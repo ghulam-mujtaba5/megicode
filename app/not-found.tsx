@@ -52,15 +52,71 @@ export default function NotFound() {
           initial={{ scale: 0.7, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
+          aria-label="Navigation Vector Graphic"
+          style={{ width: '100%', maxWidth: 340, margin: '0 auto' }}
         >
-          <Image
-            src={theme === 'dark' ? '/gmVectorDark.svg' : '/gmVector.svg'}
-            alt="Logo"
-            width={80}
-            height={80}
-            className={styles.logo}
-            priority
-          />
+          {/* Responsive, animated, world-class navigation SVG */}
+          <motion.svg
+            viewBox="0 0 340 140"
+            width="100%"
+            height="auto"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            style={{ display: 'block', margin: '0 auto' }}
+            initial={{ opacity: 0, y: -40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.2, ease: 'easeOut' }}
+          >
+            <defs>
+              <radialGradient id="nav-bg" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stopColor={theme === 'dark' ? '#3b82f6' : '#0D47A1'} stopOpacity="0.7" />
+                <stop offset="100%" stopColor={theme === 'dark' ? '#181c20' : '#f5f5f5'} stopOpacity="0.2" />
+              </radialGradient>
+              <linearGradient id="nav-path" x1="0" y1="0" x2="340" y2="140" gradientUnits="userSpaceOnUse">
+                <stop stopColor={theme === 'dark' ? '#fff' : '#0D47A1'} />
+                <stop offset="1" stopColor={theme === 'dark' ? '#3b82f6' : '#1565c0'} />
+              </linearGradient>
+              <linearGradient id="nav-arrow" x1="0" y1="0" x2="0" y2="40" gradientUnits="userSpaceOnUse">
+                <stop stopColor={theme === 'dark' ? '#fff' : '#0D47A1'} />
+                <stop offset="1" stopColor={theme === 'dark' ? '#3b82f6' : '#1565c0'} />
+              </linearGradient>
+            </defs>
+            {/* Background globe */}
+            <ellipse cx="170" cy="70" rx="120" ry="60" fill="url(#nav-bg)" />
+            {/* Animated navigation path */}
+            <motion.path
+              d="M40 110 Q170 10 300 110"
+              stroke="url(#nav-path)"
+              strokeWidth="7"
+              fill="none"
+              strokeLinecap="round"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ duration: 1.2, delay: 0.4, ease: 'easeInOut' }}
+            />
+            {/* Animated moving dot on path */}
+            <motion.circle
+              r="13"
+              fill={theme === 'dark' ? '#3b82f6' : '#0D47A1'}
+              stroke="#fff"
+              strokeWidth="3"
+              initial={{ cx: 40, cy: 110 }}
+              animate={{ cx: 170, cy: 40 }}
+              transition={{ duration: 1.2, delay: 1, ease: 'easeInOut' }}
+            />
+            {/* Arrow at the end of the path */}
+            <motion.polygon
+              points="170,25 180,45 170,40 160,45"
+              fill="url(#nav-arrow)"
+              initial={{ opacity: 0, scale: 0.7, y: -10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 1.5, ease: 'easeOut' }}
+            />
+            {/* Decorative navigation markers */}
+            <circle cx="40" cy="110" r="6" fill={theme === 'dark' ? '#fff' : '#3b82f6'} />
+            <circle cx="300" cy="110" r="6" fill={theme === 'dark' ? '#fff' : '#3b82f6'} />
+            <circle cx="170" cy="40" r="6" fill={theme === 'dark' ? '#fff' : '#3b82f6'} />
+          </motion.svg>
         </motion.div>
         <motion.h1
           className={styles.title}
