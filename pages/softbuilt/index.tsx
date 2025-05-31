@@ -60,39 +60,45 @@ export default function CompanyHome() {
       </Head>
 
       {/* Theme Toggle Icon */}
-      <div id="theme-toggle" role="button" tabIndex="0" onClick={onDarkModeButtonContainerClick}>
-        <ThemeToggleIcon style={{ width: '100%', height: 'auto' }} />
+
+      <div id="theme-toggle" role="button" tabIndex={0} onClick={onDarkModeButtonContainerClick}>
+        <ThemeToggleIcon />
       </div>
 
       {/* Desktop NavBar */}
+
       <nav id="desktop-navbar" aria-label="Main Navigation">
-        <NavBarDesktop style={{ width: '100%', height: '80px' }} />
+        <NavBarDesktop />
       </nav>
 
       {/* Mobile NavBar */}
+
       <nav id="mobile-navbar" aria-label="Mobile Navigation">
-        <NavBarMobile style={{ width: '100%', height: '60px' }} sections={sections} />
+        <NavBarMobile sections={sections} />
       </nav>
 
       {/* Welcome Frame */}
+
       <section id="welcome-section" aria-labelledby="welcome-heading" style={{ width: '100%', overflow: 'hidden' }}>
-        <WelcomeFrame style={{ width: '100%', height: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center' }} />
+        <WelcomeFrame />
       </section>
       
       {/* About Me Section */}
+
       <section id="about-section" aria-labelledby="about-heading" style={{ width: '100%', overflow: 'hidden' }}>
-        <AboutMeSection style={{ width: '100%', padding: '20px', textAlign: 'center' }} />
+        <AboutMeSection />
       </section>
 
       {/* Services Frame */}
+
       <section id="services-section" aria-labelledby="services-heading" style={{ width: '100%', overflow: 'hidden' }}>
-        <ServicesFrame style={{ width: '100%', padding: '20px' }} />
+        <ServicesFrame />
       </section>
 
       {/* Contact Section */}
+
       <section id="contact-section" aria-labelledby="contact-heading" style={{ width: '100%', overflow: 'hidden' }}>
         <ContactSection 
-          style={{ width: '100%', padding: '20px' }}
           email={contactEmail}
           phoneNumber={contactPhoneNumber}
           showCertificationBadge={false} 
@@ -100,9 +106,9 @@ export default function CompanyHome() {
       </section>
       
       {/* Footer */}
+
       <footer id="footer-section" aria-label="Footer" style={{ width: '100%', overflow: 'hidden' }}>
         <Footer 
-          style={{ width: '100%', height: '100px', padding: '20px' }}
           linkedinUrl={linkedinUrl}
           instagramUrl={instagramUrl}
           githubUrl={githubUrl}

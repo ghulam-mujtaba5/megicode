@@ -1,10 +1,27 @@
 
-import React, { useState, useEffect, createContext, useContext } from 'react';
 
-const ThemeContext = createContext();
+import React, { useState, useEffect, createContext, useContext, ReactNode } from 'react';
 
-export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState('light'); // Default theme
+// Define the type for the context value
+interface ThemeContextType {
+  theme: 'light' | 'dark';
+  toggleTheme: () => void;
+}
+
+const defaultContextValue: ThemeContextType = {
+  theme: 'light',
+  toggleTheme: () => {},
+};
+
+const ThemeContext = createContext<ThemeContextType>(defaultContextValue);
+
+
+interface ThemeProviderProps {
+  children: ReactNode;
+}
+
+export const ThemeProvider = ({ children }: ThemeProviderProps) => {
+  const [theme, setTheme] = useState<'light' | 'dark'>('light'); // Default theme
 
   // Function to toggle between light and dark theme
   const toggleTheme = () => {
@@ -22,7 +39,7 @@ export const ThemeProvider = ({ children }) => {
   // Effect to set initial theme based on user preference or stored theme
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
+    if (savedTheme === 'light' || savedTheme === 'dark') {
       setTheme(savedTheme);
     } else {
       setTheme(prefersDarkMode() ? 'dark' : 'light');

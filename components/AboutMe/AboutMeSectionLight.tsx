@@ -79,7 +79,7 @@ const AboutMeSection = () => {
 
   const controls = useAnimation();
   const ref = useRef(null);
-  const isInView = useInView(ref, { threshold: 0.1 });
+  const isInView = useInView(ref);
 
   useEffect(() => {
     if (isInView) {

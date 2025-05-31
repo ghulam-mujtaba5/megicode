@@ -70,7 +70,7 @@ const ServicesFrame = () => {
         <article
           className={`${commonStyles.skillCard} ${frameStyles.skillCard} ${category.cardClass} ${visible[index] ? commonStyles.animateIn : ''}`}
           key={index}
-          ref={el => skillCardRefs.current[index] = el}
+          ref={el => { skillCardRefs.current[index] = el; }}
           aria-labelledby={`${category.title.replace(/ /g, '-')}-title`}
         >
           <header className={`${commonStyles.header} ${frameStyles.header}`}>

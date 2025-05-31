@@ -5,7 +5,22 @@ import styles from './projectLight.module.css';
 import darkStyles from './ProjectDark.module.css';
 import commonStyles from './ProjectCommon.module.css';
 
-const ProjectCard = React.memo(({ project, frameStyles, theme }) => {
+interface Project {
+  title: string;
+  description: string;
+  techStack: string;
+  imgSrc: string;
+  livePreviewLink: string;
+  viewCodeLink: string;
+}
+
+interface ProjectCardProps {
+  project: Project;
+  frameStyles: { [key: string]: string };
+  theme: 'light' | 'dark';
+}
+
+const ProjectCard = React.memo(({ project, frameStyles, theme }: ProjectCardProps) => {
   const cardRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 

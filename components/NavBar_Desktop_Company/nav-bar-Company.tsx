@@ -148,10 +148,16 @@
 
 import styles from "./nav-bar-Compnay.module.css";
 import { useState } from "react";
-import Link from 'next/link'; // Import Link from Next.js
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const NavBar = () => {
   const [hover, setHover] = useState(false);
+  const router = useRouter();
+
+  const handleLogoClick = () => {
+    router.push('/');
+  };
 
   const handleMouseEnter = () => {
     setHover(true);
