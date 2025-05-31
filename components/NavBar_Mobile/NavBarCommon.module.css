@@ -17,7 +17,7 @@
     font-size: 22px;
     background: var(--md-surface);
     color: var(--md-on-surface);
-    box-shadow: var(--md-elevation-1);
+    
     border-radius: 0 0 16px 16px;
     transition: box-shadow 0.2s, background 0.2s;
   }
@@ -50,7 +50,7 @@
     background-color: var(--md-surface, #f5f7fa);
     border: none;
     border-radius: 50%;
-    box-shadow: var(--md-elevation-1);
+  
     outline: none;
   }
   

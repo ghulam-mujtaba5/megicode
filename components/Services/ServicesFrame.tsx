@@ -1,4 +1,3 @@
-"use client";
 import React, { useRef, useState, useEffect } from 'react';
 import { useTheme } from '../../context/ThemeContext';
 import commonStyles from './ServicesFrameCommon.module.css';
