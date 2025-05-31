@@ -14,11 +14,8 @@
 .textContainer {
   width: 45%; /* Take full width */
   position: relative; /* Relative positioning to control absolute child elements */
-  z-index: 20;
-/* Ensure CTA button is always visible and not overlapped by animation */
-.ctaButton {
-  z-index: 30;
-}
+ 
+
   min-height: 300px; /* Adjust this value to ensure space for animations */
 }
 
