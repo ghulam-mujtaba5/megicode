@@ -57,3 +57,6 @@ Feel free to reach out via [LinkedIn](https://www.linkedin.com/in/ghulamujtabaof
 ---
 
 > Designed & built by [Ghulam Mujtaba].
+
+
+git remote set-url origin https://megicodes@github.com/megicodes/megicode.git
