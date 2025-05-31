@@ -1,5 +1,4 @@
-
-
+"use client";
 import React, { useState, useEffect, createContext, useContext, ReactNode } from 'react';
 
 // Define the type for the context value
@@ -68,5 +67,4 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
     </ThemeContext.Provider>
   );
 };
-
 export const useTheme = () => useContext(ThemeContext);

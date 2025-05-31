@@ -1,5 +1,4 @@
-
-
+"use client";
 import React, { useEffect, useState } from 'react';
 import { useTheme } from '../../context/ThemeContext';
 import { motion } from 'framer-motion';

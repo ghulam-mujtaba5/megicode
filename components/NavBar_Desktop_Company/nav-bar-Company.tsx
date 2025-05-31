@@ -146,10 +146,11 @@
 // export default NavBar;
 
 
+"use client";
 import styles from "./nav-bar-Compnay.module.css";
 import { useState } from "react";
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 const NavBar = () => {
   const [hover, setHover] = useState(false);

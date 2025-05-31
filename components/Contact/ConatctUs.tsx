@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import emailjs from 'emailjs-com';
 import { useTheme } from '../../context/ThemeContext';

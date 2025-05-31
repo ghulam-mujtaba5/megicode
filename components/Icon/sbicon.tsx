@@ -66,8 +66,9 @@
 
 // export default ThemeToggleIcon;
 
+"use client";
 import React, { useCallback, useMemo, useRef, useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useTheme } from '../../context/ThemeContext';
 import Image from 'next/image';
 import styles from './sbicon.module.css'; // Ensure the correct path and module import

@@ -1,5 +1,6 @@
+"use client";
 import React, { useState, useCallback } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useTheme } from '../../context/ThemeContext';
 import commonStyles from './NavBarCommon.module.css';
 import lightStyles from './NavBarMobileLight.module.css';

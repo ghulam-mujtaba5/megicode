@@ -1,10 +1,11 @@
+"use client";
 import { useTheme } from '../context/ThemeContext';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import styles from './404.module.css';
+import styles from '../styles/404.module.css';
 
-export default function Custom404() {
+export default function NotFound() {
   const { theme } = useTheme();
 
   return (
