@@ -12,14 +12,10 @@
     position: absolute;
     top: 0px;
     right: 0px;
-    font-family: var(--md-font-family, 'Open Sans', sans-serif);
+    font-family: "Open Sans", sans-serif;
     display: none; /* Initially hide the navbar */
     font-size: 22px;
-    background: var(--md-surface);
-    color: var(--md-on-surface);
     
-    border-radius: 0 0 16px 16px;
-    transition: box-shadow 0.2s, background 0.2s;
   }
   
   
@@ -37,21 +33,19 @@
 }
   /* Menu toggle button */
   .menuToggle {
-    margin-top: 8px;
-    width: 32px;
-    height: 32px;
+    margin-top: 10px;
+    width: 30px;
+    height: 30px;
     position: relative;
-    top: 24px;
-    right: 32px;
+    top: 25px;
+    right: 30px;
     transform: rotate(0deg);
-    transition: box-shadow 0.2s, background 0.2s, .5s ease-in-out;
+    transition: .5s ease-in-out;
     cursor: pointer;
     z-index: 4; /* Ensure the button is above the menu list */
-    background-color: var(--md-surface, #f5f7fa);
-    border: none;
-    border-radius: 50%;
-  
-    outline: none;
+    background-color: transparent; /* Background color of the button */
+    border: none; /* Remove default border */
+    outline: no
   }
   
   /* Styles for the hamburger icon lines */
@@ -122,19 +116,13 @@
   
   /* Styles for individual menu items */
   .menuItem {
-    padding: 8px 24px;
-    border-radius: 8px;
-    transition: background 0.2s, color 0.2s;
-    font-size: 1rem;
-    color: var(--md-on-surface);
+    padding: 8px 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
   
   /* Menu item hover effect */
-  .menuItem:hover, .menuItem:focus {
-    background: var(--md-primary, #4573df);
-    color: var(--md-on-primary, #fff);
-    outline: 2px solid var(--md-primary, #4573df);
-    outline-offset: 2px;
+  .menuItem:hover {
+    background-color: #a9b1b5;
   }
   
   /* Open state styles */
