@@ -8,7 +8,8 @@
   align-items: center;
   justify-content: center;
   min-height: 80vh;
-  background: #f5f5f5;
+  background: var(--404-bg, #f5f5f5);
+  transition: background 0.3s;
 }
 .logoContainer {
   margin-bottom: 1.5rem;
@@ -25,28 +26,59 @@
 .title {
   font-size: 2.2rem;
   font-weight: 700;
-  color: #0D47A1;
+  color: var(--404-title, #0D47A1);
   margin-bottom: 0.5rem;
+  transition: color 0.3s;
 }
 .description {
   font-size: 1.1rem;
-  color: #333;
+  color: var(--404-desc, #333);
   margin-bottom: 2rem;
   text-align: center;
+  transition: color 0.3s;
 }
 .homeLink {
   display: inline-block;
   padding: 0.75rem 2rem;
-  background: #0D47A1;
-  color: #fff;
+  background: var(--404-btn-bg, #0D47A1);
+  color: var(--404-btn-text, #fff);
   border-radius: 8px;
   font-weight: 600;
   text-decoration: none;
-  transition: background 0.2s;
+  transition: background 0.2s, color 0.2s;
 }
 
 .homeLink:hover {
-  background: #1565c0;
+  background: var(--404-btn-bg-hover, #1565c0);
+}
+/* Theme support for dark and light */
+[data-theme="dark"] .wrapper {
+  --404-bg: #181c20;
+}
+[data-theme="dark"] .title {
+  --404-title: #fff;
+}
+[data-theme="dark"] .description {
+  --404-desc: #cbd5e1;
+}
+[data-theme="dark"] .homeLink {
+  --404-btn-bg: #3b82f6;
+  --404-btn-bg-hover: #2563eb;
+  --404-btn-text: #fff;
+}
+[data-theme="light"] .wrapper {
+  --404-bg: #f5f5f5;
+}
+[data-theme="light"] .title {
+  --404-title: #0D47A1;
+}
+[data-theme="light"] .description {
+  --404-desc: #333;
+}
+[data-theme="light"] .homeLink {
+  --404-btn-bg: #0D47A1;
+  --404-btn-bg-hover: #1565c0;
+  --404-btn-text: #fff;
 }
 .homeBtnBg {
   display: none;
