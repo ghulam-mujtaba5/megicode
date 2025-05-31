@@ -1,0 +1,10 @@
+/* Light mode styles for Let's Talk CTA button */
+.ctaButton {
+  background: #4573df;
+  color: #fff;
+}
+.ctaButton:hover, .ctaButton:focus {
+  background: #2d4fa2;
+  color: #fff;
+  transform: translateY(-2px) scale(1.04);
+}

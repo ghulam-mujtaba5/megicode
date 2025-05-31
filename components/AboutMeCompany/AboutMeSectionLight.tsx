@@ -46,6 +46,7 @@
 // export default AboutMeSection;
 "use client";
 import React, { useMemo } from 'react';
+import LetsTalkButton from '../CTA/LetsTalkButton';
 import { useTheme } from '../../context/ThemeContext';
 import { motion } from 'framer-motion';
 import commonStyles from './AboutMeSectionCommon.module.css';
@@ -78,33 +79,36 @@ const AboutMeSection = () => {
   );
 
   return (
-    <motion.div
-      className={containerClass}
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: 'easeOut' }}
-    >
-      <div className={sectionClass}>
-        <motion.h2
-          className={titleClass}
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2, ease: 'easeOut' }}
-        >
-          ABOUT US
-        </motion.h2>
-        <motion.p
-          className={descriptionClass}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4, ease: 'easeOut' }}
-        >
-          Megicode specializes in emerging technologies to drive efficiency, productivity, and growth for businesses worldwide. From ideation to implementation, we collaborate with clients to bring their vision to life with excellence.
-          <br /><br />
-          Our mission is to exceed expectations by delivering best-in-class software solutions, with a strong focus on integrating emerging technologies such as data science and AI.
-        </motion.p>
-      </div>
-    </motion.div>
+    <>
+      <LetsTalkButton />
+      <motion.div
+        className={containerClass}
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+      >
+        <div className={sectionClass}>
+          <motion.h2
+            className={titleClass}
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2, ease: 'easeOut' }}
+          >
+            ABOUT US
+          </motion.h2>
+          <motion.p
+            className={descriptionClass}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4, ease: 'easeOut' }}
+          >
+            Megicode specializes in emerging technologies to drive efficiency, productivity, and growth for businesses worldwide. From ideation to implementation, we collaborate with clients to bring their vision to life with excellence.
+            <br /><br />
+            Our mission is to exceed expectations by delivering best-in-class software solutions, with a strong focus on integrating emerging technologies such as data science and AI.
+          </motion.p>
+        </div>
+      </motion.div>
+    </>
   );
 };
 
