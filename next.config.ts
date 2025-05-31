@@ -80,7 +80,7 @@ const nextConfig = {
     return [
       {
         source: '/',
-        destination: '/softbuilt',
+        destination: '/megicode',
         permanent: false,
       },
     ];
