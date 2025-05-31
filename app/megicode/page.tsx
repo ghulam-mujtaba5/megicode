@@ -18,11 +18,12 @@ export default function MegicodePage() {
   }, []);
 
   // Define paths for social media links
-  const linkedinUrl = "https://www.linkedin.com/in/ghulamujtabaofficial";
-  const instagramUrl = "https://www.instagram.com/ghulamujtabaofficial/";
-  const githubUrl = "https://github.com/ghulam-mujtaba5";
-  const copyrightText = "Copyright 2024 Soft Built. All Rights Reserved.";
-  const contactEmail = "softbuilt@ghulammujtaba.com";
+  // Megicode branding and contact
+  const linkedinUrl = "https://www.linkedin.com/company/megicode";
+  const instagramUrl = "https://www.instagram.com/megicode/";
+  const githubUrl = "https://github.com/megicode";
+  const copyrightText = "Copyright 2025 Megicode. All Rights Reserved.";
+  const contactEmail = "megicode@gmail.com";
   const contactPhoneNumber = "+123 456 7890";
 
   // Sample menu list override

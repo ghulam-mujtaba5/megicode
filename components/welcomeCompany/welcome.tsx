@@ -6,14 +6,15 @@ import styles from './welcomeLight.module.css'; // Import the light mode CSS fil
 import darkStyles from './welcomeDark.module.css'; // Import the dark mode CSS file
 import commonStyles from './welcomeCommon.module.css'; // Import the common CSS file
 
+
 const Frame = () => {
   const { theme } = useTheme(); // Destructure theme from the context
   const [welcomeText, setWelcomeText] = useState('');
-  const [softBuiltText, setSoftBuiltText] = useState('');
+  const [megicodeText, setMegicodeText] = useState('');
   const [serviceText, setServiceText] = useState('');
 
   const welcomeTextToDisplay = 'Welcome to ';
-  const softBuiltTextToDisplay = ' Soft Built';
+  const megicodeTextToDisplay = ' MegiCode';
   const serviceTextToDisplay = 'Elevate your Business with our Services.';
 
   useEffect(() => {
@@ -25,12 +26,12 @@ const Frame = () => {
           await new Promise(resolve => setTimeout(resolve, 40)); // Adjusted for smoother typing effect
         }
 
-        // Pause before adding 'Soft Built'
+        // Pause before adding 'Megicode'
         await new Promise(resolve => setTimeout(resolve, 500));
 
-        // Animate 'Soft Built'
-        for (let i = 0; i <= softBuiltTextToDisplay.length; i++) {
-          setSoftBuiltText(softBuiltTextToDisplay.slice(0, i));
+        // Animate 'Megicode'
+        for (let i = 0; i <= megicodeTextToDisplay.length; i++) {
+          setMegicodeText(megicodeTextToDisplay.slice(0, i));
           await new Promise(resolve => setTimeout(resolve, 40)); // Adjusted for smoother typing effect
         }
 
@@ -54,7 +55,7 @@ const Frame = () => {
   return (
     <section
       className={`${commonStyles.container} ${theme === 'dark' ? darkStyles.darkContainer : styles.container}`}
-      aria-label="Welcome to Soft Built"
+      aria-label="Welcome to Megicode"
     >
       <div
         className={`${commonStyles.textContainer} ${theme === 'dark' ? darkStyles.textContainer : styles.textContainer}`}
@@ -72,14 +73,14 @@ const Frame = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: 'easeOut', delay: (welcomeText.length * 40) / 1000 + 0.5 }}
           >
-            {softBuiltText}
+            {megicodeText}
           </motion.span>
         </motion.h1>
         <motion.p
           className={`${commonStyles.paragraph} ${theme === 'dark' ? darkStyles.paragraph : styles.paragraph}`}
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: 'easeOut', delay: (welcomeText.length * 40 + 500 + softBuiltText.length * 40) / 1000 + 1 }}
+          transition={{ duration: 0.8, ease: 'easeOut', delay: (welcomeText.length * 40 + 500 + megicodeText.length * 40) / 1000 + 1 }}
         >
           {serviceText}
         </motion.p>

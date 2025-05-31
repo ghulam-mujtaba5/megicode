@@ -8,7 +8,7 @@ import darkStyles from './ContactUsDark.module.css';
 import { motion, useAnimation } from 'framer-motion';
 
 const ContactSection = ({
-  email = "ghulammujtaba0454@gmail.com",
+  email = "megicode@gmail.com",
   phoneNumber = "+92 317 7107849",
   showCertificationBadge = true,
   showAdditionalCertificationBadge = true
