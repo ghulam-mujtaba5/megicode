@@ -1,10 +1,12 @@
 /* Row container for centering the button */
+/* Row container for the button: left on desktop, center on mobile */
 .ctaButtonRow {
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   margin-bottom: 2.5rem;
+  padding-left: 6%;
 }
 
 @media (max-width: 768px) {
