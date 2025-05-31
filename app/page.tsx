@@ -1,6 +1,6 @@
 "use client";
-import SoftbuiltPage from "./softbuilt/page";
+import MegicodePage from "./megicode/page";
 
 export default function Page() {
-  return <SoftbuiltPage />;
+  return <MegicodePage />;
 }
