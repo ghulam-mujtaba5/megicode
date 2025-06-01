@@ -91,28 +91,32 @@
 .skillRow {
     display: flex;
     align-items: center;
-    margin-top: 12px;
+    margin-top: 0;
+    padding-top: 1px;
     position: relative;
+    line-height: 1.2;
 }
 
 /* Container for skill name and progress bar */
 .skillNameContainer {
     display: flex;
     flex-direction: column;
-    margin-left: auto; /* Move skill name container to the right */
+    margin-left: auto;
     position: relative;
-   /* Background color for the skill name container */
     border-radius: 3px;
-    padding: 2px 3px;
+    padding: 1px 3px;
     box-sizing: border-box;
-    width: 210px; 
-    height: 30px;   
+    width: 210px;
+    height: 26px;
 }
 
 /* Skill name text */
 .skillName {
     font-weight: 600;
-    font-size: 17px;
+    font-size: 16px;
+    line-height: 1.2;
+    margin: 0;
+    padding: 0;
 }
 
 /* Icons container */
