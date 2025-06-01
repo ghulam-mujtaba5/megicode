@@ -28,8 +28,11 @@
   height: 35px;
   object-fit: contain;
   border-radius: 50%;
-  background: linear-gradient(135deg, #4573df 60%, #CFE8EF 100%);
-  box-shadow: 0 2px 12px #4573df22;
+  background: none;
+  box-shadow: none;
+  border: none;
+  padding: 0;
+  margin: 0;
 }
 
 /* Media query for smaller screens */

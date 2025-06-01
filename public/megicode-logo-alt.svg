@@ -1,10 +1,26 @@
-<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="megicodeBlue" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#4573df"/>
-      <stop offset="1" stop-color="#CFE8EF"/>
+    <linearGradient id="megicodeGradient" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#4573df" />
+      <stop offset="100%" stop-color="#cfe8ef" />
     </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#4573df" flood-opacity="0.15"/>
+    </filter>
   </defs>
-  <circle cx="20" cy="20" r="20" fill="url(#megicodeBlue)" />
-  <text x="50%" y="58%" text-anchor="middle" fill="#fff" font-family="Open Sans, Arial, sans-serif" font-size="18" font-weight="bold" dy=".3em" letter-spacing="2">M</text>
+
+  <!-- Background Circle -->
+  <circle cx="32" cy="32" r="30" fill="none" stroke="url(#megicodeGradient)" stroke-width="3.5" filter="url(#shadow)"/>
+
+  <!-- Stylized "M" for Megicode with cleared intersection -->
+  <path d="M20 44V22L32 34L44 22V44" stroke="url(#megicodeGradient)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- Minimalist AI Circuit Nodes -->
+  <circle cx="20" cy="22" r="1.5" fill="#4573df"/>
+  <circle cx="44" cy="22" r="1.5" fill="#4573df"/>
+  <circle cx="32" cy="34" r="1.5" fill="#4573df"/>
+
+  <!-- Code Angle Brackets -->
+  <path d="M17 32 L13.5 28 L17 24" stroke="url(#megicodeGradient)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M47 32 L50.5 28 L47 24" stroke="url(#megicodeGradient)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

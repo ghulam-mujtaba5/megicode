@@ -10,7 +10,7 @@ const ThemeToggleIcon = () => {
   const iconRef = useRef(null);
 
   const handleIconClick = useCallback(() => {
-    window.location.href = 'https://softbuilt.ghulammujtaba.com'; // Change to your subdomain
+    window.location.href = '/'; // Go to Megicode home page
   }, []);
 
   const iconClass = useMemo(() => {
