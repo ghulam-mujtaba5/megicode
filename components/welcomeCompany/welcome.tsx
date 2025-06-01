@@ -14,7 +14,7 @@ const Frame = () => {
   const [serviceText, setServiceText] = useState('');
 
   const welcomeTextToDisplay = 'Welcome to ';
-  const megicodeTextToDisplay = ' MegiCode';
+  const megicodeTextToDisplay = ' Megicode';
   const serviceTextToDisplay = 'Elevate your Business with our Services.';
 
   useEffect(() => {
