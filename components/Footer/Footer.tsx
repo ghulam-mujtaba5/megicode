@@ -14,51 +14,57 @@ const Footer = ({
 
   const themeStyles = useMemo(() => (theme === 'dark' ? darkStyles : lightStyles), [theme]);
 
-  const onLinkedinIconClick = useCallback(() => {
-    window.open(linkedinUrl, '_blank', 'noopener,noreferrer');
-  }, [linkedinUrl]);
 
-  const onInstagramIconClick = useCallback(() => {
-    window.open(instagramUrl, '_blank', 'noopener,noreferrer');
-  }, [instagramUrl]);
+  // Keyboard and mouse interactivity for icons
+  const openLink = useCallback((url: string) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  }, []);
 
-  const onGithubIconClick = useCallback(() => {
-    window.open(githubUrl, '_blank', 'noopener,noreferrer');
-  }, [githubUrl]);
+  const handleKeyDown = useCallback((event: React.KeyboardEvent<HTMLImageElement>, url: string) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      openLink(url);
+    }
+  }, [openLink]);
 
   return (
     <footer className={`${commonStyles.footer} ${themeStyles.footer}`}>
       <div className={commonStyles.footerFrame}>
         <div className={`${commonStyles.footerBackground} ${themeStyles.footerBackground}`} />
-        <img 
-          className={commonStyles.copyrightIcon} 
-          alt="Copyright Icon" 
-          src={theme === 'dark' ? "CopyrightDark.svg" : "copyright-icon.svg"} 
+        <img
+          className={commonStyles.copyrightIcon}
+          alt="Copyright Icon"
+          src={theme === 'dark' ? "CopyrightDark.svg" : "copyright-icon.svg"}
         />
         <p className={commonStyles.copyrightLabel}>
           {copyrightText}
         </p>
-        <img 
-          className={commonStyles.linkedinIcon} 
-          alt="LinkedIn" 
-          src={theme === 'dark' ? "LinkedinDark.svg" : "linkedin-icon.svg"} 
-          onClick={onLinkedinIconClick} 
+        <img
+          className={commonStyles.linkedinIcon}
+          alt="LinkedIn"
+          src={theme === 'dark' ? "LinkedinDark.svg" : "linkedin-icon.svg"}
+          onClick={() => openLink(linkedinUrl)}
+          onKeyDown={e => handleKeyDown(e, linkedinUrl)}
+          tabIndex={0}
           role="button"
           aria-label="LinkedIn"
         />
-        <img 
-          className={commonStyles.instagramIcon} 
-          alt="Instagram" 
-          src={theme === 'dark' ? "InstagramDark.svg" : "Instagram-icon.svg"} 
-          onClick={onInstagramIconClick} 
+        <img
+          className={commonStyles.instagramIcon}
+          alt="Instagram"
+          src={theme === 'dark' ? "InstagramDark.svg" : "Instagram-icon.svg"}
+          onClick={() => openLink(instagramUrl)}
+          onKeyDown={e => handleKeyDown(e, instagramUrl)}
+          tabIndex={0}
           role="button"
           aria-label="Instagram"
         />
-        <img 
-          className={commonStyles.githubIcon} 
-          alt="GitHub" 
-          src={theme === 'dark' ? "GithubDark.svg" : "github_icon.svg"} 
-          onClick={onGithubIconClick} 
+        <img
+          className={commonStyles.githubIcon}
+          alt="GitHub"
+          src={theme === 'dark' ? "GithubDark.svg" : "github_icon.svg"}
+          onClick={() => openLink(githubUrl)}
+          onKeyDown={e => handleKeyDown(e, githubUrl)}
+          tabIndex={0}
           role="button"
           aria-label="GitHub"
         />

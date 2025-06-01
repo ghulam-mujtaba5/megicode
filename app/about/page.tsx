@@ -1,6 +1,4 @@
 "use client";
-
-"use client";
 import React from "react";
 import { useTheme } from "../../context/ThemeContext";
 import NavBarDesktop from "../../components/NavBar_Desktop_Company/nav-bar-Company";
