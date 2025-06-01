@@ -73,7 +73,7 @@ const NavBar = () => {
 
       {/* Logo and Name Animation */}
       <div
-        className={styles.logoAnimation + (pathname === "/" ? ` ${styles.selected}` : "")}
+        className={styles.logoAnimation}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         role="button"
