@@ -3,30 +3,61 @@
     display: none !important;
   }
 }
-/* Interactive SVG animation feedback */
+
 .megicode-hero-illustration {
   position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 48vw;
-  min-width: 260px;
-  max-width: 480px;
-  height: 100%;
-  max-height: 520px;
+  right: -2%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52vw;
+  min-width: 520px;
+  max-width: 800px;
+  aspect-ratio: 1;
   display: flex;
   align-items: center;
+  justify-content: center;
+  pointer-events: all;
+  will-change: transform;
+  display: flex;
+  align-items: stretch;
   justify-content: flex-end;
   z-index: 1;
   pointer-events: auto;
+  overflow: hidden;
   user-select: none;
 }
 
 .svg-hovered svg {
-  filter: drop-shadow(0 0 16px #4573df) brightness(1.15);
-  transition: filter 0.3s cubic-bezier(.4,2,.6,1);
+  filter: drop-shadow(0 0 20px #4573df) brightness(1.2);
+  transition: filter 0.3s cubic-bezier(.4,2,.6,1), transform 0.3s cubic-bezier(.4,2,.6,1);
+  transform: scale(1.05);
 }
+
 .svg-clicked svg {
-  filter: drop-shadow(0 0 32px #2d4fa2) brightness(1.3) saturate(1.2);
-  transition: filter 0.2s cubic-bezier(.4,2,.6,1);
+  filter: drop-shadow(0 0 40px #2d4fa2) brightness(1.4) saturate(1.3);
+  transition: filter 0.2s cubic-bezier(.4,2,.6,1), transform 0.2s cubic-bezier(.4,2,.6,1);
+  transform: scale(1.1);
+}
+
+/* Floating animation for icons */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Parallax movement for the hero illustration */
+@keyframes parallaxMove {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-15px);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
