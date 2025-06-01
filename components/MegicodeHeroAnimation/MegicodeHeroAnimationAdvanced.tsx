@@ -42,6 +42,16 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
   // Parallax transform helper
   const parallax = (base: number, factor: number) => base + (mouse.x - 0.5) * factor;
 
+  // Only render on desktop/tablet (not mobile)
+  const [isMobile, setIsMobile] = React.useState(false);
+  React.useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+  if (isMobile) return null;
+
   return (
     <div className={styles['megicode-hero-illustration']} style={{ position: 'absolute' }}>
       <svg
