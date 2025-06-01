@@ -7,7 +7,8 @@ import styles from './gmicon.module.css';
 const ThemeToggleIcon = () => {
   const { theme } = useTheme();
   const [isInView, setIsInView] = useState(false);
-  const iconRef = useRef(null);
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const iconRef = useRef<HTMLDivElement | null>(null);
 
   const handleIconClick = useCallback(() => {
     window.location.href = '/'; // Go to Megicode home page
@@ -22,19 +23,23 @@ const ThemeToggleIcon = () => {
   }, []);
 
   const checkInView = () => {
-    if (iconRef.current) {
+    if (iconRef.current && !hasAnimated) {
       const rect = iconRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight || document.documentElement.clientHeight;
       const isVisible = (rect.top <= windowHeight) && (rect.bottom >= 0);
       if (isVisible) {
         setIsInView(true);
-        // Reset animation by toggling the class
+        setHasAnimated(true);
         setTimeout(() => setIsInView(false), 1000); // Match duration of the animation
       }
     }
   };
 
   useEffect(() => {
+    // Only show on mobile screens
+    const isMobile = () => window.matchMedia('(max-width: 768px)').matches;
+    if (!isMobile()) return;
+
     // Initial check
     checkInView();
 
@@ -45,7 +50,11 @@ const ThemeToggleIcon = () => {
     return () => {
       window.removeEventListener('scroll', checkInView);
     };
-  }, []);
+  }, [hasAnimated]);
+
+  // Only render on mobile screens
+  const isMobile = typeof window !== 'undefined' ? window.matchMedia('(max-width: 768px)').matches : false;
+  if (!isMobile) return null;
 
   return (
     <div

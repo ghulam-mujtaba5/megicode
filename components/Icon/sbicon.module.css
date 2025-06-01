@@ -21,7 +21,7 @@
 }
 
 .theme-toggle-icon {
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   width: 44px;
@@ -31,8 +31,16 @@
   box-shadow: 0 2px 16px #4573df22, 0 0 0 0 #cfe8ef33;
   transition: box-shadow 0.3s, background 0.3s, filter 0.3s;
   cursor: pointer;
-  animation: aiGlow 2.2s cubic-bezier(0.4, 0.2, 0.2, 1) infinite;
   will-change: box-shadow, filter, transform;
+}
+@media screen and (max-width: 768px) {
+  .theme-toggle-icon {
+    display: flex;
+  }
+}
+
+.animate {
+  animation: aiGlow 1s cubic-bezier(0.4, 0.2, 0.2, 1) 1;
 }
 
 .theme-toggle-icon img {
