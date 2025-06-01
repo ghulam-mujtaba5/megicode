@@ -1,3 +1,8 @@
+/* Selected (active) nav item */
+.selected, .selected > div {
+  background-color: #4573df !important;
+  color: #fff !important;
+}
 /* Styles for the Home button text */
 
 

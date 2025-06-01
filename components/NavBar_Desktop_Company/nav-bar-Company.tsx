@@ -3,12 +3,12 @@
 "use client";
 import styles from "./nav-bar-Compnay.module.css";
 import { useState } from "react";
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 const NavBar = () => {
   const [hover, setHover] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
 
   const handleLogoClick = () => {
     router.push('/');
@@ -30,8 +30,11 @@ const NavBar = () => {
   return (
     <header className={styles.header}>
       {/* Home button */}
+
       <button
-        className={styles.home}
+        className={
+          styles.home + (pathname === "/" ? ` ${styles.selected}` : "")
+        }
         onClick={() => navigateTo("/")}
         aria-label="Home"
       >
@@ -39,8 +42,11 @@ const NavBar = () => {
       </button>
 
       {/* About page */}
+
       <div
-        className={styles.about}
+        className={
+          styles.about + (pathname === "/about" ? ` ${styles.selected}` : "")
+        }
         onClick={() => navigateTo("/about")}
         role="button"
         tabIndex={0}
@@ -51,8 +57,11 @@ const NavBar = () => {
       </div>
 
       {/* Services page */}
+
       <div
-        className={styles.skills}
+        className={
+          styles.skills + (pathname === "/services" ? ` ${styles.selected}` : "")
+        }
         onClick={() => navigateTo("/services")}
         role="button"
         tabIndex={0}
@@ -64,7 +73,7 @@ const NavBar = () => {
 
       {/* Logo and Name Animation */}
       <div
-        className={styles.logoAnimation}
+        className={styles.logoAnimation + (pathname === "/" ? ` ${styles.selected}` : "")}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         role="button"
@@ -107,8 +116,11 @@ const NavBar = () => {
       </div>
 
       {/* Reviews page */}
+
       <div
-        className={styles.resume}
+        className={
+          styles.resume + (pathname === "/reviews" ? ` ${styles.selected}` : "")
+        }
         onClick={() => navigateTo("/reviews")}
         role="button"
         tabIndex={0}
@@ -119,8 +131,11 @@ const NavBar = () => {
       </div>
 
       {/* Project page */}
+
       <div
-        className={styles.project}
+        className={
+          styles.project + (pathname === "/project" ? ` ${styles.selected}` : "")
+        }
         onClick={() => navigateTo("/project")}
         role="button"
         tabIndex={0}
@@ -131,8 +146,11 @@ const NavBar = () => {
       </div>
 
       {/* Contact page */}
+
       <div
-        className={styles.contact}
+        className={
+          styles.contact + (pathname === "/contact" ? ` ${styles.selected}` : "")
+        }
         onClick={() => navigateTo("/contact")}
         role="button"
         tabIndex={0}
