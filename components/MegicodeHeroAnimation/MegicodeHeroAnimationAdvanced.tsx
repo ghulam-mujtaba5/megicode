@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { useTheme } from '../../context/ThemeContext';
 import { motion, useAnimation } from 'framer-motion';
 import styles from './MegicodeHeroAnimation.module.css';
 
@@ -17,11 +18,30 @@ const NODES = [
   { id: 'n6', cx: 390, cy: 200 },
 ];
 
+const ORBIT_RADIUS = 32;
+const ORBIT_SPEED = 0.8; // seconds per orbit
+const DATA_PACKET_COUNT = 3;
+
 const MegicodeHeroAnimationAdvanced: React.FC = () => {
+  const { theme } = useTheme ? useTheme() : { theme: 'light' };
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
   const [clickedNode, setClickedNode] = useState<string | null>(null);
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
   const svgRef = useRef<SVGSVGElement>(null);
+  const [orbitAngle, setOrbitAngle] = useState(0);
+  // Animate orbit angle
+  React.useEffect(() => {
+    let frame: number;
+    let last = performance.now();
+    function animate(now: number) {
+      const dt = (now - last) / 1000;
+      last = now;
+      setOrbitAngle(a => (a + dt * (2 * Math.PI) / ORBIT_SPEED) % (2 * Math.PI));
+      frame = requestAnimationFrame(animate);
+    }
+    frame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(frame);
+  }, []);
 
   // Parallax effect on mouse move
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -116,14 +136,14 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
           animate={{ points: hoveredNode === 'n3' ? '300,90 320,30 360,90' : '300,80 320,40 360,80' }}
           transition={{ duration: 0.5, repeat: Infinity, repeatType: 'reverse' }}
         />
-        {/* Interactive Nodes */}
+        {/* Interactive Nodes (static) */}
         {NODES.map(node => (
           <motion.circle
             key={node.id}
             cx={parallax(node.cx, hoveredNode === node.id ? 8 : 4)}
             cy={parallax(node.cy, hoveredNode === node.id ? 8 : 4)}
             r={clickedNode === node.id ? 16 : hoveredNode === node.id ? 12 : 8}
-            fill={hoveredNode === node.id || clickedNode === node.id ? 'url(#blueGrad)' : '#2d4fa2'}
+            fill={hoveredNode === node.id || clickedNode === node.id ? 'url(#blueGrad)' : (theme === 'dark' ? '#4573df' : '#2d4fa2')}
             style={{ cursor: 'pointer' }}
             initial={{ opacity: 0.8 }}
             animate={{ opacity: hoveredNode === node.id ? 1 : 0.8, filter: clickedNode === node.id ? 'drop-shadow(0 0 24px #4573df)' : 'none' }}
@@ -133,6 +153,45 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
             onClick={() => handleNodeClick(node.id)}
           />
         ))}
+        {/* Orbiting Nodes (animated) */}
+        {[...Array(3)].map((_, i) => {
+          const angle = orbitAngle + (i * (2 * Math.PI) / 3);
+          const cx = 240 + ORBIT_RADIUS * Math.cos(angle);
+          const cy = 160 + ORBIT_RADIUS * Math.sin(angle);
+          return (
+            <motion.circle
+              key={`orbit-${i}`}
+              cx={cx}
+              cy={cy}
+              r={7}
+              fill={theme === 'dark' ? '#fff' : '#4573df'}
+              opacity={0.7}
+              style={{ filter: 'drop-shadow(0 0 8px #4573df)' }}
+              animate={{ r: [7, 10, 7] }}
+              transition={{ duration: 1.2, repeat: Infinity, repeatType: 'loop', delay: i * 0.2 }}
+            />
+          );
+        })}
+        {/* Animated Data Packets on Data Streams */}
+        {[...Array(DATA_PACKET_COUNT)].map((_, i) => {
+          // Animate t from 0 to 1
+          const t = ((orbitAngle / (2 * Math.PI)) + i / DATA_PACKET_COUNT) % 1;
+          // First stream: 180,80 -> 200,40 -> 240,80 (quadratic Bezier approx)
+          const x = (1 - t) * (1 - t) * 180 + 2 * (1 - t) * t * 200 + t * t * 240;
+          const y = (1 - t) * (1 - t) * 80 + 2 * (1 - t) * t * 40 + t * t * 80;
+          return (
+            <circle key={`packet1-${i}`} cx={x} cy={y} r={3} fill="#fff" opacity={0.8} />
+          );
+        })}
+        {[...Array(DATA_PACKET_COUNT)].map((_, i) => {
+          const t = ((orbitAngle / (2 * Math.PI)) + i / DATA_PACKET_COUNT + 0.5) % 1;
+          // Second stream: 300,80 -> 320,40 -> 360,80
+          const x = (1 - t) * (1 - t) * 300 + 2 * (1 - t) * t * 320 + t * t * 360;
+          const y = (1 - t) * (1 - t) * 80 + 2 * (1 - t) * t * 40 + t * t * 80;
+          return (
+            <circle key={`packet2-${i}`} cx={x} cy={y} r={3} fill="#fff" opacity={0.8} />
+          );
+        })}
         {/* Sparkles */}
         {[...Array(8)].map((_, i) => (
           <motion.circle
