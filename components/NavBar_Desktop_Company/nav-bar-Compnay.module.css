@@ -1,3 +1,30 @@
+.logoAnimation {
+  position: relative;
+}
+
+.nameIcon {
+  position: relative;
+  z-index: 1;
+}
+
+/* Crystal shine effect */
+.logoAnimation .crystal-shine {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.08) 100%);
+  transform: skewX(-24deg);
+  pointer-events: none;
+  transition: left 0.7s cubic-bezier(0.4,0,0.2,1);
+  z-index: 2;
+}
+
+.logoAnimation:hover .crystal-shine {
+  left: 110%;
+}
 /* Selected (active) nav item */
 .selected {
   background-color: #4573df !important;
@@ -146,9 +173,33 @@
 
 /* Animation for hovering on the Name animation container */
 .typo:hover .nameIcon {
-  opacity: 0; /* Hide the Name animation icon on hover */
-  transition: opacity 0.3s ease; /* Smooth opacity transition */
+  opacity: 1;
+  transform: scale(1.08) rotate(-1deg);
+  filter: drop-shadow(0 2px 16px #4573df55) drop-shadow(0 0px 32px #CFE8EF44);
+  background: linear-gradient(90deg, #2d4fa2 0%, #4573df 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  position: relative;
+  transition: 
+    background 0.3s cubic-bezier(0.4,0,0.2,1),
+    filter 0.3s cubic-bezier(0.4,0,0.2,1),
+    transform 0.25s cubic-bezier(0.4,0,0.2,1);
+}
 
+.typo:hover .nameIcon::before {
+  content: "";
+  position: absolute;
+  left: -60%;
+  top: 0;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.08) 100%);
+  transform: skewX(-24deg);
+  transition: left 0.5s cubic-bezier(0.4,0,0.2,1);
+  pointer-events: none;
+  z-index: 2;
 }
 
 

@@ -90,13 +90,16 @@ const NavBar = () => {
           />
         </button>
         <div className={styles.typo}>
-          <img
-            className={styles.nameIcon}
-            loading="lazy"
-            alt="Megicode Name"
-            src="/megicode-wordmark.svg"
-            style={{ maxWidth: "100%", height: "auto" }}
-          />
+          <span style={{position: 'relative', display: 'inline-block'}}>
+            <img
+              className={styles.nameIcon}
+              loading="lazy"
+              alt="Megicode Name"
+              src="/megicode-wordmark.svg"
+              style={{ maxWidth: "100%", height: "auto" }}
+            />
+            <span className="crystal-shine" style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%'}}></span>
+          </span>
         </div>
       </div>
 
