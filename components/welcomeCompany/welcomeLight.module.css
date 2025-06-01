@@ -1,7 +1,9 @@
 /* Light Mode Styles */
 
 .container {
-  background: #fff; /* Light mode background gradient */
+  background: transparent; /* Allow particles to show through */
+  position: relative;
+  z-index: 1;
 }
 
 .text {
