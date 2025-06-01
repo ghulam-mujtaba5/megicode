@@ -4,7 +4,12 @@ import { useTheme } from '../../context/ThemeContext';
 import Image from 'next/image';
 import styles from './gmicon.module.css';
 
-const ThemeToggleIcon = () => {
+
+interface GmIconProps {
+  showOnDesktop?: boolean;
+}
+
+const GmIcon: React.FC<GmIconProps> = ({ showOnDesktop = false }) => {
   const { theme } = useTheme();
   const [isInView, setIsInView] = useState(false);
   const [hasAnimated, setHasAnimated] = useState(false);
@@ -36,9 +41,9 @@ const ThemeToggleIcon = () => {
   };
 
   useEffect(() => {
-    // Only show on mobile screens
+    // Only show on mobile screens unless showOnDesktop is true
     const isMobile = () => window.matchMedia('(max-width: 768px)').matches;
-    if (!isMobile()) return;
+    if (!showOnDesktop && !isMobile()) return;
 
     // Initial check
     checkInView();
@@ -50,11 +55,11 @@ const ThemeToggleIcon = () => {
     return () => {
       window.removeEventListener('scroll', checkInView);
     };
-  }, [hasAnimated]);
+  }, [hasAnimated, showOnDesktop]);
 
-  // Only render on mobile screens
+  // Only render on mobile screens unless showOnDesktop is true
   const isMobile = typeof window !== 'undefined' ? window.matchMedia('(max-width: 768px)').matches : false;
-  if (!isMobile) return null;
+  if (!showOnDesktop && !isMobile) return null;
 
   return (
     <div
@@ -70,9 +75,9 @@ const ThemeToggleIcon = () => {
       }}
       ref={iconRef}
     >
-      <Image src={iconSrc} alt="Megicode Logo Icon" width={32} height={32} />
+      <Image src={iconSrc} alt="Megicode Logo Icon" width={36} height={36} />
     </div>
   );
 };
 
-export default ThemeToggleIcon;
+export default GmIcon;

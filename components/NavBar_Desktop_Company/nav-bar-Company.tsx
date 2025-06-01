@@ -67,28 +67,25 @@ const NavBar = () => {
         <div className={styles.skillsText}>Services</div>
       </div>
 
-      {/* Logo and Name Animation */}
+      {/* Logo and Name Animation (Megicode Icon Component, 100% consistent) */}
       <div
         className={styles.logoAnimation}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
         role="button"
         tabIndex={0}
         aria-label="Home"
         onClick={() => navigateTo("/")}
         onKeyPress={(e) => e.key === 'Enter' && navigateTo("/")}
+        style={{ cursor: 'pointer' }}
       >
-        <button className={`${styles.logo} ${hover ? styles.logoHover : ""}`}>
-          <img
-            className={styles.logoIcon}
-            alt="Company Logo"
-            src="/megicode-logo-alt.svg"
-            style={{
-              width: hover ? "35px" : "27px",
-              height: hover ? "35px" : "27px",
-            }}
-          />
-        </button>
+        {/* Use the gmicon component for 100% design and animation parity */}
+        {typeof window !== 'undefined' && (
+          (() => {
+            const GmIcon = require('../Icon/gmicon').default;
+            return (
+              <GmIcon showOnDesktop={true} />
+            );
+          })()
+        )}
         <div className={styles.typo}>
           <span style={{position: 'relative', display: 'inline-block'}}>
             <img

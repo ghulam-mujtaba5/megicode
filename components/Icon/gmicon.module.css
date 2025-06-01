@@ -1,4 +1,5 @@
 /* Modern AI/ML-inspired icon styles for Megicode */
+
 @keyframes aiGlow {
   0% {
     box-shadow: 0 0 0 0 rgba(69, 115, 223, 0.25), 0 0 0 0 rgba(207, 232, 239, 0.15);
@@ -20,24 +21,27 @@
   }
 }
 
+.animate {
+  animation: aiGlow 1s cubic-bezier(0.4, 0.2, 0.2, 1) 1;
+}
+
 .theme-toggle-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #4573df 60%, #cfe8ef 100%);
-  box-shadow: 0 2px 16px #4573df22, 0 0 0 0 #cfe8ef33;
+  background: linear-gradient(135deg, #1d2127 60%, #4573df 100%);
+  box-shadow: 0 2px 12px #4573df22, 0 0 0 0 #cfe8ef33;
   transition: box-shadow 0.3s, background 0.3s, filter 0.3s;
   cursor: pointer;
-  animation: aiGlow 2.2s cubic-bezier(0.4, 0.2, 0.2, 1) infinite;
   will-change: box-shadow, filter, transform;
 }
 
 .theme-toggle-icon img {
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   object-fit: contain;
   border-radius: 50%;
   background: transparent;
@@ -49,14 +53,7 @@
 }
 
 /* Theme-aware backgrounds for accessibility */
-.theme-toggle-icon.light {
-  background: linear-gradient(135deg, #e8ebee 60%, #cfe8ef 100%);
-  box-shadow: 0 2px 16px #cfe8ef33, 0 0 0 0 #4573df22;
-}
-.theme-toggle-icon.dark {
-  background: linear-gradient(135deg, #1d2127 60%, #4573df 100%);
-  box-shadow: 0 2px 16px #4573df33, 0 0 0 0 #cfe8ef22;
-}
+
 
 /* Focus and hover for accessibility and interactivity */
 .theme-toggle-icon:focus,
