@@ -59,19 +59,24 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
       });
     }
   };
-
-  // Particles
+  // Particles with horizontal movement only
   useEffect(() => {
     setParticles(
-      Array.from({ length: PARTICLE_COUNT }, () => ({        x: Math.random() * 960,
+      Array.from({ length: PARTICLE_COUNT }, () => ({
+        x: Math.random() * 960,
         y: Math.random() * 640,
-        speed: 0.5 + Math.random() * 1.5
+        angle: Math.random() * Math.PI * 2,
+        speed: 0.3 + Math.random() * 0.8
       }))
     );
   }, []);
   useEffect(() => {
     const interval = setInterval(() => {
-      setParticles(prev => prev.map(p => ({ ...p, y: (p.y + p.speed) % 640 })));
+      setParticles(prev => prev.map(p => ({
+        ...p,
+        x: (p.x + Math.cos(p.angle) * p.speed + 960) % 960,
+        y: p.y
+      })));
     }, 60);
     return () => clearInterval(interval);
   }, []);
