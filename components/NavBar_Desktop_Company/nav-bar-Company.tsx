@@ -82,7 +82,7 @@ const NavBar = () => {
           <img
             className={styles.logoIcon}
             alt="Company Logo"
-            src={hover ? "gmVectorDark.svg" : "sb.svg"}
+            src="/megicode-logo-alt.svg"
             style={{
               width: hover ? "35px" : "27px",
               height: hover ? "35px" : "27px",
@@ -94,8 +94,8 @@ const NavBar = () => {
             <img
               className={styles.nameIcon}
               loading="lazy"
-              alt="SoftBuilt Name"
-              src="/sbname.svg"
+              alt="Megicode Name"
+              src="/megicode-wordmark.svg"
               style={{ maxWidth: "100%", height: "auto" }}
             />
           )}
