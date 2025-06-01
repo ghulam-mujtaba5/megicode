@@ -1,14 +1,10 @@
 /* Selected (active) nav item */
-.selected, .selected > div {
+.selected {
   background-color: #4573df !important;
   color: #fff !important;
 }
+
 /* Styles for the Home button text */
-
-
-.header * {
-  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-}
 .homeText {
   position: relative;
   font-size: 20px;
@@ -25,7 +21,7 @@
   cursor: pointer;
   border: 0;
   padding: 20px 40px;
-  background-color: #4573df;
+  background-color: transparent;
   border-radius: 60px;
   overflow: hidden;
   display: flex;
@@ -34,15 +30,15 @@
   justify-content: center;
 }
 
-/* Hover effect for all elements */
-.about:hover,
-.skills:hover,
-.resume:hover,
-.project:hover,
-.contact:hover {
-  background-color: #33373c; /* Change to darker color on hover */
-  transform: scale(1.05); /* Slight scale effect on hover */
-
+/* Hover effect for all nav items when not selected */
+.home:not(.selected):hover,
+.about:not(.selected):hover,
+.skills:not(.selected):hover,
+.resume:not(.selected):hover,
+.project:not(.selected):hover,
+.contact:not(.selected):hover {
+  background-color: #33373c;
+  transform: scale(1.05);
 }
 
 /* Styles for the About section text */
@@ -111,11 +107,9 @@
 }
 
 .logoHover {
-  background-color: #4573df;
+  background-color: #33373c;
   transform: scale(1.03);
   box-shadow:none;
-  transition: opacity 0.3s ease; /* Smooth opacity transition */
-
 }
 
 /* Styles for the Name animation icon */

@@ -1,5 +1,3 @@
-
-
 "use client";
 import styles from "./nav-bar-Compnay.module.css";
 import { useState } from "react";
@@ -32,9 +30,7 @@ const NavBar = () => {
       {/* Home button */}
 
       <button
-        className={
-          styles.home + (pathname === "/" ? ` ${styles.selected}` : "")
-        }
+        className={`${styles.home} ${pathname === "/" ? styles.selected : ""}`}
         onClick={() => navigateTo("/")}
         aria-label="Home"
       >
@@ -44,9 +40,7 @@ const NavBar = () => {
       {/* About page */}
 
       <div
-        className={
-          styles.about + (pathname === "/about" ? ` ${styles.selected}` : "")
-        }
+        className={`${styles.about} ${pathname === "/about" ? styles.selected : ""}`}
         onClick={() => navigateTo("/about")}
         role="button"
         tabIndex={0}
@@ -59,9 +53,7 @@ const NavBar = () => {
       {/* Services page */}
 
       <div
-        className={
-          styles.skills + (pathname === "/services" ? ` ${styles.selected}` : "")
-        }
+        className={`${styles.skills} ${pathname === "/services" ? styles.selected : ""}`}
         onClick={() => navigateTo("/services")}
         role="button"
         tabIndex={0}
@@ -118,9 +110,7 @@ const NavBar = () => {
       {/* Reviews page */}
 
       <div
-        className={
-          styles.resume + (pathname === "/reviews" ? ` ${styles.selected}` : "")
-        }
+        className={`${styles.resume} ${pathname === "/reviews" ? styles.selected : ""}`}
         onClick={() => navigateTo("/reviews")}
         role="button"
         tabIndex={0}
@@ -133,9 +123,7 @@ const NavBar = () => {
       {/* Project page */}
 
       <div
-        className={
-          styles.project + (pathname === "/project" ? ` ${styles.selected}` : "")
-        }
+        className={`${styles.project} ${pathname === "/project" ? styles.selected : ""}`}
         onClick={() => navigateTo("/project")}
         role="button"
         tabIndex={0}
@@ -148,9 +136,7 @@ const NavBar = () => {
       {/* Contact page */}
 
       <div
-        className={
-          styles.contact + (pathname === "/contact" ? ` ${styles.selected}` : "")
-        }
+        className={`${styles.contact} ${pathname === "/contact" ? styles.selected : ""}`}
         onClick={() => navigateTo("/contact")}
         role="button"
         tabIndex={0}
