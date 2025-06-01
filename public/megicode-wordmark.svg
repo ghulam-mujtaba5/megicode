@@ -5,6 +5,5 @@
       <stop offset="1" stop-color="#CFE8EF"/>
     </linearGradient>
   </defs>
-  <text x="0" y="28" fill="url(#megicodeWord)" font-family="Open Sans, Arial, sans-serif" font-size="32" font-weight="bold" letter-spacing="2">Megi</text>
-  <text x="110" y="28" fill="#4573df" font-family="Open Sans, Arial, sans-serif" font-size="32" font-weight="bold" letter-spacing="2">code</text>
+  <text x="0" y="28" fill="url(#megicodeWord)" font-family="Open Sans, Arial, sans-serif" font-size="32" font-weight="bold">Megicode</text>
 </svg>
