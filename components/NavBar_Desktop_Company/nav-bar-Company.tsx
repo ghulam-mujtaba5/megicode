@@ -7,6 +7,7 @@ const NavBar = () => {
   const [hover, setHover] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
+  console.log('Current pathname:', pathname);
 
   const handleLogoClick = () => {
     router.push('/');
@@ -29,13 +30,16 @@ const NavBar = () => {
     <header className={styles.header}>
       {/* Home button */}
 
-      <button
-        className={`${styles.home} ${pathname === "/" ? styles.selected : ""}`}
+      <div
+        className={`${styles.home} ${(pathname === "/" || pathname === "/megicode" || pathname === "") ? styles.selected : ""}`}
         onClick={() => navigateTo("/")}
+        role="button"
+        tabIndex={0}
         aria-label="Home"
+        onKeyPress={(e) => e.key === 'Enter' && navigateTo("/")}
       >
-        <b className={styles.homeText}>Home</b>
-      </button>
+        <div className={styles.homeText}>Home</div>
+      </div>
 
       {/* About page */}
 

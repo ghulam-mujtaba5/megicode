@@ -11,9 +11,13 @@
   letter-spacing: -0.01em;
   display: inline-block;
   font-family: "Open Sans";
-  color: #fff;
   text-align: left;
   min-width: 59px;
+}
+
+/* Ensure selected Home text is white */
+.home.selected .homeText {
+  color: #fff !important;
 }
 
 /* Styles for the Home button */
