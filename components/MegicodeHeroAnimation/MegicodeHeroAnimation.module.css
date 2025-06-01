@@ -1,0 +1,27 @@
+/* Interactive SVG animation feedback */
+.megicode-hero-illustration {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 48vw;
+  min-width: 260px;
+  max-width: 480px;
+  height: 100%;
+  max-height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  z-index: 1;
+  pointer-events: auto;
+  user-select: none;
+}
+
+.svg-hovered svg {
+  filter: drop-shadow(0 0 16px #4573df) brightness(1.15);
+  transition: filter 0.3s cubic-bezier(.4,2,.6,1);
+}
+.svg-clicked svg {
+  filter: drop-shadow(0 0 32px #2d4fa2) brightness(1.3) saturate(1.2);
+  transition: filter 0.2s cubic-bezier(.4,2,.6,1);
+}

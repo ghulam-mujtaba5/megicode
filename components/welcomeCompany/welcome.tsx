@@ -6,7 +6,6 @@ import styles from './welcomeLight.module.css'; // Import the light mode CSS fil
 import darkStyles from './welcomeDark.module.css'; // Import the dark mode CSS file
 import commonStyles from './welcomeCommon.module.css'; // Import the common CSS file
 
-
 const Frame = () => {
   const { theme } = useTheme(); // Destructure theme from the context
   const [welcomeText, setWelcomeText] = useState('');
@@ -56,9 +55,11 @@ const Frame = () => {
     <section
       className={`${commonStyles.container} ${theme === 'dark' ? darkStyles.darkContainer : styles.container}`}
       aria-label="Welcome to Megicode"
+      style={{ position: 'relative', minHeight: 320 }}
     >
       <div
         className={`${commonStyles.textContainer} ${theme === 'dark' ? darkStyles.textContainer : styles.textContainer}`}
+        style={{ zIndex: 2 }}
       >
         <motion.h1
           className={`${commonStyles.text} ${theme === 'dark' ? darkStyles.text : styles.text}`}
@@ -85,6 +86,8 @@ const Frame = () => {
           {serviceText}
         </motion.p>
       </div>
+      {/* Hero SVG Animation - Responsive, only on desktop/tablet */}
+     
     </section>
   );
 };

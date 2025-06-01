@@ -1,4 +1,5 @@
 "use client";
+import MegicodeHeroAnimationAdvancedClient from "./MegicodeHeroAnimationAdvancedClient";
 import React, { useCallback } from "react";
 import { useTheme } from "../../context/ThemeContext";
 import NavBarDesktop from "../../components/NavBar_Desktop_Company/nav-bar-Company";
@@ -51,9 +52,10 @@ export default function MegicodePage() {
         <NavBarMobile sections={sections} />
       </nav>
 
-      {/* Welcome Frame */}
-      <section id="welcome-section" aria-labelledby="welcome-heading" style={{ width: "100%", overflow: "hidden" }}>
+      {/* Welcome Frame + Advanced Hero Animation */}
+      <section id="welcome-section" aria-labelledby="welcome-heading" style={{ width: "100%", overflow: "hidden", position: 'relative' }}>
         <WelcomeFrame />
+        <MegicodeHeroAnimationAdvancedClient />
       </section>
 
       {/* About Me Section */}
