@@ -90,24 +90,13 @@ const NavBar = () => {
           />
         </button>
         <div className={styles.typo}>
-          {!hover && (
-            <img
-              className={styles.nameIcon}
-              loading="lazy"
-              alt="Megicode Name"
-              src="/megicode-wordmark.svg"
-              style={{ maxWidth: "100%", height: "auto" }}
-            />
-          )}
-          {hover && (
-            <img
-              className={styles.alternativeNameIcon}
-              loading="lazy"
-              alt="Ghulam Mujtaba Name"
-              src="/ghulam-mujtaba.svg"
-              style={{ maxWidth: "100%", height: "auto" }}
-            />
-          )}
+          <img
+            className={styles.nameIcon}
+            loading="lazy"
+            alt="Megicode Name"
+            src="/megicode-wordmark.svg"
+            style={{ maxWidth: "100%", height: "auto" }}
+          />
         </div>
       </div>
 
