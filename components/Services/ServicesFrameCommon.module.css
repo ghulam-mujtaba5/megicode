@@ -28,9 +28,10 @@
 
 /* Title icon styling */
 .titleicon {
-    width: 30px; /* Set width for the title icon */
-    height: 30px; /* Set height for the title icon */
-    margin-right: 10px; /* Add margin to separate icon from text */
+    width: 48px;
+    height: 48px;
+    margin-right: 10px;
+    object-fit: contain;
 }
 
 /* Individual skill card */
@@ -52,19 +53,17 @@
     box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
 }
 .uiuxCard .icon{
-    width: 55px;
-    max-width: 97px; /* Maximum width of the icon */
-    height: auto ; /* Height of the icon */
+    width: 48px;
+    height: 48px;
+    max-width: 48px;
     object-fit: contain;
-
 }
 
 .developmentCard .icon{
-    width: 55px;
-    max-width: 97px; /* Maximum width of the icon */
-    height: auto ; /* Height of the icon */
+    width: 48px;
+    height: 48px;
+    max-width: 48px;
     object-fit: contain;
-    
 }
 
 
@@ -124,9 +123,9 @@
 
 /* Individual icon */
 .icon {
-    width: auto;
-    max-width: 97px; /* Maximum width of the icon */
-    height: 30px; /* Height of the icon */
+    width: 48px;
+    height: 48px;
+    max-width: 48px;
     object-fit: contain;
 }
 
