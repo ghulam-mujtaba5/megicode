@@ -1,4 +1,10 @@
-<svg width="180" height="40" viewBox="0 0 180 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <text x="0" y="28" fill="#4573df" font-family="Open Sans, Arial, sans-serif" font-size="32" font-weight="bold">Mega</text>
-  <text x="75" y="28" fill="#CFE8EF" font-family="Open Sans, Arial, sans-serif" font-size="32" font-weight="bold">code</text>
+<svg width="220" height="40" viewBox="0 0 220 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="megicodeWord" x1="0" y1="0" x2="100" y2="0" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4573df"/>
+      <stop offset="1" stop-color="#CFE8EF"/>
+    </linearGradient>
+  </defs>
+  <text x="0" y="28" fill="url(#megicodeWord)" font-family="Open Sans, Arial, sans-serif" font-size="32" font-weight="bold" letter-spacing="2">Megi</text>
+  <text x="110" y="28" fill="#4573df" font-family="Open Sans, Arial, sans-serif" font-size="32" font-weight="bold" letter-spacing="2">code</text>
 </svg>

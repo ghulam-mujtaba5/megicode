@@ -1,4 +1,10 @@
 <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="20" cy="20" r="20" fill="#4573df"/>
-  <text x="50%" y="55%" text-anchor="middle" fill="#fff" font-family="Open Sans, Arial, sans-serif" font-size="20" font-weight="bold" dy=".3em">M</text>
+  <defs>
+    <linearGradient id="megicodeBlue" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4573df"/>
+      <stop offset="1" stop-color="#CFE8EF"/>
+    </linearGradient>
+  </defs>
+  <circle cx="20" cy="20" r="20" fill="url(#megicodeBlue)" />
+  <text x="50%" y="58%" text-anchor="middle" fill="#fff" font-family="Open Sans, Arial, sans-serif" font-size="18" font-weight="bold" dy=".3em" letter-spacing="2">M</text>
 </svg>
