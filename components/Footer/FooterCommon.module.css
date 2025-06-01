@@ -30,6 +30,7 @@
 }
 
 
+
 .linkedinIcon,
 .instagramIcon,
 .githubIcon {
@@ -39,8 +40,9 @@
     max-height: 100%;
     width: 22.4px;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+    transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s cubic-bezier(0.4,0,0.2,1), filter 0.3s cubic-bezier(0.4,0,0.2,1);
     outline: none;
+    will-change: transform, box-shadow, filter;
 }
 
 .linkedinIcon:hover,
@@ -49,10 +51,10 @@
 .linkedinIcon:focus,
 .instagramIcon:focus,
 .githubIcon:focus {
-    transform: scale(1.18) rotate(-6deg);
-    box-shadow: 0 2px 16px 0 #3b82f6aa;
-    filter: brightness(1.2) drop-shadow(0 0 4px #3b82f6);
-    outline: 2px solid #3b82f6;
+    transform: scale(1.13) rotate(-4deg);
+    box-shadow: 0 4px 18px 0 #4573df55, 0 0 0 2px #4573df;
+    filter: brightness(1.13) drop-shadow(0 0 4px #4573df);
+    outline: 2px solid #4573df;
     z-index: 2;
 }
 

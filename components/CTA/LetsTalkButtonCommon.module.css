@@ -24,6 +24,7 @@
   }
 }
 /* Common styles for Let's Talk CTA button */
+/* Advanced animated CTA button */
 .ctaButton {
   display: inline-block;
   margin-top: 2.5rem;
@@ -35,9 +36,61 @@
   cursor: pointer;
   text-align: center;
   text-decoration: none;
-  transition: background 0.2s, color 0.2s, transform 0.2s;
-  box-shadow: 0 2px 8px rgba(69, 115, 223, 0.08);
   outline: none;
+  background: linear-gradient(90deg, #4573df 0%, #2d4fa2 100%);
+  color: #fff;
+  box-shadow: 0 4px 24px 0 rgba(69, 115, 223, 0.18), 0 1.5px 8px 0 #4573df22;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s cubic-bezier(0.4,0,0.2,1), color 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s cubic-bezier(0.4,0,0.2,1), transform 0.25s cubic-bezier(0.4,0,0.2,1);
+  will-change: transform, box-shadow, background;
+}
+
+.ctaButton::before {
+  content: "";
+  position: absolute;
+  left: -60%;
+  top: 0;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.04) 100%);
+  transform: skewX(-24deg);
+  transition: left 0.5s cubic-bezier(0.4,0,0.2,1);
+  pointer-events: none;
+}
+
+.ctaButton:hover::before,
+.ctaButton:focus::before {
+  left: 110%;
+}
+
+.ctaButton:hover,
+.ctaButton:focus {
+  background: linear-gradient(90deg, #2d4fa2 0%, #4573df 100%);
+  color: #fff;
+  box-shadow: 0 8px 32px 0 #4573df44, 0 2px 16px 0 #4573df33;
+  transform: translateY(-3px) scale(1.045) rotate(-1deg);
+}
+
+.ctaButton:active {
+  transform: scale(0.97);
+  box-shadow: 0 2px 8px 0 #4573df22;
+}
+
+@keyframes ctaPulse {
+  0% {
+    box-shadow: 0 0 0 0 #4573df44;
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(69, 115, 223, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(69, 115, 223, 0);
+  }
+}
+
+.ctaButton {
+  animation: ctaPulse 2.2s infinite cubic-bezier(0.4,0,0.2,1);
 }
 .ctaButton:focus {
   outline: 2px solid #4573df;
