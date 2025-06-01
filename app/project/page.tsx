@@ -16,7 +16,12 @@ export default function ProjectPage() {
   const copyrightText = "Copyright 2025 Megicode. All Rights Reserved.";
 
   const sections = [
-    { id: "project-section", label: "Projects" },
+    { label: "Home", route: "/" },
+    { label: "About", route: "/about" },
+    { label: "Services", route: "/services" },
+    { label: "Reviews", route: "/reviews" },
+    { label: "Project", route: "/project" },
+    { label: "Contact", route: "/contact" },
   ];
 
   return (

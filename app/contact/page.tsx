@@ -18,7 +18,12 @@ export default function ContactPage() {
   const contactPhoneNumber = "+123 456 7890";
 
   const sections = [
-    { id: "contact-section", label: "Contact" },
+    { label: "Home", route: "/" },
+    { label: "About", route: "/about" },
+    { label: "Services", route: "/services" },
+    { label: "Reviews", route: "/reviews" },
+    { label: "Project", route: "/project" },
+    { label: "Contact", route: "/contact" },
   ];
 
   return (

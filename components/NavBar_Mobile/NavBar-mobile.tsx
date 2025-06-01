@@ -18,15 +18,14 @@ const NavBar = ({ sections }) => {
     }, []);
 
     const handleScrollOrRoute = useCallback((sectionOrRoute) => {
-        if (sectionOrRoute.startsWith('/')) {
-            // If the sectionOrRoute starts with '/', treat it as a route
+        if (typeof sectionOrRoute === 'string' && sectionOrRoute.startsWith('/')) {
             router.push(sectionOrRoute);
-        } else {
-            // Otherwise, treat it as a section ID
+            setIsMenuOpen(false);
+        } else if (typeof sectionOrRoute === 'string') {
             const section = document.getElementById(sectionOrRoute);
             if (section) {
                 section.scrollIntoView({ behavior: 'smooth' });
-                setIsMenuOpen(false); // Close the menu after clicking on a menu item
+                setIsMenuOpen(false);
             }
         }
     }, [router]);
@@ -57,13 +56,25 @@ const NavBar = ({ sections }) => {
                     {sections?.length > 0 ? (
                         sections.map((section) => (
                             <li
-                                key={section.id}
+                                key={section.route || section.id}
                                 className={`${commonStyles.menuItem} ${themeStyles.menuItem}`}
-                                onClick={() => handleScrollOrRoute(section.id || section.route)}
+                                onClick={() => {
+                                    if (section.route) {
+                                        handleScrollOrRoute(section.route);
+                                    } else if (section.id) {
+                                        handleScrollOrRoute(section.id);
+                                    }
+                                }}
                                 role="menuitem"
                                 tabIndex={0}
                                 onKeyPress={(e) => {
-                                    if (e.key === 'Enter') handleScrollOrRoute(section.id || section.route);
+                                    if (e.key === 'Enter') {
+                                        if (section.route) {
+                                            handleScrollOrRoute(section.route);
+                                        } else if (section.id) {
+                                            handleScrollOrRoute(section.id);
+                                        }
+                                    }
                                 }}
                             >
                                 {section.label}

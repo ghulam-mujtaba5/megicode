@@ -1,149 +1,3 @@
-// import styles from "./nav-bar-Compnay.module.css";
-// import { useState } from "react";
-// import { useRouter } from "next/router";
-
-// const NavBar = () => {
-//   const [hover, setHover] = useState(false);
-//   const router = useRouter();
-
-//   const handleLogoClick = () => {
-//     router.push('/');
-//   };
-
-//   const handleMouseEnter = () => {
-//     setHover(true);
-//   };
-
-//   const handleMouseLeave = () => {
-//     setHover(false);
-//   };
-
-//   const scrollToSection = (sectionId) => {
-//     const section = document.getElementById(sectionId);
-//     if (section) {
-//       section.scrollIntoView({ behavior: "smooth" });
-//     }
-//   };
-
-//   return (
-//     <header className={styles.header}>
-//       {/* Home button */}
-//       <button
-//         className={styles.home}
-//         onClick={() => scrollToSection("home-section")}
-//         aria-label="Home"
-//       >
-//         <b className={styles.homeText}>Home</b>
-//       </button>
-
-//       {/* About section */}
-//       <div
-//         className={styles.about}
-//         onClick={() => scrollToSection("about-section")}
-//         role="button"
-//         tabIndex={0}
-//         aria-label="About"
-//         onKeyPress={(e) => e.key === 'Enter' && scrollToSection("about-section")}
-//       >
-//         <div className={styles.aboutText}>About</div>
-//       </div>
-
-//       {/* Services section */}
-//       <div
-//         className={styles.skills}
-//         onClick={() => scrollToSection("services-section")}
-//         role="button"
-//         tabIndex={0}
-//         aria-label="Services"
-//         onKeyPress={(e) => e.key === 'Enter' && scrollToSection("services-section")}
-//       >
-//         <div className={styles.skillsText}>Services</div>
-//       </div>
-
-//       {/* Logo and Name Animation */}
-//       <div
-//         className={styles.logoAnimation}
-//         onMouseEnter={handleMouseEnter}
-//         onMouseLeave={handleMouseLeave}
-//         onClick={handleLogoClick}
-//         role="button"
-//         tabIndex={0}
-//         aria-label="Home Portfolio"
-//         onKeyPress={(e) => e.key === 'Enter' && handleLogoClick()}
-//       >
-//         <button className={`${styles.logo} ${hover ? styles.logoHover : ""}`}>
-//           <img
-//             className={styles.logoIcon}
-//             alt="Company Logo"
-//             src={hover ? "gmVectorDark.svg" : "sb.svg"} // Different SVG based on hover state
-//             style={{
-//               width: hover ? "35px" : "27px", // Adjust width based on hover state
-//               height: hover ? "35px" : "27px", // Adjust height based on hover state
-//             }}
-//           />
-//         </button>
-//         <div className={styles.typo}>
-//           {!hover && (
-//             <img
-//               className={styles.nameIcon}
-//               loading="lazy"
-//               alt="SoftBuilt Name"
-//               src="/sbname.svg"
-//               style={{ maxWidth: "100%", height: "auto" }} // Make the image responsive
-//             />
-//           )}
-//           {hover && (
-//             <img
-//               className={styles.alternativeNameIcon}
-//               loading="lazy"
-//               alt="Ghulam Mujtaba Name"
-//               src="/ghulam-mujtaba.svg" // Alternative SVG on hover
-//               style={{ maxWidth: "100%", height: "auto" }} // Make the image responsive
-//             />
-//           )}
-//         </div>
-//       </div>
-
-//       {/* Reviews section */}
-//       <div
-//         className={styles.resume}
-//         onClick={() => scrollToSection("reviews-section")}
-//         role="button"
-//         tabIndex={0}
-//         aria-label="Reviews"
-//         onKeyPress={(e) => e.key === 'Enter' && scrollToSection("reviews-section")}
-//       >
-//         <div className={styles.resumeText}>Reviews</div>
-//       </div>
-
-//       {/* Project section */}
-//       <div
-//         className={styles.project}
-//         onClick={() => scrollToSection("project-section")}
-//         role="button"
-//         tabIndex={0}
-//         aria-label="Project"
-//         onKeyPress={(e) => e.key === 'Enter' && scrollToSection("project-section")}
-//       >
-//         <div className={styles.projectText}>Project</div>
-//       </div>
-
-//       {/* Contact section */}
-//       <div
-//         className={styles.contact}
-//         onClick={() => scrollToSection("contact-section")}
-//         role="button"
-//         tabIndex={0}
-//         aria-label="Contact"
-//         onKeyPress={(e) => e.key === 'Enter' && scrollToSection("contact-section")}
-//       >
-//         <div className={styles.contactText}>Contact</div>
-//       </div>
-//     </header>
-//   );
-// };
-
-// export default NavBar;
 
 
 "use client";
@@ -168,11 +22,9 @@ const NavBar = () => {
     setHover(false);
   };
 
-  const scrollToSection = (sectionId) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-    }
+  // Navigation handler for desktop navbar
+  const navigateTo = (route) => {
+    router.push(route);
   };
 
   return (
@@ -180,113 +32,112 @@ const NavBar = () => {
       {/* Home button */}
       <button
         className={styles.home}
-        onClick={() => scrollToSection("home-section")}
+        onClick={() => navigateTo("/")}
         aria-label="Home"
       >
         <b className={styles.homeText}>Home</b>
       </button>
 
-      {/* About section */}
+      {/* About page */}
       <div
         className={styles.about}
-        onClick={() => scrollToSection("about-section")}
+        onClick={() => navigateTo("/about")}
         role="button"
         tabIndex={0}
         aria-label="About"
-        onKeyPress={(e) => e.key === 'Enter' && scrollToSection("about-section")}
+        onKeyPress={(e) => e.key === 'Enter' && navigateTo("/about")}
       >
         <div className={styles.aboutText}>About</div>
       </div>
 
-      {/* Services section */}
+      {/* Services page */}
       <div
         className={styles.skills}
-        onClick={() => scrollToSection("services-section")}
+        onClick={() => navigateTo("/services")}
         role="button"
         tabIndex={0}
         aria-label="Services"
-        onKeyPress={(e) => e.key === 'Enter' && scrollToSection("services-section")}
+        onKeyPress={(e) => e.key === 'Enter' && navigateTo("/services")}
       >
         <div className={styles.skillsText}>Services</div>
       </div>
 
       {/* Logo and Name Animation */}
-      <Link href="http://ghulammujtaba.com" passHref>
-        <div
-          className={styles.logoAnimation}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-          role="button"
-          tabIndex={0}
-          aria-label="Home Portfolio"
-          onKeyPress={(e) => e.key === 'Enter' && handleLogoClick()}
-        >
-          <button className={`${styles.logo} ${hover ? styles.logoHover : ""}`}>
+      <div
+        className={styles.logoAnimation}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        role="button"
+        tabIndex={0}
+        aria-label="Home"
+        onClick={() => navigateTo("/")}
+        onKeyPress={(e) => e.key === 'Enter' && navigateTo("/")}
+      >
+        <button className={`${styles.logo} ${hover ? styles.logoHover : ""}`}>
+          <img
+            className={styles.logoIcon}
+            alt="Company Logo"
+            src={hover ? "gmVectorDark.svg" : "sb.svg"}
+            style={{
+              width: hover ? "35px" : "27px",
+              height: hover ? "35px" : "27px",
+            }}
+          />
+        </button>
+        <div className={styles.typo}>
+          {!hover && (
             <img
-              className={styles.logoIcon}
-              alt="Company Logo"
-              src={hover ? "gmVectorDark.svg" : "sb.svg"} // Different SVG based on hover state
-              style={{
-                width: hover ? "35px" : "27px", // Adjust width based on hover state
-                height: hover ? "35px" : "27px", // Adjust height based on hover state
-              }}
+              className={styles.nameIcon}
+              loading="lazy"
+              alt="SoftBuilt Name"
+              src="/sbname.svg"
+              style={{ maxWidth: "100%", height: "auto" }}
             />
-          </button>
-          <div className={styles.typo}>
-            {!hover && (
-              <img
-                className={styles.nameIcon}
-                loading="lazy"
-                alt="SoftBuilt Name"
-                src="/sbname.svg"
-                style={{ maxWidth: "100%", height: "auto" }} // Make the image responsive
-              />
-            )}
-            {hover && (
-              <img
-                className={styles.alternativeNameIcon}
-                loading="lazy"
-                alt="Ghulam Mujtaba Name"
-                src="/ghulam-mujtaba.svg" // Alternative SVG on hover
-                style={{ maxWidth: "100%", height: "auto" }} // Make the image responsive
-              />
-            )}
-          </div>
+          )}
+          {hover && (
+            <img
+              className={styles.alternativeNameIcon}
+              loading="lazy"
+              alt="Ghulam Mujtaba Name"
+              src="/ghulam-mujtaba.svg"
+              style={{ maxWidth: "100%", height: "auto" }}
+            />
+          )}
         </div>
-      </Link>
+      </div>
 
-      {/* Reviews section */}
+      {/* Reviews page */}
       <div
         className={styles.resume}
-        onClick={() => scrollToSection("reviews-section")}
+        onClick={() => navigateTo("/reviews")}
         role="button"
         tabIndex={0}
         aria-label="Reviews"
-        onKeyPress={(e) => e.key === 'Enter' && scrollToSection("reviews-section")}
+        onKeyPress={(e) => e.key === 'Enter' && navigateTo("/reviews")}
       >
         <div className={styles.resumeText}>Reviews</div>
       </div>
 
-      {/* Project section */}
+      {/* Project page */}
       <div
         className={styles.project}
-        onClick={() => scrollToSection("project-section")}
+        onClick={() => navigateTo("/project")}
         role="button"
         tabIndex={0}
         aria-label="Project"
-        onKeyPress={(e) => e.key === 'Enter' && scrollToSection("project-section")}
+        onKeyPress={(e) => e.key === 'Enter' && navigateTo("/project")}
       >
         <div className={styles.projectText}>Project</div>
       </div>
 
-      {/* Contact section */}
+      {/* Contact page */}
       <div
         className={styles.contact}
-        onClick={() => scrollToSection("contact-section")}
+        onClick={() => navigateTo("/contact")}
         role="button"
         tabIndex={0}
         aria-label="Contact"
-        onKeyPress={(e) => e.key === 'Enter' && scrollToSection("contact-section")}
+        onKeyPress={(e) => e.key === 'Enter' && navigateTo("/contact")}
       >
         <div className={styles.contactText}>Contact</div>
       </div>

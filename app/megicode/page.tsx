@@ -28,12 +28,15 @@ export default function MegicodePage() {
   const contactEmail = "megicode@gmail.com";
   const contactPhoneNumber = "+123 456 7890";
 
-  // Sample menu list override
+  // Navigation menu for mobile navbar
   const sections = [
-    { id: "home-section", label: "Home" },
-    { id: "about-section", label: "About" },
-    { id: "services-section", label: "Services" },
-    { id: "contact-section", label: "Contact" },
+    { label: "Home", route: "/" },
+    { label: "About", route: "/about" },
+    { label: "Services", route: "/services" },
+
+    { label: "Reviews", route: "/reviews" },
+    { label: "Project", route: "/project" },
+    { label: "Contact", route: "/contact" },
   ];
   return (
     <div style={{ backgroundColor: theme === "dark" ? "#1d2127" : "#ffffff", overflowX: "hidden", position: "relative" }}>      <div style={{ 
