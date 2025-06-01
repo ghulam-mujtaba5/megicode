@@ -4,11 +4,6 @@
     left: 0;
     width: 100%;
     height: 80px;
-    background: linear-gradient(90deg, #f8fafc 0%, #e0e7ef 100%);
-    /* subtle gradient for quality */
-    border-top: 1px solid #e5e7eb;
-    border-bottom: 1px solid #e5e7eb;
-    z-index: 0;
 }
 
 .copyrightIcon {
@@ -80,8 +75,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    /* padding: 0 20px; */
     box-sizing: border-box;
-    z-index: 1;
 }
 
 .footer {
@@ -90,10 +85,7 @@
     margin: 0 !important;
     text-align: left;
     font-size: 24px;
-    font-family: 'Open Sans', Arial, sans-serif;
-    letter-spacing: 0.01em;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Open Sans';
 }
 
 /* Media query for small screens */
@@ -122,11 +114,6 @@
         width: 57%;
         display: flex;
         align-items: center;
-        text-shadow: 0 1px 2px #fff8, 0 0.5px 1px #e0e7ef;
-        /* subtle shadow for clarity */
-        background: transparent;
-        border-radius: 2px;
-        padding: 0 2px;
     }
 
     .linkedinIcon {
