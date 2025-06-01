@@ -11,7 +11,8 @@ const ThemeToggleIcon = () => {
   const { theme } = useTheme();
   const router = useRouter();
   const [animate, setAnimate] = useState(false);
-  const iconRef = useRef(null);
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const iconRef = useRef<HTMLDivElement | null>(null);
 
   const handleIconClick = useCallback(() => {
     window.location.href = '/'; // Go to Megicode home page
@@ -26,15 +27,19 @@ const ThemeToggleIcon = () => {
   }, []);
 
   useEffect(() => {
+    // Only show on mobile screens
+    const isMobile = () => window.matchMedia('(max-width: 768px)').matches;
+    if (!isMobile()) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting && !hasAnimated) {
           setAnimate(true);
-          // Reset animation class after animation completes
+          setHasAnimated(true);
           setTimeout(() => setAnimate(false), 1000); // Match duration with animation time
         }
       },
-      { threshold: 0.1 } // Adjust based on when you want the animation to trigger
+      { threshold: 0.1 }
     );
 
     if (iconRef.current) {
@@ -46,7 +51,11 @@ const ThemeToggleIcon = () => {
         observer.unobserve(iconRef.current);
       }
     };
-  }, []);
+  }, [hasAnimated]);
+
+  // Only render on mobile screens
+  const isMobile = typeof window !== 'undefined' ? window.matchMedia('(max-width: 768px)').matches : false;
+  if (!isMobile) return null;
 
   return (
     <div

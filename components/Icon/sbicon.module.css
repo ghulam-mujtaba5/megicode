@@ -1,65 +1,80 @@
-/* Define the keyframes for the animation */
-@keyframes zoomInWithShadowAndGlow {
+/* Modern AI/ML-inspired icon styles for Megicode */
+@keyframes aiGlow {
   0% {
-    transform: scale(0.7);
-    opacity: 0;
-    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    box-shadow: 0 0 0 0 rgba(69, 115, 223, 0.25), 0 0 0 0 rgba(207, 232, 239, 0.15);
     filter: brightness(1) blur(0px);
+    opacity: 0.7;
+    transform: scale(0.92);
   }
   50% {
+    box-shadow: 0 0 16px 6px rgba(69, 115, 223, 0.32), 0 0 32px 12px rgba(207, 232, 239, 0.18);
+    filter: brightness(1.18) blur(0.5px);
     opacity: 1;
-    transform: scale(1.1);
-    box-shadow: 0 8px 35px rgba(0, 0, 0, 0.4); /* Slightly more prominent shadow */
-    filter: brightness(1.2) blur(0px);
+    transform: scale(1.04);
   }
   100% {
+    box-shadow: 0 0 0 0 rgba(69, 115, 223, 0.18), 0 0 0 0 rgba(207, 232, 239, 0.10);
+    filter: brightness(1.05) blur(0px);
+    opacity: 0.85;
     transform: scale(1);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); /* Softer shadow for final state */
-    filter: brightness(1.1) blur(0px);
   }
 }
 
 .theme-toggle-icon {
-  display: none; /* Hide by default */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4573df 60%, #cfe8ef 100%);
+  box-shadow: 0 2px 16px #4573df22, 0 0 0 0 #cfe8ef33;
+  transition: box-shadow 0.3s, background 0.3s, filter 0.3s;
+  cursor: pointer;
+  animation: aiGlow 2.2s cubic-bezier(0.4, 0.2, 0.2, 1) infinite;
+  will-change: box-shadow, filter, transform;
 }
 
 .theme-toggle-icon img {
-  width: 35px;
-  height: 35px;
+  width: 34px;
+  height: 34px;
   object-fit: contain;
   border-radius: 50%;
-  background: none;
+  background: transparent;
   box-shadow: none;
   border: none;
   padding: 0;
   margin: 0;
+  display: block;
 }
 
-/* Media query for smaller screens */
+/* Theme-aware backgrounds for accessibility */
+.theme-toggle-icon.light {
+  background: linear-gradient(135deg, #e8ebee 60%, #cfe8ef 100%);
+  box-shadow: 0 2px 16px #cfe8ef33, 0 0 0 0 #4573df22;
+}
+.theme-toggle-icon.dark {
+  background: linear-gradient(135deg, #1d2127 60%, #4573df 100%);
+  box-shadow: 0 2px 16px #4573df33, 0 0 0 0 #cfe8ef22;
+}
+
+/* Focus and hover for accessibility and interactivity */
+.theme-toggle-icon:focus,
+.theme-toggle-icon:active,
+.theme-toggle-icon:hover {
+  outline: 2px solid #4573df;
+  outline-offset: 2px;
+  filter: brightness(1.12) drop-shadow(0 0 8px #4573df88);
+  box-shadow: 0 0 24px 8px #4573df55, 0 0 48px 16px #cfe8ef33;
+}
+
 @media screen and (max-width: 768px) {
   .theme-toggle-icon {
-    display: block; /* Show on small screens */
     position: absolute;
     top: 25px;
     left: 25px;
-    z-index: 1000; /* Ensure it appears on top of other elements */
-    border-radius: 50%; /* Make it a circle */
-    width: 45px; /* Fixed width */
-    height: 45px; /* Fixed height */
-    display: flex; /* Center the image */
-    justify-content: center; /* Center the image */
-    align-items: center; /* Center the image */
-  }
-
-  .theme-toggle-icon.light {
-    background-color: #1d2127; /* Light theme background color */
-  }
-
-  .theme-toggle-icon.dark {
-    background-color: #272c34; /* Dark theme background color */
-  }
-
-  .animate {
-    animation: zoomInWithShadowAndGlow 1s ease-out forwards; /* Apply the enhanced animation */
+    z-index: 1000;
+    width: 45px;
+    height: 45px;
   }
 }
