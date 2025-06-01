@@ -10,7 +10,6 @@
   pointer-events: none;
   overflow: hidden;
 }
-
 /* Copied from original location. If you want to update styles, do so here. */
 /* Example content, replace with your actual 404.module.css content */
 /* 404 Page Styles for Megicode */
@@ -59,6 +58,7 @@
   font-size: 2.2rem;
   font-weight: 700;
   color: var(--404-title, #0D47A1);
+  letter-spacing: 0.01em;
   margin-bottom: 0.5rem;
   transition: color 0.3s;
   text-align: center;
@@ -66,7 +66,8 @@
 }
 .description {
   font-size: 1.1rem;
-  color: var(--404-desc, #333);
+  color: var(--404-desc, #222);
+  letter-spacing: 0.01em;
   margin-bottom: 2rem;
   text-align: center;
   transition: color 0.3s;
@@ -77,19 +78,27 @@
   padding: 0.75rem 2rem;
   background: var(--404-btn-bg, #0D47A1);
   color: var(--404-btn-text, #fff);
-  border-radius: 8px;
-  font-weight: 600;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 1.15rem;
   text-decoration: none;
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
   margin-top: 0.5rem;
   width: 100%;
-  max-width: 320px;
+  max-width: 340px;
   text-align: center;
   box-sizing: border-box;
+  outline: none;
+  border: none;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
 }
 
 .homeLink:hover {
   background: var(--404-btn-bg-hover, #1565c0);
+  color: var(--404-btn-text, #fff);
+  box-shadow: 0 4px 18px rgba(59,130,246,0.18);
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
 }
 @media (max-width: 600px) {
   .wrapper {
@@ -142,7 +151,10 @@
 [data-theme="dark"] .description {
   --404-desc: #cbd5e1;
 }
-[data-theme="dark"] .homeLink {
+[data-theme="dark"] .homeButton {
+  --404-btn-bg: #3b82f6;
+  --404-btn-bg-hover: #2563eb;
+  --404-btn-text: #fff;
   --404-btn-bg: #3b82f6;
   --404-btn-bg-hover: #2563eb;
   --404-btn-text: #fff;
@@ -154,9 +166,9 @@
   --404-title: #0D47A1;
 }
 [data-theme="light"] .description {
-  --404-desc: #333;
+  --404-desc: #222;
 }
-[data-theme="light"] .homeLink {
+[data-theme="light"] .homeButton {
   --404-btn-bg: #0D47A1;
   --404-btn-bg-hover: #1565c0;
   --404-btn-text: #fff;
@@ -192,11 +204,13 @@
   font-size: 8rem;
   font-weight: bold;
   text-align: center;
-  color: var(--text-color);
-  text-shadow: 
-    2px 2px var(--primary-color),
-    -2px -2px var(--secondary-color);
+  color: var(--text-color, #0D47A1);
+  text-shadow:
+    2px 2px var(--primary-color, #3b82f6),
+    -2px -2px var(--secondary-color, #1565c0);
   position: relative;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
 }
 
 .glitchText::before,
@@ -226,7 +240,7 @@
 .messageContainer {
   text-align: center;
   margin: 2rem 0;
-  color: var(--text-color);
+  color: var(--404-desc, #222);
 }
 
 .messageContainer h2 {
@@ -243,7 +257,8 @@
 .motivate {
   font-size: 1.1rem;
   margin-top: 1.2rem;
-  color: var(--404-desc, #333);
+  color: var(--404-desc, #222);
+  opacity: 0.96;
   font-weight: 500;
   text-align: center;
   opacity: 0.92;
@@ -303,8 +318,8 @@
   display: inline-block;
   padding: 1rem 2rem;
   font-size: 1.2rem;
-  color: #fff;
-  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  color: var(--404-btn-text, #fff);
+  background: var(--404-btn-bg, #0D47A1);
   border-radius: 30px;
   text-decoration: none;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -313,7 +328,11 @@
 
 .homeButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  background: var(--404-btn-bg-hover, #1565c0);
+  color: var(--404-btn-text, #fff);
+  box-shadow: 0 6px 20px rgba(59,130,246,0.18);
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
 }
 
 @keyframes glitch {
