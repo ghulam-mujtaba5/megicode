@@ -191,7 +191,10 @@ const ORBIT_ICONS = [
 
 const ORBIT_RADIUS = 140;
 const ORBIT_SPEED = 35;
-const PARTICLE_COUNT = 24;
+const PARTICLE_COUNT = 32;
+const QUANTUM_PARTICLES = 16;
+const ENERGY_FLOW_SPEED = 2;
+const WAVE_AMPLITUDE = 3;
 
 const MegicodeHeroAnimationAdvanced: React.FC = () => {
   const themeValue = useTheme()?.theme || 'light';
@@ -199,7 +202,9 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
   const [focusedIcon, setFocusedIcon] = useState<string | null>(null);
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
   const [orbitAngle, setOrbitAngle] = useState(0);
-  const [particles, setParticles] = useState<Array<{ x: number; y: number; speed: number }>>([]);
+  const [particles, setParticles] = useState<Array<{ x: number; y: number; speed: number; angle: number }>>([]);
+  const [quantumParticles, setQuantumParticles] = useState<Array<{ x: number; y: number; angle: number; phase: number }>>([]);
+  const [energyFlow, setEnergyFlow] = useState<number>(0);
   const svgRef = useRef<SVGSVGElement>(null);
 
   // Animate orbit angle
@@ -243,6 +248,37 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // Initialize quantum particles
+  useEffect(() => {
+    setQuantumParticles(
+      Array.from({ length: QUANTUM_PARTICLES }, () => ({
+        x: (Math.random() - 0.5) * ORBIT_RADIUS * 2,
+        y: (Math.random() - 0.5) * ORBIT_RADIUS * 2,
+        angle: Math.random() * Math.PI * 2,
+        phase: Math.random() * Math.PI * 2
+      }))
+    );
+  }, []);
+
+  // Animate quantum particles and energy flow
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setQuantumParticles(prev => prev.map(p => ({
+        ...p,
+        angle: p.angle + 0.02,
+        phase: p.phase + 0.03,
+        x: p.x + Math.cos(p.angle) * 0.5,
+        y: p.y + Math.sin(p.angle) * 0.5
+      })).map(p => ({
+        ...p,
+        x: Math.abs(p.x) > ORBIT_RADIUS ? -p.x : p.x,
+        y: Math.abs(p.y) > ORBIT_RADIUS ? -p.y : p.y
+      })));
+      setEnergyFlow(prev => (prev + ENERGY_FLOW_SPEED) % 360);
+    }, 16);
+    return () => clearInterval(interval);
+  }, []);
+
   // Only render on desktop/tablet (not mobile)
   const [isMobile, setIsMobile] = React.useState(false);
   useEffect(() => {
@@ -272,9 +308,76 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
           height: '100%',
           transform: `translate(${mouse.x * 15}px, ${mouse.y * 15}px)`
         }}
-        aria-label="Megicode hero animation with orbiting service icons"
+        aria-label="Megicode quantum animation with orbiting service icons"
         role="img"
       >
+        <defs>
+          <radialGradient id="quantumGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#4573df" stopOpacity="0.3" />
+            <stop offset="100%" stopColor="#4573df" stopOpacity="0" />
+          </radialGradient>
+          <filter id="quantumBlur">
+            <feGaussianBlur stdDeviation="2" />
+          </filter>
+        </defs>
+
+        {/* Quantum background effect */}
+        <motion.path
+          d={`M0,-240 L208,-120 L208,120 L0,240 L-208,120 L-208,-120 Z`}
+          fill="url(#quantumGlow)"
+          opacity="0.15"
+          style={{ filter: 'url(#quantumBlur)' }}
+          animate={{
+            opacity: [0.15, 0.25, 0.15],
+            scale: [1, 1.02, 1],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+
+        {/* Quantum particles */}
+        {quantumParticles.map((particle, i) => (
+          <motion.circle
+            key={`quantum-${i}`}
+            cx={particle.x}
+            cy={particle.y}
+            r={2}
+            fill="#4573df"
+            opacity={0.6}
+            style={{
+              filter: 'url(#quantumBlur)',
+            }}
+            animate={{
+              opacity: [0.6, 0.8, 0.6],
+              scale: [1, 1.5, 1],
+            }}
+            transition={{
+              duration: 2 + (i % 3),
+              repeat: Infinity,
+              delay: i * 0.2,
+            }}
+          />
+        ))}
+
+        {/* Energy flow lines */}
+        {Array.from({ length: 8 }).map((_, i) => {
+          const angle = (i * Math.PI * 2) / 8 + (energyFlow * Math.PI) / 180;
+          return (
+            <motion.path
+              key={`energy-${i}`}
+              d={`M${Math.cos(angle) * 80},${Math.sin(angle) * 80} L${Math.cos(angle) * 160},${Math.sin(angle) * 160}`}
+              stroke="url(#blueGrad)"
+              strokeWidth="1.5"
+              strokeDasharray="4 4"
+              opacity="0.4"
+              style={{ filter: 'url(#quantumBlur)' }}
+            />
+          );
+        })}
+
         {/* Hexagonal crystal-like background */}
         <motion.path
           d="M0,-240 L208,-120 L208,120 L0,240 L-208,120 L-208,-120 Z"
