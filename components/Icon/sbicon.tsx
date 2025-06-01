@@ -88,7 +88,7 @@ const ThemeToggleIcon = () => {
   }, [theme, animate]);
 
   const iconSrc = useMemo(() => {
-    return "/sbVector.svg"; // Assuming the same icon for both themes
+    return "/megicode-internalogo.svg";
   }, []);
 
   useEffect(() => {
@@ -120,7 +120,7 @@ const ThemeToggleIcon = () => {
       className={iconClass}
       onClick={handleIconClick}
       role="button"
-      aria-label="Toggle Theme and Navigate to HomePortfolio"
+      aria-label="Toggle Theme and Navigate to Megicode"
       tabIndex={0}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
@@ -128,7 +128,7 @@ const ThemeToggleIcon = () => {
         }
       }}
     >
-      <Image src={iconSrc} alt="Theme Icon" width={32} height={32} />
+      <Image src={iconSrc} alt="Megicode Logo Icon" width={32} height={32} />
     </div>
   );
 };

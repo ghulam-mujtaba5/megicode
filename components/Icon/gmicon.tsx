@@ -88,8 +88,8 @@ const ThemeToggleIcon = () => {
   }, [theme, isInView, styles]);
 
   const iconSrc = useMemo(() => {
-    return theme === 'light' ? "/gmVector.svg" : "/gmVectorDark.svg";
-  }, [theme]);
+    return "/megicode-internalogo.svg";
+  }, []);
 
   const checkInView = () => {
     if (iconRef.current) {
@@ -122,7 +122,7 @@ const ThemeToggleIcon = () => {
       className={iconClass}
       onClick={handleIconClick}
       role="button"
-      aria-label="Toggle Theme and Navigate to SoftBuilt"
+      aria-label="Toggle Theme and Navigate to Megicode"
       tabIndex={0}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
@@ -131,7 +131,7 @@ const ThemeToggleIcon = () => {
       }}
       ref={iconRef}
     >
-      <Image src={iconSrc} alt="Theme Icon" width={32} height={32} />
+      <Image src={iconSrc} alt="Megicode Logo Icon" width={32} height={32} />
     </div>
   );
 };
