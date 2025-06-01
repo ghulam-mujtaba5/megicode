@@ -24,11 +24,11 @@
   display: none;
   align-items: center;
   justify-content: center;
-  width: 64px;
-  height: 64px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: linear-gradient(135deg, #4573df 60%, #cfe8ef 100%);
-  box-shadow: 0 4px 24px #4573df33, 0 0 0 0 #cfe8ef33;
+  box-shadow: 0 2px 16px #4573df22, 0 0 0 0 #cfe8ef33;
   transition: box-shadow 0.3s, background 0.3s, filter 0.3s;
   cursor: pointer;
   will-change: box-shadow, filter, transform;
@@ -44,8 +44,8 @@
 }
 
 .theme-toggle-icon img {
-  width: 54px;
-  height: 54px;
+  width: 34px;
+  height: 34px;
   object-fit: contain;
   border-radius: 50%;
   background: transparent;
@@ -79,10 +79,10 @@
 @media screen and (max-width: 768px) {
   .theme-toggle-icon {
     position: absolute;
-    top: 18px;
-    left: 18px;
+    top: 25px;
+    left: 25px;
     z-index: 1000;
-    width: 64px;
-    height: 64px;
+    width: 45px;
+    height: 45px;
   }
 }

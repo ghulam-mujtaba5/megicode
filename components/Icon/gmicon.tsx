@@ -75,7 +75,7 @@ const GmIcon: React.FC<GmIconProps> = ({ showOnDesktop = false }) => {
       }}
       ref={iconRef}
     >
-      <Image src={iconSrc} alt="Megicode Logo Icon" width={36} height={36} />
+      <Image src={iconSrc} alt="Megicode Logo Icon" width={28} height={28} />
     </div>
   );
 };

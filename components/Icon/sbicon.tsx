@@ -71,7 +71,7 @@ const ThemeToggleIcon = () => {
         }
       }}
     >
-      <Image src={iconSrc} alt="Megicode Logo Icon" width={32} height={32} />
+      <Image src={iconSrc} alt="Megicode Logo Icon" width={28} height={28} />
     </div>
   );
 };
