@@ -1,5 +1,6 @@
 "use client";
 import MegicodeHeroAnimationAdvancedClient from "./MegicodeHeroAnimationAdvancedClient";
+import ParticleBackgroundClient from "./ParticleBackgroundClient";
 import React, { useCallback } from "react";
 import { useTheme } from "../../context/ThemeContext";
 import NavBarDesktop from "../../components/NavBar_Desktop_Company/nav-bar-Company";
@@ -34,9 +35,18 @@ export default function MegicodePage() {
     { id: "services-section", label: "Services" },
     { id: "contact-section", label: "Contact" },
   ];
-
   return (
-    <div style={{ backgroundColor: theme === "dark" ? "#1d2127" : "#ffffff", overflowX: "hidden" }}>
+    <div style={{ backgroundColor: theme === "dark" ? "#1d2127" : "#ffffff", overflowX: "hidden", position: "relative" }}>      <div style={{ 
+        position: "fixed", 
+        top: 0, 
+        left: 0, 
+        width: "100%", 
+        height: "150vh",
+        pointerEvents: "none",
+        zIndex: 0
+      }}>
+        <ParticleBackgroundClient />
+      </div>
       {/* Theme Toggle Icon */}
       <div id="theme-toggle" role="button" tabIndex={0} onClick={onDarkModeButtonContainerClick}>
         <ThemeToggleIcon />
