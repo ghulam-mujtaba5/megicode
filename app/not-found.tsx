@@ -1,7 +1,8 @@
 "use client";
 
+import React, { useEffect, useState, useRef } from 'react';
 import { useTheme } from '../context/ThemeContext';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from '../styles/404.module.css';
@@ -10,9 +11,125 @@ import NavBarMobile from '../components/NavBar_Mobile/NavBar-mobile';
 import Footer from '../components/Footer/Footer';
 import ThemeToggleIcon from '../components/Icon/sbicon';
 
+// Animation variants
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      when: "beforeChildren",
+      staggerChildren: 0.3,
+    }
+  }
+};
+
+const floatingVariants: Variants = {
+  initial: { y: 0 },
+  animate: {
+    y: [-20, 20],
+    transition: {
+      duration: 4,
+      repeat: Infinity,
+      repeatType: "reverse",
+      ease: "easeInOut"
+    }
+  }
+};
+
+const glitchVariants: Variants = {
+  initial: { skew: 0 },
+  animate: {
+    skew: [0, -5, 5, 0],
+    transition: {
+      duration: 0.5,
+      repeat: Infinity,
+      repeatType: "reverse",
+      ease: "easeInOut",
+      times: [0, 0.2, 0.8, 1]
+    }
+  }
+};
+
 
 export default function NotFound() {
   const { theme } = useTheme();
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isMobile, setIsMobile] = useState(false);
+  const [touchStart, setTouchStart] = useState<{x: number, y: number} | null>(null);
+  const [touchMove, setTouchMove] = useState<{x: number, y: number} | null>(null);
+  const [windowSize, setWindowSize] = useState({ width: 1200, height: 800 });
+  const particleCount = isMobile ? 10 : 24;
+  const particles = useRef(
+    [...Array(particleCount)].map(() => ({
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 4 + 1,
+      color: Math.random() > 0.5 ? '#3b82f6' : '#0D47A1',
+      delay: Math.random() * 2
+    }))
+  ).current;
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+      setIsMobile(window.innerWidth < 700);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) {
+      const handleTouchStart = (e: TouchEvent) => {
+        if (e.touches.length > 0) {
+          setTouchStart({ x: e.touches[0].clientX, y: e.touches[0].clientY });
+        }
+      };
+      const handleTouchMove = (e: TouchEvent) => {
+        if (e.touches.length > 0) {
+          setTouchMove({ x: e.touches[0].clientX, y: e.touches[0].clientY });
+        }
+      };
+      window.addEventListener('touchstart', handleTouchStart);
+      window.addEventListener('touchmove', handleTouchMove);
+      return () => {
+        window.removeEventListener('touchstart', handleTouchStart);
+        window.removeEventListener('touchmove', handleTouchMove);
+      };
+    } else {
+      const handleMouseMove = (e: MouseEvent) => {
+        setMousePosition({ x: e.clientX, y: e.clientY });
+      };
+      window.addEventListener('mousemove', handleMouseMove);
+      return () => window.removeEventListener('mousemove', handleMouseMove);
+    }
+  }, [isMobile]);
+
+  // Calculate 3D rotation for desktop, or parallax for mobile
+  let transformStyle = {};
+  if (isMobile && touchMove && touchStart) {
+    const dx = touchMove.x - touchStart.x;
+    const dy = touchMove.y - touchStart.y;
+    transformStyle = {
+      transform: `translate3d(${dx * 0.1}px, ${dy * 0.1}px, 0)`
+    };
+  } else if (!isMobile) {
+    transformStyle = {
+      transform: `rotate3d(
+        ${(mousePosition.y / windowSize.height - 0.5) * -10},
+        ${(mousePosition.x / windowSize.width - 0.5) * 10},
+        0,
+        ${Math.min(
+          Math.sqrt(
+            Math.pow(mousePosition.x - windowSize.width / 2, 2) +
+            Math.pow(mousePosition.y - windowSize.height / 2, 2)
+          ) * 0.01,
+          20
+        )}deg
+      )`
+    };
+  }
 
   // Social/contact info (reuse from other pages)
   const linkedinUrl = "https://www.linkedin.com/company/megicode";
@@ -29,7 +146,14 @@ export default function NotFound() {
   ];
 
   return (
-    <div style={{ backgroundColor: theme === "dark" ? "#1d2127" : "#ffffff", minHeight: "100vh", overflowX: "hidden" }}>
+    <div 
+      style={{ 
+        backgroundColor: theme === "dark" ? "#1d2127" : "#ffffff", 
+        minHeight: "100vh", 
+        overflowX: "hidden",
+        perspective: "1000px"
+      }}
+    >
       {/* Theme Toggle Icon */}
       <div id="theme-toggle" role="button" tabIndex={0} style={{ position: 'absolute', top: 24, right: 32 }}>
         <ThemeToggleIcon />
@@ -45,17 +169,144 @@ export default function NotFound() {
         <NavBarMobile sections={sections} />
       </nav>
 
-      {/* 404 Content */}
-      <div className={styles.wrapper} data-theme={theme}>
+      {/* Enhanced 404 Content */}
+      <motion.div 
+        className={styles.wrapper} 
+        data-theme={theme}
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        style={{
+          transform: `rotate3d(
+            ${(mousePosition.y / window.innerHeight - 0.5) * -10},
+            ${(mousePosition.x / window.innerWidth - 0.5) * 10},
+            0,
+            ${Math.min(
+              Math.sqrt(
+                Math.pow(mousePosition.x - window.innerWidth / 2, 2) +
+                Math.pow(mousePosition.y - window.innerHeight / 2, 2)
+              ) * 0.01,
+              20
+            )}deg
+          )`
+        }}
+      >
+        {/* Parallax/animated background layer */}
+        <div className={styles.bgParallax} aria-hidden="true">
+          <svg width="100%" height="100%" viewBox="0 0 1440 320" preserveAspectRatio="none" style={{ position: 'absolute', top: 0, left: 0, zIndex: 0 }}>
+            <defs>
+              <linearGradient id="bg-gradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor={theme === 'dark' ? '#232946' : '#e3f0ff'} />
+                <stop offset="100%" stopColor={theme === 'dark' ? '#181c20' : '#f5f5f5'} />
+              </linearGradient>
+            </defs>
+            <motion.path
+              d="M0,160L60,170C120,180,240,200,360,192C480,184,600,136,720,128C840,120,960,152,1080,170.7C1200,189,1320,203,1380,210.7L1440,218L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"
+              fill="url(#bg-gradient)"
+              initial={{ y: 0 }}
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+              style={{ opacity: 0.7 }}
+            />
+          </svg>
+        </div>
+
+        {/* Particle Effects */}
+        <div className={styles.particleContainer}>
+          {particles.map((particle, i) => (
+            <motion.div
+              key={i}
+              className={styles.particle}
+              initial={{ x: particle.x + "%", y: particle.y + "%", scale: 0 }}
+              animate={{
+                x: [particle.x + "%", (particle.x + Math.random() * 20 - 10) + "%"],
+                y: [particle.y + "%", (particle.y + Math.random() * 20 - 10) + "%"],
+                scale: [0, particle.size, 0]
+              }}
+              transition={{
+                duration: 3 + particle.delay,
+                repeat: Infinity,
+                repeatType: "reverse",
+                ease: "easeInOut",
+                delay: particle.delay
+              }}
+              style={{
+                backgroundColor: theme === "dark" ? particle.color : (particle.color === '#3b82f6' ? '#0D47A1' : '#3b82f6'),
+                width: isMobile ? '3px' : '5px',
+                height: isMobile ? '3px' : '5px',
+                borderRadius: "50%",
+                position: "absolute"
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Glitch Effect Text with SVG "broken" overlay */}
+        <motion.div
+          variants={glitchVariants}
+          initial="initial"
+          animate="animate"
+          className={styles.glitchContainer}
+        >
+          <motion.h1
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className={styles.glitchText}
+            style={{ position: 'relative', zIndex: 2 }}
+          >
+            404
+            {/* SVG "crack" overlay for psychological effect */}
+            <svg width="100%" height="100%" viewBox="0 0 320 120" style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none' }}>
+              <motion.path
+                d="M40,60 Q80,80 120,60 Q160,40 200,60 Q240,80 280,60"
+                stroke={theme === 'dark' ? '#60a5fa' : '#1565c0'}
+                strokeWidth="4"
+                fill="none"
+                initial={{ pathLength: 0, opacity: 0.7 }}
+                animate={{ pathLength: [0, 1, 0.7, 1], opacity: [0.7, 1, 0.7, 1] }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+              />
+            </svg>
+          </motion.h1>
+        </motion.div>
+
+        {/* Floating Message with motivational text */}
+        <motion.div
+          variants={floatingVariants}
+          initial="initial"
+          animate="animate"
+          className={styles.messageContainer}
+        >
+          <h2>Page Not Found</h2>
+          <p>The page you're looking for doesn't exist or has been moved.</p>
+          <p className={styles.motivate}>
+            <span role="img" aria-label="compass">🧭</span> Sometimes the best journeys are the unexpected ones.<br />
+            Let’s get you back on track!
+          </p>
+        </motion.div>
+
+        {/* Enhanced SVG Animation */}
         <motion.div
           className={styles.logoContainer}
-          initial={{ scale: 0.7, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-          aria-label="Navigation Vector Graphic"
-          style={{ width: '100%', maxWidth: 340, margin: '0 auto' }}
+          initial={{ scale: 0.7, opacity: 0, rotateY: 0 }}
+          animate={{ 
+            scale: 1, 
+            opacity: 1,
+            rotateY: [0, 360],
+          }}
+          transition={{ 
+            duration: 2,
+            ease: 'easeOut',
+            rotateY: {
+              duration: 20,
+              repeat: Infinity,
+              ease: "linear"
+            }
+          }}
+          style={{ transformStyle: 'preserve-3d' }}
         >
-          {/* Responsive, animated, world-class navigation SVG */}
+          {/* SVG content with enhanced animations */}
           <motion.svg
             viewBox="0 0 340 140"
             width="100%"
@@ -117,35 +368,73 @@ export default function NotFound() {
             <circle cx="300" cy="110" r="6" fill={theme === 'dark' ? '#fff' : '#3b82f6'} />
             <circle cx="170" cy="40" r="6" fill={theme === 'dark' ? '#fff' : '#3b82f6'} />
           </motion.svg>
+
+          {/* Add new animated elements */}
+          <motion.path
+            d="M40 70 Q170 140 300 70"
+            stroke="url(#nav-path)"
+            strokeWidth="4"
+            strokeDasharray="5,5"
+            fill="none"
+            initial={{ pathLength: 0, opacity: 0.2 }}
+            animate={{ 
+              pathLength: [0, 1, 0],
+              opacity: [0.2, 0.8, 0.2]
+            }}
+            transition={{ 
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+
+          {/* Pulsing Error Indicators */}
+          {[0, 120, 240].map((angle, i) => (
+            <motion.circle
+              key={i}
+              cx={170 + Math.cos(angle * Math.PI / 180) * 60}
+              cy={70 + Math.sin(angle * Math.PI / 180) * 30}
+              r="8"
+              fill={theme === 'dark' ? '#3b82f6' : '#0D47A1'}
+              initial={{ scale: 1, opacity: 0.5 }}
+              animate={{ 
+                scale: [1, 1.5, 1],
+                opacity: [0.5, 1, 0.5]
+              }}
+              transition={{ 
+                duration: 2,
+                delay: i * 0.3,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
+          ))}
         </motion.div>
-        <motion.h1
-          className={styles.title}
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2, ease: 'easeOut' }}
-        >
-          404 - Page Not Found
-        </motion.h1>
-        <motion.p
-          className={styles.description}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.4, ease: 'easeOut' }}
-        >
-          Oops! The page you are looking for doesn’t exist or has been moved.<br />
-          Let’s get you back to something awesome.
-        </motion.p>
+
+        {/* Interactive Home Button with pulse and glow */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.6, ease: 'easeOut' }}
+          whileHover={{ scale: 1.12, boxShadow: "0 0 24px 6px #3b82f6" }}
+          whileTap={{ scale: 0.96 }}
+          animate={{
+            boxShadow: [
+              "0 0 0px 0px #3b82f6",
+              "0 0 16px 4px #3b82f6",
+              "0 0 0px 0px #3b82f6"
+            ]
+          }}
+          transition={{
+            duration: 2.5,
+            repeat: Infinity,
+            repeatType: "loop",
+            ease: "easeInOut"
+          }}
+          style={{ marginTop: "2rem", borderRadius: 40 }}
         >
-          <Link href="/" className={styles.homeLink} aria-label="Go back home">
-            <span className={styles.homeBtnBg} />
-            <span className={styles.homeBtnText}>Go Back Home</span>
+          <Link href="/" className={styles.homeButton}>
+            Return Home
           </Link>
         </motion.div>
-      </div>
+      </motion.div>
 
       {/* Footer */}
       <footer id="footer-section" aria-label="Footer" style={{ width: "100%", overflow: "hidden" }}>
