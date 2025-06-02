@@ -1,6 +1,7 @@
 .introSection {
   padding: 6rem 2rem;
-  background: #ffffff;
+  background: var(--color-bg);
+  transition: background 0.3s;
 }
 
 .container {
@@ -17,11 +18,12 @@
 }
 
 .whoWeAre h2 {
-  color: #2d4fa2;
+  color: var(--color-heading);
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
   position: relative;
   display: inline-block;
+  transition: color 0.3s;
 }
 
 .whoWeAre h2::after {
@@ -32,14 +34,15 @@
   transform: translateX(-50%);
   width: 60px;
   height: 3px;
-  background: #4573df;
+  background: var(--color-primary);
   border-radius: 2px;
 }
 
 .whoWeAre p {
   font-size: 1.2rem;
   line-height: 1.8;
-  color: #444;
+  color: var(--color-text-secondary);
+  transition: color 0.3s;
 }
 
 .missionVision {
@@ -52,9 +55,9 @@
 .mission, .vision {
   padding: 2rem;
   border-radius: 12px;
-  background: rgba(69,115,223,0.03);
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-  transition: transform 0.3s ease;
+  background: var(--color-bg-secondary);
+  box-shadow: var(--color-shadow);
+  transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
 }
 
 .mission:hover, .vision:hover {
@@ -62,15 +65,17 @@
 }
 
 .mission h3, .vision h3 {
-  color: #2d4fa2;
+  color: var(--color-heading);
   font-size: 1.8rem;
   margin-bottom: 1rem;
+  transition: color 0.3s;
 }
 
 .mission p, .vision p {
-  color: #555;
+  color: var(--color-text-secondary);
   line-height: 1.7;
   font-size: 1.1rem;
+  transition: color 0.3s;
 }
 
 /* Responsive Design */
@@ -85,19 +90,15 @@
   .introSection {
     padding: 4rem 1.5rem;
   }
-
   .whoWeAre h2 {
     font-size: 2rem;
   }
-
   .whoWeAre p {
     font-size: 1.1rem;
   }
-
   .mission h3, .vision h3 {
     font-size: 1.5rem;
   }
-
   .mission p, .vision p {
     font-size: 1rem;
   }

@@ -30,7 +30,7 @@ export default function AboutPage() {
   ];
 
   return (
-    <div style={{ backgroundColor: theme === "dark" ? "#1d2127" : "#ffffff", minHeight: "100vh", overflowX: "hidden" }}>
+    <div style={{ background: "var(--color-bg)", minHeight: "100vh", overflowX: "hidden" }}>
       {/* Theme Toggle Icon */}
       <div id="theme-toggle" role="button" tabIndex={0}>
         <ThemeToggleIcon />
@@ -45,7 +45,7 @@ export default function AboutPage() {
       <nav id="mobile-navbar" aria-label="Mobile Navigation">
         <NavBarMobile sections={sections} />
       </nav>      {/* Main Content */}
-      <main>
+      <main style={{ background: "var(--color-bg)", color: "var(--color-text)" }}>
         {/* Hero Section */}
         <AboutHero />
 
