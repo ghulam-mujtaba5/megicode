@@ -1,6 +1,5 @@
 'use client';
 import React from 'react';
-import Image from 'next/image';
 import commonStyles from './AboutHeroCommon.module.css';
 import lightStyles from './AboutHeroLight.module.css';
 import darkStyles from './AboutHeroDark.module.css';
@@ -12,8 +11,8 @@ const AboutHero = () => {
   const { theme } = useTheme();
   const themeStyles = theme === 'dark' ? darkStyles : lightStyles;
 
-  const slideUp = {
-    hidden: { opacity: 0, y: 30 },
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 20 },
     visible: { 
       opacity: 1, 
       y: 0,
@@ -21,29 +20,41 @@ const AboutHero = () => {
     }
   };
 
+  const stats = [
+    { number: "98%", label: "Client Satisfaction" },
+    { number: "50+", label: "Projects Delivered" },
+    { number: "5★", label: "Average Rating" }
+  ];
+
+  const handleScroll = () => {
+    const nextSection = document.getElementById('about-intro');
+    if (nextSection) {
+      nextSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className={`${commonStyles.heroContainer} ${themeStyles.heroContainer}`}>
       <div className={commonStyles.backgroundEffect}>
-        <div className={commonStyles.gradientOrb1}></div>
-        <div className={commonStyles.gradientOrb2}></div>
-        <div className={commonStyles.gridPattern}></div>
+        <div className={commonStyles.gradientOrb1} />
+        <div className={commonStyles.gradientOrb2} />
       </div>
 
       <motion.div 
-        className={`${commonStyles.contentWrapper} ${themeStyles.contentWrapper}`}
+        className={commonStyles.contentWrapper}
         initial="hidden"
         animate="visible"
         variants={{
           visible: {
             transition: {
-              staggerChildren: 0.2
+              staggerChildren: 0.15
             }
           }
         }}
       >
         <motion.h1 
           className={`${commonStyles.heading} ${themeStyles.heading}`}
-          variants={slideUp}
+          variants={fadeInUp}
         >
           <span className={commonStyles.gradientText}>Transforming</span> Ideas into{' '}
           <span className={commonStyles.gradientText}>Intelligent</span> Solutions
@@ -51,70 +62,62 @@ const AboutHero = () => {
 
         <motion.p 
           className={`${commonStyles.subheading} ${themeStyles.subheading}`}
-          variants={slideUp}
+          variants={fadeInUp}
         >
-          We craft scalable, AI-powered software solutions that drive innovation and empower businesses to achieve breakthrough results.
+          We craft scalable, AI-powered software solutions that drive innovation 
+          and empower businesses to achieve breakthrough results.
         </motion.p>
 
         <motion.div 
           className={commonStyles.statsContainer}
-          variants={slideUp}
+          variants={fadeInUp}
         >
-          <div className={`${commonStyles.statItem} ${themeStyles.statItem}`}>
-            <span className={commonStyles.statNumber}>98%</span>
-            <span className={commonStyles.statLabel}>Client Satisfaction</span>
-          </div>
-          <div className={`${commonStyles.statItem} ${themeStyles.statItem}`}>
-            <span className={commonStyles.statNumber}>50+</span>
-            <span className={commonStyles.statLabel}>Projects Delivered</span>
-          </div>
-          <div className={`${commonStyles.statItem} ${themeStyles.statItem}`}>
-            <span className={commonStyles.statNumber}>5★</span>
-            <span className={commonStyles.statLabel}>Average Rating</span>
-          </div>
+          {stats.map((stat, index) => (
+            <motion.div 
+              key={stat.label}
+              className={`${commonStyles.statItem} ${themeStyles.statItem}`}
+              variants={fadeInUp}
+              whileHover={{ y: -5, transition: { duration: 0.2 } }}
+            >
+              <span className={commonStyles.statNumber}>{stat.number}</span>
+              <span className={commonStyles.statLabel}>{stat.label}</span>
+            </motion.div>
+          ))}
         </motion.div>
 
         <motion.div 
           className={commonStyles.ctaContainer}
-          variants={slideUp}
+          variants={fadeInUp}
         >
           <LetsTalkButton />
-          <motion.a 
-            href="#portfolio"
+          <motion.button 
             className={`${commonStyles.secondaryButton} ${themeStyles.secondaryButton}`}
-            whileHover={{ scale: 1.02 }}
+            whileHover={{ y: -2 }}
             whileTap={{ scale: 0.98 }}
+            onClick={handleScroll}
           >
             View Our Work
-          </motion.a>
+          </motion.button>
         </motion.div>
       </motion.div>
 
       <motion.div 
-        className={commonStyles.heroGraphic}
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, delay: 0.3 }}
+        className={commonStyles.scrollIndicator}
+        onClick={handleScroll}
+        whileHover={{ y: 3 }}
+        animate={{ 
+          y: [0, 5, 0],
+          opacity: [0.6, 1, 0.6]
+        }}
+        transition={{ 
+          y: { duration: 1.5, repeat: Infinity },
+          opacity: { duration: 1.5, repeat: Infinity }
+        }}
       >
-        <Image
-          src="/images/hero-graphic.svg"
-          alt="AI Technology Illustration"
-          width={600}
-          height={400}
-          priority
-        />
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M12 5v14M19 12l-7 7-7-7" />
+        </svg>
       </motion.div>
-
-      <div className={commonStyles.scrollIndicator}>
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M12 5v14M19 12l-7 7-7-7" />
-          </svg>
-        </motion.div>
-      </div>
     </section>
   );
 };
