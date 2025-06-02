@@ -239,65 +239,57 @@ export const TechStackIcon = ({ size = 32, color = 'currentColor', className = '
     className={className}
     xmlns="http://www.w3.org/2000/svg"
   >
-    {/* Code brackets */}
+    {/* Stack layers representing different frameworks/tools */}
     <path
-      d="M11 8L6 16L11 24"
+      d="M6 22L16 26L26 22"
       stroke={color}
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
     />
     <path
-      d="M21 8L26 16L21 24"
+      d="M6 18L16 22L26 18"
       stroke={color}
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
     />
-    {/* Settings gear */}
+    <path
+      d="M6 14L16 18L26 14"
+      stroke={color}
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    {/* Top layer with code symbols */}
+    <path
+      d="M16 6L26 10L16 14L6 10L16 6Z"
+      stroke={color}
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    {/* Code symbols */}
+    <path
+      d="M12 9L10 10L12 11"
+      stroke={color}
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M20 9L22 10L20 11"
+      stroke={color}
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    {/* Central dot connecting layers */}
     <circle
       cx="16"
       cy="16"
-      r="3"
-      stroke={color}
-      strokeWidth="2"
-    />
-    {/* Gear teeth */}
-    <path
-      d="M16 8V13"
-      stroke={color}
-      strokeWidth="2"
-      strokeLinecap="round"
-    />
-    <path
-      d="M16 19V24"
-      stroke={color}
-      strokeWidth="2"
-      strokeLinecap="round"
-    />
-    <path
-      d="M21.7 10.3L18.5 13.5"
-      stroke={color}
-      strokeWidth="2"
-      strokeLinecap="round"
-    />
-    <path
-      d="M13.5 18.5L10.3 21.7"
-      stroke={color}
-      strokeWidth="2"
-      strokeLinecap="round"
-    />
-    <path
-      d="M24 16H19"
-      stroke={color}
-      strokeWidth="2"
-      strokeLinecap="round"
-    />
-    <path
-      d="M13 16H8"
-      stroke={color}
-      strokeWidth="2"
-      strokeLinecap="round"
+      r="1"
+      fill={color}
     />
   </svg>
 );
