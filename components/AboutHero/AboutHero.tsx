@@ -26,13 +26,6 @@ const AboutHero = () => {
     { number: "5★", label: "Average Rating" }
   ];
 
-  const handleScroll = () => {
-    const nextSection = document.getElementById('about-intro');
-    if (nextSection) {
-      nextSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <section className={`${commonStyles.heroContainer} ${themeStyles.heroContainer}`}>
       <div className={commonStyles.backgroundEffect}>
@@ -90,21 +83,11 @@ const AboutHero = () => {
           variants={fadeInUp}
         >
           <LetsTalkButton />
-          <motion.button 
-            className={`${commonStyles.secondaryButton} ${themeStyles.secondaryButton}`}
-            whileHover={{ y: -2 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={handleScroll}
-          >
-            View Our Work
-          </motion.button>
         </motion.div>
       </motion.div>
 
       <motion.div 
         className={commonStyles.scrollIndicator}
-        onClick={handleScroll}
-        whileHover={{ y: 3 }}
         animate={{ 
           y: [0, 5, 0],
           opacity: [0.6, 1, 0.6]
