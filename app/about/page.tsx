@@ -1,20 +1,36 @@
 "use client";
-import React from "react";
+import React, { Suspense } from "react";
 import { useTheme } from "../../context/ThemeContext";
+import dynamic from 'next/dynamic';
+import Loading from '../loading';
+
+// Static imports for critical components
 import NavBarDesktop from "../../components/NavBar_Desktop_Company/nav-bar-Company";
 import NavBarMobile from "../../components/NavBar_Mobile/NavBar-mobile";
 import ThemeToggleIcon from "../../components/Icon/sbicon";
 import AboutHero from "../../components/AboutHero/AboutHero";
-import AboutIntro from "../../components/AboutIntro/AboutIntro";
-import CoreValues from "../../components/CoreValues/CoreValues";
-import AboutFounder from "../../components/AboutFounder/AboutFounder";
-import AboutStats from "../../components/AboutStats/AboutStats";
-import Footer from "../../components/Footer/Footer";
+
+// Dynamic imports for non-critical components
+const AboutIntro = dynamic(() => import("../../components/AboutIntro/AboutIntro"), {
+  loading: () => <Loading />
+});
+const CoreValues = dynamic(() => import("../../components/CoreValues/CoreValues"), {
+  loading: () => <Loading />
+});
+const AboutFounder = dynamic(() => import("../../components/AboutFounder/AboutFounder"), {
+  loading: () => <Loading />
+});
+const AboutStats = dynamic(() => import("../../components/AboutStats/AboutStats"), {
+  loading: () => <Loading />
+});
+const Footer = dynamic(() => import("../../components/Footer/Footer"), {
+  loading: () => <Loading />
+});
 
 export default function AboutPage() {
   const { theme } = useTheme();
 
-  // Social/contact info (reuse from MegicodePage)
+  // Social/contact info
   const linkedinUrl = "https://www.linkedin.com/company/megicode";
   const instagramUrl = "https://www.instagram.com/megicode/";
   const githubUrl = "https://github.com/megicode";
@@ -30,46 +46,92 @@ export default function AboutPage() {
   ];
 
   return (
-    <div style={{ backgroundColor: theme === "dark" ? "#1d2127" : "#ffffff", minHeight: "100vh", overflowX: "hidden" }}>
+    <div 
+      style={{ 
+        backgroundColor: theme === "dark" ? "#1d2127" : "#ffffff", 
+        minHeight: "100vh", 
+        overflowX: "hidden" 
+      }}
+    >
       {/* Theme Toggle Icon */}
-      <div id="theme-toggle" role="button" tabIndex={0}>
+      <div 
+        id="theme-toggle" 
+        role="button" 
+        tabIndex={0} 
+        aria-label="Toggle theme"
+      >
         <ThemeToggleIcon />
       </div>
 
-      {/* Desktop NavBar */}
-      <nav id="desktop-navbar" aria-label="Main Navigation">
-        <NavBarDesktop />
-      </nav>
+      {/* Navigation */}
+      <header>
+        {/* Desktop NavBar */}
+        <nav 
+          id="desktop-navbar" 
+          aria-label="Main Navigation"
+          className="hidden md:block"
+        >
+          <NavBarDesktop />
+        </nav>
 
-      {/* Mobile NavBar */}
-      <nav id="mobile-navbar" aria-label="Mobile Navigation">
-        <NavBarMobile sections={sections} />
-      </nav>      {/* Main Content */}
-      <main style={{ background: "var(--color-bg)", color: "var(--color-text)" }}>
-        {/* Hero Section */}
+        {/* Mobile NavBar */}
+        <nav 
+          id="mobile-navbar" 
+          aria-label="Mobile Navigation"
+          className="block md:hidden"
+        >
+          <NavBarMobile sections={sections} />
+        </nav>
+      </header>
+
+      {/* Main Content */}
+      <main 
+        style={{ 
+          background: "var(--color-bg)", 
+          color: "var(--color-text)" 
+        }}
+      >
+        {/* Critical Path - Load Immediately */}
         <AboutHero />
 
-        {/* Stats Section - Moved up to establish credibility early */}
-        <AboutStats />
+        {/* Non-Critical Components - Load Dynamically */}
+        <Suspense fallback={<Loading />}>
+          {/* Stats Section - Establish credibility early */}
+          <section aria-label="Company Statistics">
+            <AboutStats />
+          </section>
 
-        {/* Introduction Section */}
-        <AboutIntro />
+          {/* Introduction Section */}
+          <section aria-label="About Company">
+            <AboutIntro />
+          </section>
 
-        {/* Core Values Section */}
-        <CoreValues />
+          {/* Core Values Section */}
+          <section aria-label="Our Core Values">
+            <CoreValues />
+          </section>
 
-        {/* Founder Section - Moved to end for personal connection */}
-        <AboutFounder />
+          {/* Founder Section */}
+          <section aria-label="About Founder">
+            <AboutFounder />
+          </section>
+        </Suspense>
       </main>
 
       {/* Footer */}
-      <footer id="footer-section" aria-label="Footer" style={{ width: "100%", overflow: "hidden" }}>
-        <Footer
-          linkedinUrl={linkedinUrl}
-          instagramUrl={instagramUrl}
-          githubUrl={githubUrl}
-          copyrightText={copyrightText}
-        />
+      <footer 
+        id="footer-section" 
+        aria-label="Footer" 
+        style={{ width: "100%", overflow: "hidden" }}
+      >
+        <Suspense fallback={<Loading />}>
+          <Footer
+            linkedinUrl={linkedinUrl}
+            instagramUrl={instagramUrl}
+            githubUrl={githubUrl}
+            copyrightText={copyrightText}
+          />
+        </Suspense>
       </footer>
     </div>
   );
