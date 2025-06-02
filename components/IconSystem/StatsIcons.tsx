@@ -193,3 +193,111 @@ export const DeliveryIcon = ({ size = 32, color = 'currentColor', className = ''
     />
   </svg>
 );
+
+export const ClientsIcon = ({ size = 32, color = 'currentColor', className = '' }: IconProps) => (
+  <svg 
+    width={size} 
+    height={size} 
+    viewBox="0 0 32 32" 
+    fill="none"
+    className={className}
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    {/* Central person */}
+    <circle cx="16" cy="10" r="4" stroke={color} strokeWidth="2"/>
+    <path
+      d="M10 20C10 17.7909 12.6863 16 16 16C19.3137 16 22 17.7909 22 20"
+      stroke={color}
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
+    {/* Left person */}
+    <circle cx="8" cy="12" r="3" stroke={color} strokeWidth="2"/>
+    <path
+      d="M4 20C4 18.3431 5.79086 17 8 17C9.10457 17 10.1046 17.3431 10.8284 18"
+      stroke={color}
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
+    {/* Right person */}
+    <circle cx="24" cy="12" r="3" stroke={color} strokeWidth="2"/>
+    <path
+      d="M28 20C28 18.3431 26.2091 17 24 17C22.8954 17 21.8954 17.3431 21.1716 18"
+      stroke={color}
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
+  </svg>
+);
+
+export const TechStackIcon = ({ size = 32, color = 'currentColor', className = '' }: IconProps) => (
+  <svg 
+    width={size} 
+    height={size} 
+    viewBox="0 0 32 32" 
+    fill="none"
+    className={className}
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    {/* Code brackets */}
+    <path
+      d="M11 8L6 16L11 24"
+      stroke={color}
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M21 8L26 16L21 24"
+      stroke={color}
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    {/* Settings gear */}
+    <circle
+      cx="16"
+      cy="16"
+      r="3"
+      stroke={color}
+      strokeWidth="2"
+    />
+    {/* Gear teeth */}
+    <path
+      d="M16 8V13"
+      stroke={color}
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
+    <path
+      d="M16 19V24"
+      stroke={color}
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
+    <path
+      d="M21.7 10.3L18.5 13.5"
+      stroke={color}
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
+    <path
+      d="M13.5 18.5L10.3 21.7"
+      stroke={color}
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
+    <path
+      d="M24 16H19"
+      stroke={color}
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
+    <path
+      d="M13 16H8"
+      stroke={color}
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
+  </svg>
+);

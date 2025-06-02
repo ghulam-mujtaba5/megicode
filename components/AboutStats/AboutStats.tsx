@@ -5,7 +5,7 @@ import commonStyles from './AboutStatsCommon.module.css';
 import lightStyles from './AboutStatsLight.module.css';
 import darkStyles from './AboutStatsDark.module.css';
 import { useTheme } from '../../context/ThemeContext';
-import { ProjectsIcon, GlobalIcon, AiIcon, DeliveryIcon } from '../IconSystem/StatsIcons';
+import { ProjectsIcon, GlobalIcon, ClientsIcon, TechStackIcon } from '../IconSystem/StatsIcons';
 
 interface StatItemProps {
   Icon: React.ComponentType<{ size?: number; color?: string }>;
@@ -50,8 +50,7 @@ const StatItem: React.FC<StatItemProps> = ({ Icon, number, label, delay }) => {
   );
 };
 
-const AboutStats = () => {
-  const stats = [
+const AboutStats = () => {  const stats = [
     {
       Icon: ProjectsIcon,
       number: '15+',
@@ -62,15 +61,14 @@ const AboutStats = () => {
       number: '5+',
       label: 'Countries Served'
     },
-    {
-      Icon: AiIcon,
-      number: '100%',
-      label: 'AI/ML Integration'
+    {      Icon: ClientsIcon,
+      number: '10+',
+      label: 'Clients Served'
     },
     {
-      Icon: DeliveryIcon,
-      number: '2-6',
-      label: 'Weeks Delivery'
+      Icon: TechStackIcon,
+      number: '20+',
+      label: 'Tools & Frameworks'
     }
   ];
 
