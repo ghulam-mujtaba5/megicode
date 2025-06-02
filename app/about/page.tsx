@@ -30,7 +30,7 @@ export default function AboutPage() {
   ];
 
   return (
-    <div style={{ background: "var(--color-bg)", minHeight: "100vh", overflowX: "hidden" }}>
+    <div style={{ backgroundColor: theme === "dark" ? "#1d2127" : "#ffffff", minHeight: "100vh", overflowX: "hidden" }}>
       {/* Theme Toggle Icon */}
       <div id="theme-toggle" role="button" tabIndex={0}>
         <ThemeToggleIcon />
