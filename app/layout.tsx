@@ -6,7 +6,7 @@ import { Providers } from "./providers";
 export const metadata = {
   metadataBase: new URL('https://megicode.com'),
   title: {
-    default: "Megicode | Innovative Software Solutions",
+    default: "Megicode - Modern Software Solutions",
     template: "%s | Megicode"
   },
   description: "Welcome to Megicode, specializing in Desktop, Web, and Mobile applications, data science, and AI solutions. Partner with us to turn your project ideas into reality.",
