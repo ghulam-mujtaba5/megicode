@@ -5,17 +5,21 @@ import commonStyles from './AboutStatsCommon.module.css';
 import lightStyles from './AboutStatsLight.module.css';
 import darkStyles from './AboutStatsDark.module.css';
 import { useTheme } from '../../context/ThemeContext';
+import { ProjectsIcon, GlobalIcon, AiIcon, DeliveryIcon } from '../IconSystem/StatsIcons';
 
 interface StatItemProps {
-  icon: string;
+  Icon: React.ComponentType<{ size?: number; color?: string }>;
   number: string;
   label: string;
   delay: number;
 }
 
-const StatItem: React.FC<StatItemProps> = ({ icon, number, label, delay }) => {
+const StatItem: React.FC<StatItemProps> = ({ Icon, number, label, delay }) => {
   const { theme } = useTheme();
   const themeStyles = theme === 'dark' ? darkStyles : lightStyles;
+  
+  const iconColor = theme === 'dark' ? '#6b8ee6' : '#4573df';
+  
   return (
     <motion.div 
       className={`${commonStyles.statItem} ${themeStyles.statItem}`}
@@ -29,7 +33,9 @@ const StatItem: React.FC<StatItemProps> = ({ icon, number, label, delay }) => {
         stiffness: 100
       }}
     >
-      <div className={`${commonStyles.icon} ${themeStyles.icon}`}>{icon}</div>
+      <div className={`${commonStyles.iconWrapper} ${themeStyles.iconWrapper}`}>
+        <Icon size={40} color={iconColor} />
+      </div>
       <motion.div 
         className={`${commonStyles.number} ${themeStyles.number}`}
         initial={{ opacity: 0, y: 20 }}
@@ -47,22 +53,22 @@ const StatItem: React.FC<StatItemProps> = ({ icon, number, label, delay }) => {
 const AboutStats = () => {
   const stats = [
     {
-      icon: '🚀',
+      Icon: ProjectsIcon,
       number: '15+',
       label: 'Projects Delivered'
     },
     {
-      icon: '🌍',
+      Icon: GlobalIcon,
       number: '5+',
       label: 'Countries Served'
     },
     {
-      icon: '🧠',
+      Icon: AiIcon,
       number: '100%',
       label: 'AI/ML Integration'
     },
     {
-      icon: '⏱️',
+      Icon: DeliveryIcon,
       number: '2-6',
       label: 'Weeks Delivery'
     }
@@ -70,6 +76,7 @@ const AboutStats = () => {
 
   const { theme } = useTheme();
   const themeStyles = theme === 'dark' ? darkStyles : lightStyles;
+
   return (
     <section className={`${commonStyles.statsSection} ${themeStyles.statsSection}`}>
       <motion.div 
@@ -84,7 +91,7 @@ const AboutStats = () => {
           {stats.map((stat, index) => (
             <StatItem
               key={stat.label}
-              icon={stat.icon}
+              Icon={stat.Icon}
               number={stat.number}
               label={stat.label}
               delay={index * 0.1}
@@ -92,7 +99,6 @@ const AboutStats = () => {
           ))}
         </div>
       </motion.div>
-      <div className={commonStyles.backgroundDecoration}></div>
     </section>
   );
 };
