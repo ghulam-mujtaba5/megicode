@@ -5,8 +5,8 @@
 }
 
 .contentWrapper {
-  background: #23272f;
-  box-shadow: 0 2px 16px #1116;
+  background: transparent;
+  box-shadow: none;
 }
 
 .heading {

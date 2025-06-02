@@ -8,15 +8,16 @@
   align-items: center;
   justify-content: center;
   padding: 4rem 2rem;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: visible;
 }
 
 .contentWrapper {
-  max-width: 1200px;
+  max-width: 900px;
   width: 100%;
   text-align: center;
   z-index: 2;
-  padding: 2rem;
+  padding: 2.5rem 1.2rem;
   margin: 0 auto;
   background: transparent;
 }
