@@ -57,9 +57,8 @@ const AboutFounder = () => {
             Our approach combines technical excellence with a deep understanding of our clients' needs.
           </p>
 
-          <div className={styles.socialLinks}>
-            <Link 
-              href="https://github.com/megicode" 
+          <div className={styles.socialLinks}>            <Link 
+              href="https://github.com/ghulam-mujtaba5" 
               target="_blank" 
               rel="noopener noreferrer"
               className={styles.socialLink}
@@ -77,7 +76,7 @@ const AboutFounder = () => {
               </motion.div>
             </Link>
             <Link 
-              href="https://linkedin.com/in/megicode" 
+              href="https://pk.linkedin.com/in/ghulamujtabaofficial" 
               target="_blank" 
               rel="noopener noreferrer"
               className={styles.socialLink}
@@ -89,6 +88,25 @@ const AboutFounder = () => {
                 <Image
                   src="/linkedin-icon.svg"
                   alt="LinkedIn"
+                  width={24}
+                  height={24}
+                />
+              </motion.div>
+            </Link>
+            <Link 
+              href="http://ghulammujtaba.com/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className={`${styles.socialLink} ${styles.portfolioLink}`}
+            >
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className={styles.portfolioIcon}
+              >
+                <Image
+                  src="/preview_icon1.svg"
+                  alt="Portfolio"
                   width={24}
                   height={24}
                 />

@@ -126,6 +126,20 @@
   background: rgba(69,115,223,0.2);
 }
 
+.portfolioLink {
+  background: rgba(69,115,223,0.15);
+}
+
+.portfolioLink:hover {
+  background: rgba(69,115,223,0.25);
+}
+
+.portfolioIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
   .container {
