@@ -5,7 +5,6 @@ import lightStyles from './AboutHeroLight.module.css';
 import darkStyles from './AboutHeroDark.module.css';
 import { useTheme } from '../../context/ThemeContext';
 import { motion } from 'framer-motion';
-import LetsTalkButton from '../CTA/LetsTalkButton';
 
 const AboutHero = () => {
   const { theme } = useTheme();
@@ -54,13 +53,6 @@ const AboutHero = () => {
           We craft scalable, AI-powered software solutions that drive innovation 
           and empower businesses to achieve breakthrough results.
         </motion.p>
-
-        <motion.div 
-          className={commonStyles.ctaContainer}
-          variants={fadeInUp}
-        >
-          <LetsTalkButton />
-        </motion.div>
       </motion.div>
 
       <motion.div 

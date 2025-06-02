@@ -53,6 +53,7 @@
   gap: 2rem;
   position: relative;
   z-index: 1;
+  padding: 0 1rem;
 }
 
 .heading {
@@ -63,32 +64,12 @@
   max-width: 800px;
 }
 
-.gradientText {
-  background: linear-gradient(135deg, #4573df 0%, #2d4fa2 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
 .subheading {
   font-size: clamp(1.1rem, 2vw, 1.25rem);
   line-height: 1.6;
   max-width: 700px;
-  margin: 0 auto 1rem;
-}
-
-.ctaContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 1rem;
-  width: 100%;
-}
-
-.ctaContainer > :global(.ctaButtonRow) {
-  margin-bottom: 0;
-  padding-left: 0;
-  justify-content: center;
+  margin: 0 auto;
+  opacity: 0.9;
 }
 
 /* Tablet */
