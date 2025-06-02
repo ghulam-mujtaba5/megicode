@@ -85,8 +85,7 @@ const AboutStats = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-      >
-        <h2 className={`${commonStyles.title} ${themeStyles.title}`}>Our Impact in Numbers</h2>
+      >        <h2 className={`${commonStyles.title} ${themeStyles.title}`}>Key Milestones & Metrics</h2>
         <div className={commonStyles.statsGrid}>
           {stats.map((stat, index) => (
             <StatItem
