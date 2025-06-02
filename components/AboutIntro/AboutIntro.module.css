@@ -1,0 +1,110 @@
+.introSection {
+  padding: 6rem 2rem;
+  background: #ffffff;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.whoWeAre {
+  text-align: center;
+  margin-bottom: 5rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.whoWeAre h2 {
+  color: #2d4fa2;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  display: inline-block;
+}
+
+.whoWeAre h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: #4573df;
+  border-radius: 2px;
+}
+
+.whoWeAre p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #444;
+}
+
+.missionVision {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  margin-top: 3rem;
+}
+
+.mission, .vision {
+  padding: 2rem;
+  border-radius: 12px;
+  background: rgba(69,115,223,0.03);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+
+.mission:hover, .vision:hover {
+  transform: translateY(-5px);
+}
+
+.mission h3, .vision h3 {
+  color: #2d4fa2;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.mission p, .vision p {
+  color: #555;
+  line-height: 1.7;
+  font-size: 1.1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+  .missionVision {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .introSection {
+    padding: 4rem 1.5rem;
+  }
+
+  .whoWeAre h2 {
+    font-size: 2rem;
+  }
+
+  .whoWeAre p {
+    font-size: 1.1rem;
+  }
+
+  .mission h3, .vision h3 {
+    font-size: 1.5rem;
+  }
+
+  .mission p, .vision p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .whoWeAre h2 {
+    font-size: 1.8rem;
+  }
+}

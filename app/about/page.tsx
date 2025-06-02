@@ -3,9 +3,13 @@ import React from "react";
 import { useTheme } from "../../context/ThemeContext";
 import NavBarDesktop from "../../components/NavBar_Desktop_Company/nav-bar-Company";
 import NavBarMobile from "../../components/NavBar_Mobile/NavBar-mobile";
-import AboutMeSection from "../../components/AboutMeCompany/AboutMeSectionLight";
-import Footer from "../../components/Footer/Footer";
 import ThemeToggleIcon from "../../components/Icon/sbicon";
+import AboutHero from "../../components/AboutHero/AboutHero";
+import AboutIntro from "../../components/AboutIntro/AboutIntro";
+import CoreValues from "../../components/CoreValues/CoreValues";
+import AboutFounder from "../../components/AboutFounder/AboutFounder";
+import AboutStats from "../../components/AboutStats/AboutStats";
+import Footer from "../../components/Footer/Footer";
 
 export default function AboutPage() {
   const { theme } = useTheme();
@@ -40,12 +44,23 @@ export default function AboutPage() {
       {/* Mobile NavBar */}
       <nav id="mobile-navbar" aria-label="Mobile Navigation">
         <NavBarMobile sections={sections} />
-      </nav>
+      </nav>      {/* Main Content */}
+      <main>
+        {/* Hero Section */}
+        <AboutHero />
 
-      {/* About Section */}
-      <section id="about-section" aria-labelledby="about-heading" style={{ width: "100%", overflow: "hidden" }}>
-        <AboutMeSection />
-      </section>
+        {/* Introduction Section */}
+        <AboutIntro />
+
+        {/* Core Values Section */}
+        <CoreValues />
+
+        {/* Founder Section */}
+        <AboutFounder />
+
+        {/* Stats Section */}
+        <AboutStats />
+      </main>
 
       {/* Footer */}
       <footer id="footer-section" aria-label="Footer" style={{ width: "100%", overflow: "hidden" }}>
