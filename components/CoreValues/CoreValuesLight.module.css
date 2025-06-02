@@ -1,0 +1,34 @@
+/* Light theme styles for CoreValues */
+
+.coreValues {
+  background: rgba(69,115,223,0.02);
+}
+
+.sectionTitle {
+  color: #2d4fa2;
+}
+
+.sectionTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: #4573df;
+  border-radius: 2px;
+}
+
+.valueCard {
+  background: #fff;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.valueCard h3 {
+  color: #2d4fa2;
+}
+
+.valueCard p {
+  color: #555;
+}

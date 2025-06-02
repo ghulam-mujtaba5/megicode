@@ -1,0 +1,18 @@
+/* Dark theme styles for AboutHero */
+
+.heroContainer {
+  background: #1d2127;
+}
+
+.contentWrapper {
+  background: #23272f;
+  box-shadow: 0 2px 16px #1116;
+}
+
+.heading {
+  color: #4573df;
+}
+
+.subheading {
+  color: #b0b8c1;
+}

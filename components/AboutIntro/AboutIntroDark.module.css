@@ -1,0 +1,30 @@
+/* Dark theme styles for AboutIntro */
+
+.introSection {
+  background: #1d2127;
+}
+
+.whoWeAre h2 {
+  color: #4573df;
+}
+
+.whoWeAre h2::after {
+  background: #4573df;
+}
+
+.whoWeAre p {
+  color: #b0b8c1;
+}
+
+.mission, .vision {
+  background: #23272f;
+  box-shadow: 0 4px 16px #1116;
+}
+
+.mission h3, .vision h3 {
+  color: #4573df;
+}
+
+.mission p, .vision p {
+  color: #b0b8c1;
+}

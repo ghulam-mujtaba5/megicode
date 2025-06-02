@@ -1,0 +1,67 @@
+/* Common styles for AboutIntro, shared by both light and dark themes */
+
+.introSection {
+  padding: 6rem 2rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.whoWeAre {
+  text-align: center;
+  margin-bottom: 5rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.missionVision {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  margin-top: 3rem;
+}
+
+.mission, .vision {
+  padding: 2rem;
+  border-radius: 12px;
+  transition: transform 0.3s;
+}
+
+.mission:hover, .vision:hover {
+  transform: translateY(-5px);
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+  .missionVision {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .introSection {
+    padding: 4rem 1.5rem;
+  }
+  .whoWeAre h2 {
+    font-size: 2rem;
+  }
+  .whoWeAre p {
+    font-size: 1.1rem;
+  }
+  .mission h3, .vision h3 {
+    font-size: 1.5rem;
+  }
+  .mission p, .vision p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .whoWeAre h2 {
+    font-size: 1.8rem;
+  }
+}

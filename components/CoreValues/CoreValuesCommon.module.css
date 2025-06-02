@@ -1,0 +1,77 @@
+/* Common styles for CoreValues, shared by both light and dark themes */
+
+.coreValues {
+  padding: 6rem 2rem;
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 4rem;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.valueCard {
+  padding: 2rem;
+  border-radius: 12px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  text-align: center;
+}
+
+.valueCard:hover {
+  transform: translateY(-5px);
+}
+
+.icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.valueCard h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.valueCard p {
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .coreValues {
+    padding: 4rem 1.5rem;
+  }
+  .sectionTitle {
+    font-size: 2rem;
+    margin-bottom: 3rem;
+  }
+  .valuesGrid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sectionTitle {
+    font-size: 1.8rem;
+  }
+  .valueCard {
+    padding: 1.5rem;
+  }
+  .valueCard h3 {
+    font-size: 1.2rem;
+  }
+  .valueCard p {
+    font-size: 0.9rem;
+  }
+}

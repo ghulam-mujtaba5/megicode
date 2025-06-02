@@ -2,66 +2,70 @@
 import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import styles from './AboutFounder.module.css';
+import commonStyles from './AboutFounderCommon.module.css';
+import lightStyles from './AboutFounderLight.module.css';
+import darkStyles from './AboutFounderDark.module.css';
+import { useTheme } from '../../context/ThemeContext';
 import Link from 'next/link';
 
 const AboutFounder = () => {
+  const { theme } = useTheme();
+  const themeStyles = theme === 'dark' ? darkStyles : lightStyles;
   return (
-    <section className={styles.founderSection}>
+    <section className={`${commonStyles.founderSection} ${themeStyles.founderSection}`}>
       <motion.div 
-        className={styles.container}
+        className={`${commonStyles.container}`}
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
         <motion.div 
-          className={styles.imageContainer}
+          className={commonStyles.imageContainer}
           initial={{ x: -50, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <div className={styles.imageWrapper}>
+          <div className={commonStyles.imageWrapper}>
             <Image
               src="/images/portfolio-picture.png"
               alt="Ghulam Mujtaba - Founder of Megicode"
               width={400}
               height={400}
-              className={styles.founderImage}
+              className={commonStyles.founderImage}
               priority
             />
-            <div className={styles.imageBorder}></div>
+            <div className={commonStyles.imageBorder}></div>
           </div>
         </motion.div>
 
         <motion.div 
-          className={styles.content}
+        className={`${commonStyles.content} ${themeStyles.content}`}
           initial={{ x: 50, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <h2 className={styles.title}>Meet the Founder</h2>
-          <h3 className={styles.name}>Ghulam Mujtaba</h3>
-          <p className={styles.role}>Founder & Lead Developer</p>
-          
-          <p className={styles.quote}>
+          <h2 className={`${commonStyles.title} ${themeStyles.title}`}>Meet the Founder</h2>
+          <h3 className={`${commonStyles.name} ${themeStyles.name}`}>Ghulam Mujtaba</h3>
+          <p className={`${commonStyles.role} ${themeStyles.role}`}>Founder & Lead Developer</p>
+          <p className={`${commonStyles.quote} ${themeStyles.quote}`}>
             "After years of experience in software engineering and AI, I founded Megicode to help businesses 
             achieve breakthrough results using intelligent systems."
           </p>
           
-          <p className={styles.description}>
+          <p className={themeStyles.description}>
             With a passion for innovation and deep expertise in AI and software development, 
             I lead a team dedicated to creating cutting-edge solutions that transform businesses. 
             Our approach combines technical excellence with a deep understanding of our clients' needs.
           </p>
 
-          <div className={styles.socialLinks}>            <Link 
+          <div className={commonStyles.socialLinks}>            <Link 
               href="https://github.com/ghulam-mujtaba5" 
               target="_blank" 
               rel="noopener noreferrer"
-              className={styles.socialLink}
+              className={commonStyles.socialLink}
             >
               <motion.div
                 whileHover={{ scale: 1.1 }}
@@ -79,7 +83,7 @@ const AboutFounder = () => {
               href="https://pk.linkedin.com/in/ghulamujtabaofficial" 
               target="_blank" 
               rel="noopener noreferrer"
-              className={styles.socialLink}
+              className={commonStyles.socialLink}
             >
               <motion.div
                 whileHover={{ scale: 1.1 }}
@@ -97,12 +101,12 @@ const AboutFounder = () => {
               href="http://ghulammujtaba.com/" 
               target="_blank" 
               rel="noopener noreferrer"
-              className={`${styles.socialLink} ${styles.portfolioLink}`}
+              className={`${commonStyles.socialLink} ${commonStyles.portfolioLink}`}
             >
               <motion.div
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                className={styles.portfolioIcon}
+                className={commonStyles.portfolioIcon}
               >
                 <Image
                   src="/preview_icon1.svg"

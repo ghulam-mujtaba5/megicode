@@ -1,0 +1,28 @@
+/* Dark theme styles for AboutFounder */
+
+.founderSection {
+  background: linear-gradient(to bottom, rgba(69,115,223,0.03) 0%, #1d2127 100%);
+}
+
+.title {
+  color: #4573df;
+}
+
+.title::after {
+  background: #4573df;
+}
+
+.name {
+  color: #fff;
+}
+
+.role {
+  color: #4573df;
+}
+
+.quote {
+  color: #b0b8c1;
+}
+.content {
+  background: #23272f;
+}

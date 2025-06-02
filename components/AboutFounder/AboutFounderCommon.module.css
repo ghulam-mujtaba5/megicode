@@ -1,0 +1,121 @@
+/* Common styles for AboutFounder, shared by both light and dark themes */
+
+.founderSection {
+  padding: 8rem 2rem;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.imageContainer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 400px;
+  height: 400px;
+}
+
+.founderImage {
+  border-radius: 20px;
+  object-fit: cover;
+  filter: brightness(1.02) contrast(1.02);
+  transition: transform 0.3s ease;
+  z-index: 2;
+  position: relative;
+}
+
+.imageBorder {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 100%;
+  height: 100%;
+  border: 2px solid var(--color-primary);
+  border-radius: 20px;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.imageWrapper:hover .founderImage {
+  transform: translate(-10px, -10px);
+}
+
+.imageWrapper:hover .imageBorder {
+  transform: translate(10px, 10px);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+  display: inline-block;
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: var(--color-primary);
+  border-radius: 2px;
+}
+
+.name {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.role {
+  font-size: 1.2rem;
+  margin: 0;
+  font-weight: 500;
+}
+
+.quote {
+  font-style: italic;
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .imageWrapper {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+@media (max-width: 600px) {
+  .founderSection {
+    padding: 4rem 1rem;
+  }
+  .title {
+    font-size: 2rem;
+  }
+  .name {
+    font-size: 1.5rem;
+  }
+}

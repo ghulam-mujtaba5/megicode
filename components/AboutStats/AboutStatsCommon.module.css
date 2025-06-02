@@ -1,0 +1,106 @@
+/* Common styles for AboutStats, shared by both light and dark themes */
+
+.statsSection {
+  padding: 6rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 4rem;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.statItem {
+  text-align: center;
+  padding: 2rem;
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s;
+}
+
+.statItem:hover {
+  transform: translateY(-10px);
+}
+
+.icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+.number {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 0.5rem 0;
+}
+
+.label {
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+}
+
+.backgroundDecoration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+@media (max-width: 1024px) {
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .statsSection {
+    padding: 4rem 1.5rem;
+  }
+  .title {
+    font-size: 2rem;
+    margin-bottom: 3rem;
+  }
+  .number {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .statsGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .title {
+    font-size: 1.8rem;
+  }
+  .statItem {
+    padding: 1.5rem;
+  }
+  .number {
+    font-size: 1.8rem;
+  }
+  .label {
+    font-size: 1rem;
+  }
+}

@@ -1,0 +1,84 @@
+/* Common styles for AboutHero, shared by both light and dark themes */
+
+.heroContainer {
+  position: relative;
+  width: 100%;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  overflow: hidden;
+}
+
+.contentWrapper {
+  max-width: 1200px;
+  width: 100%;
+  text-align: center;
+  z-index: 2;
+  padding: 2rem;
+  margin: 0 auto;
+  background: transparent;
+}
+
+.heading {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  text-shadow: 0 2px 8px var(--color-shadow);
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.subheading {
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  max-width: 800px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.6;
+  padding: 0 1rem;
+}
+
+.ctaContainer {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.backgroundAnimation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .heading {
+    font-size: 2.5rem;
+  }
+  .subheading {
+    font-size: 1.25rem;
+    padding: 0 1rem;
+  }
+  .heroContainer {
+    padding: 3rem 1rem;
+    min-height: 70vh;
+  }
+  .contentWrapper {
+    padding: 1.5rem 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .heading {
+    font-size: 2rem;
+  }
+  .subheading {
+    font-size: 1.1rem;
+  }
+}
