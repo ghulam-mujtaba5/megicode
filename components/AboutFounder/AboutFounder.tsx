@@ -27,6 +27,7 @@ const AboutFounder = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
+          <div className={commonStyles.imageGlow}></div>
           <div className={commonStyles.imageWrapper}>
             <Image
               src="/images/portfolio-picture.png"
@@ -48,20 +49,34 @@ const AboutFounder = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
         >
           <h2 className={`${commonStyles.title} ${themeStyles.title}`}>Meet the Founder</h2>
+          <span style={{
+            display: 'inline-block',
+            background: 'linear-gradient(90deg, #4573df 60%, #2d4fa2 100%)',
+            color: '#fff',
+            fontWeight: 600,
+            fontSize: '1.05rem',
+            borderRadius: '0.7rem',
+            padding: '0.25rem 1.1rem',
+            marginBottom: '0.7rem',
+            letterSpacing: '0.03em',
+            boxShadow: '0 2px 8px #4573df22',
+            marginLeft: '0.2rem',
+          }}>Founder & Lead Developer</span>
           <h3 className={`${commonStyles.name} ${themeStyles.name}`}>Ghulam Mujtaba</h3>
-          <p className={`${commonStyles.role} ${themeStyles.role}`}>Founder & Lead Developer</p>
-          <p className={`${commonStyles.quote} ${themeStyles.quote}`}>
-            "After years of experience in software engineering and AI, I founded Megicode to help businesses 
-            achieve breakthrough results using intelligent systems."
+          <p className={`${commonStyles.quote} ${themeStyles.quote}`} style={{fontWeight: 500, fontSize: '1.18rem', color: '#2d4fa2'}}>
+            <span style={{fontSize: '2rem', verticalAlign: 'middle', color: '#4573df', marginRight: 6}}>&ldquo;</span>
+            After years of experience in <span style={{color:'#4573df', fontWeight:600}}>software engineering</span> and <span style={{color:'#4573df', fontWeight:600}}>AI</span>, I founded <span style={{color:'#4573df', fontWeight:600}}>Megicode</span> to help businesses achieve breakthrough results using intelligent systems.
+            <span style={{fontSize: '2rem', verticalAlign: 'middle', color: '#4573df', marginLeft: 6}}>&rdquo;</span>
           </p>
-          
           <p className={themeStyles.description}>
-            With a passion for innovation and deep expertise in AI and software development, 
-            I lead a team dedicated to creating cutting-edge solutions that transform businesses. 
-            Our approach combines technical excellence with a deep understanding of our clients' needs.
+            With a passion for <b>innovation</b> and deep expertise in <b>AI</b> and <b>software development</b>, I lead a team dedicated to creating <span style={{color:'#4573df', fontWeight:600}}>cutting-edge solutions</span> that transform businesses.<br/>
+            Our approach combines <span style={{color:'#4573df', fontWeight:600}}>technical excellence</span> with a deep understanding of our clients' needs.
           </p>
-
-          <div className={commonStyles.socialLinks}>            <Link 
+          <div style={{margin: '1.2rem 0 0.5rem 0', fontFamily: 'cursive', fontSize: '1.2rem', color: '#2d4fa2', opacity: 0.85, textAlign: 'right'}}>
+            <span style={{fontSize: '1.6rem', color: '#4573df'}}>—</span> Ghulam Mujtaba
+          </div>
+          <div className={commonStyles.socialLinks}>
+            <Link 
               href="https://github.com/ghulam-mujtaba5" 
               target="_blank" 
               rel="noopener noreferrer"
