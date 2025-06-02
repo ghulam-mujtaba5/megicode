@@ -130,55 +130,16 @@
 
 .ctaContainer {
   display: flex;
-  gap: 1.25rem;
-  margin-top: 1rem;
-  padding: 0 1rem;
-}
-
-.secondaryButton {
-  display: inline-flex;
-  align-items: center;
   justify-content: center;
-  height: 3.25rem;
-  padding: 0 2rem;
-  border-radius: 0.75rem;
-  font-size: 1rem;
-  font-weight: 500;
-  text-decoration: none;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  background: linear-gradient(145deg, rgba(69,115,223,0.1) 0%, rgba(69,115,223,0.05) 100%);
-  border: 1px solid rgba(69,115,223,0.15);
-  white-space: nowrap;
+  align-items: center;
+  margin-top: 2rem;
+  width: 100%;
 }
 
-.secondaryButton:hover {
-  background: linear-gradient(145deg, rgba(69,115,223,0.15) 0%, rgba(69,115,223,0.08) 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 16px -4px rgba(69,115,223,0.15);
-}
-
-.scrollIndicator {
-  position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  color: rgba(69,115,223,0.6);
-  z-index: 2;
-  cursor: pointer;
-  transition: opacity 0.3s ease;
-}
-
-.scrollIndicator:hover {
-  opacity: 0.8;
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translate(0, 0);
-  }
-  50% {
-    transform: translate(-20px, 20px);
-  }
+.ctaContainer > :global(.ctaButtonRow) {
+  margin-bottom: 0;
+  padding-left: 0;
+  justify-content: center;
 }
 
 /* Tablet */
@@ -244,5 +205,14 @@
 
   .statLabel {
     font-size: 0.9rem;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-20px, 20px);
   }
 }
