@@ -20,12 +20,6 @@ const AboutHero = () => {
     }
   };
 
-  const stats = [
-    { number: "98%", label: "Client Satisfaction" },
-    { number: "50+", label: "Projects Delivered" },
-    { number: "5★", label: "Average Rating" }
-  ];
-
   return (
     <section className={`${commonStyles.heroContainer} ${themeStyles.heroContainer}`}>
       <div className={commonStyles.backgroundEffect}>
@@ -60,23 +54,6 @@ const AboutHero = () => {
           We craft scalable, AI-powered software solutions that drive innovation 
           and empower businesses to achieve breakthrough results.
         </motion.p>
-
-        <motion.div 
-          className={commonStyles.statsContainer}
-          variants={fadeInUp}
-        >
-          {stats.map((stat, index) => (
-            <motion.div 
-              key={stat.label}
-              className={`${commonStyles.statItem} ${themeStyles.statItem}`}
-              variants={fadeInUp}
-              whileHover={{ y: -5, transition: { duration: 0.2 } }}
-            >
-              <span className={commonStyles.statNumber}>{stat.number}</span>
-              <span className={commonStyles.statLabel}>{stat.label}</span>
-            </motion.div>
-          ))}
-        </motion.div>
 
         <motion.div 
           className={commonStyles.ctaContainer}
