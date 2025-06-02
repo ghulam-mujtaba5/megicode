@@ -49,17 +49,17 @@ export default function AboutPage() {
         {/* Hero Section */}
         <AboutHero />
 
+        {/* Stats Section - Moved up to establish credibility early */}
+        <AboutStats />
+
         {/* Introduction Section */}
         <AboutIntro />
 
         {/* Core Values Section */}
         <CoreValues />
 
-        {/* Founder Section */}
+        {/* Founder Section - Moved to end for personal connection */}
         <AboutFounder />
-
-        {/* Stats Section */}
-        <AboutStats />
       </main>
 
       {/* Footer */}
