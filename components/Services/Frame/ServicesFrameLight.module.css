@@ -1,16 +1,21 @@
 .skillFrame {
-  background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(250,252,255,0.98) 100%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.8) 100%);
 }
 
 .skillCard {
-  background: #ffffff;
-  box-shadow: 0 8px 32px rgba(69,115,223,0.1);
-  border: 1px solid rgba(69,115,223,0.1);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(69, 115, 223, 0.08);
+  box-shadow: 
+    0 4px 20px rgba(69, 115, 223, 0.06),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.5);
 }
 
 .skillCard:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 40px rgba(69,115,223,0.15);
+  border-color: rgba(69, 115, 223, 0.15);
+  box-shadow: 
+    0 8px 30px rgba(69, 115, 223, 0.08),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+  transform: translateY(-4px);
 }
 
 .skillsTitle {
@@ -29,8 +34,21 @@
   border-radius: 2px;
 }
 
+.header {
+  border-bottom-color: rgba(69, 115, 223, 0.08);
+}
+
+.categoryIcon {
+  background: linear-gradient(135deg, rgba(69, 115, 223, 0.06) 0%, rgba(69, 115, 223, 0.1) 100%);
+  border: 1px solid rgba(69, 115, 223, 0.1);
+}
+
 .title {
   color: #2d4fa2;
+}
+
+.description {
+  color: #4a5568;
 }
 
 .skillRow {
@@ -47,6 +65,45 @@
   transform: scale(1.1);
 }
 
+.skillItem {
+  background: linear-gradient(135deg, rgba(69, 115, 223, 0.03) 0%, rgba(69, 115, 223, 0.06) 100%);
+  border: 1px solid rgba(69, 115, 223, 0.06);
+}
+
+.skillItem:hover {
+  background: linear-gradient(135deg, rgba(69, 115, 223, 0.06) 0%, rgba(69, 115, 223, 0.09) 100%);
+  border-color: rgba(69, 115, 223, 0.1);
+}
+
+.skillIcon {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 
+    0 2px 8px rgba(69, 115, 223, 0.08),
+    inset 0 0 0 1px rgba(69, 115, 223, 0.06);
+}
+
+.skillItem:hover .skillIcon {
+  box-shadow: 
+    0 4px 12px rgba(69, 115, 223, 0.12),
+    inset 0 0 0 1px rgba(69, 115, 223, 0.08);
+}
+
 .skillName {
+  color: #2d4fa2;
+}
+
+.skillDescription {
   color: #4a5568;
+}
+
+.uiuxCard {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 243, 255, 0.95) 100%);
+}
+
+.developmentCard {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(242, 250, 255, 0.95) 100%);
+}
+
+.dataScienceCard {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(243, 242, 255, 0.95) 100%);
 }

@@ -1,61 +1,81 @@
 .skillFrame {
-  background: linear-gradient(145deg, rgba(29,33,39,0.95) 0%, rgba(25,29,35,0.98) 100%);
+  background: linear-gradient(180deg, rgba(28, 34, 47, 0.3) 0%, rgba(28, 34, 47, 0.5) 100%);
 }
 
 .skillCard {
-  background: linear-gradient(145deg, rgba(35,42,58,0.95) 0%, rgba(28,34,47,0.98) 100%);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-  border: 1px solid rgba(69,115,223,0.2);
-  backdrop-filter: blur(10px);
+  background: rgba(28, 34, 47, 0.95);
+  border: 1px solid rgba(123, 160, 255, 0.08);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.2),
+    inset 0 0 0 1px rgba(123, 160, 255, 0.04);
 }
 
 .skillCard:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
-  border-color: rgba(123,160,255,0.3);
-  background: linear-gradient(145deg, rgba(38,46,64,0.98) 0%, rgba(30,37,52,1) 100%);
+  border-color: rgba(123, 160, 255, 0.15);
+  box-shadow: 
+    0 8px 30px rgba(0, 0, 0, 0.25),
+    inset 0 0 0 1px rgba(123, 160, 255, 0.08);
+  transform: translateY(-4px);
 }
 
-.skillsTitle {
-  color: #7ba0ff;
-  text-shadow: 0 2px 8px rgba(69,115,223,0.2);
+.header {
+  border-bottom-color: rgba(123, 160, 255, 0.08);
 }
 
-.skillsTitle::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 3px;
-  background: #4573df;
-  border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(69,115,223,0.3);
+.categoryIcon {
+  background: rgba(123, 160, 255, 0.08);
+  border: 1px solid rgba(123, 160, 255, 0.1);
 }
 
 .title {
   color: #7ba0ff;
-  text-shadow: 0 2px 4px rgba(69,115,223,0.2);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-.skillRow {
-  background: rgba(69,115,223,0.08);
-  border: 1px solid rgba(123,160,255,0.15);
+.description {
+  color: rgba(255, 255, 255, 0.8);
 }
 
-.skillRow:hover {
-  background: rgba(123,160,255,0.1);
-  transform: translateX(5px);
-  border-color: rgba(123,160,255,0.25);
+.skillItem {
+  background: rgba(123, 160, 255, 0.04);
+  border: 1px solid rgba(123, 160, 255, 0.06);
 }
 
-.skillRow:hover .icon {
-  transform: scale(1.1);
-  filter: drop-shadow(0 2px 8px rgba(123,160,255,0.3));
+.skillItem:hover {
+  background: rgba(123, 160, 255, 0.08);
+  border-color: rgba(123, 160, 255, 0.12);
+}
+
+.skillIcon {
+  background: rgba(28, 34, 47, 0.9);
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    inset 0 0 0 1px rgba(123, 160, 255, 0.08);
+}
+
+.skillItem:hover .skillIcon {
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.25),
+    inset 0 0 0 1px rgba(123, 160, 255, 0.12);
 }
 
 .skillName {
-  color: rgba(255,255,255,0.9);
-  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.skillDescription {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.uiuxCard {
+  background: linear-gradient(135deg, rgba(28, 34, 47, 0.95) 0%, rgba(32, 39, 56, 0.95) 100%);
+}
+
+.developmentCard {
+  background: linear-gradient(135deg, rgba(28, 34, 47, 0.95) 0%, rgba(31, 41, 59, 0.95) 100%);
+}
+
+.dataScienceCard {
+  background: linear-gradient(135deg, rgba(28, 34, 47, 0.95) 0%, rgba(33, 37, 54, 0.95) 100%);
 }
