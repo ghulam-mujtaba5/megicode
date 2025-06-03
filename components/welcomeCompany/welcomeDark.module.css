@@ -13,10 +13,14 @@
 }
 
 .softBuilt {
-  color: #4573df; /* Highlighted color */
+  background: linear-gradient(135deg, #4573df 0%, #2d4fa2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #4573df;
 }
 
-@media (max-width: 1024px) {
+@media(max-width: 1024px) {
   .text {
     color: #ffffff;
   }
