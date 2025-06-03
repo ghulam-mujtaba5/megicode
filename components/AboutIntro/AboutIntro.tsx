@@ -6,7 +6,9 @@ import darkStyles from './AboutIntroDark.module.css';
 import { useTheme } from '../../context/ThemeContext';
 import { motion } from 'framer-motion';
 
-const AboutIntro: React.FC = () => {
+interface AboutIntroProps {}
+
+const AboutIntro: React.FC<AboutIntroProps> = () => {
   const { theme } = useTheme();
   const themeStyles = theme === 'dark' ? darkStyles : lightStyles;
 
@@ -48,8 +50,7 @@ const AboutIntro: React.FC = () => {
                 boxShadow: '0 2px 12px #4573df22, inset 0 1px 1px #ffffff'
               }}>
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  {/* Mission icon SVG elements */}
-                  <circle cx="16" cy="16" r="15" fill="url(#missionGradient)" fillOpacity="0.08" />
+                  <circle cx="16" cy="16" r="15" fill="url(#missionGradient)" fillOpacity="0.08"/>
                   <circle cx="16" cy="16" r="15" stroke="url(#missionStroke)" strokeWidth="1.5">
                     <animate
                       attributeName="stroke-dasharray"
@@ -59,31 +60,39 @@ const AboutIntro: React.FC = () => {
                       repeatCount="1"
                     />
                   </circle>
-                  <circle 
-                    cx="16" 
-                    cy="16" 
-                    r="11" 
-                    stroke="#4573df" 
-                    strokeWidth="1.5" 
-                    strokeDasharray="3 3"
-                  >
-                    <animateTransform
-                      attributeName="transform"
-                      type="rotate"
-                      from="0 16 16"
-                      to="360 16 16"
-                      dur="20s"
-                      repeatCount="indefinite"
-                    />
-                  </circle>
-                  <circle cx="16" cy="16" r="7" stroke="#4573df" strokeWidth="1.5">
-                    <animate
-                      attributeName="stroke-opacity"
-                      values="1;0.6;1"
-                      dur="2s"
-                      repeatCount="indefinite"
-                    />
-                  </circle>
+                  
+                  <g>
+                    <circle cx="16" cy="16" r="11" stroke="#4573df" strokeWidth="1.5" strokeDasharray="3 3">
+                      <animate
+                        attributeName="r"
+                        values="11;9.5;11"
+                        dur="3s"
+                        repeatCount="indefinite"
+                      />
+                      <animate
+                        attributeName="stroke-opacity"
+                        values="0.4;0.6;0.4"
+                        dur="3s"
+                        repeatCount="indefinite"
+                      />
+                    </circle>
+                    
+                    <circle cx="16" cy="16" r="7" stroke="#4573df" strokeWidth="1.5">
+                      <animate
+                        attributeName="r"
+                        values="7;6;7"
+                        dur="2s"
+                        repeatCount="indefinite"
+                      />
+                      <animate
+                        attributeName="stroke-opacity"
+                        values="0.6;0.8;0.6"
+                        dur="2s"
+                        repeatCount="indefinite"
+                      />
+                    </circle>
+                  </g>
+
                   <circle cx="16" cy="16" r="3" fill="#4573df">
                     <animate 
                       attributeName="r" 
@@ -98,6 +107,7 @@ const AboutIntro: React.FC = () => {
                       repeatCount="indefinite"
                     />
                   </circle>
+
                   <g>
                     <animate
                       attributeName="opacity"
@@ -105,19 +115,20 @@ const AboutIntro: React.FC = () => {
                       dur="3s"
                       repeatCount="indefinite"
                     />
-                    <path d="M16 5V7" stroke="#4573df" strokeWidth="1.5" strokeLinecap="round" />
-                    <path d="M16 25V27" stroke="#4573df" strokeWidth="1.5" strokeLinecap="round" />
-                    <path d="M27 16H25" stroke="#4573df" strokeWidth="1.5" strokeLinecap="round" />
-                    <path d="M7 16H5" stroke="#4573df" strokeWidth="1.5" strokeLinecap="round" />
+                    <path d="M16 5V7" stroke="#4573df" strokeWidth="1.5" strokeLinecap="round"/>
+                    <path d="M16 25V27" stroke="#4573df" strokeWidth="1.5" strokeLinecap="round"/>
+                    <path d="M27 16H25" stroke="#4573df" strokeWidth="1.5" strokeLinecap="round"/>
+                    <path d="M7 16H5" stroke="#4573df" strokeWidth="1.5" strokeLinecap="round"/>
                   </g>
+                  
                   <defs>
                     <linearGradient id="missionGradient" x1="16" y1="1" x2="16" y2="31" gradientUnits="userSpaceOnUse">
-                      <stop stopColor="#4573df" />
-                      <stop offset="1" stopColor="#2d4fa2" />
+                      <stop stopColor="#4573df"/>
+                      <stop offset="1" stopColor="#2d4fa2"/>
                     </linearGradient>
                     <linearGradient id="missionStroke" x1="16" y1="1" x2="16" y2="31" gradientUnits="userSpaceOnUse">
-                      <stop stopColor="#4573df" />
-                      <stop offset="1" stopColor="#2d4fa2" />
+                      <stop stopColor="#4573df"/>
+                      <stop offset="1" stopColor="#2d4fa2"/>
                     </linearGradient>
                   </defs>
                 </svg>
@@ -192,20 +203,13 @@ const AboutIntro: React.FC = () => {
                       dur="2s"
                       repeatCount="indefinite"
                     />
-                    <path 
-                      d="M16 9V11M16 21V23M9 16H11M21 16H23" 
+                    <path d="M16 9V11M16 21V23M9 16H11M21 16H23" 
                       stroke="#6C8EE3" 
                       strokeWidth="1.5" 
                       strokeLinecap="round"
                     />
                   </g>
-                  <circle 
-                    cx="16" 
-                    cy="16" 
-                    r="5" 
-                    stroke="#4573df" 
-                    strokeWidth="1.5"
-                  >
+                  <circle cx="16" cy="16" r="5" stroke="#4573df" strokeWidth="1.5">
                     <animateTransform
                       attributeName="transform"
                       type="rotate"
@@ -231,12 +235,12 @@ const AboutIntro: React.FC = () => {
                   </circle>
                   <defs>
                     <linearGradient id="visionGradient" x1="16" y1="1" x2="16" y2="31" gradientUnits="userSpaceOnUse">
-                      <stop stopColor="#4573df" />
-                      <stop offset="1" stopColor="#2d4fa2" />
+                      <stop stopColor="#4573df"/>
+                      <stop offset="1" stopColor="#2d4fa2"/>
                     </linearGradient>
                     <linearGradient id="visionStroke" x1="4" y1="16" x2="28" y2="16" gradientUnits="userSpaceOnUse">
-                      <stop stopColor="#6C8EE3" />
-                      <stop offset="1" stopColor="#4573df" />
+                      <stop stopColor="#6C8EE3"/>
+                      <stop offset="1" stopColor="#4573df"/>
                     </linearGradient>
                   </defs>
                 </svg>

@@ -10,20 +10,33 @@ import NavBarMobile from "../../components/NavBar_Mobile/NavBar-mobile";
 import ThemeToggleIcon from "../../components/Icon/sbicon";
 import AboutHero from "../../components/AboutHero/AboutHero";
 
-// Dynamic imports for non-critical components
-const AboutIntro = dynamic(() => import("../../components/AboutIntro/AboutIntro"), {
+// Component interfaces
+interface FooterProps {
+  linkedinUrl: string;
+  instagramUrl: string;
+  githubUrl: string;
+  copyrightText: string;
+}
+
+// Dynamic imports for non-critical components with proper typing
+const AboutIntro = dynamic<{}>(
+  () => import("../../components/AboutIntro/AboutIntro").then(mod => mod.default), {
   loading: () => <Loading />
 });
-const CoreValues = dynamic(() => import("../../components/CoreValues/CoreValues"), {
+const CoreValues = dynamic<{}>(
+  () => import("../../components/CoreValues/CoreValues").then(mod => mod.default), {
   loading: () => <Loading />
 });
-const AboutFounder = dynamic(() => import("../../components/AboutFounder/AboutFounder"), {
+const AboutFounder = dynamic<{}>(
+  () => import("../../components/AboutFounder/AboutFounder").then(mod => mod.default), {
   loading: () => <Loading />
 });
-const AboutStats = dynamic(() => import("../../components/AboutStats/AboutStats"), {
+const AboutStats = dynamic<{}>(
+  () => import("../../components/AboutStats/AboutStats").then(mod => mod.default), {
   loading: () => <Loading />
 });
-const Footer = dynamic(() => import("../../components/Footer/Footer"), {
+const Footer = dynamic<FooterProps>(
+  () => import("../../components/Footer/Footer").then(mod => mod.default), {
   loading: () => <Loading />
 });
 
