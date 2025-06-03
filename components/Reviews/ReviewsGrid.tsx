@@ -60,22 +60,24 @@ const ReviewsGrid = () => {
   return (
     <section className={`${commonStyles.gridSection} ${themeStyles.gridSection}`}>
       <div className={commonStyles.reviewsContainer}>
-        <motion.h2 
-          className={`${commonStyles.sectionTitle} ${themeStyles.sectionTitle}`}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          Client Testimonials
-        </motion.h2>
-        <motion.p 
-          className={`${commonStyles.sectionSubtitle} ${themeStyles.sectionSubtitle}`}
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-        >
-          Hear what our clients say about their experience working with Megicode
-        </motion.p>
+        <div style={{ width: '100%', textAlign: 'center' }}>
+          <motion.h2 
+            className={`${commonStyles.sectionTitle} ${themeStyles.sectionTitle}`}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            Client Testimonials
+          </motion.h2>
+          <motion.p 
+            className={`${commonStyles.sectionSubtitle} ${themeStyles.sectionSubtitle}`}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            Hear what our clients say about their experience working with Megicode
+          </motion.p>
+        </div>
         
         <motion.div 
           className={commonStyles.grid}

@@ -42,7 +42,11 @@
 }
 
 .sectionTitle {
-  color: #2d4fa2;
+  color: #111827;
+  background: linear-gradient(135deg, #1a365d 0%, #2563eb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .sectionTitle::after {
@@ -50,5 +54,5 @@
 }
 
 .sectionSubtitle {
-  color: #4a5568;
+  color: #4B5563;
 }

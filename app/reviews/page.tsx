@@ -7,6 +7,7 @@ import Footer from "../../components/Footer/Footer";
 import ThemeToggleIcon from "../../components/Icon/sbicon";
 import ReviewsHero from "../../components/Reviews/ReviewsHero";
 import ReviewsGrid from "../../components/Reviews/ReviewsGrid";
+import styles from './reviews.module.css';
 
 export default function ReviewsPage() {
   const { theme } = useTheme();
@@ -25,36 +26,63 @@ export default function ReviewsPage() {
   const githubUrl = "https://github.com/megicode";
   const copyrightText = "Copyright 2025 Megicode. All Rights Reserved.";
 
+  // CSS variable for accent color based on theme
+  const accentColorVar = {
+    '--accent-color': theme === 'dark' ? '100, 150, 255' : '0, 100, 255'
+  } as React.CSSProperties;
+
   return (
-    <div style={{ backgroundColor: theme === "dark" ? "#1d2127" : "#ffffff", minHeight: "100vh", overflowX: "hidden", color: theme === "dark" ? "#ffffff" : "#1d2127" }}>
+    <div 
+      className={styles.pageContainer}
+      style={{ 
+        backgroundColor: theme === "dark" ? "#1d2127" : "#ffffff",
+        color: theme === "dark" ? "#ffffff" : "#1d2127",
+        ...accentColorVar
+      }}
+    >
       {/* Theme Toggle Icon */}
-      <div id="theme-toggle" role="button" tabIndex={0}>
+      <div id="theme-toggle" className={styles.themeToggle} role="button" tabIndex={0}>
         <ThemeToggleIcon />
       </div>
 
-      {/* Desktop NavBar */}
-      <nav id="desktop-navbar" aria-label="Main Navigation">
-        <NavBarDesktop />
-      </nav>
+      {/* Navigation */}
+      <header className={`${styles.header} ${theme === 'dark' ? styles.headerDark : styles.headerLight}`}>
+        <div className={styles.desktopNav}>
+          <NavBarDesktop />
+        </div>
+        <div className={styles.mobileNav}>
+          <NavBarMobile sections={sections} />
+        </div>
+      </header>
 
-      {/* Mobile NavBar */}
-      <nav id="mobile-navbar" aria-label="Mobile Navigation">
-        <NavBarMobile sections={sections} />
-      </nav>
+      {/* Main Content */}
+      <main className={styles.main}>
+        {/* Hero Section with Background Decoration */}
+        <section className={styles.heroSection}>
+          <div className={styles.backgroundDecoration} />
+          <div className={styles.contentWrapper}>
+            <ReviewsHero />
+          </div>
+        </section>
 
-      {/* Reviews Page Content */}
-      <main>
-        <ReviewsHero />
-        <ReviewsGrid />
+        {/* Reviews Grid Section */}
+        <section className={styles.reviewsSection}>
+          <div className={styles.backgroundDecoration} />
+          <div className={styles.contentWrapper}>
+            <ReviewsGrid />
+          </div>
+        </section>
       </main>
 
       {/* Footer */}
-      <Footer
-        linkedinUrl={linkedinUrl}
-        instagramUrl={instagramUrl}
-        githubUrl={githubUrl}
-        copyrightText={copyrightText}
-      />
+      <footer className={styles.footer}>
+        <Footer
+          linkedinUrl={linkedinUrl}
+          instagramUrl={instagramUrl}
+          githubUrl={githubUrl}
+          copyrightText={copyrightText}
+        />
+      </footer>
     </div>
   );
 }
