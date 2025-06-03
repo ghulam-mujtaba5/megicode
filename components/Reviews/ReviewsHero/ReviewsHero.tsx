@@ -40,12 +40,11 @@ const ReviewsHero: React.FC = () => {
             animate="visible"
             variants={containerVariants}
         >
-            <div className={commonStyles.heroContent}>
-                <motion.h1 
+            <div className={commonStyles.heroContent}>                <motion.h1 
                     className={`${commonStyles.title} ${themeStyles.title}`}
                     variants={itemVariants}
                 >
-                    Client Reviews & Testimonials
+                    Client <span className={themeStyles.highlight}>Reviews</span> & Testimonials
                 </motion.h1>
                 <motion.p 
                     className={`${commonStyles.subtitle} ${themeStyles.subtitle}`}

@@ -29,11 +29,21 @@ export default function ReviewsPage() {
     ];
 
     return (
-        <div className={`min-h-screen ${theme}`}>            <div className="relative z-50">
-                <NavBarDesktop />
-                <NavBarMobile sections={sections} />
-                <ThemeToggleIcon />
-            </div>
+      <div style={{ backgroundColor: theme === "dark" ? "#1d2127" : "#ffffff", minHeight: "100vh", overflowX: "hidden" }}>
+      {/* Theme Toggle Icon */}
+      <div id="theme-toggle" role="button" tabIndex={0}>
+        <ThemeToggleIcon />
+      </div>
+
+      {/* Desktop NavBar */}
+      <nav id="desktop-navbar" aria-label="Main Navigation">
+        <NavBarDesktop />
+      </nav>
+
+      {/* Mobile NavBar */}
+      <nav id="mobile-navbar" aria-label="Mobile Navigation">
+        <NavBarMobile sections={sections} />
+      </nav>   
 
             <main className="relative">
                 <Suspense fallback={<Loading />}>

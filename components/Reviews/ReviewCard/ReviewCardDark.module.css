@@ -1,32 +1,42 @@
 .card {
-    background-color: #1e293b;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(145deg, rgba(29,33,39,0.95) 0%, rgba(25,29,35,0.98) 100%);
+    box-shadow: 0 4px 20px -2px rgba(0,0,0,0.3);
+    border: 1px solid rgba(69,115,223,0.1);
 }
 
 .card::before {
-    background: linear-gradient(90deg, #e2e8f0 0%, #f8fafc 100%);
+    background: linear-gradient(90deg, #4573df 0%, #7ba0ff 100%);
 }
 
 .star {
-    color: #facc15;
+    color: #7ba0ff;
 }
 
 .review {
-    color: #e2e8f0;
+    color: #e6e9f0;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
 }
 
 .reviewer {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(69,115,223,0.15);
 }
 
 .name {
-    color: #f8fafc;
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
 }
 
 .company {
-    color: #94a3b8;
+    color: #7ba0ff;
 }
 
 .imageContainer {
-    border: 2px solid rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(69,115,223,0.3);
+    box-shadow: 0 2px 8px -2px rgba(0,0,0,0.3);
+}
+
+.card:hover {
+    box-shadow: 0 8px 30px -4px rgba(0,0,0,0.4);
+    border-color: rgba(69,115,223,0.2);
+    background: linear-gradient(145deg, rgba(31,35,41,0.95) 0%, rgba(27,31,37,0.98) 100%);
 }
