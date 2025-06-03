@@ -1,0 +1,104 @@
+.skillFrame {
+  width: 100%;
+  min-height: 100vh;
+  padding: 4rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.skillCard {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 20px;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skillsTitle {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.categoryIcon {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.skillRow {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.skillName {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.animateIn {
+  animation: slideIn 0.6s ease-out forwards;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .skillFrame {
+    padding: 3rem 1rem;
+  }
+
+  .skillsTitle {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .skillCard {
+    padding: 1.5rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .skillRow {
+    padding: 0.75rem;
+    margin: 0.75rem 0;
+  }
+}

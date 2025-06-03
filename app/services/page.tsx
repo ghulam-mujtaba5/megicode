@@ -10,10 +10,10 @@ import ThemeToggleIcon from "../../components/Icon/sbicon";
 import Loading from "../loading";
 
 // Dynamic imports for optimized loading
-const ServicesHero = dynamic(() => import("../../components/Services/ServicesHero"), {
+const ServicesHero = dynamic(() => import("../../components/Services/Hero/ServicesHero"), {
   loading: () => <Loading />
 });
-const ServiceCard = dynamic(() => import("../../components/Services/ServiceCard"), {
+const ServiceCard = dynamic(() => import("../../components/Services/Card/ServiceCard"), {
   loading: () => <Loading />
 });
 

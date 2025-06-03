@@ -1,0 +1,56 @@
+.card {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(69,115,223,0.15);
+  box-shadow: 0 8px 24px rgba(69,115,223,0.1);
+}
+
+.card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(69,115,223,0.15);
+  border-color: rgba(69,115,223,0.25);
+}
+
+.iconWrapper {
+  background: linear-gradient(135deg, rgba(69,115,223,0.12) 0%, rgba(69,115,223,0.08) 100%);
+  border: 1px solid rgba(69,115,223,0.1);
+}
+
+.title {
+  background: linear-gradient(135deg, #2d4fa2 0%, #4573df 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.description {
+  color: #4a5568;
+}
+
+.featuresContainer, .techsContainer {
+  background: rgba(255,255,255,0.5);
+}
+
+.feature {
+  color: #4a5568;
+}
+
+.feature:hover {
+  background: rgba(69,115,223,0.08);
+  transform: translateX(5px);
+}
+
+.checkIcon {
+  color: #4573df;
+}
+
+.techBadge {
+  background: linear-gradient(135deg, rgba(69,115,223,0.1) 0%, rgba(69,115,223,0.15) 100%);
+  color: #4573df;
+  border: 1px solid rgba(69,115,223,0.1);
+}
+
+.techBadge:hover {
+  transform: translateY(-2px);
+  border-color: rgba(69,115,223,0.2);
+  box-shadow: 0 4px 12px rgba(69,115,223,0.15);
+}
