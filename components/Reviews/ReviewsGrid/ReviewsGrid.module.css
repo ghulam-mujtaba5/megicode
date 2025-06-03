@@ -1,6 +1,6 @@
 .container {
     padding: 1.5rem;
-    max-width: 90rem;
+    max-width: 72rem;
     margin-left: auto;
     margin-right: auto;
     overflow: hidden;
@@ -8,9 +8,9 @@
 
 .grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    padding: 0.5rem;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 2rem;
+    padding: 1rem;
 }
 
 /* Small screens */

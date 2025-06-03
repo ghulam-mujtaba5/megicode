@@ -6,37 +6,19 @@ const reviews = [
     {
         name: "John Smith",
         company: "Tech Innovations Inc.",
-        review: "Working with Megicode was a game-changer for our business. Their expertise in AI and machine learning helped us develop a cutting-edge solution that put us ahead of our competition.",
+        review: "Working with Megicode was a game-changer for our business. Their expertise in AI and machine learning helped us develop a cutting-edge solution that put us ahead of our competition. The team's innovative approach and technical excellence exceeded our expectations.",
         rating: 5
     },
     {
         name: "Sarah Johnson",
         company: "Digital Solutions Co.",
-        review: "The web application Megicode developed for us exceeded our expectations. Their attention to detail and commitment to quality is outstanding.",
+        review: "The web application Megicode developed for us exceeded our expectations. Their attention to detail and commitment to quality is outstanding. From initial concept to final deployment, every step was handled with utmost professionalism.",
         rating: 5
     },
     {
         name: "Michael Chen",
         company: "DataFlow Systems",
-        review: "Megicode's data science solutions helped us make sense of our complex data sets. Their team's technical expertise and professional approach made the entire process smooth.",
-        rating: 5
-    },
-    {
-        name: "Emma Davis",
-        company: "Mobile First Ltd.",
-        review: "The mobile app development team at Megicode delivered a fantastic product. Their understanding of user experience and technical requirements was impressive.",
-        rating: 5
-    },
-    {
-        name: "Robert Wilson",
-        company: "Enterprise Solutions",
-        review: "From concept to deployment, Megicode demonstrated excellence in every phase of our project. Their team's communication and technical skills are top-notch.",
-        rating: 5
-    },
-    {
-        name: "Lisa Martinez",
-        company: "AI Innovations",
-        review: "Megicode's AI solutions helped us automate critical processes. Their expertise in machine learning and data analysis is remarkable.",
+        review: "Megicode's data science solutions helped us make sense of our complex data sets. Their team's technical expertise and professional approach made the entire process smooth. The insights we gained have transformed our decision-making process.",
         rating: 5
     }
 ];
