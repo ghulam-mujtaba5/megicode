@@ -96,24 +96,24 @@ export default function AboutPage() {
 
         {/* Non-Critical Components - Load Dynamically */}
         <Suspense fallback={<Loading />}>
-          {/* Stats Section - Establish credibility early */}
-          <section aria-label="Company Statistics">
-            <AboutStats />
-          </section>
-
-          {/* Introduction Section */}
+          {/* Introduction Section - Start with who we are */}
           <section aria-label="About Company">
             <AboutIntro />
+          </section>
+
+          {/* Founder Section - Move up for personal connection */}
+          <section aria-label="About Founder">
+            <AboutFounder />
+          </section>
+
+          {/* Stats Section - Show achievements after intro/founder */}
+          <section aria-label="Company Statistics">
+            <AboutStats />
           </section>
 
           {/* Core Values Section */}
           <section aria-label="Our Core Values">
             <CoreValues />
-          </section>
-
-          {/* Founder Section */}
-          <section aria-label="About Founder">
-            <AboutFounder />
           </section>
         </Suspense>
       </main>
