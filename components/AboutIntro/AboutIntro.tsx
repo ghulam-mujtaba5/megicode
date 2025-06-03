@@ -35,7 +35,10 @@ const AboutIntro = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h3 className={themeStyles['mission h3']}>Our Mission</h3>
+            <div style={{display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem'}}>
+              <img src="/Ai icon.svg" alt="Mission Icon" width={40} height={40} style={{flexShrink: 0}} />
+              <h3 className={themeStyles['mission h3']}>Our Mission</h3>
+            </div>
             <p className={themeStyles['mission p']}>
               To deliver impactful AI-driven software and digital experiences that help organizations 
               innovate, optimize, and lead in their industries.
@@ -49,7 +52,10 @@ const AboutIntro = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h3 className={themeStyles['vision h3']}>Our Vision</h3>
+            <div style={{display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem'}}>
+              <img src="/data visualization icon.svg" alt="Vision Icon" width={40} height={40} style={{flexShrink: 0}} />
+              <h3 className={themeStyles['vision h3']}>Our Vision</h3>
+            </div>
             <p className={themeStyles['vision p']}>
               To become a global leader in AI and intelligent software systems, enabling businesses to 
               unlock the full potential of data and automation.
