@@ -14,33 +14,30 @@ const ServicesFrame = () => {
 
   const skillsData = [
     {
-      title: "UI & UX Designing",
-      titleicon: "Ui&Ux-icon.svg",
+      title: "UI & UX Designing",      titleicon: "/Ui&Ux-icon.svg",
       skills: [
-        { name: "Desktop Application", icon: "Desktop-App-icon.svg", darkIcon: "Desktop App Dark.svg" },
-        { name: "Web Application", icon: "web app icon.svg" },
-        { name: "Mobile App", icon: "mobile app icon.svg", darkIcon: "Mobile App Dark.svg" },
+        { name: "Desktop Application", icon: "/Desktop-App-icon.svg", darkIcon: "/Desktop App Dark.svg" },
+        { name: "Web Application", icon: "/web app icon.svg" },
+        { name: "Mobile App", icon: "/mobile app icon.svg", darkIcon: "/Mobile App Dark.svg" },
       ],
       cardClass: themeStyles.uiuxCard
     },
     {
-      title: "Development",
-      titleicon: "devlopment-icon.svg",
+      title: "Development",      titleicon: "/devlopment-icon.svg",
       skills: [
-        { name: "Desktop Application", icon: "Desktop-App-icon.svg", darkIcon: "Desktop App Dark.svg" },
-        { name: "Web Application", icon: "web app icon.svg" },
-        { name: "Mobile App", icon: "mobile app icon.svg", darkIcon: "Mobile App Dark.svg" },
+        { name: "Desktop Application", icon: "/Desktop-App-icon.svg", darkIcon: "/Desktop App Dark.svg" },
+        { name: "Web Application", icon: "/web app icon.svg" },
+        { name: "Mobile App", icon: "/mobile app icon.svg", darkIcon: "/Mobile App Dark.svg" },
       ],
       cardClass: themeStyles.developmentCard
     },
     {
-      title: "Data Science & AI",
-      titleicon: "ds&ai-icon.svg",
+      title: "Data Science & AI",      titleicon: "/ds&ai-icon.svg",
       skills: [
-        { name: "Data Scraping", icon: "data scrapping icon.svg" },
-        { name: "Data Visualization", icon: "data visualization icon.svg" },
-        { name: "Big Data Analytics", icon: "Big Data Analytics.svg" },
-        { name: "AI Solution Development", icon: "Ai icon.svg" }
+        { name: "Data Scraping", icon: "/data scrapping icon.svg" },
+        { name: "Data Visualization", icon: "/data visualization icon.svg" },
+        { name: "Big Data Analytics", icon: "/Big Data Analytics.svg" },
+        { name: "AI Solution Development", icon: "/Ai icon.svg" }
       ],
       cardClass: themeStyles.dataScienceCard
     }
