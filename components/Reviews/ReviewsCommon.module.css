@@ -1,0 +1,155 @@
+.reviewsContainer {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.gridSection {
+  position: relative;
+  padding: 4rem 0;
+  overflow: hidden;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.gridItem {
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.card {
+  padding: 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.logoContainer {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.rating {
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.star {
+  font-size: 18px;
+}
+
+.content {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+  flex-grow: 1;
+  position: relative;
+  z-index: 1;
+  font-style: italic;
+}
+
+.reviewFooter {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+}
+
+.authorInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.authorName {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.authorRole {
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.sectionTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+}
+
+.sectionSubtitle {
+  text-align: center;
+  font-size: 1.1rem;
+  max-width: 700px;
+  margin: 2rem auto;
+  line-height: 1.6;
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .reviewsContainer {
+    padding: 1rem;
+  }
+
+  .gridSection {
+    padding: 2rem 0;
+  }
+}
