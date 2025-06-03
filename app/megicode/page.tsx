@@ -7,7 +7,7 @@ import NavBarDesktop from "../../components/NavBar_Desktop_Company/nav-bar-Compa
 import NavBarMobile from "../../components/NavBar_Mobile/NavBar-mobile";
 import WelcomeFrame from "../../components/welcomeCompany/welcome";
 import AboutMeSection from "../../components/AboutMeCompany/AboutMeSectionLight";
-import ServicesFrame from "../../components/Services/Frame/ServicesFrame";
+import ServicesFrame from "../../components/About-page-Services/ServicesFrame";
 import ContactSection from "../../components/Contact/ConatctUs";
 import Footer from "../../components/Footer/Footer";
 import ThemeToggleIcon from "../../components/Icon/sbicon";

@@ -27,42 +27,39 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   const themeStyles = theme === 'dark' ? darkStyles : lightStyles;
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 15 },
     visible: { 
       opacity: 1, 
       y: 0,
       transition: {
-        duration: 0.6,
+        duration: 0.5,
         delay,
         ease: "easeOut"
       }
     }
   };
 
-  const featureVariants = {
-    hidden: { opacity: 0, x: -10 },
-    visible: (i: number) => ({
+  const contentVariants = {
+    hidden: { opacity: 0 },
+    visible: { 
       opacity: 1,
-      x: 0,
       transition: {
-        delay: delay + 0.1 + i * 0.1,
-        duration: 0.4,
-        ease: "easeOut"
+        staggerChildren: 0.1,
+        delayChildren: delay + 0.2
       }
-    })
+    }
   };
 
-  const techVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: (i: number) => ({
-      opacity: 1,
-      scale: 1,
+  const itemVariants = {
+    hidden: { opacity: 0, y: 5 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
       transition: {
-        delay: delay + 0.2 + i * 0.05,
         duration: 0.3,
         ease: "easeOut"
       }
-    })
+    }
   };
 
   return (
@@ -71,70 +68,67 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       variants={cardVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true }}
+      viewport={{ once: true, margin: "-50px" }}
     >
-      <motion.div 
-        className={`${commonStyles.iconWrapper} ${themeStyles.iconWrapper}`}
-        whileHover={{ scale: 1.1 }}
-        transition={{ type: "spring", stiffness: 300, damping: 10 }}
-      >
-        <img src={icon} alt={`${title} icon`} className={commonStyles.icon} />
-      </motion.div>
+      <div className={commonStyles.cardContent}>
+        <motion.div 
+          className={`${commonStyles.iconWrapper} ${themeStyles.iconWrapper}`}
+          whileHover={{ scale: 1.05 }}
+          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+        >
+          <img src={icon} alt={`${title} icon`} className={commonStyles.icon} />
+        </motion.div>
 
-      <h3 className={`${commonStyles.title} ${themeStyles.title}`}>{title}</h3>
-      <p className={`${commonStyles.description} ${themeStyles.description}`}>{description}</p>
-      
-      <motion.div 
-        className={`${commonStyles.featuresContainer} ${themeStyles.featuresContainer}`}
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ delay: delay + 0.1 }}
-      >
-        <h4 className={`${commonStyles.title} ${themeStyles.title}`}>Key Features</h4>
-        <ul className={commonStyles.featuresList}>
-          {features.map((feature, index) => (
-            <motion.li 
-              key={index} 
-              className={`${commonStyles.feature} ${themeStyles.feature}`}
-              custom={index}
-              variants={featureVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              <svg className={`${commonStyles.checkIcon} ${themeStyles.checkIcon}`} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              {feature}
-            </motion.li>
-          ))}
-        </ul>
-      </motion.div>
+        <motion.div variants={contentVariants} initial="hidden" animate="visible">
+          <motion.h3 
+            className={`${commonStyles.title} ${themeStyles.title}`}
+            variants={itemVariants}
+          >
+            {title}
+          </motion.h3>
+          
+          <motion.p 
+            className={`${commonStyles.description} ${themeStyles.description}`}
+            variants={itemVariants}
+          >
+            {description}
+          </motion.p>
+          
+          <motion.div 
+            className={`${commonStyles.featuresContainer} ${themeStyles.featuresContainer}`}
+            variants={contentVariants}
+          >
+            <motion.div className={commonStyles.featuresList}>
+              {features.map((feature, index) => (
+                <motion.div 
+                  key={index}
+                  className={`${commonStyles.feature} ${themeStyles.feature}`}
+                  variants={itemVariants}
+                >
+                  <span className={`${commonStyles.featureDot} ${themeStyles.featureDot}`} />
+                  {feature}
+                </motion.div>
+              ))}
+            </motion.div>
 
-      <motion.div 
-        className={`${commonStyles.techsContainer} ${themeStyles.techsContainer}`}
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ delay: delay + 0.2 }}
-      >
-        <h4 className={`${commonStyles.title} ${themeStyles.title}`}>Technologies</h4>
-        <div className={commonStyles.techsList}>
-          {techs.map((tech, index) => (
-            <motion.span 
-              key={index} 
-              className={`${commonStyles.techBadge} ${themeStyles.techBadge}`}
-              custom={index}
-              variants={techVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.1, y: -2 }}
+            <motion.div 
+              className={commonStyles.techsList}
+              variants={contentVariants}
             >
-              {tech}
-            </motion.span>
-          ))}
-        </div>
-      </motion.div>
+              {techs.map((tech, index) => (
+                <motion.span
+                  key={index}
+                  className={`${commonStyles.techBadge} ${themeStyles.techBadge}`}
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.05 }}
+                >
+                  {tech}
+                </motion.span>
+              ))}
+            </motion.div>
+          </motion.div>
+        </motion.div>
+      </div>
     </motion.div>
   );
 };
