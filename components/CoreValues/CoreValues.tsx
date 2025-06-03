@@ -36,7 +36,7 @@ const ValueCard: React.FC<ValueCardProps> = ({ title, description, Icon, delay }
     >
       <div className={commonStyles.iconWrapper}>
         <IconWrapper size={72}>
-          <Icon size={32} color={theme === 'dark' ? '#6b8ee6' : '#4573df'} />
+          <Icon size={32} color={theme === 'dark' ? '#7ba0ff' : '#4573df'} />
         </IconWrapper>
       </div>
       <h3 className={`${commonStyles.valueTitle} ${themeStyles.valueTitle}`}>{title}</h3>

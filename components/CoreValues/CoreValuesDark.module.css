@@ -25,12 +25,15 @@
 }
 
 .valueCard {
-  background: linear-gradient(145deg, rgba(36,44,62,0.95) 0%, rgba(28,35,50,0.98) 100%);
-  box-shadow: 0 4px 16px #1116;
+  background: linear-gradient(145deg, rgba(45,55,75,0.95) 0%, rgba(32,40,58,0.98) 100%);
+  box-shadow: 0 8px 24px rgba(17, 17, 17, 0.2);
+  border: 1px solid rgba(69,115,223,0.1);
 }
 
 .valueCard:hover {
-  background: linear-gradient(145deg, rgba(36,44,62,0.98) 0%, rgba(28,35,50,1) 100%);
+  background: linear-gradient(145deg, rgba(50,60,85,0.98) 0%, rgba(35,45,65,1) 100%);
+  border: 1px solid rgba(69,115,223,0.2);
+  box-shadow: 0 12px 32px rgba(69,115,223,0.15);
 }
 
 .valueTitle {
