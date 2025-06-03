@@ -1,0 +1,164 @@
+.card {
+    background-color: var(--bg-white);
+    border-radius: 1rem;
+    padding: 1.25rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(to right, var(--text-gradient-start), var(--text-gradient-end));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-0.35rem);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+.rating {
+    display: flex;
+    gap: 0.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.star {
+    color: #facc15;
+    font-size: 1.125rem;
+}
+
+.review {
+    color: var(--text-gray-600);
+    margin-bottom: 1.25rem;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    flex-grow: 1;
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+}
+
+.reviewer {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color, rgba(0, 0, 0, 0.1));
+}
+
+.imageContainer {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 9999px;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 2px solid var(--border-color, rgba(0, 0, 0, 0.1));
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+}
+
+.name {
+    font-weight: 600;
+    color: var(--text-gray-900);
+    font-size: 0.9375rem;
+}
+
+.company {
+    font-size: 0.8125rem;
+    color: var(--text-gray-500);
+}
+
+/* Tablet and up */
+@media (min-width: 640px) {
+    .card {
+        padding: 1.5rem;
+    }
+
+    .star {
+        font-size: 1.25rem;
+    }
+
+    .review {
+        font-size: 1rem;
+        -webkit-line-clamp: 5;
+    }
+
+    .imageContainer {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    .name {
+        font-size: 1rem;
+    }
+
+    .company {
+        font-size: 0.875rem;
+    }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+    .card {
+        padding: 1.75rem;
+    }
+
+    .review {
+        font-size: 1.125rem;
+    }
+}
+
+:global(.dark) .card {
+    background-color: var(--bg-gray-800);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+}
+
+:global(.dark) .review {
+    color: var(--text-gray-300);
+}
+
+:global(.dark) .name {
+    color: var(--text-white);
+}
+
+:global(.dark) .company {
+    color: var(--text-gray-400);
+}
+
+:global(.dark) .reviewer {
+    border-top-color: var(--border-color, rgba(255, 255, 255, 0.1));
+}
+
+:global(.dark) .imageContainer {
+    border-color: var(--border-color, rgba(255, 255, 255, 0.1));
+}
