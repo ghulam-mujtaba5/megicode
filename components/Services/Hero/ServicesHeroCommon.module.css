@@ -1,59 +1,73 @@
 .heroSection {
-  padding: 6rem 2rem;
   position: relative;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
   overflow: hidden;
 }
 
-.heroSection::before {
-  content: '';
+.gradientBg {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  z-index: 0;
   pointer-events: none;
 }
 
 .container {
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  text-align: center;
+  padding: 2rem;
   position: relative;
   z-index: 1;
 }
 
 .content {
-  margin-bottom: 3rem;
-  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .title {
-  font-size: 3.5rem;
-  font-weight: 800;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
   line-height: 1.2;
   margin-bottom: 1.5rem;
   letter-spacing: -0.02em;
 }
 
 .highlight {
-  position: relative;
   display: inline-block;
+  position: relative;
+  padding: 0 0.5rem;
 }
 
 .subtitle {
-  font-size: 1.25rem;
+  font-size: clamp(1rem, 2vw, 1.25rem);
   line-height: 1.6;
-  max-width: 800px;
+  max-width: 700px;
   margin: 0 auto;
-  position: relative;
+  font-weight: 400;
 }
 
 @media (max-width: 768px) {
   .heroSection {
-    padding: 4rem 1rem;
+    min-height: 70vh;
+    padding: 4rem 0;
+  }
+
+  .container {
+    padding: 1rem;
   }
 
   .title {
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 4vw, 3rem);
+  }
+
+  .subtitle {
+    font-size: 1rem;
   }
 }

@@ -10,14 +10,26 @@ const ServicesHero = () => {
   const { theme } = useTheme();
   const themeStyles = theme === 'dark' ? darkStyles : lightStyles;
   
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.1
+      }
+    }
+  };
+
   const titleVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 30 },
     visible: { 
       opacity: 1, 
       y: 0,
       transition: {
-        duration: 0.8,
-        ease: "easeOut"
+        type: "spring",
+        stiffness: 100,
+        damping: 20
       }
     }
   };
@@ -28,8 +40,21 @@ const ServicesHero = () => {
       opacity: 1, 
       scale: 1,
       transition: {
-        duration: 0.6,
-        delay: 0.3,
+        type: "spring",
+        stiffness: 200,
+        damping: 20,
+        delay: 0.3
+      }
+    }
+  };
+
+  const gradientVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 1,
         ease: "easeOut"
       }
     }
@@ -37,14 +62,24 @@ const ServicesHero = () => {
   
   return (
     <section className={`${commonStyles.heroSection} ${themeStyles.heroSection}`}>
+      <motion.div 
+        className={`${commonStyles.gradientBg} ${themeStyles.gradientBg}`}
+        variants={gradientVariants}
+        initial="hidden"
+        animate="visible"
+      />
+      
       <div className={commonStyles.container}>
         <motion.div 
           className={commonStyles.content}
+          variants={containerVariants}
           initial="hidden"
           animate="visible"
-          variants={titleVariants}
         >
-          <motion.h1 className={`${commonStyles.title} ${themeStyles.title}`}>
+          <motion.h1 
+            className={`${commonStyles.title} ${themeStyles.title}`}
+            variants={titleVariants}
+          >
             Transformative Solutions for the{' '}
             <motion.span 
               className={`${commonStyles.highlight} ${themeStyles.highlight}`}
@@ -53,11 +88,15 @@ const ServicesHero = () => {
               Digital Age
             </motion.span>
           </motion.h1>
-          <p className={`${commonStyles.subtitle} ${themeStyles.subtitle}`}>
+          
+          <motion.p 
+            className={`${commonStyles.subtitle} ${themeStyles.subtitle}`}
+            variants={titleVariants}
+          >
             Empowering businesses with cutting-edge AI and advanced technologies,{' '}
             crafting innovative solutions that drive exceptional growth and seamless{' '}
             digital transformation.
-          </p>
+          </motion.p>
         </motion.div>
       </div>
     </section>
