@@ -1,0 +1,80 @@
+.heroContainer {
+    position: relative;
+    width: 100%;
+    min-height: 35vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    overflow: hidden;
+}
+
+.heroContent {
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    padding: 1rem;
+    z-index: 1;
+}
+
+.title {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    padding: 0 0.5rem;
+}
+
+.subtitle {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 0.5rem;
+}
+
+@media (min-width: 640px) {
+    .heroContainer {
+        min-height: 40vh;
+        padding: 3rem 1.5rem;
+    }
+
+    .heroContent {
+        max-width: 80%;
+    }
+
+    .title {
+        font-size: 2.25rem;
+        line-height: 2.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .subtitle {
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .heroContainer {
+        min-height: 45vh;
+        padding: 4rem 2rem;
+    }
+
+    .heroContent {
+        max-width: 56rem;
+    }
+
+    .title {
+        font-size: 3rem;
+        line-height: 1.2;
+        margin-bottom: 2rem;
+    }
+
+    .subtitle {
+        font-size: 1.25rem;
+        max-width: 42rem;
+    }
+}
