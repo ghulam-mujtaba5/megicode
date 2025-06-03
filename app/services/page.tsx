@@ -158,18 +158,16 @@ export default function ServicesPage() {
       </nav>      {/* Hero Section */}
       <Suspense fallback={<Loading />}>
         <ServicesHero />
-      </Suspense>
-
-      {/* Services Grid */}
+      </Suspense>      {/* Services Grid */}
       <section 
         className="services-grid"
         style={{
-          padding: "4rem 2rem",
+          padding: "2rem 1.5rem",
           maxWidth: "1200px",
           margin: "0 auto",
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-          gap: "2rem",
+          gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+          gap: "1.5rem",
           position: "relative",
         }}
       >
