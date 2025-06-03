@@ -37,22 +37,19 @@ const AboutIntro: React.FC = () => {
             transition={{ duration: 0.6 }}
           >
             <div style={{display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem'}}>
-              <span 
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: 52,
-                  height: 52,
-                  background: 'linear-gradient(135deg, #eaf1ff 0%, #f5f9ff 100%)',
-                  borderRadius: 14,
-                  boxShadow: '0 2px 12px #4573df22, inset 0 1px 1px #ffffff'
-                }}
-              >
-                {/* Mission Icon */}
+              <span style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: 52,
+                height: 52,
+                background: 'linear-gradient(135deg, #eaf1ff 0%, #f5f9ff 100%)',
+                borderRadius: 14,
+                boxShadow: '0 2px 12px #4573df22, inset 0 1px 1px #ffffff'
+              }}>
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  {/* Main circle background */}
-                  <circle cx="16" cy="16" r="15" fill="url(#missionGradient)" fillOpacity="0.08"/>
+                  {/* Mission icon SVG elements */}
+                  <circle cx="16" cy="16" r="15" fill="url(#missionGradient)" fillOpacity="0.08" />
                   <circle cx="16" cy="16" r="15" stroke="url(#missionStroke)" strokeWidth="1.5">
                     <animate
                       attributeName="stroke-dasharray"
@@ -62,8 +59,6 @@ const AboutIntro: React.FC = () => {
                       repeatCount="1"
                     />
                   </circle>
-                  
-                  {/* Rotating outer ring */}
                   <circle 
                     cx="16" 
                     cy="16" 
@@ -81,15 +76,7 @@ const AboutIntro: React.FC = () => {
                       repeatCount="indefinite"
                     />
                   </circle>
-
-                  {/* Middle ring with pulse */}
-                  <circle 
-                    cx="16" 
-                    cy="16" 
-                    r="7" 
-                    stroke="#4573df" 
-                    strokeWidth="1.5"
-                  >
+                  <circle cx="16" cy="16" r="7" stroke="#4573df" strokeWidth="1.5">
                     <animate
                       attributeName="stroke-opacity"
                       values="1;0.6;1"
@@ -97,8 +84,6 @@ const AboutIntro: React.FC = () => {
                       repeatCount="indefinite"
                     />
                   </circle>
-                  
-                  {/* Center target dot with pulse and glow */}
                   <circle cx="16" cy="16" r="3" fill="#4573df">
                     <animate 
                       attributeName="r" 
@@ -113,8 +98,6 @@ const AboutIntro: React.FC = () => {
                       repeatCount="indefinite"
                     />
                   </circle>
-
-                  {/* Subtle crosshair lines with fade */}
                   <g>
                     <animate
                       attributeName="opacity"
@@ -122,21 +105,19 @@ const AboutIntro: React.FC = () => {
                       dur="3s"
                       repeatCount="indefinite"
                     />
-                    <path d="M16 5V7" stroke="#4573df" strokeWidth="1.5" strokeLinecap="round"/>
-                    <path d="M16 25V27" stroke="#4573df" strokeWidth="1.5" strokeLinecap="round"/>
-                    <path d="M27 16H25" stroke="#4573df" strokeWidth="1.5" strokeLinecap="round"/>
-                    <path d="M7 16H5" stroke="#4573df" strokeWidth="1.5" strokeLinecap="round"/>
+                    <path d="M16 5V7" stroke="#4573df" strokeWidth="1.5" strokeLinecap="round" />
+                    <path d="M16 25V27" stroke="#4573df" strokeWidth="1.5" strokeLinecap="round" />
+                    <path d="M27 16H25" stroke="#4573df" strokeWidth="1.5" strokeLinecap="round" />
+                    <path d="M7 16H5" stroke="#4573df" strokeWidth="1.5" strokeLinecap="round" />
                   </g>
-                  
-                  {/* Gradient definitions */}
                   <defs>
                     <linearGradient id="missionGradient" x1="16" y1="1" x2="16" y2="31" gradientUnits="userSpaceOnUse">
-                      <stop stopColor="#4573df"/>
-                      <stop offset="1" stopColor="#2d4fa2"/>
+                      <stop stopColor="#4573df" />
+                      <stop offset="1" stopColor="#2d4fa2" />
                     </linearGradient>
                     <linearGradient id="missionStroke" x1="16" y1="1" x2="16" y2="31" gradientUnits="userSpaceOnUse">
-                      <stop stopColor="#4573df"/>
-                      <stop offset="1" stopColor="#2d4fa2"/>
+                      <stop stopColor="#4573df" />
+                      <stop offset="1" stopColor="#2d4fa2" />
                     </linearGradient>
                   </defs>
                 </svg>
@@ -157,21 +138,17 @@ const AboutIntro: React.FC = () => {
             transition={{ duration: 0.6 }}
           >
             <div style={{display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem'}}>
-              <span 
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: 52,
-                  height: 52,
-                  background: 'linear-gradient(135deg, #fffbe7 0%, #fff8e1 100%)',
-                  borderRadius: 14,
-                  boxShadow: '0 2px 12px #ffc10733, inset 0 1px 1px #ffffff'
-                }}
-              >
-                {/* Vision Icon */}
+              <span style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: 52,
+                height: 52,
+                background: 'linear-gradient(135deg, #eef6ff 0%, #f5f9ff 100%)',
+                borderRadius: 14,
+                boxShadow: '0 2px 12px rgba(69,115,223,0.12), inset 0 1px 1px #ffffff'
+              }}>
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  {/* Background glow with pulse */}
                   <circle cx="16" cy="16" r="15" fill="url(#visionGradient)" fillOpacity="0.1">
                     <animate
                       attributeName="fill-opacity"
@@ -180,8 +157,6 @@ const AboutIntro: React.FC = () => {
                       repeatCount="indefinite"
                     />
                   </circle>
-                  
-                  {/* Main eye shape with reveal animation */}
                   <path 
                     d="M4 16C4 16 10 6 16 6C22 6 28 16 28 16C28 16 22 26 16 26C10 26 4 16 4 16Z" 
                     stroke="url(#visionStroke)" 
@@ -196,11 +171,9 @@ const AboutIntro: React.FC = () => {
                       repeatCount="1"
                     />
                   </path>
-                  
-                  {/* Scanning effect lines */}
                   <path 
                     d="M7 14C12 14 12 18 16 18C20 18 20 14 25 14" 
-                    stroke="#ffc107" 
+                    stroke="#6C8EE3" 
                     strokeWidth="1.5" 
                     strokeDasharray="2 2"
                   >
@@ -212,8 +185,6 @@ const AboutIntro: React.FC = () => {
                       repeatCount="indefinite"
                     />
                   </path>
-                  
-                  {/* Tech circuit paths with fade */}
                   <g>
                     <animate
                       attributeName="opacity"
@@ -221,19 +192,18 @@ const AboutIntro: React.FC = () => {
                       dur="2s"
                       repeatCount="indefinite"
                     />
-                    <path d="M16 9V11M16 21V23M9 16H11M21 16H23" 
-                      stroke="#ffc107" 
+                    <path 
+                      d="M16 9V11M16 21V23M9 16H11M21 16H23" 
+                      stroke="#6C8EE3" 
                       strokeWidth="1.5" 
                       strokeLinecap="round"
                     />
                   </g>
-                  
-                  {/* Iris ring with rotation */}
                   <circle 
                     cx="16" 
                     cy="16" 
                     r="5" 
-                    stroke="#ffc107" 
+                    stroke="#4573df" 
                     strokeWidth="1.5"
                   >
                     <animateTransform
@@ -245,9 +215,7 @@ const AboutIntro: React.FC = () => {
                       repeatCount="indefinite"
                     />
                   </circle>
-                  
-                  {/* Center pupil with pulse */}
-                  <circle cx="16" cy="16" r="2" fill="#ffc107">
+                  <circle cx="16" cy="16" r="2" fill="#4573df">
                     <animate 
                       attributeName="r" 
                       values="1.5;2;1.5" 
@@ -261,16 +229,14 @@ const AboutIntro: React.FC = () => {
                       repeatCount="indefinite"
                     />
                   </circle>
-
-                  {/* Gradient definitions */}
                   <defs>
                     <linearGradient id="visionGradient" x1="16" y1="1" x2="16" y2="31" gradientUnits="userSpaceOnUse">
-                      <stop stopColor="#ffc107"/>
-                      <stop offset="1" stopColor="#ff9800"/>
+                      <stop stopColor="#4573df" />
+                      <stop offset="1" stopColor="#2d4fa2" />
                     </linearGradient>
                     <linearGradient id="visionStroke" x1="4" y1="16" x2="28" y2="16" gradientUnits="userSpaceOnUse">
-                      <stop stopColor="#ffc107"/>
-                      <stop offset="1" stopColor="#ff9800"/>
+                      <stop stopColor="#6C8EE3" />
+                      <stop offset="1" stopColor="#4573df" />
                     </linearGradient>
                   </defs>
                 </svg>
