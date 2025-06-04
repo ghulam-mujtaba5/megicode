@@ -66,7 +66,7 @@ const ProjectServices = () => {
             <div key={index} className={styles.serviceCard}
                  style={{ animationDelay: `${index * 0.2}s` }}>
               <div className={styles.iconWrapper}>
-                <span className={styles.icon}>{service.icon}</span>
+                <span className={styles.icon} role="img" aria-label={service.title}>{service.icon}</span>
               </div>
               <h3 className={styles.serviceTitle}>{service.title}</h3>
               <p className={styles.serviceDescription}>{service.description}</p>

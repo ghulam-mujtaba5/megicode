@@ -76,7 +76,7 @@ const ProjectStack = () => {
               } as React.CSSProperties}
             >
               <div className={styles.techHeader}>
-                <span className={styles.techIcon}>{tech.icon}</span>
+                <span className={styles.techIcon} role="img" aria-label={tech.name}>{tech.icon}</span>
                 <h3 className={styles.techName}>{tech.name}</h3>
                 <span className={styles.techLevel}>{tech.level}%</span>
               </div>

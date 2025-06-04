@@ -46,7 +46,7 @@ const ProjectIndustries = () => {
         <div className={styles.grid}>
           {industries.map((industry, index) => (
             <div key={index} className={styles.card}>
-              <div className={styles.icon}>{industry.icon}</div>
+              <div className={styles.icon} role="img" aria-label={industry.name}>{industry.icon}</div>
               <h3 className={styles.industryName}>{industry.name}</h3>
               <p className={styles.description}>{industry.description}</p>
             </div>

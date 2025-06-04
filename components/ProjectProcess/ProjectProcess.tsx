@@ -70,7 +70,7 @@ const ProjectProcess = () => {
             <div key={index} className={styles.processCard}
                  style={{ animationDelay: `${index * 0.2}s` }}>
               <div className={styles.stepNumber}>Step {step.step}</div>
-              <div className={styles.icon}>{step.icon}</div>
+              <div className={styles.icon} role="img" aria-label={step.title}>{step.icon}</div>
               <h3 className={styles.stepTitle}>{step.title}</h3>
               <p className={styles.stepDescription}>{step.description}</p>
               <ul className={styles.featureList}>

@@ -70,7 +70,7 @@ const ProjectOverview = () => {
         <div className={styles.stats}>
           {stats.map((stat, index) => (
             <div key={index} className={styles.statCard}>
-              <div className={styles.statIcon}>{stat.icon}</div>
+              <div className={styles.statIcon} role="img" aria-label={stat.label}>{stat.icon}</div>
               <div className={styles.statContent}>
                 <div className={styles.statNumber}>{stat.number}</div>
                 <div className={styles.statLabel}>{stat.label}</div>

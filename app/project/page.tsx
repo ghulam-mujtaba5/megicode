@@ -6,6 +6,7 @@ import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 import { LoadingSpinner } from '@/components/Icon/LoadingSpinner';
 import { useTheme } from '@/context/ThemeContext';
 import ProjectHero from '@/components/ProjectHero/ProjectHero';
+import ProjectTestimonials from '@/components/ProjectTestimonials/ProjectTestimonials';
 
 // Dynamic imports with loading states for better UX
 const ProjectOverview = dynamic(() => import('@/components/ProjectOverview/ProjectOverview'), {
@@ -28,13 +29,7 @@ const ProjectProcess = dynamic(() => import('@/components/ProjectProcess/Project
   loading: () => <LoadingSpinner aria-label="Loading process section" />
 });
 
-const ProjectMetrics = dynamic(() => import('@/components/ProjectMetrics/ProjectMetrics'), {
-  loading: () => <LoadingSpinner aria-label="Loading metrics section" />
-});
-
-const ProjectIndustries = dynamic(() => import('@/components/ProjectIndustries/ProjectIndustries'), {
-  loading: () => <LoadingSpinner aria-label="Loading industries section" />
-});
+// Removed ProjectMetrics and ProjectIndustries for a more focused project page
 
 const ProjectCaseStudies = dynamic(() => import('@/components/ProjectCaseStudies/ProjectCaseStudies'), {
   loading: () => <LoadingSpinner aria-label="Loading case studies" />
@@ -45,9 +40,9 @@ const sections = [
   { id: 'overview', label: 'Overview', ariaLabel: 'Project overview section' },
   { id: 'services', label: 'Services', ariaLabel: 'Our services section' },
   { id: 'projects', label: 'Projects', ariaLabel: 'Featured projects section' },
-  { id: 'industries', label: 'Industries', ariaLabel: 'Industries we serve section' },
   { id: 'process', label: 'Process', ariaLabel: 'Our process section' },
-  { id: 'technologies', label: 'Tech Stack', ariaLabel: 'Technology stack section' }
+  { id: 'technologies', label: 'Tech Stack', ariaLabel: 'Technology stack section' },
+  { id: 'testimonials', label: 'Testimonials', ariaLabel: 'Client testimonials section' }
 ];
 
 const ProjectPage = () => {
@@ -173,14 +168,7 @@ const ProjectPage = () => {
           <ProjectCaseStudies />
         </section>
 
-        <section 
-          id="industries" 
-          className={`${styles.section} ${styles.fadeInUp}`}
-          aria-label="Industries We Serve"
-        >
-          <ProjectIndustries />
-          <ProjectMetrics />
-        </section>
+
 
         <section 
           id="process" 
@@ -196,6 +184,14 @@ const ProjectPage = () => {
           aria-label="Technology Stack"
         >
           <ProjectStack />
+        </section>
+
+        <section
+          id="testimonials"
+          className={`${styles.section} ${styles.fadeInUp}`}
+          aria-label="Client Testimonials"
+        >
+          <ProjectTestimonials />
         </section>
       </main>
     </>
