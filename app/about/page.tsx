@@ -93,7 +93,7 @@ export default function AboutPage() {
           aria-label="Mobile Navigation"
           className="block md:hidden"
         >
-          <NavBarMobile sections={sections} />
+          <NavBarMobile />
         </nav>
       </header>
 
