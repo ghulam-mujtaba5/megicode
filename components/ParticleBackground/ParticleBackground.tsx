@@ -13,51 +13,61 @@ interface Particle {
 
 const ParticleBackground: React.FC = () => {
   const [particles, setParticles] = useState<Particle[]>([]);
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+
   useEffect(() => {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-    setParticles(
-      Array.from({ length: PARTICLE_COUNT }, () => ({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        speed: 0.3 + Math.random() * 0.8,
-        radius: 1.2 + Math.random() * 1.8,
-        opacity: 0.2 + Math.random() * 0.3,
-      }))
-    );
-  }, []);
-  useEffect(() => {
-    const handleResize = () => {
+    if (typeof window !== 'undefined') {
       const width = window.innerWidth;
       const height = window.innerHeight;
-      setParticles(prev => 
-        prev.map(p => ({
-          ...p,
-          x: p.x % width,
-          y: p.y % height,
+      setDimensions({ width, height });
+      setParticles(
+        Array.from({ length: PARTICLE_COUNT }, () => ({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          speed: 0.3 + Math.random() * 0.8,
+          radius: 1.2 + Math.random() * 1.8,
+          opacity: 0.2 + Math.random() * 0.3,
         }))
       );
-    };
+    }
+  }, []);
 
-    window.addEventListener('resize', handleResize);
-    
-    const interval = setInterval(() => {
-      setParticles((prev) => {
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const handleResize = () => {
         const width = window.innerWidth;
         const height = window.innerHeight;
-        return prev.map((p) => ({
-          ...p,
-          y: (p.y + p.speed) % height,
-          x: (p.x + Math.sin(p.y / 80) * 0.3) % width,
-        }));
-      });
-    }, 60);
+        setDimensions({ width, height });
+        setParticles(prev =>
+          prev.map(p => ({
+            ...p,
+            x: p.x % width,
+            y: p.y % height,
+          }))
+        );
+      };
 
-    return () => {
-      clearInterval(interval);
-      window.removeEventListener('resize', handleResize);
-    };
+      window.addEventListener('resize', handleResize);
+
+      const interval = setInterval(() => {
+        setParticles((prev) => {
+          const width = window.innerWidth;
+          const height = window.innerHeight;
+          return prev.map((p) => ({
+            ...p,
+            y: (p.y + p.speed) % height,
+            x: (p.x + Math.sin(p.y / 80) * 0.3) % width,
+          }));
+        });
+      }, 60);
+
+      return () => {
+        clearInterval(interval);
+        window.removeEventListener('resize', handleResize);
+      };
+    }
   }, []);
+
   return (
     <div style={{
       position: "absolute",
@@ -75,7 +85,7 @@ const ParticleBackground: React.FC = () => {
           height: "100%",
           opacity: 0.8,
         }}
-        viewBox={`0 0 ${window.innerWidth} ${window.innerHeight}`}
+        viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
         preserveAspectRatio="xMidYMid slice"
       >
         {particles.map((particle, i) => (

@@ -154,7 +154,7 @@ export default function ServicesPage() {
 
       {/* Mobile NavBar */}
       <nav id="mobile-navbar" aria-label="Mobile Navigation">
-        <NavBarMobile sections={sections} />
+        <NavBarMobile />
       </nav>      {/* Hero Section */}
       <Suspense fallback={<Loading />}>
         <ServicesHero />

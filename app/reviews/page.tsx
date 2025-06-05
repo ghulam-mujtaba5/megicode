@@ -42,7 +42,7 @@ export default function ReviewsPage() {
 
       {/* Mobile NavBar */}
       <nav id="mobile-navbar" aria-label="Mobile Navigation">
-        <NavBarMobile sections={sections} />
+        <NavBarMobile />
       </nav>   
 
             <main className="relative">

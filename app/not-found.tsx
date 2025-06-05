@@ -191,7 +191,7 @@ function NotFound() {
 
       {/* Mobile NavBar */}
       <nav id="mobile-navbar" aria-label="Mobile Navigation">
-        <NavBarMobile sections={sections} />
+        <NavBarMobile />
       </nav>
 
       {/* Enhanced 404 Content */}
@@ -369,7 +369,7 @@ function NotFound() {
 
       {/* Mobile NavBar */}
       <nav id="mobile-navbar" aria-label="Mobile Navigation">
-        <NavBarMobile sections={sections} />
+        <NavBarMobile />
       </nav>
 
       {/* Enhanced 404 Content */}
