@@ -7,6 +7,10 @@ import lightStyles from './ContactUsLight.module.css';
 import darkStyles from './ContactUsDark.module.css';
 import { motion, useAnimation } from 'framer-motion';
 
+const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+const EMAILJS_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+
 const ContactSection = ({
   email = "megicode@gmail.com",
   phoneNumber = "+92 317 7107849",
@@ -20,17 +24,27 @@ const ContactSection = ({
   const [error, setError] = useState(null);
   const [isSending, setIsSending] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const nameInputRef = useRef(null);
+
+  useEffect(() => {
+    if (nameInputRef.current) {
+      nameInputRef.current.setAttribute('aria-required', 'true');
+    }
+  }, []);
 
   const handleNameChange = useCallback((event) => {
     setName(event.target.value);
+    setError(null);
   }, []);
 
   const handleEmailChange = useCallback((event) => {
     setEmailInput(event.target.value);
+    setError(null);
   }, []);
 
   const handleMessageChange = useCallback((event) => {
     setMessage(event.target.value);
+    setError(null);
   }, []);
 
   const validateEmail = useCallback((email) => {
@@ -38,48 +52,46 @@ const ContactSection = ({
     return re.test(email);
   }, []);
 
-  const sendEmail = useCallback(async () => {
-    setIsSending(true);
-
-    try {
-      const result = await emailjs.send(
-        'service_ewji0vl', // Replace with your EmailJS service ID
-        'template_3kv9gje', // Replace with your EmailJS template ID
+  const handleSubmit = useCallback(
+    (event) => {
+      event.preventDefault();
+      setIsSending(true);
+      setError(null);
+      setResponse(null);
+      if (!name || !emailInput || !message) {
+        setError('Please fill in all fields.');
+        setIsSending(false);
+        return;
+      }
+      if (!validateEmail(emailInput)) {
+        setError('Please enter a valid email address.');
+        setIsSending(false);
+        return;
+      }
+      emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
         {
-          user_name: name,
-          user_email: emailInput,
+          from_name: name,
+          from_email: emailInput,
           message: message,
         },
-        'LFm2JfW5ThGTsvKYr' // Replace with your EmailJS user ID (public key)
-      );
-
-      console.log('Email sent!', result);
-      setResponse('Message sent successfully!');
-      setName('');
-      setEmailInput('');
-      setMessage('');
-      setError(null);
-    } catch (error) {
-      console.error('Error sending email:', error);
-      setError('Failed to send message.');
-      setResponse(null);
-    } finally {
-      setIsSending(false);
-    }
-  }, [name, emailInput, message]);
-
-  const handleSubmit = useCallback(async (event) => {
-    event.preventDefault();
-
-    setError(null);
-
-    if (!validateEmail(emailInput)) {
-      setError('Please enter a valid email address.');
-      return;
-    }
-
-    await sendEmail();
-  }, [emailInput, sendEmail, validateEmail]);
+        EMAILJS_PUBLIC_KEY
+      )
+      .then((result) => {
+        setResponse('Message sent successfully!');
+        setName('');
+        setEmailInput('');
+        setMessage('');
+      }, (error) => {
+        setError('Failed to send message. Please try again later.');
+      })
+      .finally(() => {
+        setIsSending(false);
+      });
+    },
+    [name, emailInput, message, validateEmail]
+  );
 
   const handleDarkModeButtonClick = useCallback(() => {
     toggleTheme();
@@ -136,6 +148,7 @@ const ContactSection = ({
           value={name}
           onChange={handleNameChange}
           required
+          ref={nameInputRef}
         />
         <label className={`${commonStyles.emailLabel} ${themeStyles.emailLabel}`} htmlFor="email">Email</label>
         <input
