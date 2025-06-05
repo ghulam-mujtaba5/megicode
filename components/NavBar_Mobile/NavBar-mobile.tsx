@@ -8,7 +8,14 @@ import darkStyles from './NavBarMobileDark.module.css';
 
 
 
-const NavBar = ({ sections }) => {
+const NavBar = () => {
+    const sections = [
+        { id: 'about', label: 'About', href: '/about' },
+        { id: 'services', label: 'Services', href: '/services' },
+        { id: 'projects', label: 'Projects', href: '/projects' },
+        { id: 'reviews', label: 'Reviews', href: '/reviews' },
+        { id: 'contact', label: 'Contact', href: '/contact' },
+    ];
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { theme, toggleTheme } = useTheme(); // Ensure toggleTheme is destructured from the context
     const router = useRouter();
@@ -56,24 +63,14 @@ const NavBar = ({ sections }) => {
                     {sections?.length > 0 ? (
                         sections.map((section) => (
                             <li
-                                key={section.route || section.id}
+                                key={section.id}
                                 className={`${commonStyles.menuItem} ${themeStyles.menuItem}`}
-                                onClick={() => {
-                                    if (section.route) {
-                                        handleScrollOrRoute(section.route);
-                                    } else if (section.id) {
-                                        handleScrollOrRoute(section.id);
-                                    }
-                                }}
+                                onClick={() => handleScrollOrRoute(section.href)}
                                 role="menuitem"
                                 tabIndex={0}
                                 onKeyPress={(e) => {
                                     if (e.key === 'Enter') {
-                                        if (section.route) {
-                                            handleScrollOrRoute(section.route);
-                                        } else if (section.id) {
-                                            handleScrollOrRoute(section.id);
-                                        }
+                                        handleScrollOrRoute(section.href);
                                     }
                                 }}
                             >

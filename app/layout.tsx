@@ -1,7 +1,13 @@
-
 import "../styles/global.css";
 import React from "react";
 import { Providers } from "./providers";
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false
+};
 
 export const metadata = {
   metadataBase: new URL('https://megicode.com'),
@@ -56,11 +62,6 @@ export const metadata = {
     description: "Expert software development services including web, mobile, desktop applications, AI solutions, and data science.",
     images: ["/meta/twitter-card.png"],
     creator: "@megicode",
-  },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 5,
   },
   robots: {
     index: true,

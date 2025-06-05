@@ -1,0 +1,20 @@
+.heroSection {
+  /* Background color now handled by parent container */
+  background-color: transparent;
+}
+
+.title {
+  color: #1e293b;
+}
+
+.subtitle {
+  color: #475569;
+}
+
+.description {
+  color: #64748b;
+}
+
+.heroPattern {
+  background-image: url('/mesh-circuit-light.svg');
+}

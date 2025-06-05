@@ -1,32 +1,42 @@
 "use client";
-import React, { useCallback } from "react";
-import { useTheme } from "../../context/ThemeContext";
+import React from 'react';
 import NavBarDesktop from "../../components/NavBar_Desktop_Company/nav-bar-Company";
 import NavBarMobile from "../../components/NavBar_Mobile/NavBar-mobile";
 import Footer from "../../components/Footer/Footer";
+import ProjectsShowcase from '../../components/Projects/ProjectsShowcase';
+import ProjectHero from '../../components/Projects/ProjectHero';
+import { useTheme } from "../../context/ThemeContext";
 import ThemeToggleIcon from "../../components/Icon/sbicon";
-import ContactSection from "../../components/Contact/ConatctUs";
+import { useCallback } from "react";
 
-export default function ContactPage() {
+export default function ProjectsPage() {
   const { theme, toggleTheme } = useTheme();
+  
   const onDarkModeButtonContainerClick = useCallback(() => {
     toggleTheme();
   }, [toggleTheme]);
 
+  // Define paths for social media links and contact info
   const linkedinUrl = "https://www.linkedin.com/company/megicode";
   const instagramUrl = "https://www.instagram.com/megicode/";
   const githubUrl = "https://github.com/megicode";
   const copyrightText = "Copyright 2025 Megicode. All Rights Reserved.";
   const contactEmail = "megicode@gmail.com";
   const contactPhoneNumber = "+123 456 7890";
-
-  return (
+  const sections = [
+    { id: 'home', label: 'Home', href: '/' },
+    { id: 'about', label: 'About', href: '/about' },
+    { id: 'services', label: 'Services', href: '/services' },
+    { id: 'projects', label: 'Projects', href: '/projects' },
+    { id: 'reviews', label: 'Reviews', href: '/reviews' },
+    { id: 'contact', label: 'Contact', href: '/contact' },
+  ];  return (
     <div style={{ backgroundColor: theme === "dark" ? "#1d2127" : "#ffffff", overflowX: "hidden", position: "relative" }}>
-      <div style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: "100%",
+      <div style={{ 
+        position: "fixed", 
+        top: 0, 
+        left: 0, 
+        width: "100%", 
         height: "150vh",
         pointerEvents: "none",
         zIndex: 0
@@ -40,10 +50,9 @@ export default function ContactPage() {
       <main className="relative z-10 min-h-screen">
         <NavBarDesktop />
         <NavBarMobile />
-        <section id="contact-section" aria-labelledby="contact-heading" style={{ width: "100%", overflow: "hidden", padding: "2rem 0" }}>
-          <ContactSection email={contactEmail} phoneNumber={contactPhoneNumber} showCertificationBadge={false} />
-        </section>
-        <Footer
+        <ProjectHero />
+        <ProjectsShowcase />
+        <Footer 
           linkedinUrl={linkedinUrl}
           instagramUrl={instagramUrl}
           githubUrl={githubUrl}

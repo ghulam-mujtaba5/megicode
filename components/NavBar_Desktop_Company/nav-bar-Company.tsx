@@ -116,12 +116,12 @@ const NavBar = () => {
       {/* Project page */}
 
       <div
-        className={`${styles.project} ${pathname === "/project" ? styles.selected : ""}`}
-        onClick={() => navigateTo("/project")}
+        className={`${styles.project} ${pathname === "/projects" ? styles.selected : ""}`}
+        onClick={() => navigateTo("/projects")}
         role="button"
         tabIndex={0}
-        aria-label="Project"
-        onKeyPress={(e) => e.key === 'Enter' && navigateTo("/project")}
+        aria-label="Projects"
+        onKeyPress={(e) => e.key === 'Enter' && navigateTo("/projects")}
       >
         <div className={styles.projectText}>Project</div>
       </div>

@@ -62,7 +62,7 @@ export default function MegicodePage() {
 
       {/* Mobile NavBar */}
       <nav id="mobile-navbar" aria-label="Mobile Navigation">
-        <NavBarMobile sections={sections} />
+        <NavBarMobile />
       </nav>
 
       {/* Welcome Frame + Advanced Hero Animation */}

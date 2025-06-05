@@ -1,0 +1,40 @@
+.showcaseSection {
+  background-color: transparent;
+}
+
+.filterButton {
+  background-color: #f1f5f9;
+  color: #64748b;
+}
+
+.filterButton:hover {
+  background-color: #e2e8f0;
+}
+
+.projectCard {
+  background-color: white;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.projectTitle {
+  color: #1e293b;
+}
+
+.projectDescription {
+  color: #475569;
+}
+
+.techTag {
+  background-color: #f1f5f9;
+  color: #475569;
+}
+
+.projectLink {
+  background: linear-gradient(135deg, #4338ca, #3b82f6);
+  color: white;
+}
+
+.projectLink:hover {
+  background: linear-gradient(135deg, #3730a3, #2563eb);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}

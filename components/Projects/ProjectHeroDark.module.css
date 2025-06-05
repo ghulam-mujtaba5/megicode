@@ -1,0 +1,26 @@
+.heroSection {
+  background-color: transparent;
+  position: relative;
+  z-index: 1;
+}
+
+.title {
+  color: #ffffff;
+  background: linear-gradient(135deg, #4573df, #6d8dff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  color: #9ba1a8;
+}
+
+.description {
+  color: #aeb4bc;
+}
+
+.heroPattern {
+  background-image: url('/mesh-circuit-dark.svg');
+  opacity: 0.07;
+}
