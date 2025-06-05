@@ -42,6 +42,26 @@ export default function ContactPage() {
         <NavBarDesktop />
         <NavBarMobile />
         <ContactInfoCard />
+        {/* Business Hours Section */}
+        <div style={{
+          maxWidth: 400,
+          margin: "0 auto 1.5rem auto",
+          padding: "1.1rem 1.5rem 1rem 1.5rem",
+          borderRadius: 16,
+          background: theme === "dark" ? "#23272f" : "#f5f7fa",
+          boxShadow: theme === "dark"
+            ? "0 2px 12px 0 rgba(30,33,39,0.10)"
+            : "0 2px 12px 0 rgba(69,115,223,0.05)",
+          border: theme === "dark" ? "1px solid #23272f" : "1px solid #e5e7eb",
+          textAlign: "center",
+          fontSize: 17,
+          color: theme === "dark" ? "#cbd5e1" : "#475569",
+          fontWeight: 500,
+          letterSpacing: 0.1,
+        }}>
+          <span role="img" aria-label="clock" style={{marginRight: 8}}>🕒</span>
+          <span>Business Hours: <span style={{color: theme === "dark" ? "#fff" : "#1d2127", fontWeight: 700}}>24/7</span></span>
+        </div>
         <section id="contact-section" aria-labelledby="contact-heading" style={{ width: "100%", overflow: "hidden", padding: "2rem 0" }}>
           <ContactSection email={contactEmail} phoneNumber={contactPhoneNumber} showCertificationBadge={false} />
         </section>
