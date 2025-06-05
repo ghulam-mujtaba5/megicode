@@ -6,6 +6,7 @@ import NavBarMobile from "../../components/NavBar_Mobile/NavBar-mobile";
 import Footer from "../../components/Footer/Footer";
 import ThemeToggleIcon from "../../components/Icon/sbicon";
 import ContactSection from "../../components/Contact/ConatctUs";
+import ContactInfoCard from "../../components/Contact/ContactInfoCard";
 
 export default function ContactPage() {
   const { theme, toggleTheme } = useTheme();
@@ -40,6 +41,7 @@ export default function ContactPage() {
       <main className="relative z-10 min-h-screen">
         <NavBarDesktop />
         <NavBarMobile />
+        <ContactInfoCard />
         <section id="contact-section" aria-labelledby="contact-heading" style={{ width: "100%", overflow: "hidden", padding: "2rem 0" }}>
           <ContactSection email={contactEmail} phoneNumber={contactPhoneNumber} showCertificationBadge={false} />
         </section>
