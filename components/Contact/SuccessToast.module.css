@@ -1,0 +1,45 @@
+/* SuccessToast.module.css */
+.toast {
+  position: fixed;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 12px;
+  padding: 1rem 2rem;
+  font-weight: 600;
+  font-size: 1.125rem;
+  z-index: 9999;
+  box-shadow: 0 4px 24px 0 rgba(30,33,39,0.18);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--toast-bg, #4573df);
+  color: var(--toast-color, #fff);
+  outline: none;
+}
+[data-theme="dark"] .toast {
+  --toast-bg: #222b3a;
+  --toast-color: #e3e8f7;
+}
+[data-theme="light"] .toast {
+  --toast-bg: #4573df;
+  --toast-color: #fff;
+}
+.icon {
+  font-size: 1.75rem;
+  display: flex;
+  align-items: center;
+}
+.closeBtn {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 1.25rem;
+  margin-left: 1rem;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+.closeBtn:hover {
+  opacity: 1;
+}

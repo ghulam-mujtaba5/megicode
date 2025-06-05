@@ -6,6 +6,7 @@ import commonStyles from './ContactUsCommon.module.css';
 import lightStyles from './ContactUsLight.module.css';
 import darkStyles from './ContactUsDark.module.css';
 import { motion, useAnimation } from 'framer-motion';
+import SuccessToast from "./SuccessToast";
 
 const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
 const EMAILJS_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
@@ -23,6 +24,7 @@ const ContactSection = ({
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
   const [isSending, setIsSending] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const nameInputRef = useRef(null);
 
@@ -80,6 +82,7 @@ const ContactSection = ({
       )
       .then((result) => {
         setResponse('Message sent successfully!');
+        setShowSuccess(true);
         setName('');
         setEmailInput('');
         setMessage('');
@@ -126,109 +129,112 @@ const ContactSection = ({
   }, [handleScroll]);
 
   return (
-    <section className={`${commonStyles.contactSection} ${themeStyles.contactSection}`}>
-      <div className={`${commonStyles.contactFormBackground} ${themeStyles.contactFormBackground}`} />
-      <motion.form
-        className={`${commonStyles.contactForm} ${themeStyles.contactForm}`}
-        onSubmit={handleSubmit}
-        aria-label="Contact form"
-        ref={ref}
-        initial={{ opacity: 0, y: 50 }}
-        animate={controls}
-        transition={{ duration: 0.5 }}
-      >
-        <label className={`${commonStyles.nameLabel} ${themeStyles.nameLabel}`} htmlFor="name">Name</label>
-        <input
-          className={`${commonStyles.nameInput} ${themeStyles.nameInput}`}
-          type="text"
-          name="user_name"
-          id="name"
-          placeholder="Name"
-          autoComplete="name"
-          value={name}
-          onChange={handleNameChange}
-          required
-          ref={nameInputRef}
-        />
-        <label className={`${commonStyles.emailLabel} ${themeStyles.emailLabel}`} htmlFor="email">Email</label>
-        <input
-          className={`${commonStyles.emailInput} ${themeStyles.emailInput}`}
-          type="email"
-          name="user_email"
-          id="email"
-          placeholder="Email"
-          autoComplete="email"
-          value={emailInput}
-          onChange={handleEmailChange}
-          required
-        />
-        <label className={`${commonStyles.messageLabel} ${themeStyles.messageLabel}`} htmlFor="message">Message</label>
-        <textarea
-          className={`${commonStyles.messageInput} ${themeStyles.messageInput}`}
-          name="message"
-          id="message"
-          placeholder="Message"
-          autoComplete="off"
-          value={message}
-          onChange={handleMessageChange}
-          required
-        ></textarea>
-        <button
-          type="submit"
-          className={`${commonStyles.sendButton} ${themeStyles.sendButton}`}
-          disabled={isSending}
+    <>
+      <SuccessToast show={showSuccess} onClose={() => setShowSuccess(false)} />
+      <section className={`${commonStyles.contactSection} ${themeStyles.contactSection}`}>
+        <div className={`${commonStyles.contactFormBackground} ${themeStyles.contactFormBackground}`} />
+        <motion.form
+          className={`${commonStyles.contactForm} ${themeStyles.contactForm}`}
+          onSubmit={handleSubmit}
+          aria-label="Contact form"
+          ref={ref}
+          initial={{ opacity: 0, y: 50 }}
+          animate={controls}
+          transition={{ duration: 0.5 }}
         >
-          <div className={`${commonStyles.sendButtonBorder} ${themeStyles.sendButtonBorder}`} />
-          <div className={`${commonStyles.sendLabel} ${themeStyles.sendLabel}`}>
-            {isSending ? 'Sending...' : 'SEND'}
+          <label className={`${commonStyles.nameLabel} ${themeStyles.nameLabel}`} htmlFor="name">Name</label>
+          <input
+            className={`${commonStyles.nameInput} ${themeStyles.nameInput}`}
+            type="text"
+            name="user_name"
+            id="name"
+            placeholder="Name"
+            autoComplete="name"
+            value={name}
+            onChange={handleNameChange}
+            required
+            ref={nameInputRef}
+          />
+          <label className={`${commonStyles.emailLabel} ${themeStyles.emailLabel}`} htmlFor="email">Email</label>
+          <input
+            className={`${commonStyles.emailInput} ${themeStyles.emailInput}`}
+            type="email"
+            name="user_email"
+            id="email"
+            placeholder="Email"
+            autoComplete="email"
+            value={emailInput}
+            onChange={handleEmailChange}
+            required
+          />
+          <label className={`${commonStyles.messageLabel} ${themeStyles.messageLabel}`} htmlFor="message">Message</label>
+          <textarea
+            className={`${commonStyles.messageInput} ${themeStyles.messageInput}`}
+            name="message"
+            id="message"
+            placeholder="Message"
+            autoComplete="off"
+            value={message}
+            onChange={handleMessageChange}
+            required
+          ></textarea>
+          <button
+            type="submit"
+            className={`${commonStyles.sendButton} ${themeStyles.sendButton}`}
+            disabled={isSending}
+          >
+            <div className={`${commonStyles.sendButtonBorder} ${themeStyles.sendButtonBorder}`} />
+            <div className={`${commonStyles.sendLabel} ${themeStyles.sendLabel}`}>
+              {isSending ? 'Sending...' : 'SEND'}
+            </div>
+          </button>
+        </motion.form>
+        {error && (
+          <p className={`${commonStyles.message} ${themeStyles.errorMessage}`} role="alert">
+            {error}
+          </p>
+        )}
+        {response && (
+          <p className={`${commonStyles.message} ${themeStyles.successMessage}`} role="status">
+            {response}
+          </p>
+        )}
+        <div className={`${commonStyles.contactDetails} ${themeStyles.contactDetails}`}>
+          <p className={`${commonStyles.contactEmail} ${themeStyles.contactEmail}`}>{email}</p>
+          <div className={`${commonStyles.contactPhoneNo} ${themeStyles.contactPhoneNo}`}>{phoneNumber}</div>
+          <h2 className={`${commonStyles.contactMeDescription} ${themeStyles.contactMeDescription}`}>Contact Me</h2>
+          <div className={`${commonStyles.contactMeLabel} ${themeStyles.contactMeLabel}`}>
+            <p className={`${commonStyles.doYouHave} ${themeStyles.doYouHave}`}>Do you have any project idea?</p>
+            <p className={`${commonStyles.doyouHave} ${themeStyles.doyouHave}`}>Let’s discuss and turn them into reality!</p>
           </div>
-        </button>
-      </motion.form>
-      {error && (
-        <p className={`${commonStyles.message} ${themeStyles.errorMessage}`} role="alert">
-          {error}
-        </p>
-      )}
-      {response && (
-        <p className={`${commonStyles.message} ${themeStyles.successMessage}`} role="status">
-          {response}
-        </p>
-      )}
-      <div className={`${commonStyles.contactDetails} ${themeStyles.contactDetails}`}>
-        <p className={`${commonStyles.contactEmail} ${themeStyles.contactEmail}`}>{email}</p>
-        <div className={`${commonStyles.contactPhoneNo} ${themeStyles.contactPhoneNo}`}>{phoneNumber}</div>
-        <h2 className={`${commonStyles.contactMeDescription} ${themeStyles.contactMeDescription}`}>Contact Me</h2>
-        <div className={`${commonStyles.contactMeLabel} ${themeStyles.contactMeLabel}`}>
-          <p className={`${commonStyles.doYouHave} ${themeStyles.doYouHave}`}>Do you have any project idea?</p>
-          <p className={`${commonStyles.doyouHave} ${themeStyles.doyouHave}`}>Let’s discuss and turn them into reality!</p>
+          <img
+            className={`${commonStyles.emailIcon} ${themeStyles.emailIcon}`}
+            alt="Email"
+            src={theme === 'light' ? "email icon.svg" : "EmailDark.svg"}
+            loading="lazy"
+          />
+          <img
+            className={`${commonStyles.phoneIcon} ${themeStyles.phoneIcon}`}
+            alt="Phone"
+            src={theme === 'light' ? "phone-icon.svg" : "PhoneDark.svg"}
+            loading="lazy"
+          />
+          <button
+            className={`${commonStyles.darkModeButton} ${themeStyles.darkModeButton}`}
+            onClick={handleDarkModeButtonClick}
+            aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+          >
+            <div className={`${commonStyles.darkModeButtonBorder} ${themeStyles.darkModeButtonBorder}`} />
+            <div className={`${commonStyles.buttonState1} ${themeStyles.buttonState}`} />
+            <div className={`${commonStyles.buttonState} ${themeStyles.buttonState1}`} />
+            <b className={`${commonStyles.darkModeLabel} ${themeStyles.darkModeLabel}`}>
+              {theme === 'light' ? 'Light Mode' : 'Dark Mode'}
+            </b>
+          </button>
+          {/* Certification badges removed as requested */}
         </div>
-        <img
-          className={`${commonStyles.emailIcon} ${themeStyles.emailIcon}`}
-          alt="Email"
-          src={theme === 'light' ? "email icon.svg" : "EmailDark.svg"}
-          loading="lazy"
-        />
-        <img
-          className={`${commonStyles.phoneIcon} ${themeStyles.phoneIcon}`}
-          alt="Phone"
-          src={theme === 'light' ? "phone-icon.svg" : "PhoneDark.svg"}
-          loading="lazy"
-        />
-        <button
-          className={`${commonStyles.darkModeButton} ${themeStyles.darkModeButton}`}
-          onClick={handleDarkModeButtonClick}
-          aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-        >
-          <div className={`${commonStyles.darkModeButtonBorder} ${themeStyles.darkModeButtonBorder}`} />
-          <div className={`${commonStyles.buttonState1} ${themeStyles.buttonState}`} />
-          <div className={`${commonStyles.buttonState} ${themeStyles.buttonState1}`} />
-          <b className={`${commonStyles.darkModeLabel} ${themeStyles.darkModeLabel}`}>
-            {theme === 'light' ? 'Light Mode' : 'Dark Mode'}
-          </b>
-        </button>
-        {/* Certification badges removed as requested */}
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 
