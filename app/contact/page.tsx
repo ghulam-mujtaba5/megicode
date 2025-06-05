@@ -7,6 +7,7 @@ import Footer from "../../components/Footer/Footer";
 import ThemeToggleIcon from "../../components/Icon/sbicon";
 import ContactSection from "../../components/Contact/ConatctUs";
 import ContactInfoCard from "../../components/Contact/ContactInfoCard";
+import ParticleBackground from "../../components/ParticleBackground/ParticleBackground";
 
 export default function ContactPage() {
   const { theme, toggleTheme } = useTheme();
@@ -23,6 +24,8 @@ export default function ContactPage() {
 
   return (
     <div style={{ backgroundColor: theme === "dark" ? "#1d2127" : "#ffffff", overflowX: "hidden", position: "relative" }}>
+      {/* Subtle animated background */}
+      <ParticleBackground />
       <div style={{
         position: "fixed",
         top: 0,
