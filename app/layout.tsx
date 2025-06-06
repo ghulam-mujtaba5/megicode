@@ -1,6 +1,9 @@
 import "../styles/global.css";
 import React from "react";
 import { Providers } from "./providers";
+if (process.env.NODE_ENV !== 'production' && typeof window !== 'undefined') {
+  require('../utils/axe-a11y');
+}
 
 export const viewport = {
   width: 'device-width',
