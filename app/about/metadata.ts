@@ -9,6 +9,7 @@ export const metadata: Metadata = {
     description: 'Discover how Megicode transforms businesses with AI-powered software solutions. Learn about our journey, values, and expertise.',
     images: [
       {
+        
         url: '/meta/about-og.png',
         width: 1200,
         height: 630,
