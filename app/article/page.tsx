@@ -12,10 +12,13 @@ const ArticlePage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://payloadw.onrender.com/api/posts")
+    fetch("/api/articles")
       .then((res) => res.json())
       .then((data) => {
         setArticles(data?.docs || []);
+        setLoading(false);
+      })
+      .catch(() => {
         setLoading(false);
       });
   }, []);
