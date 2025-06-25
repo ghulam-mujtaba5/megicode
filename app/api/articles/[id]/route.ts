@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 export async function GET(req, { params }) {
-  const { id } = params;
+  const { id } = await params;
   try {
     const res = await fetch(`https://payloadw.onrender.com/api/posts/${id}`);
     if (!res.ok) {
