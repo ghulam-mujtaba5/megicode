@@ -100,17 +100,17 @@ const NavBar = () => {
         </div>
       </div>
 
-      {/* Reviews page */}
+      {/* Article page */}
 
       <div
-        className={`${styles.resume} ${pathname === "/reviews" ? styles.selected : ""}`}
-        onClick={() => navigateTo("/reviews")}
+        className={`${styles.resume} ${pathname === "/article" ? styles.selected : ""}`}
+        onClick={() => navigateTo("/article")}
         role="button"
         tabIndex={0}
-        aria-label="Reviews"
-        onKeyPress={(e) => e.key === 'Enter' && navigateTo("/reviews")}
+        aria-label="Article"
+        onKeyPress={(e) => e.key === 'Enter' && navigateTo("/article")}
       >
-        <div className={styles.resumeText}>Reviews</div>
+        <div className={styles.resumeText}>Article</div>
       </div>
 
       {/* Project page */}

@@ -13,7 +13,7 @@ const NavBar = () => {
         { id: 'about', label: 'About', href: '/about' },
         { id: 'services', label: 'Services', href: '/services' },
         { id: 'projects', label: 'Projects', href: '/projects' },
-        { id: 'reviews', label: 'Reviews', href: '/reviews' },
+        { id: 'article', label: 'Article', href: '/article' },
         { id: 'contact', label: 'Contact', href: '/contact' },
     ];
     const [isMenuOpen, setIsMenuOpen] = useState(false);
