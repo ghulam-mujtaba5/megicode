@@ -7,7 +7,7 @@ import ThemeToggleIcon from "../../components/Icon/sbicon";
 import { useTheme } from "../../context/ThemeContext";
 
 const ArticlePage = () => {
-  const { theme } = useTheme();
+  const { theme, toggleTheme } = useTheme();
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -29,7 +29,8 @@ const ArticlePage = () => {
         transition: "background 0.3s"
       }}
     >
-      <div id="theme-toggle" role="button" tabIndex={0} style={{ position: "fixed", top: 24, right: 32, zIndex: 10 }}>
+      {/* Theme Toggle Icon */}
+      <div id="theme-toggle" role="button" tabIndex={0} onClick={toggleTheme} style={{ margin: "0 0 0 1.5rem", paddingTop: 18, width: 40 }}>
         <ThemeToggleIcon />
       </div>
       <nav id="desktop-navbar" aria-label="Main Navigation">
