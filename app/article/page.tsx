@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
 import NavBarDesktop from "../../components/NavBar_Desktop_Company/nav-bar-Company";
 import NavBarMobile from "../../components/NavBar_Mobile/NavBar-mobile";
 import Footer from "../../components/Footer/Footer";
@@ -74,57 +75,63 @@ const ArticlePage = () => {
             }}
           >
             {articles.map((article) => (
-              <article
+              <Link
                 key={article.id}
-                style={{
-                  background: theme === "dark"
-                    ? "rgba(36, 41, 54, 0.98)"
-                    : "rgba(255,255,255,0.98)",
-                  border: theme === "dark" ? "1.5px solid #2e3440" : "1.5px solid #e3e8ee",
-                  borderRadius: 20,
-                  boxShadow:
-                    theme === "dark"
-                      ? "0 4px 32px 0 rgba(0,0,0,0.25)"
-                      : "0 4px 24px 0 rgba(60,60,120,0.07)",
-                  padding: "2.5rem 2rem 2rem 2rem",
-                  transition: "box-shadow 0.2s, border 0.2s, background 0.2s",
-                  position: "relative",
-                  overflow: "hidden"
-                }}
+                href={`/article/${article.id}`}
+                style={{ textDecoration: "none" }}
               >
-                <h2
+                <article
                   style={{
-                    fontSize: 26,
-                    fontWeight: 700,
-                    marginBottom: 10,
-                    color: theme === "dark" ? "#e3e8ee" : "#232946",
-                    letterSpacing: "-0.5px"
+                    background: theme === "dark"
+                      ? "rgba(36, 41, 54, 0.98)"
+                      : "rgba(255,255,255,0.98)",
+                    border: theme === "dark" ? "1.5px solid #2e3440" : "1.5px solid #e3e8ee",
+                    borderRadius: 20,
+                    boxShadow:
+                      theme === "dark"
+                        ? "0 4px 32px 0 rgba(0,0,0,0.25)"
+                        : "0 4px 24px 0 rgba(60,60,120,0.07)",
+                    padding: "2.5rem 2rem 2rem 2rem",
+                    transition: "box-shadow 0.2s, border 0.2s, background 0.2s",
+                    position: "relative",
+                    overflow: "hidden",
+                    cursor: "pointer"
                   }}
                 >
-                  {article.title}
-                </h2>
-                <div
-                  style={{
-                    color: theme === "dark" ? "#b0b8c1" : "#5a6270",
-                    fontSize: 15,
-                    marginBottom: 18,
-                    fontWeight: 500
-                  }}
-                >
-                  {article.populatedAuthors && article.populatedAuthors[0]?.name} &middot; {new Date(article.createdAt).toLocaleDateString()}
-                </div>
-                <p
-                  style={{
-                    fontSize: 18,
-                    lineHeight: 1.7,
-                    color: theme === "dark" ? "#c7d0e0" : "#232946",
-                    marginBottom: 0,
-                    fontWeight: 400
-                  }}
-                >
-                  {article.content?.root?.children?.[0]?.children?.map((c) => c.text).join(' ')?.slice(0, 200) || 'No preview available.'}
-                </p>
-              </article>
+                  <h2
+                    style={{
+                      fontSize: 26,
+                      fontWeight: 700,
+                      marginBottom: 10,
+                      color: theme === "dark" ? "#e3e8ee" : "#232946",
+                      letterSpacing: "-0.5px"
+                    }}
+                  >
+                    {article.title}
+                  </h2>
+                  <div
+                    style={{
+                      color: theme === "dark" ? "#b0b8c1" : "#5a6270",
+                      fontSize: 15,
+                      marginBottom: 18,
+                      fontWeight: 500
+                    }}
+                  >
+                    {article.populatedAuthors && article.populatedAuthors[0]?.name} &middot; {new Date(article.createdAt).toLocaleDateString()}
+                  </div>
+                  <p
+                    style={{
+                      fontSize: 18,
+                      lineHeight: 1.7,
+                      color: theme === "dark" ? "#c7d0e0" : "#232946",
+                      marginBottom: 0,
+                      fontWeight: 400
+                    }}
+                  >
+                    {article.content?.root?.children?.[0]?.children?.map((c) => c.text).join(' ')?.slice(0, 200) || 'No preview available.'}
+                  </p>
+                </article>
+              </Link>
             ))}
           </div>
         )}
