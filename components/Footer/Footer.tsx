@@ -33,7 +33,7 @@ const Footer = ({
         <img
           className={commonStyles.copyrightIcon}
           alt="Copyright Icon"
-          src={theme === 'dark' ? "CopyrightDark.svg" : "copyright-icon.svg"}
+          src={theme === 'dark' ? "/CopyrightDark.svg" : "/copyright-icon.svg"}
         />
         <p className={commonStyles.copyrightLabel}>
           {copyrightText}
@@ -41,7 +41,7 @@ const Footer = ({
         <img
           className={commonStyles.linkedinIcon}
           alt="LinkedIn"
-          src={theme === 'dark' ? "LinkedinDark.svg" : "linkedin-icon.svg"}
+          src={theme === 'dark' ? "/LinkedinDark.svg" : "/linkedin-icon.svg"}
           onClick={() => openLink(linkedinUrl)}
           onKeyDown={e => handleKeyDown(e, linkedinUrl)}
           tabIndex={0}
@@ -51,7 +51,7 @@ const Footer = ({
         <img
           className={commonStyles.instagramIcon}
           alt="Instagram"
-          src={theme === 'dark' ? "InstagramDark.svg" : "Instagram-icon.svg"}
+          src={theme === 'dark' ? "/InstagramDark.svg" : "/Instagram-icon.svg"}
           onClick={() => openLink(instagramUrl)}
           onKeyDown={e => handleKeyDown(e, instagramUrl)}
           tabIndex={0}
@@ -61,7 +61,7 @@ const Footer = ({
         <img
           className={commonStyles.githubIcon}
           alt="GitHub"
-          src={theme === 'dark' ? "GithubDark.svg" : "github_icon.svg"}
+          src={theme === 'dark' ? "/GithubDark.svg" : "/github_icon.svg"}
           onClick={() => openLink(githubUrl)}
           onKeyDown={e => handleKeyDown(e, githubUrl)}
           tabIndex={0}
