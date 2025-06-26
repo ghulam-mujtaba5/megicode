@@ -1,6 +1,9 @@
 import "../styles/global.css";
 import React from "react";
 import { Providers } from "./providers";
+import dynamic from "next/dynamic";
+import ClientLayout from "./ClientLayout";
+
 if (process.env.NODE_ENV !== 'production' && typeof window !== 'undefined') {
   require('../utils/axe-a11y');
 }
@@ -59,6 +62,7 @@ export const metadata = {
       },
     ],
   },
+  
   twitter: {
     card: "summary_large_image",
     title: "Megicode - Modern Software Solutions",
@@ -83,7 +87,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          <ClientLayout>
+            {children}
+          </ClientLayout>
+        </Providers>
       </body>
     </html>
   );
