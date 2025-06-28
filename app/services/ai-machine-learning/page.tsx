@@ -7,7 +7,7 @@ import { useInViewAnimation } from "../../../hooks/useInViewAnimation";
 import servicesData from "../servicesData";
 import { OurProcess, EngagementModels, MethodologyAndCommunication, ServiceFAQs } from "../ServiceDetailSections";
 import { SiPython, SiTensorflow, SiPytorch, SiScikitlearn, SiAmazon, SiGooglecloud } from "react-icons/si";
-import { FaRobot } from "react-icons/fa";
+import { FaRobot, FaLanguage, FaEye, FaCogs } from "react-icons/fa";
 
 
 // Clone the service object and override the techs array to remove 'AI' and 'Azure', and add other relevant technologies
@@ -37,6 +37,16 @@ const faqs = [
   { q: "Can you work with our existing data and systems?", a: "Yes, we specialize in integrating AI solutions with your current tech stack and data sources." },
   { q: "What is the typical project timeline?", a: "AI projects usually take 6-16 weeks, depending on complexity and data readiness." },
   { q: "Do you provide post-launch support?", a: "Absolutely. We offer ongoing monitoring, retraining, and support packages." }
+];
+
+
+// Features/deliverables with icons
+const features = [
+  { icon: <FaRobot color="#4573df" size={36} title="AI Model Development" />, label: "AI Model Development" },
+  { icon: <SiTensorflow color="#FF6F00" size={36} title="Machine Learning Integration" />, label: "Machine Learning Integration" },
+  { icon: <FaLanguage color="#4573df" size={36} title="Natural Language Processing" />, label: "Natural Language Processing" },
+  { icon: <FaEye color="#4573df" size={36} title="Computer Vision" />, label: "Computer Vision" },
+  { icon: <FaCogs color="#4573df" size={36} title="AI-Powered Automation" />, label: "AI-Powered Automation" },
 ];
 
 const testimonial = {
@@ -410,7 +420,7 @@ export default function AIMachineLearningDetailPage() {
       <section style={{ margin: '3.2rem 0', animation: 'fadeInUp 1.5s cubic-bezier(.23,1.01,.32,1) both' }} data-animate="stagger-fade">
         <h2 style={{ fontSize: '1.38rem', fontWeight: 900, color: '#4573df', marginBottom: 26, letterSpacing: 0.14, textShadow: '0 2px 8px #4573df11', lineHeight: 1.1 }}>What You Get</h2>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 32 }}>
-          {service.features.map((f, i) => (
+          {features.map((f, i) => (
             <div key={i} className="deliverable-card" style={{
               background: palette.cardBgGlass,
               borderRadius: 22,
@@ -434,8 +444,8 @@ export default function AIMachineLearningDetailPage() {
               onMouseOut={e => e.currentTarget.style.boxShadow = isDark ? '0 8px 32px #23294633' : '0 8px 32px #4573df11'}
               data-animate="fade-in"
             >
-              <img src="/IconSystem/checkmark.svg" alt="Check" style={{ width: 36, height: 36, filter: isDark ? 'drop-shadow(0 3px 8px #23294644)' : 'drop-shadow(0 3px 8px #4573df22)' }} />
-              {f}
+              {f.icon}
+              {f.label}
             </div>
           ))}
         </div>
