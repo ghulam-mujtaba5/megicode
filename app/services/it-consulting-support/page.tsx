@@ -6,7 +6,7 @@ import { useTheme } from "../../../context/ThemeContext";
 import { useInViewAnimation } from "../../../hooks/useInViewAnimation";
 import servicesData from "../servicesData";
 import { OurProcess, EngagementModels, MethodologyAndCommunication, ServiceFAQs } from "../ServiceDetailSections";
-import { FaCogs, FaUserShield, FaRegHandshake, FaRegClock, FaRegCheckCircle } from "react-icons/fa";
+import { FaCogs, FaUserShield, FaRegHandshake, FaRegClock, FaRegCheckCircle, FaMapSigns, FaServer, FaShieldAlt, FaLifeRing, FaBook } from "react-icons/fa";
 
 
 import { SiJirasoftware, SiGoogle } from "react-icons/si";
@@ -220,33 +220,43 @@ export default function ITConsultingSupportDetailPage() {
         <section style={{ margin: '3.2rem 0', animation: 'fadeInUp 1.5s cubic-bezier(.23,1.01,.32,1) both' }}>
           <h2 style={{ fontSize: '1.38rem', fontWeight: 900, color: palette.textAccent, marginBottom: 26, letterSpacing: 0.14, textShadow: isDark ? '0 2px 8px #23294633' : '0 2px 8px #4ea8ff11', lineHeight: 1.1 }}>Key Features</h2>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 32 }}>
-            {service.features.map((f, i) => (
-              <div key={i} style={{
-                background: palette.cardBgGlass,
-                borderRadius: 22,
-                padding: '1.7rem 1.8rem',
-                minWidth: 240,
-                flex: 1,
-                fontWeight: 900,
-                color: palette.textMain,
-                boxShadow: isDark ? '0 8px 32px #23294633' : '0 8px 32px #4ea8ff11',
-                fontSize: '1.16rem',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 22,
-                border: `1.5px solid ${palette.border}`,
-                transition: 'box-shadow 0.2s, transform 0.15s',
-                backdropFilter: 'blur(2px)',
-                cursor: 'pointer',
-                filter: isDark ? 'drop-shadow(0 2px 12px #23294633)' : 'drop-shadow(0 2px 12px #4ea8ff11)',
-              }}
-                onMouseOver={e => e.currentTarget.style.boxShadow = isDark ? '0 16px 48px #23294644' : '0 16px 48px #4ea8ff22'}
-                onMouseOut={e => e.currentTarget.style.boxShadow = isDark ? '0 8px 32px #23294633' : '0 8px 32px #4ea8ff11'}
-              >
-                <FaCogs color={palette.textAccent} size={32} style={{ marginRight: 14 }} />
-                {f}
-              </div>
-            ))}
+            {service.features.map((f, i) => {
+              // Choose icon based on feature index or text
+              const icons = [
+                <FaMapSigns color={palette.textAccent} size={32} style={{ marginRight: 14 }} title="Technology Strategy & Roadmapping" />,
+                <FaServer color={palette.textAccent} size={32} style={{ marginRight: 14 }} title="IT Infrastructure Consulting" />,
+                <FaShieldAlt color={palette.textAccent} size={32} style={{ marginRight: 14 }} title="Security Audits & Compliance" />,
+                <FaLifeRing color={palette.textAccent} size={32} style={{ marginRight: 14 }} title="Ongoing Maintenance & Support" />,
+                <FaBook color={palette.textAccent} size={32} style={{ marginRight: 14 }} title="Training & Documentation" />
+              ];
+              return (
+                <div key={i} style={{
+                  background: palette.cardBgGlass,
+                  borderRadius: 22,
+                  padding: '1.7rem 1.8rem',
+                  minWidth: 240,
+                  flex: 1,
+                  fontWeight: 900,
+                  color: palette.textMain,
+                  boxShadow: isDark ? '0 8px 32px #23294633' : '0 8px 32px #4ea8ff11',
+                  fontSize: '1.16rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 22,
+                  border: `1.5px solid ${palette.border}`,
+                  transition: 'box-shadow 0.2s, transform 0.15s',
+                  backdropFilter: 'blur(2px)',
+                  cursor: 'pointer',
+                  filter: isDark ? 'drop-shadow(0 2px 12px #23294633)' : 'drop-shadow(0 2px 12px #4ea8ff11)',
+                }}
+                  onMouseOver={e => e.currentTarget.style.boxShadow = isDark ? '0 16px 48px #23294644' : '0 16px 48px #4ea8ff22'}
+                  onMouseOut={e => e.currentTarget.style.boxShadow = isDark ? '0 8px 32px #23294633' : '0 8px 32px #4ea8ff11'}
+                >
+                  {icons[i] || <FaCogs color={palette.textAccent} size={32} style={{ marginRight: 14 }} />}
+                  {f}
+                </div>
+              );
+            })}
           </div>
         </section>
 
