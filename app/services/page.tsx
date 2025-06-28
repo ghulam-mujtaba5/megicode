@@ -1,6 +1,8 @@
 
 "use client";
+
 import React, { Suspense } from "react";
+import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { useTheme } from "../../context/ThemeContext";
 import NavBarDesktop from "../../components/NavBar_Desktop_Company/nav-bar-Company";
@@ -37,6 +39,7 @@ export default function ServicesPage() {
     {
       icon: "/Ai icon.svg",
       title: "AI & Machine Learning Solutions",
+      slug: "ai-machine-learning",
       description: "Custom AI models, automation, and intelligent systems to drive innovation and efficiency for your business.",
       features: [
         "AI Model Development",
@@ -50,6 +53,7 @@ export default function ServicesPage() {
     {
       icon: "/ds&ai-icon.svg",
       title: "Data Analytics & Business Intelligence",
+      slug: "data-analytics-bi",
       description: "Transform data into actionable insights with analytics, dashboards, and business intelligence solutions.",
       features: [
         "Big Data Analytics",
@@ -63,6 +67,7 @@ export default function ServicesPage() {
     {
       icon: "/web app icon.svg",
       title: "Custom Web Development",
+      slug: "custom-web-development",
       description: "Robust, scalable, and secure web applications tailored to your business goals and user needs.",
       features: [
         "Full-Stack Development",
@@ -76,6 +81,7 @@ export default function ServicesPage() {
     {
       icon: "/mobile app icon.svg",
       title: "Mobile App Solutions",
+      slug: "mobile-app-solutions",
       description: "Native and cross-platform mobile apps for iOS and Android, designed for performance and engagement.",
       features: [
         "iOS & Android Apps",
@@ -89,6 +95,7 @@ export default function ServicesPage() {
     {
       icon: "/Desktop-App-icon.svg",
       title: "Cloud & DevOps Services",
+      slug: "cloud-devops-services",
       description: "Cloud migration, CI/CD, and infrastructure automation for scalable, secure, and efficient operations.",
       features: [
         "Cloud Migration & Management",
@@ -102,6 +109,7 @@ export default function ServicesPage() {
     {
       icon: "/data scrapping icon.svg",
       title: "Automation & Integration",
+      slug: "automation-integration",
       description: "Workflow automation, data integration, and process optimization to streamline your business.",
       features: [
         "Business Process Automation",
@@ -115,6 +123,7 @@ export default function ServicesPage() {
     {
       icon: "/Ui&Ux-icon.svg",
       title: "UI/UX & Product Design",
+      slug: "ui-ux-product-design",
       description: "User-centered design for engaging, intuitive, and accessible digital products.",
       features: [
         "User Research & Personas",
@@ -128,6 +137,7 @@ export default function ServicesPage() {
     {
       icon: "/it-consulting-support-icon.svg",
       title: "IT Consulting & Support",
+      slug: "it-consulting-support",
       description: "Expert guidance, security, and ongoing support to help you achieve your technology goals.",
       features: [
         "Technology Strategy & Roadmapping",
@@ -251,23 +261,25 @@ export default function ServicesPage() {
       `}</style>
       <section className="services-grid">
         {services.map((service, idx) => (
-          <div className="service-card" key={idx}>
-            <div className={`service-card-icon${service.title === 'Cloud & DevOps Services' ? ' cloud-devops' : ''}`}>
-              <img src={service.icon} alt={service.title + ' icon'} />
+          <Link href={`/services/${service.slug}`} key={idx} style={{ textDecoration: 'none' }}>
+            <div className="service-card" tabIndex={0} role="button" style={{ cursor: 'pointer' }}>
+              <div className={`service-card-icon${service.title === 'Cloud & DevOps Services' ? ' cloud-devops' : ''}`}>
+                <img src={service.icon} alt={service.title + ' icon'} />
+              </div>
+              <div className="service-card-title">{service.title}</div>
+              <div className="service-card-desc">{service.description}</div>
+              <ul className="service-card-features">
+                {service.features.map((f, i) => (
+                  <li key={i}>{f}</li>
+                ))}
+              </ul>
+              <div className="service-card-techs">
+                {service.techs.map((t, i) => (
+                  <span className="service-card-tech" key={i}>{t}</span>
+                ))}
+              </div>
             </div>
-            <div className="service-card-title">{service.title}</div>
-            <div className="service-card-desc">{service.description}</div>
-            <ul className="service-card-features">
-              {service.features.map((f, i) => (
-                <li key={i}>{f}</li>
-              ))}
-            </ul>
-            <div className="service-card-techs">
-              {service.techs.map((t, i) => (
-                <span className="service-card-tech" key={i}>{t}</span>
-              ))}
-            </div>
-          </div>
+          </Link>
         ))}
       </section>
 
