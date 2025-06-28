@@ -1,14 +1,36 @@
 <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
   <g>
-    <!-- Main shield -->
-    <path d="M28 9L46 18V30C46 40 34 46 28 48C22 46 10 40 10 30V18L28 9Z" fill="#3C7ABE"/>
+    <!-- Larger, more central shield -->
+    <path d="M28 12L44 20V32C44 41 32 46 28 47.5C24 46 12 41 12 32V20L28 12Z" fill="#3C7ABE"/>
     <!-- Shield highlight for depth -->
-    <path d="M28 13L42 20.5V30C42 37 32 42 28 43.5C24 42 14 37 14 30V20.5L28 13Z" fill="#fff" fill-opacity="0.13"/>
-    <!-- Subtle inner highlight -->
-    <path d="M28 17L38 22.5V30C38 34 30.5 38 28 39C25.5 38 18 34 18 30V22.5L28 17Z" fill="#fff" fill-opacity="0.07"/>
-    <!-- Advanced, dynamic checkmark -->
-    <path d="M21.5 31.5L27.5 38L38 22" stroke="#F0782D" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M28 16L40 22.5V32C40 38 30.5 42 28 43C25.5 42 16 38 16 32V22.5L28 16Z" fill="#fff" fill-opacity="0.13"/>
+    <!-- Gear (IT/tech), larger and more central -->
+    <g>
+      <circle cx="38" cy="28" r="4.5" fill="#fff" fill-opacity="0.18"/>
+      <circle cx="38" cy="28" r="2.3" fill="#3C7ABE"/>
+      <g stroke="#3C7ABE" stroke-width="1.2">
+        <line x1="38" y1="23.2" x2="38" y2="21.5"/>
+        <line x1="38" y1="32.8" x2="38" y2="34.5"/>
+        <line x1="42.8" y1="28" x2="44.5" y2="28"/>
+        <line x1="33.2" y1="28" x2="31.5" y2="28"/>
+        <line x1="41.2" y1="25.2" x2="42.3" y2="24.1"/>
+        <line x1="34.8" y1="30.8" x2="33.7" y2="31.9"/>
+        <line x1="34.8" y1="25.2" x2="33.7" y2="24.1"/>
+        <line x1="41.2" y1="30.8" x2="42.3" y2="31.9"/>
+      </g>
+    </g>
+    <!-- Chat bubble (consulting/support), larger and more central -->
+    <g>
+      <ellipse cx="22" cy="34" rx="6" ry="3.5" fill="#fff" fill-opacity="0.18"/>
+      <ellipse cx="22" cy="34" rx="3.7" ry="1.9" fill="#3C7ABE"/>
+      <path d="M22 37.5L22 41" stroke="#3C7ABE" stroke-width="1.2" stroke-linecap="round"/>
+      <circle cx="19.5" cy="34" r="0.6" fill="#fff"/>
+      <circle cx="22" cy="34" r="0.6" fill="#fff"/>
+      <circle cx="24.5" cy="34" r="0.6" fill="#fff"/>
+    </g>
+    <!-- Advanced, dynamic checkmark, larger -->
+    <path d="M20 29L27 37L38 20" stroke="#F0782D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
     <!-- Subtle white glow behind checkmark for contrast -->
-    <path d="M21.5 31.5L27.5 38L38 22" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="0.13"/>
+    <path d="M20 29L27 37L38 20" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.13"/>
   </g>
 </svg>
