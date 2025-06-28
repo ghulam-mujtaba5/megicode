@@ -1,10 +1,13 @@
 
 "use client";
+
 import React from "react";
 import { useTheme } from "../../../context/ThemeContext";
 import { useInViewAnimation } from "../../../hooks/useInViewAnimation";
 import servicesData from "../servicesData";
 import { OurProcess, EngagementModels, MethodologyAndCommunication, ServiceFAQs } from "../ServiceDetailSections";
+import { SiPython, SiTensorflow, SiPytorch, SiScikitlearn, SiAmazon, SiGooglecloud } from "react-icons/si";
+import { FaRobot } from "react-icons/fa";
 
 const service = servicesData.find(s => s.slug === "ai-machine-learning");
 
@@ -440,32 +443,76 @@ export default function AIMachineLearningDetailPage() {
       }} data-animate="logo-cloud">
         <h2 style={{ fontSize: '1.28rem', fontWeight: 900, color: '#4573df', marginBottom: 26, letterSpacing: 0.14, textShadow: '0 2px 8px #4573df11', lineHeight: 1.1 }}>Technologies</h2>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 32, alignItems: 'center' }}>
-          {service.techs.map((t, i) => (
-            <span key={i} className="tech-logo-card" style={{
-              background: palette.cardBgGlass,
-              borderRadius: 14,
-              padding: '0.7rem 1.7rem',
-              fontWeight: 900,
-              fontSize: '1.16rem',
-              letterSpacing: 0.24,
-              boxShadow: isDark ? '0 4px 18px #23294633' : '0 4px 18px #4573df11',
-              display: 'flex',
-              alignItems: 'center',
-              gap: 16,
-              border: `1.5px solid ${palette.border}`,
-              transition: 'box-shadow 0.2s, transform 0.15s',
-              backdropFilter: 'blur(2px)',
-              cursor: 'pointer',
-              filter: isDark ? 'drop-shadow(0 2px 12px #23294633)' : 'drop-shadow(0 2px 12px #4573df11)',
-            }}
-              onMouseOver={e => e.currentTarget.style.boxShadow = isDark ? '0 16px 48px #23294644' : '0 16px 48px #4573df22'}
-              onMouseOut={e => e.currentTarget.style.boxShadow = isDark ? '0 4px 18px #23294633' : '0 4px 18px #4573df11'}
-              data-animate="scale-on-hover"
-            >
-              <img src={`/meta/${t.replace(/\s/g, '')}.png`} alt={t} style={{ width: 40, height: 40, marginRight: 12 }} />
-              {t}
-            </span>
-          ))}
+          {/* Example: Map tech name to react-icon if available, else fallback to image */}
+          {service.techs.map((t, i) => {
+            let Icon = null;
+            let color = undefined;
+            switch (t.toLowerCase()) {
+              case "python": Icon = SiPython; color = "#3776AB"; break;
+              case "tensorflow": Icon = SiTensorflow; color = "#FF6F00"; break;
+              case "pytorch": Icon = SiPytorch; color = "#EE4C2C"; break;
+              case "scikit-learn": Icon = SiScikitlearn; color = "#F7931E"; break;
+              case "aws":
+              case "amazon aws":
+              case "amazon web services": Icon = SiAmazon; color = "#FF9900"; break;
+              case "google cloud": Icon = SiGooglecloud; color = "#4285F4"; break;
+              case "openai":
+                try {
+                  // Dynamically import to avoid breaking if not present
+                  // eslint-disable-next-line @typescript-eslint/no-var-requires
+                  Icon = require("react-icons/si").SiOpenai;
+                  color = "#412991";
+                } catch { Icon = null; color = undefined; }
+                break;
+              case "azureai":
+              case "azure ai":
+              case "microsoft azure":
+                try {
+                  Icon = require("react-icons/si").SiMicrosoftazure;
+                  color = "#0089D6";
+                } catch { Icon = null; color = undefined; }
+                break;
+              default: Icon = null; color = undefined;
+            }
+            return (
+              <span key={i} className="tech-logo-card" style={{
+                background: palette.cardBgGlass,
+                borderRadius: 14,
+                padding: '0.7rem 1.7rem',
+                fontWeight: 900,
+                fontSize: '1.16rem',
+                letterSpacing: 0.24,
+                boxShadow: isDark ? '0 4px 18px #23294633' : '0 4px 18px #4573df11',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 16,
+                border: `1.5px solid ${palette.border}`,
+                transition: 'box-shadow 0.2s, transform 0.15s',
+                backdropFilter: 'blur(2px)',
+                cursor: 'pointer',
+                filter: isDark ? 'drop-shadow(0 2px 12px #23294633)' : 'drop-shadow(0 2px 12px #4573df11)',
+              }}
+                onMouseOver={e => e.currentTarget.style.boxShadow = isDark ? '0 16px 48px #23294644' : '0 16px 48px #4573df22'}
+                onMouseOut={e => e.currentTarget.style.boxShadow = isDark ? '0 4px 18px #23294633' : '0 4px 18px #4573df11'}
+                data-animate="scale-on-hover"
+              >
+                {Icon ? (
+                  <Icon size={40} style={{ marginRight: 12 }} title={t} color={color} />
+                ) : (
+                  <img
+                    src={`/meta/${
+                      t.toLowerCase().replace(/\s/g, '') === 'azureai' || t.toLowerCase().replace(/\s/g, '') === 'azure' || t.toLowerCase().replace(/\s/g, '') === 'microsoftazure'
+                        ? 'AzureAI.png'
+                        : `${t.replace(/\s/g, '')}.png`
+                    }`}
+                    alt={t}
+                    style={{ width: 40, height: 40, marginRight: 12 }}
+                  />
+                )}
+                {t}
+              </span>
+            );
+          })}
         </div>
       </section>
 
@@ -713,7 +760,8 @@ export default function AIMachineLearningDetailPage() {
             e.currentTarget.style.boxShadow = isDark ? '0 8px 32px #23294644' : '0 8px 32px #4573df33';
           }}
         >
-          <span role="img" aria-label="Talk to AI Consultant" style={{ marginRight: 14, fontSize: '1.5rem', animation: 'pulse 2.2s infinite' }}>🤖</span>Talk to AI Consultant
+          <FaRobot style={{ marginRight: 14, fontSize: '1.5rem', animation: 'pulse 2.2s infinite', verticalAlign: 'middle' }} title="AI Consultant" />
+          Talk to AI Consultant
         </a>
         <div style={{ marginTop: 22, color: palette.textMain, fontSize: '1.18rem', fontWeight: 800, textShadow: isDark ? '0 3px 16px #23294644' : '0 3px 16px #4573df22', position: 'relative', zIndex: 2 }}>Ready to unlock the power of AI? Let’s talk about your vision.</div>
       </section>
