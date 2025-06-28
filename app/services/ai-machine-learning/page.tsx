@@ -9,7 +9,20 @@ import { OurProcess, EngagementModels, MethodologyAndCommunication, ServiceFAQs 
 import { SiPython, SiTensorflow, SiPytorch, SiScikitlearn, SiAmazon, SiGooglecloud } from "react-icons/si";
 import { FaRobot } from "react-icons/fa";
 
-const service = servicesData.find(s => s.slug === "ai-machine-learning");
+
+// Clone the service object and override the techs array to remove 'AI' and 'Azure', and add other relevant technologies
+const service = {
+  ...servicesData.find(s => s.slug === "ai-machine-learning"),
+  techs: [
+    "Python",
+    "TensorFlow",
+    "PyTorch",
+    "Scikit-learn",
+    "AWS",
+    "Google Cloud",
+    "OpenAI"
+  ]
+};
 
 const processSteps = [
   { title: "Discovery & Consultation", desc: "Business goals & AI opportunities.", icon: "/IconSystem/requirements.svg" },
