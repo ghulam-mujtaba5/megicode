@@ -385,7 +385,6 @@ export default function AIMachineLearningDetailPage() {
         backdropFilter: 'blur(2.5px)',
         animation: 'fadeInUp 1.4s cubic-bezier(.23,1.01,.32,1) both',
       }} data-animate="timeline">
-        <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#4573df', marginBottom: 18, letterSpacing: 0.1 }}>Our Process</h2>
         <OurProcess steps={processSteps} />
       </section>
 
