@@ -469,112 +469,129 @@ export default function AIMachineLearningDetailPage() {
         </div>
       </section>
 
-      {/* Engagement Models & Methodology */}
+      {/* How We Work Section */}
       {/* Section divider */}
       <div style={{ width: '100%', height: 0, borderTop: '1.5px solid #eaf6ff', margin: '0 0 2.2rem 0', opacity: 0.7 }} />
-      <div className="engagement-method-section">
-        {/* Engagement Models Card */}
-        <div
-          className="engagement-method-card"
-          tabIndex={0}
-          style={{
-            flex: 1,
-            minWidth: 320,
-            background: palette.cardInner,
-            borderRadius: 28,
-            boxShadow: isDark ? '0 8px 32px #181c2244' : '0 8px 32px #4573df11',
-            padding: '2.7rem 2.2rem 2.5rem 2.2rem',
+      <section
+        style={{
+          margin: '3.2rem 0',
+          background: isDark ? 'linear-gradient(100deg, #232946 60%, #181c22 100%)' : 'linear-gradient(100deg, #e3e6ea 60%, #f7fafd 100%)',
+          borderRadius: 32,
+          boxShadow: isDark ? '0 12px 48px #23294633' : '0 12px 48px #4573df11',
+          padding: '3.2rem 2.8rem',
+          border: `2px solid ${palette.border}`,
+          position: 'relative',
+          overflow: 'hidden',
+          animation: 'fadeInUp 1.8s cubic-bezier(.23,1.01,.32,1) both',
+          color: palette.textMain,
+        }}
+        aria-labelledby="how-we-work-title"
+      >
+        <h2 id="how-we-work-title" style={{ fontSize: '1.55rem', fontWeight: 900, color: palette.textAccent, marginBottom: 18, letterSpacing: 0.13, textShadow: isDark ? '0 2px 8px #23294633' : '0 2px 8px #4573df11', lineHeight: 1.1, textAlign: 'center' }}>
+          How We Work: Partnership, Process & Delivery
+        </h2>
+        <div style={{ maxWidth: 900, margin: '0 auto', marginBottom: 32, color: palette.textSubtle, fontWeight: 600, fontSize: '1.13rem', textAlign: 'center' }}>
+          We operate as your strategic partner—combining robust engagement models, agile execution, and enterprise-grade governance. Our operational workflow ensures risk-managed, transparent, and value-driven AI delivery: on time, on budget, and with full business visibility.
+        </div>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+          gap: 36,
+          alignItems: 'stretch',
+          margin: '0 auto',
+          maxWidth: 980,
+        }}>
+          {/* Engagement Models */}
+          <div style={{
+            background: palette.cardBgGlass,
+            borderRadius: 22,
+            padding: '2.1rem 1.7rem',
+            boxShadow: isDark ? '0 8px 32px #23294633' : '0 8px 32px #4573df11',
             border: `1.5px solid ${palette.cardInnerBorder}`,
-            backdropFilter: 'blur(2.5px)',
             display: 'flex',
             flexDirection: 'column',
+            gap: 18,
+            minHeight: 240,
             justifyContent: 'flex-start',
+            alignItems: 'flex-start',
             position: 'relative',
-            transition: 'box-shadow 0.2s, transform 0.15s',
-          }}
-          onMouseOver={e => e.currentTarget.style.boxShadow = isDark ? '0 16px 48px #23294644' : '0 16px 48px #4573df22'}
-          onMouseOut={e => e.currentTarget.style.boxShadow = isDark ? '0 8px 32px #181c2244' : '0 8px 32px #4573df11'}
-          aria-label="Engagement Models"
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 18 }}>
-            <span className="engagement-method-icon" tabIndex={0} aria-label="Engagement Models Icon" style={{ fontSize: '2.1rem', lineHeight: 1, marginRight: 2 }}>💰</span>
-            <h2 style={{ fontSize: '1.22rem', fontWeight: 900, color: palette.textAccent, letterSpacing: 0.13, margin: 0 }}>Engagement Models</h2>
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 6 }}>
+              <span style={{ fontSize: '2rem' }} aria-label="Engagement Models">�</span>
+              <span style={{ fontWeight: 800, fontSize: '1.13rem', color: palette.textAccent }}>Engagement Models</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+              <span style={{ fontSize: '1.3rem' }} aria-label="Fixed Price">📊</span>
+              <div>
+                <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Fixed Price</div>
+                <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Clear deliverables, predictable budget, and milestone-based billing. Ideal for well-defined projects and risk-averse stakeholders.</div>
+              </div>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+              <span style={{ fontSize: '1.3rem' }} aria-label="Dedicated Team">🤝</span>
+              <div>
+                <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Dedicated Team</div>
+                <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Scalable, cross-functional team extension. Direct access to Megicode experts, rapid onboarding, and seamless collaboration with your business.</div>
+              </div>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+              <span style={{ fontSize: '1.3rem' }} aria-label="Time & Material">⏱️</span>
+              <div>
+                <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Time & Material</div>
+                <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Agile, transparent billing for evolving requirements. Best for innovation, R&D, and projects with changing scope.</div>
+              </div>
+            </div>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}>
-              <span className="engagement-method-icon" tabIndex={0} aria-label="Fixed Price Icon" style={{ fontSize: '1.5rem', marginTop: 2 }}>💰</span>
+          {/* Methodology & Communication */}
+          <div style={{
+            background: palette.cardBgGlass,
+            borderRadius: 22,
+            padding: '2.1rem 1.7rem',
+            boxShadow: isDark ? '0 8px 32px #23294633' : '0 8px 32px #4573df11',
+            border: `1.5px solid ${palette.cardInnerBorder}`,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 18,
+            minHeight: 260,
+            justifyContent: 'flex-start',
+            alignItems: 'flex-start',
+            position: 'relative',
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 6 }}>
+              <span style={{ fontSize: '2rem' }} aria-label="Methodology & Communication">🧭</span>
+              <span style={{ fontWeight: 800, fontSize: '1.13rem', color: palette.textAccent }}>Methodology & Communication</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+              <span style={{ fontSize: '1.3rem' }} aria-label="Agile, CMMI L3+">⚡</span>
               <div>
-                <div style={{ fontWeight: 800, fontSize: '1.08rem', color: palette.textMain }}>Fixed Price</div>
-                <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '1.01rem', marginTop: 2 }}>Predictable budget, defined scope.</div>
+                <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Agile, CMMI L3+</div>
+                <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Iterative, sprint-based delivery with continuous improvement. CMMI L3+ for process maturity and global best practices.</div>
               </div>
             </div>
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}>
-              <span className="engagement-method-icon" tabIndex={0} aria-label="Dedicated Team Icon" style={{ fontSize: '1.5rem', marginTop: 2 }}>🤝</span>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+              <span style={{ fontSize: '1.3rem' }} aria-label="Transparent Updates">📢</span>
               <div>
-                <div style={{ fontWeight: 800, fontSize: '1.08rem', color: palette.textMain }}>Dedicated Team</div>
-                <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '1.01rem', marginTop: 2 }}>Flexible, scalable team extension.</div>
+                <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Transparent Updates</div>
+                <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Weekly demos, open communication, and real-time dashboards for full project visibility.</div>
               </div>
             </div>
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}>
-              <span className="engagement-method-icon" tabIndex={0} aria-label="Time and Material Icon" style={{ fontSize: '1.5rem', marginTop: 2 }}>⏱️</span>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+              <span style={{ fontSize: '1.3rem' }} aria-label="Jira, Figma, GitHub">🛠️</span>
               <div>
-                <div style={{ fontWeight: 800, fontSize: '1.08rem', color: palette.textMain }}>Time & Material</div>
-                <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '1.01rem', marginTop: 2 }}>Agile, transparent billing.</div>
+                <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Jira, Figma, GitHub</div>
+                <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Enterprise-grade tools for project tracking, design collaboration, and code quality assurance.</div>
+              </div>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+              <span style={{ fontSize: '1.3rem' }} aria-label="Risk Management & Governance">🛡️</span>
+              <div>
+                <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Risk Management & Governance</div>
+                <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Proactive risk identification, compliance (GDPR, SOC2), and executive reporting for business assurance.</div>
               </div>
             </div>
           </div>
         </div>
-        {/* Divider for visual separation on desktop */}
-        <div style={{ width: 2, background: isDark ? '#23294622' : '#eaf6ff', borderRadius: 2, margin: '0 0.5rem', alignSelf: 'stretch', opacity: 0.7, display: 'none', minHeight: 220 }} className="engagement-method-divider" aria-hidden="true" />
-        {/* Methodology & Communication Card */}
-        <div
-          className="engagement-method-card"
-          tabIndex={0}
-          style={{
-            flex: 1,
-            minWidth: 320,
-            background: palette.cardInner,
-            borderRadius: 28,
-            boxShadow: isDark ? '0 8px 32px #181c2244' : '0 8px 32px #4573df11',
-            padding: '2.7rem 2.2rem 2.5rem 2.2rem',
-            border: `1.5px solid ${palette.cardInnerBorder}`,
-            backdropFilter: 'blur(2.5px)',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'flex-start',
-            position: 'relative',
-            transition: 'box-shadow 0.2s, transform 0.15s',
-          }}
-          onMouseOver={e => e.currentTarget.style.boxShadow = isDark ? '0 16px 48px #23294644' : '0 16px 48px #4573df22'}
-          onMouseOut={e => e.currentTarget.style.boxShadow = isDark ? '0 8px 32px #181c2244' : '0 8px 32px #4573df11'}
-          aria-label="Methodology and Communication"
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 18 }}>
-            <span className="engagement-method-icon" tabIndex={0} aria-label="Methodology Icon" style={{ fontSize: '2.1rem', lineHeight: 1, marginRight: 2 }}>⚡</span>
-            <h2 style={{ fontSize: '1.22rem', fontWeight: 900, color: palette.textAccent, letterSpacing: 0.13, margin: 0 }}>Methodology & Communication</h2>
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}>
-              <span className="engagement-method-icon" tabIndex={0} aria-label="Agile, CMMI L3+ Icon" style={{ fontSize: '1.5rem', marginTop: 2 }}>⚡</span>
-              <div>
-                <div style={{ fontWeight: 800, fontSize: '1.08rem', color: palette.textMain }}>Agile, CMMI L3+</div>
-              </div>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}>
-              <span className="engagement-method-icon" tabIndex={0} aria-label="Transparent Updates Icon" style={{ fontSize: '1.5rem', marginTop: 2 }}>📢</span>
-              <div>
-                <div style={{ fontWeight: 800, fontSize: '1.08rem', color: palette.textMain }}>Transparent Updates</div>
-              </div>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}>
-              <span className="engagement-method-icon" tabIndex={0} aria-label="Jira, Figma, GitHub Icon" style={{ fontSize: '1.5rem', marginTop: 2 }}>🛠️</span>
-              <div>
-                <div style={{ fontWeight: 800, fontSize: '1.08rem', color: palette.textMain }}>Jira, Figma, GitHub</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      </section>
 
       {/* Testimonial */}
       {/* Section divider */}
