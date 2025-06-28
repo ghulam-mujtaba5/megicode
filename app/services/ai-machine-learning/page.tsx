@@ -76,9 +76,62 @@ export default function AIMachineLearningDetailPage() {
   };
   return (
     <>
-      <style>{keyframes}</style>
+      <style>{`
+        ${keyframes}
+        .skip-to-content {
+          position: absolute;
+          left: -999px;
+          top: auto;
+          width: 1px;
+          height: 1px;
+          overflow: hidden;
+          z-index: 9999;
+          background: #fff;
+          color: #222b3a;
+          font-weight: bold;
+          border-radius: 8px;
+          padding: 8px 18px;
+          transition: left 0.2s;
+        }
+        .skip-to-content:focus {
+          left: 16px;
+          top: 16px;
+          width: auto;
+          height: auto;
+          outline: 3px solid #4573df;
+        }
+        .engagement-method-section {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 56px;
+          margin: 3.2rem 0;
+          animation: fadeInUp 1.7s cubic-bezier(.23,1.01,.32,1) both;
+          align-items: stretch;
+        }
+        @media (max-width: 900px) {
+          .engagement-method-section {
+            flex-direction: column;
+            gap: 32px;
+          }
+        }
+        .engagement-method-card:focus-within, .engagement-method-card:focus {
+          outline: 3px solid #4573df;
+          outline-offset: 2px;
+        }
+        .engagement-method-icon[aria-label] {
+          outline: none;
+        }
+        .engagement-method-icon:focus {
+          outline: 2px solid #4573df;
+        }
+        .cta-btn:active {
+          transform: scale(0.97);
+          box-shadow: 0 2px 8px #4573df44;
+        }
+      `}</style>
+      <a href="#main-content" className="skip-to-content">Skip to main content</a>
       <div style={{ background: palette.bgMain, overflowX: 'hidden', position: 'relative', minHeight: '100vh', colorScheme: isDark ? 'dark' : 'light', transition: 'background 0.4s, color 0.3s' }}>
-        <main
+        <main id="main-content"
           style={{
             maxWidth: 1160,
             margin: '2.5rem auto',
@@ -420,54 +473,51 @@ export default function AIMachineLearningDetailPage() {
       {/* Engagement Models & Methodology */}
       {/* Section divider */}
       <div style={{ width: '100%', height: 0, borderTop: '1.5px solid #eaf6ff', margin: '0 0 2.2rem 0', opacity: 0.7 }} />
-      <div style={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: 56,
-        margin: '3.2rem 0',
-        animation: 'fadeInUp 1.7s cubic-bezier(.23,1.01,.32,1) both',
-        alignItems: 'stretch',
-      }}>
+      <div className="engagement-method-section">
         {/* Engagement Models Card */}
-        <div style={{
-          flex: 1,
-          minWidth: 320,
-          background: palette.cardInner,
-          borderRadius: 28,
-          boxShadow: isDark ? '0 8px 32px #181c2244' : '0 8px 32px #4573df11',
-          padding: '2.7rem 2.2rem 2.5rem 2.2rem',
-          border: `1.5px solid ${palette.cardInnerBorder}`,
-          backdropFilter: 'blur(2.5px)',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'flex-start',
-          position: 'relative',
-          transition: 'box-shadow 0.2s, transform 0.15s',
-        }}
+        <div
+          className="engagement-method-card"
+          tabIndex={0}
+          style={{
+            flex: 1,
+            minWidth: 320,
+            background: palette.cardInner,
+            borderRadius: 28,
+            boxShadow: isDark ? '0 8px 32px #181c2244' : '0 8px 32px #4573df11',
+            padding: '2.7rem 2.2rem 2.5rem 2.2rem',
+            border: `1.5px solid ${palette.cardInnerBorder}`,
+            backdropFilter: 'blur(2.5px)',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-start',
+            position: 'relative',
+            transition: 'box-shadow 0.2s, transform 0.15s',
+          }}
           onMouseOver={e => e.currentTarget.style.boxShadow = isDark ? '0 16px 48px #23294644' : '0 16px 48px #4573df22'}
           onMouseOut={e => e.currentTarget.style.boxShadow = isDark ? '0 8px 32px #181c2244' : '0 8px 32px #4573df11'}
+          aria-label="Engagement Models"
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 18 }}>
-            <span style={{ fontSize: '2.1rem', lineHeight: 1, marginRight: 2 }}>💰</span>
+            <span className="engagement-method-icon" tabIndex={0} aria-label="Engagement Models Icon" style={{ fontSize: '2.1rem', lineHeight: 1, marginRight: 2 }}>💰</span>
             <h2 style={{ fontSize: '1.22rem', fontWeight: 900, color: palette.textAccent, letterSpacing: 0.13, margin: 0 }}>Engagement Models</h2>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}>
-              <span style={{ fontSize: '1.5rem', marginTop: 2 }}>💰</span>
+              <span className="engagement-method-icon" tabIndex={0} aria-label="Fixed Price Icon" style={{ fontSize: '1.5rem', marginTop: 2 }}>💰</span>
               <div>
                 <div style={{ fontWeight: 800, fontSize: '1.08rem', color: palette.textMain }}>Fixed Price</div>
                 <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '1.01rem', marginTop: 2 }}>Predictable budget, defined scope.</div>
               </div>
             </div>
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}>
-              <span style={{ fontSize: '1.5rem', marginTop: 2 }}>🤝</span>
+              <span className="engagement-method-icon" tabIndex={0} aria-label="Dedicated Team Icon" style={{ fontSize: '1.5rem', marginTop: 2 }}>🤝</span>
               <div>
                 <div style={{ fontWeight: 800, fontSize: '1.08rem', color: palette.textMain }}>Dedicated Team</div>
                 <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '1.01rem', marginTop: 2 }}>Flexible, scalable team extension.</div>
               </div>
             </div>
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}>
-              <span style={{ fontSize: '1.5rem', marginTop: 2 }}>⏱️</span>
+              <span className="engagement-method-icon" tabIndex={0} aria-label="Time and Material Icon" style={{ fontSize: '1.5rem', marginTop: 2 }}>⏱️</span>
               <div>
                 <div style={{ fontWeight: 800, fontSize: '1.08rem', color: palette.textMain }}>Time & Material</div>
                 <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '1.01rem', marginTop: 2 }}>Agile, transparent billing.</div>
@@ -476,45 +526,49 @@ export default function AIMachineLearningDetailPage() {
           </div>
         </div>
         {/* Divider for visual separation on desktop */}
-        <div style={{ width: 2, background: isDark ? '#23294622' : '#eaf6ff', borderRadius: 2, margin: '0 0.5rem', alignSelf: 'stretch', opacity: 0.7, display: 'none', minHeight: 220 }} className="engagement-method-divider" />
+        <div style={{ width: 2, background: isDark ? '#23294622' : '#eaf6ff', borderRadius: 2, margin: '0 0.5rem', alignSelf: 'stretch', opacity: 0.7, display: 'none', minHeight: 220 }} className="engagement-method-divider" aria-hidden="true" />
         {/* Methodology & Communication Card */}
-        <div style={{
-          flex: 1,
-          minWidth: 320,
-          background: palette.cardInner,
-          borderRadius: 28,
-          boxShadow: isDark ? '0 8px 32px #181c2244' : '0 8px 32px #4573df11',
-          padding: '2.7rem 2.2rem 2.5rem 2.2rem',
-          border: `1.5px solid ${palette.cardInnerBorder}`,
-          backdropFilter: 'blur(2.5px)',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'flex-start',
-          position: 'relative',
-          transition: 'box-shadow 0.2s, transform 0.15s',
-        }}
+        <div
+          className="engagement-method-card"
+          tabIndex={0}
+          style={{
+            flex: 1,
+            minWidth: 320,
+            background: palette.cardInner,
+            borderRadius: 28,
+            boxShadow: isDark ? '0 8px 32px #181c2244' : '0 8px 32px #4573df11',
+            padding: '2.7rem 2.2rem 2.5rem 2.2rem',
+            border: `1.5px solid ${palette.cardInnerBorder}`,
+            backdropFilter: 'blur(2.5px)',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-start',
+            position: 'relative',
+            transition: 'box-shadow 0.2s, transform 0.15s',
+          }}
           onMouseOver={e => e.currentTarget.style.boxShadow = isDark ? '0 16px 48px #23294644' : '0 16px 48px #4573df22'}
           onMouseOut={e => e.currentTarget.style.boxShadow = isDark ? '0 8px 32px #181c2244' : '0 8px 32px #4573df11'}
+          aria-label="Methodology and Communication"
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 18 }}>
-            <span style={{ fontSize: '2.1rem', lineHeight: 1, marginRight: 2 }}>⚡</span>
+            <span className="engagement-method-icon" tabIndex={0} aria-label="Methodology Icon" style={{ fontSize: '2.1rem', lineHeight: 1, marginRight: 2 }}>⚡</span>
             <h2 style={{ fontSize: '1.22rem', fontWeight: 900, color: palette.textAccent, letterSpacing: 0.13, margin: 0 }}>Methodology & Communication</h2>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}>
-              <span style={{ fontSize: '1.5rem', marginTop: 2 }}>⚡</span>
+              <span className="engagement-method-icon" tabIndex={0} aria-label="Agile, CMMI L3+ Icon" style={{ fontSize: '1.5rem', marginTop: 2 }}>⚡</span>
               <div>
                 <div style={{ fontWeight: 800, fontSize: '1.08rem', color: palette.textMain }}>Agile, CMMI L3+</div>
               </div>
             </div>
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}>
-              <span style={{ fontSize: '1.5rem', marginTop: 2 }}>📢</span>
+              <span className="engagement-method-icon" tabIndex={0} aria-label="Transparent Updates Icon" style={{ fontSize: '1.5rem', marginTop: 2 }}>📢</span>
               <div>
                 <div style={{ fontWeight: 800, fontSize: '1.08rem', color: palette.textMain }}>Transparent Updates</div>
               </div>
             </div>
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}>
-              <span style={{ fontSize: '1.5rem', marginTop: 2 }}>🛠️</span>
+              <span className="engagement-method-icon" tabIndex={0} aria-label="Jira, Figma, GitHub Icon" style={{ fontSize: '1.5rem', marginTop: 2 }}>🛠️</span>
               <div>
                 <div style={{ fontWeight: 800, fontSize: '1.08rem', color: palette.textMain }}>Jira, Figma, GitHub</div>
               </div>
