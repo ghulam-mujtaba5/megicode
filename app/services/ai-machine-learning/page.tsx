@@ -517,28 +517,28 @@ export default function AIMachineLearningDetailPage() {
             position: 'relative',
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 6 }}>
-              <span style={{ fontSize: '2rem' }} aria-label="Engagement Models">�</span>
+              <span style={{ fontSize: '2rem' }} aria-label="Engagement Models" role="img">💼</span>
               <span style={{ fontWeight: 800, fontSize: '1.13rem', color: palette.textAccent }}>Engagement Models</span>
             </div>
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-              <span style={{ fontSize: '1.3rem' }} aria-label="Fixed Price">📊</span>
+              <span style={{ fontSize: '1.3rem' }} aria-label="Fixed Price" role="img">📊</span>
               <div>
                 <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Fixed Price</div>
-                <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Clear deliverables, predictable budget, and milestone-based billing. Ideal for well-defined projects and risk-averse stakeholders.</div>
+                <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Defined scope, predictable budget, and milestone-based billing. Best for projects with clear requirements and risk management needs.</div>
               </div>
             </div>
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-              <span style={{ fontSize: '1.3rem' }} aria-label="Dedicated Team">🤝</span>
+              <span style={{ fontSize: '1.3rem' }} aria-label="Dedicated Team" role="img">🤝</span>
               <div>
                 <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Dedicated Team</div>
-                <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Scalable, cross-functional team extension. Direct access to Megicode experts, rapid onboarding, and seamless collaboration with your business.</div>
+                <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Scalable, cross-functional team extension. Direct access to certified Megicode experts, rapid onboarding, and seamless enterprise collaboration.</div>
               </div>
             </div>
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-              <span style={{ fontSize: '1.3rem' }} aria-label="Time & Material">⏱️</span>
+              <span style={{ fontSize: '1.3rem' }} aria-label="Time & Material" role="img">⏱️</span>
               <div>
                 <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Time & Material</div>
-                <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Agile, transparent billing for evolving requirements. Best for innovation, R&D, and projects with changing scope.</div>
+                <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Agile, transparent billing for evolving requirements. Ideal for innovation, R&D, and projects with dynamic scope.</div>
               </div>
             </div>
           </div>
@@ -558,35 +558,35 @@ export default function AIMachineLearningDetailPage() {
             position: 'relative',
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 6 }}>
-              <span style={{ fontSize: '2rem' }} aria-label="Methodology & Communication">🧭</span>
+              <span style={{ fontSize: '2rem' }} aria-label="Methodology & Communication" role="img">🧭</span>
               <span style={{ fontWeight: 800, fontSize: '1.13rem', color: palette.textAccent }}>Methodology & Communication</span>
             </div>
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-              <span style={{ fontSize: '1.3rem' }} aria-label="Agile, CMMI L3+">⚡</span>
+              <span style={{ fontSize: '1.3rem' }} aria-label="Agile, CMMI L3+" role="img">⚡</span>
               <div>
                 <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Agile, CMMI L3+</div>
-                <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Iterative, sprint-based delivery with continuous improvement. CMMI L3+ for process maturity and global best practices.</div>
+                <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Iterative, sprint-based delivery with continuous improvement. CMMI L3+ for process maturity and global best practices in enterprise AI.</div>
               </div>
             </div>
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-              <span style={{ fontSize: '1.3rem' }} aria-label="Transparent Updates">📢</span>
+              <span style={{ fontSize: '1.3rem' }} aria-label="Transparent Updates" role="img">📢</span>
               <div>
                 <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Transparent Updates</div>
-                <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Weekly demos, open communication, and real-time dashboards for full project visibility.</div>
+                <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Weekly demos, open communication, and real-time dashboards for full project transparency and stakeholder alignment.</div>
               </div>
             </div>
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-              <span style={{ fontSize: '1.3rem' }} aria-label="Jira, Figma, GitHub">🛠️</span>
+              <span style={{ fontSize: '1.3rem' }} aria-label="Jira, Figma, GitHub" role="img">🛠️</span>
               <div>
                 <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Jira, Figma, GitHub</div>
-                <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Enterprise-grade tools for project tracking, design collaboration, and code quality assurance.</div>
+                <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Enterprise-grade tools for project tracking, secure design collaboration, and code quality assurance.</div>
               </div>
             </div>
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-              <span style={{ fontSize: '1.3rem' }} aria-label="Risk Management & Governance">🛡️</span>
+              <span style={{ fontSize: '1.3rem' }} aria-label="Risk Management & Governance" role="img">🛡️</span>
               <div>
                 <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Risk Management & Governance</div>
-                <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Proactive risk identification, compliance (GDPR, SOC2), and executive reporting for business assurance.</div>
+                <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Proactive risk identification, regulatory compliance (GDPR, SOC2), and executive reporting for enterprise assurance.</div>
               </div>
             </div>
           </div>
