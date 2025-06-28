@@ -34,43 +34,69 @@ export function OurProcess({ steps }: { steps: { title: string; desc: string; ic
 import { FaMoneyBillWave, FaUsers, FaRegClock, FaBolt, FaBullhorn, FaTools } from "react-icons/fa";
 
 export function EngagementModels() {
-  const models = [
-    { label: 'Fixed Price', icon: <FaMoneyBillWave size={26} color="#4ea8ff" title="Fixed Price" />, desc: 'Predictable budget, defined scope.' },
-    { label: 'Dedicated Team', icon: <FaUsers size={26} color="#4ea8ff" title="Dedicated Team" />, desc: 'Flexible, scalable team extension.' },
-    { label: 'Time & Material', icon: <FaRegClock size={26} color="#4ea8ff" title="Time & Material" />, desc: 'Agile, transparent billing.' },
-  ];
   return (
     <section style={{ marginTop: 32, marginBottom: 32 }}>
       <h2 style={{ fontSize: "1.15rem", fontWeight: 700, color: "#4ea8ff", marginBottom: 10 }}>Engagement Models</h2>
-      <div style={{ display: 'flex', gap: 18, flexWrap: 'wrap' }}>
-        {models.map((m, i) => (
-          <div key={i} style={{ background: '#e3e6ea', borderRadius: 12, padding: '0.7rem 1.2rem', minWidth: 120, textAlign: 'center', boxShadow: '0 1px 4px #4ea8ff11' }}>
-            <div style={{ fontSize: 26, marginBottom: 4 }}>{m.icon}</div>
-            <div style={{ fontWeight: 700, color: '#4ea8ff', fontSize: '1.01rem' }}>{m.label}</div>
-            <div style={{ fontSize: '0.97rem', color: '#444', opacity: 0.8 }}>{m.desc}</div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+          <span style={{ fontSize: '1.3rem' }} aria-label="Fixed Price" role="img">📊</span>
+          <div>
+            <div style={{ fontWeight: 700, fontSize: '1.05rem', color: '#232946' }}>Fixed Price</div>
+            <div style={{ color: '#3a4a5d', fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Defined scope, predictable budget, and milestone-based billing. Best for projects with clear requirements and risk management needs.</div>
           </div>
-        ))}
+        </div>
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+          <span style={{ fontSize: '1.3rem' }} aria-label="Dedicated Team" role="img">🤝</span>
+          <div>
+            <div style={{ fontWeight: 700, fontSize: '1.05rem', color: '#232946' }}>Dedicated Team</div>
+            <div style={{ color: '#3a4a5d', fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Scalable, cross-functional team extension. Direct access to certified Megicode experts, rapid onboarding, and seamless enterprise collaboration.</div>
+          </div>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+          <span style={{ fontSize: '1.3rem' }} aria-label="Time & Material" role="img">⏱️</span>
+          <div>
+            <div style={{ fontWeight: 700, fontSize: '1.05rem', color: '#232946' }}>Time & Material</div>
+            <div style={{ color: '#3a4a5d', fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Agile, transparent billing for evolving requirements. Ideal for innovation, R&D, and projects with dynamic scope.</div>
+          </div>
+        </div>
       </div>
     </section>
   );
 }
 
 export function MethodologyAndCommunication() {
-  const items = [
-    { icon: <FaBolt size={24} color="#4ea8ff" title="Agile, CMMI L3+" />, label: 'Agile, CMMI L3+' },
-    { icon: <FaBullhorn size={24} color="#4ea8ff" title="Transparent Updates" />, label: 'Transparent Updates' },
-    { icon: <FaTools size={24} color="#4ea8ff" title="Jira, Figma, GitHub" />, label: 'Jira, Figma, GitHub' },
-  ];
   return (
     <section style={{ marginTop: 32, marginBottom: 32 }}>
       <h2 style={{ fontSize: "1.15rem", fontWeight: 700, color: "#4ea8ff", marginBottom: 10 }}>Methodology & Communication</h2>
-      <div style={{ display: 'flex', gap: 18, flexWrap: 'wrap' }}>
-        {items.map((item, i) => (
-          <div key={i} style={{ background: '#e3e6ea', borderRadius: 12, padding: '0.7rem 1.2rem', minWidth: 120, textAlign: 'center', boxShadow: '0 1px 4px #4ea8ff11' }}>
-            <div style={{ fontSize: 24, marginBottom: 4 }}>{item.icon}</div>
-            <div style={{ fontWeight: 700, color: '#4ea8ff', fontSize: '1.01rem' }}>{item.label}</div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+          <span style={{ fontSize: '1.3rem' }} aria-label="Agile, CMMI L3+" role="img">⚡</span>
+          <div>
+            <div style={{ fontWeight: 700, fontSize: '1.05rem', color: '#232946' }}>Agile, CMMI L3+</div>
+            <div style={{ color: '#3a4a5d', fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Iterative, sprint-based delivery with continuous improvement. CMMI L3+ for process maturity and global best practices in enterprise IT.</div>
           </div>
-        ))}
+        </div>
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+          <span style={{ fontSize: '1.3rem' }} aria-label="Transparent Updates" role="img">📢</span>
+          <div>
+            <div style={{ fontWeight: 700, fontSize: '1.05rem', color: '#232946' }}>Transparent Updates</div>
+            <div style={{ color: '#3a4a5d', fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Weekly demos, open communication, and real-time dashboards for full project transparency and stakeholder alignment.</div>
+          </div>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+          <span style={{ fontSize: '1.3rem' }} aria-label="Jira, Figma, GitHub" role="img">🛠️</span>
+          <div>
+            <div style={{ fontWeight: 700, fontSize: '1.05rem', color: '#232946' }}>Jira, Figma, GitHub</div>
+            <div style={{ color: '#3a4a5d', fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Enterprise-grade tools for project tracking, secure design collaboration, and code quality assurance.</div>
+          </div>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+          <span style={{ fontSize: '1.3rem' }} aria-label="Risk Management & Governance" role="img">🛡️</span>
+          <div>
+            <div style={{ fontWeight: 700, fontSize: '1.05rem', color: '#232946' }}>Risk Management & Governance</div>
+            <div style={{ color: '#3a4a5d', fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Proactive risk identification, regulatory compliance (GDPR, ISO 27001), and executive reporting for enterprise assurance.</div>
+          </div>
+        </div>
       </div>
     </section>
   );

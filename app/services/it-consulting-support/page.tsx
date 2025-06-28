@@ -46,7 +46,6 @@ const processSteps = [
 const techs = [
   { name: "ITIL", icon: <FaNetworkWired size={36} color="#4ea8ff" title="ITIL" /> },
   { name: "ISO 27001", icon: <MdSecurity size={36} color="#4ea8ff" title="ISO 27001" /> },
-  { name: "Microsoft 365", icon: <img src="/IconSystem/microsoft365.svg" alt="Microsoft 365" style={{ width: 36, height: 36, marginRight: 0 }} /> },
   { name: "Google Workspace", icon: <SiGoogle size={36} color="#4ea8ff" title="Google Workspace" /> },
   { name: "Jira", icon: <SiJirasoftware size={36} color="#4ea8ff" title="Jira" /> },
 ];
@@ -101,7 +100,6 @@ export default function ITConsultingSupportDetailPage() {
           100% { border-image-source: linear-gradient(450deg, #4ea8ff, #6ea8ff, #cfe8ef, #4ea8ff); }
         }
       `}</style>
-      <a href="#main-content" className="skip-to-content">Skip to main content</a>
       <div style={{ background: palette.bgMain, overflowX: 'hidden', position: 'relative', minHeight: '100vh', colorScheme: isDark ? 'dark' : 'light', transition: 'background 0.4s, color 0.3s' }}>
         <main id="main-content"
           style={{
@@ -173,7 +171,10 @@ export default function ITConsultingSupportDetailPage() {
                   e.currentTarget.style.transform = 'scale(1)';
                   e.currentTarget.style.boxShadow = isDark ? '0 6px 32px #23294644, 0 0 0 2.5px #263040' : '0 6px 32px #4ea8ff33, 0 0 0 2.5px #eaf6ff';
                 }}
-              >Start Your IT Project</a>
+              >
+                <FaUserShield style={{ marginRight: 14, fontSize: '1.5rem', verticalAlign: 'middle' }} title="IT Consultant" />
+                Start Your IT Project
+              </a>
             </div>
             <div style={{ flex: 1, minWidth: 220, textAlign: 'center', position: 'relative' }}>
               <div style={{
@@ -431,6 +432,7 @@ export default function ITConsultingSupportDetailPage() {
               e.currentTarget.style.boxShadow = isDark ? '0 8px 32px #23294644' : '0 8px 32px #4ea8ff33';
             }}
           >
+            <FaUserShield style={{ marginRight: 14, fontSize: '1.5rem', verticalAlign: 'middle' }} title="IT Consultant" />
             Start Your IT Project
           </a>
           <div style={{ marginTop: 22, color: palette.textMain, fontSize: '1.18rem', fontWeight: 800, textShadow: isDark ? '0 3px 16px #23294644' : '0 3px 16px #4ea8ff22', position: 'relative', zIndex: 2 }}>Ready for secure, reliable IT? Let’s talk about your vision.</div>
