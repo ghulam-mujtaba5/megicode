@@ -37,12 +37,12 @@ export default function ServicesPage() {
     {
       icon: "/Ai icon.svg",
       title: "AI & Machine Learning Solutions",
-      description: "Empower your business with custom AI models, automation, and intelligent systems tailored to your needs.",
+      description: "Custom AI models, automation, and intelligent systems to drive innovation and efficiency for your business.",
       features: [
-        "Custom AI Model Development",
+        "AI Model Development",
         "Machine Learning Integration",
         "Natural Language Processing",
-        "Computer Vision Applications",
+        "Computer Vision",
         "AI-Powered Automation"
       ],
       techs: ["TensorFlow", "PyTorch", "OpenAI", "Scikit-learn", "Azure AI"]
@@ -50,11 +50,11 @@ export default function ServicesPage() {
     {
       icon: "/ds&ai-icon.svg",
       title: "Data Analytics & Business Intelligence",
-      description: "Unlock actionable insights from your data with advanced analytics, dashboards, and reporting.",
+      description: "Transform data into actionable insights with analytics, dashboards, and business intelligence solutions.",
       features: [
         "Big Data Analytics",
-        "Predictive & Prescriptive Analytics",
-        "Business Intelligence Dashboards",
+        "Predictive Analytics",
+        "BI Dashboards",
         "Data Warehousing",
         "Data Visualization"
       ],
@@ -63,12 +63,12 @@ export default function ServicesPage() {
     {
       icon: "/web app icon.svg",
       title: "Custom Web Development",
-      description: "Build robust, scalable, and secure web applications tailored to your business goals.",
+      description: "Robust, scalable, and secure web applications tailored to your business goals and user needs.",
       features: [
-        "Full-Stack Web Development",
+        "Full-Stack Development",
         "API & Microservices",
         "E-commerce Solutions",
-        "Content Management Systems",
+        "CMS & Portals",
         "Performance Optimization"
       ],
       techs: ["React", "Next.js", "Node.js", "TypeScript", "GraphQL"]
@@ -76,20 +76,20 @@ export default function ServicesPage() {
     {
       icon: "/mobile app icon.svg",
       title: "Mobile App Solutions",
-      description: "Deliver seamless mobile experiences with native and cross-platform apps for iOS and Android.",
+      description: "Native and cross-platform mobile apps for iOS and Android, designed for performance and engagement.",
       features: [
-        "iOS & Android Development",
-        "Cross-Platform Apps",
+        "iOS & Android Apps",
+        "Cross-Platform Development",
         "Mobile UI/UX Design",
-        "App Store Deployment",
-        "App Maintenance & Support"
+        "App Store Launch",
+        "Ongoing Support"
       ],
       techs: ["React Native", "Flutter", "Swift", "Kotlin", "Firebase"]
     },
     {
       icon: "/Desktop-App-icon.svg",
       title: "Cloud & DevOps Services",
-      description: "Accelerate your digital transformation with cloud migration, CI/CD, and infrastructure automation.",
+      description: "Cloud migration, CI/CD, and infrastructure automation for scalable, secure, and efficient operations.",
       features: [
         "Cloud Migration & Management",
         "DevOps Automation",
@@ -100,9 +100,22 @@ export default function ServicesPage() {
       techs: ["AWS", "Azure", "Docker", "Kubernetes", "Terraform"]
     },
     {
+      icon: "/data scrapping icon.svg",
+      title: "Automation & Integration",
+      description: "Workflow automation, data integration, and process optimization to streamline your business.",
+      features: [
+        "Business Process Automation",
+        "API Integration",
+        "ETL Pipelines",
+        "RPA (Robotic Process Automation)",
+        "Custom Scripting"
+      ],
+      techs: ["Python", "Zapier", "Make", "Node.js", "Selenium"]
+    },
+    {
       icon: "/Ui&Ux-icon.svg",
       title: "UI/UX & Product Design",
-      description: "Create engaging, user-centered digital products with our expert design team.",
+      description: "User-centered design for engaging, intuitive, and accessible digital products.",
       features: [
         "User Research & Personas",
         "Wireframing & Prototyping",
@@ -113,22 +126,9 @@ export default function ServicesPage() {
       techs: ["Figma", "Adobe XD", "Sketch", "InVision", "Zeplin"]
     },
     {
-      icon: "/data scrapping icon.svg",
-      title: "Automation & Integration",
-      description: "Streamline your business with workflow automation, data integration, and process optimization.",
-      features: [
-        "Business Process Automation",
-        "API Integration",
-        "ETL Pipelines",
-        "Robotic Process Automation (RPA)",
-        "Custom Scripting"
-      ],
-      techs: ["Python", "Zapier", "Make", "Node.js", "Selenium"]
-    },
-    {
       icon: "/copyright-icon.svg",
       title: "IT Consulting & Support",
-      description: "Expert guidance and ongoing support to help you achieve your technology goals.",
+      description: "Expert guidance, security, and ongoing support to help you achieve your technology goals.",
       features: [
         "Technology Strategy & Roadmapping",
         "IT Infrastructure Consulting",
