@@ -5,7 +5,10 @@ import React from "react";
 import { useTheme } from "../../../context/ThemeContext";
 import { useInViewAnimation } from "../../../hooks/useInViewAnimation";
 import servicesData from "../servicesData";
-import { OurProcess, EngagementModels, MethodologyAndCommunication, ServiceFAQs } from "../ServiceDetailSections";
+
+import { ServiceFAQs } from "../ServiceDetailSections";
+import { FaClipboardList, FaPencilRuler, FaMobileAlt, FaRocket, FaLifeRing, FaReact, FaAws, FaFigma, FaHandshake, FaMoneyBillWave, FaUsers, FaClock, FaBolt, FaBullhorn, FaTools } from 'react-icons/fa';
+import { SiFlutter, SiSwift, SiKotlin, SiFirebase, SiJira, SiFigma as SiFigmaIcon, SiGithub } from 'react-icons/si';
 
 const service = {
   ...servicesData.find(s => s.slug === "mobile-app-solutions"),
@@ -20,12 +23,13 @@ const service = {
   ]
 };
 
+
 const processSteps = [
-  { title: "Discovery & Planning", desc: "App vision & requirements.", icon: "/IconSystem/requirements.svg" },
-  { title: "UI/UX Design", desc: "Mobile UI/UX design.", icon: "/IconSystem/design.svg" },
-  { title: "Development & Testing", desc: "Build & QA.", icon: "/IconSystem/development.svg" },
-  { title: "App Store Launch", desc: "Launch on stores.", icon: "/IconSystem/deploy.svg" },
-  { title: "Ongoing Support", desc: "Updates & support.", icon: "/IconSystem/support.svg" }
+  { title: "Discovery & Planning", desc: "App vision & requirements.", icon: <FaClipboardList size={32} color="#4ea8ff" /> },
+  { title: "UI/UX Design", desc: "Mobile UI/UX design.", icon: <FaPencilRuler size={32} color="#4ea8ff" /> },
+  { title: "Development & Testing", desc: "Build & QA.", icon: <FaMobileAlt size={32} color="#4ea8ff" /> },
+  { title: "App Store Launch", desc: "Launch on stores.", icon: <FaRocket size={32} color="#4ea8ff" /> },
+  { title: "Ongoing Support", desc: "Updates & support.", icon: <FaLifeRing size={32} color="#4ea8ff" /> },
 ];
 
 const faqs = [
@@ -35,12 +39,13 @@ const faqs = [
   { q: "How do you ensure app quality?", a: "We use automated and manual testing on real devices for every release." }
 ];
 
+
 const features = [
-  { icon: "/IconSystem/requirements.svg", label: "Requirements & Planning" },
-  { icon: "/IconSystem/design.svg", label: "UI/UX Design" },
-  { icon: "/IconSystem/development.svg", label: "Native & Cross-platform Development" },
-  { icon: "/IconSystem/deploy.svg", label: "App Store Launch" },
-  { icon: "/IconSystem/support.svg", label: "Ongoing Support" },
+  { icon: <FaMobileAlt size={28} color="#4ea8ff" />, label: "Cross-Platform Expertise" },
+  { icon: <FaBolt size={28} color="#4ea8ff" />, label: "Agile & Rapid Delivery" },
+  { icon: <FaTools size={28} color="#4ea8ff" />, label: "Enterprise-Grade Security" },
+  { icon: <FaRocket size={28} color="#4ea8ff" />, label: "App Store Optimization" },
+  { icon: <FaLifeRing size={28} color="#4ea8ff" />, label: "Ongoing Analytics & Support" },
 ];
 
 const testimonial = {
@@ -77,9 +82,41 @@ export default function MobileAppSolutionsDetailPage() {
     cardInner: isDark ? 'rgba(36,41,54,0.92)' : 'rgba(255,255,255,0.96)',
     cardInnerBorder: isDark ? '#232946' : '#eaf6ff',
   };
+
+  // Animation keyframes and skip link for accessibility
+  const keyframes = `
+    @keyframes floatY { 0% { transform: translateY(0); } 50% { transform: translateY(-18px); } 100% { transform: translateY(0); } }
+    @keyframes floatX { 0% { transform: translateX(0); } 50% { transform: translateX(18px); } 100% { transform: translateX(0); } }
+    @keyframes fadeInUp { 0% { opacity: 0; transform: translateY(32px); } 100% { opacity: 1; transform: translateY(0); } }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 #4ea8ff33; } 70% { box-shadow: 0 0 0 18px #4ea8ff11; } 100% { box-shadow: 0 0 0 0 #4ea8ff33; } }
+    @keyframes borderGradient {
+      0% { border-image-source: linear-gradient(90deg, #4ea8ff, #6ea8ff, #cfe8ef, #4ea8ff); }
+      100% { border-image-source: linear-gradient(450deg, #4ea8ff, #6ea8ff, #cfe8ef, #4ea8ff); }
+    }
+    @keyframes sparkMove {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      50% { transform: translateY(-18px) scale(1.2); opacity: 0.7; }
+      100% { transform: translateY(0) scale(1); opacity: 1; }
+    }
+  `;
+
   return (
-    <div style={{ background: palette.bgMain, overflowX: 'hidden', position: 'relative', minHeight: '100vh', colorScheme: isDark ? 'dark' : 'light', transition: 'background 0.4s, color 0.3s' }}>
-      <main id="main-content"
+    <React.Fragment>
+      <style>{keyframes}</style>
+      <a href="#main-content" className="skip-to-content" style={{position:'absolute',left:'-999px',top:'auto',width:1,height:1,overflow:'hidden',zIndex:9999,background:'#fff',color:'#222b3a',fontWeight:'bold',borderRadius:8,padding:'8px 18px',transition:'left 0.2s'}} tabIndex={0}>Skip to main content</a>
+      <div style={{ background: palette.bgMain, overflowX: 'hidden', position: 'relative', minHeight: '100vh', colorScheme: isDark ? 'dark' : 'light', transition: 'background 0.4s, color 0.3s' }}>
+        {/* Animated background shapes */}
+        <div style={{position:'absolute',left:-120,top:80,width:320,height:320,background:isDark?'radial-gradient(circle, #23294655 0%, #181c2200 80%)':'radial-gradient(circle, #cfe8ef55 0%, #f7fafd00 80%)',filter:'blur(32px)',zIndex:0,pointerEvents:'none',animation:'floatY 7s ease-in-out infinite'}} aria-hidden="true" />
+        <div style={{position:'absolute',right:-100,bottom:0,width:260,height:260,background:isDark?'radial-gradient(circle, #4ea8ff33 0%, #23294600 80%)':'radial-gradient(circle, #4ea8ff22 0%, #f7fafd00 80%)',filter:'blur(36px)',zIndex:0,pointerEvents:'none',animation:'floatX 9s ease-in-out infinite'}} aria-hidden="true" />
+        {/* Scroll to top button */}
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          style={{position:'fixed',bottom:32,right:32,zIndex:100,background:palette.ctaBtn,color:palette.ctaBtnText,border:`2px solid ${palette.ctaBtnBorder}`,borderRadius:'50%',width:48,height:48,boxShadow:isDark?'0 4px 16px #23294688':'0 4px 16px #4ea8ff33',cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center',fontSize:24,transition:'background 0.2s, box-shadow 0.2s, transform 0.15s',outline:'none'}}
+          aria-label="Scroll to top"
+          tabIndex={0}
+          onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+        >↑</button>
+        <main id="main-content"
         style={{
           maxWidth: 1160,
           margin: '2.5rem auto',
@@ -189,16 +226,46 @@ export default function MobileAppSolutionsDetailPage() {
         {/* Process Stepper */}
         <div style={{ width: '100%', height: 0, borderTop: '1.5px solid #eaf6ff', margin: '0 0 2.2rem 0', opacity: 0.7 }} />
         <section style={{
-          margin: '3.2rem 0',
+          margin: '2.2rem 0',
           background: palette.cardBg,
-          borderRadius: 26,
-          boxShadow: isDark ? '0 8px 32px #23294633' : '0 8px 32px #4ea8ff11',
-          padding: '3rem 2.5rem',
-          border: `1.5px solid ${palette.border}`,
-          backdropFilter: 'blur(2.5px)',
+          borderRadius: 22,
+          boxShadow: isDark ? '0 4px 18px #23294633' : '0 4px 18px #4ea8ff11',
+          padding: '2.2rem 1.2rem',
+          border: `1px solid ${palette.border}`,
+          backdropFilter: 'blur(1.5px)',
         }}>
-          <h2 style={{ fontSize: '1.38rem', fontWeight: 900, color: palette.textAccent, marginBottom: 36, letterSpacing: 0.14, textShadow: isDark ? '0 2px 8px #23294633' : '0 2px 8px #4ea8ff11', lineHeight: 1.1, textAlign: 'center' }}>Our Process</h2>
-          <OurProcess steps={processSteps} />
+          <h2 style={{ fontSize: '1.18rem', fontWeight: 900, color: palette.textAccent, marginBottom: 18, textShadow: isDark ? '0 1px 4px #23294633' : '0 1px 4px #4ea8ff11', lineHeight: 1.1, textAlign: 'center', textTransform: 'uppercase', letterSpacing: 1 }}>{'Our Process'}</h2>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 18, justifyContent: 'center' }}>
+            {processSteps.map((step, i) => (
+              <div key={i} style={{
+                background: palette.cardBgGlass,
+                borderRadius: 16,
+                padding: '1.1rem 1.1rem',
+                minWidth: 140,
+                maxWidth: 200,
+                flex: '1 1 140px',
+                fontWeight: 700,
+                color: palette.textMain,
+                boxShadow: isDark ? '0 2px 8px #23294622' : '0 2px 8px #4ea8ff11',
+                fontSize: '0.98rem',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: 7,
+                border: `1px solid ${palette.border}`,
+                transition: 'box-shadow 0.2s, transform 0.15s',
+                backdropFilter: 'blur(1px)',
+                cursor: 'pointer',
+                filter: isDark ? 'drop-shadow(0 1px 6px #23294622)' : 'drop-shadow(0 1px 6px #4ea8ff11)',
+                textAlign: 'center',
+                marginBottom: 8,
+              }}>
+                <div style={{ marginBottom: 2 }}>{step.icon}</div>
+                <div style={{ fontWeight: 800, fontSize: '1.01rem', color: palette.textAccent, marginBottom: 1 }}>{step.title}</div>
+                <div style={{ color: palette.textMain, fontWeight: 500, fontSize: '0.93rem', opacity: 0.85 }}>{step.desc}</div>
+              </div>
+            ))}
+          </div>
         </section>
 
         {/* Features as Cards */}
@@ -226,7 +293,7 @@ export default function MobileAppSolutionsDetailPage() {
                 cursor: 'pointer',
                 filter: isDark ? 'drop-shadow(0 2px 12px #23294633)' : 'drop-shadow(0 2px 12px #4ea8ff11)',
               }}>
-                <img src={f.icon} alt={f.label} style={{ width: 36, height: 36, marginRight: 18 }} />
+                <span style={{ marginRight: 18 }}>{f.icon}</span>
                 {f.label}
               </div>
             ))}
@@ -246,28 +313,46 @@ export default function MobileAppSolutionsDetailPage() {
         }}>
           <h2 style={{ fontSize: '1.28rem', fontWeight: 900, color: '#4ea8ff', marginBottom: 26, letterSpacing: 0.14, textShadow: '0 2px 8px #4ea8ff11', lineHeight: 1.1 }}>Technologies</h2>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 32, alignItems: 'center' }}>
-            {service.techs.map((t, i) => (
-              <span key={i} style={{
-                background: palette.cardBgGlass,
-                borderRadius: 14,
-                padding: '0.7rem 1.7rem',
-                fontWeight: 900,
-                fontSize: '1.16rem',
-                letterSpacing: 0.24,
-                boxShadow: isDark ? '0 4px 18px #23294633' : '0 4px 18px #4ea8ff11',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 16,
-                border: `1.5px solid ${palette.border}`,
-                transition: 'box-shadow 0.2s, transform 0.15s',
-                backdropFilter: 'blur(2px)',
-                cursor: 'pointer',
-                filter: isDark ? 'drop-shadow(0 2px 12px #23294633)' : 'drop-shadow(0 2px 12px #4ea8ff11)',
-              }}>
-                <img src={`/meta/${t.replace(/\s/g, '')}.png`} alt={t} style={{ width: 40, height: 40, marginRight: 12 }} />
-                {t}
-              </span>
-            ))}
+            {service.techs.map((t, i) => {
+              let Icon = null;
+              let color = undefined;
+              switch (t.toLowerCase()) {
+                case "react native": Icon = FaReact; color = "#61dafb"; break;
+                case "flutter": Icon = SiFlutter; color = "#02569B"; break;
+                case "swift": Icon = SiSwift; color = "#FA7343"; break;
+                case "kotlin": Icon = SiKotlin; color = "#7F52FF"; break;
+                case "firebase": Icon = SiFirebase; color = "#FFCA28"; break;
+                case "aws": Icon = FaAws; color = "#FF9900"; break;
+                case "figma": Icon = FaFigma; color = "#A259FF"; break;
+                default: Icon = null; color = undefined;
+              }
+              return (
+                <span key={i} style={{
+                  background: palette.cardBgGlass,
+                  borderRadius: 14,
+                  padding: '0.7rem 1.7rem',
+                  fontWeight: 900,
+                  fontSize: '1.16rem',
+                  letterSpacing: 0.24,
+                  boxShadow: isDark ? '0 4px 18px #23294633' : '0 4px 18px #4ea8ff11',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 16,
+                  border: `1.5px solid ${palette.border}`,
+                  transition: 'box-shadow 0.2s, transform 0.15s',
+                  backdropFilter: 'blur(2px)',
+                  cursor: 'pointer',
+                  filter: isDark ? 'drop-shadow(0 2px 12px #23294633)' : 'drop-shadow(0 2px 12px #4ea8ff11)',
+                }}>
+                  {Icon ? (
+                    <Icon size={36} style={{ marginRight: 12 }} color={color} />
+                  ) : (
+                    <img src={`/meta/${t.replace(/\s/g, '')}.png`} alt={t} style={{ width: 36, height: 36, marginRight: 12 }} />
+                  )}
+                  {t}
+                </span>
+              );
+            })}
           </div>
         </section>
 
@@ -301,6 +386,7 @@ export default function MobileAppSolutionsDetailPage() {
             margin: '0 auto',
             maxWidth: 980,
           }}>
+            {/* Engagement Models */}
             <div style={{
               background: palette.cardBgGlass,
               borderRadius: 22,
@@ -316,11 +402,28 @@ export default function MobileAppSolutionsDetailPage() {
               position: 'relative',
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 6 }}>
-                <span style={{ fontSize: '2rem' }} aria-label="Engagement Models" role="img">💼</span>
+                <FaHandshake size={32} color={palette.textAccent} aria-label="Engagement Models" />
                 <span style={{ fontWeight: 800, fontSize: '1.13rem', color: palette.textAccent }}>Engagement Models</span>
               </div>
-              <EngagementModels />
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 16, width: '100%' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                  <FaMoneyBillWave size={22} color="#4ea8ff" aria-label="Fixed Price" />
+                  <span style={{ fontWeight: 700 }}>Fixed Price</span>
+                </div>
+                <div style={{ color: palette.textSubtle, fontSize: '1rem', marginLeft: 34, marginBottom: 8 }}>Predictable budget, defined scope.</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                  <FaUsers size={22} color="#4ea8ff" aria-label="Dedicated Team" />
+                  <span style={{ fontWeight: 700 }}>Dedicated Team</span>
+                </div>
+                <div style={{ color: palette.textSubtle, fontSize: '1rem', marginLeft: 34, marginBottom: 8 }}>Flexible, scalable team extension.</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                  <FaClock size={22} color="#4ea8ff" aria-label="Time & Material" />
+                  <span style={{ fontWeight: 700 }}>Time & Material</span>
+                </div>
+                <div style={{ color: palette.textSubtle, fontSize: '1rem', marginLeft: 34 }}>Agile, transparent billing.</div>
+              </div>
             </div>
+            {/* Methodology & Communication */}
             <div style={{
               background: palette.cardBgGlass,
               borderRadius: 22,
@@ -336,10 +439,23 @@ export default function MobileAppSolutionsDetailPage() {
               position: 'relative',
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 6 }}>
-                <span style={{ fontSize: '2rem' }} aria-label="Methodology & Communication" role="img">🧭</span>
+                <FaBolt size={32} color={palette.textAccent} aria-label="Methodology & Communication" />
                 <span style={{ fontWeight: 800, fontSize: '1.13rem', color: palette.textAccent }}>Methodology & Communication</span>
               </div>
-              <MethodologyAndCommunication />
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
+                <FaBolt size={22} color="#4ea8ff" aria-label="Agile, CMMI L3+" />
+                <span style={{ fontWeight: 700 }}>Agile, CMMI L3+</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
+                <FaBullhorn size={22} color="#4ea8ff" aria-label="Transparent Updates" />
+                <span style={{ fontWeight: 700 }}>Transparent Updates</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                <SiJira size={22} color="#0052CC" aria-label="Jira" />
+                <SiFigmaIcon size={22} color="#A259FF" aria-label="Figma" />
+                <SiGithub size={22} color="#333" aria-label="GitHub" />
+                <span style={{ fontWeight: 700 }}>Jira, Figma, GitHub</span>
+              </div>
             </div>
           </div>
         </section>
@@ -417,5 +533,6 @@ export default function MobileAppSolutionsDetailPage() {
         </section>
       </main>
     </div>
+    </React.Fragment>
   );
 }
