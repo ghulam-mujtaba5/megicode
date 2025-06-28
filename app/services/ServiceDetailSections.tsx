@@ -1,7 +1,9 @@
 "use client";
 import React from "react";
 
-export function OurProcess({ steps }: { steps: { title: string; desc: string; icon?: string }[] }) {
+import type { ReactNode } from "react";
+
+export function OurProcess({ steps }: { steps: { title: string; desc: string; icon?: string | React.ReactNode }[] }) {
   return (
     <section style={{ marginTop: 32, marginBottom: 32 }}>
       <h2 style={{ fontSize: "1.25rem", fontWeight: 700, color: "#4ea8ff", marginBottom: 18 }}>Our Process</h2>
@@ -11,7 +13,11 @@ export function OurProcess({ steps }: { steps: { title: string; desc: string; ic
             <div style={{
               width: 48, height: 48, margin: '0 auto 8px', borderRadius: '50%', background: '#e3e6ea', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 8px #4ea8ff22', fontSize: 26
             }}>
-              {step.icon ? <img src={step.icon} alt={step.title} style={{ width: 28, height: 28 }} /> : <span role="img" aria-label="step">🔹</span>}
+              {step.icon
+                ? (typeof step.icon === 'string'
+                    ? <img src={step.icon} alt={step.title} style={{ width: 28, height: 28 }} />
+                    : step.icon)
+                : <span role="img" aria-label="step">🔹</span>}
             </div>
             <div style={{ fontWeight: 700, color: '#4ea8ff', fontSize: '1.05rem', marginBottom: 4 }}>{step.title}</div>
             <div style={{ fontSize: '0.98rem', color: '#444', opacity: 0.85 }}>{step.desc}</div>
@@ -25,11 +31,13 @@ export function OurProcess({ steps }: { steps: { title: string; desc: string; ic
   );
 }
 
+import { FaMoneyBillWave, FaUsers, FaRegClock, FaBolt, FaBullhorn, FaTools } from "react-icons/fa";
+
 export function EngagementModels() {
   const models = [
-    { label: 'Fixed Price', icon: '💰', desc: 'Predictable budget, defined scope.' },
-    { label: 'Dedicated Team', icon: '🤝', desc: 'Flexible, scalable team extension.' },
-    { label: 'Time & Material', icon: '⏱️', desc: 'Agile, transparent billing.' },
+    { label: 'Fixed Price', icon: <FaMoneyBillWave size={26} color="#4ea8ff" title="Fixed Price" />, desc: 'Predictable budget, defined scope.' },
+    { label: 'Dedicated Team', icon: <FaUsers size={26} color="#4ea8ff" title="Dedicated Team" />, desc: 'Flexible, scalable team extension.' },
+    { label: 'Time & Material', icon: <FaRegClock size={26} color="#4ea8ff" title="Time & Material" />, desc: 'Agile, transparent billing.' },
   ];
   return (
     <section style={{ marginTop: 32, marginBottom: 32 }}>
@@ -49,9 +57,9 @@ export function EngagementModels() {
 
 export function MethodologyAndCommunication() {
   const items = [
-    { icon: '⚡', label: 'Agile, CMMI L3+' },
-    { icon: '📢', label: 'Transparent Updates' },
-    { icon: '🛠️', label: 'Jira, Figma, GitHub' },
+    { icon: <FaBolt size={24} color="#4ea8ff" title="Agile, CMMI L3+" />, label: 'Agile, CMMI L3+' },
+    { icon: <FaBullhorn size={24} color="#4ea8ff" title="Transparent Updates" />, label: 'Transparent Updates' },
+    { icon: <FaTools size={24} color="#4ea8ff" title="Jira, Figma, GitHub" />, label: 'Jira, Figma, GitHub' },
   ];
   return (
     <section style={{ marginTop: 32, marginBottom: 32 }}>
