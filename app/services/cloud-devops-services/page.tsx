@@ -1,11 +1,10 @@
-
 "use client";
 import React from "react";
 import { useTheme } from "../../../context/ThemeContext";
 import { useInViewAnimation } from "../../../hooks/useInViewAnimation";
 import servicesData from "../servicesData";
 import { OurProcess, EngagementModels, MethodologyAndCommunication, ServiceFAQs } from "../ServiceDetailSections";
-import { SiAmazon, SiMicrosoftazure, SiDocker, SiKubernetes, SiTerraform, SiGithubactions, SiJenkins, SiGooglecloud } from "react-icons/si";
+import { SiAmazon, SiDocker, SiKubernetes, SiTerraform, SiGithubactions, SiJenkins, SiGooglecloud } from "react-icons/si";
 import { FaCloud, FaServer, FaSync, FaLock, FaCogs, FaLifeRing, FaRocket, FaDatabase } from "react-icons/fa";
 
 const service = {
@@ -236,7 +235,7 @@ export default function CloudDevOpsServicesDetailPage() {
               let color = undefined;
               switch (t.toLowerCase()) {
                 case "aws": Icon = SiAmazon; color = "#FF9900"; break;
-                case "azure": Icon = SiMicrosoftazure; color = "#0089D6"; break;
+                case "azure": Icon = FaCloud; color = "#0089D6"; break;
                 case "docker": Icon = SiDocker; color = "#2496ED"; break;
                 case "kubernetes": Icon = SiKubernetes; color = "#326CE5"; break;
                 case "terraform": Icon = SiTerraform; color = "#623CE4"; break;

@@ -93,7 +93,7 @@ export default function ServicesPage() {
       techs: ["React Native", "Flutter", "Swift", "Kotlin", "Firebase"]
     },
     {
-      icon: "/Desktop-App-icon.svg",
+      icon: "/meta/rm.svg",
       title: "Cloud & DevOps Services",
       slug: "cloud-devops-services",
       description: "Cloud migration, CI/CD, and infrastructure automation for scalable, secure, and efficient operations.",
