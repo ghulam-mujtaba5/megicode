@@ -7,17 +7,16 @@ import { useInViewAnimation } from "../../../hooks/useInViewAnimation";
 import servicesData from "../servicesData";
 import { OurProcess, EngagementModels, MethodologyAndCommunication, ServiceFAQs } from "../ServiceDetailSections";
 import { FaLaptopCode, FaPalette, FaCogs, FaRocket, FaLifeRing, FaCloud, FaLock, FaSyncAlt } from "react-icons/fa";
-import { SiReact, SiNextdotjs, SiTypescript, SiNodedotjs, SiAmazon, SiVercel, SiDocker } from "react-icons/si";
+import { SiReact, SiNextdotjs, SiTypescript, SiNodedotjs, SiAmazon, SiVercel, SiDocker, SiSpringboot } from "react-icons/si";
 
 const service = {
   ...servicesData.find(s => s.slug === "custom-web-development"),
   techs: [
     "React",
     "Next.js",
-    "TypeScript",
     "Node.js",
+    "Spring Boot",
     "AWS",
-    "Vercel",
     "Docker"
   ]
 };
@@ -127,7 +126,16 @@ export default function CustomWebDevelopmentDetailPage() {
           </section>
 
           {/* Process Stepper */}
-          <section style={{ margin: '3.2rem 0', background: palette.cardBg, borderRadius: 26, boxShadow: isDark ? '0 8px 32px #23294633' : '0 8px 32px #4ea8ff11', padding: '3rem 2.5rem', border: `1.5px solid ${palette.border}`, backdropFilter: 'blur(2.5px)' }}>
+          <section style={{
+            margin: '3.2rem 0',
+            background: palette.cardBg,
+            borderRadius: 26,
+            boxShadow: isDark ? '0 8px 32px #23294633' : '0 8px 32px #4ea8ff11',
+            padding: '3rem 2.5rem',
+            border: `1.5px solid ${palette.border}`,
+            borderBottom: '6px solid #4ea8ff',
+            backdropFilter: 'blur(2.5px)'
+          }}>
             <h2 style={{ fontSize: '1.38rem', fontWeight: 900, color: palette.textAccent, marginBottom: 36, letterSpacing: 0.14, textShadow: isDark ? '0 2px 8px #23294633' : '0 2px 8px #4ea8ff11', lineHeight: 1.1, textAlign: 'center' }}>Our Process</h2>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 0, flexWrap: 'wrap', margin: '0 auto', maxWidth: 980 }}>
               {processSteps.map((step, idx) => (
@@ -161,20 +169,39 @@ export default function CustomWebDevelopmentDetailPage() {
           {/* Technologies as Logo Cloud */}
           <section style={{ margin: '3.2rem 0', background: palette.cardBg, borderRadius: 26, boxShadow: isDark ? '0 8px 32px #23294633' : '0 8px 32px #4ea8ff11', padding: '3rem 2.5rem', border: `1.5px solid ${palette.border}`, backdropFilter: 'blur(2.5px)' }}>
             <h2 style={{ fontSize: '1.28rem', fontWeight: 900, color: '#4ea8ff', marginBottom: 26, letterSpacing: 0.14, textShadow: '0 2px 8px #4ea8ff11', lineHeight: 1.1 }}>Technologies</h2>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 32, alignItems: 'center' }}>
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+                gap: 32,
+                alignItems: 'center',
+                justifyItems: 'center',
+                width: '100%'
+              }}
+            >
               {/* Map tech name to react-icon if available, else fallback to image */}
               {service.techs.map((t, i) => {
                 let Icon = null;
                 let color = undefined;
                 switch (t.toLowerCase()) {
-                  case "react": Icon = SiReact; color = "#61DAFB"; break;
-                  case "next.js": Icon = SiNextdotjs; color = "#000"; break;
-                  case "typescript": Icon = SiTypescript; color = "#3178C6"; break;
-                  case "node.js": Icon = SiNodedotjs; color = "#339933"; break;
-                  case "aws": Icon = SiAmazon; color = "#FF9900"; break;
-                  case "vercel": Icon = SiVercel; color = "#000"; break;
-                  case "docker": Icon = SiDocker; color = "#2496ED"; break;
-                  default: Icon = null; color = undefined;
+                  case "react":
+                    Icon = SiReact; color = "#61DAFB"; break;
+                  case "next.js":
+                    Icon = SiNextdotjs; color = "#000"; break;
+                  // case "typescript":
+                  //   Icon = SiTypescript; color = "#3178C6"; break;
+                  case "node.js":
+                    Icon = SiNodedotjs; color = "#339933"; break;
+                  case "spring boot":
+                    Icon = SiSpringboot; color = "#6DB33F"; break;
+                  case "aws":
+                    Icon = SiAmazon; color = "#FF9900"; break;
+                  case "docker":
+                    Icon = SiDocker; color = "#2496ED"; break;
+                  // case "vercel":
+                  //   Icon = SiVercel; color = "#000"; break;
+                  default:
+                    Icon = null; color = undefined;
                 }
                 return (
                   <span key={i} style={{ background: palette.cardBgGlass, borderRadius: 14, padding: '0.7rem 1.7rem', fontWeight: 900, fontSize: '1.16rem', letterSpacing: 0.24, boxShadow: isDark ? '0 4px 18px #23294633' : '0 4px 18px #4ea8ff11', display: 'flex', alignItems: 'center', gap: 16, border: `1.5px solid ${palette.border}`, transition: 'box-shadow 0.2s, transform 0.15s', backdropFilter: 'blur(2px)', cursor: 'pointer', filter: isDark ? 'drop-shadow(0 2px 12px #23294633)' : 'drop-shadow(0 2px 12px #4ea8ff11)' }}>
