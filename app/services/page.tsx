@@ -187,15 +187,29 @@ export default function ServicesPage() {
           border-color: #4ea8ff;
         }
         .service-card-icon {
-          width: 54px;
-          height: 54px;
+          width: 64px;
+          height: 64px;
           margin-bottom: 1.1rem;
           display: flex;
           align-items: center;
           justify-content: center;
-          border-radius: 14px;
+          border-radius: 16px;
           background: ${theme === "dark" ? "#23272f" : "#e3e6ea"};
-          box-shadow: 0 2px 8px 0 rgba(78,168,255,0.10);
+          box-shadow: 0 4px 16px 0 rgba(78,168,255,0.12);
+          border: 1.5px solid ${theme === "dark" ? "#263040" : "#dbeafe"};
+          overflow: hidden;
+        }
+        .service-card-icon img {
+          width: 44px;
+          height: 44px;
+          object-fit: contain;
+          display: block;
+          margin: auto;
+          filter: drop-shadow(0 1px 2px rgba(0,0,0,0.07));
+        }
+        .service-card-icon.cloud-devops img {
+          width: 54px;
+          height: 54px;
         }
         .service-card-title {
           font-size: 1.32rem;
@@ -238,8 +252,8 @@ export default function ServicesPage() {
       <section className="services-grid">
         {services.map((service, idx) => (
           <div className="service-card" key={idx}>
-            <div className="service-card-icon">
-              <img src={service.icon} alt="" style={{width: 32, height: 32, objectFit: 'contain'}} />
+            <div className={`service-card-icon${service.title === 'Cloud & DevOps Services' ? ' cloud-devops' : ''}`}>
+              <img src={service.icon} alt={service.title + ' icon'} />
             </div>
             <div className="service-card-title">{service.title}</div>
             <div className="service-card-desc">{service.description}</div>
@@ -269,3 +283,6 @@ export default function ServicesPage() {
     </div>
   );
 }
+
+
+
