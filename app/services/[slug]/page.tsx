@@ -15,6 +15,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   return {
     title: service.title + ' | Megicode',
     description: service.description,
+    keywords: service.keywords,
+    openGraph: service.openGraph,
+    twitter: service.twitter,
   };
 }
 
