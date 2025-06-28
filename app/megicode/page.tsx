@@ -13,14 +13,13 @@ import Footer from "../../components/Footer/Footer";
 import ThemeToggleIcon from "../../components/Icon/sbicon";
 
 export default function MegicodePage() {
-  const { theme } = useTheme();
+  const { theme, toggleTheme } = useTheme();
 
   const onDarkModeButtonContainerClick = useCallback(() => {
-    // Add your dark mode toggle logic here
-  }, []);
+    toggleTheme && toggleTheme();
+  }, [toggleTheme]);
 
-  // Define paths for social media links
-  // Megicode branding and contact
+  // Social/contact info
   const linkedinUrl = "https://www.linkedin.com/company/megicode";
   const instagramUrl = "https://www.instagram.com/megicode/";
   const githubUrl = "https://github.com/megicode";
@@ -28,73 +27,105 @@ export default function MegicodePage() {
   const contactEmail = "megicode@gmail.com";
   const contactPhoneNumber = "+123 456 7890";
 
-  // Navigation menu for mobile navbar
-  const sections = [
-    { label: "Home", route: "/" },
-    { label: "About", route: "/about" },
-    { label: "Services", route: "/services" },
-
-    { label: "Reviews", route: "/reviews" },
-    { label: "Project", route: "/project" },
-    { label: "Contact", route: "/contact" },
-  ];
   return (
-    <div style={{ backgroundColor: theme === "dark" ? "#1d2127" : "#ffffff", overflowX: "hidden", position: "relative" }}>      <div style={{ 
-        position: "fixed", 
-        top: 0, 
-        left: 0, 
-        width: "100%", 
-        height: "150vh",
-        pointerEvents: "none",
-        zIndex: 0
-      }}>
+    <div
+      style={{
+        background: theme === "dark"
+          ? "linear-gradient(135deg, #181c22 0%, #232946 100%)"
+          : "linear-gradient(135deg, #f8fafc 0%, #e8eaf6 100%)",
+        minHeight: "100vh",
+        overflowX: "hidden",
+        position: "relative",
+        colorScheme: theme === "dark" ? "dark" : "light",
+        border: theme === "dark" ? "1.5px solid #23272f" : "1.5px solid #e3e8ee",
+        boxShadow: theme === "dark"
+          ? "0 4px 32px 0 rgba(0,0,0,0.25)"
+          : "0 4px 24px 0 rgba(60,60,120,0.07)",
+        borderRadius: 24,
+        transition: "background 0.4s, box-shadow 0.3s, border 0.3s"
+      }}
+      // For system UI color adaptation
+      className={theme === "dark" ? "dark" : "light"}
+    >
+      {/* Subtle animated background */}
+      <div
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "150vh",
+          pointerEvents: "none",
+          zIndex: 0
+        }}
+      >
         <ParticleBackgroundClient />
       </div>
       {/* Theme Toggle Icon */}
-      <div id="theme-toggle" role="button" tabIndex={0} onClick={onDarkModeButtonContainerClick}>
+      <div
+        id="theme-toggle"
+        role="button"
+        tabIndex={0}
+        aria-label="Toggle theme"
+        onClick={onDarkModeButtonContainerClick}
+        style={{
+          position: "absolute",
+          top: 24,
+          left: 24,
+          zIndex: 20,
+          cursor: "pointer"
+        }}
+      >
         <ThemeToggleIcon />
       </div>
-
-      {/* Desktop NavBar */}
-      <nav id="desktop-navbar" aria-label="Main Navigation">
+      <main className="relative z-10 min-h-screen" style={{ paddingTop: 0, paddingBottom: 0 }}>
         <NavBarDesktop />
-      </nav>
-
-      {/* Mobile NavBar */}
-      <nav id="mobile-navbar" aria-label="Mobile Navigation">
         <NavBarMobile />
-      </nav>
-
-      {/* Welcome Frame + Advanced Hero Animation */}
-      <section id="welcome-section" aria-labelledby="welcome-heading" style={{ width: "100%", overflow: "hidden", position: 'relative' }}>
-        <WelcomeFrame />
-        <MegicodeHeroAnimationAdvancedClient />
-      </section>
-
-      {/* About Me Section */}
-      <section id="about-section" aria-labelledby="about-heading" style={{ width: "100%", overflow: "hidden" }}>
-        <AboutMeSection />
-      </section>
-
-      {/* Services Frame */}
-      <section id="services-section" aria-labelledby="services-heading" style={{ width: "100%", overflow: "hidden" }}>
-        <ServicesFrame />
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact-section" aria-labelledby="contact-heading" style={{ width: "100%", overflow: "hidden" }}>
-        <ContactSection email={contactEmail} phoneNumber={contactPhoneNumber} showCertificationBadge={false} />
-      </section>
-
-      {/* Footer */}
-      <footer id="footer-section" aria-label="Footer" style={{ width: "100%", overflow: "hidden" }}>
+        {/* Welcome Frame + Advanced Hero Animation */}
+        <section
+          id="welcome-section"
+          aria-labelledby="welcome-heading"
+          style={{ width: "100%", overflow: "hidden", position: "relative" }}
+        >
+          <WelcomeFrame />
+          <MegicodeHeroAnimationAdvancedClient />
+        </section>
+        {/* About Me Section */}
+        <section
+          id="about-section"
+          aria-labelledby="about-heading"
+          style={{ width: "100%", overflow: "hidden" }}
+        >
+          <AboutMeSection />
+        </section>
+        {/* Services Frame */}
+        <section
+          id="services-section"
+          aria-labelledby="services-heading"
+          style={{ width: "100%", overflow: "hidden" }}
+        >
+          <ServicesFrame />
+        </section>
+        {/* Contact Section */}
+        <section
+          id="contact-section"
+          aria-labelledby="contact-heading"
+          style={{ width: "100%", overflow: "hidden" }}
+        >
+          <ContactSection
+            email={contactEmail}
+            phoneNumber={contactPhoneNumber}
+            showCertificationBadge={false}
+          />
+        </section>
+        {/* Footer */}
         <Footer
           linkedinUrl={linkedinUrl}
           instagramUrl={instagramUrl}
           githubUrl={githubUrl}
           copyrightText={copyrightText}
         />
-      </footer>
+      </main>
     </div>
   );
 }
