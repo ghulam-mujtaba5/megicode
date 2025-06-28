@@ -126,7 +126,7 @@ export default function ServicesPage() {
       techs: ["Figma", "Adobe XD", "Sketch", "InVision", "Zeplin"]
     },
     {
-      icon: "/copyright-icon.svg",
+      icon: "/it-consulting-support-icon.svg",
       title: "IT Consulting & Support",
       description: "Expert guidance, security, and ongoing support to help you achieve your technology goals.",
       features: [
