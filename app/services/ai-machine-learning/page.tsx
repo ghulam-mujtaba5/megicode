@@ -7,7 +7,7 @@ import { useInViewAnimation } from "../../../hooks/useInViewAnimation";
 import servicesData from "../servicesData";
 import { OurProcess, EngagementModels, MethodologyAndCommunication, ServiceFAQs } from "../ServiceDetailSections";
 import { SiPython, SiTensorflow, SiPytorch, SiScikitlearn, SiAmazon, SiGooglecloud } from "react-icons/si";
-import { FaRobot, FaLanguage, FaEye, FaCogs } from "react-icons/fa";
+import { FaRobot, FaLanguage, FaEye, FaCogs, FaSearch, FaDatabase, FaRocket, FaLifeRing } from "react-icons/fa";
 
 
 // Clone the service object and override the techs array to remove 'AI' and 'Azure', and add other relevant technologies
@@ -25,11 +25,31 @@ const service = {
 };
 
 const processSteps = [
-  { title: "Discovery & Consultation", desc: "Business goals & AI opportunities.", icon: "/IconSystem/requirements.svg" },
-  { title: "Data Preparation", desc: "Data collection & cleaning.", icon: "/IconSystem/data.svg" },
-  { title: "Model Development", desc: "Custom AI/ML model design.", icon: "/IconSystem/development.svg" },
-  { title: "Integration & Deployment", desc: "Workflow integration & launch.", icon: "/IconSystem/deploy.svg" },
-  { title: "Monitoring & Support", desc: "Ongoing tuning & support.", icon: "/IconSystem/support.svg" }
+  {
+    title: "Discovery & Consultation",
+    desc: "Business goals & AI opportunities.",
+    icon: <FaSearch color="#4573df" size={36} title="Discovery & Consultation" />
+  },
+  {
+    title: "Data Preparation",
+    desc: "Data collection & cleaning.",
+    icon: <FaDatabase color="#4573df" size={36} title="Data Preparation" />
+  },
+  {
+    title: "Model Development",
+    desc: "Custom AI/ML model design.",
+    icon: <FaCogs color="#4573df" size={36} title="Model Development" />
+  },
+  {
+    title: "Integration & Deployment",
+    desc: "Workflow integration & launch.",
+    icon: <FaRocket color="#4573df" size={36} title="Integration & Deployment" />
+  },
+  {
+    title: "Monitoring & Support",
+    desc: "Ongoing tuning & support.",
+    icon: <FaLifeRing color="#4573df" size={36} title="Monitoring & Support" />
+  }
 ];
 
 const faqs = [
@@ -411,7 +431,63 @@ export default function AIMachineLearningDetailPage() {
         backdropFilter: 'blur(2.5px)',
         animation: 'fadeInUp 1.4s cubic-bezier(.23,1.01,.32,1) both',
       }} data-animate="timeline">
-        <OurProcess steps={processSteps} />
+        <h2 style={{ fontSize: '1.38rem', fontWeight: 900, color: palette.textAccent, marginBottom: 36, letterSpacing: 0.14, textShadow: isDark ? '0 2px 8px #23294633' : '0 2px 8px #4573df11', lineHeight: 1.1, textAlign: 'center' }}>Our Process</h2>
+        <div style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'flex-start',
+          gap: 0,
+          flexWrap: 'wrap',
+          margin: '0 auto',
+          maxWidth: 980,
+        }}>
+          {processSteps.map((step, idx) => (
+            <div key={idx} style={{
+              flex: 1,
+              minWidth: 160,
+              maxWidth: 220,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              textAlign: 'center',
+              margin: '0 8px',
+              position: 'relative',
+            }}>
+              <div style={{
+                background: isDark ? '#232946' : '#f7fafd',
+                borderRadius: '50%',
+                width: 64,
+                height: 64,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: 12,
+                border: `2.5px solid ${palette.border}`,
+                boxShadow: isDark ? '0 4px 18px #23294633' : '0 4px 18px #4573df11',
+              }}>
+                {step.icon}
+              </div>
+              <div style={{ fontWeight: 900, fontSize: '1.08rem', color: palette.textAccent, marginBottom: 6 }}>{step.title}</div>
+              <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginBottom: 0 }}>{step.desc}</div>
+              {idx < processSteps.length - 1 && (
+                <div style={{
+                  position: 'absolute',
+                  right: -8,
+                  top: 32,
+                  width: 24,
+                  height: 2,
+                  background: isDark ? '#263040' : '#eaf6ff',
+                  opacity: 0.7,
+                  zIndex: 1,
+                  left: '100%',
+                  marginLeft: 0,
+                  marginRight: 0,
+                  display: 'block',
+                }} />
+              )}
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* Features as Cards - Deliverables Grid */}
