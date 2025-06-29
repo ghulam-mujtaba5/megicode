@@ -45,12 +45,13 @@ export default function ReviewsPage() {
         <NavBarMobile />
       </nav>   
 
-            <main className="relative">
-                <Suspense fallback={<Loading />}>
-                    <ReviewsHero />
-                    <ReviewsGrid />
-                </Suspense>
-            </main>
+        <main className="relative" aria-label="Reviews Main Content">
+            <h1 style={{position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden'}}>Reviews & Testimonials</h1>
+            <Suspense fallback={<Loading />}>
+                <ReviewsHero />
+                <ReviewsGrid />
+            </Suspense>
+        </main>
 
             <Footer 
                 linkedinUrl="https://www.linkedin.com/company/megicode"

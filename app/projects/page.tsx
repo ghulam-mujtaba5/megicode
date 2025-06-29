@@ -47,7 +47,8 @@ export default function ProjectsPage() {
       <div id="theme-toggle" role="button" tabIndex={0} onClick={onDarkModeButtonContainerClick} style={{ position: 'absolute', top: 24, left: 24, zIndex: 20, cursor: 'pointer' }}>
         <ThemeToggleIcon />
       </div>
-      <main className="relative z-10 min-h-screen">
+      <main className="relative z-10 min-h-screen" aria-label="Projects Main Content">
+        <h1 style={{position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden'}}>Projects Portfolio</h1>
         <NavBarDesktop />
         <NavBarMobile />
         <ProjectHero />

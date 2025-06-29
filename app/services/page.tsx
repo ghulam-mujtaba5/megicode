@@ -165,10 +165,37 @@ export default function ServicesPage() {
       {/* Mobile NavBar */}
       <nav id="mobile-navbar" aria-label="Mobile Navigation">
         <NavBarMobile />
-      </nav>      {/* Hero Section */}
-      <Suspense fallback={<Loading />}>
-        <ServicesHero />
-      </Suspense>      {/* Services Grid */}
+      </nav>
+
+      <main aria-label="Services Main Content">
+        <h1 style={{position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden'}}>Our Services</h1>
+        <Suspense fallback={<Loading />}>
+          <ServicesHero />
+        </Suspense>
+        <section className="services-grid">
+          {services.map((service, idx) => (
+            <Link href={`/services/${service.slug}`} key={idx} style={{ textDecoration: 'none' }}>
+              <div className="service-card" tabIndex={0} role="button" aria-label={service.title} style={{ cursor: 'pointer' }}>
+                <div className={`service-card-icon${service.title === 'Cloud & DevOps Services' ? ' cloud-devops' : ''}`}>
+                  <img src={service.icon} alt={service.title + ' icon'} />
+                </div>
+                <div className="service-card-title">{service.title}</div>
+                <div className="service-card-desc">{service.description}</div>
+                <ul className="service-card-features">
+                  {service.features.map((f, i) => (
+                    <li key={i}>{f}</li>
+                  ))}
+                </ul>
+                <div className="service-card-techs">
+                  {service.techs.map((t, i) => (
+                    <span className="service-card-tech" key={i}>{t}</span>
+                  ))}
+                </div>
+              </div>
+            </Link>
+          ))}
+        </section>
+      </main>
       <style>{`
         .services-grid {
           padding: 2rem 1.5rem;
