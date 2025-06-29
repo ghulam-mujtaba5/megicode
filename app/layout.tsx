@@ -11,8 +11,8 @@ if (process.env.NODE_ENV !== 'production' && typeof window !== 'undefined') {
 export const viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false
+  maximumScale: 5,
+  userScalable: true
 };
 
 export const metadata = {
