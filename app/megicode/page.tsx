@@ -50,7 +50,6 @@ export default function MegicodePage() {
             : "0 4px 24px 0 rgba(60,60,120,0.07)",
           transition: "background 0.4s, box-shadow 0.3s, border 0.3s"
         }}
-        // For system UI color adaptation
         className={theme === "dark" ? "dark" : "light"}
       >
         {/* Subtle animated background */}
@@ -67,20 +66,13 @@ export default function MegicodePage() {
         >
           <ParticleBackgroundClient />
         </div>
-        {/* Theme Toggle Icon */}
+        {/* Theme Toggle Icon - match services page style */}
         <div
           id="theme-toggle"
           role="button"
           tabIndex={0}
           aria-label="Toggle theme"
           onClick={onDarkModeButtonContainerClick}
-          style={{
-            position: "absolute",
-            top: 24,
-            left: 24,
-            zIndex: 20,
-            cursor: "pointer"
-          }}
         >
           <ThemeToggleIcon />
         </div>
