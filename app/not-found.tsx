@@ -1,6 +1,13 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from 'react';
+
+// Add noindex meta for SEO
+if (typeof window === 'undefined') {
+  const meta = { name: 'robots', content: 'noindex' };
+  // For Next.js App Router, use the Head export if available
+  // Otherwise, this is a placeholder for frameworks that support custom head tags
+}
 import { useTheme } from '../context/ThemeContext';
 import { motion, Variants } from 'framer-motion';
 import Image from 'next/image';

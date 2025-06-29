@@ -60,3 +60,25 @@ Megicode partners with businesses worldwide to deliver best-in-class software so
 
 ---
 > Designed & built by Megicode | Ghulam Mujtaba
+
+
+
+
+
+
+
+------------------------------------
+
+
+
+
+  
+Current pathname: /_not-found
+Current pathname: /contact
+Current pathname: /about
+Current pathname: /projects
+Current pathname: /reviews
+Current pathname: /megicode
+Current pathname: /
+Current pathname: /article
+Current pathname: /services
