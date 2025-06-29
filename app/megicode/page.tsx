@@ -31,13 +31,13 @@ export default function MegicodePage() {
     <>
       <style jsx global>{`
         html, body {
-          background: ${theme === "dark" ? "#181c22" : "#f8fafc"} !important;
+          background: ${theme === "dark" ? "#1d2127" : "#f8fafc"} !important;
         }
       `}</style>
       <div
         style={{
           background: theme === "dark"
-            ? "linear-gradient(135deg, #181c22 0%, #232946 100%)"
+            ? "#1d2127"
             : "linear-gradient(135deg, #f8fafc 0%, #e8eaf6 100%)",
           minHeight: "100vh",
           overflowX: "hidden",
