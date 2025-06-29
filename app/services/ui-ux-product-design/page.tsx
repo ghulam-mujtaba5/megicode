@@ -9,7 +9,6 @@ import { ServiceFAQs } from "../ServiceDetailSections";
 import { FaPencilRuler, FaPalette, FaUserCheck, FaRegObjectGroup, FaUsers, FaRocket, FaLifeRing } from "react-icons/fa";
 import { SiFigma, SiAdobe, SiSketch, SiInvision } from "react-icons/si";
 
-const service = {
   ...servicesData.find(s => s.slug === "ui-ux-product-design"),
   techs: [
     "Figma",
@@ -20,7 +19,18 @@ const service = {
   ]
 };
 
-const processSteps = [
+import ThemeToggleIcon from "../../../components/Icon/sbicon";
+import { useCallback } from "react";
+const service = {
+  ...servicesData.find(s => s.slug === "ui-ux-product-design"),
+  techs: [
+    "Figma",
+    "Adobe XD",
+    "Sketch",
+    "InVision",
+    "Zeplin"
+  ]
+};
   {
     title: "Research & Discovery",
     desc: "User & business research.",
@@ -556,6 +566,75 @@ export default function UIUXProductDesignDetailPage() {
             textAlign: 'center',
             background: palette.ctaBg,
             borderRadius: 32,
+export default function UIUXProductDesignDetailPage() {
+  const { theme, toggleTheme } = useTheme();
+  useInViewAnimation();
+  const onDarkModeButtonContainerClick = useCallback(() => {
+    toggleTheme && toggleTheme();
+  }, [toggleTheme]);
+  if (!service) return null;
+  const isDark = theme === 'dark';
+  const palette = {
+    bgMain: isDark ? 'linear-gradient(120deg, #181c22 70%, #232946 100%)' : 'linear-gradient(120deg, #f7fafd 70%, #eaf6ff 100%)',
+    border: isDark ? '#23272f' : '#eaf6ff',
+    boxShadow: isDark ? '0 12px 64px #181c2244, 0 1.5px 0 #23272f' : '0 12px 64px #4ea8ff33, 0 1.5px 0 #fff',
+    cardBg: isDark ? 'rgba(24,28,34,0.98)' : 'rgba(255,255,255,0.96)',
+    cardBgGlass: isDark ? 'rgba(36,41,54,0.88)' : 'rgba(255,255,255,0.92)',
+    textMain: isDark ? '#eaf6ff' : '#222b3a',
+    textAccent: isDark ? '#6ea8ff' : '#4ea8ff',
+    textSubtle: isDark ? '#b0c4d8' : '#3a4a5d',
+    heroGradient: isDark ? 'linear-gradient(100deg, #232946 0%, #4ea8ff 60%, #6ea8ff 100%)' : 'linear-gradient(100deg, #4ea8ff 0%, #6ea8ff 60%, #cfe8ef 100%)',
+    heroOverlay: isDark ? 'rgba(24,28,34,0.18)' : 'rgba(255,255,255,0.13)',
+    divider: isDark ? '#263040' : '#eaf6ff',
+    testimonialBg: isDark ? 'linear-gradient(100deg, #232946 60%, #181c22 100%)' : 'linear-gradient(100deg, #e3e6ea 60%, #f7fafd 100%)',
+    ctaBg: isDark ? 'linear-gradient(100deg, #232946 0%, #4ea8ff 60%, #6ea8ff 100%)' : 'linear-gradient(100deg, #4ea8ff 0%, #6ea8ff 60%, #cfe8ef 100%)',
+    ctaBtn: isDark ? 'rgba(36,41,54,0.98)' : 'rgba(255,255,255,0.96)',
+    ctaBtnHover: isDark ? '#232946' : '#eaf6ff',
+    ctaBtnText: isDark ? '#6ea8ff' : '#4ea8ff',
+    ctaBtnBorder: isDark ? '#263040' : '#fff',
+    iconBg: isDark ? '#232946' : '#f7fafd',
+    iconBorder: isDark ? '#263040' : '#eaf6ff',
+    cardInner: isDark ? 'rgba(36,41,54,0.92)' : 'rgba(255,255,255,0.96)',
+    cardInnerBorder: isDark ? '#232946' : '#eaf6ff',
+  };
+
+  return (
+    <>
+      <style>{`
+        @keyframes fadeInUp { 0% { opacity: 0; transform: translateY(32px); } 100% { opacity: 1; transform: translateY(0); } }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 #4ea8ff33; } 70% { box-shadow: 0 0 0 18px #4ea8ff11; } 100% { box-shadow: 0 0 0 0 #4ea8ff33; }
+      `}</style>
+      <div style={{ background: palette.bgMain, overflowX: 'hidden', position: 'relative', minHeight: '100vh', colorScheme: isDark ? 'dark' : 'light', transition: 'background 0.4s, color 0.3s' }}>
+        {/* Theme Toggle Icon - match services page style */}
+        <div
+          id="theme-toggle"
+          role="button"
+          tabIndex={0}
+          aria-label="Toggle theme"
+          onClick={onDarkModeButtonContainerClick}
+        >
+          <ThemeToggleIcon />
+        </div>
+        <main
+          style={{
+            maxWidth: 1160,
+            margin: '2.5rem auto',
+            padding: '0 1.2rem 5rem 1.2rem',
+            fontFamily: 'Inter, sans-serif',
+            background: 'linear-gradient(120deg, rgba(36,41,54,0.98) 60%, rgba(78,168,255,0.10) 100%)',
+            borderRadius: 36,
+            boxShadow: palette.boxShadow,
+            position: 'relative',
+            overflow: 'hidden',
+            border: `1.5px solid ${palette.border}`,
+            color: palette.textMain,
+            transition: 'background 0.4s, box-shadow 0.3s, border 0.3s',
+            minHeight: '80vh',
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+          aria-label="UI/UX Product Design Service Detail"
+        >
             padding: '3.5rem 2.8rem',
             boxShadow: isDark ? '0 12px 48px #23294633' : '0 12px 48px #4ea8ff22',
             position: 'relative',

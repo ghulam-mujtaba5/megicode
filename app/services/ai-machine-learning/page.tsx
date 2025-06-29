@@ -300,7 +300,6 @@ export default function AIMachineLearningDetailPage() {
           }
         }
       `}</style>
-      <a href="#main-content" className="skip-to-content">Skip to main content</a>
       <div style={{ background: palette.bgMain, overflowX: 'hidden', position: 'relative', minHeight: '100vh', colorScheme: isDark ? 'dark' : 'light', transition: 'background 0.4s, color 0.3s' }}>
         <main id="main-content"
           style={{
