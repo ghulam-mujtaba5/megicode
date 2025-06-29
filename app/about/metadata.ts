@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 
+
 export const metadata: Metadata = {
   title: 'About Us | Megicode - AI & Software Development Experts',
   description: 'Learn about Megicode\'s journey in delivering innovative AI-powered software solutions. Discover our values, expertise, and commitment to transforming businesses through technology.',
