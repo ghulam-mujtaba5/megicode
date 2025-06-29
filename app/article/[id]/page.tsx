@@ -1,44 +1,51 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
 import NavBarDesktop from "../../../components/NavBar_Desktop_Company/nav-bar-Company";
 import NavBarMobile from "../../../components/NavBar_Mobile/NavBar-mobile";
 import Footer from "../../../components/Footer/Footer";
-import ThemeToggleIcon from "../../../components/Icon/sbicon";
-import { useTheme } from "../../../context/ThemeContext";
+import { ThemeToggleClient } from "../../../components/Icon";
+import { notFound } from "next/navigation";
 
-const ArticleDetailPage = () => {
-  const { theme, toggleTheme } = useTheme();
-  const params = useParams();
+// ISR: revalidate every 60 seconds
+export const revalidate = 60;
+
+// Generate static params for all articles (optional: you can fetch all IDs from your API)
+export async function generateStaticParams() {
+  try {
+    const res = await fetch("https://payloadw.onrender.com/api/articles?limit=100", { next: { revalidate: 3600 } });
+    const data = await res.json();
+    const articles = data?.docs || [];
+    return articles.map((a) => ({ id: a.id?.toString() }));
+  } catch {
+    return [];
+  }
+}
+
+async function getArticle(id) {
+  try {
+    const res = await fetch(`https://payloadw.onrender.com/api/articles/${id}`);
+    if (!res.ok) return null;
+    const data = await res.json();
+    return data?.doc || data;
+  } catch {
+    return null;
+  }
+}
+
+const ArticleDetailPage = async ({ params }) => {
   const { id } = params;
-  const [article, setArticle] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    if (!id) return;
-    fetch(`/api/articles/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setArticle(data?.doc || data); // fallback for different API shapes
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
-  }, [id]);
+  const article = await getArticle(id);
+  // Theme is handled client-side; default to 'light' for SSR, but useEffect will update on client
+  if (!article) return notFound();
 
   return (
     <div
+      className="article-detail-theme-bg"
       style={{
-        background: theme === "dark"
-          ? "linear-gradient(135deg, #181c22 0%, #232946 100%)"
-          : "linear-gradient(135deg, #f8fafc 0%, #e8eaf6 100%)",
         minHeight: "100vh",
         overflowX: "hidden",
         transition: "background 0.3s"
       }}
     >
-      <div id="theme-toggle" role="button" tabIndex={0} onClick={toggleTheme} style={{ margin: "0 0 0 1.5rem", paddingTop: 18, width: 40 }}>
-        <ThemeToggleIcon />
-      </div>
+      <ThemeToggleClient style={{ margin: "0 0 0 1.5rem", paddingTop: 18, width: 40 }} />
       <nav id="desktop-navbar" aria-label="Main Navigation">
         <NavBarDesktop />
       </nav>
@@ -53,89 +60,83 @@ const ArticleDetailPage = () => {
           minHeight: "80vh"
         }}
       >
-        {loading ? (
-          <div style={{ color: theme === "dark" ? "#b0b8c1" : "#232946", fontSize: 20, textAlign: "center", marginTop: 60 }}>Loading...</div>
-        ) : !article ? (
-          <div style={{ color: theme === "dark" ? "#b0b8c1" : "#232946", fontSize: 20, textAlign: "center", marginTop: 60 }}>Article not found.</div>
-        ) : (
-          <article>
-            {(() => {
-              // Prefer heroImage.sizes.medium.url, then heroImage.url, then coverImage
-              let imageUrl = null;
-              let alt = article.title || 'Article cover';
-              if (article.heroImage) {
-                if (article.heroImage.sizes && article.heroImage.sizes.medium && article.heroImage.sizes.medium.url) {
-                  imageUrl = article.heroImage.sizes.medium.url;
-                } else if (article.heroImage.url) {
-                  imageUrl = article.heroImage.url;
-                }
-                if (article.heroImage.alt) alt = article.heroImage.alt;
-              } else if (article.coverImage) {
-                imageUrl = article.coverImage;
+        <article>
+          {(() => {
+            // Prefer heroImage.sizes.medium.url, then heroImage.url, then coverImage
+            let imageUrl = null;
+            let alt = article.title || 'Article cover';
+            if (article.heroImage) {
+              if (article.heroImage.sizes && article.heroImage.sizes.medium && article.heroImage.sizes.medium.url) {
+                imageUrl = article.heroImage.sizes.medium.url;
+              } else if (article.heroImage.url) {
+                imageUrl = article.heroImage.url;
               }
-              if (!imageUrl) return null;
-              // If not absolute, prefix with API URL
-              const isAbsolute = imageUrl.startsWith('http');
-              // Ensure imageUrl starts with a single slash
-              let normalizedPath = imageUrl;
-              if (!isAbsolute) {
-                if (!imageUrl.startsWith('/')) {
-                  normalizedPath = '/' + imageUrl;
-                }
+              if (article.heroImage.alt) alt = article.heroImage.alt;
+            } else if (article.coverImage) {
+              imageUrl = article.coverImage;
+            }
+            if (!imageUrl) return null;
+            // If not absolute, prefix with API URL
+            const isAbsolute = imageUrl.startsWith('http');
+            // Ensure imageUrl starts with a single slash
+            let normalizedPath = imageUrl;
+            if (!isAbsolute) {
+              if (!imageUrl.startsWith('/')) {
+                normalizedPath = '/' + imageUrl;
               }
-              const src = isAbsolute ? imageUrl : `https://payloadw.onrender.com${normalizedPath}`;
-              return (
-                <img
-                  src={src}
-                  alt={alt}
-                  style={{
-                    width: '100%',
-                    maxHeight: 360,
-                    objectFit: 'cover',
-                    borderRadius: 12,
-                    marginBottom: 28,
-                    background: theme === 'dark' ? '#232946' : '#e8eaf6'
-                  }}
-                  onError={e => { e.currentTarget.style.display = 'none'; }}
-                />
-              );
-            })()}
-            <h1
-              style={{
-                fontSize: 40,
-                fontWeight: 800,
-                marginBottom: 24,
-                color: theme === "dark" ? "#e3e8ee" : "#1d2127",
-                letterSpacing: "-1px"
-              }}
-            >
-              {article.title}
-            </h1>
-            <div
-              style={{
-                color: theme === "dark" ? "#b0b8c1" : "#5a6270",
-                fontSize: 15,
-                marginBottom: 18,
-                fontWeight: 500
-              }}
-            >
-              {article.populatedAuthors && article.populatedAuthors[0]?.name} &middot; {article.createdAt && new Date(article.createdAt).toLocaleDateString()}
-            </div>
-            <div
-              style={{
-                fontSize: 18,
-                lineHeight: 1.7,
-                color: theme === "dark" ? "#c7d0e0" : "#232946",
-                marginBottom: 0,
-                fontWeight: 400
-              }}
-            >
-              {article.content?.root?.children?.map((block, i) => (
-                <p key={i}>{block.children?.map((c) => c.text).join(' ')}</p>
-              )) || 'No content available.'}
-            </div>
-          </article>
-        )}
+            }
+            const src = isAbsolute ? imageUrl : `https://payloadw.onrender.com${normalizedPath}`;
+            // Theme is handled by CSS class on <html> or <body>
+            return (
+              <img
+                src={src}
+                alt={alt}
+                style={{
+                  width: '100%',
+                  maxHeight: 360,
+                  objectFit: 'cover',
+                  borderRadius: 12,
+                  marginBottom: 28
+                }}
+                onError={e => { e.currentTarget.style.display = 'none'; }}
+              />
+            );
+          })()}
+          <h1
+            className="article-title"
+            style={{
+              fontSize: 40,
+              fontWeight: 800,
+              marginBottom: 24,
+              letterSpacing: "-1px"
+            }}
+          >
+            {article.title}
+          </h1>
+          <div
+            className="article-meta"
+            style={{
+              fontSize: 15,
+              marginBottom: 18,
+              fontWeight: 500
+            }}
+          >
+            {article.populatedAuthors && article.populatedAuthors[0]?.name} &middot; {article.createdAt && new Date(article.createdAt).toLocaleDateString()}
+          </div>
+          <div
+            className="article-content"
+            style={{
+              fontSize: 18,
+              lineHeight: 1.7,
+              marginBottom: 0,
+              fontWeight: 400
+            }}
+          >
+            {article.content?.root?.children?.map((block, i) => (
+              <p key={i}>{block.children?.map((c) => c.text).join(' ')}</p>
+            )) || 'No content available.'}
+          </div>
+        </article>
       </main>
       <Footer
         linkedinUrl="https://www.linkedin.com/company/megicode"
