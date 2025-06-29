@@ -9,7 +9,7 @@ import { OurProcess, EngagementModels, MethodologyAndCommunication, ServiceFAQs 
 import { SiPython, SiTensorflow, SiPytorch, SiScikitlearn, SiAmazon, SiGooglecloud } from "react-icons/si";
 import { FaRobot, FaLanguage, FaEye, FaCogs, FaSearch, FaDatabase, FaRocket, FaLifeRing } from "react-icons/fa";
 
-
+import NavBarMobile from "../../../components/NavBar_Mobile/NavBar-mobile";
 // Clone the service object and override the techs array to remove 'AI' and 'Azure', and add other relevant technologies
 const service = {
   ...servicesData.find(s => s.slug === "ai-machine-learning"),
@@ -122,6 +122,10 @@ export default function AIMachineLearningDetailPage() {
   };
   return (
     <>
+      {/* Mobile NavBar */}
+      <div className="mobile-navbar-wrapper" style={{ display: 'block', width: '100%', position: 'sticky', top: 0, zIndex: 2000 }}>
+        <NavBarMobile />
+      </div>
       <style>{`
         ${keyframes}
         .skip-to-content {
@@ -139,6 +143,7 @@ export default function AIMachineLearningDetailPage() {
           padding: 8px 18px;
           transition: left 0.2s;
         }
+        /* Ensure #1d2127 is not used in NavBarMobile or here */
         .skip-to-content:focus {
           left: 16px;
           top: 16px;
@@ -154,12 +159,6 @@ export default function AIMachineLearningDetailPage() {
           animation: fadeInUp 1.7s cubic-bezier(.23,1.01,.32,1) both;
           align-items: stretch;
         }
-        @media (max-width: 900px) {
-          .engagement-method-section {
-            flex-direction: column;
-            gap: 32px;
-          }
-        }
         .engagement-method-card:focus-within, .engagement-method-card:focus {
           outline: 3px solid #4573df;
           outline-offset: 2px;
@@ -174,6 +173,132 @@ export default function AIMachineLearningDetailPage() {
           transform: scale(0.97);
           box-shadow: 0 2px 8px #4573df44;
         }
+
+        /* --- Enhanced Mobile Responsive Styles --- */
+        @media (max-width: 900px) {
+          .engagement-method-section {
+            flex-direction: column;
+            gap: 24px;
+          }
+        }
+        @media (max-width: 700px) {
+          html, body {
+            width: 100vw;
+            overflow-x: hidden;
+          }
+          main#main-content {
+            max-width: 100vw !important;
+            margin: 0 !important;
+            padding: 4.5rem 0.5rem 2.2rem 0.5rem !important;
+            border-radius: 0 !important;
+            min-height: unset !important;
+            box-sizing: border-box !important;
+          }
+          .service-hero-gradient {
+            padding: 3.2rem 0.5rem 2rem 0.5rem !important;
+            min-height: 160px !important;
+            border-radius: 0 0 1.2rem 1.2rem !important;
+            margin-bottom: 18px !important;
+            box-sizing: border-box !important;
+          }
+          .service-hero-gradient h1 {
+            font-size: 1.25rem !important;
+            margin-bottom: 8px !important;
+            letter-spacing: -1.2px !important;
+            line-height: 1.2 !important;
+          }
+          .service-hero-gradient p {
+            font-size: 0.95rem !important;
+            margin-bottom: 10px !important;
+            line-height: 1.5 !important;
+          }
+          .service-hero-gradient a[data-animate="cta-bounce"] {
+            font-size: 1rem !important;
+            padding: 0.9rem 1.2rem !important;
+            margin-top: 8px !important;
+            min-width: 120px !important;
+          }
+          .service-hero-gradient > div {
+            flex-direction: column !important;
+            gap: 10px !important;
+          }
+          .service-hero-gradient img {
+            width: 70px !important;
+            padding: 2px !important;
+          }
+          section, .engagement-method-section, .deliverable-card, .tech-logo-card {
+            padding: 0.6rem 0.1rem !important;
+            border-radius: 0.6rem !important;
+            margin: 0.5rem 0 !important;
+            box-sizing: border-box !important;
+          }
+          .deliverable-card, .tech-logo-card {
+            min-width: 100px !important;
+            font-size: 0.98rem !important;
+            padding: 0.8rem 0.4rem !important;
+            gap: 8px !important;
+            flex: 1 1 100% !important;
+            box-sizing: border-box !important;
+          }
+          .tech-logo-card img, .tech-logo-card svg {
+            width: 26px !important;
+            height: 26px !important;
+            margin-right: 4px !important;
+          }
+          .engagement-method-section {
+            gap: 8px !important;
+          }
+          .engagement-method-card, .engagement-method-section > div {
+            min-height: unset !important;
+            padding: 0.6rem 0.1rem !important;
+          }
+          .testimonialBg, .testimonial-section {
+            padding: 0.6rem 0.1rem !important;
+            border-radius: 0.6rem !important;
+          }
+          .cta-strip {
+            padding: 0.8rem 0.2rem !important;
+            border-radius: 0.6rem !important;
+          }
+          .cta-strip a {
+            font-size: 1rem !important;
+            padding: 0.9rem 1.2rem !important;
+            min-width: 120px !important;
+          }
+          .cta-strip div {
+            font-size: 1rem !important;
+          }
+          .process-stepper, .process-stepper > div {
+            flex-direction: column !important;
+            gap: 8px !important;
+            min-width: unset !important;
+            max-width: unset !important;
+          }
+          .process-stepper > div {
+            margin: 0 !important;
+          }
+          /* Section grid and flex adjustments for mobile */
+          section[data-animate], .deliverable-card, .tech-logo-card {
+            box-shadow: none !important;
+          }
+          section[data-animate] > div, .deliverable-card, .tech-logo-card {
+            border-radius: 0.6rem !important;
+          }
+          /* Grid to single column for cards */
+          section > div[style*='grid-template-columns'] {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 10px !important;
+          }
+          /* FAQ and testimonial font size */
+          .faq-section, .testimonial-section, .testimonialBg {
+            font-size: 1rem !important;
+          }
+          /* Remove horizontal scroll on all children */
+          * {
+            box-sizing: border-box !important;
+          }
+        }
       `}</style>
       <a href="#main-content" className="skip-to-content">Skip to main content</a>
       <div style={{ background: palette.bgMain, overflowX: 'hidden', position: 'relative', minHeight: '100vh', colorScheme: isDark ? 'dark' : 'light', transition: 'background 0.4s, color 0.3s' }}>
@@ -181,7 +306,7 @@ export default function AIMachineLearningDetailPage() {
           style={{
             maxWidth: 1160,
             margin: '2.5rem auto',
-            padding: '0 1.2rem 5rem 1.2rem',
+            padding: '3.5rem 1.2rem 5rem 1.2rem', // Increased top padding
             fontFamily: 'Inter, sans-serif',
             background: 'linear-gradient(120deg, rgba(36,41,54,0.98) 60%, rgba(70,115,223,0.10) 100%)',
             borderRadius: 36,
@@ -292,7 +417,7 @@ export default function AIMachineLearningDetailPage() {
           zIndex: 1,
         }} />
         <div style={{ display: 'flex', alignItems: 'center', gap: 64, flexWrap: 'wrap', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 3 }}>
-          <div style={{ flex: 1, minWidth: 320 }}>
+          <div style={{ flex: 1, minWidth: 220 }}>
             <h1 style={{ fontSize: '3.5rem', fontWeight: 900, color: isDark ? '#eaf6ff' : '#fff', marginBottom: 24, letterSpacing: -2.5, textShadow: isDark ? '0 6px 32px #23294699, 0 1px 0 #23294644' : '0 6px 32px #4573df66, 0 1px 0 #fff2', lineHeight: 1.08 }}>{service.title}</h1>
             <p style={{ fontSize: '1.36rem', color: isDark ? '#b0c4d8' : '#eaf6ff', marginBottom: 36, fontWeight: 600, lineHeight: 1.75, textShadow: isDark ? '0 3px 16px #23294644' : '0 3px 16px #4573df33', letterSpacing: 0.01 }} data-animate="typewriter">{service.description}</p>
             <a
@@ -342,11 +467,12 @@ export default function AIMachineLearningDetailPage() {
               transition: 'box-shadow 0.2s',
               position: 'relative',
               animation: 'pulse 2.8s infinite',
+              maxWidth: '100%',
             }}>
               <img
                 src="/Ai icon.svg"
                 alt="AI Illustration"
-                style={{ width: 220, maxWidth: '100%', borderRadius: 32, boxShadow: '0 8px 32px #4573df33', background: isDark ? 'rgba(36,41,54,0.98)' : '#fff', padding: 18, border: `2px solid ${palette.cardInnerBorder}` }}
+                style={{ width: 'min(220px, 60vw)', maxWidth: '100%', borderRadius: 32, boxShadow: '0 8px 32px #4573df33', background: isDark ? 'rgba(36,41,54,0.98)' : '#fff', padding: 18, border: `2px solid ${palette.cardInnerBorder}` }}
                 data-animate="float"
               />
               {/* Animated floating dot */}
