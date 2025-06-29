@@ -57,8 +57,18 @@ const GmIcon: React.FC<GmIconProps> = ({ showOnDesktop = false }) => {
     };
   }, [hasAnimated, showOnDesktop]);
 
+
+  // Hydration fix: Only render icon after mount to avoid SSR/CSR mismatch
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   // Only render on mobile screens unless showOnDesktop is true
-  const isMobile = typeof window !== 'undefined' ? window.matchMedia('(max-width: 768px)').matches : false;
+  let isMobile = false;
+  if (mounted && typeof window !== 'undefined') {
+    isMobile = window.matchMedia('(max-width: 768px)').matches;
+  }
   if (!showOnDesktop && !isMobile) return null;
 
   return (
