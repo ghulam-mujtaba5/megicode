@@ -6,10 +6,10 @@ export async function generateStaticParams() {
   return servicesData.map(service => ({ slug: service.slug }));
 }
 
-
-
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const { slug } = await params;
+// Accept params as a Promise to match generated types
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const resolvedParams = await params;
+  const { slug } = resolvedParams;
   const service = servicesData.find(s => s.slug === slug);
   if (!service) return {};
   return {
@@ -21,10 +21,10 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-
-
-export default async function ServiceDetailPage({ params }: { params: { slug: string } }) {
-  const { slug } = await params;
+// Accept params as a Promise to match generated types
+export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params;
+  const { slug } = resolvedParams;
   const service = servicesData.find(s => s.slug === slug);
   if (!service) return notFound();
 

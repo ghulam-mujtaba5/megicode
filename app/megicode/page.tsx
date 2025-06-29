@@ -12,6 +12,7 @@ import ContactSection from "../../components/Contact/ConatctUs";
 import Footer from "../../components/Footer/Footer";
 import ThemeToggleIcon from "../../components/Icon/sbicon";
 
+
 export default function MegicodePage() {
   const { theme, toggleTheme } = useTheme();
 
