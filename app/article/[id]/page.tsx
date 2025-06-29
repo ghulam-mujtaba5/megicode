@@ -59,6 +59,47 @@ const ArticleDetailPage = () => {
           <div style={{ color: theme === "dark" ? "#b0b8c1" : "#232946", fontSize: 20, textAlign: "center", marginTop: 60 }}>Article not found.</div>
         ) : (
           <article>
+            {(() => {
+              // Prefer heroImage.sizes.medium.url, then heroImage.url, then coverImage
+              let imageUrl = null;
+              let alt = article.title || 'Article cover';
+              if (article.heroImage) {
+                if (article.heroImage.sizes && article.heroImage.sizes.medium && article.heroImage.sizes.medium.url) {
+                  imageUrl = article.heroImage.sizes.medium.url;
+                } else if (article.heroImage.url) {
+                  imageUrl = article.heroImage.url;
+                }
+                if (article.heroImage.alt) alt = article.heroImage.alt;
+              } else if (article.coverImage) {
+                imageUrl = article.coverImage;
+              }
+              if (!imageUrl) return null;
+              // If not absolute, prefix with API URL
+              const isAbsolute = imageUrl.startsWith('http');
+              // Ensure imageUrl starts with a single slash
+              let normalizedPath = imageUrl;
+              if (!isAbsolute) {
+                if (!imageUrl.startsWith('/')) {
+                  normalizedPath = '/' + imageUrl;
+                }
+              }
+              const src = isAbsolute ? imageUrl : `https://payloadw.onrender.com${normalizedPath}`;
+              return (
+                <img
+                  src={src}
+                  alt={alt}
+                  style={{
+                    width: '100%',
+                    maxHeight: 360,
+                    objectFit: 'cover',
+                    borderRadius: 12,
+                    marginBottom: 28,
+                    background: theme === 'dark' ? '#232946' : '#e8eaf6'
+                  }}
+                  onError={e => { e.currentTarget.style.display = 'none'; }}
+                />
+              );
+            })()}
             <h1
               style={{
                 fontSize: 40,
