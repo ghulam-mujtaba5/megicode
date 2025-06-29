@@ -28,104 +28,110 @@ export default function MegicodePage() {
   const contactPhoneNumber = "+123 456 7890";
 
   return (
-    <div
-      style={{
-        background: theme === "dark"
-          ? "linear-gradient(135deg, #181c22 0%, #232946 100%)"
-          : "linear-gradient(135deg, #f8fafc 0%, #e8eaf6 100%)",
-        minHeight: "100vh",
-        overflowX: "hidden",
-        position: "relative",
-        colorScheme: theme === "dark" ? "dark" : "light",
-        border: theme === "dark" ? "1.5px solid #23272f" : "1.5px solid #e3e8ee",
-        boxShadow: theme === "dark"
-          ? "0 4px 32px 0 rgba(0,0,0,0.25)"
-          : "0 4px 24px 0 rgba(60,60,120,0.07)",
-        borderRadius: 24,
-        transition: "background 0.4s, box-shadow 0.3s, border 0.3s"
-      }}
-      // For system UI color adaptation
-      className={theme === "dark" ? "dark" : "light"}
-    >
-      {/* Subtle animated background */}
+    <>
+      <style jsx global>{`
+        html, body {
+          background: ${theme === "dark" ? "#181c22" : "#f8fafc"} !important;
+        }
+      `}</style>
       <div
         style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "150vh",
-          pointerEvents: "none",
-          zIndex: 0
+          background: theme === "dark"
+            ? "linear-gradient(135deg, #181c22 0%, #232946 100%)"
+            : "linear-gradient(135deg, #f8fafc 0%, #e8eaf6 100%)",
+          minHeight: "100vh",
+          overflowX: "hidden",
+          position: "relative",
+          colorScheme: theme === "dark" ? "dark" : "light",
+          border: theme === "dark" ? "1.5px solid #23272f" : "1.5px solid #e3e8ee",
+          boxShadow: theme === "dark"
+            ? "0 4px 32px 0 rgba(0,0,0,0.25)"
+            : "0 4px 24px 0 rgba(60,60,120,0.07)",
+          transition: "background 0.4s, box-shadow 0.3s, border 0.3s"
         }}
+        // For system UI color adaptation
+        className={theme === "dark" ? "dark" : "light"}
       >
-        <ParticleBackgroundClient />
-      </div>
-      {/* Theme Toggle Icon */}
-      <div
-        id="theme-toggle"
-        role="button"
-        tabIndex={0}
-        aria-label="Toggle theme"
-        onClick={onDarkModeButtonContainerClick}
-        style={{
-          position: "absolute",
-          top: 24,
-          left: 24,
-          zIndex: 20,
-          cursor: "pointer"
-        }}
-      >
-        <ThemeToggleIcon />
-      </div>
-      <main className="relative z-10 min-h-screen" style={{ paddingTop: 0, paddingBottom: 0 }}>
-        <NavBarDesktop />
-        <NavBarMobile />
-        {/* Welcome Frame + Advanced Hero Animation */}
-        <section
-          id="welcome-section"
-          aria-labelledby="welcome-heading"
-          style={{ width: "100%", overflow: "hidden", position: "relative" }}
+        {/* Subtle animated background */}
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "150vh",
+            pointerEvents: "none",
+            zIndex: 0
+          }}
         >
-          <WelcomeFrame />
-          <MegicodeHeroAnimationAdvancedClient />
-        </section>
-        {/* About Me Section */}
-        <section
-          id="about-section"
-          aria-labelledby="about-heading"
-          style={{ width: "100%", overflow: "hidden" }}
+          <ParticleBackgroundClient />
+        </div>
+        {/* Theme Toggle Icon */}
+        <div
+          id="theme-toggle"
+          role="button"
+          tabIndex={0}
+          aria-label="Toggle theme"
+          onClick={onDarkModeButtonContainerClick}
+          style={{
+            position: "absolute",
+            top: 24,
+            left: 24,
+            zIndex: 20,
+            cursor: "pointer"
+          }}
         >
-          <AboutMeSection />
-        </section>
-        {/* Services Frame */}
-        <section
-          id="services-section"
-          aria-labelledby="services-heading"
-          style={{ width: "100%", overflow: "hidden" }}
-        >
-          <ServicesFrame />
-        </section>
-        {/* Contact Section */}
-        <section
-          id="contact-section"
-          aria-labelledby="contact-heading"
-          style={{ width: "100%", overflow: "hidden" }}
-        >
-          <ContactSection
-            email={contactEmail}
-            phoneNumber={contactPhoneNumber}
-            showCertificationBadge={false}
+          <ThemeToggleIcon />
+        </div>
+        <main className="relative z-10 min-h-screen" style={{ paddingTop: 0, paddingBottom: 0 }}>
+          <NavBarDesktop />
+          <NavBarMobile />
+          {/* Welcome Frame + Advanced Hero Animation */}
+          <section
+            id="welcome-section"
+            aria-labelledby="welcome-heading"
+            style={{ width: "100%", overflow: "hidden", position: "relative" }}
+          >
+            <WelcomeFrame />
+            <MegicodeHeroAnimationAdvancedClient />
+          </section>
+          {/* About Me Section */}
+          <section
+            id="about-section"
+            aria-labelledby="about-heading"
+            style={{ width: "100%", overflow: "hidden" }}
+          >
+            <AboutMeSection />
+          </section>
+          {/* Services Frame */}
+          <section
+            id="services-section"
+            aria-labelledby="services-heading"
+            style={{ width: "100%", overflow: "hidden" }}
+          >
+            <ServicesFrame />
+          </section>
+          {/* Contact Section */}
+          <section
+            id="contact-section"
+            aria-labelledby="contact-heading"
+            style={{ width: "100%", overflow: "hidden" }}
+          >
+            <ContactSection
+              email={contactEmail}
+              phoneNumber={contactPhoneNumber}
+              showCertificationBadge={false}
+            />
+          </section>
+          {/* Footer */}
+          <Footer
+            linkedinUrl={linkedinUrl}
+            instagramUrl={instagramUrl}
+            githubUrl={githubUrl}
+            copyrightText={copyrightText}
           />
-        </section>
-        {/* Footer */}
-        <Footer
-          linkedinUrl={linkedinUrl}
-          instagramUrl={instagramUrl}
-          githubUrl={githubUrl}
-          copyrightText={copyrightText}
-        />
-      </main>
-    </div>
+        </main>
+      </div>
+    </>
   );
 }
