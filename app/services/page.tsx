@@ -10,6 +10,7 @@ import NavBarMobile from "../../components/NavBar_Mobile/NavBar-mobile";
 import Footer from "../../components/Footer/Footer";
 import ThemeToggleIcon from "../../components/Icon/sbicon";
 import Loading from "../loading";
+import servicesData from "./servicesData";
 
 // Dynamic imports for optimized loading
 const ServicesHero = dynamic(() => import("../../components/Services/Hero/ServicesHero"), {
@@ -35,120 +36,6 @@ export default function ServicesPage() {
     { label: "Project", route: "/project" },
     { label: "Contact", route: "/contact" },
   ];
-  const services = [
-    {
-      icon: "/Ai icon.svg",
-      title: "AI & Machine Learning Solutions",
-      slug: "ai-machine-learning",
-      description: "Custom AI models, automation, and intelligent systems to drive innovation and efficiency for your business.",
-      features: [
-        "AI Model Development",
-        "Machine Learning Integration",
-        "Natural Language Processing",
-        "Computer Vision",
-        "AI-Powered Automation"
-      ],
-      techs: ["TensorFlow", "PyTorch", "OpenAI", "Scikit-learn", "Azure AI"]
-    },
-    {
-      icon: "/ds&ai-icon.svg",
-      title: "Data Analytics & Business Intelligence",
-      slug: "data-analytics-bi",
-      description: "Transform data into actionable insights with analytics, dashboards, and business intelligence solutions.",
-      features: [
-        "Big Data Analytics",
-        "Predictive Analytics",
-        "BI Dashboards",
-        "Data Warehousing",
-        "Data Visualization"
-      ],
-      techs: ["Python", "Power BI", "Tableau", "SQL", "Spark"]
-    },
-    {
-      icon: "/web app icon.svg",
-      title: "Custom Web Development",
-      slug: "custom-web-development",
-      description: "Robust, scalable, and secure web applications tailored to your business goals and user needs.",
-      features: [
-        "Full-Stack Development",
-        "API & Microservices",
-        "E-commerce Solutions",
-        "CMS & Portals",
-        "Performance Optimization"
-      ],
-      techs: ["React", "Next.js", "Node.js", "TypeScript", "GraphQL"]
-    },
-    {
-      icon: "/mobile app icon.svg",
-      title: "Mobile App Solutions",
-      slug: "mobile-app-solutions",
-      description: "Native and cross-platform mobile apps for iOS and Android, designed for performance and engagement.",
-      features: [
-        "iOS & Android Apps",
-        "Cross-Platform Development",
-        "Mobile UI/UX Design",
-        "App Store Launch",
-        "Ongoing Support"
-      ],
-      techs: ["React Native", "Flutter", "Swift", "Kotlin", "Firebase"]
-    },
-    {
-      icon: "/meta/rm.svg",
-      title: "Cloud & DevOps Services",
-      slug: "cloud-devops-services",
-      description: "Cloud migration, CI/CD, and infrastructure automation for scalable, secure, and efficient operations.",
-      features: [
-        "Cloud Migration & Management",
-        "DevOps Automation",
-        "CI/CD Pipeline Setup",
-        "Infrastructure as Code",
-        "Monitoring & Security"
-      ],
-      techs: ["AWS", "Azure", "Docker", "Kubernetes", "Terraform"]
-    },
-    {
-      icon: "/data scrapping icon.svg",
-      title: "Automation & Integration",
-      slug: "automation-integration",
-      description: "Workflow automation, data integration, and process optimization to streamline your business.",
-      features: [
-        "Business Process Automation",
-        "API Integration",
-        "ETL Pipelines",
-        "RPA (Robotic Process Automation)",
-        "Custom Scripting"
-      ],
-      techs: ["Python", "Zapier", "Make", "Node.js", "Selenium"]
-    },
-    {
-      icon: "/Ui&Ux-icon.svg",
-      title: "UI/UX & Product Design",
-      slug: "ui-ux-product-design",
-      description: "User-centered design for engaging, intuitive, and accessible digital products.",
-      features: [
-        "User Research & Personas",
-        "Wireframing & Prototyping",
-        "UI/UX Design Systems",
-        "Usability Testing",
-        "Brand Identity Design"
-      ],
-      techs: ["Figma", "Adobe XD", "Sketch", "InVision", "Zeplin"]
-    },
-    {
-      icon: "/it-consulting-support-icon.svg",
-      title: "IT Consulting & Support",
-      slug: "it-consulting-support",
-      description: "Expert guidance, security, and ongoing support to help you achieve your technology goals.",
-      features: [
-        "Technology Strategy & Roadmapping",
-        "IT Infrastructure Consulting",
-        "Security Audits & Compliance",
-        "Ongoing Maintenance & Support",
-        "Training & Documentation"
-      ],
-      techs: ["ITIL", "ISO 27001", "Microsoft 365", "Google Workspace", "Jira"]
-    }
-  ];
 
   return (
     <div style={{ backgroundColor: theme === "dark" ? "#1d2127" : "#ffffff", minHeight: "100vh", overflowX: "hidden" }}>
@@ -173,10 +60,10 @@ export default function ServicesPage() {
           <ServicesHero />
         </Suspense>
         <section className="services-grid">
-          {services.map((service, idx) => (
+          {servicesData.map((service, idx) => (
             <Link href={`/services/${service.slug}`} key={idx} style={{ textDecoration: 'none' }}>
               <div className="service-card" tabIndex={0} role="button" aria-label={service.title} style={{ cursor: 'pointer' }}>
-                <div className={`service-card-icon${service.title === 'Cloud & DevOps Services' ? ' cloud-devops' : ''}`}>
+                <div className={`service-card-icon${service.title === 'Cloud & DevOps Services' ? ' cloud-devops' : ''}`}> 
                   <img src={service.icon} alt={service.title + ' icon'} />
                 </div>
                 <div className="service-card-title">{service.title}</div>
@@ -286,29 +173,6 @@ export default function ServicesPage() {
           border: 1px solid ${theme === "dark" ? "#263040" : "#dbeafe"};
         }
       `}</style>
-      <section className="services-grid">
-        {services.map((service, idx) => (
-          <Link href={`/services/${service.slug}`} key={idx} style={{ textDecoration: 'none' }}>
-            <div className="service-card" tabIndex={0} role="button" style={{ cursor: 'pointer' }}>
-              <div className={`service-card-icon${service.title === 'Cloud & DevOps Services' ? ' cloud-devops' : ''}`}>
-                <img src={service.icon} alt={service.title + ' icon'} />
-              </div>
-              <div className="service-card-title">{service.title}</div>
-              <div className="service-card-desc">{service.description}</div>
-              <ul className="service-card-features">
-                {service.features.map((f, i) => (
-                  <li key={i}>{f}</li>
-                ))}
-              </ul>
-              <div className="service-card-techs">
-                {service.techs.map((t, i) => (
-                  <span className="service-card-tech" key={i}>{t}</span>
-                ))}
-              </div>
-            </div>
-          </Link>
-        ))}
-      </section>
 
       {/* Footer */}
       <footer id="footer-section" aria-label="Footer" style={{ width: "100%", overflow: "hidden" }}>
