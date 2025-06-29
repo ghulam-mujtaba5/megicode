@@ -23,7 +23,7 @@ export default function ContactPage() {
   const contactPhoneNumber = "+123 456 7890";
 
   return (
-    <div style={{ backgroundColor: theme === "dark" ? "#1d2127" : "#ffffff", overflowX: "hidden", position: "relative" }}>
+    <div style={{ backgroundColor: theme === "dark" ? "#1d2127" : "#ffffff", overflowX: "hidden", position: "relative", paddingTop: '2.5rem' }}>
       {/* Subtle animated background */}
       <ParticleBackground />
       <div style={{
@@ -37,11 +37,11 @@ export default function ContactPage() {
       }}>
         {/* Background container */}
       </div>
-      {/* Theme Toggle Icon */}
-      <div id="theme-toggle" role="button" tabIndex={0} onClick={onDarkModeButtonContainerClick} style={{ position: 'absolute', top: 24, left: 24, zIndex: 20, cursor: 'pointer' }}>
-        <ThemeToggleIcon />
-      </div>
       <main className="relative z-10 min-h-screen">
+        {/* Theme Toggle Icon - consistent with services page */}
+        <div id="theme-toggle" role="button" tabIndex={0} onClick={onDarkModeButtonContainerClick} style={{ margin: '1.5rem 0 2.5rem 0', cursor: 'pointer', alignSelf: 'flex-start' }}>
+          <ThemeToggleIcon />
+        </div>
         <NavBarDesktop />
         <NavBarMobile />
         <ContactInfoCard />
