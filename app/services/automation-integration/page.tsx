@@ -150,8 +150,8 @@ export default function AutomationIntegrationDetailPage() {
           style={{
             maxWidth: 1160,
             margin: isMobile ? '0.5rem 0' : '2.5rem auto',
-            // Improved: more top/bottom padding, more side padding for mobile; no padding for desktop
-            padding: isMobile ? '4.2rem 0.7rem 3.2rem 0rem' : isTablet ? '0 0.7rem 4rem 0.7rem' : '0',
+            // Improved: more top/bottom padding, more side padding for mobile
+            padding: isMobile ? '4.2rem 0.7rem 3.2rem 0.7rem' : isTablet ? '0 0.7rem 4rem 0.7rem' : '0 1.2rem 5rem 1.2rem',
             fontFamily: 'Inter, sans-serif',
             background: isMobile ? 'none' : 'linear-gradient(120deg, rgba(36,41,54,0.98) 60%, rgba(70,115,223,0.10) 100%)',
             borderRadius: isMobile ? 0 : 36,
