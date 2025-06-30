@@ -63,13 +63,65 @@ utils/
 - Styles adapt based on the current theme.
 
 ## Accessibility
-- Uses semantic HTML and ARIA attributes for navigation and main content.
-- Hidden headings for screen readers.
-- Keyboard navigable cards and buttons.
 
 ## Adding/Editing Services
-- Edit `app/services/servicesData.ts` to add, remove, or update services.
-- Each service should have a `slug`, `title`, `description`, `features`, `techs`, and `icon`.
+
+To add, remove, or update services displayed on the Services page, edit the `app/services/servicesData.ts` file. Each service is represented as an object in the exported array. Follow these steps and guidelines:
+
+### 1. Service Object Structure
+Each service should be an object with the following fields:
+
+| Field        | Type     | Description                                                                 |
+|--------------|----------|-----------------------------------------------------------------------------|
+| `slug`       | string   | Unique identifier for the service (used in URLs, e.g., `web-development`).   |
+| `title`      | string   | Display name of the service.                                                |
+| `description`| string   | Short summary (1-2 sentences) describing the service.                       |
+| `features`   | string[] | List of key features or offerings for this service.                         |
+| `techs`      | string[] | Technologies/tools used (e.g., ['React', 'Node.js']).                        |
+| `icon`       | string   | Path to the SVG icon in `public/` or a React component for the icon.         |
+
+#### Example:
+```ts
+{
+  slug: 'web-development',
+  title: 'Web Development',
+  description: 'Modern, scalable websites and web apps tailored to your business needs.',
+  features: [
+    'Responsive design',
+    'SEO optimization',
+    'Performance-focused',
+    'Custom CMS integration'
+  ],
+  techs: ['Next.js', 'React', 'TypeScript', 'Node.js'],
+  icon: '/web app icon.svg',
+}
+```
+
+### 2. Adding a New Service
+1. Open `app/services/servicesData.ts`.
+2. Copy an existing service object and paste it at the end of the array (before the closing bracket).
+3. Update the fields as needed:
+   - **slug**: Use lowercase, hyphen-separated words. Must be unique.
+   - **title**: Clear, concise name.
+   - **description**: 1-2 sentences, avoid jargon.
+   - **features**: 3-6 bullet points, each a short phrase.
+   - **techs**: List of relevant technologies.
+   - **icon**: Path to an SVG in `public/` or a React icon component.
+4. Save the file. The new service will appear automatically on the Services page.
+
+### 3. Editing or Removing a Service
+- **Edit**: Find the service object and update any fields as needed.
+- **Remove**: Delete the entire object from the array.
+
+### 4. Best Practices
+- Keep slugs unique and URL-friendly.
+- Use consistent formatting and indentation.
+- Prefer SVG icons for scalability and theme support.
+- Keep descriptions and features concise and user-focused.
+- If adding a new icon, place it in `public/` and reference its path.
+
+### 5. Preview Changes
+After editing, run the development server (`npm run dev`) and visit `/services` to verify your changes.
 
 ## Deployment
 - Standard Next.js deployment (Vercel, Netlify, or custom server).
