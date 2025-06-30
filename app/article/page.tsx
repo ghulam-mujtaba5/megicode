@@ -34,7 +34,7 @@ const ArticlePage = () => {
       }}
     >
       {/* Theme Toggle Icon */}
-      <div id="theme-toggle" role="button" tabIndex={0} onClick={toggleTheme} style={{ margin: "0 0 0 1.5rem", paddingTop: 18, width: 40 }}>
+      <div id="theme-toggle" role="button" tabIndex={0} onClick={toggleTheme} style={{ margin: "0 0 0 1.5rem", width: 40 }}>
         <ThemeToggleIcon />
       </div>
       <nav id="desktop-navbar" aria-label="Main Navigation">
