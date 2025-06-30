@@ -11,6 +11,7 @@ import { FaPython, FaNodeJs } from "react-icons/fa";
 import { SiZapier, SiSelenium, SiPostman, SiMake } from "react-icons/si";
 import NavBarMobile from "../../../components/NavBar_Mobile/NavBar-mobile";
 import ThemeToggleIcon from "../../../components/Icon/sbicon";
+import Footer from "../../../components/Footer/Footer";
 
 
 const techLogos = {
@@ -149,8 +150,8 @@ export default function AutomationIntegrationDetailPage() {
           style={{
             maxWidth: 1160,
             margin: isMobile ? '0.5rem 0' : '2.5rem auto',
-            // Add more top padding for mobile
-            padding: isMobile ? '3.5rem 0.2rem 2.5rem 0.2rem' : isTablet ? '0 0.7rem 4rem 0.7rem' : '0 1.2rem 5rem 1.2rem',
+            // Improved: more top/bottom padding, more side padding for mobile; no padding for desktop
+            padding: isMobile ? '4.2rem 0.7rem 3.2rem 0rem' : isTablet ? '0 0.7rem 4rem 0.7rem' : '0',
             fontFamily: 'Inter, sans-serif',
             background: isMobile ? 'none' : 'linear-gradient(120deg, rgba(36,41,54,0.98) 60%, rgba(70,115,223,0.10) 100%)',
             borderRadius: isMobile ? 0 : 36,
@@ -163,6 +164,7 @@ export default function AutomationIntegrationDetailPage() {
             minHeight: isMobile ? '100vh' : '80vh',
             display: 'flex',
             flexDirection: 'column',
+            gap: isMobile ? 24 : 0,
           }}
           aria-label="Automation & Integration Service Detail"
         >
@@ -172,12 +174,12 @@ export default function AutomationIntegrationDetailPage() {
             width: '100%',
             background: palette.heroGradient,
             borderRadius: isMobile ? 0 : '0 0 3.5rem 3.5rem',
-            padding: isMobile ? '2.2rem 0.7rem 1.7rem 0.7rem' : isTablet ? '3rem 1.2rem 2.2rem 1.2rem' : '4.2rem 3.2rem 3.2rem 3.2rem',
-            marginBottom: isMobile ? 24 : 64,
+            padding: isMobile ? '2.7rem 1.1rem 2.2rem 1.1rem' : isTablet ? '3rem 1.2rem 2.2rem 1.2rem' : '4.2rem 3.2rem 3.2rem 3.2rem',
+            marginBottom: isMobile ? 32 : 64,
             boxShadow: isMobile ? 'none' : isDark ? '0 12px 48px #23294666' : '0 12px 48px #4ea8ff33',
             position: 'relative',
             overflow: 'hidden',
-            minHeight: isMobile ? 180 : 320,
+            minHeight: isMobile ? 210 : 320,
             zIndex: 1,
           }}
         >
@@ -193,8 +195,8 @@ export default function AutomationIntegrationDetailPage() {
             zIndex: 3
           }}>
             <div style={{ flex: 1, minWidth: isMobile ? 'unset' : 320, marginBottom: isMobile ? 18 : 0 }}>
-              <h1 style={{ fontSize: isMobile ? '2rem' : isTablet ? '2.3rem' : '3rem', fontWeight: 900, color: isDark ? '#eaf6ff' : '#fff', marginBottom: isMobile ? 12 : 20, letterSpacing: -2, textShadow: isDark ? '0 6px 32px #23294699, 0 1px 0 #23294644' : '0 6px 32px #4ea8ff66, 0 1px 0 #fff2', lineHeight: 1.08 }}>{service.title}</h1>
-              <p style={{ fontSize: isMobile ? '1.01rem' : '1.22rem', color: isDark ? '#b0c4d8' : '#eaf6ff', marginBottom: isMobile ? 16 : 28, fontWeight: 600, lineHeight: 1.75, textShadow: isDark ? '0 3px 16px #23294644' : '0 3px 16px #4ea8ff33', letterSpacing: 0.01 }}>{service.description}</p>
+              <h1 style={{ fontSize: isMobile ? '2.25rem' : isTablet ? '2.3rem' : '3rem', fontWeight: 900, color: isDark ? '#eaf6ff' : '#fff', marginBottom: isMobile ? 16 : 20, letterSpacing: -2, textShadow: isDark ? '0 6px 32px #23294699, 0 1px 0 #23294644' : '0 6px 32px #4ea8ff66, 0 1px 0 #fff2', lineHeight: 1.08 }}>{service.title}</h1>
+              <p style={{ fontSize: isMobile ? '1.13rem' : '1.22rem', color: isDark ? '#b0c4d8' : '#eaf6ff', marginBottom: isMobile ? 20 : 28, fontWeight: 600, lineHeight: 1.75, textShadow: isDark ? '0 3px 16px #23294644' : '0 3px 16px #4ea8ff33', letterSpacing: 0.01 }}>{service.description}</p>
               <a
                 href="/contact"
                 style={{
@@ -203,12 +205,12 @@ export default function AutomationIntegrationDetailPage() {
                   fontWeight: 900,
                   fontSize: isMobile ? '1rem' : '1.18rem',
                   borderRadius: 18,
-                  padding: isMobile ? '0.8rem 1.5rem' : '1.1rem 2.8rem',
+                  padding: isMobile ? '1.1rem 1.7rem' : '1.1rem 2.8rem',
                   textDecoration: 'none',
                   boxShadow: isDark ? '0 6px 32px #23294644, 0 0 0 2.5px #263040' : '0 6px 32px #4ea8ff33, 0 0 0 2.5px #eaf6ff',
                   transition: 'background 0.2s, box-shadow 0.2s, transform 0.15s',
                   display: 'inline-block',
-                  marginTop: 18,
+                  marginTop: isMobile ? 22 : 18,
                   border: `2.5px solid ${palette.ctaBtnBorder}`,
                   letterSpacing: 0.22,
                   backdropFilter: 'blur(2.5px)',
@@ -227,7 +229,7 @@ export default function AutomationIntegrationDetailPage() {
                 }}
               >Start Your Automation Project</a>
             </div>
-            <div style={{ flex: 1, minWidth: isMobile ? 'unset' : 260, textAlign: 'center', position: 'relative', marginTop: isMobile ? 18 : 0 }}>
+            <div style={{ flex: 1, minWidth: isMobile ? 'unset' : 260, textAlign: 'center', position: 'relative', marginTop: isMobile ? 22 : 0 }}>
               <div style={{
                 display: 'inline-block',
                 background: isDark ? 'rgba(36,41,54,0.22)' : 'rgba(255,255,255,0.22)',
@@ -242,7 +244,7 @@ export default function AutomationIntegrationDetailPage() {
                 <img
                   src="/data scrapping icon.svg"
                   alt="Automation Illustration"
-                  style={{ width: isMobile ? 110 : 180, maxWidth: '100%', borderRadius: 32, boxShadow: '0 8px 32px #4ea8ff33', background: isDark ? 'rgba(36,41,54,0.98)' : '#fff', padding: isMobile ? 8 : 18, border: `2px solid ${palette.cardInnerBorder}` }}
+                  style={{ width: isMobile ? 130 : 180, maxWidth: '100%', borderRadius: 32, boxShadow: '0 8px 32px #4ea8ff33', background: isDark ? 'rgba(36,41,54,0.98)' : '#fff', padding: isMobile ? 12 : 18, border: `2px solid ${palette.cardInnerBorder}` }}
                 />
               </div>
             </div>
@@ -250,7 +252,7 @@ export default function AutomationIntegrationDetailPage() {
         </section>
 
         {/* Process Stepper */}
-        <section style={{ margin: isMobile ? '1.2rem 0' : '3.2rem 0', background: palette.cardBg, borderRadius: isMobile ? 12 : 26, boxShadow: isMobile ? 'none' : isDark ? '0 8px 32px #23294633' : '0 8px 32px #4ea8ff11', padding: isMobile ? '1.2rem 0.7rem' : '3rem 2.5rem', border: `1.5px solid ${palette.border}`, backdropFilter: 'blur(2.5px)' }}>
+        <section style={{ margin: isMobile ? '1.7rem 0' : '3.2rem 0', background: palette.cardBg, borderRadius: isMobile ? 16 : 26, boxShadow: isMobile ? 'none' : isDark ? '0 8px 32px #23294633' : '0 8px 32px #4ea8ff11', padding: isMobile ? '1.7rem 1.1rem' : '3rem 2.5rem', border: `1.5px solid ${palette.border}`, backdropFilter: 'blur(2.5px)' }}>
           <h2 style={{ fontSize: isMobile ? '1.13rem' : '1.38rem', fontWeight: 900, color: palette.textAccent, marginBottom: isMobile ? 18 : 36, letterSpacing: 0.14, textShadow: isDark ? '0 2px 8px #23294633' : '0 2px 8px #4ea8ff11', lineHeight: 1.1, textAlign: 'center' }}>Our Process</h2>
           <div style={{
             display: 'flex',
@@ -278,11 +280,11 @@ export default function AutomationIntegrationDetailPage() {
         </section>
 
         {/* Features as Cards */}
-        <section style={{ margin: isMobile ? '1.2rem 0' : '3.2rem 0' }}>
+        <section style={{ margin: isMobile ? '1.7rem 0' : '3.2rem 0' }}>
           <h2 style={{ fontSize: isMobile ? '1.13rem' : '1.38rem', fontWeight: 900, color: '#4ea8ff', marginBottom: isMobile ? 14 : 26, letterSpacing: 0.14, textShadow: '0 2px 8px #4ea8ff11', lineHeight: 1.1 }}>What You Get</h2>
-          <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', flexWrap: 'wrap', gap: isMobile ? 14 : 32 }}>
+          <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', flexWrap: 'wrap', gap: isMobile ? 18 : 32 }}>
             {features.map((f, i) => (
-              <div key={i} style={{ background: palette.cardBgGlass, borderRadius: isMobile ? 12 : 22, padding: isMobile ? '1.1rem 1.1rem' : '1.7rem 1.8rem', minWidth: isMobile ? 'unset' : 180, flex: 1, fontWeight: 900, color: palette.textMain, boxShadow: isMobile ? 'none' : isDark ? '0 8px 32px #23294633' : '0 8px 32px #4ea8ff11', fontSize: isMobile ? '1rem' : '1.16rem', display: 'flex', alignItems: 'center', gap: isMobile ? 12 : 22, border: `1.5px solid ${palette.border}`, transition: 'box-shadow 0.2s, transform 0.15s', backdropFilter: 'blur(2px)', cursor: 'pointer', filter: isDark ? 'drop-shadow(0 2px 12px #23294633)' : 'drop-shadow(0 2px 12px #4ea8ff11)', marginBottom: isMobile ? 8 : 0 }}>
+              <div key={i} style={{ background: palette.cardBgGlass, borderRadius: isMobile ? 16 : 22, padding: isMobile ? '1.3rem 1.3rem' : '1.7rem 1.8rem', minWidth: isMobile ? 'unset' : 180, flex: 1, fontWeight: 900, color: palette.textMain, boxShadow: isMobile ? 'none' : isDark ? '0 8px 32px #23294633' : '0 8px 32px #4ea8ff11', fontSize: isMobile ? '1.09rem' : '1.16rem', display: 'flex', alignItems: 'center', gap: isMobile ? 16 : 22, border: `1.5px solid ${palette.border}`, transition: 'box-shadow 0.2s, transform 0.15s', backdropFilter: 'blur(2px)', cursor: 'pointer', filter: isDark ? 'drop-shadow(0 2px 12px #23294633)' : 'drop-shadow(0 2px 12px #4ea8ff11)', marginBottom: isMobile ? 10 : 0 }}>
                 {f.icon}
                 {f.label}
               </div>
@@ -291,12 +293,12 @@ export default function AutomationIntegrationDetailPage() {
         </section>
 
         {/* Technologies as Logo Cloud */}
-        <section style={{ margin: isMobile ? '1.2rem 0' : '3.2rem 0', background: palette.cardBg, borderRadius: isMobile ? 12 : 26, boxShadow: isMobile ? 'none' : isDark ? '0 8px 32px #23294633' : '0 8px 32px #4ea8ff11', padding: isMobile ? '1.2rem 0.7rem' : '3rem 2.5rem', border: `1.5px solid ${palette.border}`, backdropFilter: 'blur(2.5px)' }}>
+        <section style={{ margin: isMobile ? '1.7rem 0' : '3.2rem 0', background: palette.cardBg, borderRadius: isMobile ? 16 : 26, boxShadow: isMobile ? 'none' : isDark ? '0 8px 32px #23294633' : '0 8px 32px #4ea8ff11', padding: isMobile ? '1.7rem 1.1rem' : '3rem 2.5rem', border: `1.5px solid ${palette.border}`, backdropFilter: 'blur(2.5px)' }}>
           <h2 style={{ fontSize: isMobile ? '1.13rem' : '1.28rem', fontWeight: 900, color: '#4ea8ff', marginBottom: isMobile ? 14 : 26, letterSpacing: 0.14, textShadow: '0 2px 8px #4ea8ff11', lineHeight: 1.1 }}>Technologies</h2>
-          <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', flexWrap: 'wrap', gap: isMobile ? 10 : 32, alignItems: 'center' }}>
+          <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', flexWrap: 'wrap', gap: isMobile ? 14 : 32, alignItems: 'center' }}>
             {service.techs.map((t, i) => (
-              <span key={i} style={{ background: palette.cardBgGlass, borderRadius: isMobile ? 8 : 14, padding: isMobile ? '0.5rem 1.1rem' : '0.7rem 1.7rem', fontWeight: 900, fontSize: isMobile ? '0.99rem' : '1.16rem', letterSpacing: 0.24, boxShadow: isMobile ? 'none' : isDark ? '0 4px 18px #23294633' : '0 4px 18px #4ea8ff11', display: 'flex', alignItems: 'center', gap: isMobile ? 8 : 16, border: `1.5px solid ${palette.border}`, transition: 'box-shadow 0.2s, transform 0.15s', backdropFilter: 'blur(2px)', cursor: 'pointer', filter: isDark ? 'drop-shadow(0 2px 12px #23294633)' : 'drop-shadow(0 2px 12px #4ea8ff11)', marginBottom: isMobile ? 6 : 0 }}>
-                {techLogos[t] && <span style={{ display: 'flex', alignItems: 'center', marginRight: 8 }}>{techLogos[t]}</span>}
+              <span key={i} style={{ background: palette.cardBgGlass, borderRadius: isMobile ? 12 : 14, padding: isMobile ? '0.8rem 1.3rem' : '0.7rem 1.7rem', fontWeight: 900, fontSize: isMobile ? '1.09rem' : '1.16rem', letterSpacing: 0.24, boxShadow: isMobile ? 'none' : isDark ? '0 4px 18px #23294633' : '0 4px 18px #4ea8ff11', display: 'flex', alignItems: 'center', gap: isMobile ? 12 : 16, border: `1.5px solid ${palette.border}`, transition: 'box-shadow 0.2s, transform 0.15s', backdropFilter: 'blur(2px)', cursor: 'pointer', filter: isDark ? 'drop-shadow(0 2px 12px #23294633)' : 'drop-shadow(0 2px 12px #4ea8ff11)', marginBottom: isMobile ? 8 : 0 }}>
+                {techLogos[t] && <span style={{ display: 'flex', alignItems: 'center', marginRight: 10 }}>{techLogos[t]}</span>}
                 {t}
               </span>
             ))}
@@ -416,6 +418,7 @@ export default function AutomationIntegrationDetailPage() {
           <div style={{ marginTop: isMobile ? 10 : 22, color: palette.textMain, fontSize: isMobile ? '1rem' : '1.18rem', fontWeight: 800, textShadow: isDark ? '0 3px 16px #23294644' : '0 3px 16px #4ea8ff22', position: 'relative', zIndex: 2 }}>Ready to automate your business? Let’s talk about your vision.</div>
         </section>
       </main>
+      <Footer />
     </div>
     </>
   );
