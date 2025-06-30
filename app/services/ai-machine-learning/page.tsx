@@ -1,5 +1,9 @@
 
+
+
 "use client";
+
+import styles from "./ai-machine-learning.module.css";
 
 import React from "react";
 import { useTheme } from "../../../context/ThemeContext";
@@ -126,249 +130,22 @@ export default function AIMachineLearningDetailPage() {
       <div className="mobile-navbar-wrapper" style={{ display: 'block', width: '100%', position: 'sticky', top: 0, zIndex: 2000 }}>
         <NavBarMobile />
       </div>
-      <style>{`
-        ${keyframes}
-        .skip-to-content {
-          position: absolute;
-          left: -999px;
-          top: auto;
-          width: 1px;
-          height: 1px;
-          overflow: hidden;
-          z-index: 9999;
-          background: #fff;
-          color: #222b3a;
-          font-weight: bold;
-          border-radius: 8px;
-          padding: 8px 18px;
-          transition: left 0.2s;
-        }
-        /* Ensure #1d2127 is not used in NavBarMobile or here */
-        .skip-to-content:focus {
-          left: 16px;
-          top: 16px;
-          width: auto;
-          height: auto;
-          outline: 3px solid #4573df;
-        }
-        .engagement-method-section {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 56px;
-          margin: 3.2rem 0;
-          animation: fadeInUp 1.7s cubic-bezier(.23,1.01,.32,1) both;
-          align-items: stretch;
-        }
-        .engagement-method-card:focus-within, .engagement-method-card:focus {
-          outline: 3px solid #4573df;
-          outline-offset: 2px;
-        }
-        .engagement-method-icon[aria-label] {
-          outline: none;
-        }
-        .engagement-method-icon:focus {
-          outline: 2px solid #4573df;
-        }
-        .cta-btn:active {
-          transform: scale(0.97);
-          box-shadow: 0 2px 8px #4573df44;
-        }
-
-        /* --- Enhanced Mobile Responsive Styles --- */
-        @media (max-width: 900px) {
-          .engagement-method-section {
-            flex-direction: column;
-            gap: 24px;
-          }
-        }
-        @media (max-width: 700px) {
-          html, body {
-            width: 100vw;
-            overflow-x: hidden;
-          }
-          main#main-content {
-            max-width: 100vw !important;
-            margin: 0 !important;
-            padding: 4.5rem 0.5rem 2.2rem 0.5rem !important;
-            border-radius: 0 !important;
-            min-height: unset !important;
-            box-sizing: border-box !important;
-          }
-          .service-hero-gradient {
-            padding: 3.2rem 0.5rem 2rem 0.5rem !important;
-            min-height: 160px !important;
-            border-radius: 0 0 1.2rem 1.2rem !important;
-            margin-bottom: 18px !important;
-            box-sizing: border-box !important;
-          }
-          .service-hero-gradient h1 {
-            font-size: 1.25rem !important;
-            margin-bottom: 8px !important;
-            letter-spacing: -1.2px !important;
-            line-height: 1.2 !important;
-          }
-          .service-hero-gradient p {
-            font-size: 0.95rem !important;
-            margin-bottom: 10px !important;
-            line-height: 1.5 !important;
-          }
-          .service-hero-gradient a[data-animate="cta-bounce"] {
-            font-size: 1rem !important;
-            padding: 0.9rem 1.2rem !important;
-            margin-top: 8px !important;
-            min-width: 120px !important;
-          }
-          .service-hero-gradient > div {
-            flex-direction: column !important;
-            gap: 10px !important;
-          }
-          .service-hero-gradient img {
-            width: 70px !important;
-            padding: 2px !important;
-          }
-          section, .engagement-method-section, .deliverable-card, .tech-logo-card {
-            padding: 0.6rem 0.1rem !important;
-            border-radius: 0.6rem !important;
-            margin: 0.5rem 0 !important;
-            box-sizing: border-box !important;
-          }
-          .deliverable-card, .tech-logo-card {
-            min-width: 100px !important;
-            font-size: 0.98rem !important;
-            padding: 0.8rem 0.4rem !important;
-            gap: 8px !important;
-            flex: 1 1 100% !important;
-            box-sizing: border-box !important;
-          }
-          .tech-logo-card img, .tech-logo-card svg {
-            width: 26px !important;
-            height: 26px !important;
-            margin-right: 4px !important;
-          }
-          .engagement-method-section {
-            gap: 8px !important;
-          }
-          .engagement-method-card, .engagement-method-section > div {
-            min-height: unset !important;
-            padding: 0.6rem 0.1rem !important;
-          }
-          .testimonialBg, .testimonial-section {
-            padding: 0.6rem 0.1rem !important;
-            border-radius: 0.6rem !important;
-          }
-          .cta-strip {
-            padding: 0.8rem 0.2rem !important;
-            border-radius: 0.6rem !important;
-          }
-          .cta-strip a {
-            font-size: 1rem !important;
-            padding: 0.9rem 1.2rem !important;
-            min-width: 120px !important;
-          }
-          .cta-strip div {
-            font-size: 1rem !important;
-          }
-          .process-stepper, .process-stepper > div {
-            flex-direction: column !important;
-            gap: 8px !important;
-            min-width: unset !important;
-            max-width: unset !important;
-          }
-          .process-stepper > div {
-            margin: 0 !important;
-          }
-          /* Section grid and flex adjustments for mobile */
-          section[data-animate], .deliverable-card, .tech-logo-card {
-            box-shadow: none !important;
-          }
-          section[data-animate] > div, .deliverable-card, .tech-logo-card {
-            border-radius: 0.6rem !important;
-          }
-          /* Grid to single column for cards */
-          section > div[style*='grid-template-columns'] {
-            display: flex !important;
-            flex-direction: column !important;
-            gap: 10px !important;
-          }
-          /* FAQ and testimonial font size */
-          .faq-section, .testimonial-section, .testimonialBg {
-            font-size: 1rem !important;
-          }
-          /* Remove horizontal scroll on all children */
-          * {
-            box-sizing: border-box !important;
-          }
-        }
-      `}</style>
-      <div style={{ background: palette.bgMain, overflowX: 'hidden', position: 'relative', minHeight: '100vh', colorScheme: isDark ? 'dark' : 'light', transition: 'background 0.4s, color 0.3s' }}>
-        <main id="main-content"
-          style={{
-            maxWidth: 1160,
-            margin: '2.5rem auto',
-            padding: '3.5rem 1.2rem 5rem 1.2rem', // Increased top padding
-            fontFamily: 'Inter, sans-serif',
-            background: 'linear-gradient(120deg, rgba(36,41,54,0.98) 60%, rgba(70,115,223,0.10) 100%)',
-            borderRadius: 36,
-            boxShadow: palette.boxShadow,
-            position: 'relative',
-            overflow: 'hidden',
-            border: `1.5px solid ${palette.border}`,
-            color: palette.textMain,
-            transition: 'background 0.4s, box-shadow 0.3s, border 0.3s',
-            minHeight: '80vh',
-            display: 'flex',
-            flexDirection: 'column',
-          }}
+      {/* CSS moved to external file ai-machine-learning.module.css */}
+      <div
+        className={`${styles.aiMLBoxSizingAll} ${isDark ? styles.dark : styles.light}`}
+      >
+        <main
+          id="main-content"
+          className={styles.mainContent}
           aria-label="AI & Machine Learning Service Detail"
         >
         {/* Soft background shapes for extra depth */}
-        <div style={{
-          position: 'absolute',
-          left: -120,
-          top: 80,
-          width: 320,
-          height: 320,
-          background: isDark ? 'radial-gradient(circle, #23294655 0%, #181c2200 80%)' : 'radial-gradient(circle, #cfe8ef55 0%, #f7fafd00 80%)',
-          filter: 'blur(32px)',
-          zIndex: 0,
-          pointerEvents: 'none',
-          animation: 'floatY 7s ease-in-out infinite',
-        }} aria-hidden="true" />
-        <div style={{
-          position: 'absolute',
-          right: -100,
-          bottom: 0,
-          width: 260,
-          height: 260,
-          background: isDark ? 'radial-gradient(circle, #4573df33 0%, #23294600 80%)' : 'radial-gradient(circle, #4573df22 0%, #f7fafd00 80%)',
-          filter: 'blur(36px)',
-          zIndex: 0,
-          pointerEvents: 'none',
-          animation: 'floatX 9s ease-in-out infinite',
-        }} aria-hidden="true" />
+        <div className={styles.bgShapeLeft} aria-hidden="true" />
+        <div className={styles.bgShapeRight} aria-hidden="true" />
         {/* Scroll to top button */}
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          style={{
-            position: 'fixed',
-            bottom: 32,
-            right: 32,
-            zIndex: 100,
-            background: palette.ctaBtn,
-            color: palette.ctaBtnText,
-            border: `2px solid ${palette.ctaBtnBorder}`,
-            borderRadius: '50%',
-            width: 48,
-            height: 48,
-            boxShadow: isDark ? '0 4px 16px #23294688' : '0 4px 16px #4573df33',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: 24,
-            transition: 'background 0.2s, box-shadow 0.2s, transform 0.15s',
-            outline: 'none',
-          }}
+          className={styles.scrollToTopBtn}
           aria-label="Scroll to top"
           tabIndex={0}
           onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') window.scrollTo({ top: 0, behavior: 'smooth' }); }}
@@ -377,33 +154,11 @@ export default function AIMachineLearningDetailPage() {
         </button>
       {/* Hero Section - Full-width gradient, Lottie/SVG, CTA */}
       <section
-        className="service-hero-gradient"
-        style={{
-          width: '100%',
-          background: palette.heroGradient,
-          borderRadius: '0 0 3.5rem 3.5rem',
-          padding: '5.2rem 3.2rem 4.2rem 3.2rem',
-          marginBottom: 64,
-          boxShadow: isDark ? '0 12px 48px #23294666' : '0 12px 48px #4573df33',
-          position: 'relative',
-          overflow: 'hidden',
-          minHeight: 390,
-          zIndex: 1,
-          animation: 'fadeInUp 1.1s cubic-bezier(.23,1.01,.32,1) both',
-        }}
+        className={`${styles.heroSection} service-hero-gradient`}
         data-animate="fade-in"
       >
         {/* Glassmorphism overlay */}
-        <div style={{
-          position: 'absolute',
-          top: 0, left: 0, right: 0, bottom: 0,
-          background: palette.heroOverlay,
-          backdropFilter: 'blur(8px)',
-          borderRadius: '0 0 3.5rem 3.5rem',
-          zIndex: 2,
-          pointerEvents: 'none',
-          boxShadow: isDark ? '0 0 0 2.5px #263040' : '0 0 0 2.5px #eaf6ff55',
-        }} />
+        <div className={styles.heroOverlay} />
         {/* Decorative blurred circle */}
         <div style={{
           position: 'absolute',
@@ -415,79 +170,28 @@ export default function AIMachineLearningDetailPage() {
           filter: 'blur(18px)',
           zIndex: 1,
         }} />
-        <div style={{ display: 'flex', alignItems: 'center', gap: 64, flexWrap: 'wrap', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 3 }}>
-          <div style={{ flex: 1, minWidth: 220 }}>
-            <h1 style={{ fontSize: '3.5rem', fontWeight: 900, color: isDark ? '#eaf6ff' : '#fff', marginBottom: 24, letterSpacing: -2.5, textShadow: isDark ? '0 6px 32px #23294699, 0 1px 0 #23294644' : '0 6px 32px #4573df66, 0 1px 0 #fff2', lineHeight: 1.08 }}>{service.title}</h1>
-            <p style={{ fontSize: '1.36rem', color: isDark ? '#b0c4d8' : '#eaf6ff', marginBottom: 36, fontWeight: 600, lineHeight: 1.75, textShadow: isDark ? '0 3px 16px #23294644' : '0 3px 16px #4573df33', letterSpacing: 0.01 }} data-animate="typewriter">{service.description}</p>
+        <div className={styles.heroContent}>
+          <div className={styles.heroTextBlock}>
+            <h1 className={styles.heroTitle}>{service.title}</h1>
+            <p className={styles.heroDesc} data-animate="typewriter">{service.description}</p>
             <a
               href="/contact"
-              style={{
-                background: palette.ctaBtn,
-                color: palette.ctaBtnText,
-                fontWeight: 900,
-                fontSize: '1.28rem',
-                borderRadius: 22,
-                padding: '1.25rem 3.3rem',
-                textDecoration: 'none',
-                boxShadow: isDark ? '0 6px 32px #23294644, 0 0 0 2.5px #263040' : '0 6px 32px #4573df33, 0 0 0 2.5px #eaf6ff',
-                transition: 'background 0.2s, box-shadow 0.2s, transform 0.15s',
-                display: 'inline-block',
-                marginTop: 24,
-                border: `2.5px solid ${palette.ctaBtnBorder}`,
-                letterSpacing: 0.32,
-                backdropFilter: 'blur(2.5px)',
-                cursor: 'pointer',
-                filter: isDark ? 'drop-shadow(0 2px 12px #23294644)' : 'drop-shadow(0 2px 12px #4573df33)',
-              }}
+              className={styles.ctaBtn}
               data-animate="cta-bounce"
-              onMouseOver={e => {
-                e.currentTarget.style.background = palette.ctaBtnHover;
-                e.currentTarget.style.transform = 'scale(1.045)';
-                e.currentTarget.style.boxShadow = isDark ? '0 12px 48px #23294666, 0 0 0 2.5px #263040' : '0 12px 48px #4573df44, 0 0 0 2.5px #eaf6ff';
-              }}
-              onMouseOut={e => {
-                e.currentTarget.style.background = palette.ctaBtn;
-                e.currentTarget.style.transform = 'scale(1)';
-                e.currentTarget.style.boxShadow = isDark ? '0 6px 32px #23294644, 0 0 0 2.5px #263040' : '0 6px 32px #4573df33, 0 0 0 2.5px #eaf6ff';
-              }}
             >Get Started</a>
           </div>
-          <div style={{ flex: 1, minWidth: 260, textAlign: 'center', position: 'relative' }}>
+          <div className={styles.heroImageBlock}>
             {/* Lottie animation placeholder, fallback to SVG */}
             {/* <Lottie src="/lottie/ai-head.json" ... /> */}
-            <div style={{
-              display: 'inline-block',
-              background: isDark ? 'rgba(36,41,54,0.22)' : 'rgba(255,255,255,0.22)',
-              borderRadius: 40,
-              boxShadow: '0 8px 32px #4573df33',
-              padding: 22,
-              border: `2.5px solid ${palette.cardInnerBorder}`,
-              backdropFilter: 'blur(2.5px)',
-              transition: 'box-shadow 0.2s',
-              position: 'relative',
-              animation: 'pulse 2.8s infinite',
-              maxWidth: '100%',
-            }}>
+            <div className={styles.heroImageCard}>
               <img
                 src="/Ai icon.svg"
                 alt="AI Illustration"
-                style={{ width: 'min(220px, 60vw)', maxWidth: '100%', borderRadius: 32, boxShadow: '0 8px 32px #4573df33', background: isDark ? 'rgba(36,41,54,0.98)' : '#fff', padding: 18, border: `2px solid ${palette.cardInnerBorder}` }}
+                className={styles.heroImage}
                 data-animate="float"
               />
               {/* Animated floating dot */}
-              <div style={{
-                position: 'absolute',
-                right: 18,
-                top: 18,
-                width: 18,
-                height: 18,
-                borderRadius: '50%',
-                background: 'radial-gradient(circle, #6ea8ff 0%, #4573df 80%)',
-                boxShadow: '0 0 16px #6ea8ff99',
-                opacity: 0.7,
-                animation: 'floatY 2.5s ease-in-out infinite',
-                zIndex: 2,
-              }} />
+              <div className={styles.heroImageDot} />
             </div>
             {/* Optionally add micro-animated background shapes here */}
           </div>
@@ -497,48 +201,29 @@ export default function AIMachineLearningDetailPage() {
       {/* Service Overview - Side-by-side layout */}
       {/* Section divider */}
       <div style={{ width: '100%', height: 0, borderTop: '1.5px solid #eaf6ff', margin: '0 0 2.2rem 0', opacity: 0.7 }} />
-      <section style={{
-        display: 'flex',
-        gap: 56,
-        alignItems: 'center',
-        flexWrap: 'wrap',
-        margin: '3.2rem 0',
-        background: palette.cardBg,
-        borderRadius: 26,
-        boxShadow: isDark ? '0 8px 32px #23294633' : '0 8px 32px #4573df11',
-        padding: '3rem 2.5rem',
-        border: `1.5px solid ${palette.border}`,
-        backdropFilter: 'blur(2.5px)',
-        animation: 'fadeInUp 1.2s cubic-bezier(.23,1.01,.32,1) both',
-      }} data-animate="slide-left">
-        <div style={{ flex: 1, minWidth: 260 }}>
-          <h2 style={{ fontSize: '1.65rem', fontWeight: 900, color: palette.textAccent, marginBottom: 20, letterSpacing: 0.13, textShadow: isDark ? '0 2px 8px #23294633' : '0 2px 8px #4573df11', lineHeight: 1.1 }}>Overview</h2>
-          <p style={{ fontSize: '1.22rem', color: palette.textMain, marginBottom: 14, lineHeight: 1.8, fontWeight: 600 }}>{service.description}</p>
+      <section className={styles.overviewSection} data-animate="slide-left">
+        <div className={styles.overviewTextBlock}>
+          <h2 className={styles.overviewTitle}>Overview</h2>
+          <p className={styles.overviewDesc}>{service.description}</p>
         </div>
-        <div style={{ flex: 1, minWidth: 180, textAlign: 'center' }}>
-          <img src="/ds&ai-icon.svg" alt="AI Service Overview" style={{ width: 160, maxWidth: '100%', borderRadius: 18, boxShadow: isDark ? '0 8px 32px #23294633' : '0 8px 32px #4573df22', background: palette.iconBg, padding: 18, border: `1.5px solid ${palette.iconBorder}` }} data-animate="fade-in" />
+        <div className={styles.overviewImageBlock}>
+          <img src="/ds&ai-icon.svg" alt="AI Service Overview" className={styles.overviewImage} data-animate="fade-in" />
         </div>
       </section>
 
       {/* Why It Matters - Animated counters, impact */}
       {/* Section divider */}
       <div style={{ width: '100%', height: 0, borderTop: '1.5px solid #eaf6ff', margin: '0 0 2.2rem 0', opacity: 0.7 }} />
-      <section style={{ margin: '3.2rem 0', animation: 'fadeInUp 1.3s cubic-bezier(.23,1.01,.32,1) both', color: palette.textMain }} data-animate="fade-in">
-        <h2 style={{ fontSize: '1.38rem', fontWeight: 900, color: palette.textAccent, marginBottom: 26, letterSpacing: 0.14, textShadow: isDark ? '0 2px 8px #23294633' : '0 2px 8px #4573df11', lineHeight: 1.1 }}>Why It Matters</h2>
-        <div style={{ display: 'flex', gap: 56, flexWrap: 'wrap' }}>
-          <div style={{ flex: 1, minWidth: 240, background: isDark ? 'linear-gradient(90deg, #232946 60%, #181c22 100%)' : 'linear-gradient(90deg, #e3e6ea 60%, #f7fafd 100%)', borderRadius: 26, padding: '2rem 2rem', textAlign: 'center', fontWeight: 900, color: palette.textAccent, fontSize: '2.4rem', marginBottom: 14, boxShadow: isDark ? '0 8px 32px #23294633' : '0 8px 32px #4573df11', border: `1.5px solid ${palette.border}`, transition: 'box-shadow 0.2s, transform 0.15s', backdropFilter: 'blur(2px)', filter: isDark ? 'drop-shadow(0 2px 12px #23294633)' : 'drop-shadow(0 2px 12px #4573df11)' }}
-            onMouseOver={e => e.currentTarget.style.transform = 'scale(1.035)'}
-            onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'}
-          >
+      <section className={styles.whySection} data-animate="fade-in">
+        <h2 className={styles.whyTitle}>Why It Matters</h2>
+        <div className={styles.whyStatsRow}>
+          <div className={styles.whyStatCard}>
             <span data-animate="countup" data-value="78">78%</span>
-            <div style={{ fontSize: '1.18rem', color: palette.textMain, fontWeight: 800, marginTop: 12 }}>of businesses believe AI will impact their industry (PwC)</div>
+            <div className={styles.whyStatDesc}>of businesses believe AI will impact their industry (PwC)</div>
           </div>
-          <div style={{ flex: 1, minWidth: 240, background: isDark ? 'linear-gradient(90deg, #232946 60%, #181c22 100%)' : 'linear-gradient(90deg, #e3e6ea 60%, #f7fafd 100%)', borderRadius: 26, padding: '2rem 2rem', textAlign: 'center', fontWeight: 900, color: palette.textAccent, fontSize: '2.4rem', marginBottom: 14, boxShadow: isDark ? '0 8px 32px #23294633' : '0 8px 32px #4573df11', border: `1.5px solid ${palette.border}`, transition: 'box-shadow 0.2s, transform 0.15s', backdropFilter: 'blur(2px)', filter: isDark ? 'drop-shadow(0 2px 12px #23294633)' : 'drop-shadow(0 2px 12px #4573df11)' }}
-            onMouseOver={e => e.currentTarget.style.transform = 'scale(1.035)'}
-            onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'}
-          >
+          <div className={styles.whyStatCard}>
             <span data-animate="countup" data-value="2">2x</span>
-            <div style={{ fontSize: '1.18rem', color: palette.textMain, fontWeight: 800, marginTop: 12 }}>revenue growth for AI adoption leaders</div>
+            <div className={styles.whyStatDesc}>revenue growth for AI adoption leaders</div>
           </div>
         </div>
       </section>
@@ -546,69 +231,16 @@ export default function AIMachineLearningDetailPage() {
       {/* Process Stepper - Timeline ready for animation */}
       {/* Section divider */}
       <div style={{ width: '100%', height: 0, borderTop: '1.5px solid #eaf6ff', margin: '0 0 2.2rem 0', opacity: 0.7 }} />
-      <section style={{
-        margin: '3.2rem 0',
-        background: palette.cardBg,
-        borderRadius: 26,
-        boxShadow: isDark ? '0 8px 32px #23294633' : '0 8px 32px #4573df11',
-        padding: '3rem 2.5rem',
-        border: `1.5px solid ${palette.border}`,
-        backdropFilter: 'blur(2.5px)',
-        animation: 'fadeInUp 1.4s cubic-bezier(.23,1.01,.32,1) both',
-      }} data-animate="timeline">
-        <h2 style={{ fontSize: '1.38rem', fontWeight: 900, color: palette.textAccent, marginBottom: 36, letterSpacing: 0.14, textShadow: isDark ? '0 2px 8px #23294633' : '0 2px 8px #4573df11', lineHeight: 1.1, textAlign: 'center' }}>Our Process</h2>
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'flex-start',
-          gap: 0,
-          flexWrap: 'wrap',
-          margin: '0 auto',
-          maxWidth: 980,
-        }}>
+      <section className={styles.processSection} data-animate="timeline">
+        <h2 className={styles.processTitle}>Our Process</h2>
+        <div className={styles.processStepsRow}>
           {processSteps.map((step, idx) => (
-            <div key={idx} style={{
-              flex: 1,
-              minWidth: 160,
-              maxWidth: 220,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              textAlign: 'center',
-              margin: '0 8px',
-              position: 'relative',
-            }}>
-              <div style={{
-                background: isDark ? '#232946' : '#f7fafd',
-                borderRadius: '50%',
-                width: 64,
-                height: 64,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: 12,
-                border: `2.5px solid ${palette.border}`,
-                boxShadow: isDark ? '0 4px 18px #23294633' : '0 4px 18px #4573df11',
-              }}>
-                {step.icon}
-              </div>
-              <div style={{ fontWeight: 900, fontSize: '1.08rem', color: palette.textAccent, marginBottom: 6 }}>{step.title}</div>
-              <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginBottom: 0 }}>{step.desc}</div>
+            <div key={idx} className={styles.processStepCard}>
+              <div className={styles.processStepIcon}>{step.icon}</div>
+              <div className={styles.processStepTitle}>{step.title}</div>
+              <div className={styles.processStepDesc}>{step.desc}</div>
               {idx < processSteps.length - 1 && (
-                <div style={{
-                  position: 'absolute',
-                  right: -8,
-                  top: 32,
-                  width: 24,
-                  height: 2,
-                  background: isDark ? '#263040' : '#eaf6ff',
-                  opacity: 0.7,
-                  zIndex: 1,
-                  left: '100%',
-                  marginLeft: 0,
-                  marginRight: 0,
-                  display: 'block',
-                }} />
+                <div className={styles.processStepConnector} />
               )}
             </div>
           ))}
@@ -618,33 +250,11 @@ export default function AIMachineLearningDetailPage() {
       {/* Features as Cards - Deliverables Grid */}
       {/* Section divider */}
       <div style={{ width: '100%', height: 0, borderTop: '1.5px solid #eaf6ff', margin: '0 0 2.2rem 0', opacity: 0.7 }} />
-      <section style={{ margin: '3.2rem 0', animation: 'fadeInUp 1.5s cubic-bezier(.23,1.01,.32,1) both' }} data-animate="stagger-fade">
-        <h2 style={{ fontSize: '1.38rem', fontWeight: 900, color: '#4573df', marginBottom: 26, letterSpacing: 0.14, textShadow: '0 2px 8px #4573df11', lineHeight: 1.1 }}>What You Get</h2>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 32 }}>
+      <section className={styles.featuresSection} data-animate="stagger-fade">
+        <h2 className={styles.featuresTitle}>What You Get</h2>
+        <div className={styles.featuresRow}>
           {features.map((f, i) => (
-            <div key={i} className="deliverable-card" style={{
-              background: palette.cardBgGlass,
-              borderRadius: 22,
-              padding: '1.7rem 1.8rem',
-              minWidth: 240,
-              flex: 1,
-              fontWeight: 900,
-              color: palette.textMain,
-              boxShadow: isDark ? '0 8px 32px #23294633' : '0 8px 32px #4573df11',
-              fontSize: '1.16rem',
-              display: 'flex',
-              alignItems: 'center',
-              gap: 22,
-              border: `1.5px solid ${palette.border}`,
-              transition: 'box-shadow 0.2s, transform 0.15s',
-              backdropFilter: 'blur(2px)',
-              cursor: 'pointer',
-              filter: isDark ? 'drop-shadow(0 2px 12px #23294633)' : 'drop-shadow(0 2px 12px #4573df11)',
-            }}
-              onMouseOver={e => e.currentTarget.style.boxShadow = isDark ? '0 16px 48px #23294644' : '0 16px 48px #4573df22'}
-              onMouseOut={e => e.currentTarget.style.boxShadow = isDark ? '0 8px 32px #23294633' : '0 8px 32px #4573df11'}
-              data-animate="fade-in"
-            >
+            <div key={i} className={styles.featureCard} data-animate="fade-in">
               {f.icon}
               {f.label}
             </div>
@@ -655,18 +265,9 @@ export default function AIMachineLearningDetailPage() {
       {/* Technologies as Logo Cloud */}
       {/* Section divider */}
       <div style={{ width: '100%', height: 0, borderTop: '1.5px solid #eaf6ff', margin: '0 0 2.2rem 0', opacity: 0.7 }} />
-      <section style={{
-        margin: '3.2rem 0',
-        background: palette.cardBg,
-        borderRadius: 26,
-        boxShadow: isDark ? '0 8px 32px #23294633' : '0 8px 32px #4573df11',
-        padding: '3rem 2.5rem',
-        border: `1.5px solid ${palette.border}`,
-        backdropFilter: 'blur(2.5px)',
-        animation: 'fadeInUp 1.6s cubic-bezier(.23,1.01,.32,1) both',
-      }} data-animate="logo-cloud">
-        <h2 style={{ fontSize: '1.28rem', fontWeight: 900, color: '#4573df', marginBottom: 26, letterSpacing: 0.14, textShadow: '0 2px 8px #4573df11', lineHeight: 1.1 }}>Technologies</h2>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 32, alignItems: 'center' }}>
+      <section className={styles.techSection} data-animate="logo-cloud">
+        <h2 className={styles.techTitle}>Technologies</h2>
+        <div className={styles.techRow}>
           {/* Example: Map tech name to react-icon if available, else fallback to image */}
           {service.techs.map((t, i) => {
             let Icon = null;
@@ -699,27 +300,7 @@ export default function AIMachineLearningDetailPage() {
               default: Icon = null; color = undefined;
             }
             return (
-              <span key={i} className="tech-logo-card" style={{
-                background: palette.cardBgGlass,
-                borderRadius: 14,
-                padding: '0.7rem 1.7rem',
-                fontWeight: 900,
-                fontSize: '1.16rem',
-                letterSpacing: 0.24,
-                boxShadow: isDark ? '0 4px 18px #23294633' : '0 4px 18px #4573df11',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 16,
-                border: `1.5px solid ${palette.border}`,
-                transition: 'box-shadow 0.2s, transform 0.15s',
-                backdropFilter: 'blur(2px)',
-                cursor: 'pointer',
-                filter: isDark ? 'drop-shadow(0 2px 12px #23294633)' : 'drop-shadow(0 2px 12px #4573df11)',
-              }}
-                onMouseOver={e => e.currentTarget.style.boxShadow = isDark ? '0 16px 48px #23294644' : '0 16px 48px #4573df22'}
-                onMouseOut={e => e.currentTarget.style.boxShadow = isDark ? '0 4px 18px #23294633' : '0 4px 18px #4573df11'}
-                data-animate="scale-on-hover"
-              >
+              <span key={i} className={styles.techCard} data-animate="scale-on-hover">
                 {Icon ? (
                   <Icon size={40} style={{ marginRight: 12 }} title={t} color={color} />
                 ) : (
@@ -743,50 +324,16 @@ export default function AIMachineLearningDetailPage() {
       {/* How We Work Section */}
       {/* Section divider */}
       <div style={{ width: '100%', height: 0, borderTop: '1.5px solid #eaf6ff', margin: '0 0 2.2rem 0', opacity: 0.7 }} />
-      <section
-        style={{
-          margin: '3.2rem 0',
-          background: isDark ? 'linear-gradient(100deg, #232946 60%, #181c22 100%)' : 'linear-gradient(100deg, #e3e6ea 60%, #f7fafd 100%)',
-          borderRadius: 32,
-          boxShadow: isDark ? '0 12px 48px #23294633' : '0 12px 48px #4573df11',
-          padding: '3.2rem 2.8rem',
-          border: `2px solid ${palette.border}`,
-          position: 'relative',
-          overflow: 'hidden',
-          animation: 'fadeInUp 1.8s cubic-bezier(.23,1.01,.32,1) both',
-          color: palette.textMain,
-        }}
-        aria-labelledby="how-we-work-title"
-      >
-        <h2 id="how-we-work-title" style={{ fontSize: '1.55rem', fontWeight: 900, color: palette.textAccent, marginBottom: 18, letterSpacing: 0.13, textShadow: isDark ? '0 2px 8px #23294633' : '0 2px 8px #4573df11', lineHeight: 1.1, textAlign: 'center' }}>
+      <section className={styles.howSection} aria-labelledby="how-we-work-title">
+        <h2 id="how-we-work-title" className={styles.howTitle}>
           How We Work: Partnership, Process & Delivery
         </h2>
-        <div style={{ maxWidth: 900, margin: '0 auto', marginBottom: 32, color: palette.textSubtle, fontWeight: 600, fontSize: '1.13rem', textAlign: 'center' }}>
+        <div className={styles.howDesc}>
           We operate as your strategic partner—combining robust engagement models, agile execution, and enterprise-grade governance. Our operational workflow ensures risk-managed, transparent, and value-driven AI delivery: on time, on budget, and with full business visibility.
         </div>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-          gap: 36,
-          alignItems: 'stretch',
-          margin: '0 auto',
-          maxWidth: 980,
-        }}>
+        <div className={styles.howGrid}>
           {/* Engagement Models */}
-          <div style={{
-            background: palette.cardBgGlass,
-            borderRadius: 22,
-            padding: '2.1rem 1.7rem',
-            boxShadow: isDark ? '0 8px 32px #23294633' : '0 8px 32px #4573df11',
-            border: `1.5px solid ${palette.cardInnerBorder}`,
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 18,
-            minHeight: 240,
-            justifyContent: 'flex-start',
-            alignItems: 'flex-start',
-            position: 'relative',
-          }}>
+          <div className={styles.howCard}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 6 }}>
               <span style={{ fontSize: '2rem' }} aria-label="Engagement Models" role="img">💼</span>
               <span style={{ fontWeight: 800, fontSize: '1.13rem', color: palette.textAccent }}>Engagement Models</span>
@@ -814,20 +361,7 @@ export default function AIMachineLearningDetailPage() {
             </div>
           </div>
           {/* Methodology & Communication */}
-          <div style={{
-            background: palette.cardBgGlass,
-            borderRadius: 22,
-            padding: '2.1rem 1.7rem',
-            boxShadow: isDark ? '0 8px 32px #23294633' : '0 8px 32px #4573df11',
-            border: `1.5px solid ${palette.cardInnerBorder}`,
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 18,
-            minHeight: 260,
-            justifyContent: 'flex-start',
-            alignItems: 'flex-start',
-            position: 'relative',
-          }}>
+          <div className={styles.howCard}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 6 }}>
               <span style={{ fontSize: '2rem' }} aria-label="Methodology & Communication" role="img">🧭</span>
               <span style={{ fontWeight: 800, fontSize: '1.13rem', color: palette.textAccent }}>Methodology & Communication</span>
@@ -867,127 +401,35 @@ export default function AIMachineLearningDetailPage() {
       {/* Testimonial */}
       {/* Section divider */}
       <div style={{ width: '100%', height: 0, borderTop: '1.5px solid #eaf6ff', margin: '0 0 2.2rem 0', opacity: 0.7 }} />
-      <section style={{
-        margin: '3.2rem 0',
-        background: palette.testimonialBg,
-        borderRadius: 32,
-        padding: '3.2rem 2.8rem',
-        boxShadow: isDark ? '0 12px 48px #23294633' : '0 12px 48px #4573df11',
-        textAlign: 'center',
-        border: `2.5px solid ${palette.border}`,
-        position: 'relative',
-        overflow: 'hidden',
-        animation: 'fadeInUp 1.8s cubic-bezier(.23,1.01,.32,1) both',
-        color: palette.textMain,
-      }} data-animate="fade-in">
+      <section className={styles.testimonialSection} data-animate="fade-in">
         {/* Animated spark/dot */}
-        <div style={{
-          position: 'absolute',
-          left: '50%',
-          top: 18,
-          width: 18,
-          height: 18,
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, #6ea8ff 0%, #4573df 80%)',
-          boxShadow: '0 0 16px #6ea8ff99',
-          opacity: 0.7,
-          animation: 'sparkMove 2.2s ease-in-out infinite',
-          zIndex: 3,
-          transform: 'translateX(-50%)',
-        }} />
+        <div className={styles.testimonialDot} />
         {/* Glassmorphism overlay */}
-        <div style={{
-          position: 'absolute',
-          top: 0, left: 0, right: 0, bottom: 0,
-          background: isDark ? 'rgba(36,41,54,0.13)' : 'rgba(255,255,255,0.13)',
-          backdropFilter: 'blur(4px)',
-          borderRadius: 28,
-          zIndex: 1,
-          pointerEvents: 'none',
-        }} />
-        <div style={{ fontSize: '1.38rem', fontWeight: 900, color: palette.textMain, marginBottom: 22, fontStyle: 'italic', letterSpacing: 0.14, textShadow: isDark ? '0 3px 16px #23294644' : '0 3px 16px #4573df22', position: 'relative', zIndex: 2, lineHeight: 1.3 }}>
+        <div className={styles.testimonialOverlay} />
+        <div className={styles.testimonialQuote}>
           “{testimonial.quote}”
         </div>
-        <div style={{ color: palette.textAccent, fontWeight: 900, fontSize: '1.18rem', letterSpacing: 0.14, position: 'relative', zIndex: 2 }}>{testimonial.name} <span style={{ color: palette.textMain, fontWeight: 800 }}>| {testimonial.company}</span></div>
+        <div className={styles.testimonialAuthor}>{testimonial.name} <span className={styles.testimonialCompany}>| {testimonial.company}</span></div>
       </section>
 
       {/* FAQs */}
       {/* Section divider */}
       <div style={{ width: '100%', height: 0, borderTop: '1.5px solid #eaf6ff', margin: '0 0 2.2rem 0', opacity: 0.7 }} />
-      <div style={{
-        margin: '3.2rem 0',
-        background: palette.cardBg,
-        borderRadius: 26,
-        boxShadow: isDark ? '0 8px 32px #23294633' : '0 8px 32px #4573df11',
-        padding: '3rem 2.5rem',
-        border: `1.5px solid ${palette.border}`,
-        backdropFilter: 'blur(2.5px)',
-        animation: 'fadeInUp 1.9s cubic-bezier(.23,1.01,.32,1) both',
-        color: palette.textMain,
-      }}>
+      <div className={styles.faqSection}>
         <ServiceFAQs faqs={faqs} />
       </div>
 
       {/* CTA - Full-width colored strip */}
       {/* Section divider */}
       <div style={{ width: '100%', height: 0, borderTop: '1.5px solid #eaf6ff', margin: '0 0 2.2rem 0', opacity: 0.7 }} />
-      <section style={{
-        margin: '4.2rem 0 0 0',
-        textAlign: 'center',
-        background: palette.ctaBg,
-        borderRadius: 32,
-        padding: '3.5rem 2.8rem',
-        boxShadow: isDark ? '0 12px 48px #23294633' : '0 12px 48px #4573df22',
-        position: 'relative',
-        overflow: 'hidden',
-        animation: 'fadeInUp 2s cubic-bezier(.23,1.01,.32,1) both',
-      }} data-animate="cta-strip">
+      <section className={styles.ctaSection} data-animate="cta-strip">
         {/* Glassmorphism overlay */}
-        <div style={{
-          position: 'absolute',
-          top: 0, left: 0, right: 0, bottom: 0,
-          background: 'rgba(255,255,255,0.10)',
-          backdropFilter: 'blur(4px)',
-          borderRadius: 28,
-          zIndex: 1,
-          pointerEvents: 'none',
-        }} />
-        <a href="/contact" style={{
-          background: palette.ctaBtn,
-          color: palette.ctaBtnText,
-          fontWeight: 900,
-          fontSize: '1.28rem',
-          borderRadius: 22,
-          padding: '1.25rem 3.3rem',
-          textDecoration: 'none',
-          boxShadow: isDark ? '0 8px 32px #23294644' : '0 8px 32px #4573df33',
-          display: 'inline-block',
-          border: `2.5px solid ${palette.ctaBtnBorder}`,
-          letterSpacing: 0.32,
-          backdropFilter: 'blur(2.5px)',
-          cursor: 'pointer',
-          position: 'relative',
-          zIndex: 2,
-          filter: isDark ? 'drop-shadow(0 2px 12px #23294644)' : 'drop-shadow(0 2px 12px #4573df33)',
-          borderImage: 'linear-gradient(90deg, #4573df, #6ea8ff, #cfe8ef, #4573df) 1',
-          animation: 'borderGradient 4s linear infinite alternate',
-          transition: 'background 0.2s, box-shadow 0.2s, transform 0.15s',
-        }} data-animate="cta-bounce"
-          onMouseOver={e => {
-            e.currentTarget.style.background = palette.ctaBtnHover;
-            e.currentTarget.style.transform = 'scale(1.045)';
-            e.currentTarget.style.boxShadow = isDark ? '0 16px 56px #23294666' : '0 16px 56px #4573df44';
-          }}
-          onMouseOut={e => {
-            e.currentTarget.style.background = palette.ctaBtn;
-            e.currentTarget.style.transform = 'scale(1)';
-            e.currentTarget.style.boxShadow = isDark ? '0 8px 32px #23294644' : '0 8px 32px #4573df33';
-          }}
-        >
-          <FaRobot style={{ marginRight: 14, fontSize: '1.5rem', animation: 'pulse 2.2s infinite', verticalAlign: 'middle' }} title="AI Consultant" />
+        <div className={styles.ctaOverlay} />
+        <a href="/contact" className={styles.ctaBtnMain} data-animate="cta-bounce">
+          <FaRobot className={styles.ctaBtnIcon} title="AI Consultant" />
           Talk to AI Consultant
         </a>
-        <div style={{ marginTop: 22, color: palette.textMain, fontSize: '1.18rem', fontWeight: 800, textShadow: isDark ? '0 3px 16px #23294644' : '0 3px 16px #4573df22', position: 'relative', zIndex: 2 }}>Ready to unlock the power of AI? Let’s talk about your vision.</div>
+        <div className={styles.ctaDesc}>Ready to unlock the power of AI? Let’s talk about your vision.</div>
       </section>
         </main>
       </div>
