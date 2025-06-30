@@ -9,6 +9,8 @@ import { ServiceFAQs } from "../ServiceDetailSections";
 import { FaPencilRuler, FaPalette, FaUserCheck, FaRegObjectGroup, FaUsers, FaRocket, FaLifeRing } from "react-icons/fa";
 import { SiFigma, SiAdobe, SiSketch, SiInvision } from "react-icons/si";
 
+import Footer from "../../../components/Footer/Footer";
+
 const service = {
   ...servicesData.find(s => s.slug === "ui-ux-product-design"),
   techs: [
@@ -600,6 +602,7 @@ export default function UIUXProductDesignDetailPage() {
             <div style={{ marginTop: 22, color: palette.textMain, fontSize: '1.18rem', fontWeight: 800, textShadow: isDark ? '0 3px 16px #23294644' : '0 3px 16px #4ea8ff22', position: 'relative', zIndex: 2 }}>Ready to elevate your product? Let’s talk about your vision.</div>
           </section>
         </main>
+        <Footer />
       </div>
     </>
   );

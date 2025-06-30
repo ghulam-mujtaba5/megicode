@@ -10,6 +10,8 @@ import { ServiceFAQs } from "../ServiceDetailSections";
 import { FaClipboardList, FaPencilRuler, FaMobileAlt, FaRocket, FaLifeRing, FaReact, FaAws, FaFigma, FaHandshake, FaMoneyBillWave, FaUsers, FaClock, FaBolt, FaBullhorn, FaTools } from 'react-icons/fa';
 import { SiFlutter, SiSwift, SiKotlin, SiFirebase, SiJira, SiFigma as SiFigmaIcon, SiGithub } from 'react-icons/si';
 
+import Footer from "../../../components/Footer/Footer";
+
 const service = {
   ...servicesData.find(s => s.slug === "mobile-app-solutions"),
   techs: [
@@ -115,7 +117,7 @@ export default function MobileAppSolutionsDetailPage() {
           aria-label="Scroll to top"
           tabIndex={0}
           onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-        >↑</button>
+        ></button>
         <main id="main-content"
         style={{
           maxWidth: 1160,
@@ -531,8 +533,9 @@ export default function MobileAppSolutionsDetailPage() {
           </a>
           <div style={{ marginTop: 22, color: palette.textMain, fontSize: '1.18rem', fontWeight: 800, textShadow: isDark ? '0 3px 16px #23294644' : '0 3px 16px #4ea8ff22', position: 'relative', zIndex: 2 }}>Ready to launch your app? Let’s talk about your vision.</div>
         </section>
-      </main>
-    </div>
+        </main>
+        <Footer />
+      </div>
     </React.Fragment>
   );
 }

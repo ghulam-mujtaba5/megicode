@@ -9,6 +9,8 @@ import { OurProcess, EngagementModels, MethodologyAndCommunication, ServiceFAQs 
 import { FaChartBar, FaDatabase, FaCogs, FaRocket, FaLifeRing, FaSearch, FaProjectDiagram } from "react-icons/fa";
 import { SiTableau, SiApachekafka, SiApacheairflow, SiPython, SiApache } from "react-icons/si";
 
+import Footer from "../../../components/Footer/Footer";
+
 // Clone the service object and override the techs array if needed
 const service = {
   ...servicesData.find(s => s.slug === "data-analytics-bi"),
@@ -808,6 +810,7 @@ export default function DataAnalyticsBIDetailPage() {
         <div style={{ marginTop: 22, color: palette.textMain, fontSize: '1.18rem', fontWeight: 800, textShadow: isDark ? '0 3px 16px #23294644' : '0 3px 16px #4573df22', position: 'relative', zIndex: 2 }}>Ready to unlock your data? Let’s talk about your vision.</div>
       </section>
         </main>
+        <Footer />
       </div>
     </>
   );

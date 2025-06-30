@@ -1,8 +1,6 @@
 
-
-
 "use client";
-
+import Footer from "../../../components/Footer/Footer";
 import styles from "./ai-machine-learning.module.css";
 
 import React from "react";
@@ -139,102 +137,92 @@ export default function AIMachineLearningDetailPage() {
           className={styles.mainContent}
           aria-label="AI & Machine Learning Service Detail"
         >
-        {/* Soft background shapes for extra depth */}
-        <div className={styles.bgShapeLeft} aria-hidden="true" />
-        <div className={styles.bgShapeRight} aria-hidden="true" />
-        {/* Scroll to top button */}
-        <button
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className={styles.scrollToTopBtn}
-          aria-label="Scroll to top"
-          tabIndex={0}
-          onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-        >
-          ↑
-        </button>
-      {/* Hero Section - Full-width gradient, Lottie/SVG, CTA */}
-      <section
-        className={`${styles.heroSection} service-hero-gradient`}
-        data-animate="fade-in"
-      >
-        {/* Glassmorphism overlay */}
-        <div className={styles.heroOverlay} />
-        {/* Decorative blurred circle */}
-        <div
-          className={
-            isDark
-              ? `${styles.heroBlurCircle} ${styles.heroBlurCircleDark}`
-              : `${styles.heroBlurCircle} ${styles.heroBlurCircleLight}`
-          }
-          aria-hidden="true"
-        />
-        <div className={styles.heroContent}>
-          <div className={styles.heroTextBlock}>
-            <h1 className={styles.heroTitle}>{service.title}</h1>
-            <p className={styles.heroDesc} data-animate="typewriter">{service.description}</p>
-            <a
-              href="/contact"
-              className={styles.ctaBtn}
-              data-animate="cta-bounce"
-            >Get Started</a>
-          </div>
-          <div className={styles.heroImageBlock}>
-            {/* Lottie animation placeholder, fallback to SVG */}
-            {/* <Lottie src="/lottie/ai-head.json" ... /> */}
-            <div className={styles.heroImageCard}>
-              <img
-                src="/Ai icon.svg"
-                alt="AI Illustration"
-                className={styles.heroImage}
-                data-animate="float"
-              />
-              {/* Animated floating dot */}
-              <div className={styles.heroImageDot} />
+          {/* Soft background shapes for extra depth */}
+          <div className={styles.bgShapeLeft} aria-hidden="true" />
+          <div className={styles.bgShapeRight} aria-hidden="true" />
+          {/* Hero Section - Full-width gradient, Lottie/SVG, CTA */}
+          <section
+            className={`${styles.heroSection} service-hero-gradient`}
+            data-animate="fade-in"
+          >
+            {/* Glassmorphism overlay */}
+            <div className={styles.heroOverlay} />
+            {/* Decorative blurred circle */}
+            <div
+              className={
+                isDark
+                  ? `${styles.heroBlurCircle} ${styles.heroBlurCircleDark}`
+                  : `${styles.heroBlurCircle} ${styles.heroBlurCircleLight}`
+              }
+              aria-hidden="true"
+            />
+            <div className={styles.heroContent}>
+              <div className={styles.heroTextBlock}>
+                <h1 className={styles.heroTitle}>{service.title}</h1>
+                <p className={styles.heroDesc} data-animate="typewriter">{service.description}</p>
+                <a
+                  href="/contact"
+                  className={styles.ctaBtn}
+                  data-animate="cta-bounce"
+                >Get Started</a>
+              </div>
+              <div className={styles.heroImageBlock}>
+                {/* Lottie animation placeholder, fallback to SVG */}
+                {/* <Lottie src="/lottie/ai-head.json" ... /> */}
+                <div className={styles.heroImageCard}>
+                  <img
+                    src="/Ai icon.svg"
+                    alt="AI Illustration"
+                    className={styles.heroImage}
+                    data-animate="float"
+                  />
+                  {/* Animated floating dot */}
+                  <div className={styles.heroImageDot} />
+                </div>
+                {/* Optionally add micro-animated background shapes here */}
+              </div>
             </div>
-            {/* Optionally add micro-animated background shapes here */}
-          </div>
-        </div>
-      </section>
+          </section>
 
-      {/* Service Overview - Side-by-side layout */}
-      {/* Section divider */}
-      <div style={{ width: '100%', height: 0, borderTop: '1.5px solid #eaf6ff', margin: '0 0 2.2rem 0', opacity: 0.7 }} />
-      <section className={styles.overviewSection} data-animate="slide-left">
-        <div className={styles.overviewTextBlock}>
-          <h2 className={styles.overviewTitle}>Overview</h2>
-          <p className={styles.overviewDesc}>{service.description}</p>
-        </div>
-        <div className={styles.overviewImageBlock}>
-          <img src="/ds&ai-icon.svg" alt="AI Service Overview" className={styles.overviewImage} data-animate="fade-in" />
-        </div>
-      </section>
+          {/* Service Overview - Side-by-side layout */}
+          {/* Section divider */}
+          <div style={{ width: '100%', height: 0, borderTop: '1.5px solid #eaf6ff', margin: '0 0 2.2rem 0', opacity: 0.7 }} />
+          <section className={styles.overviewSection} data-animate="slide-left">
+            <div className={styles.overviewTextBlock}>
+              <h2 className={styles.overviewTitle}>Overview</h2>
+              <p className={styles.overviewDesc}>{service.description}</p>
+            </div>
+            <div className={styles.overviewImageBlock}>
+              <img src="/ds&ai-icon.svg" alt="AI Service Overview" className={styles.overviewImage} data-animate="fade-in" />
+            </div>
+          </section>
 
-      {/* Why It Matters - Animated counters, impact */}
-      {/* Section divider */}
-      <div style={{ width: '100%', height: 0, borderTop: '1.5px solid #eaf6ff', margin: '0 0 2.2rem 0', opacity: 0.7 }} />
-      <section className={styles.whySection} data-animate="fade-in">
-        <h2 className={styles.whyTitle}>Why It Matters</h2>
-        <div className={styles.whyStatsRow}>
-          <div className={styles.whyStatCard}>
-            <span data-animate="countup" data-value="78">78%</span>
-            <div className={styles.whyStatDesc}>of businesses believe AI will impact their industry (PwC)</div>
-          </div>
-          <div className={styles.whyStatCard}>
-            <span data-animate="countup" data-value="2">2x</span>
-            <div className={styles.whyStatDesc}>revenue growth for AI adoption leaders</div>
-          </div>
-        </div>
-      </section>
+          {/* Why It Matters - Animated counters, impact */}
+          {/* Section divider */}
+          <div style={{ width: '100%', height: 0, borderTop: '1.5px solid #eaf6ff', margin: '0 0 2.2rem 0', opacity: 0.7 }} />
+          <section className={styles.whySection} data-animate="fade-in">
+            <h2 className={styles.whyTitle}>Why It Matters</h2>
+            <div className={styles.whyStatsRow}>
+              <div className={styles.whyStatCard}>
+                <span data-animate="countup" data-value="78">78%</span>
+                <div className={styles.whyStatDesc}>of businesses believe AI will impact their industry (PwC)</div>
+              </div>
+              <div className={styles.whyStatCard}>
+                <span data-animate="countup" data-value="2">2x</span>
+                <div className={styles.whyStatDesc}>revenue growth for AI adoption leaders</div>
+              </div>
+            </div>
+          </section>
 
-      {/* Process Stepper - Timeline ready for animation */}
-      {/* Section divider */}
-      <div style={{ width: '100%', height: 0, borderTop: '1.5px solid #eaf6ff', margin: '0 0 2.2rem 0', opacity: 0.7 }} />
-      <section className={styles.processSection} data-animate="timeline">
-        <h2 className={styles.processTitle}>Our Process</h2>
-        <div className={styles.processStepsRow}>
-          {processSteps.map((step, idx) => (
-            <div key={idx} className={styles.processStepCard}>
-              <div className={styles.processStepIcon}>{step.icon}</div>
+          {/* Process Stepper - Timeline ready for animation */}
+          {/* Section divider */}
+          <div style={{ width: '100%', height: 0, borderTop: '1.5px solid #eaf6ff', margin: '0 0 2.2rem 0', opacity: 0.7 }} />
+          <section className={styles.processSection} data-animate="timeline">
+            <h2 className={styles.processTitle}>Our Process</h2>
+            <div className={styles.processStepsRow}>
+              {processSteps.map((step, idx) => (
+                <div key={idx} className={styles.processStepCard}>
+                  <div className={styles.processStepIcon}>{step.icon}</div>
               <div className={styles.processStepTitle}>{step.title}</div>
               <div className={styles.processStepDesc}>{step.desc}</div>
               {idx < processSteps.length - 1 && (
@@ -430,6 +418,7 @@ export default function AIMachineLearningDetailPage() {
         <div className={styles.ctaDesc}>Ready to unlock the power of AI? Let’s talk about your vision.</div>
       </section>
         </main>
+        <Footer />
       </div>
     </>
   );

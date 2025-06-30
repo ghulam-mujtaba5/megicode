@@ -7,6 +7,8 @@ import { OurProcess, EngagementModels, MethodologyAndCommunication, ServiceFAQs 
 import { SiAmazon, SiDocker, SiKubernetes, SiTerraform, SiGithubactions, SiJenkins, SiGooglecloud } from "react-icons/si";
 import { FaCloud, FaServer, FaSync, FaLock, FaCogs, FaLifeRing, FaRocket, FaDatabase } from "react-icons/fa";
 
+import Footer from "../../../components/Footer/Footer";
+
 const service = {
   ...servicesData.find(s => s.slug === "cloud-devops-services"),
   techs: [
@@ -119,7 +121,7 @@ export default function CloudDevOpsServicesDetailPage() {
             display: 'flex',
             flexDirection: 'column',
           }}
-          aria-label="Cloud & DevOps Service Detail"
+          aria-label="Cloud & DevOps Services Detail"
         >
         {/* Hero Section */}
         <section
@@ -367,8 +369,9 @@ export default function CloudDevOpsServicesDetailPage() {
           </a>
           <div style={{ marginTop: 22, color: palette.textMain, fontSize: '1.18rem', fontWeight: 800, textShadow: isDark ? '0 3px 16px #23294644' : '0 3px 16px #4ea8ff22', position: 'relative', zIndex: 2 }}>Ready to modernize your infrastructure? Let’s talk about your vision.</div>
         </section>
-      </main>
-    </div>
+        </main>
+        <Footer />
+      </div>
     </>
   );
 }

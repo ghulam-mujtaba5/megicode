@@ -11,6 +11,8 @@ import { SiJirasoftware, SiGoogle } from "react-icons/si";
 import { FaNetworkWired } from "react-icons/fa";
 import { MdSecurity } from "react-icons/md";
 
+import Footer from "../../../components/Footer/Footer";
+
 const service = servicesData.find(s => s.slug === "it-consulting-support");
 
 const processSteps = [
@@ -436,6 +438,7 @@ export default function ITConsultingSupportDetailPage() {
           <div style={{ marginTop: 22, color: palette.textMain, fontSize: '1.18rem', fontWeight: 800, textShadow: isDark ? '0 3px 16px #23294644' : '0 3px 16px #4ea8ff22', position: 'relative', zIndex: 2 }}>Ready for secure, reliable IT? Let’s talk about your vision.</div>
         </section>
         </main>
+        <Footer />
       </div>
     </>
   );

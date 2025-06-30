@@ -9,6 +9,8 @@ import { OurProcess, EngagementModels, MethodologyAndCommunication, ServiceFAQs 
 import { FaLaptopCode, FaPalette, FaCogs, FaRocket, FaLifeRing, FaCloud, FaLock, FaSyncAlt } from "react-icons/fa";
 import { SiReact, SiNextdotjs, SiTypescript, SiNodedotjs, SiAmazon, SiVercel, SiDocker, SiSpringboot } from "react-icons/si";
 
+import Footer from "../../../components/Footer/Footer";
+
 const service = {
   ...servicesData.find(s => s.slug === "custom-web-development"),
   techs: [
@@ -118,6 +120,7 @@ export default function CustomWebDevelopmentDetailPage() {
                 <a href="/contact" style={{ background: palette.ctaBtn, color: palette.ctaBtnText, fontWeight: 900, fontSize: '1.28rem', borderRadius: 22, padding: '1.25rem 3.3rem', textDecoration: 'none', boxShadow: isDark ? '0 6px 32px #23294644, 0 0 0 2.5px #263040' : '0 6px 32px #4ea8ff33, 0 0 0 2.5px #eaf6ff', transition: 'background 0.2s, box-shadow 0.2s, transform 0.15s', display: 'inline-block', marginTop: 24, border: `2.5px solid ${palette.ctaBtnBorder}`, letterSpacing: 0.32, backdropFilter: 'blur(2.5px)', cursor: 'pointer', filter: isDark ? 'drop-shadow(0 2px 12px #23294644)' : 'drop-shadow(0 2px 12px #4ea8ff33)' }}>Start Your Web Project</a>
               </div>
               <div style={{ flex: 1, minWidth: 260, textAlign: 'center', position: 'relative' }}>
+        <Footer />
                 <div style={{ display: 'inline-block', background: isDark ? 'rgba(36,41,54,0.22)' : 'rgba(255,255,255,0.22)', borderRadius: 40, boxShadow: '0 8px 32px #4ea8ff33', padding: 22, border: `2.5px solid ${palette.cardInnerBorder}`, backdropFilter: 'blur(2.5px)', transition: 'box-shadow 0.2s', position: 'relative', animation: 'pulse 2.8s infinite' }}>
                   <img src="/web app icon.svg" alt="Web App Illustration" style={{ width: 220, maxWidth: '100%', borderRadius: 32, boxShadow: '0 8px 32px #4ea8ff33', background: isDark ? 'rgba(36,41,54,0.98)' : '#fff', padding: 18, border: `2px solid ${palette.cardInnerBorder}` }} />
                 </div>
