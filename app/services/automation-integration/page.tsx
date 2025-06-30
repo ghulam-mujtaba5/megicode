@@ -7,8 +7,22 @@ import { useInViewAnimation } from "../../../hooks/useInViewAnimation";
 import servicesData from "../servicesData";
 import { OurProcess, EngagementModels, MethodologyAndCommunication, ServiceFAQs } from "../ServiceDetailSections";
 import { FaCogs, FaLink, FaRobot, FaSync, FaChalkboardTeacher, FaLifeRing, FaDatabase, FaTools, FaCheckCircle } from "react-icons/fa";
+import { FaPython, FaNodeJs } from "react-icons/fa";
+import { SiZapier, SiSelenium, SiPostman, SiMake } from "react-icons/si";
 import NavBarMobile from "../../../components/NavBar_Mobile/NavBar-mobile";
 import ThemeToggleIcon from "../../../components/Icon/sbicon";
+
+
+const techLogos = {
+  Python: <FaPython color="#3776AB" size={32} title="Python" />,
+  Zapier: <SiZapier color="#FF4F00" size={32} title="Zapier" />,
+  Make: <SiMake color="#5C2D91" size={32} title="Make" />,
+  Selenium: <SiSelenium color="#43B02A" size={32} title="Selenium" />,
+  "Node.js": <FaNodeJs color="#339933" size={32} title="Node.js" />,
+  "REST APIs": <SiPostman color="#FF6C37" size={32} title="REST APIs" />,
+  // Power Automate icon is not available in react-icons/si, use FaSync as a fallback
+  "Power Automate": <FaSync color="#0066FF" size={32} title="Power Automate" />,
+};
 
 const service = {
   ...servicesData.find(s => s.slug === "automation-integration"),
@@ -282,6 +296,7 @@ export default function AutomationIntegrationDetailPage() {
           <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', flexWrap: 'wrap', gap: isMobile ? 10 : 32, alignItems: 'center' }}>
             {service.techs.map((t, i) => (
               <span key={i} style={{ background: palette.cardBgGlass, borderRadius: isMobile ? 8 : 14, padding: isMobile ? '0.5rem 1.1rem' : '0.7rem 1.7rem', fontWeight: 900, fontSize: isMobile ? '0.99rem' : '1.16rem', letterSpacing: 0.24, boxShadow: isMobile ? 'none' : isDark ? '0 4px 18px #23294633' : '0 4px 18px #4ea8ff11', display: 'flex', alignItems: 'center', gap: isMobile ? 8 : 16, border: `1.5px solid ${palette.border}`, transition: 'box-shadow 0.2s, transform 0.15s', backdropFilter: 'blur(2px)', cursor: 'pointer', filter: isDark ? 'drop-shadow(0 2px 12px #23294633)' : 'drop-shadow(0 2px 12px #4ea8ff11)', marginBottom: isMobile ? 6 : 0 }}>
+                {techLogos[t] && <span style={{ display: 'flex', alignItems: 'center', marginRight: 8 }}>{techLogos[t]}</span>}
                 {t}
               </span>
             ))}
