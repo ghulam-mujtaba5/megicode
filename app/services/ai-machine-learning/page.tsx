@@ -127,7 +127,7 @@ export default function AIMachineLearningDetailPage() {
   return (
     <>
       {/* Mobile NavBar */}
-      <div className="mobile-navbar-wrapper" style={{ display: 'block', width: '100%', position: 'sticky', top: 0, zIndex: 2000 }}>
+      <div className="mobile-navbar-wrapper" style={{ width: '100%', position: 'sticky', top: 0, zIndex: 2000 }}>
         <NavBarMobile />
       </div>
       {/* CSS moved to external file ai-machine-learning.module.css */}
@@ -160,16 +160,14 @@ export default function AIMachineLearningDetailPage() {
         {/* Glassmorphism overlay */}
         <div className={styles.heroOverlay} />
         {/* Decorative blurred circle */}
-        <div style={{
-          position: 'absolute',
-          right: -80,
-          top: 40,
-          width: 220,
-          height: 220,
-          background: isDark ? 'radial-gradient(circle, #232946 0%, #4573df33 80%)' : 'radial-gradient(circle, #eaf6ff 0%, #4573df11 80%)',
-          filter: 'blur(18px)',
-          zIndex: 1,
-        }} />
+        <div
+          className={
+            isDark
+              ? `${styles.heroBlurCircle} ${styles.heroBlurCircleDark}`
+              : `${styles.heroBlurCircle} ${styles.heroBlurCircleLight}`
+          }
+          aria-hidden="true"
+        />
         <div className={styles.heroContent}>
           <div className={styles.heroTextBlock}>
             <h1 className={styles.heroTitle}>{service.title}</h1>

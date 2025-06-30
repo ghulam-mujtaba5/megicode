@@ -1,3 +1,30 @@
+/* Decorative blurred circle in hero section */
+.heroBlurCircle {
+  position: absolute;
+  right: -80px;
+  top: 40px;
+  width: 220px;
+  height: 220px;
+  filter: blur(18px);
+  z-index: 1;
+  pointer-events: none;
+  border-radius: 50%;
+}
+.heroBlurCircleDark {
+  background: radial-gradient(circle, #232946 0%, #4573df33 80%);
+}
+.heroBlurCircleLight {
+  background: radial-gradient(circle, #eaf6ff 0%, #4573df11 80%);
+}
+@media (max-width: 700px) {
+  .heroBlurCircle {
+    right: -30px;
+    top: 16px;
+    width: 90px;
+    height: 90px;
+    filter: blur(10px);
+  }
+}
 @media (max-width: 700px) {
   .mainContent {
     max-width: 100vw !important;
