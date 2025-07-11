@@ -7,6 +7,7 @@ import dynamic from 'next/dynamic';
 import Loading from '../loading';
 
 
+
 // Static imports for critical components
 import NavBarDesktop from "../../components/NavBar_Desktop_Company/nav-bar-Company";
 import NavBarMobile from "../../components/NavBar_Mobile/NavBar-mobile";
