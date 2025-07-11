@@ -126,7 +126,7 @@ export default function AIMachineLearningDetailPage() {
   return (
     <>
       {/* Desktop NavBar (visible on desktop only) */}
-      <div className="desktop-navbar-wrapper" style={{ width: '100%', position: 'sticky', top: 0, zIndex: 2100, display: 'none' }}>
+      <div className="desktop-navbar-wrapper" style={{ width: '100%', position: 'sticky', top: 0, zIndex: 2100 }}>
         <NavBar />
       </div>
       {/* Mobile NavBar (visible on mobile only) */}
@@ -141,6 +141,7 @@ export default function AIMachineLearningDetailPage() {
           id="main-content"
           className={styles.mainContent}
           aria-label="AI & Machine Learning Service Detail"
+          style={{ paddingTop: '72px' }} // Add this line or adjust as needed
         >
           {/* Soft background shapes for extra depth */}
           <div className={styles.bgShapeLeft} aria-hidden="true" />

@@ -3,6 +3,7 @@
   position: absolute;
   right: -80px;
   top: 40px;
+  
   width: 220px;
   height: 220px;
   filter: blur(18px);
@@ -182,6 +183,7 @@
     padding: 0.7rem 0.7rem !important;
     border-radius: 0.7rem !important;
     gap: 10px !important;
+    color: #fff;
   }
   .howSection {
     padding: 1.5rem 0.7rem !important;
@@ -650,6 +652,14 @@
   color: inherit;
   min-height: unset;
   display: block;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+@media (max-width: 900px) {
+  .mainContent {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }
 .bgShapeLeft {
   position: absolute;
@@ -1178,4 +1188,9 @@
   .sectionDivider {
     margin: 0 0 1.2rem 0;
   }
+}
+
+.dark .techCard, .techCard {
+  color: #fff !important;
+  text-shadow: 0 1px 4px #23294688;
 }

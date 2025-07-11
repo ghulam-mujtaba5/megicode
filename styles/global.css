@@ -27,6 +27,18 @@ body {
   background: var(--md-background);
   color: var(--md-on-background);
   font-family: 'Open Sans', 'Poppins', 'Inter', Arial, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark mode support */
+[data-theme="dark"] {
+  background: #181c22;
+  color: #eaf6ff;
+}
+
+[data-theme="dark"] body {
+  background: #181c22;
+  color: #eaf6ff;
 }
 
 /* Material Typography Scale */
