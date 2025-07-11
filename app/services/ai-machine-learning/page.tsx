@@ -12,6 +12,7 @@ import { SiPython, SiTensorflow, SiPytorch, SiScikitlearn, SiAmazon, SiGoogleclo
 import { FaRobot, FaLanguage, FaEye, FaCogs, FaSearch, FaDatabase, FaRocket, FaLifeRing } from "react-icons/fa";
 
 import NavBarMobile from "../../../components/NavBar_Mobile/NavBar-mobile";
+import NavBar from "../../../components/NavBar_Desktop_Company/nav-bar-Company";
 // Clone the service object and override the techs array to remove 'AI' and 'Azure', and add other relevant technologies
 const service = {
   ...servicesData.find(s => s.slug === "ai-machine-learning"),
@@ -124,7 +125,11 @@ export default function AIMachineLearningDetailPage() {
   };
   return (
     <>
-      {/* Mobile NavBar */}
+      {/* Desktop NavBar (visible on desktop only) */}
+      <div className="desktop-navbar-wrapper" style={{ width: '100%', position: 'sticky', top: 0, zIndex: 2100, display: 'none' }}>
+        <NavBar />
+      </div>
+      {/* Mobile NavBar (visible on mobile only) */}
       <div className="mobile-navbar-wrapper" style={{ width: '100%', position: 'sticky', top: 0, zIndex: 2000 }}>
         <NavBarMobile />
       </div>
@@ -186,7 +191,7 @@ export default function AIMachineLearningDetailPage() {
 
           {/* Service Overview - Side-by-side layout */}
           {/* Section divider */}
-          <div style={{ width: '100%', height: 0, borderTop: '1.5px solid #eaf6ff', margin: '0 0 2.2rem 0', opacity: 0.7 }} />
+          <div className={styles.sectionDivider} />
           <section className={styles.overviewSection} data-animate="slide-left">
             <div className={styles.overviewTextBlock}>
               <h2 className={styles.overviewTitle}>Overview</h2>
@@ -199,7 +204,7 @@ export default function AIMachineLearningDetailPage() {
 
           {/* Why It Matters - Animated counters, impact */}
           {/* Section divider */}
-          <div style={{ width: '100%', height: 0, borderTop: '1.5px solid #eaf6ff', margin: '0 0 2.2rem 0', opacity: 0.7 }} />
+          <div className={styles.sectionDivider} />
           <section className={styles.whySection} data-animate="fade-in">
             <h2 className={styles.whyTitle}>Why It Matters</h2>
             <div className={styles.whyStatsRow}>
@@ -216,7 +221,7 @@ export default function AIMachineLearningDetailPage() {
 
           {/* Process Stepper - Timeline ready for animation */}
           {/* Section divider */}
-          <div style={{ width: '100%', height: 0, borderTop: '1.5px solid #eaf6ff', margin: '0 0 2.2rem 0', opacity: 0.7 }} />
+          <div className={styles.sectionDivider} />
           <section className={styles.processSection} data-animate="timeline">
             <h2 className={styles.processTitle}>Our Process</h2>
             <div className={styles.processStepsRow}>
@@ -235,7 +240,7 @@ export default function AIMachineLearningDetailPage() {
 
       {/* Features as Cards - Deliverables Grid */}
       {/* Section divider */}
-      <div style={{ width: '100%', height: 0, borderTop: '1.5px solid #eaf6ff', margin: '0 0 2.2rem 0', opacity: 0.7 }} />
+      <div className={styles.sectionDivider} />
       <section className={styles.featuresSection} data-animate="stagger-fade">
         <h2 className={styles.featuresTitle}>What You Get</h2>
         <div className={styles.featuresRow}>
@@ -250,7 +255,7 @@ export default function AIMachineLearningDetailPage() {
 
       {/* Technologies as Logo Cloud */}
       {/* Section divider */}
-      <div style={{ width: '100%', height: 0, borderTop: '1.5px solid #eaf6ff', margin: '0 0 2.2rem 0', opacity: 0.7 }} />
+      <div className={styles.sectionDivider} />
       <section className={styles.techSection} data-animate="logo-cloud">
         <h2 className={styles.techTitle}>Technologies</h2>
         <div className={styles.techRow}>
@@ -309,7 +314,7 @@ export default function AIMachineLearningDetailPage() {
 
       {/* How We Work Section */}
       {/* Section divider */}
-      <div style={{ width: '100%', height: 0, borderTop: '1.5px solid #eaf6ff', margin: '0 0 2.2rem 0', opacity: 0.7 }} />
+      <div className={styles.sectionDivider} />
       <section className={styles.howSection} aria-labelledby="how-we-work-title">
         <h2 id="how-we-work-title" className={styles.howTitle}>
           How We Work: Partnership, Process & Delivery
@@ -386,7 +391,7 @@ export default function AIMachineLearningDetailPage() {
 
       {/* Testimonial */}
       {/* Section divider */}
-      <div style={{ width: '100%', height: 0, borderTop: '1.5px solid #eaf6ff', margin: '0 0 2.2rem 0', opacity: 0.7 }} />
+      <div className={styles.sectionDivider} />
       <section className={styles.testimonialSection} data-animate="fade-in">
         {/* Animated spark/dot */}
         <div className={styles.testimonialDot} />
@@ -400,14 +405,14 @@ export default function AIMachineLearningDetailPage() {
 
       {/* FAQs */}
       {/* Section divider */}
-      <div style={{ width: '100%', height: 0, borderTop: '1.5px solid #eaf6ff', margin: '0 0 2.2rem 0', opacity: 0.7 }} />
+      <div className={styles.sectionDivider} />
       <div className={styles.faqSection}>
         <ServiceFAQs faqs={faqs} />
       </div>
 
       {/* CTA - Full-width colored strip */}
       {/* Section divider */}
-      <div style={{ width: '100%', height: 0, borderTop: '1.5px solid #eaf6ff', margin: '0 0 2.2rem 0', opacity: 0.7 }} />
+      <div className={styles.sectionDivider} />
       <section className={styles.ctaSection} data-animate="cta-strip">
         {/* Glassmorphism overlay */}
         <div className={styles.ctaOverlay} />

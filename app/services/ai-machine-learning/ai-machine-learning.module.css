@@ -35,7 +35,7 @@
     box-sizing: border-box !important;
   }
   .heroSection {
-    padding: 2.2rem 0.5rem 1.2rem 0.5rem !important;
+    padding: 2.2rem 0 1.2rem 0 !important;
     min-height: 180px !important;
     border-radius: 0 0 1.2rem 1.2rem !important;
     margin-bottom: 18px !important;
@@ -637,21 +637,19 @@
   color-scheme: light;
 }
 .mainContent {
-  max-width: 1160px;
+  max-width: 1320px;
   margin: 2.5rem auto;
-  padding: 3.5rem 1.2rem 5rem 1.2rem;
+  padding: 0;
   font-family: 'Inter', sans-serif;
-  background: linear-gradient(120deg, rgba(36,41,54,0.98) 60%, rgba(70,115,223,0.10) 100%);
-  border-radius: 36px;
-  box-shadow: 0 12px 64px #181c2244, 0 1.5px 0 #23272f;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
   position: relative;
-  overflow: hidden;
-  border: 1.5px solid #23272f;
-  color: #eaf6ff;
-  transition: background 0.4s, box-shadow 0.3s, border 0.3s;
-  min-height: 80vh;
-  display: flex;
-  flex-direction: column;
+  overflow: visible;
+  border: none;
+  color: inherit;
+  min-height: unset;
+  display: block;
 }
 .bgShapeLeft {
   position: absolute;
@@ -699,16 +697,21 @@
 }
 .heroSection {
   width: 100%;
-  background: linear-gradient(100deg, #232946 0%, #4573df 60%, #6ea8ff 100%);
-  border-radius: 0 0 3.5rem 3.5rem;
-  padding: 5.2rem 3.2rem 4.2rem 3.2rem;
-  margin-bottom: 64px;
-  box-shadow: 0 12px 48px #23294666;
+  max-width: 100%;
+  margin: 0 auto 32px auto;
+  background: none;
+  border-radius: 0;
+  padding: 3.2rem 0 2.2rem 0;
+  box-shadow: none;
   position: relative;
-  overflow: hidden;
-  min-height: 390px;
+  overflow: visible;
+  min-height: unset;
   z-index: 1;
   animation: fadeInUp 1.1s cubic-bezier(.23,1.01,.32,1) both;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .heroOverlay {
   position: absolute;
@@ -723,70 +726,82 @@
 .heroContent {
   display: flex;
   align-items: center;
-  gap: 64px;
+  justify-content: center;
+  gap: 48px;
   flex-wrap: wrap;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 2rem;
   position: relative;
   z-index: 3;
 }
 .heroTextBlock {
-  flex: 1;
-  min-width: 220px;
+  flex: 1 1 320px;
+  min-width: 260px;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 }
 .heroTitle {
-  font-size: 3.5rem;
+  font-size: 3.2rem;
   font-weight: 900;
   color: #eaf6ff;
-  margin-bottom: 24px;
-  letter-spacing: -2.5px;
+  margin-bottom: 20px;
+  letter-spacing: -2px;
   text-shadow: 0 6px 32px #23294699, 0 1px 0 #23294644;
   line-height: 1.08;
 }
 .heroDesc {
-  font-size: 1.36rem;
+  font-size: 1.18rem;
   color: #b0c4d8;
-  margin-bottom: 36px;
+  margin-bottom: 28px;
   font-weight: 600;
-  line-height: 1.75;
+  line-height: 1.7;
   text-shadow: 0 3px 16px #23294644;
   letter-spacing: 0.01px;
 }
 .ctaBtn {
-  background: rgba(36,41,54,0.98);
-  color: #6ea8ff;
+  background: linear-gradient(90deg, #4573df 60%, #6ea8ff 100%);
+  color: #fff;
   font-weight: 900;
-  font-size: 1.28rem;
+  font-size: 1.18rem;
   border-radius: 22px;
-  padding: 1.25rem 3.3rem;
+  padding: 1.1rem 2.8rem;
   text-decoration: none;
-  box-shadow: 0 6px 32px #23294644, 0 0 0 2.5px #263040;
+  box-shadow: 0 6px 32px #4573df33, 0 0 0 2.5px #263040;
   transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
   display: inline-block;
-  margin-top: 24px;
-  border: 2.5px solid #263040;
+  margin-top: 18px;
+  border: none;
   letter-spacing: 0.32px;
   backdrop-filter: blur(2.5px);
   cursor: pointer;
   filter: drop-shadow(0 2px 12px #23294644);
 }
 .ctaBtn:hover {
-  background: #232946;
+  background: linear-gradient(90deg, #6ea8ff 0%, #4573df 100%);
+  color: #fff;
   transform: scale(1.045);
-  box-shadow: 0 12px 48px #23294666, 0 0 0 2.5px #263040;
+  box-shadow: 0 12px 48px #23294633, 0 0 0 2.5px #263040;
 }
 .heroImageBlock {
-  flex: 1;
-  min-width: 260px;
+  flex: 1 1 260px;
+  min-width: 220px;
+  max-width: 420px;
   text-align: center;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .heroImageCard {
   display: inline-block;
   background: rgba(36,41,54,0.22);
   border-radius: 40px;
   box-shadow: 0 8px 32px #4573df33;
-  padding: 22px;
+  padding: 18px;
   border: 2.5px solid #232946;
   backdrop-filter: blur(2.5px);
   transition: box-shadow 0.2s;
@@ -795,13 +810,34 @@
   max-width: 100%;
 }
 .heroImage {
-  width: min(220px, 60vw);
+  width: 140px;
+  height: 140px;
   max-width: 100%;
-  border-radius: 32px;
+  border-radius: 24px;
   box-shadow: 0 8px 32px #4573df33;
   background: rgba(36,41,54,0.98);
-  padding: 18px;
+  padding: 12px;
   border: 2px solid #232946;
+  display: block;
+  margin: 0 auto;
+}
+@media (max-width: 1200px) {
+  .heroImage {
+    width: 120px !important;
+    height: 120px !important;
+  }
+}
+@media (max-width: 900px) {
+  .heroImage {
+    width: 100px !important;
+    height: 100px !important;
+  }
+}
+@media (max-width: 700px) {
+  .heroImage {
+    width: 120px !important;
+    height: 120px !important;
+  }
 }
 .heroImageDot {
   position: absolute;
@@ -940,132 +976,206 @@
 }
 
 /* --- Enhanced Mobile Responsive Styles --- */
+/* --- Tablet Breakpoint --- */
 @media (max-width: 900px) {
-  .engagement-method-section {
-    flex-direction: column;
-    gap: 24px;
-  }
-}
-@media (max-width: 700px) {
-  /* Removed html, body global selector for CSS modules compatibility */
-  .aiMLForceFullWidth {
-    width: 100vw;
-    overflow-x: hidden;
-  }
-  main#main-content {
-    max-width: 100vw !important;
-    margin: 0 !important;
-    padding: 4.5rem 0.5rem 2.2rem 0.5rem !important;
+  /* Place all tablet-specific styles here, merging from previous 900px/1200px/700px rules */
+  .heroSection {
+    padding: 1.2rem 0.7rem 1.5rem 0.7rem !important;
+    margin: 0 auto 8px auto !important;
+    min-height: unset !important;
     border-radius: 0 !important;
-    min-height: unset !important;
-    box-sizing: border-box !important;
+    background: none;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
   }
-  .service-hero-gradient {
-    padding: 3.2rem 0.5rem 2rem 0.5rem !important;
-    min-height: 160px !important;
-    border-radius: 0 0 1.2rem 1.2rem !important;
-    margin-bottom: 18px !important;
-    box-sizing: border-box !important;
+  .heroContent {
+    flex-direction: column;
+    gap: 1.2rem;
+    padding: 0;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
   }
-  .service-hero-gradient h1 {
-    font-size: 1.25rem !important;
-    margin-bottom: 8px !important;
-    letter-spacing: -1.2px !important;
-    line-height: 1.2 !important;
+  .heroImageBlock {
+    order: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.5rem;
   }
-  .service-hero-gradient p {
-    font-size: 0.95rem !important;
-    margin-bottom: 10px !important;
-    line-height: 1.5 !important;
+  .heroImageCard {
+    padding: 0.5rem !important;
+    border-radius: 1.5rem !important;
+    box-shadow: 0 2px 8px #23294622 !important;
+    background: rgba(255,255,255,0.10);
   }
-  .service-hero-gradient a[data-animate="cta-bounce"] {
-    font-size: 1rem !important;
-    padding: 0.9rem 1.2rem !important;
-    margin-top: 8px !important;
-    min-width: 120px !important;
+  .heroImage {
+    width: 100px !important;
+    height: 100px !important;
+    padding: 0 !important;
+    border-radius: 1.2rem !important;
+    margin: 0;
+    box-shadow: none;
+    background: none;
+    border: none;
+    display: block;
   }
-  .service-hero-gradient > div {
-    flex-direction: column !important;
-    gap: 10px !important;
+  .heroTextBlock {
+    order: 2;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 0.2rem;
+    margin-top: 0;
+    padding: 0;
   }
-  .service-hero-gradient img {
-    width: 70px !important;
-    padding: 2px !important;
+  .heroTitle {
+    font-size: 2.1rem;
+    font-weight: 900;
+    line-height: 1.18;
+    margin-bottom: 0.5rem;
+    letter-spacing: -1px;
+    color: #fff;
+    text-shadow: 0 2px 8px #23294644;
   }
-  /* Only use local classes for CSS modules */
-  .engagement-method-section,
-  .deliverable-card,
-  .tech-logo-card {
-    padding: 0.6rem 0.1rem !important;
-    border-radius: 0.6rem !important;
-    margin: 0.5rem 0 !important;
-    box-sizing: border-box !important;
+  .heroDesc {
+    font-size: 1.08rem;
+    color: #eaf6ff;
+    margin-bottom: 0.7rem;
+    line-height: 1.45;
+    font-weight: 500;
+    text-shadow: none;
   }
-  .deliverable-card, .tech-logo-card {
-    min-width: 100px !important;
-    font-size: 0.98rem !important;
-    padding: 0.8rem 0.4rem !important;
-    gap: 8px !important;
-    flex: 1 1 100% !important;
-    box-sizing: border-box !important;
+  .ctaBtn {
+    order: 3;
+    width: 100%;
+    min-width: 120px;
+    max-width: 320px;
+    text-align: center;
+    font-size: 1.13rem;
+    padding: 1rem 0.7rem;
+    margin: 0.3rem auto 0 auto;
+    border-radius: 1rem;
+    background: linear-gradient(90deg, #4573df 60%, #6ea8ff 100%);
+    color: #fff;
+    font-weight: 800;
+    box-shadow: 0 2px 8px #4573df22;
+    border: none;
+    display: block;
   }
-  .tech-logo-card img, .tech-logo-card svg {
-    width: 26px !important;
-    height: 26px !important;
-    margin-right: 4px !important;
-  }
-  .engagement-method-section {
-    gap: 8px !important;
-  }
-  .engagement-method-card, .engagement-method-section > div {
-    min-height: unset !important;
-    padding: 0.6rem 0.1rem !important;
-  }
-  .testimonialBg, .testimonial-section {
-    padding: 0.6rem 0.1rem !important;
-    border-radius: 0.6rem !important;
-  }
-  .cta-strip {
-    padding: 0.8rem 0.2rem !important;
-    border-radius: 0.6rem !important;
-  }
-  .cta-strip a {
-    font-size: 1rem !important;
-    padding: 0.9rem 1.2rem !important;
-    min-width: 120px !important;
-  }
-  .cta-strip div {
-    font-size: 1rem !important;
-  }
-  .process-stepper, .process-stepper > div {
-    flex-direction: column !important;
-    gap: 8px !important;
-    min-width: unset !important;
-    max-width: unset !important;
-  }
-  .process-stepper > div {
-    margin: 0 !important;
-  }
-  /* Section grid and flex adjustments for mobile */
-  /* Only use local classes for CSS modules */
-  .deliverable-card,
-  .tech-logo-card {
-    box-shadow: none !important;
-    border-radius: 0.6rem !important;
-  }
-  /* Only use local classes for CSS modules. If needed, add a class to the target div in the component. */
-  .aiMLGridToColumn {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 10px !important;
-  }
-  /* FAQ and testimonial font size */
-  .faq-section, .testimonial-section, .testimonialBg {
-    font-size: 1rem !important;
-  }
-  /* Remove horizontal scroll on all children */
-  /* To apply box-sizing: border-box to all descendants, use the .aiMLBoxSizingAll class on a parent element */
-.aiMLBoxSizingAll * {
-  box-sizing: border-box !important;
+  /* Add other tablet-specific rules here, merging from previous breakpoints */
 }
+
+/* --- Mobile Breakpoint --- */
+@media (max-width: 600px) {
+  /* Place all mobile-specific styles here, merging from previous 700px/600px rules */
+  .heroSection {
+    padding: 0.8rem 0.3rem 1rem 0.3rem !important;
+    margin: 0 auto 4px auto !important;
+    min-height: unset !important;
+    border-radius: 0 !important;
+    background: none;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .heroContent {
+    flex-direction: column;
+    gap: 0.7rem;
+    padding: 0;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+  }
+  .heroImageBlock {
+    order: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.2rem;
+  }
+  .heroImageCard {
+    padding: 0.2rem !important;
+    border-radius: 1rem !important;
+    box-shadow: 0 2px 8px #23294622 !important;
+    background: rgba(255,255,255,0.10);
+  }
+  .heroImage {
+    width: 120px !important;
+    height: 120px !important;
+    padding: 0 !important;
+    border-radius: 0.9rem !important;
+    margin: 0;
+    box-shadow: none;
+    background: none;
+    border: none;
+    display: block;
+  }
+  .heroTextBlock {
+    order: 2;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 0.1rem;
+    margin-top: 0;
+    padding: 0;
+  }
+  .heroTitle {
+    font-size: 1.35rem;
+    font-weight: 900;
+    line-height: 1.13;
+    margin-bottom: 0.18rem;
+    letter-spacing: -0.7px;
+    color: #fff;
+    text-shadow: 0 1px 4px #23294644;
+  }
+  .heroDesc {
+    font-size: 0.99rem;
+    color: #eaf6ff;
+    margin-bottom: 0.32rem;
+    line-height: 1.32;
+    font-weight: 500;
+    text-shadow: none;
+  }
+  .ctaBtn {
+    order: 3;
+    width: 100%;
+    min-width: 100px;
+    max-width: 200px;
+    text-align: center;
+    font-size: 1.01rem;
+    padding: 0.7rem 0.6rem;
+    margin: 0.18rem auto 0 auto;
+    border-radius: 0.7rem;
+    background: linear-gradient(90deg, #4573df 60%, #6ea8ff 100%);
+    color: #fff;
+    font-weight: 700;
+    box-shadow: 0 2px 8px #4573df22;
+    border: none;
+    display: block;
+  }
+  /* Add other mobile-specific rules here, merging from previous breakpoints */
+}
+
+/* Remove all other @media (max-width: 700px), (max-width: 1200px), etc. and move their rules into the above as appropriate. */
+
+.sectionDivider {
+  width: 100%;
+  height: 0;
+  border-top: 1.5px solid #eaf6ff;
+  margin: 0 0 2.2rem 0;
+  opacity: 0.7;
+}
+
+@media (max-width: 700px) {
+  .sectionDivider {
+    margin: 0 0 1.2rem 0;
+  }
 }
