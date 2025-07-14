@@ -164,52 +164,6 @@
   }
   .whyStatCard {
     min-width: 0 !important;
-    font-size: 1.3rem !important;
-    padding: 1.1rem 0.7rem !important;
-    border-radius: 1rem !important;
-    margin-bottom: 8px !important;
-  }
-  .whyStatDesc {
-    font-size: 0.98rem !important;
-    margin-top: 6px !important;
-  }
-  .processSection {
-    padding: 1.5rem 0.7rem !important;
-    border-radius: 1rem !important;
-  }
-  .processStepsRow {
-    flex-direction: column !important;
-    gap: 18px !important;
-    max-width: 100% !important;
-  }
-  .processStepCard {
-    min-width: 0 !important;
-    max-width: 100% !important;
-    margin: 0 !important;
-    padding-bottom: 10px !important;
-  }
-  .processStepIcon {
-    width: 40px !important;
-    height: 40px !important;
-    margin-bottom: 6px !important;
-  }
-  .processStepTitle {
-    font-size: 1rem !important;
-    margin-bottom: 2px !important;
-  }
-  .processStepDesc {
-    font-size: 0.92rem !important;
-  }
-  .featuresSection {
-    padding: 1.5rem 0.7rem !important;
-    border-radius: 1rem !important;
-  }
-  .featuresRow {
-    flex-direction: column !important;
-    gap: 14px !important;
-  }
-  .featureCard {
-    min-width: 0 !important;
     font-size: 1rem !important;
     padding: 1.1rem 0.7rem !important;
     border-radius: 1rem !important;
@@ -688,7 +642,7 @@
 }
 .howGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 32px;
   align-items: stretch;
   margin: 0 auto;
@@ -696,7 +650,6 @@
   position: relative;
   z-index: 2;
   perspective: 1000px;
-  transform-style: preserve-3d;
 }
 .howCard {
   background: rgba(36,41,54,0.98);
@@ -709,7 +662,7 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
-  min-height: 300px;
+  min-height: 400px;
   justify-content: flex-start;
   align-items: flex-start;
   position: relative;
@@ -769,7 +722,7 @@
     );
   }
   
-  .icon-wrapper {
+  .iconWrapper {
     transform: scale(1.1) translateZ(30px);
     box-shadow: 
       0 12px 32px rgba(69,115,223,0.3),
@@ -781,29 +734,26 @@
     color: #ffffff;
   }
 
-  p {
+  .benefitsList {
     transform: translateZ(10px);
   }
 }
 
-.howCard::after {
-  content: '';
+.popularBadge {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(120deg, transparent, rgba(110,168,255,0.1), transparent);
-  transform: translateX(-100%);
-  transition: transform 0.6s ease;
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0,242,254,0.3);
+  z-index: 2;
 }
 
-.howCard:hover::after {
-  transform: translateX(100%);
-}
-
-/* Add styles for icons in how cards */
-.howCard .icon-wrapper {
+.iconWrapper {
   width: 68px;
   height: 68px;
   background: linear-gradient(
@@ -819,44 +769,17 @@
   box-shadow: 
     0 8px 24px rgba(13,17,23,0.2),
     0 0 0 1px rgba(110,168,255,0.3) inset;
-  font-size: 2rem;
-  color: #6ea8ff;
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   transform: translateZ(0);
-  
-  &::after {
-    content: '';
-    position: absolute;
-    inset: -1px;
-    background: linear-gradient(
-      135deg,
-      rgba(110,168,255,0.4),
-      transparent 50%
-    );
-    border-radius: 20px;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-  }
-
-  &:hover::after {
-    opacity: 1;
-  }
-}
-
-.howCard:hover .icon-wrapper {
-  transform: scale(1.1);
-  border-color: rgba(110,168,255,0.5);
-  box-shadow: 0 8px 24px rgba(69,115,223,0.2);
 }
 
 .howCard h3 {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: #6ea8ff;
   margin: 0;
   line-height: 1.4;
-  position: relative;
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   background: linear-gradient(135deg, #6ea8ff 0%, #4573df 100%);
   -webkit-background-clip: text;
@@ -864,84 +787,137 @@
   background-clip: text;
 }
 
-.howCard p {
-  font-size: 1.05rem;
-  color: rgba(176,196,216,0.9);
-  margin: 0;
-  line-height: 1.6;
+.benefitsList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.testimonialSection {
-  margin: 3.2rem 0;
-  background: linear-gradient(100deg, #232946 60%, #181c22 100%);
-  border-radius: 32px;
-  padding: 3.2rem 2.8rem;
-  box-shadow: 0 12px 48px #23294633;
+
+.benefitItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.05rem;
+  color: #b0c4d8;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+.processTimelineGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  width: 100%;
+  margin-top: 16px;
+}
+
+.processTimelineItem {
+  position: relative;
+  padding: 20px;
+  background: rgba(36,41,54,0.5);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  border: 2.5px solid #23272f;
-  position: relative;
-  overflow: hidden;
-  animation: fadeInUp 1.8s cubic-bezier(.23,1.01,.32,1) both;
-  color: #eaf6ff;
+  gap: 16px;
+  box-shadow: 
+    0 8px 24px rgba(13,17,23,0.15),
+    0 0 0 1px rgba(110,168,255,0.1) inset;
+  transition: all 0.3s ease;
 }
-.testimonialDot {
-  position: absolute;
-  left: 50%;
-  top: 18px;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: radial-gradient(circle, #6ea8ff 0%, #4573df 80%);
-  box-shadow: 0 0 16px #6ea8ff99;
-  opacity: 0.7;
-  animation: sparkMove 2.2s ease-in-out infinite;
-  z-index: 3;
-  transform: translateX(-50%);
+
+.processTimelineItem:hover {
+  transform: translateY(-4px);
+  background: rgba(36,41,54,0.8);
+  box-shadow: 
+    0 12px 32px rgba(69,115,223,0.2),
+    0 0 0 1px rgba(110,168,255,0.2) inset;
 }
-.testimonialOverlay {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(36,41,54,0.13);
-  backdrop-filter: blur(4px);
-  border-radius: 28px;
-  z-index: 1;
-  pointer-events: none;
-}
-.testimonialQuote {
-  font-size: 1.38rem;
-  font-weight: 900;
-  color: #eaf6ff;
-  margin-bottom: 22px;
-  font-style: italic;
-  letter-spacing: 0.14px;
-  text-shadow: 0 3px 16px #23294644;
-  position: relative;
-  z-index: 2;
-  line-height: 1.3;
-}
-.testimonialAuthor {
+
+.processTimelineIcon {
+  width: 56px;
+  height: 56px;
+  background: rgba(69,115,223,0.1);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: #6ea8ff;
-  font-weight: 900;
-  font-size: 1.18rem;
-  letter-spacing: 0.14px;
-  position: relative;
-  z-index: 2;
+  box-shadow: 
+    0 8px 24px rgba(13,17,23,0.1),
+    0 0 0 1px rgba(110,168,255,0.2) inset;
+  transition: all 0.3s ease;
 }
-.testimonialCompany {
-  color: #eaf6ff;
-  font-weight: 800;
+
+.processTimelineItem:hover .processTimelineIcon {
+  transform: scale(1.1);
+  background: rgba(69,115,223,0.2);
+  box-shadow: 
+    0 12px 32px rgba(69,115,223,0.25),
+    0 0 0 1px rgba(110,168,255,0.3) inset;
 }
-.faqSection {
-  margin: 3.2rem 0;
-  background: rgba(24,28,34,0.98);
-  border-radius: 26px;
-  box-shadow: 0 8px 32px #23294633;
-  padding: 3rem 2.5rem;
-  border: 1.5px solid #23272f;
-  backdrop-filter: blur(2.5px);
-  animation: fadeInUp 1.9s cubic-bezier(.23,1.01,.32,1) both;
-  color: #eaf6ff;
+
+.processTimelineContent h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #6ea8ff;
+  margin: 0 0 8px 0;
 }
+
+.processTimelineContent p {
+  font-size: 0.95rem;
+  color: #b0c4d8;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.processTimelineConnector {
+  position: absolute;
+  top: 50%;
+  right: -24px;
+  width: 24px;
+  height: 2px;
+  background: rgba(110,168,255,0.2);
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .howSection {
+    padding: 3rem 2rem;
+    margin: 3rem 0;
+  }
+
+  .howTitle {
+    font-size: 2rem;
+  }
+
+  .howDesc {
+    font-size: 1.1rem;
+    margin-bottom: 32px;
+  }
+
+  .howGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .howCard {
+    padding: 2rem 1.5rem;
+    min-height: auto;
+  }
+
+  .processTimelineGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .processTimelineConnector {
+    display: none;
+  }
+}
+
 /*====================================
   8. Theme & Color Schemes
 ====================================*/

@@ -26,6 +26,46 @@ const service = {
   ]
 };
 
+// Import additional icons we'll need
+import { RiPriceTag3Fill, RiTeamFill, RiTimeFill } from 'react-icons/ri';
+import { BsCheckCircleFill } from 'react-icons/bs';
+
+const engagementModels = [
+  {
+    title: "Fixed Price",
+    icon: <RiPriceTag3Fill size={40} />,
+    benefits: [
+      "Defined Project Scope",
+      "Predictable Budget",
+      "Milestone-Based Billing"
+    ],
+    color: "#4FACFE",
+    isPopular: false
+  },
+  {
+    title: "Dedicated Team",
+    icon: <RiTeamFill size={40} />,
+    benefits: [
+      "Scalable Team Extension",
+      "Direct Expert Access",
+      "Seamless Integration"
+    ],
+    color: "#6EA8FF",
+    isPopular: true
+  },
+  {
+    title: "Time & Material",
+    icon: <RiTimeFill size={40} />,
+    benefits: [
+      "Flexible Scope",
+      "Agile Development",
+      "Pay-as-you-go"
+    ],
+    color: "#45B7DF",
+    isPopular: false
+  }
+];
+
 const processSteps = [
   {
     title: "Discovery & Consultation",
@@ -339,77 +379,50 @@ export default function AIMachineLearningDetailPage() {
     <div className={styles.sectionDivider} />
     <section className={styles.howSection} aria-labelledby="how-we-work-title">
       <h2 id="how-we-work-title" className={styles.howTitle}>
-        How We Work: Partnership, Process & Delivery
+        How We Work
       </h2>
       <div className={styles.howDesc}>
-        We operate as your strategic partner—combining robust engagement models, agile execution, and enterprise-grade governance. Our operational workflow ensures risk-managed, transparent, and value-driven AI delivery: on time, on budget, and with full business visibility.
+        Choose your ideal engagement model for maximum value and efficiency.
       </div>
       <div className={styles.howGrid}>
-        {/* Engagement Models */}
-        <div className={styles.howCard}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 6 }}>
-            <span style={{ fontSize: '2rem' }} aria-label="Engagement Models" role="img">💼</span>
-            <span style={{ fontWeight: 800, fontSize: '1.13rem', color: palette.textAccent }}>Engagement Models</span>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-            <span style={{ fontSize: '1.3rem' }} aria-label="Fixed Price" role="img">📊</span>
-            <div>
-              <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Fixed Price</div>
-              <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Defined scope, predictable budget, and milestone-based billing. Best for projects with clear requirements and risk management needs.</div>
+        {engagementModels.map((model, index) => (
+          <div 
+            key={model.title} 
+            className={styles.howCard}
+            style={{
+              borderColor: model.isPopular ? model.color : undefined,
+              transform: model.isPopular ? 'scale(1.05)' : undefined,
+            }}
+          >
+            {model.isPopular && (
+              <div className={styles.popularBadge}>
+                Most Popular
+              </div>
+            )}
+            <div className={styles.iconWrapper} style={{ color: model.color }}>
+              {model.icon}
+            </div>
+            <h3>{model.title}</h3>
+            <div className={styles.benefitsList}>
+              {model.benefits.map((benefit, idx) => (
+                <div key={idx} className={styles.benefitItem}>
+                  <BsCheckCircleFill
+                    size={16}
+                    style={{ color: model.color, flexShrink: 0 }}
+                  />
+                  <span>{benefit}</span>
+                </div>
+              ))}
             </div>
           </div>
-          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-            <span style={{ fontSize: '1.3rem' }} aria-label="Dedicated Team" role="img">🤝</span>
-            <div>
-              <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Dedicated Team</div>
-              <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Scalable, cross-functional team extension. Direct access to certified Megicode experts, rapid onboarding, and seamless enterprise collaboration.</div>
-            </div>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-            <span style={{ fontSize: '1.3rem' }} aria-label="Time & Material" role="img">⏱️</span>
-            <div>
-              <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Time & Material</div>
-              <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Agile, transparent billing for evolving requirements. Ideal for innovation, R&D, and projects with dynamic scope.</div>
-            </div>
-          </div>
-        </div>
-        {/* Methodology & Communication */}
-        <div className={styles.howCard}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 6 }}>
-            <span style={{ fontSize: '2rem' }} aria-label="Methodology & Communication" role="img">🧭</span>
-            <span style={{ fontWeight: 800, fontSize: '1.13rem', color: palette.textAccent }}>Methodology & Communication</span>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-            <span style={{ fontSize: '1.3rem' }} aria-label="Agile, CMMI L3+" role="img">⚡</span>
-            <div>
-              <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Agile, CMMI L3+</div>
-              <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Iterative, sprint-based delivery with continuous improvement. CMMI L3+ for process maturity and global best practices in enterprise AI.</div>
-            </div>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-            <span style={{ fontSize: '1.3rem' }} aria-label="Transparent Updates" role="img">📢</span>
-            <div>
-              <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Transparent Updates</div>
-              <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Weekly demos, open communication, and real-time dashboards for full project transparency and stakeholder alignment.</div>
-            </div>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-            <span style={{ fontSize: '1.3rem' }} aria-label="Jira, Figma, GitHub" role="img">🛠️</span>
-            <div>
-              <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Jira, Figma, GitHub</div>
-              <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Enterprise-grade tools for project tracking, secure design collaboration, and code quality assurance.</div>
-            </div>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-            <span style={{ fontSize: '1.3rem' }} aria-label="Risk Management & Governance" role="img">🛡️</span>
-            <div>
-              <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Risk Management & Governance</div>
-              <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Proactive risk identification, regulatory compliance (GDPR, SOC2), and executive reporting for enterprise assurance.</div>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
     </section>
+
+    {/* Section divider */}
+    <div className={styles.sectionDivider} />
+
+
 
     {/* Testimonial */}
     {/* Section divider */}
