@@ -1,6 +1,6 @@
-/* =================
-   Main Container
-   ================= */
+/*====================================
+  1. Base Layout & Container Styles
+====================================*/
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -8,7 +8,9 @@
   position: relative;
 }
 
-/* Hero Section */
+/*====================================
+  2. Hero Section Styles
+====================================*/
 .heroSection {
   position: relative;
   padding: 8rem 0 6rem;
@@ -25,7 +27,9 @@
   z-index: -1;
 }
 
-/* Typography */
+/*====================================
+  3. Typography & Text Styles
+====================================*/
 .title {
   font-size: 3.5rem;
   font-weight: 700;
@@ -45,7 +49,9 @@
   margin-bottom: 2.5rem;
 }
 
-/* Content Sections */
+/*====================================
+  4. Content Section Base Styles
+====================================*/
 .section {
   padding: 5rem 0;
   border-bottom: 1px solid rgba(69,115,223,0.1);
@@ -65,7 +71,9 @@
   margin-top: 3rem;
 }
 
-/* Feature Cards */
+/*====================================
+  5. Feature Cards & Components
+====================================*/
 .featureCard {
   padding: 2rem;
   border-radius: 1rem;
@@ -723,7 +731,9 @@
   animation: fadeInUp 1.9s cubic-bezier(.23,1.01,.32,1) both;
   color: #eaf6ff;
 }
-/* --- AI & Machine Learning Service Detail Page Styles --- */
+/*====================================
+  8. Theme & Color Schemes
+====================================*/
 .aiMLBoxSizingAll {
   box-sizing: border-box;
   min-height: 100vh;
@@ -731,10 +741,14 @@
   overflow-x: hidden;
   transition: background 0.4s, color 0.3s;
 }
+
+/* Dark Theme */
 .dark {
   background: linear-gradient(120deg, #181c22 70%, #232946 100%);
   color-scheme: dark;
 }
+
+/* Light Theme */
 .light {
   background: linear-gradient(120deg, #f7fafd 70%, #eaf6ff 100%);
   color-scheme: light;
@@ -964,7 +978,9 @@
   z-index: 2;
 }
 
-/* CTA Section */
+/*====================================
+  9. Call-to-Action (CTA) Components
+====================================*/
 .ctaSection {
   margin: 4.2rem 0 0 0;
   text-align: center;
@@ -1026,15 +1042,37 @@
   position: relative;
   z-index: 2;
 }
-/* Keyframes and animation CSS */
-@keyframes floatY { 0% { transform: translateY(0); } 50% { transform: translateY(-18px); } 100% { transform: translateY(0); } }
-@keyframes floatX { 0% { transform: translateX(0); } 50% { transform: translateX(18px); } 100% { transform: translateX(0); } }
-@keyframes fadeInUp { 0% { opacity: 0; transform: translateY(32px); } 100% { opacity: 1; transform: translateY(0); } }
-@keyframes pulse { 0% { box-shadow: 0 0 0 0 #4573df33; } 70% { box-shadow: 0 0 0 18px #4573df11; } 100% { box-shadow: 0 0 0 0 #4573df33; } }
+/*====================================
+  6. Animations & Keyframes
+====================================*/
+@keyframes floatY { 
+  0% { transform: translateY(0); } 
+  50% { transform: translateY(-18px); } 
+  100% { transform: translateY(0); } 
+}
+
+@keyframes floatX { 
+  0% { transform: translateX(0); } 
+  50% { transform: translateX(18px); } 
+  100% { transform: translateX(0); } 
+}
+
+@keyframes fadeInUp { 
+  0% { opacity: 0; transform: translateY(32px); } 
+  100% { opacity: 1; transform: translateY(0); } 
+}
+
+@keyframes pulse { 
+  0% { box-shadow: 0 0 0 0 #4573df33; } 
+  70% { box-shadow: 0 0 0 18px #4573df11; } 
+  100% { box-shadow: 0 0 0 0 #4573df33; } 
+}
+
 @keyframes borderGradient {
   0% { border-image-source: linear-gradient(90deg, #4573df, #6ea8ff, #cfe8ef, #4573df); }
   100% { border-image-source: linear-gradient(450deg, #4573df, #6ea8ff, #cfe8ef, #4573df); }
 }
+
 @keyframes sparkMove {
   0% { transform: translateY(0) scale(1); opacity: 1; }
   50% { transform: translateY(-18px) scale(1.2); opacity: 0.7; }
@@ -1064,8 +1102,10 @@
   box-shadow: 0 2px 8px #4573df44;
 }
 
-/* --- Enhanced Mobile Responsive Styles --- */
-/* --- Tablet Breakpoint --- */
+/*====================================
+  7. Responsive Design
+====================================*/
+/* Tablet Breakpoint */
 @media (max-width: 900px) {
   /* Place all tablet-specific styles here, merging from previous 900px/1200px/700px rules */
   .heroSection {
@@ -1255,6 +1295,9 @@
 
 /* Remove all other @media (max-width: 700px), (max-width: 1200px), etc. and move their rules into the above as appropriate. */
 
+/*====================================
+  10. Utility Classes & Helpers
+====================================*/
 .sectionDivider {
   width: 100%;
   height: 0;
@@ -1269,6 +1312,7 @@
   }
 }
 
+/* Theme-specific overrides */
 .dark .techCard, .techCard {
   color: #fff !important;
   text-shadow: 0 1px 4px #23294688;
