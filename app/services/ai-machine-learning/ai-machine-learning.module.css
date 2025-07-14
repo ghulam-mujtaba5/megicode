@@ -9,6 +9,8 @@
   position: relative;
   padding: 8rem 0 6rem;
   overflow: hidden;
+  background: linear-gradient(135deg, rgba(69,115,223,0.12) 0%, rgba(110,168,255,0.08) 50%, transparent 100%);
+  border-bottom: 1px solid rgba(69,115,223,0.15);
 }
 
 .heroBackground {
@@ -17,7 +19,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(69,115,223,0.08) 0%, transparent 100%);
+  background: radial-gradient(circle at top right, rgba(110,168,255,0.15) 0%, transparent 70%);
   z-index: -1;
 }
 
@@ -357,22 +359,41 @@
 .whyStatCard {
   flex: 1;
   min-width: 240px;
-  background: linear-gradient(90deg, #232946 60%, #181c22 100%);
+  background: linear-gradient(135deg, rgba(36,41,54,0.95) 0%, rgba(69,115,223,0.15) 100%);
   border-radius: 26px;
   padding: 2rem 2rem;
   text-align: center;
-  font-weight: 900;
+  font-weight: 800;
   color: #6ea8ff;
   font-size: 2.4rem;
   margin-bottom: 14px;
-  box-shadow: 0 8px 32px #23294633;
-  border: 1.5px solid #23272f;
-  transition: box-shadow 0.2s, transform 0.15s;
-  backdrop-filter: blur(2px);
-  filter: drop-shadow(0 2px 12px #23294633);
+  box-shadow: 0 8px 32px rgba(13,17,23,0.2);
+  border: 1px solid rgba(69,115,223,0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(4px);
+  position: relative;
+  overflow: hidden;
 }
 .whyStatCard:hover {
-  transform: scale(1.035);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(69,115,223,0.25);
+  border-color: rgba(110,168,255,0.4);
+}
+
+.whyStatCard::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(110,168,255,0.1), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.whyStatCard:hover::after {
+  transform: translateX(100%);
 }
 .whyStatDesc {
   font-size: 1.18rem;
@@ -421,7 +442,7 @@
   position: relative;
 }
 .processStepIcon {
-  background: #232946;
+  background: linear-gradient(135deg, rgba(69,115,223,0.15) 0%, rgba(36,41,54,0.95) 100%);
   border-radius: 50%;
   width: 64px;
   height: 64px;
@@ -429,8 +450,33 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 12px;
-  border: 2.5px solid #23272f;
-  box-shadow: 0 4px 18px #23294633;
+  border: 1px solid rgba(110,168,255,0.3);
+  box-shadow: 0 8px 24px rgba(13,17,23,0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.processStepIcon:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(69,115,223,0.25);
+  border-color: rgba(110,168,255,0.5);
+}
+
+.processStepIcon::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(110,168,255,0.1), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.processStepIcon:hover::after {
+  transform: translateX(100%);
 }
 .processStepTitle {
   font-weight: 900;
@@ -477,26 +523,46 @@
   gap: 32px;
 }
 .featureCard {
-  background: rgba(36,41,54,0.88);
+  background: rgba(36,41,54,0.92);
   border-radius: 22px;
   padding: 1.7rem 1.8rem;
   min-width: 240px;
   flex: 1;
-  font-weight: 900;
+  font-weight: 800;
   color: #eaf6ff;
-  box-shadow: 0 8px 32px #23294633;
+  box-shadow: 0 8px 32px rgba(13,17,23,0.2);
   font-size: 1.16rem;
   display: flex;
   align-items: center;
   gap: 22px;
-  border: 1.5px solid #23272f;
-  transition: box-shadow 0.2s, transform 0.15s;
-  backdrop-filter: blur(2px);
+  border: 1px solid rgba(69,115,223,0.2);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
   cursor: pointer;
-  filter: drop-shadow(0 2px 12px #23294633);
+  position: relative;
+  overflow: hidden;
 }
 .featureCard:hover {
-  box-shadow: 0 16px 48px #23294644;
+  box-shadow: 0 16px 48px rgba(69,115,223,0.25);
+  border-color: rgba(110,168,255,0.4);
+  transform: translateY(-2px);
+  background: rgba(36,41,54,0.95);
+}
+
+.featureCard::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(110,168,255,0.1), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.featureCard:hover::after {
+  transform: translateX(100%);
 }
 .techSection {
   margin: 3.2rem 0;
@@ -679,13 +745,13 @@
 
 /* Dark Theme */
 .dark {
-  background: linear-gradient(120deg, #181c22 70%, #232946 100%);
+  background: linear-gradient(120deg, #0d1117 70%, #1a1f2e 100%);
   color-scheme: dark;
 }
 
 /* Light Theme */
 .light {
-  background: linear-gradient(120deg, #f7fafd 70%, #eaf6ff 100%);
+  background: linear-gradient(120deg, #ffffff 70%, #f0f7ff 100%);
   color-scheme: light;
 }
 .mainContent {
@@ -823,28 +889,47 @@
   letter-spacing: 0.01px;
 }
 .ctaBtn {
-  background: linear-gradient(90deg, #4573df 60%, #6ea8ff 100%);
-  color: #fff;
-  font-weight: 900;
+  background: linear-gradient(90deg, #4573df 0%, #6ea8ff 100%);
+  color: #ffffff;
+  font-weight: 800;
   font-size: 1.18rem;
   border-radius: 22px;
   padding: 1.1rem 2.8rem;
   text-decoration: none;
-  box-shadow: 0 6px 32px #4573df33, 0 0 0 2.5px #263040;
-  transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+  box-shadow: 0 8px 24px rgba(69,115,223,0.25);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: inline-block;
   margin-top: 18px;
-  border: none;
+  border: 1px solid rgba(110,168,255,0.3);
   letter-spacing: 0.32px;
-  backdrop-filter: blur(2.5px);
+  position: relative;
+  overflow: hidden;
   cursor: pointer;
-  filter: drop-shadow(0 2px 12px #23294644);
+  backdrop-filter: blur(4px);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 .ctaBtn:hover {
   background: linear-gradient(90deg, #6ea8ff 0%, #4573df 100%);
-  color: #fff;
-  transform: scale(1.045);
-  box-shadow: 0 12px 48px #23294633, 0 0 0 2.5px #263040;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(69,115,223,0.35);
+  border-color: rgba(110,168,255,0.5);
+}
+
+.ctaBtn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.2), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.ctaBtn:hover::after {
+  transform: translateX(100%);
 }
 .heroImageBlock {
   flex: 1 1 260px;
@@ -907,10 +992,25 @@
   height: 18px;
   border-radius: 50%;
   background: radial-gradient(circle, #6ea8ff 0%, #4573df 80%);
-  box-shadow: 0 0 16px #6ea8ff99;
-  opacity: 0.7;
-  animation: floatY 2.5s ease-in-out infinite;
+  box-shadow: 0 0 24px rgba(110,168,255,0.6);
+  opacity: 0.85;
+  animation: pulseAndFloat 3s ease-in-out infinite;
   z-index: 2;
+}
+
+@keyframes pulseAndFloat {
+  0% {
+    transform: translateY(0);
+    box-shadow: 0 0 24px rgba(110,168,255,0.6);
+  }
+  50% {
+    transform: translateY(-12px);
+    box-shadow: 0 0 32px rgba(110,168,255,0.8);
+  }
+  100% {
+    transform: translateY(0);
+    box-shadow: 0 0 24px rgba(110,168,255,0.6);
+  }
 }
 
 /*====================================
@@ -993,8 +1093,16 @@
 }
 
 @keyframes fadeInUp { 
-  0% { opacity: 0; transform: translateY(32px); } 
-  100% { opacity: 1; transform: translateY(0); } 
+  0% { 
+    opacity: 0; 
+    transform: translateY(32px); 
+    filter: blur(8px);
+  } 
+  100% { 
+    opacity: 1; 
+    transform: translateY(0);
+    filter: blur(0);
+  } 
 }
 
 @keyframes pulse { 
