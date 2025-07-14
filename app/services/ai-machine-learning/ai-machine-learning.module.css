@@ -1041,28 +1041,6 @@
   100% { transform: translateY(0) scale(1); opacity: 1; }
 }
 
-.skip-to-content {
-  position: absolute;
-  left: -999px;
-  top: auto;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  z-index: 9999;
-  background: #fff;
-  color: #222b3a;
-  font-weight: bold;
-  border-radius: 8px;
-  padding: 8px 18px;
-  transition: left 0.2s;
-}
-.skip-to-content:focus {
-  left: 16px;
-  top: 16px;
-  width: auto;
-  height: auto;
-  outline: 3px solid #4573df;
-}
 .engagement-method-section {
   display: flex;
   flex-wrap: wrap;
