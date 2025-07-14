@@ -190,13 +190,6 @@ export default function AIMachineLearningDetailPage() {
                     Get Started
                     <span className={styles.ctaBtnArrow} aria-hidden="true">→</span>
                   </a>
-                  <a 
-                    href="#how-we-work"
-                    className={styles.secondaryBtn}
-                    aria-label="Learn more about our process"
-                  >
-                    Learn More
-                  </a>
                 </div>
               </div>
               <div className={styles.heroImageBlock} aria-hidden="true">
