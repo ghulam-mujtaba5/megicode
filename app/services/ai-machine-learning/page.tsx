@@ -1,4 +1,3 @@
-
 "use client";
 import Footer from "../../../components/Footer/Footer";
 import styles from "./ai-machine-learning.module.css";
@@ -84,18 +83,33 @@ export default function AIMachineLearningDetailPage() {
   if (!service) return null;
   // Keyframes for animation
   const keyframes = `
-    @keyframes floatY { 0% { transform: translateY(0); } 50% { transform: translateY(-18px); } 100% { transform: translateY(0); } }
-    @keyframes floatX { 0% { transform: translateX(0); } 50% { transform: translateX(18px); } 100% { transform: translateX(0); } }
-    @keyframes fadeInUp { 0% { opacity: 0; transform: translateY(32px); } 100% { opacity: 1; transform: translateY(0); } }
-    @keyframes pulse { 0% { box-shadow: 0 0 0 0 #4573df33; } 70% { box-shadow: 0 0 0 18px #4573df11; } 100% { box-shadow: 0 0 0 0 #4573df33; } }
+    @keyframes floatY { 
+      0% { transform: translateY(0); } 
+      50% { transform: translateY(-12px); } 
+      100% { transform: translateY(0); } 
+    }
+    @keyframes floatX { 
+      0% { transform: translateX(0); } 
+      50% { transform: translateX(12px); } 
+      100% { transform: translateX(0); } 
+    }
+    @keyframes fadeInUp { 
+      0% { opacity: 0; transform: translateY(24px); } 
+      100% { opacity: 1; transform: translateY(0); } 
+    }
+    @keyframes pulse { 
+      0% { box-shadow: 0 0 0 0 rgba(69, 115, 223, 0.2); } 
+      70% { box-shadow: 0 0 0 12px rgba(69, 115, 223, 0.05); } 
+      100% { box-shadow: 0 0 0 0 rgba(69, 115, 223, 0.2); } 
+    }
     @keyframes borderGradient {
-      0% { border-image-source: linear-gradient(90deg, #4573df, #6ea8ff, #cfe8ef, #4573df); }
-      100% { border-image-source: linear-gradient(450deg, #4573df, #6ea8ff, #cfe8ef, #4573df); }
+      0% { border-image-source: linear-gradient(90deg, #4573df, #6ea8ff); }
+      100% { border-image-source: linear-gradient(450deg, #4573df, #6ea8ff); }
     }
     @keyframes sparkMove {
-      0% { transform: translateY(0) scale(1); opacity: 1; }
-      50% { transform: translateY(-18px) scale(1.2); opacity: 0.7; }
-      100% { transform: translateY(0) scale(1); opacity: 1; }
+      0% { transform: translateY(0) scale(1); opacity: 0.8; }
+      50% { transform: translateY(-12px) scale(1.1); opacity: 0.6; }
+      100% { transform: translateY(0) scale(1); opacity: 0.8; }
     }
   `;
   // Color palette for light/dark
@@ -124,308 +138,321 @@ export default function AIMachineLearningDetailPage() {
     cardInnerBorder: isDark ? '#232946' : '#eaf6ff',
   };
   return (
-    <>
-      {/* Desktop NavBar (visible on desktop only) */}
+    <div className={`${styles.aiMLBoxSizingAll} ${isDark ? styles.dark : styles.light}`}>
+      {/* NavBars */}
       <div className="desktop-navbar-wrapper" style={{ width: '100%', position: 'sticky', top: 0, zIndex: 2100 }}>
         <NavBar />
       </div>
-      {/* Mobile NavBar (visible on mobile only) */}
       <div className="mobile-navbar-wrapper" style={{ width: '100%', position: 'sticky', top: 0, zIndex: 2000 }}>
         <NavBarMobile />
       </div>
-      {/* CSS moved to external file ai-machine-learning.module.css */}
-      <div
-        className={`${styles.aiMLBoxSizingAll} ${isDark ? styles.dark : styles.light}`}
+
+      <main
+        id="main-content"
+        className={styles.mainContent}
+        aria-label="AI & Machine Learning Service Detail"
+        style={{ 
+          paddingTop: '88px',
+          maxWidth: '1440px',
+          margin: '0 auto',
+          padding: '88px 24px 64px'
+        }}
       >
-        <main
-          id="main-content"
-          className={styles.mainContent}
-          aria-label="AI & Machine Learning Service Detail"
-          style={{ paddingTop: '72px' }} // Add this line or adjust as needed
-        >
-          {/* Soft background shapes for extra depth */}
-          <div className={styles.bgShapeLeft} aria-hidden="true" />
-          <div className={styles.bgShapeRight} aria-hidden="true" />
-          {/* Hero Section - Full-width gradient, Lottie/SVG, CTA */}
-          <section
+        {/* Soft background shapes for extra depth */}
+        <div className={styles.bgShapeLeft} aria-hidden="true" />
+        <div className={styles.bgShapeRight} aria-hidden="true" />
+        {/* Hero Section - Full-width gradient, Lottie/SVG, CTA */}
+        <section
             className={`${styles.heroSection} service-hero-gradient`}
             data-animate="fade-in"
+            aria-labelledby="hero-title"
           >
-            {/* Glassmorphism overlay */}
-            <div className={styles.heroOverlay} />
-            {/* Decorative blurred circle */}
-            <div
-              className={
-                isDark
-                  ? `${styles.heroBlurCircle} ${styles.heroBlurCircleDark}`
-                  : `${styles.heroBlurCircle} ${styles.heroBlurCircleLight}`
-              }
+            <div className={styles.heroOverlay} aria-hidden="true" />
+            <div 
+              className={`${styles.heroBlurCircle} ${isDark ? styles.heroBlurCircleDark : styles.heroBlurCircleLight}`}
               aria-hidden="true"
             />
             <div className={styles.heroContent}>
               <div className={styles.heroTextBlock}>
-                <h1 className={styles.heroTitle}>{service.title}</h1>
-                <p className={styles.heroDesc} data-animate="typewriter">{service.description}</p>
-                <a
-                  href="/contact"
-                  className={styles.ctaBtn}
-                  data-animate="cta-bounce"
-                >Get Started</a>
+                <h1 id="hero-title" className={styles.heroTitle}>
+                  <span className={styles.gradientText}>{service.title}</span>
+                </h1>
+                <p className={styles.heroDesc} data-animate="typewriter">
+                  {service.description}
+                </p>
+                <div className={styles.heroCTAWrapper}>
+                  <a
+                    href="/contact"
+                    className={styles.ctaBtn}
+                    data-animate="cta-bounce"
+                    aria-label="Get Started with AI & Machine Learning Services"
+                  >
+                    Get Started
+                    <span className={styles.ctaBtnArrow} aria-hidden="true">→</span>
+                  </a>
+                  <a 
+                    href="#how-we-work"
+                    className={styles.secondaryBtn}
+                    aria-label="Learn more about our process"
+                  >
+                    Learn More
+                  </a>
+                </div>
               </div>
-              <div className={styles.heroImageBlock}>
-                {/* Lottie animation placeholder, fallback to SVG */}
-                {/* <Lottie src="/lottie/ai-head.json" ... /> */}
-                <div className={styles.heroImageCard}>
+              <div className={styles.heroImageBlock} aria-hidden="true">
+                <div className={styles.heroImageCard} data-animate="float">
                   <img
                     src="/Ai icon.svg"
-                    alt="AI Illustration"
+                    alt=""
                     className={styles.heroImage}
-                    data-animate="float"
+                    loading="eager"
                   />
-                  {/* Animated floating dot */}
                   <div className={styles.heroImageDot} />
+                  <div className={styles.heroImageSparkles}>
+                    {[...Array(3)].map((_, i) => (
+                      <div key={i} className={styles.sparkle} style={{ animationDelay: `${i * 0.2}s` }} />
+                    ))}
+                  </div>
                 </div>
-                {/* Optionally add micro-animated background shapes here */}
               </div>
             </div>
           </section>
 
-          {/* Service Overview - Side-by-side layout */}
-          {/* Section divider */}
-          <div className={styles.sectionDivider} />
-          <section className={styles.overviewSection} data-animate="slide-left">
-            <div className={styles.overviewTextBlock}>
-              <h2 className={styles.overviewTitle}>Overview</h2>
-              <p className={styles.overviewDesc}>{service.description}</p>
-            </div>
-            <div className={styles.overviewImageBlock}>
-              <img src="/ds&ai-icon.svg" alt="AI Service Overview" className={styles.overviewImage} data-animate="fade-in" />
-            </div>
-          </section>
+        {/* Service Overview - Side-by-side layout */}
+        {/* Section divider */}
+        <div className={styles.sectionDivider} />
+        <section className={styles.overviewSection} data-animate="slide-left">
+          <div className={styles.overviewTextBlock}>
+            <h2 className={styles.overviewTitle}>Overview</h2>
+            <p className={styles.overviewDesc}>{service.description}</p>
+          </div>
+          <div className={styles.overviewImageBlock}>
+            <img src="/ds&ai-icon.svg" alt="AI Service Overview" className={styles.overviewImage} data-animate="fade-in" />
+          </div>
+        </section>
 
-          {/* Why It Matters - Animated counters, impact */}
-          {/* Section divider */}
-          <div className={styles.sectionDivider} />
-          <section className={styles.whySection} data-animate="fade-in">
-            <h2 className={styles.whyTitle}>Why It Matters</h2>
-            <div className={styles.whyStatsRow}>
-              <div className={styles.whyStatCard}>
-                <span data-animate="countup" data-value="78">78%</span>
-                <div className={styles.whyStatDesc}>of businesses believe AI will impact their industry (PwC)</div>
-              </div>
-              <div className={styles.whyStatCard}>
-                <span data-animate="countup" data-value="2">2x</span>
-                <div className={styles.whyStatDesc}>revenue growth for AI adoption leaders</div>
-              </div>
+        {/* Why It Matters - Animated counters, impact */}
+        {/* Section divider */}
+        <div className={styles.sectionDivider} />
+        <section className={styles.whySection} data-animate="fade-in">
+          <h2 className={styles.whyTitle}>Why It Matters</h2>
+          <div className={styles.whyStatsRow}>
+            <div className={styles.whyStatCard}>
+              <span data-animate="countup" data-value="78">78%</span>
+              <div className={styles.whyStatDesc}>of businesses believe AI will impact their industry (PwC)</div>
             </div>
-          </section>
+            <div className={styles.whyStatCard}>
+              <span data-animate="countup" data-value="2">2x</span>
+              <div className={styles.whyStatDesc}>revenue growth for AI adoption leaders</div>
+            </div>
+          </div>
+        </section>
 
-          {/* Process Stepper - Timeline ready for animation */}
-          {/* Section divider */}
-          <div className={styles.sectionDivider} />
-          <section className={styles.processSection} data-animate="timeline">
-            <h2 className={styles.processTitle}>Our Process</h2>
-            <div className={styles.processStepsRow}>
-              {processSteps.map((step, idx) => (
-                <div key={idx} className={styles.processStepCard}>
-                  <div className={styles.processStepIcon}>{step.icon}</div>
-              <div className={styles.processStepTitle}>{step.title}</div>
-              <div className={styles.processStepDesc}>{step.desc}</div>
-              {idx < processSteps.length - 1 && (
-                <div className={styles.processStepConnector} />
+        {/* Process Stepper - Timeline ready for animation */}
+        {/* Section divider */}
+        <div className={styles.sectionDivider} />
+        <section className={styles.processSection} data-animate="timeline">
+          <h2 className={styles.processTitle}>Our Process</h2>
+          <div className={styles.processStepsRow}>
+            {processSteps.map((step, idx) => (
+              <div key={idx} className={styles.processStepCard}>
+                <div className={styles.processStepIcon}>{step.icon}</div>
+            <div className={styles.processStepTitle}>{step.title}</div>
+            <div className={styles.processStepDesc}>{step.desc}</div>
+            {idx < processSteps.length - 1 && (
+              <div className={styles.processStepConnector} />
+            )}
+          </div>
+        ))}
+      </div>
+    </section>
+
+    {/* Features as Cards - Deliverables Grid */}
+    {/* Section divider */}
+    <div className={styles.sectionDivider} />
+    <section className={styles.featuresSection} data-animate="stagger-fade">
+      <h2 className={styles.featuresTitle}>What You Get</h2>
+      <div className={styles.featuresRow}>
+        {features.map((f, i) => (
+          <div key={i} className={styles.featureCard} data-animate="fade-in">
+            {f.icon}
+            {f.label}
+          </div>
+        ))}
+      </div>
+    </section>
+
+    {/* Technologies as Logo Cloud */}
+    {/* Section divider */}
+    <div className={styles.sectionDivider} />
+    <section className={styles.techSection} data-animate="logo-cloud">
+      <h2 className={styles.techTitle}>Technologies</h2>
+      <div className={styles.techRow}>
+        {/* Example: Map tech name to react-icon if available, else fallback to image */}
+        {service.techs.map((t, i) => {
+          let Icon = null;
+          let color = undefined;
+          switch (t.toLowerCase()) {
+            case "python": Icon = SiPython; color = "#3776AB"; break;
+            case "tensorflow": Icon = SiTensorflow; color = "#FF6F00"; break;
+            case "pytorch": Icon = SiPytorch; color = "#EE4C2C"; break;
+            case "scikit-learn": Icon = SiScikitlearn; color = "#F7931E"; break;
+            case "aws":
+            case "amazon aws":
+            case "amazon web services": Icon = SiAmazon; color = "#FF9900"; break;
+            case "google cloud": Icon = SiGooglecloud; color = "#4285F4"; break;
+            case "openai":
+              try {
+                // Dynamically import to avoid breaking if not present
+                // eslint-disable-next-line @typescript-eslint/no-var-requires
+                Icon = require("react-icons/si").SiOpenai;
+                color = "#412991";
+              } catch { Icon = null; color = undefined; }
+              break;
+            case "azureai":
+            case "azure ai":
+            case "microsoft azure":
+              try {
+                Icon = require("react-icons/si").SiMicrosoftazure;
+                color = "#0089D6";
+              } catch { Icon = null; color = undefined; }
+              break;
+            default: Icon = null; color = undefined;
+          }
+          return (
+            <span key={i} className={styles.techCard} data-animate="scale-on-hover">
+              {Icon ? (
+                <Icon size={40} style={{ marginRight: 12 }} title={t} color={color} />
+              ) : (
+                <img
+                  src={`/meta/${
+                    t.toLowerCase().replace(/\s/g, '') === 'azureai' || t.toLowerCase().replace(/\s/g, '') === 'azure' || t.toLowerCase().replace(/\s/g, '') === 'microsoftazure'
+                      ? 'AzureAI.png'
+                      : `${t.replace(/\s/g, '')}.png`
+                  }`}
+                  alt={t}
+                  style={{ width: 40, height: 40, marginRight: 12 }}
+                />
               )}
-            </div>
-          ))}
-        </div>
-      </section>
+              {t}
+            </span>
+          );
+        })}
+      </div>
+    </section>
 
-      {/* Features as Cards - Deliverables Grid */}
-      {/* Section divider */}
-      <div className={styles.sectionDivider} />
-      <section className={styles.featuresSection} data-animate="stagger-fade">
-        <h2 className={styles.featuresTitle}>What You Get</h2>
-        <div className={styles.featuresRow}>
-          {features.map((f, i) => (
-            <div key={i} className={styles.featureCard} data-animate="fade-in">
-              {f.icon}
-              {f.label}
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Technologies as Logo Cloud */}
-      {/* Section divider */}
-      <div className={styles.sectionDivider} />
-      <section className={styles.techSection} data-animate="logo-cloud">
-        <h2 className={styles.techTitle}>Technologies</h2>
-        <div className={styles.techRow}>
-          {/* Example: Map tech name to react-icon if available, else fallback to image */}
-          {service.techs.map((t, i) => {
-            let Icon = null;
-            let color = undefined;
-            switch (t.toLowerCase()) {
-              case "python": Icon = SiPython; color = "#3776AB"; break;
-              case "tensorflow": Icon = SiTensorflow; color = "#FF6F00"; break;
-              case "pytorch": Icon = SiPytorch; color = "#EE4C2C"; break;
-              case "scikit-learn": Icon = SiScikitlearn; color = "#F7931E"; break;
-              case "aws":
-              case "amazon aws":
-              case "amazon web services": Icon = SiAmazon; color = "#FF9900"; break;
-              case "google cloud": Icon = SiGooglecloud; color = "#4285F4"; break;
-              case "openai":
-                try {
-                  // Dynamically import to avoid breaking if not present
-                  // eslint-disable-next-line @typescript-eslint/no-var-requires
-                  Icon = require("react-icons/si").SiOpenai;
-                  color = "#412991";
-                } catch { Icon = null; color = undefined; }
-                break;
-              case "azureai":
-              case "azure ai":
-              case "microsoft azure":
-                try {
-                  Icon = require("react-icons/si").SiMicrosoftazure;
-                  color = "#0089D6";
-                } catch { Icon = null; color = undefined; }
-                break;
-              default: Icon = null; color = undefined;
-            }
-            return (
-              <span key={i} className={styles.techCard} data-animate="scale-on-hover">
-                {Icon ? (
-                  <Icon size={40} style={{ marginRight: 12 }} title={t} color={color} />
-                ) : (
-                  <img
-                    src={`/meta/${
-                      t.toLowerCase().replace(/\s/g, '') === 'azureai' || t.toLowerCase().replace(/\s/g, '') === 'azure' || t.toLowerCase().replace(/\s/g, '') === 'microsoftazure'
-                        ? 'AzureAI.png'
-                        : `${t.replace(/\s/g, '')}.png`
-                    }`}
-                    alt={t}
-                    style={{ width: 40, height: 40, marginRight: 12 }}
-                  />
-                )}
-                {t}
-              </span>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* How We Work Section */}
-      {/* Section divider */}
-      <div className={styles.sectionDivider} />
-      <section className={styles.howSection} aria-labelledby="how-we-work-title">
-        <h2 id="how-we-work-title" className={styles.howTitle}>
-          How We Work: Partnership, Process & Delivery
-        </h2>
-        <div className={styles.howDesc}>
-          We operate as your strategic partner—combining robust engagement models, agile execution, and enterprise-grade governance. Our operational workflow ensures risk-managed, transparent, and value-driven AI delivery: on time, on budget, and with full business visibility.
-        </div>
-        <div className={styles.howGrid}>
-          {/* Engagement Models */}
-          <div className={styles.howCard}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 6 }}>
-              <span style={{ fontSize: '2rem' }} aria-label="Engagement Models" role="img">💼</span>
-              <span style={{ fontWeight: 800, fontSize: '1.13rem', color: palette.textAccent }}>Engagement Models</span>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-              <span style={{ fontSize: '1.3rem' }} aria-label="Fixed Price" role="img">📊</span>
-              <div>
-                <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Fixed Price</div>
-                <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Defined scope, predictable budget, and milestone-based billing. Best for projects with clear requirements and risk management needs.</div>
-              </div>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-              <span style={{ fontSize: '1.3rem' }} aria-label="Dedicated Team" role="img">🤝</span>
-              <div>
-                <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Dedicated Team</div>
-                <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Scalable, cross-functional team extension. Direct access to certified Megicode experts, rapid onboarding, and seamless enterprise collaboration.</div>
-              </div>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-              <span style={{ fontSize: '1.3rem' }} aria-label="Time & Material" role="img">⏱️</span>
-              <div>
-                <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Time & Material</div>
-                <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Agile, transparent billing for evolving requirements. Ideal for innovation, R&D, and projects with dynamic scope.</div>
-              </div>
+    {/* How We Work Section */}
+    {/* Section divider */}
+    <div className={styles.sectionDivider} />
+    <section className={styles.howSection} aria-labelledby="how-we-work-title">
+      <h2 id="how-we-work-title" className={styles.howTitle}>
+        How We Work: Partnership, Process & Delivery
+      </h2>
+      <div className={styles.howDesc}>
+        We operate as your strategic partner—combining robust engagement models, agile execution, and enterprise-grade governance. Our operational workflow ensures risk-managed, transparent, and value-driven AI delivery: on time, on budget, and with full business visibility.
+      </div>
+      <div className={styles.howGrid}>
+        {/* Engagement Models */}
+        <div className={styles.howCard}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 6 }}>
+            <span style={{ fontSize: '2rem' }} aria-label="Engagement Models" role="img">💼</span>
+            <span style={{ fontWeight: 800, fontSize: '1.13rem', color: palette.textAccent }}>Engagement Models</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+            <span style={{ fontSize: '1.3rem' }} aria-label="Fixed Price" role="img">📊</span>
+            <div>
+              <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Fixed Price</div>
+              <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Defined scope, predictable budget, and milestone-based billing. Best for projects with clear requirements and risk management needs.</div>
             </div>
           </div>
-          {/* Methodology & Communication */}
-          <div className={styles.howCard}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 6 }}>
-              <span style={{ fontSize: '2rem' }} aria-label="Methodology & Communication" role="img">🧭</span>
-              <span style={{ fontWeight: 800, fontSize: '1.13rem', color: palette.textAccent }}>Methodology & Communication</span>
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+            <span style={{ fontSize: '1.3rem' }} aria-label="Dedicated Team" role="img">🤝</span>
+            <div>
+              <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Dedicated Team</div>
+              <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Scalable, cross-functional team extension. Direct access to certified Megicode experts, rapid onboarding, and seamless enterprise collaboration.</div>
             </div>
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-              <span style={{ fontSize: '1.3rem' }} aria-label="Agile, CMMI L3+" role="img">⚡</span>
-              <div>
-                <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Agile, CMMI L3+</div>
-                <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Iterative, sprint-based delivery with continuous improvement. CMMI L3+ for process maturity and global best practices in enterprise AI.</div>
-              </div>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-              <span style={{ fontSize: '1.3rem' }} aria-label="Transparent Updates" role="img">📢</span>
-              <div>
-                <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Transparent Updates</div>
-                <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Weekly demos, open communication, and real-time dashboards for full project transparency and stakeholder alignment.</div>
-              </div>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-              <span style={{ fontSize: '1.3rem' }} aria-label="Jira, Figma, GitHub" role="img">🛠️</span>
-              <div>
-                <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Jira, Figma, GitHub</div>
-                <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Enterprise-grade tools for project tracking, secure design collaboration, and code quality assurance.</div>
-              </div>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-              <span style={{ fontSize: '1.3rem' }} aria-label="Risk Management & Governance" role="img">🛡️</span>
-              <div>
-                <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Risk Management & Governance</div>
-                <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Proactive risk identification, regulatory compliance (GDPR, SOC2), and executive reporting for enterprise assurance.</div>
-              </div>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+            <span style={{ fontSize: '1.3rem' }} aria-label="Time & Material" role="img">⏱️</span>
+            <div>
+              <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Time & Material</div>
+              <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Agile, transparent billing for evolving requirements. Ideal for innovation, R&D, and projects with dynamic scope.</div>
             </div>
           </div>
         </div>
-      </section>
-
-      {/* Testimonial */}
-      {/* Section divider */}
-      <div className={styles.sectionDivider} />
-      <section className={styles.testimonialSection} data-animate="fade-in">
-        {/* Animated spark/dot */}
-        <div className={styles.testimonialDot} />
-        {/* Glassmorphism overlay */}
-        <div className={styles.testimonialOverlay} />
-        <div className={styles.testimonialQuote}>
-          “{testimonial.quote}”
+        {/* Methodology & Communication */}
+        <div className={styles.howCard}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 6 }}>
+            <span style={{ fontSize: '2rem' }} aria-label="Methodology & Communication" role="img">🧭</span>
+            <span style={{ fontWeight: 800, fontSize: '1.13rem', color: palette.textAccent }}>Methodology & Communication</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+            <span style={{ fontSize: '1.3rem' }} aria-label="Agile, CMMI L3+" role="img">⚡</span>
+            <div>
+              <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Agile, CMMI L3+</div>
+              <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Iterative, sprint-based delivery with continuous improvement. CMMI L3+ for process maturity and global best practices in enterprise AI.</div>
+            </div>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+            <span style={{ fontSize: '1.3rem' }} aria-label="Transparent Updates" role="img">📢</span>
+            <div>
+              <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Transparent Updates</div>
+              <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Weekly demos, open communication, and real-time dashboards for full project transparency and stakeholder alignment.</div>
+            </div>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+            <span style={{ fontSize: '1.3rem' }} aria-label="Jira, Figma, GitHub" role="img">🛠️</span>
+            <div>
+              <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Jira, Figma, GitHub</div>
+              <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Enterprise-grade tools for project tracking, secure design collaboration, and code quality assurance.</div>
+            </div>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+            <span style={{ fontSize: '1.3rem' }} aria-label="Risk Management & Governance" role="img">🛡️</span>
+            <div>
+              <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Risk Management & Governance</div>
+              <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Proactive risk identification, regulatory compliance (GDPR, SOC2), and executive reporting for enterprise assurance.</div>
+            </div>
+          </div>
         </div>
-        <div className={styles.testimonialAuthor}>{testimonial.name} <span className={styles.testimonialCompany}>| {testimonial.company}</span></div>
-      </section>
-
-      {/* FAQs */}
-      {/* Section divider */}
-      <div className={styles.sectionDivider} />
-      <div className={styles.faqSection}>
-        <ServiceFAQs faqs={faqs} />
       </div>
+    </section>
 
-      {/* CTA - Full-width colored strip */}
-      {/* Section divider */}
-      <div className={styles.sectionDivider} />
-      <section className={styles.ctaSection} data-animate="cta-strip">
-        {/* Glassmorphism overlay */}
-        <div className={styles.ctaOverlay} />
-        <a href="/contact" className={styles.ctaBtnMain} data-animate="cta-bounce">
-          <FaRobot className={styles.ctaBtnIcon} title="AI Consultant" />
-          Talk to AI Consultant
-        </a>
-        <div className={styles.ctaDesc}>Ready to unlock the power of AI? Let’s talk about your vision.</div>
-      </section>
-        </main>
-        <Footer />
+    {/* Testimonial */}
+    {/* Section divider */}
+    <div className={styles.sectionDivider} />
+    <section className={styles.testimonialSection} data-animate="fade-in">
+      {/* Animated spark/dot */}
+      <div className={styles.testimonialDot} />
+      {/* Glassmorphism overlay */}
+      <div className={styles.testimonialOverlay} />
+      <div className={styles.testimonialQuote}>
+        “{testimonial.quote}”
       </div>
-    </>
+      <div className={styles.testimonialAuthor}>{testimonial.name} <span className={styles.testimonialCompany}>| {testimonial.company}</span></div>
+    </section>
+
+    {/* FAQs */}
+    {/* Section divider */}
+    <div className={styles.sectionDivider} />
+    <div className={styles.faqSection}>
+      <ServiceFAQs faqs={faqs} />
+    </div>
+
+    {/* CTA - Full-width colored strip */}
+    {/* Section divider */}
+    <div className={styles.sectionDivider} />
+    <section className={styles.ctaSection} data-animate="cta-strip">
+      {/* Glassmorphism overlay */}
+      <div className={styles.ctaOverlay} />
+      <a href="/contact" className={styles.ctaBtnMain} data-animate="cta-bounce">
+        <FaRobot className={styles.ctaBtnIcon} title="AI Consultant" />
+        Talk to AI Consultant
+      </a>
+      <div className={styles.ctaDesc}>Ready to unlock the power of AI? Let’s talk about your vision.</div>
+    </section>
+      </main>
+      <Footer />
+    </div>
   );
 }
