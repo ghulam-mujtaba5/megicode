@@ -419,8 +419,6 @@ export default function AIMachineLearningDetailPage() {
       </div>
     </section>
 
-    {/* Section divider */}
-    <div className={styles.sectionDivider} />
 
 
 
