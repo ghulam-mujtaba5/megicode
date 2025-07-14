@@ -611,55 +611,130 @@
 }
 .howSection {
   margin: 3.2rem 0;
-  background: linear-gradient(100deg, #232946 60%, #181c22 100%);
+  background: linear-gradient(135deg, rgba(36,41,54,0.95) 0%, rgba(69,115,223,0.15) 100%);
   border-radius: 32px;
-  box-shadow: 0 12px 48px #23294633;
-  padding: 3.2rem 2.8rem;
-  border: 2px solid #23272f;
+  box-shadow: 0 16px 48px rgba(13,17,23,0.25);
+  padding: 4rem 3rem;
+  border: 1px solid rgba(110,168,255,0.2);
   position: relative;
   overflow: hidden;
-  animation: fadeInUp 1.8s cubic-bezier(.23,1.01,.32,1) both;
+  animation: fadeInUp 1.8s cubic-bezier(0.4, 0, 0.2, 1) both;
   color: #eaf6ff;
+  backdrop-filter: blur(10px);
 }
 .howTitle {
-  font-size: 1.55rem;
-  font-weight: 900;
-  color: #6ea8ff;
-  margin-bottom: 18px;
-  letter-spacing: 0.13px;
-  text-shadow: 0 2px 8px #23294633;
-  line-height: 1.1;
+  font-size: 2.2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #6ea8ff 0%, #4573df 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 24px;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
   text-align: center;
+  position: relative;
+  z-index: 2;
 }
 .howDesc {
-  max-width: 900px;
-  margin: 0 auto 32px auto;
-  color: #b0c4d8;
-  font-weight: 600;
-  font-size: 1.13rem;
+  max-width: 800px;
+  margin: 0 auto 48px auto;
+  color: rgba(176,196,216,0.95);
+  font-weight: 500;
+  font-size: 1.2rem;
   text-align: center;
+  line-height: 1.6;
+  letter-spacing: 0.2px;
+  position: relative;
+  z-index: 2;
 }
 .howGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 36px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 28px;
   align-items: stretch;
   margin: 0 auto;
-  max-width: 980px;
+  max-width: 1200px;
+  position: relative;
+  z-index: 2;
 }
 .howCard {
-  background: rgba(36,41,54,0.88);
-  border-radius: 22px;
-  padding: 2.1rem 1.7rem;
-  box-shadow: 0 8px 32px #23294633;
-  border: 1.5px solid #232946;
+  background: rgba(36,41,54,0.95);
+  border-radius: 24px;
+  padding: 2.4rem 2rem;
+  box-shadow: 0 12px 36px rgba(13,17,23,0.2);
+  border: 1px solid rgba(110,168,255,0.2);
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  min-height: 240px;
+  gap: 20px;
+  min-height: 260px;
   justify-content: flex-start;
   align-items: flex-start;
   position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+}
+
+.howCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 48px rgba(69,115,223,0.25);
+  border-color: rgba(110,168,255,0.4);
+  background: rgba(36,41,54,0.98);
+}
+
+.howCard::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(110,168,255,0.1), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.howCard:hover::after {
+  transform: translateX(100%);
+}
+
+/* Add styles for icons in how cards */
+.howCard .icon-wrapper {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, rgba(69,115,223,0.15) 0%, rgba(36,41,54,0.95) 100%);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  border: 1px solid rgba(110,168,255,0.3);
+  font-size: 1.8rem;
+  color: #6ea8ff;
+  transition: all 0.3s ease;
+}
+
+.howCard:hover .icon-wrapper {
+  transform: scale(1.1);
+  border-color: rgba(110,168,255,0.5);
+  box-shadow: 0 8px 24px rgba(69,115,223,0.2);
+}
+
+.howCard h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #6ea8ff;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.howCard p {
+  font-size: 1.05rem;
+  color: rgba(176,196,216,0.9);
+  margin: 0;
+  line-height: 1.6;
 }
 .testimonialSection {
   margin: 3.2rem 0;
@@ -1122,222 +1197,143 @@
   100% { transform: translateY(0) scale(1); opacity: 1; }
 }
 
-.engagement-method-section {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 56px;
-  margin: 3.2rem 0;
-  animation: fadeInUp 1.7s cubic-bezier(.23,1.01,.32,1) both;
-  align-items: stretch;
-}
-.engagement-method-card:focus-within, .engagement-method-card:focus {
-  outline: 3px solid #4573df;
-  outline-offset: 2px;
-}
-.engagement-method-icon[aria-label] {
-  outline: none;
-}
-.engagement-method-icon:focus {
-  outline: 2px solid #4573df;
-}
-.cta-btn:active {
-  transform: scale(0.97);
-  box-shadow: 0 2px 8px #4573df44;
+/* How Section Animations */
+@keyframes cardFloat {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
-/*====================================
-  7. Responsive Design
-====================================*/
-/* Tablet Breakpoint */
-@media (max-width: 900px) {
-  /* Place all tablet-specific styles here, merging from previous 900px/1200px/700px rules */
-  .heroSection {
-    padding: 1.2rem 0.7rem 1.5rem 0.7rem !important;
-    margin: 0 auto 8px auto !important;
-    min-height: unset !important;
-    border-radius: 0 !important;
-    background: none;
-    box-shadow: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
+@keyframes iconPulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
   }
-  .heroContent {
-    flex-direction: column;
-    gap: 1.2rem;
-    padding: 0;
-    align-items: center;
-    justify-content: flex-start;
-    width: 100%;
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
   }
-  .heroImageBlock {
-    order: 1;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 0.5rem;
+  100% {
+    transform: scale(1);
+    opacity: 1;
   }
-  .heroImageCard {
-    padding: 0.5rem !important;
-    border-radius: 1.5rem !important;
-    box-shadow: 0 2px 8px #23294622 !important;
-    background: rgba(255,255,255,0.10);
-  }
-  .heroImage {
-    width: 100px !important;
-    height: 100px !important;
-    padding: 0 !important;
-    border-radius: 1.2rem !important;
-    margin: 0;
-    box-shadow: none;
-    background: none;
-    border: none;
-    display: block;
-  }
-  .heroTextBlock {
-    order: 2;
-    width: 100%;
-    align-items: center;
-    text-align: center;
-    margin-bottom: 0.2rem;
-    margin-top: 0;
-    padding: 0;
-  }
-  .heroTitle {
-    font-size: 2.1rem;
-    font-weight: 900;
-    line-height: 1.18;
-    margin-bottom: 0.5rem;
-    letter-spacing: -1px;
-    color: #fff;
-    text-shadow: 0 2px 8px #23294644;
-  }
-  .heroDesc {
-    font-size: 1.08rem;
-    color: #eaf6ff;
-    margin-bottom: 0.7rem;
-    line-height: 1.45;
-    font-weight: 500;
-    text-shadow: none;
-  }
-  .ctaBtn {
-    order: 3;
-    width: 100%;
-    min-width: 120px;
-    max-width: 320px;
-    text-align: center;
-    font-size: 1.13rem;
-    padding: 1rem 0.7rem;
-    margin: 0.3rem auto 0 auto;
-    border-radius: 1rem;
-    background: linear-gradient(90deg, #4573df 60%, #6ea8ff 100%);
-    color: #fff;
-    font-weight: 800;
-    box-shadow: 0 2px 8px #4573df22;
-    border: none;
-    display: block;
-  }
-  /* Add other tablet-specific rules here, merging from previous breakpoints */
 }
 
-/* --- Mobile Breakpoint --- */
-@media (max-width: 600px) {
-  /* Place all mobile-specific styles here, merging from previous 700px/600px rules */
-  .heroSection {
-    padding: 0.8rem 0.3rem 1rem 0.3rem !important;
-    margin: 0 auto 4px auto !important;
-    min-height: unset !important;
-    border-radius: 0 !important;
-    background: none;
-    box-shadow: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-  }
-  .heroContent {
-    flex-direction: column;
-    gap: 0.7rem;
-    padding: 0;
-    align-items: center;
-    justify-content: flex-start;
-    width: 100%;
-  }
-  .heroImageBlock {
-    order: 1;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 0.2rem;
-  }
-  .heroImageCard {
-    padding: 0.2rem !important;
-    border-radius: 1rem !important;
-    box-shadow: 0 2px 8px #23294622 !important;
-    background: rgba(255,255,255,0.10);
-  }
-  .heroImage {
-    width: 120px !important;
-    height: 120px !important;
-    padding: 0 !important;
-    border-radius: 0.9rem !important;
-    margin: 0;
-    box-shadow: none;
-    background: none;
-    border: none;
-    display: block;
-  }
-  .heroTextBlock {
-    order: 2;
-    width: 100%;
-    align-items: center;
-    text-align: center;
-    margin-bottom: 0.1rem;
-    margin-top: 0;
-    padding: 0;
-  }
-  .heroTitle {
-    font-size: 1.35rem;
-    font-weight: 900;
-    line-height: 1.13;
-    margin-bottom: 0.18rem;
-    letter-spacing: -0.7px;
-    color: #fff;
-    text-shadow: 0 1px 4px #23294644;
-  }
-  .heroDesc {
-    font-size: 0.99rem;
-    color: #eaf6ff;
-    margin-bottom: 0.32rem;
-    line-height: 1.32;
-    font-weight: 500;
-    text-shadow: none;
-  }
-  .ctaBtn {
-    order: 3;
-    width: 100%;
-    min-width: 100px;
-    max-width: 200px;
-    text-align: center;
-    font-size: 1.01rem;
-    padding: 0.7rem 0.6rem;
-    margin: 0.18rem auto 0 auto;
-    border-radius: 0.7rem;
-    background: linear-gradient(90deg, #4573df 60%, #6ea8ff 100%);
-    color: #fff;
-    font-weight: 700;
-    box-shadow: 0 2px 8px #4573df22;
-    border: none;
-    display: block;
-  }
-  /* Add other mobile-specific rules here, merging from previous breakpoints */
+/* Add floating background elements */
+.howSection::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(110,168,255,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(40px);
+  animation: floatY 8s ease-in-out infinite;
+  z-index: 1;
 }
 
-/* Remove all other @media (max-width: 700px), (max-width: 1200px), etc. and move their rules into the above as appropriate. */
+.howSection::after {
+  content: '';
+  position: absolute;
+  bottom: -50px;
+  left: -50px;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(69,115,223,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(40px);
+  animation: floatX 8s ease-in-out infinite;
+  z-index: 1;
+}
 
+/* Responsive adjustments for How section */
+@media (max-width: 1200px) {
+  .howSection {
+    padding: 3rem 2rem;
+  }
+  
+  .howTitle {
+    font-size: 2rem;
+  }
+  
+  .howDesc {
+    font-size: 1.1rem;
+    margin-bottom: 36px;
+  }
+  
+  .howGrid {
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .howSection {
+    padding: 2.5rem 1.5rem;
+    margin: 2rem 0;
+  }
+  
+  .howTitle {
+    font-size: 1.8rem;
+  }
+  
+  .howDesc {
+    font-size: 1rem;
+    margin-bottom: 28px;
+  }
+  
+  .howCard {
+    padding: 1.8rem 1.5rem;
+    min-height: 220px;
+  }
+  
+  .howCard .icon-wrapper {
+    width: 48px;
+    height: 48px;
+    font-size: 1.5rem;
+  }
+  
+  .howCard h3 {
+    font-size: 1.2rem;
+  }
+  
+  .howCard p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .howSection {
+    padding: 2rem 1rem;
+    border-radius: 24px;
+  }
+  
+  .howTitle {
+    font-size: 1.6rem;
+  }
+  
+  .howDesc {
+    font-size: 0.95rem;
+    margin-bottom: 24px;
+  }
+  
+  .howGrid {
+    gap: 16px;
+  }
+  
+  .howCard {
+    padding: 1.5rem 1.2rem;
+    min-height: 200px;
+    gap: 16px;
+  }
+}
 /*====================================
   10. Utility Classes & Helpers
 ====================================*/
