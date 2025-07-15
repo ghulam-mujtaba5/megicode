@@ -1,7 +1,7 @@
 "use client";
 import Footer from "../../../components/Footer/Footer";
 import styles from "./ai-machine-learning.module.css";
-import GmIcon from "../../../components/Icon/gmicon";
+import GmIcon from "../../../components/Icon/sbicon";
 
 import React from "react";
 import { useTheme } from "../../../context/ThemeContext";
