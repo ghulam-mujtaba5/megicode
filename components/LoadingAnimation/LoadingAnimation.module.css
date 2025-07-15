@@ -1,0 +1,151 @@
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  position: relative;
+  overflow: hidden;
+  padding: 1rem;
+  width: 100%;
+}
+
+.inline {
+  padding: 0;
+  background: transparent;
+  width: auto;
+  height: auto;
+}
+
+.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  height: 100vh;
+}
+
+.loadingWrapper {
+  position: relative;
+}
+
+/* Size variations */
+.small .loadingWrapper {
+  width: 60px;
+  height: 60px;
+}
+
+.medium .loadingWrapper {
+  width: 120px;
+  height: 120px;
+}
+
+.large .loadingWrapper {
+  width: 180px;
+  height: 180px;
+}
+
+.circle {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 4px solid transparent;
+  animation: rotate 2s linear infinite;
+}
+
+.circle1 {
+  border-top-color: var(--md-primary);
+  animation-duration: 1s;
+}
+
+.circle2 {
+  border-right-color: var(--md-secondary);
+  animation-duration: 1.5s;
+  width: 80%;
+  height: 80%;
+  top: 10%;
+  left: 10%;
+}
+
+.circle3 {
+  border-bottom-color: var(--md-primary-variant);
+  animation-duration: 2s;
+  width: 60%;
+  height: 60%;
+  top: 20%;
+  left: 20%;
+}
+
+.particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  background: var(--md-primary);
+  border-radius: 50%;
+  animation: float 3s ease-in-out infinite;
+}
+
+.small .particle {
+  width: 2px;
+  height: 2px;
+}
+
+.medium .particle {
+  width: 4px;
+  height: 4px;
+}
+
+.large .particle {
+  width: 6px;
+  height: 6px;
+}
+
+.logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(-20px) translateX(10px);
+    opacity: 0.6;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 1;
+  }
+}
+
+[data-theme="dark"] .particle {
+  background: var(--md-secondary);
+}

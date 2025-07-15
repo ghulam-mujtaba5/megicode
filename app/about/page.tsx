@@ -1,10 +1,8 @@
-
-
 "use client";
 import React, { Suspense } from "react";
 import { useTheme } from "../../context/ThemeContext";
 import dynamic from 'next/dynamic';
-import Loading from '../loading';
+import LoadingAnimation from '@/components/LoadingAnimation/LoadingAnimation';
 
 
 
@@ -26,23 +24,23 @@ interface FooterProps {
 // Dynamic imports for non-critical components with proper typing
 const AboutIntro = dynamic<{}>(
   () => import("../../components/AboutIntro/AboutIntro").then(mod => mod.default), {
-  loading: () => <Loading />
+  loading: () => <LoadingAnimation size="medium" />
 });
 const CoreValues = dynamic<{}>(
   () => import("../../components/CoreValues/CoreValues").then(mod => mod.default), {
-  loading: () => <Loading />
+  loading: () => <LoadingAnimation size="medium" />
 });
 const AboutFounder = dynamic<{}>(
   () => import("../../components/AboutFounder/AboutFounder").then(mod => mod.default), {
-  loading: () => <Loading />
+  loading: () => <LoadingAnimation size="medium" />
 });
 const AboutStats = dynamic<{}>(
   () => import("../../components/AboutStats/AboutStats").then(mod => mod.default), {
-  loading: () => <Loading />
+  loading: () => <LoadingAnimation size="medium" />
 });
 const Footer = dynamic<FooterProps>(
   () => import("../../components/Footer/Footer").then(mod => mod.default), {
-  loading: () => <Loading />
+  loading: () => <LoadingAnimation size="medium" />
 });
 
 export default function AboutPage() {
@@ -113,7 +111,7 @@ export default function AboutPage() {
         <AboutHero />
 
         {/* Non-Critical Components - Load Dynamically */}
-        <Suspense fallback={<Loading />}>
+        <Suspense fallback={<LoadingAnimation size="medium" />}>
           {/* Introduction Section - Start with who we are */}
           <section aria-label="About Company">
             <AboutIntro />
@@ -142,7 +140,7 @@ export default function AboutPage() {
         aria-label="Footer" 
         style={{ width: "100%", overflow: "hidden" }}
       >
-        <Suspense fallback={<Loading />}>
+        <Suspense fallback={<LoadingAnimation size="medium" />}>
           <Footer
             linkedinUrl={linkedinUrl}
             instagramUrl={instagramUrl}

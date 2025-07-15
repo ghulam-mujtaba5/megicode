@@ -6,14 +6,14 @@ import NavBarDesktop from "../../components/NavBar_Desktop_Company/nav-bar-Compa
 import NavBarMobile from "../../components/NavBar_Mobile/NavBar-mobile";
 import Footer from "../../components/Footer/Footer";
 import ThemeToggleIcon from "../../components/Icon/sbicon";
-import Loading from "../loading";
+import LoadingAnimation from "@/components/LoadingAnimation/LoadingAnimation";
 
 // Dynamic imports for optimized loading
 const ReviewsHero = dynamic(() => import("../../components/Reviews/ReviewsHero/ReviewsHero"), {
-    loading: () => <Loading />
+    loading: () => <LoadingAnimation size="medium" />
 });
 const ReviewsGrid = dynamic(() => import("../../components/Reviews/ReviewsGrid/ReviewsGrid"), {
-    loading: () => <Loading />
+    loading: () => <LoadingAnimation size="medium" />
 });
 
 export default function ReviewsPage() {
@@ -47,7 +47,7 @@ export default function ReviewsPage() {
 
         <main className="relative" aria-label="Reviews Main Content">
             <h1 style={{position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden'}}>Reviews & Testimonials</h1>
-            <Suspense fallback={<Loading />}>
+            <Suspense fallback={<LoadingAnimation size="medium" />}>
                 <ReviewsHero />
                 <ReviewsGrid />
             </Suspense>

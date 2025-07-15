@@ -6,6 +6,7 @@ import NavBarMobile from "../../components/NavBar_Mobile/NavBar-mobile";
 import Footer from "../../components/Footer/Footer";
 import ThemeToggleIcon from "../../components/Icon/sbicon";
 import { useTheme } from "../../context/ThemeContext";
+import LoadingAnimation from "@/components/LoadingAnimation/LoadingAnimation";
 
 const ArticlePage = () => {
   const { theme, toggleTheme } = useTheme();
@@ -63,7 +64,15 @@ const ArticlePage = () => {
           Articles
         </h1>
         {loading ? (
-          <div style={{ color: theme === "dark" ? "#b0b8c1" : "#232946", fontSize: 20, textAlign: "center", marginTop: 60 }}>Loading...</div>
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'center', 
+            alignItems: 'center', 
+            minHeight: '400px',
+            width: '100%'
+          }}>
+            <LoadingAnimation size="medium" />
+          </div>
         ) : articles.length === 0 ? (
           <div style={{ color: theme === "dark" ? "#b0b8c1" : "#232946", fontSize: 20, textAlign: "center", marginTop: 60 }}>No articles found.</div>
         ) : (

@@ -1,0 +1,113 @@
+.loadingContainer {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--md-background);
+  position: relative;
+  overflow: hidden;
+}
+
+.loadingWrapper {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+
+.circle {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 4px solid transparent;
+  animation: rotate 2s linear infinite;
+}
+
+.circle1 {
+  border-top-color: var(--md-primary);
+  animation-duration: 1s;
+}
+
+.circle2 {
+  border-right-color: var(--md-secondary);
+  animation-duration: 1.5s;
+  width: 80%;
+  height: 80%;
+  top: 10%;
+  left: 10%;
+}
+
+.circle3 {
+  border-bottom-color: var(--md-primary-variant);
+  animation-duration: 2s;
+  width: 60%;
+  height: 60%;
+  top: 20%;
+  left: 20%;
+}
+
+.particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--md-primary);
+  border-radius: 50%;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(-20px) translateX(10px);
+    opacity: 0.6;
+  }
+}
+
+.logo {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 1;
+  }
+}
+
+[data-theme="dark"] .loadingContainer {
+  background: #181c22;
+}
+
+[data-theme="dark"] .particle {
+  background: var(--md-secondary);
+}

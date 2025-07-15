@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { Suspense } from "react";
@@ -9,15 +8,15 @@ import NavBarDesktop from "../../components/NavBar_Desktop_Company/nav-bar-Compa
 import NavBarMobile from "../../components/NavBar_Mobile/NavBar-mobile";
 import Footer from "../../components/Footer/Footer";
 import ThemeToggleIcon from "../../components/Icon/sbicon";
-import Loading from "../loading";
+import LoadingAnimation from "@/components/LoadingAnimation/LoadingAnimation";
 import servicesData from "./servicesData";
 
 // Dynamic imports for optimized loading
 const ServicesHero = dynamic(() => import("../../components/Services/Hero/ServicesHero"), {
-  loading: () => <Loading />
+  loading: () => <LoadingAnimation size="medium" />
 });
 const ServiceCard = dynamic(() => import("../../components/Services/Card/ServiceCard"), {
-  loading: () => <Loading />
+  loading: () => <LoadingAnimation size="medium" />
 });
 
 export default function ServicesPage() {
@@ -56,7 +55,7 @@ export default function ServicesPage() {
 
       <main aria-label="Services Main Content">
         <h1 style={{position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden'}}>Our Services</h1>
-        <Suspense fallback={<Loading />}>
+        <Suspense fallback={<LoadingAnimation size="medium" />}>
           <ServicesHero />
         </Suspense>
         <section className="services-grid">
