@@ -3,6 +3,14 @@
   color-scheme: light;
 }
 
+.bgShapeLeft {
+  background: radial-gradient(circle, rgba(69, 115, 223, 0.1) 0%, rgba(255, 255, 255, 0) 80%);
+}
+
+.bgShapeRight {
+  background: radial-gradient(circle, rgba(110, 168, 255, 0.1) 0%, rgba(255, 255, 255, 0) 80%);
+}
+
 .heroBlurCircle {
   background: radial-gradient(circle, #eaf6ff 0%, #4573df11 80%);
 }

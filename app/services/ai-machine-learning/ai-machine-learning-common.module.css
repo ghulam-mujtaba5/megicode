@@ -10,8 +10,6 @@
   position: relative;
   padding: 8rem 0 6rem;
   overflow: hidden;
-  background: linear-gradient(135deg, rgba(69,115,223,0.12) 0%, rgba(110,168,255,0.08) 50%, transparent 100%);
-  border-bottom: 1px solid rgba(69,115,223,0.15);
 }
 
 .heroBackground {
@@ -20,7 +18,6 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at top right, rgba(110,168,255,0.15) 0%, transparent 70%);
   z-index: -1;
 }
 
@@ -33,18 +30,11 @@
 .featureCard {
   padding: 2rem;
   border-radius: 1rem;
-  background: rgba(36,41,54,0.95);
-  color: var(--text-light);
-  border: 1px solid rgba(110,168,255,0.2);
-  box-shadow: 
-    0 8px 32px var(--shadow-dark),
-    0 0 0 1px rgba(110,168,255,0.2) inset;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .featureCard:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 30px rgba(69,115,223,0.15);
 }
 
 
@@ -345,11 +335,8 @@
   align-items: center;
   flex-wrap: wrap;
   margin: 3.2rem 0;
-  background: rgba(24,28,34,0.98);
   border-radius: 26px;
-  box-shadow: 0 8px 32px #23294633;
   padding: 3rem 2.5rem;
-  border: 1.5px solid #23272f;
   backdrop-filter: blur(2.5px);
   animation: fadeInUp 1.2s cubic-bezier(.23,1.01,.32,1) both;
 }
@@ -360,15 +347,12 @@
 .overviewTitle {
   font-size: 1.65rem;
   font-weight: 900;
-  color: #6ea8ff;
   margin-bottom: 20px;
   letter-spacing: 0.13px;
-  text-shadow: 0 2px 8px #23294633;
   line-height: 1.1;
 }
 .overviewDesc {
   font-size: 1.22rem;
-  color: #eaf6ff;
   margin-bottom: 14px;
   line-height: 1.8;
   font-weight: 600;
@@ -390,15 +374,12 @@
 .whySection {
   margin: 3.2rem 0;
   animation: fadeInUp 1.3s cubic-bezier(.23,1.01,.32,1) both;
-  color: #eaf6ff;
 }
 .whyTitle {
   font-size: 1.38rem;
   font-weight: 900;
-  color: #6ea8ff;
   margin-bottom: 26px;
   letter-spacing: 0.14px;
-  text-shadow: 0 2px 8px #23294633;
   line-height: 1.1;
 }
 .whyStatsRow {
@@ -409,16 +390,12 @@
 .whyStatCard {
   flex: 1;
   min-width: 240px;
-  background: linear-gradient(135deg, rgba(36,41,54,0.95) 0%, rgba(69,115,223,0.15) 100%);
   border-radius: 26px;
   padding: 2rem 2rem;
   text-align: center;
   font-weight: 800;
-  color: #6ea8ff;
   font-size: 2.4rem;
   margin-bottom: 14px;
-  box-shadow: 0 8px 32px rgba(13,17,23,0.2);
-  border: 1px solid rgba(69,115,223,0.2);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   backdrop-filter: blur(4px);
   position: relative;
@@ -1105,7 +1082,6 @@
   top: 80px;
   width: 320px;
   height: 320px;
-  background: radial-gradient(circle, #23294655 0%, #181c2200 80%);
   filter: blur(32px);
   z-index: 0;
   pointer-events: none;
@@ -1117,7 +1093,6 @@
   bottom: 0;
   width: 260px;
   height: 260px;
-  background: radial-gradient(circle, #4573df33 0%, #23294600 80%);
   filter: blur(36px);
   z-index: 0;
   pointer-events: none;
