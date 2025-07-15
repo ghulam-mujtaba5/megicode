@@ -1,6 +1,7 @@
 "use client";
 import Footer from "../../../components/Footer/Footer";
 import styles from "./ai-machine-learning.module.css";
+import GmIcon from "../../../components/Icon/gmicon";
 
 import React from "react";
 import { useTheme } from "../../../context/ThemeContext";
@@ -186,6 +187,7 @@ export default function AIMachineLearningDetailPage() {
       <div className="mobile-navbar-wrapper" style={{ width: '100%', position: 'sticky', top: 0, zIndex: 2000 }}>
         <NavBarMobile />
       </div>
+      <GmIcon />
 
       <main
         id="main-content"
