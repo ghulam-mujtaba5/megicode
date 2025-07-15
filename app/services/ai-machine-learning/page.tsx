@@ -1,9 +1,11 @@
 "use client";
 import Footer from "../../../components/Footer/Footer";
-import styles from "./ai-machine-learning-common.module.css";
+import commonStyles from "./ai-machine-learning-common.module.css";
+import lightStyles from "./ai-machine-learning-light.module.css";
+import darkStyles from "./ai-machine-learning-dark.module.css";
 import GmIcon from "../../../components/Icon/sbicon";
 
-import React from "react";
+import React, { useMemo } from "react";
 import { useTheme } from "../../../context/ThemeContext";
 import { useInViewAnimation } from "../../../hooks/useInViewAnimation";
 import servicesData from "../servicesData";
@@ -102,7 +104,6 @@ const faqs = [
   { q: "Do you provide post-launch support?", a: "Absolutely. We offer ongoing monitoring, retraining, and support packages." }
 ];
 
-
 // Features/deliverables with icons
 const features = [
   { icon: <FaRobot color="#4573df" size={36} title="AI Model Development" />, label: "AI Model Development" },
@@ -120,66 +121,12 @@ const testimonial = {
 
 export default function AIMachineLearningDetailPage() {
   const { theme } = useTheme();
+  const themeStyles = useMemo(() => (theme === 'dark' ? darkStyles : lightStyles), [theme]);
   useInViewAnimation();
   if (!service) return null;
-  // Keyframes for animation
-  const keyframes = `
-    @keyframes floatY { 
-      0% { transform: translateY(0); } 
-      50% { transform: translateY(-12px); } 
-      100% { transform: translateY(0); } 
-    }
-    @keyframes floatX { 
-      0% { transform: translateX(0); } 
-      50% { transform: translateX(12px); } 
-      100% { transform: translateX(0); } 
-    }
-    @keyframes fadeInUp { 
-      0% { opacity: 0; transform: translateY(24px); } 
-      100% { opacity: 1; transform: translateY(0); } 
-    }
-    @keyframes pulse { 
-      0% { box-shadow: 0 0 0 0 rgba(69, 115, 223, 0.2); } 
-      70% { box-shadow: 0 0 0 12px rgba(69, 115, 223, 0.05); } 
-      100% { box-shadow: 0 0 0 0 rgba(69, 115, 223, 0.2); } 
-    }
-    @keyframes borderGradient {
-      0% { border-image-source: linear-gradient(90deg, #4573df, #6ea8ff); }
-      100% { border-image-source: linear-gradient(450deg, #4573df, #6ea8ff); }
-    }
-    @keyframes sparkMove {
-      0% { transform: translateY(0) scale(1); opacity: 0.8; }
-      50% { transform: translateY(-12px) scale(1.1); opacity: 0.6; }
-      100% { transform: translateY(0) scale(1); opacity: 0.8; }
-    }
-  `;
-  // Color palette for light/dark
-  const isDark = theme === 'dark';
-  const palette = {
-    bgMain: isDark ? 'linear-gradient(120deg, #181c22 70%, #232946 100%)' : 'linear-gradient(120deg, #f7fafd 70%, #eaf6ff 100%)',
-    border: isDark ? '#23272f' : '#eaf6ff',
-    boxShadow: isDark ? '0 12px 64px #181c2244, 0 1.5px 0 #23272f' : '0 12px 64px #4573df33, 0 1.5px 0 #fff',
-    cardBg: isDark ? 'rgba(24,28,34,0.98)' : 'rgba(255,255,255,0.96)',
-    cardBgGlass: isDark ? 'rgba(36,41,54,0.88)' : 'rgba(255,255,255,0.92)',
-    textMain: isDark ? '#eaf6ff' : '#222b3a',
-    textAccent: isDark ? '#6ea8ff' : '#4573df',
-    textSubtle: isDark ? '#b0c4d8' : '#3a4a5d',
-    heroGradient: isDark ? 'linear-gradient(100deg, #232946 0%, #4573df 60%, #6ea8ff 100%)' : 'linear-gradient(100deg, #4573df 0%, #6ea8ff 60%, #cfe8ef 100%)',
-    heroOverlay: isDark ? 'rgba(24,28,34,0.18)' : 'rgba(255,255,255,0.13)',
-    divider: isDark ? '#263040' : '#eaf6ff',
-    testimonialBg: isDark ? 'linear-gradient(100deg, #232946 60%, #181c22 100%)' : 'linear-gradient(100deg, #e3e6ea 60%, #f7fafd 100%)',
-    ctaBg: isDark ? 'linear-gradient(100deg, #232946 0%, #4573df 60%, #6ea8ff 100%)' : 'linear-gradient(100deg, #4573df 0%, #6ea8ff 60%, #cfe8ef 100%)',
-    ctaBtn: isDark ? 'rgba(36,41,54,0.98)' : 'rgba(255,255,255,0.96)',
-    ctaBtnHover: isDark ? '#232946' : '#eaf6ff',
-    ctaBtnText: isDark ? '#6ea8ff' : '#4573df',
-    ctaBtnBorder: isDark ? '#263040' : '#fff',
-    iconBg: isDark ? '#232946' : '#f7fafd',
-    iconBorder: isDark ? '#263040' : '#eaf6ff',
-    cardInner: isDark ? 'rgba(36,41,54,0.92)' : 'rgba(255,255,255,0.96)',
-    cardInnerBorder: isDark ? '#232946' : '#eaf6ff',
-  };
+
   return (
-    <div className={`${styles.aiMLBoxSizingAll} ${isDark ? styles.dark : styles.light}`}>
+    <div className={`${commonStyles.aiMLBoxSizingAll} ${themeStyles.main}`}>
       {/* NavBars */}
       <div className="desktop-navbar-wrapper" style={{ width: '100%', position: 'sticky', top: 0, zIndex: 2100 }}>
         <NavBar />
@@ -191,7 +138,7 @@ export default function AIMachineLearningDetailPage() {
 
       <main
         id="main-content"
-        className={styles.mainContent}
+        className={commonStyles.mainContent}
         aria-label="AI & Machine Learning Service Detail"
         style={{ 
           paddingTop: '88px',
@@ -201,51 +148,51 @@ export default function AIMachineLearningDetailPage() {
         }}
       >
         {/* Soft background shapes for extra depth */}
-        <div className={styles.bgShapeLeft} aria-hidden="true" />
-        <div className={styles.bgShapeRight} aria-hidden="true" />
+        <div className={commonStyles.bgShapeLeft} aria-hidden="true" />
+        <div className={commonStyles.bgShapeRight} aria-hidden="true" />
         {/* Hero Section - Full-width gradient, Lottie/SVG, CTA */}
         <section
-            className={`${styles.heroSection} service-hero-gradient`}
+            className={`${commonStyles.heroSection} ${themeStyles.heroSection} service-hero-gradient`}
             data-animate="fade-in"
             aria-labelledby="hero-title"
           >
-            <div className={styles.heroOverlay} aria-hidden="true" />
+            <div className={`${commonStyles.heroOverlay} ${themeStyles.heroOverlay}`} aria-hidden="true" />
             <div 
-              className={`${styles.heroBlurCircle} ${isDark ? styles.heroBlurCircleDark : styles.heroBlurCircleLight}`}
+              className={`${commonStyles.heroBlurCircle} ${themeStyles.heroBlurCircle}`}
               aria-hidden="true"
             />
-            <div className={styles.heroContent}>
-              <div className={styles.heroTextBlock}>
-                <h1 id="hero-title" className={styles.heroTitle}>
-                  <span className={styles.gradientText}>{service.title}</span>
+            <div className={commonStyles.heroContent}>
+              <div className={commonStyles.heroTextBlock}>
+                <h1 id="hero-title" className={`${commonStyles.heroTitle} ${themeStyles.heroTitle}`}>
+                  <span className={commonStyles.gradientText}>{service.title}</span>
                 </h1>
-                <p className={styles.heroDesc} data-animate="typewriter">
+                <p className={`${commonStyles.heroDesc} ${themeStyles.heroDesc}`} data-animate="typewriter">
                   {service.description}
                 </p>
-                <div className={styles.heroCTAWrapper}>
+                <div className={commonStyles.heroCTAWrapper}>
                   <a
                     href="/contact"
-                    className={styles.ctaBtn}
+                    className={commonStyles.ctaBtn}
                     data-animate="cta-bounce"
                     aria-label="Get Started with AI & Machine Learning Services"
                   >
                     Get Started
-                    <span className={styles.ctaBtnArrow} aria-hidden="true">→</span>
+                    <span className={commonStyles.ctaBtnArrow} aria-hidden="true">→</span>
                   </a>
                 </div>
               </div>
-              <div className={styles.heroImageBlock} aria-hidden="true">
-                <div className={styles.heroImageCard} data-animate="float">
+              <div className={commonStyles.heroImageBlock} aria-hidden="true">
+                <div className={commonStyles.heroImageCard} data-animate="float">
                   <img
                     src="/Ai icon.svg"
                     alt=""
-                    className={styles.heroImage}
+                    className={commonStyles.heroImage}
                     loading="eager"
                   />
-                  <div className={styles.heroImageDot} />
-                  <div className={styles.heroImageSparkles}>
+                  <div className={commonStyles.heroImageDot} />
+                  <div className={commonStyles.heroImageSparkles}>
                     {[...Array(3)].map((_, i) => (
-                      <div key={i} className={styles.sparkle} style={{ animationDelay: `${i * 0.2}s` }} />
+                      <div key={i} className={commonStyles.sparkle} style={{ animationDelay: `${i * 0.2}s` }} />
                     ))}
                   </div>
                 </div>
@@ -255,208 +202,204 @@ export default function AIMachineLearningDetailPage() {
 
         {/* Service Overview - Side-by-side layout */}
         {/* Section divider */}
-        <div className={styles.sectionDivider} />
-        <section className={styles.overviewSection} data-animate="slide-left">
-          <div className={styles.overviewTextBlock}>
-            <h2 className={styles.overviewTitle}>Overview</h2>
-            <p className={styles.overviewDesc}>{service.description}</p>
+        <div className={`${commonStyles.sectionDivider} ${themeStyles.sectionDivider}`} />
+        <section className={`${commonStyles.overviewSection} ${themeStyles.overviewSection}`} data-animate="slide-left">
+          <div className={commonStyles.overviewTextBlock}>
+            <h2 className={`${commonStyles.overviewTitle} ${themeStyles.overviewTitle}`}>Overview</h2>
+            <p className={`${commonStyles.overviewDesc} ${themeStyles.overviewDesc}`}>{service.description}</p>
           </div>
-          <div className={styles.overviewImageBlock}>
-            <img src="/ds&ai-icon.svg" alt="AI Service Overview" className={styles.overviewImage} data-animate="fade-in" />
+          <div className={commonStyles.overviewImageBlock}>
+            <img src="/ds&ai-icon.svg" alt="AI Service Overview" className={`${commonStyles.overviewImage} ${themeStyles.overviewImage}`} data-animate="fade-in" />
           </div>
         </section>
 
         {/* Why It Matters - Animated counters, impact */}
         {/* Section divider */}
-        <div className={styles.sectionDivider} />
-        <section className={styles.whySection} data-animate="fade-in">
-          <h2 className={styles.whyTitle}>Why It Matters</h2>
-          <div className={styles.whyStatsRow}>
-            <div className={styles.whyStatCard}>
+        <div className={`${commonStyles.sectionDivider} ${themeStyles.sectionDivider}`} />
+        <section className={`${commonStyles.whySection} ${themeStyles.whySection}`} data-animate="fade-in">
+          <h2 className={`${commonStyles.whyTitle} ${themeStyles.whyTitle}`}>Why It Matters</h2>
+          <div className={commonStyles.whyStatsRow}>
+            <div className={`${commonStyles.whyStatCard} ${themeStyles.whyStatCard}`}>
               <span data-animate="countup" data-value="78">78%</span>
-              <div className={styles.whyStatDesc}>of businesses believe AI will impact their industry (PwC)</div>
+              <div className={`${commonStyles.whyStatDesc} ${themeStyles.whyStatDesc}`}>of businesses believe AI will impact their industry (PwC)</div>
             </div>
-            <div className={styles.whyStatCard}>
+            <div className={`${commonStyles.whyStatCard} ${themeStyles.whyStatCard}`}>
               <span data-animate="countup" data-value="2">2x</span>
-              <div className={styles.whyStatDesc}>revenue growth for AI adoption leaders</div>
+              <div className={`${commonStyles.whyStatDesc} ${themeStyles.whyStatDesc}`}>revenue growth for AI adoption leaders</div>
             </div>
           </div>
         </section>
 
         {/* Process Stepper - Timeline ready for animation */}
         {/* Section divider */}
-        <div className={styles.sectionDivider} />
-        <section className={styles.processSection} data-animate="timeline">
-          <h2 className={styles.processTitle}>Our Process</h2>
-          <div className={styles.processStepsRow}>
+        <div className={`${commonStyles.sectionDivider} ${themeStyles.sectionDivider}`} />
+        <section className={`${commonStyles.processSection} ${themeStyles.processSection}`} data-animate="timeline">
+          <h2 className={`${commonStyles.processTitle} ${themeStyles.processTitle}`}>Our Process</h2>
+          <div className={commonStyles.processStepsRow}>
             {processSteps.map((step, idx) => (
-              <div key={idx} className={styles.processStepCard}>
-                <div className={styles.processStepIcon}>{step.icon}</div>
-            <div className={styles.processStepTitle}>{step.title}</div>
-            <div className={styles.processStepDesc}>{step.desc}</div>
-            {idx < processSteps.length - 1 && (
-              <div className={styles.processStepConnector} />
-            )}
-          </div>
-        ))}
-      </div>
-    </section>
-
-    {/* Features as Cards - Deliverables Grid */}
-    {/* Section divider */}
-    <div className={styles.sectionDivider} />
-    <section className={styles.featuresSection} data-animate="stagger-fade">
-      <h2 className={styles.featuresTitle}>What You Get</h2>
-      <div className={styles.featuresRow}>
-        {features.map((f, i) => (
-          <div key={i} className={styles.featureCard} data-animate="fade-in">
-            {f.icon}
-            {f.label}
-          </div>
-        ))}
-      </div>
-    </section>
-
-    {/* Technologies as Logo Cloud */}
-    {/* Section divider */}
-    <div className={styles.sectionDivider} />
-    <section className={styles.techSection} data-animate="logo-cloud">
-      <h2 className={styles.techTitle}>Technologies</h2>
-      <div className={styles.techRow}>
-        {/* Example: Map tech name to react-icon if available, else fallback to image */}
-        {service.techs.map((t, i) => {
-          let Icon = null;
-          let color = undefined;
-          switch (t.toLowerCase()) {
-            case "python": Icon = SiPython; color = "#3776AB"; break;
-            case "tensorflow": Icon = SiTensorflow; color = "#FF6F00"; break;
-            case "pytorch": Icon = SiPytorch; color = "#EE4C2C"; break;
-            case "scikit-learn": Icon = SiScikitlearn; color = "#F7931E"; break;
-            case "aws":
-            case "amazon aws":
-            case "amazon web services": Icon = SiAmazon; color = "#FF9900"; break;
-            case "google cloud": Icon = SiGooglecloud; color = "#4285F4"; break;
-            case "openai":
-              try {
-                // Dynamically import to avoid breaking if not present
-                // eslint-disable-next-line @typescript-eslint/no-var-requires
-                Icon = require("react-icons/si").SiOpenai;
-                color = "#412991";
-              } catch { Icon = null; color = undefined; }
-              break;
-            case "azureai":
-            case "azure ai":
-            case "microsoft azure":
-              try {
-                Icon = require("react-icons/si").SiMicrosoftazure;
-                color = "#0089D6";
-              } catch { Icon = null; color = undefined; }
-              break;
-            default: Icon = null; color = undefined;
-          }
-          return (
-            <span key={i} className={styles.techCard} data-animate="scale-on-hover">
-              {Icon ? (
-                <Icon size={40} style={{ marginRight: 12 }} title={t} color={color} />
-              ) : (
-                <img
-                  src={`/meta/${
-                    t.toLowerCase().replace(/\s/g, '') === 'azureai' || t.toLowerCase().replace(/\s/g, '') === 'azure' || t.toLowerCase().replace(/\s/g, '') === 'microsoftazure'
-                      ? 'AzureAI.png'
-                      : `${t.replace(/\s/g, '')}.png`
-                  }`}
-                  alt={t}
-                  style={{ width: 40, height: 40, marginRight: 12 }}
-                />
-              )}
-              {t}
-            </span>
-          );
-        })}
-      </div>
-    </section>
-
-    {/* How We Work Section */}
-    {/* Section divider */}
-    <div className={styles.sectionDivider} />
-    <section className={styles.howSection} aria-labelledby="how-we-work-title">
-      <h2 id="how-we-work-title" className={styles.howTitle}>
-        How We Work
-      </h2>
-      <div className={styles.howDesc}>
-        Choose your ideal engagement model for maximum value and efficiency.
-      </div>
-      <div className={styles.howGrid}>
-        {engagementModels.map((model, index) => (
-          <div 
-            key={model.title} 
-            className={styles.howCard}
-            style={{
-              borderColor: model.isPopular ? model.color : undefined,
-              transform: model.isPopular ? 'scale(1.05)' : undefined,
-            }}
-          >
-            {model.isPopular && (
-              <div className={styles.popularBadge}>
-                Most Popular
+              <div key={idx} className={commonStyles.processStepCard}>
+                <div className={`${commonStyles.processStepIcon} ${themeStyles.processStepIcon}`}>{step.icon}</div>
+                <div className={`${commonStyles.processStepTitle} ${themeStyles.processStepTitle}`}>{step.title}</div>
+                <div className={`${commonStyles.processStepDesc} ${themeStyles.processStepDesc}`}>{step.desc}</div>
+                {idx < processSteps.length - 1 && (
+                  <div className={`${commonStyles.processStepConnector} ${themeStyles.processStepConnector}`} />
+                )}
               </div>
-            )}
-            <div className={styles.iconWrapper} style={{ color: model.color }}>
-              {model.icon}
-            </div>
-            <h3>{model.title}</h3>
-            <div className={styles.benefitsList}>
-              {model.benefits.map((benefit, idx) => (
-                <div key={idx} className={styles.benefitItem}>
-                  <BsCheckCircleFill
-                    size={16}
-                    style={{ color: model.color, flexShrink: 0 }}
-                  />
-                  <span>{benefit}</span>
-                </div>
-              ))}
-            </div>
+            ))}
           </div>
-        ))}
-      </div>
-    </section>
+        </section>
 
+        {/* Features as Cards - Deliverables Grid */}
+        {/* Section divider */}
+        <div className={`${commonStyles.sectionDivider} ${themeStyles.sectionDivider}`} />
+        <section className={`${commonStyles.featuresSection} ${themeStyles.featuresSection}`} data-animate="stagger-fade">
+          <h2 className={`${commonStyles.featuresTitle} ${themeStyles.featuresTitle}`}>What You Get</h2>
+          <div className={commonStyles.featuresRow}>
+            {features.map((f, i) => (
+              <div key={i} className={`${commonStyles.featureCard} ${themeStyles.featureCard}`} data-animate="fade-in">
+                {f.icon}
+                {f.label}
+              </div>
+            ))}
+          </div>
+        </section>
 
+        {/* Technologies as Logo Cloud */}
+        {/* Section divider */}
+        <div className={`${commonStyles.sectionDivider} ${themeStyles.sectionDivider}`} />
+        <section className={`${commonStyles.techSection} ${themeStyles.techSection}`} data-animate="logo-cloud">
+          <h2 className={`${commonStyles.techTitle} ${themeStyles.techTitle}`}>Technologies</h2>
+          <div className={commonStyles.techRow}>
+            {service.techs.map((t, i) => {
+              let Icon = null;
+              let color = undefined;
+              switch (t.toLowerCase()) {
+                case "python": Icon = SiPython; color = "#3776AB"; break;
+                case "tensorflow": Icon = SiTensorflow; color = "#FF6F00"; break;
+                case "pytorch": Icon = SiPytorch; color = "#EE4C2C"; break;
+                case "scikit-learn": Icon = SiScikitlearn; color = "#F7931E"; break;
+                case "aws":
+                case "amazon aws":
+                case "amazon web services": Icon = SiAmazon; color = "#FF9900"; break;
+                case "google cloud": Icon = SiGooglecloud; color = "#4285F4"; break;
+                case "openai":
+                  try {
+                    Icon = require("react-icons/si").SiOpenai;
+                    color = "#412991";
+                  } catch { Icon = null; color = undefined; }
+                  break;
+                case "azureai":
+                case "azure ai":
+                case "microsoft azure":
+                  try {
+                    Icon = require("react-icons/si").SiMicrosoftazure;
+                    color = "#0089D6";
+                  } catch { Icon = null; color = undefined; }
+                  break;
+                default: Icon = null; color = undefined;
+              }
+              return (
+                <span key={i} className={`${commonStyles.techCard} ${themeStyles.techCard}`} data-animate="scale-on-hover">
+                  {Icon ? (
+                    <Icon size={40} style={{ marginRight: 12 }} title={t} color={color} />
+                  ) : (
+                    <img
+                      src={`/meta/${
+                        t.toLowerCase().replace(/\s/g, '') === 'azureai' || t.toLowerCase().replace(/\s/g, '') === 'azure' || t.toLowerCase().replace(/\s/g, '') === 'microsoftazure'
+                          ? 'AzureAI.png'
+                          : `${t.replace(/\s/g, '')}.png`
+                      }`}
+                      alt={t}
+                      style={{ width: 40, height: 40, marginRight: 12 }}
+                    />
+                  )}
+                  {t}
+                </span>
+              );
+            })}
+          </div>
+        </section>
 
+        {/* How We Work Section */}
+        {/* Section divider */}
+        <div className={`${commonStyles.sectionDivider} ${themeStyles.sectionDivider}`} />
+        <section className={`${commonStyles.howSection} ${themeStyles.howSection}`} aria-labelledby="how-we-work-title">
+          <h2 id="how-we-work-title" className={`${commonStyles.howTitle} ${themeStyles.howTitle}`}>
+            How We Work
+          </h2>
+          <div className={`${commonStyles.howDesc} ${themeStyles.howDesc}`}>
+            Choose your ideal engagement model for maximum value and efficiency.
+          </div>
+          <div className={commonStyles.howGrid}>
+            {engagementModels.map((model, index) => (
+              <div 
+                key={model.title} 
+                className={`${commonStyles.howCard} ${themeStyles.howCard}`}
+                style={{
+                  borderColor: model.isPopular ? model.color : undefined,
+                  transform: model.isPopular ? 'scale(1.05)' : undefined,
+                }}
+              >
+                {model.isPopular && (
+                  <div className={commonStyles.popularBadge}>
+                    Most Popular
+                  </div>
+                )}
+                <div className={`${commonStyles.iconWrapper} ${themeStyles.iconWrapper}`} style={{ color: model.color }}>
+                  {model.icon}
+                </div>
+                <h3>{model.title}</h3>
+                <div className={commonStyles.benefitsList}>
+                  {model.benefits.map((benefit, idx) => (
+                    <div key={idx} className={`${commonStyles.benefitItem} ${themeStyles.benefitItem}`}>
+                      <BsCheckCircleFill
+                        size={16}
+                        style={{ color: model.color, flexShrink: 0 }}
+                      />
+                      <span>{benefit}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
 
-    {/* Testimonial */}
-    {/* Section divider */}
-    <div className={styles.sectionDivider} />
-    <section className={styles.testimonialSection} data-animate="fade-in">
-      {/* Animated spark/dot */}
-      <div className={styles.testimonialDot} />
-      {/* Glassmorphism overlay */}
-      <div className={styles.testimonialOverlay} />
-      <div className={styles.testimonialQuote}>
-        “{testimonial.quote}”
-      </div>
-      <div className={styles.testimonialAuthor}>{testimonial.name} <span className={styles.testimonialCompany}>| {testimonial.company}</span></div>
-    </section>
+        {/* Testimonial */}
+        {/* Section divider */}
+        <div className={`${commonStyles.sectionDivider} ${themeStyles.sectionDivider}`} />
+        <section className={`${commonStyles.testimonialSection} ${themeStyles.testimonialSection}`} data-animate="fade-in">
+          {/* Animated spark/dot */}
+          <div className={commonStyles.testimonialDot} />
+          {/* Glassmorphism overlay */}
+          <div className={`${commonStyles.testimonialOverlay} ${themeStyles.testimonialOverlay}`} />
+          <div className={`${commonStyles.testimonialQuote} ${themeStyles.testimonialQuote}`}>
+            "{testimonial.quote}"
+          </div>
+          <div className={`${commonStyles.testimonialAuthor} ${themeStyles.testimonialAuthor}`}>
+            {testimonial.name} <span className={`${commonStyles.testimonialCompany} ${themeStyles.testimonialCompany}`}>| {testimonial.company}</span>
+          </div>
+        </section>
 
-    {/* FAQs */}
-    {/* Section divider */}
-    <div className={styles.sectionDivider} />
-    <div className={styles.faqSection}>
-      <ServiceFAQs faqs={faqs} />
-    </div>
+        {/* FAQs */}
+        {/* Section divider */}
+        <div className={`${commonStyles.sectionDivider} ${themeStyles.sectionDivider}`} />
+        <div className={commonStyles.faqSection}>
+          <ServiceFAQs faqs={faqs} />
+        </div>
 
-    {/* CTA - Full-width colored strip */}
-    {/* Section divider */}
-    <div className={styles.sectionDivider} />
-    <section className={styles.ctaSection} data-animate="cta-strip">
-      {/* Glassmorphism overlay */}
-      <div className={styles.ctaOverlay} />
-      <a href="/contact" className={styles.ctaBtnMain} data-animate="cta-bounce">
-        <FaRobot className={styles.ctaBtnIcon} title="AI Consultant" />
-        Talk to AI Consultant
-      </a>
-      <div className={styles.ctaDesc}>Ready to unlock the power of AI? Let’s talk about your vision.</div>
-    </section>
+        {/* CTA - Full-width colored strip */}
+        {/* Section divider */}
+        <div className={`${commonStyles.sectionDivider} ${themeStyles.sectionDivider}`} />
+        <section className={`${commonStyles.ctaSection} ${themeStyles.ctaSection}`} data-animate="cta-strip">
+          {/* Glassmorphism overlay */}
+          <div className={`${commonStyles.ctaOverlay} ${themeStyles.ctaOverlay}`} />
+          <a href="/contact" className={`${commonStyles.ctaBtnMain} ${themeStyles.ctaBtnMain}`} data-animate="cta-bounce">
+            <FaRobot className={commonStyles.ctaBtnIcon} title="AI Consultant" />
+            Talk to AI Consultant
+          </a>
+          <div className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}>Ready to unlock the power of AI? Let's talk about your vision.</div>
+        </section>
       </main>
       <Footer />
     </div>
