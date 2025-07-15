@@ -21,38 +21,7 @@ interface AnimationParticle {
     scale: number;
     opacity: number;
   };
-  text: string;
-  initialDelay: number;
 }
-
-interface ParticleItem {
-  text: string;
-  delay: number;
-}
-
-// Carefully selected keywords representing core technologies
-const techKeywords = [
-  { text: 'AI', delay: 0 },
-  { text: 'React', delay: 0.5 },
-  { text: 'Next.js', delay: 1 },
-  { text: 'TypeScript', delay: 1.5 },
-  { text: 'Python', delay: 2 },
-  { text: 'Analytics', delay: 2.5 },
-  { text: 'UI/UX', delay: 3 },
-  { text: 'Cloud', delay: 3.5 }
-];
-
-// Code snippets with semantic meaning
-const codeSnippets = [
-  { text: 'async function', delay: 0.2 },
-  { text: 'const data =', delay: 0.7 },
-  { text: 'import React', delay: 1.2 },
-  { text: 'useState<T>', delay: 1.7 },
-  { text: 'export default', delay: 2.2 },
-  { text: '=> void', delay: 2.7 },
-  { text: 'interface Props', delay: 3.2 },
-  { text: '<Component />', delay: 3.7 }
-];
 
 export const LoadingAnimation = ({
   size = 'medium',
@@ -63,8 +32,6 @@ export const LoadingAnimation = ({
   const { theme } = useTheme();
   const animationRef = useRef<HTMLDivElement>(null);
   const [particles, setParticles] = useState<AnimationParticle[]>([]);
-  const [codeParticles, setCodeParticles] = useState<AnimationParticle[]>([]);
-  const [techParticles, setTechParticles] = useState<AnimationParticle[]>([]);
 
   // Create particles with proper timing and positioning
   useEffect(() => {
@@ -77,42 +44,10 @@ export const LoadingAnimation = ({
         animationDelay: `${index * 0.2}s`, // Staggered timing
         scale: 0.5 + Math.random() * 0.5,
         opacity: 0.6 + Math.random() * 0.4
-      },
-      text: '',
-      initialDelay: index * 0.2
-    }));
-
-    // Code snippet particles with semantic positioning
-    const newCodeParticles = codeSnippets.map((snippet, index) => ({
-      id: index + 100,
-      style: {
-        top: `${20 + (index * 60 / codeSnippets.length)}%`, // Distributed vertically
-        left: `${15 + Math.random() * 30}%`, // Left side of the container
-        animationDelay: `${snippet.delay}s`,
-        scale: 0.9 + Math.random() * 0.2,
-        opacity: 0.8
-      },
-      text: snippet.text,
-      initialDelay: snippet.delay
-    }));
-
-    // Tech keyword particles with balanced distribution
-    const newTechParticles = techKeywords.map((keyword, index) => ({
-      id: index + 200,
-      style: {
-        top: `${20 + (index * 60 / techKeywords.length)}%`, // Distributed vertically
-        left: `${55 + Math.random() * 30}%`, // Right side of the container
-        animationDelay: `${keyword.delay}s`,
-        scale: 0.9 + Math.random() * 0.2,
-        opacity: 0.8
-      },
-      text: keyword.text,
-      initialDelay: keyword.delay
+      }
     }));
 
     setParticles(newParticles);
-    setCodeParticles(newCodeParticles);
-    setTechParticles(newTechParticles);
   }, []);
 
   return (
@@ -121,48 +56,18 @@ export const LoadingAnimation = ({
       ref={animationRef}
     >
       {!inline && (
-        <>
-          <div className={styles.particles}>
-            {particles.map((particle) => (
-              <div
-                key={particle.id}
-                className={styles.particle}
-                style={{
-                  ...particle.style,
-                  transform: `scale(${particle.style.scale})`
-                }}
-              />
-            ))}
-          </div>
-          <div className={styles.codeParticles}>
-            {codeParticles.map((particle) => (
-              <div
-                key={particle.id}
-                className={`${styles.codeParticle} ${theme === 'dark' ? styles.darkTheme : ''}`}
-                style={{
-                  ...particle.style,
-                  transform: `scale(${particle.style.scale})`
-                }}
-              >
-                {particle.text}
-              </div>
-            ))}
-          </div>
-          <div className={styles.techParticles}>
-            {techParticles.map((particle) => (
-              <div
-                key={particle.id}
-                className={`${styles.techParticle} ${theme === 'dark' ? styles.darkTheme : ''}`}
-                style={{
-                  ...particle.style,
-                  transform: `scale(${particle.style.scale})`
-                }}
-              >
-                {particle.text}
-              </div>
-            ))}
-          </div>
-        </>
+        <div className={styles.particles}>
+          {particles.map((particle) => (
+            <div
+              key={particle.id}
+              className={styles.particle}
+              style={{
+                ...particle.style,
+                transform: `scale(${particle.style.scale})`
+              }}
+            />
+          ))}
+        </div>
       )}
       <div className={styles.loadingWrapper}>
         <div className={`${styles.circle} ${styles.circle1}`}>
