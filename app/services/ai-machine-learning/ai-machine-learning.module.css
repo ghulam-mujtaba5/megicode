@@ -78,19 +78,23 @@
 }
 @media (max-width: 700px) {
   .mainContent {
-    max-width: 100vw !important;
+    width: 100% !important;
+    max-width: 100% !important;
     margin: 0 !important;
     padding: 1rem !important;
     border-radius: 0 !important;
     min-height: unset !important;
     box-sizing: border-box !important;
+    overflow-x: hidden !important;
   }
   .heroSection {
+    width: 100% !important;
     padding: 3rem 1rem 2rem !important;
     min-height: auto !important;
     border-radius: 0 0 2rem 2rem !important;
     margin-bottom: 2rem !important;
     box-sizing: border-box !important;
+    overflow-x: hidden !important;
   }
   .heroContent {
     flex-direction: column !important;
@@ -161,11 +165,20 @@
     padding: 2rem 1rem !important;
     border-radius: 1.5rem !important;
     margin: 2rem 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .overviewTextBlock {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
   }
   .overviewTitle {
     font-size: 1.4rem !important;
     margin-bottom: 1rem !important;
     text-align: center !important;
+    width: 100% !important;
   }
   .overviewDesc {
     font-size: 1.1rem !important;
@@ -205,22 +218,32 @@
     padding: 2rem 1rem !important;
     border-radius: 1.5rem !important;
     margin: 2rem 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
   }
   .techRow {
     flex-direction: row !important;
     flex-wrap: wrap !important;
     justify-content: center !important;
     gap: 1rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 0 !important;
   }
   .techCard {
     flex: 0 1 calc(50% - 1rem) !important;
-    min-width: 140px !important;
+    min-width: 120px !important;
+    max-width: calc(50% - 1rem) !important;
     font-size: 1rem !important;
     padding: 1rem !important;
     border-radius: 1rem !important;
     gap: 0.8rem !important;
     color: #fff;
     justify-content: center !important;
+    box-sizing: border-box !important;
+    word-break: break-word !important;
   }
   .howSection {
     padding: 2.5rem 1rem !important;
@@ -255,12 +278,19 @@
     padding: 2.5rem 1.5rem !important;
     border-radius: 1.5rem !important;
     margin: 2.5rem 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
   }
   .testimonialQuote {
     font-size: 1.2rem !important;
     margin-bottom: 1.5rem !important;
     line-height: 1.6 !important;
     padding: 0 0.5rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
   }
   .testimonialAuthor {
     font-size: 1.1rem !important;
@@ -976,6 +1006,21 @@
 
   .processTimelineConnector {
     display: none;
+  }
+}
+
+/* Global mobile overflow control */
+@media (max-width: 700px) {
+  .aiMLBoxSizingAll {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+  }
+
+  .mainContent {
+    overflow-x: hidden;
+    width: 100%;
+    box-sizing: border-box;
   }
 }
 
