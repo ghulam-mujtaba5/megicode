@@ -42,11 +42,16 @@ export const LoadingAnimation = ({
   const [progressDisplay, setProgressDisplay] = useState(0);
 
   useEffect(() => {
-    if (progress !== undefined) {
+    if (typeof progress === 'number') {
       const targetProgress = Math.min(100, Math.max(0, progress));
       setProgressDisplay(targetProgress);
     }
   }, [progress]);
+
+  // Calculate the CSS variable for progress
+  const progressStyle = {
+    '--progress': `${progressDisplay}%`
+  } as React.CSSProperties;
 
   // Create particles with proper timing and positioning
   useEffect(() => {
@@ -104,10 +109,8 @@ export const LoadingAnimation = ({
       )}
       <div className={styles.loadingWrapper}>
         <div 
-          className={`${styles.progressRing} ${progress !== undefined ? styles.withProgress : ''}`}
-          style={{
-            '--progress': `${progressDisplay}%`
-          } as React.CSSProperties}
+          className={styles.progressRing}
+          style={progressStyle}
         >
           <div className={`${styles.circle} ${styles.circle1}`}>
             <div className={styles.circleContent} />

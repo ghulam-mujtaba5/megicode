@@ -56,40 +56,59 @@
   height: 100%;
 }
 
-.progressRing.withProgress::before {
+.progressRing::before {
   content: '';
   position: absolute;
-  top: -4px;
-  left: -4px;
-  right: -4px;
-  bottom: -4px;
+  inset: -2px;
   border-radius: 50%;
   background: conic-gradient(
-    var(--md-primary) var(--progress),
-    transparent var(--progress)
+    var(--md-primary) calc(var(--progress, 0%) + 1.8deg),
+    transparent calc(var(--progress, 0%) + 2.2deg)
   );
-  opacity: 0.15;
-  animation: fadeIn 0.3s ease-out;
+  mask: radial-gradient(farthest-side, transparent 66%, black 67%);
+  -webkit-mask: radial-gradient(farthest-side, transparent 66%, black 67%);
+}
+
+.progressRing::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: conic-gradient(
+    var(--md-secondary) calc(var(--progress, 0%) + 1.8deg),
+    transparent calc(var(--progress, 0%) + 2.2deg)
+  );
+  mask: radial-gradient(farthest-side, transparent 71%, black 72%);
+  -webkit-mask: radial-gradient(farthest-side, transparent 71%, black 72%);
+  opacity: 0.5;
 }
 
 .messageWrapper {
   position: absolute;
-  bottom: -2rem;
+  bottom: -3rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.5rem;
   width: max-content;
-  max-width: 200px;
+  max-width: 300px;
+  background: rgba(var(--md-background-rgb), 0.8);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  animation: slideUp 0.3s ease-out;
 }
 
 .message {
   color: var(--md-primary);
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
   text-align: center;
-  opacity: 0.9;
+  opacity: 1;
+  line-height: 1.4;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -97,9 +116,23 @@
 
 .progressText {
   color: var(--md-secondary);
-  font-size: 0.75rem;
-  font-weight: 500;
-  opacity: 0.8;
+  font-size: 0.875rem;
+  font-weight: 600;
+  opacity: 1;
+  background: rgba(var(--md-primary-rgb), 0.1);
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translate(-50%, 10px);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
 }
 
 /* Size variations */
@@ -154,14 +187,18 @@
 }
 
 .circle1 {
-  border-top-color: var(--md-primary);
+  border: 2px solid var(--md-primary);
+  border-left-color: transparent;
+  border-right-color: transparent;
   animation: rotate 2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
   animation-delay: -0.5s;
   transform: rotateX(60deg) rotateZ(0deg);
 }
 
 .circle2 {
-  border-right-color: var(--md-secondary);
+  border: 2px solid var(--md-secondary);
+  border-top-color: transparent;
+  border-bottom-color: transparent;
   animation: rotate 2s cubic-bezier(0.45, 0, 0.55, 1) infinite reverse;
   width: 80%;
   height: 80%;
@@ -172,7 +209,9 @@
 }
 
 .circle3 {
-  border-bottom-color: var(--md-primary-variant);
+  border: 2px solid var(--md-primary);
+  border-left-color: transparent;
+  border-right-color: transparent;
   animation: rotate 3s cubic-bezier(0.45, 0, 0.55, 1) infinite;
   width: 60%;
   height: 60%;
