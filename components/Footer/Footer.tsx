@@ -1,3 +1,4 @@
+"use client";
 import React, { useCallback, useMemo } from 'react';
 import { useTheme } from '../../context/ThemeContext';
 import commonStyles from './FooterCommon.module.css'; // Import common styles

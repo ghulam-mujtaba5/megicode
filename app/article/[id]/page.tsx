@@ -4,8 +4,10 @@ import Footer from "../../../components/Footer/Footer";
 import { ThemeToggleClient } from "../../../components/Icon";
 import { Metadata } from "next";
 // Dynamic metadata for SEO
-export async function generateMetadata({ params }): Promise<Metadata> {
-  const article = await getArticle(params.id);
+export async function generateMetadata({ params }: { params: { id: string | Promise<string> } }): Promise<Metadata> {
+  const resolvedId = await Promise.resolve(params.id);
+  const article = await getArticle(resolvedId);
+
   if (!article) {
     return {
       title: "Article Not Found | Megicode",
@@ -13,24 +15,31 @@ export async function generateMetadata({ params }): Promise<Metadata> {
       robots: { index: false, follow: false },
     };
   }
+
+  const pageUrl = `https://megicode.com/article/${resolvedId}`;
+  const imageUrl = article.heroImage?.sizes?.medium?.url || 
+                  article.heroImage?.url || 
+                  article.coverImage || 
+                  "/meta/default-og.jpg";
+
   return {
     title: article.title || "Article | Megicode",
     description: article.summary || article.title || "Read this article on Megicode.",
     openGraph: {
       title: article.title,
       description: article.summary || article.title,
-      url: `https://yourdomain.com/article/${params.id}`,
+      url: pageUrl,
       type: "article",
-      images: [article.heroImage?.sizes?.medium?.url || article.heroImage?.url || article.coverImage || "/meta/default-og.jpg"],
+      images: [imageUrl],
     },
     twitter: {
       card: "summary_large_image",
       title: article.title,
       description: article.summary || article.title,
-      images: [article.heroImage?.sizes?.medium?.url || article.heroImage?.url || article.coverImage || "/meta/default-og.jpg"],
+      images: [imageUrl],
     },
     alternates: {
-      canonical: `https://megicode.com/article/${params.id}`,
+      canonical: pageUrl,
     },
   };
 }
@@ -42,7 +51,7 @@ export const revalidate = 60;
 // Generate static params for all articles (optional: you can fetch all IDs from your API)
 export async function generateStaticParams() {
   try {
-    const res = await fetch("https://payloadw.onrender.com/api/articles?limit=100", { next: { revalidate: 3600 } });
+    const res = await fetch("https://payloadw.onrender.com/api/posts?limit=100", { next: { revalidate: 3600 } });
     const data = await res.json();
     const articles = data?.docs || [];
     return articles.map((a) => ({ id: a.id?.toString() }));
@@ -51,19 +60,29 @@ export async function generateStaticParams() {
   }
 }
 
-async function getArticle(id) {
+async function getArticle(id: string) {
+  if (!id) return null;
+  
   try {
-    const res = await fetch(`https://payloadw.onrender.com/api/articles/${id}`);
-    if (!res.ok) return null;
+    // Create a URL object to ensure proper URL construction
+    const url = new URL(`/api/posts/${id}`, process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000');
+    const res = await fetch(url.toString(), { next: { revalidate: 60 } });
+    
+    if (!res.ok) {
+      console.error(`Failed to fetch article: ${res.status} ${res.statusText}`);
+      return null;
+    }
+    
     const data = await res.json();
     return data?.doc || data;
-  } catch {
+  } catch (error) {
+    console.error('Error fetching article:', error);
     return null;
   }
 }
 
-const ArticleDetailPage = async ({ params }) => {
-  const { id } = params;
+const ArticleDetailPage = async ({ params }: { params: { id: string } }) => {
+  const id = await Promise.resolve(params.id);
   const article = await getArticle(id);
   // Theme is handled client-side; default to 'light' for SSR, but useEffect will update on client
   if (!article) return notFound();

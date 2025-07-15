@@ -4,7 +4,7 @@ export async function GET(
   request: Request,
   { params }: { params: { id: string } }
 ) {
-  const id = params.id;
+  const id = await Promise.resolve(params.id);
   
   try {
     const res = await fetch(`https://payloadw.onrender.com/api/posts/${id}`, {
@@ -12,9 +12,9 @@ export async function GET(
     });
 
     if (!res.ok) {
-      console.error(`Failed to fetch article ${id}: ${res.status} ${res.statusText}`);
+      console.error(`Failed to fetch post ${id}: ${res.status} ${res.statusText}`);
       return NextResponse.json(
-        { error: `Failed to fetch article: ${res.statusText}` },
+        { error: `Failed to fetch post: ${res.statusText}` },
         { status: res.status }
       );
     }
@@ -30,7 +30,7 @@ export async function GET(
 
     return NextResponse.json(data);
   } catch (error) {
-    console.error('Error fetching article:', error);
+    console.error('Error fetching post:', error);
     return NextResponse.json(
       { error: 'Internal server error', message: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }

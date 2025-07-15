@@ -1,26 +1,21 @@
 import { NextResponse } from 'next/server';
 
-export async function GET(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
-  const id = params.id;
-  
+export async function GET() {
   try {
-    const res = await fetch(`https://payloadw.onrender.com/api/posts/${id}`, {
+    const res = await fetch('https://payloadw.onrender.com/api/posts', {
       next: { revalidate: 60 }, // Cache for 60 seconds
     });
-
+    
     if (!res.ok) {
-      console.error(`Failed to fetch article ${id}: ${res.status} ${res.statusText}`);
+      console.error(`Failed to fetch posts: ${res.status} ${res.statusText}`);
       return NextResponse.json(
-        { error: `Failed to fetch article: ${res.statusText}` },
+        { error: `Failed to fetch posts: ${res.statusText}` },
         { status: res.status }
       );
     }
 
     const data = await res.json();
-    if (!data || (!data.doc && !data.id)) {
+    if (!data || !Array.isArray(data.docs)) {
       console.error('Invalid response format from API:', data);
       return NextResponse.json(
         { error: 'Invalid response format from API' },
@@ -30,7 +25,7 @@ export async function GET(
 
     return NextResponse.json(data);
   } catch (error) {
-    console.error('Error fetching article:', error);
+    console.error('Error fetching posts:', error);
     return NextResponse.json(
       { error: 'Internal server error', message: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }

@@ -14,7 +14,7 @@ const ArticlePage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/api/articles")
+    fetch("/api/posts")
       .then((res) => res.json())
       .then((data) => {
         setArticles(data?.docs || []);
@@ -85,8 +85,8 @@ const ArticlePage = () => {
           >
             {articles.map((article) => (
               <Link
-                key={article.id}
-                href={`/article/${article.id}`}
+                key={article._id || article.id}
+                href={`/article/${article._id || article.id}`}
                 style={{ textDecoration: "none" }}
               >
                 <article
