@@ -87,6 +87,7 @@
 
 /* Styles for the About section */
 .about {
+  cursor: pointer;
   border-radius: 60px;
   overflow: hidden;
   display: flex;
@@ -106,6 +107,7 @@
 
 /* Styles for the Skills section */
 .skills {
+  cursor: pointer;
   border-radius: 60px;
   overflow: hidden;
   display: flex;
@@ -218,6 +220,7 @@
 
 /* Styles for the Resume section */
 .resume {
+  cursor: pointer;
   border-radius: 60px;
   overflow: hidden;
   display: flex;
@@ -237,6 +240,7 @@
 
 /* Styles for the Project section */
 .project {
+  cursor: pointer;
   border-radius: 60px;
   overflow: hidden;
   display: flex;
@@ -264,6 +268,7 @@
 
 /* Additional styles for the Contact section */
 .contact {
+  cursor: pointer;
   border-radius: 60px;
   overflow: hidden;
   justify-content: center;
