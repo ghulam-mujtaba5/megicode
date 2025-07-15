@@ -80,45 +80,51 @@
   .mainContent {
     max-width: 100vw !important;
     margin: 0 !important;
-    padding: 2.2rem 0.5rem 1.2rem 0.5rem !important;
+    padding: 1rem !important;
     border-radius: 0 !important;
     min-height: unset !important;
     box-sizing: border-box !important;
   }
   .heroSection {
-    padding: 2.2rem 0 1.2rem 0 !important;
-    min-height: 180px !important;
-    border-radius: 0 0 1.2rem 1.2rem !important;
-    margin-bottom: 18px !important;
+    padding: 3rem 1rem 2rem !important;
+    min-height: auto !important;
+    border-radius: 0 0 2rem 2rem !important;
+    margin-bottom: 2rem !important;
     box-sizing: border-box !important;
   }
   .heroContent {
     flex-direction: column !important;
-    gap: 18px !important;
-    align-items: stretch !important;
+    gap: 2rem !important;
+    align-items: center !important;
+    padding: 0 !important;
+  }
+  .heroTextBlock {
+    text-align: center !important;
+    align-items: center !important;
   }
   .heroTitle {
-    font-size: 2rem !important;
-    margin-bottom: 10px !important;
-    letter-spacing: -1.2px !important;
+    font-size: 2.2rem !important;
+    margin-bottom: 1rem !important;
+    letter-spacing: -1px !important;
     line-height: 1.2 !important;
     text-align: center !important;
     color: var(--text-light);
     text-shadow: 0 6px 32px rgba(35,41,70,0.6);
   }
   .heroDesc {
-    font-size: 1.05rem !important;
-    margin-bottom: 14px !important;
-    line-height: 1.5 !important;
+    font-size: 1.1rem !important;
+    margin-bottom: 1.5rem !important;
+    line-height: 1.6 !important;
     text-align: center !important;
     color: var(--secondary-light);
+    padding: 0 0.5rem !important;
   }
   .ctaBtn {
-    font-size: 1rem !important;
-    padding: 0.9rem 1.2rem !important;
-    margin-top: 8px !important;
-    min-width: 120px !important;
-    width: 100%;
+    font-size: 1.1rem !important;
+    padding: 1rem 2rem !important;
+    margin-top: 1rem !important;
+    width: auto !important;
+    min-width: 200px !important;
     text-align: center;
     background: var(--gradient-primary);
     color: var(--text-light);
@@ -132,6 +138,7 @@
     min-width: 0 !important;
     text-align: center !important;
     margin: 0 auto !important;
+    transform: scale(0.9) !important;
   }
   .heroImage {
     width: 90px !important;
@@ -150,103 +157,147 @@
   }
   .overviewSection {
     flex-direction: column !important;
-    gap: 18px !important;
-    padding: 1.5rem 0.7rem !important;
-    border-radius: 1rem !important;
+    gap: 2rem !important;
+    padding: 2rem 1rem !important;
+    border-radius: 1.5rem !important;
+    margin: 2rem 0 !important;
   }
   .overviewTitle {
-    font-size: 1.18rem !important;
-    margin-bottom: 8px !important;
+    font-size: 1.4rem !important;
+    margin-bottom: 1rem !important;
     text-align: center !important;
   }
   .overviewDesc {
-    font-size: 1rem !important;
-    margin-bottom: 8px !important;
+    font-size: 1.1rem !important;
+    margin-bottom: 1rem !important;
     text-align: center !important;
+    line-height: 1.6 !important;
+    padding: 0 0.5rem !important;
   }
   .overviewImage {
-    width: 70px !important;
-    padding: 4px !important;
-    border-radius: 10px !important;
+    width: 100px !important;
+    padding: 1rem !important;
+    border-radius: 1.2rem !important;
+    margin: 0 auto !important;
+    display: block !important;
   }
   .whySection {
-    padding: 1.2rem 0.7rem !important;
+    padding: 2rem 1rem !important;
+    margin: 2rem 0 !important;
   }
   .whyStatsRow {
     flex-direction: column !important;
-    gap: 18px !important;
+    gap: 1.5rem !important;
+    align-items: stretch !important;
   }
   .whyStatCard {
     min-width: 0 !important;
-    font-size: 1rem !important;
-    padding: 1.1rem 0.7rem !important;
-    border-radius: 1rem !important;
-    gap: 12px !important;
+    font-size: 2rem !important;
+    padding: 1.5rem !important;
+    border-radius: 1.5rem !important;
+    gap: 1rem !important;
+  }
+  .whyStatDesc {
+    font-size: 1.1rem !important;
+    line-height: 1.5 !important;
   }
   .techSection {
-    padding: 1.5rem 0.7rem !important;
-    border-radius: 1rem !important;
+    padding: 2rem 1rem !important;
+    border-radius: 1.5rem !important;
+    margin: 2rem 0 !important;
   }
   .techRow {
-    flex-direction: column !important;
-    gap: 14px !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 1rem !important;
   }
   .techCard {
-    min-width: 0 !important;
+    flex: 0 1 calc(50% - 1rem) !important;
+    min-width: 140px !important;
     font-size: 1rem !important;
-    padding: 0.7rem 0.7rem !important;
-    border-radius: 0.7rem !important;
-    gap: 10px !important;
+    padding: 1rem !important;
+    border-radius: 1rem !important;
+    gap: 0.8rem !important;
     color: #fff;
+    justify-content: center !important;
   }
   .howSection {
-    padding: 1.5rem 0.7rem !important;
-    border-radius: 1rem !important;
+    padding: 2.5rem 1rem !important;
+    border-radius: 1.5rem !important;
+    margin: 2.5rem 0 !important;
   }
   .howGrid {
     grid-template-columns: 1fr !important;
-    gap: 14px !important;
+    gap: 1.5rem !important;
     max-width: 100% !important;
   }
   .howCard {
     min-height: unset !important;
-    padding: 1.1rem 0.7rem !important;
-    border-radius: 1rem !important;
-    gap: 10px !important;
+    padding: 1.5rem !important;
+    border-radius: 1.5rem !important;
+    gap: 1rem !important;
+  }
+  .howCard .iconWrapper {
+    width: 56px !important;
+    height: 56px !important;
+  }
+  .howCard h3 {
+    font-size: 1.3rem !important;
+  }
+  .benefitsList {
+    gap: 1rem !important;
+  }
+  .benefitItem {
+    font-size: 1rem !important;
   }
   .testimonialSection {
-    padding: 1.1rem 0.7rem !important;
-    border-radius: 1rem !important;
+    padding: 2.5rem 1.5rem !important;
+    border-radius: 1.5rem !important;
+    margin: 2.5rem 0 !important;
   }
   .testimonialQuote {
-    font-size: 1.05rem !important;
-    margin-bottom: 10px !important;
+    font-size: 1.2rem !important;
+    margin-bottom: 1.5rem !important;
+    line-height: 1.6 !important;
+    padding: 0 0.5rem !important;
   }
   .testimonialAuthor {
-    font-size: 1rem !important;
-  }
-  .faqSection {
-    padding: 1.1rem 0.7rem !important;
-    border-radius: 1rem !important;
-  }
-  .ctaSection {
-    padding: 1.5rem 0.7rem !important;
-    border-radius: 1rem !important;
-  }
-  .ctaBtnMain {
-    font-size: 1rem !important;
-    padding: 0.9rem 1.2rem !important;
-    min-width: 120px !important;
-    width: 100%;
-    text-align: center;
-  }
-  .ctaBtnIcon {
-    margin-right: 8px !important;
     font-size: 1.1rem !important;
   }
+  .testimonialCompany {
+    display: block !important;
+    margin-top: 0.5rem !important;
+  }
+  .faqSection {
+    padding: 2rem 1rem !important;
+    border-radius: 1.5rem !important;
+    margin: 2rem 0 !important;
+  }
+  .ctaSection {
+    padding: 2.5rem 1.5rem !important;
+    border-radius: 1.5rem !important;
+    margin: 2.5rem 0 1.5rem !important;
+  }
+  .ctaBtnMain {
+    font-size: 1.1rem !important;
+    padding: 1.2rem 2rem !important;
+    min-width: 200px !important;
+    width: auto !important;
+    text-align: center;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  .ctaBtnIcon {
+    margin-right: 1rem !important;
+    font-size: 1.3rem !important;
+  }
   .ctaDesc {
-    font-size: 1rem !important;
-    margin-top: 10px !important;
+    font-size: 1.1rem !important;
+    margin-top: 1.5rem !important;
+    line-height: 1.6 !important;
+    padding: 0 1rem !important;
   }
   .scrollToTopBtn {
     width: 38px !important;
