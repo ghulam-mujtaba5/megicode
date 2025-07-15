@@ -17,7 +17,9 @@
 }
 
 .menuContainer {
-  background-color: #e8ebee;
+  background-color: rgba(232, 235, 238, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .menuItem {
@@ -25,5 +27,5 @@
 }
 
 .menuItem:hover {
-  background-color: #d0d4d9;
+  background-color: rgba(208, 212, 217, 0.8);
 }
