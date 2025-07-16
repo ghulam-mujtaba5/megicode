@@ -20,8 +20,7 @@ const service = {
     "Figma",
     "Adobe XD",
     "Sketch",
-    "InVision",
-    "Zeplin"
+    "InVision"
   ]
 };
 
@@ -96,7 +95,7 @@ const processSteps = [
 const faqs = [
   { q: "Do you provide design systems?", a: "Yes, we create scalable design systems for consistency and efficiency." },
   { q: "Can you work with our branding?", a: "Absolutely. We align all designs with your brand guidelines." },
-  { q: "What tools do you use?", a: "Figma, Adobe XD, Sketch, InVision, Zeplin, and more." },
+  { q: "What tools do you use?", a: "Figma, Adobe XD, Sketch, InVision, and other modern design tools." },
   { q: "Do you test with real users?", a: "Yes, usability testing is a core part of our process." }
 ];
 
@@ -274,7 +273,6 @@ export default function UIUXProductDesignDetailPage() {
                 case "adobe xd": Icon = SiAdobe; color = "#FF61F6"; break;
                 case "sketch": Icon = SiSketch; color = "#F7B500"; break;
                 case "invision": Icon = SiInvision; color = "#FF3366"; break;
-                // Zeplin icon not available in react-icons/si
                 default: Icon = null; color = undefined;
               }
               return (
