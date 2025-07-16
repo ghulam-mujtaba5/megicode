@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, easeOut } from 'framer-motion';
 import { useTheme } from '../../../context/ThemeContext';
 import commonStyles from './ServiceCardCommon.module.css';
 import lightStyles from './ServiceCardLight.module.css';
@@ -34,7 +34,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       transition: {
         duration: 0.5,
         delay,
-        ease: "easeOut"
+        ease: easeOut
       }
     }
   };
@@ -57,7 +57,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       y: 0,
       transition: {
         duration: 0.3,
-        ease: "easeOut"
+        ease: easeOut
       }
     }
   };

@@ -4,7 +4,7 @@ import commonStyles from './AboutHeroCommon.module.css';
 import lightStyles from './AboutHeroLight.module.css';
 import darkStyles from './AboutHeroDark.module.css';
 import { useTheme } from '../../context/ThemeContext';
-import { motion } from 'framer-motion';
+import { motion, easeOut } from 'framer-motion';
 
 const AboutHero = () => {
   const { theme } = useTheme();
@@ -15,7 +15,7 @@ const AboutHero = () => {
     visible: { 
       opacity: 1, 
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
+      transition: { duration: 0.6, ease: easeOut }
     }
   };
 

@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, easeOut } from 'framer-motion';
 import commonStyles from './AboutFounderCommon.module.css';
 import lightStyles from './AboutFounderLight.module.css';
 import darkStyles from './AboutFounderDark.module.css';
@@ -17,7 +17,7 @@ const AboutFounder = () => {
     visible: { 
       y: 0, 
       opacity: 1,
-      transition: { duration: 0.6, ease: "easeOut" }
+      transition: { duration: 0.6, ease: easeOut }
     }
   };
 

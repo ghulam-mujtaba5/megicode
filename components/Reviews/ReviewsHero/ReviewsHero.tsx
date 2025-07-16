@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, easeOut } from 'framer-motion';
 import { useTheme } from '../../../context/ThemeContext';
 import commonStyles from './ReviewsHeroCommon.module.css';
 import lightStyles from './ReviewsHeroLight.module.css';
@@ -28,7 +28,7 @@ const ReviewsHero: React.FC = () => {
             opacity: 1,
             transition: {
                 duration: 0.5,
-                ease: "easeOut"
+                ease: easeOut
             }
         }
     };

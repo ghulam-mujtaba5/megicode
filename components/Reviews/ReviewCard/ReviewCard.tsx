@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, easeOut } from 'framer-motion';
 import { useTheme } from '../../../context/ThemeContext';
 import commonStyles from './ReviewCardCommon.module.css';
 import lightStyles from './ReviewCardLight.module.css';
@@ -31,7 +31,7 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
             y: 0,
             transition: {
                 duration: 0.5,
-                ease: "easeOut"
+                ease: easeOut
             }
         }
     };

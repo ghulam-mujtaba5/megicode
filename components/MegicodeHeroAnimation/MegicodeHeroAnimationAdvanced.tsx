@@ -1,7 +1,7 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import { useTheme } from '../../context/ThemeContext';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, easeInOut } from 'framer-motion';
 import styles from './MegicodeHeroAnimation.module.css';
 
 const ORBIT_ICONS = [
@@ -167,7 +167,7 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
           transition={{
             duration: 3,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: easeInOut
           }}
         />
 
@@ -275,7 +275,7 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
           strokeLinejoin="round"
           initial={{ pathLength: 0 }}
           animate={{ pathLength: 1 }}
-          transition={{ duration: 2.5, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' }}
+          transition={{ duration: 2.5, repeat: Infinity, repeatType: 'reverse', ease: easeInOut }}
           filter={(hoveredIcon || focusedIcon) ? 'url(#glow)' : undefined}
         />        {/* Orbiting SVG icons with floating effect */}
         {ORBIT_ICONS.map((item, i) => {          const angle = orbitAngle + (i * (2 * Math.PI) / ORBIT_ICONS.length);

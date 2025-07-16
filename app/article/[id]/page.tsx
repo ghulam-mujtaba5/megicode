@@ -4,9 +4,9 @@ import Footer from "../../../components/Footer/Footer";
 import { ThemeToggleClient } from "../../../components/Icon";
 import { Metadata } from "next";
 // Dynamic metadata for SEO
-export async function generateMetadata({ params }: { params: { id: string | Promise<string> } }): Promise<Metadata> {
-  const resolvedId = await Promise.resolve(params.id);
-  const article = await getArticle(resolvedId);
+export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+  const { id } = await params;
+  const article = await getArticle(id);
 
   if (!article) {
     return {
@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: { id: string | Prom
     };
   }
 
-  const pageUrl = `https://megicode.com/article/${resolvedId}`;
+  const pageUrl = `https://megicode.com/article/${id}`;
   const imageUrl = article.heroImage?.sizes?.medium?.url || 
                   article.heroImage?.url || 
                   article.coverImage || 
@@ -27,6 +27,7 @@ export async function generateMetadata({ params }: { params: { id: string | Prom
     description: article.summary || article.title || "Read this article on Megicode.",
     openGraph: {
       title: article.title,
+
       description: article.summary || article.title,
       url: pageUrl,
       type: "article",
@@ -82,7 +83,7 @@ async function getArticle(id: string) {
 }
 
 const ArticleDetailPage = async ({ params }: { params: { id: string } }) => {
-  const id = await Promise.resolve(params.id);
+  const { id } = await params;
   const article = await getArticle(id);
   // Theme is handled client-side; default to 'light' for SSR, but useEffect will update on client
   if (!article) return notFound();

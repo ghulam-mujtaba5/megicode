@@ -9,7 +9,7 @@ if (typeof window === 'undefined') {
   // Otherwise, this is a placeholder for frameworks that support custom head tags
 }
 import { useTheme } from '../context/ThemeContext';
-import { motion, Variants } from 'framer-motion';
+import { motion, Variants, easeInOut, easeOut } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from '../styles/404.module.css';
@@ -38,20 +38,20 @@ const floatingVariants: Variants = {
       duration: 4,
       repeat: Infinity,
       repeatType: "reverse",
-      ease: "easeInOut"
+      ease: easeInOut
     }
   }
 };
 
 const glitchVariants: Variants = {
-  initial: { skew: 0 },
+  initial: { skewX: 0 },
   animate: {
-    skew: [0, -5, 5, 0],
+    skewX: [0, -5, 5, 0],
     transition: {
       duration: 0.5,
       repeat: Infinity,
       repeatType: "reverse",
-      ease: "easeInOut",
+      ease: easeInOut,
       times: [0, 0.2, 0.8, 1]
     }
   }
@@ -224,7 +224,7 @@ function NotFound() {
               fill="url(#bg-gradient)"
               initial={{ y: 0 }}
               animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+              transition={{ duration: 8, repeat: Infinity, ease: easeInOut }}
               style={{ opacity: 0.7 }}
             />
           </svg>
@@ -289,7 +289,7 @@ function NotFound() {
                 fill="none"
                 initial={{ pathLength: 0, opacity: 0.7 }}
                 animate={{ pathLength: [0, 1, 0.7, 1], opacity: [0.7, 1, 0.7, 1] }}
-                transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: easeInOut }}
               />
             </svg>
           </motion.h1>
@@ -553,7 +553,7 @@ function NotFound() {
               strokeLinecap="round"
               initial={{ pathLength: 0 }}
               animate={{ pathLength: 1 }}
-              transition={{ duration: 1.2, delay: 0.4, ease: 'easeInOut' }}
+              transition={{ duration: 1.2, delay: 0.4, ease: easeInOut }}
             />
             {/* Animated moving dot on path */}
             <motion.circle
@@ -563,7 +563,7 @@ function NotFound() {
               strokeWidth="3"
               initial={{ cx: 40, cy: 110 }}
               animate={{ cx: 170, cy: 40 }}
-              transition={{ duration: 1.2, delay: 1, ease: 'easeInOut' }}
+              transition={{ duration: 1.2, delay: 1, ease: easeInOut }}
             />
             {/* Arrow at the end of the path */}
             <motion.polygon
@@ -571,7 +571,7 @@ function NotFound() {
               fill="url(#nav-arrow)"
               initial={{ opacity: 0, scale: 0.7, y: -10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 1.5, ease: 'easeOut' }}
+              transition={{ duration: 0.7, delay: 1.5, ease: easeOut }}
             />
             {/* Decorative navigation markers */}
             <circle cx="40" cy="110" r="6" fill={theme === 'dark' ? '#fff' : '#3b82f6'} />
@@ -594,7 +594,7 @@ function NotFound() {
             transition={{ 
               duration: 3,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: easeInOut
             }}
           />
 
@@ -615,7 +615,7 @@ function NotFound() {
                 duration: 2,
                 delay: i * 0.3,
                 repeat: Infinity,
-                ease: "easeInOut"
+                ease: easeInOut
               }}
             />
           ))}
@@ -636,7 +636,7 @@ function NotFound() {
             duration: 2.5,
             repeat: Infinity,
             repeatType: "loop",
-            ease: "easeInOut"
+            ease: easeInOut
           }}
           style={{ marginTop: "2rem", borderRadius: 40 }}
         >
