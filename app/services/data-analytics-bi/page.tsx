@@ -10,7 +10,7 @@ import { useTheme } from "../../../context/ThemeContext";
 import { useInViewAnimation } from "../../../hooks/useInViewAnimation";
 import servicesData from "../servicesData";
 import { OurProcess, EngagementModels, MethodologyAndCommunication, ServiceFAQs } from "../ServiceDetailSections";
-import { SiPython, SiPowerbi, SiTableau, SiMicrosoftsqlserver, SiApachespark } from "react-icons/si";
+import { SiPython, SiTableau, SiMysql, SiApachespark } from "react-icons/si";
 import { 
   FaSearch, 
   FaDatabase, 
@@ -131,6 +131,10 @@ const testimonial = {
 export default function DataAnalyticsDetailPage() {
   const { theme } = useTheme();
   const themeStyles = useMemo(() => (theme === 'dark' ? darkStyles : lightStyles), [theme]);
+  const isDark = theme === 'dark';
+  const palette = useMemo(() => ({
+    cardInnerBorder: isDark ? 'rgba(78, 168, 255, 0.2)' : 'rgba(78, 168, 255, 0.1)'
+  }), [isDark]);
   useInViewAnimation();
   if (!service) return null;
 
@@ -193,8 +197,8 @@ export default function DataAnalyticsDetailPage() {
               <div className={commonStyles.heroImageBlock} aria-hidden="true">
                 <div className={commonStyles.heroImageCard} data-animate="float">
                   <img
-                    src="/Ai icon.svg"
-                    alt=""
+                    src="/Big Data Analytics.svg"
+                    alt="Data Analytics Illustration"
                     className={commonStyles.heroImage}
                     loading="eager"
                   />
@@ -218,7 +222,21 @@ export default function DataAnalyticsDetailPage() {
             <p className={`${commonStyles.overviewDesc} ${themeStyles.overviewDesc}`}>{service.description}</p>
           </div>
           <div className={commonStyles.overviewImageBlock}>
-            <img src="/ds&ai-icon.svg" alt="AI Service Overview" className={`${commonStyles.overviewImage} ${themeStyles.overviewImage}`} data-animate="fade-in" />
+            <img 
+              src="/Big Data Analytics.svg"
+              alt="Data Analytics & BI Overview"
+              className={`${commonStyles.overviewImage} ${themeStyles.overviewImage}`}
+              data-animate="fade-in"
+              style={{ 
+                width: 180, 
+                maxWidth: '100%', 
+                borderRadius: 32, 
+                boxShadow: '0 8px 32px #4ea8ff33', 
+                background: isDark ? 'rgba(36,41,54,0.98)' : '#fff', 
+                padding: 18, 
+                border: `2px solid ${palette.cardInnerBorder}` 
+              }}
+            />
           </div>
         </section>
 
@@ -284,9 +302,9 @@ export default function DataAnalyticsDetailPage() {
               let color = undefined;
               switch (t.toLowerCase()) {
                 case "python": Icon = SiPython; color = "#3776AB"; break;
-                case "power bi": Icon = SiPowerbi; color = "#F2C811"; break;
+                case "power bi": Icon = SiTableau; color = "#00A4EF"; break; // Using Tableau icon temporarily for Power BI
                 case "tableau": Icon = SiTableau; color = "#E97627"; break;
-                case "sql": Icon = SiMicrosoftsqlserver; color = "#CC2927"; break;
+                case "sql": Icon = SiMysql; color = "#4479A1"; break;
                 case "spark": Icon = SiApachespark; color = "#E25A1C"; break;
                 default: Icon = null; color = undefined;
               }
