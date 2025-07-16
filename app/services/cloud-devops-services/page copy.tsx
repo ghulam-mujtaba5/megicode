@@ -1,8 +1,8 @@
 "use client";
 import Footer from "../../../components/Footer/Footer";
-import commonStyles from "./automation-integration-common.module.css";
-import lightStyles from "./automation-integration-light.module.css";
-import darkStyles from "./automation-integration-dark.module.css";
+import commonStyles from "./ai-machine-learning-common.module.css";
+import lightStyles from "./ai-machine-learning-light.module.css";
+import darkStyles from "./ai-machine-learning-dark.module.css";
 import GmIcon from "../../../components/Icon/sbicon";
 
 import React, { useMemo } from "react";
@@ -10,22 +10,22 @@ import { useTheme } from "../../../context/ThemeContext";
 import { useInViewAnimation } from "../../../hooks/useInViewAnimation";
 import servicesData from "../servicesData";
 import { OurProcess, EngagementModels, MethodologyAndCommunication, ServiceFAQs } from "../ServiceDetailSections";
-import { FaSync, FaCogs, FaSearch, FaDatabase, FaRocket, FaLifeRing, FaTools, FaLink, FaCheckCircle, FaChalkboardTeacher, FaPython, FaNodeJs } from "react-icons/fa";
-import { SiZapier, SiMake, SiSelenium, SiPostman } from "react-icons/si";
+import { SiPython, SiTensorflow, SiPytorch, SiScikitlearn, SiAmazon, SiGooglecloud } from "react-icons/si";
+import { FaRobot, FaLanguage, FaEye, FaCogs, FaSearch, FaDatabase, FaRocket, FaLifeRing } from "react-icons/fa";
 
 import NavBarMobile from "../../../components/NavBar_Mobile/NavBar-mobile";
 import NavBar from "../../../components/NavBar_Desktop_Company/nav-bar-Company";
 // Clone the service object and override the techs array to remove 'AI' and 'Azure', and add other relevant technologies
 const service = {
-  ...servicesData.find(s => s.slug === "automation-integration"),
+  ...servicesData.find(s => s.slug === "ai-machine-learning"),
   techs: [
     "Python",
-    "Zapier",
-    "Make",
-    "Selenium",
-    "Node.js",
-    "REST APIs",
-    "Power Automate"
+    "TensorFlow",
+    "PyTorch",
+    "Scikit-learn",
+    "AWS",
+    "Google Cloud",
+    "OpenAI"
   ]
 };
 
@@ -71,55 +71,55 @@ const engagementModels = [
 
 const processSteps = [
   {
-    title: "Process Analysis",
-    desc: "Identify automation opportunities.",
-    icon: <FaSearch color="#4573df" size={36} title="Process Analysis" />
+    title: "Discovery & Consultation",
+    desc: "Business goals & AI opportunities.",
+    icon: <FaSearch color="#4573df" size={36} title="Discovery & Consultation" />
   },
   {
-    title: "Workflow Design",
-    desc: "Design efficient workflows.",
-    icon: <FaCogs color="#4573df" size={36} title="Workflow Design" />
+    title: "Data Preparation",
+    desc: "Data collection & cleaning.",
+    icon: <FaDatabase color="#4573df" size={36} title="Data Preparation" />
   },
   {
-    title: "Integration Planning",
-    desc: "API & system integration plan.",
-    icon: <FaDatabase color="#4573df" size={36} title="Integration Planning" />
+    title: "Model Development",
+    desc: "Custom AI/ML model design.",
+    icon: <FaCogs color="#4573df" size={36} title="Model Development" />
   },
   {
-    title: "Implementation",
-    desc: "Build & test automation.",
-    icon: <FaRocket color="#4573df" size={36} title="Implementation" />
+    title: "Integration & Deployment",
+    desc: "Workflow integration & launch.",
+    icon: <FaRocket color="#4573df" size={36} title="Integration & Deployment" />
   },
   {
-    title: "Optimization & Support",
-    desc: "Monitor & improve processes.",
-    icon: <FaLifeRing color="#4573df" size={36} title="Optimization & Support" />
+    title: "Monitoring & Support",
+    desc: "Ongoing tuning & support.",
+    icon: <FaLifeRing color="#4573df" size={36} title="Monitoring & Support" />
   }
 ];
 
 const faqs = [
-  { q: "What processes can be automated?", a: "We can automate repetitive tasks, data entry, workflow approvals, report generation, and system integrations among others." },
-  { q: "How do you ensure seamless integration with existing systems?", a: "We use industry-standard APIs and protocols, thoroughly test all integrations, and follow best practices for system compatibility." },
-  { q: "What is the typical ROI for automation projects?", a: "Most clients see ROI within 3-6 months through reduced manual work, fewer errors, and improved efficiency." },
-  { q: "Do you provide maintenance and updates?", a: "Yes, we offer ongoing maintenance, monitoring, and optimization services to ensure your automated processes run smoothly." }
+  { q: "How do you ensure data privacy and security?", a: "We follow strict security protocols, comply with GDPR, and use secure cloud infrastructure for all AI projects." },
+  { q: "Can you work with our existing data and systems?", a: "Yes, we specialize in integrating AI solutions with your current tech stack and data sources." },
+  { q: "What is the typical project timeline?", a: "AI projects usually take 6-16 weeks, depending on complexity and data readiness." },
+  { q: "Do you provide post-launch support?", a: "Absolutely. We offer ongoing monitoring, retraining, and support packages." }
 ];
 
 // Features/deliverables with icons
 const features = [
-  { icon: <FaSync color="#4ea8ff" size={36} title="Workflow Automation" />, label: "Workflow Automation" },
-  { icon: <FaLink color="#4ea8ff" size={36} title="System Integration" />, label: "System Integration" },
-  { icon: <FaTools color="#4ea8ff" size={36} title="Custom Scripting" />, label: "Custom Scripting" },
-  { icon: <FaCheckCircle color="#4ea8ff" size={36} title="Error Handling & Monitoring" />, label: "Error Handling & Monitoring" },
-  { icon: <FaChalkboardTeacher color="#4ea8ff" size={36} title="Training & Documentation" />, label: "Training & Documentation" },
+  { icon: <FaRobot color="#4573df" size={36} title="AI Model Development" />, label: "AI Model Development" },
+  { icon: <SiTensorflow color="#FF6F00" size={36} title="Machine Learning Integration" />, label: "Machine Learning Integration" },
+  { icon: <FaLanguage color="#4573df" size={36} title="Natural Language Processing" />, label: "Natural Language Processing" },
+  { icon: <FaEye color="#4573df" size={36} title="Computer Vision" />, label: "Computer Vision" },
+  { icon: <FaCogs color="#4573df" size={36} title="AI-Powered Automation" />, label: "AI-Powered Automation" },
 ];
 
 const testimonial = {
-  quote: "Megicode streamlined our business processes through intelligent automation. They helped us integrate multiple systems seamlessly, saving us countless hours of manual work.",
-  name: "Michael R.",
-  company: "Enterprise Solutions"
+  quote: "Megicode delivered a custom AI solution that transformed our business insights and automated key processes. Their expertise and communication were top-notch!",
+  name: "Sarah L.",
+  company: "FinTech Client"
 };
 
-export default function AutomationIntegrationPage() {
+export default function AIMachineLearningDetailPage() {
   const { theme } = useTheme();
   const themeStyles = useMemo(() => (theme === 'dark' ? darkStyles : lightStyles), [theme]);
   useInViewAnimation();
@@ -139,7 +139,7 @@ export default function AutomationIntegrationPage() {
       <main
         id="main-content"
         className={commonStyles.mainContent}
-        aria-label="Automation & Integration Service Detail"
+        aria-label="AI & Machine Learning Service Detail"
         style={{ 
           paddingTop: '88px',
           maxWidth: '1440px',
@@ -174,7 +174,7 @@ export default function AutomationIntegrationPage() {
                     href="/contact"
                     className={commonStyles.ctaBtn}
                     data-animate="cta-bounce"
-                    aria-label="Get Started with Automation & Integration Services"
+                    aria-label="Get Started with AI & Machine Learning Services"
                   >
                     Get Started
                     <span className={commonStyles.ctaBtnArrow} aria-hidden="true">→</span>
@@ -184,8 +184,8 @@ export default function AutomationIntegrationPage() {
               <div className={commonStyles.heroImageBlock} aria-hidden="true">
                 <div className={commonStyles.heroImageCard} data-animate="float">
                   <img
-                    src="/data scrapping icon.svg"
-                    alt="Automation Illustration"
+                    src="/Ai icon.svg"
+                    alt=""
                     className={commonStyles.heroImage}
                     loading="eager"
                   />
@@ -209,7 +209,7 @@ export default function AutomationIntegrationPage() {
             <p className={`${commonStyles.overviewDesc} ${themeStyles.overviewDesc}`}>{service.description}</p>
           </div>
           <div className={commonStyles.overviewImageBlock}>
-            <img src="/devlopment-icon.svg" alt="Automation Service Overview" className={`${commonStyles.overviewImage} ${themeStyles.overviewImage}`} data-animate="fade-in" />
+            <img src="/ds&ai-icon.svg" alt="AI Service Overview" className={`${commonStyles.overviewImage} ${themeStyles.overviewImage}`} data-animate="fade-in" />
           </div>
         </section>
 
@@ -220,12 +220,12 @@ export default function AutomationIntegrationPage() {
           <h2 className={`${commonStyles.whyTitle} ${themeStyles.whyTitle}`}>Why It Matters</h2>
           <div className={commonStyles.whyStatsRow}>
             <div className={`${commonStyles.whyStatCard} ${themeStyles.whyStatCard}`}>
-              <span data-animate="countup" data-value="40">40%</span>
-              <div className={`${commonStyles.whyStatDesc} ${themeStyles.whyStatDesc}`}>average time saved through process automation</div>
+              <span data-animate="countup" data-value="78">78%</span>
+              <div className={`${commonStyles.whyStatDesc} ${themeStyles.whyStatDesc}`}>of businesses believe AI will impact their industry (PwC)</div>
             </div>
             <div className={`${commonStyles.whyStatCard} ${themeStyles.whyStatCard}`}>
-              <span data-animate="countup" data-value="3">3x</span>
-              <div className={`${commonStyles.whyStatDesc} ${themeStyles.whyStatDesc}`}>faster delivery with automated workflows</div>
+              <span data-animate="countup" data-value="2">2x</span>
+              <div className={`${commonStyles.whyStatDesc} ${themeStyles.whyStatDesc}`}>revenue growth for AI adoption leaders</div>
             </div>
           </div>
         </section>
@@ -271,19 +271,48 @@ export default function AutomationIntegrationPage() {
           <h2 className={`${commonStyles.techTitle} ${themeStyles.techTitle}`}>Technologies</h2>
           <div className={commonStyles.techRow}>
             {service.techs.map((t, i) => {
-              const techLogos = {
-                "Python": <FaPython color="#3776AB" size={32} title="Python" />,
-                "Zapier": <SiZapier color="#FF4F00" size={32} title="Zapier" />,
-                "Make": <SiMake color="#5C2D91" size={32} title="Make" />,
-                "Selenium": <SiSelenium color="#43B02A" size={32} title="Selenium" />,
-                "Node.js": <FaNodeJs color="#339933" size={32} title="Node.js" />,
-                "REST APIs": <SiPostman color="#FF6C37" size={32} title="REST APIs" />,
-                "Power Automate": <FaSync color="#0066FF" size={32} title="Power Automate" />
-              };
-              const IconComponent = techLogos[t];
+              let Icon = null;
+              let color = undefined;
+              switch (t.toLowerCase()) {
+                case "python": Icon = SiPython; color = "#3776AB"; break;
+                case "tensorflow": Icon = SiTensorflow; color = "#FF6F00"; break;
+                case "pytorch": Icon = SiPytorch; color = "#EE4C2C"; break;
+                case "scikit-learn": Icon = SiScikitlearn; color = "#F7931E"; break;
+                case "aws":
+                case "amazon aws":
+                case "amazon web services": Icon = SiAmazon; color = "#FF9900"; break;
+                case "google cloud": Icon = SiGooglecloud; color = "#4285F4"; break;
+                case "openai":
+                  try {
+                    Icon = require("react-icons/si").SiOpenai;
+                    color = "#412991";
+                  } catch { Icon = null; color = undefined; }
+                  break;
+                case "azureai":
+                case "azure ai":
+                case "microsoft azure":
+                  try {
+                    Icon = require("react-icons/si").SiMicrosoftazure;
+                    color = "#0089D6";
+                  } catch { Icon = null; color = undefined; }
+                  break;
+                default: Icon = null; color = undefined;
+              }
               return (
                 <span key={i} className={`${commonStyles.techCard} ${themeStyles.techCard}`} data-animate="scale-on-hover">
-                  {IconComponent}
+                  {Icon ? (
+                    <Icon size={40} style={{ marginRight: 12 }} title={t} color={color} />
+                  ) : (
+                    <img
+                      src={`/meta/${
+                        t.toLowerCase().replace(/\s/g, '') === 'azureai' || t.toLowerCase().replace(/\s/g, '') === 'azure' || t.toLowerCase().replace(/\s/g, '') === 'microsoftazure'
+                          ? 'AzureAI.png'
+                          : `${t.replace(/\s/g, '')}.png`
+                      }`}
+                      alt={t}
+                      style={{ width: 40, height: 40, marginRight: 12 }}
+                    />
+                  )}
                   {t}
                 </span>
               );
@@ -366,10 +395,10 @@ export default function AutomationIntegrationPage() {
           {/* Glassmorphism overlay */}
           <div className={`${commonStyles.ctaOverlay} ${themeStyles.ctaOverlay}`} />
           <a href="/contact" className={`${commonStyles.ctaBtnMain} ${themeStyles.ctaBtnMain}`} data-animate="cta-bounce">
-            <FaCogs className={commonStyles.ctaBtnIcon} title="Automation Consultant" />
-            Start Your Automation Project
+            <FaRobot className={commonStyles.ctaBtnIcon} title="AI Consultant" />
+            Talk to AI Consultant
           </a>
-          <div className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}>Ready to automate your business? Let's talk about your vision.</div>
+          <div className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}>Ready to unlock the power of AI? Let's talk about your vision.</div>
         </section>
       </main>
       <Footer />
