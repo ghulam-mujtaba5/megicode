@@ -10,22 +10,32 @@ import { useTheme } from "../../../context/ThemeContext";
 import { useInViewAnimation } from "../../../hooks/useInViewAnimation";
 import servicesData from "../servicesData";
 import { OurProcess, EngagementModels, MethodologyAndCommunication, ServiceFAQs } from "../ServiceDetailSections";
-import { SiPython, SiTensorflow, SiPytorch, SiScikitlearn, SiAmazon, SiGooglecloud } from "react-icons/si";
-import { FaRobot, FaLanguage, FaEye, FaCogs, FaSearch, FaDatabase, FaRocket, FaLifeRing } from "react-icons/fa";
+import { SiReact, SiNextdotjs, SiNodedotjs, SiSpringboot, SiAmazon, SiDocker } from "react-icons/si";
+import { 
+  FaCode,
+  FaPaintBrush,
+  FaCloud,
+  FaShieldAlt,
+  FaPlug,
+  FaSearch,
+  FaRocket,
+  FaLifeRing
+} from "react-icons/fa";
 
 import NavBarMobile from "../../../components/NavBar_Mobile/NavBar-mobile";
 import NavBar from "../../../components/NavBar_Desktop_Company/nav-bar-Company";
 // Clone the service object and override the techs array to remove 'AI' and 'Azure', and add other relevant technologies
 const service = {
   ...servicesData.find(s => s.slug === "custom-web-development"),
+  title: "Custom Web Development",
+  description: "Robust, scalable, and secure web applications tailored to your business goals and user needs.",
   techs: [
-    "Python",
-    "TensorFlow",
-    "PyTorch",
-    "Scikit-learn",
+    "React",
+    "Next.js",
+    "Node.js",
+    "Spring Boot",
     "AWS",
-    "Google Cloud",
-    "OpenAI"
+    "Docker"
   ]
 };
 
@@ -71,57 +81,61 @@ const engagementModels = [
 
 const processSteps = [
   {
-    title: "Discovery & Consultation",
-    desc: "Business goals & AI opportunities.",
-    icon: <FaSearch color="#4573df" size={36} title="Discovery & Consultation" />
+    title: "Requirement Analysis",
+    desc: "Define goals & features.",
+    icon: <FaSearch color="#4573df" size={36} title="Requirement Analysis" />
   },
   {
-    title: "Data Preparation",
-    desc: "Data collection & cleaning.",
-    icon: <FaDatabase color="#4573df" size={36} title="Data Preparation" />
+    title: "UI/UX Design",
+    desc: "Wireframes & prototypes.",
+    icon: <FaPaintBrush color="#4573df" size={36} title="UI/UX Design" />
   },
   {
-    title: "Model Development",
-    desc: "Custom AI/ML model design.",
-    icon: <FaCogs color="#4573df" size={36} title="Model Development" />
+    title: "Development & Testing",
+    desc: "Build & QA.",
+    icon: <FaCode color="#4573df" size={36} title="Development & Testing" />
   },
   {
-    title: "Integration & Deployment",
-    desc: "Workflow integration & launch.",
-    icon: <FaRocket color="#4573df" size={36} title="Integration & Deployment" />
+    title: "Deployment & Launch",
+    desc: "Go live!",
+    icon: <FaRocket color="#4573df" size={36} title="Deployment & Launch" />
   },
   {
-    title: "Monitoring & Support",
-    desc: "Ongoing tuning & support.",
-    icon: <FaLifeRing color="#4573df" size={36} title="Monitoring & Support" />
+    title: "Maintenance & Growth",
+    desc: "Support & optimize.",
+    icon: <FaLifeRing color="#4573df" size={36} title="Maintenance & Growth" />
   }
 ];
 
 const faqs = [
-  { q: "How do you ensure data privacy and security?", a: "We follow strict security protocols, comply with GDPR, and use secure cloud infrastructure for all AI projects." },
-  { q: "Can you work with our existing data and systems?", a: "Yes, we specialize in integrating AI solutions with your current tech stack and data sources." },
-  { q: "What is the typical project timeline?", a: "AI projects usually take 6-16 weeks, depending on complexity and data readiness." },
-  { q: "Do you provide post-launch support?", a: "Absolutely. We offer ongoing monitoring, retraining, and support packages." }
+  { q: "Can you migrate our legacy app?", a: "Yes, we specialize in modernizing legacy applications with minimal disruption to your business operations." },
+  { q: "Do you offer post-launch support?", a: "Yes, we provide comprehensive maintenance, monitoring, and enhancement support after launch." },
+  { q: "How do you ensure web app security?", a: "We implement industry-standard security practices, regular security audits, and follow OWASP guidelines." },
+  { q: "What is the typical timeline?", a: "Web projects typically take 8-16 weeks, depending on complexity and requirements." }
 ];
 
 // Features/deliverables with icons
 const features = [
-  { icon: <FaRobot color="#4573df" size={36} title="AI Model Development" />, label: "AI Model Development" },
-  { icon: <SiTensorflow color="#FF6F00" size={36} title="Machine Learning Integration" />, label: "Machine Learning Integration" },
-  { icon: <FaLanguage color="#4573df" size={36} title="Natural Language Processing" />, label: "Natural Language Processing" },
-  { icon: <FaEye color="#4573df" size={36} title="Computer Vision" />, label: "Computer Vision" },
-  { icon: <FaCogs color="#4573df" size={36} title="AI-Powered Automation" />, label: "AI-Powered Automation" },
+  { icon: <FaCode color="#4573df" size={36} title="Custom Web Apps" />, label: "Custom Web Apps" },
+  { icon: <FaPaintBrush color="#4573df" size={36} title="UI/UX Design" />, label: "UI/UX Design" },
+  { icon: <FaCloud color="#4573df" size={36} title="Cloud Deployment" />, label: "Cloud Deployment" },
+  { icon: <FaShieldAlt color="#4573df" size={36} title="Security Best Practices" />, label: "Security Best Practices" },
+  { icon: <FaPlug color="#4573df" size={36} title="API Integrations" />, label: "API Integrations" },
 ];
 
 const testimonial = {
-  quote: "Megicode delivered a custom AI solution that transformed our business insights and automated key processes. Their expertise and communication were top-notch!",
-  name: "Sarah L.",
-  company: "FinTech Client"
+  quote: "Megicode built a robust web platform for us, delivering on time and exceeding our expectations for quality and UX.",
+  name: "Priya S.",
+  company: "E-Commerce Startup"
 };
 
 export default function WebDevelopmentDetailPage() {
   const { theme } = useTheme();
   const themeStyles = useMemo(() => (theme === 'dark' ? darkStyles : lightStyles), [theme]);
+  const isDark = theme === 'dark';
+  const palette = useMemo(() => ({
+    cardInnerBorder: isDark ? 'rgba(78, 168, 255, 0.2)' : 'rgba(78, 168, 255, 0.1)'
+  }), [isDark]);
   useInViewAnimation();
   if (!service) return null;
 
@@ -139,7 +153,7 @@ export default function WebDevelopmentDetailPage() {
       <main
         id="main-content"
         className={commonStyles.mainContent}
-        aria-label="AI & Machine Learning Service Detail"
+        aria-label="Custom Web Development Service Detail"
         style={{ 
           paddingTop: '88px',
           maxWidth: '1440px',
@@ -184,8 +198,8 @@ export default function WebDevelopmentDetailPage() {
               <div className={commonStyles.heroImageBlock} aria-hidden="true">
                 <div className={commonStyles.heroImageCard} data-animate="float">
                   <img
-                    src="/Ai icon.svg"
-                    alt=""
+                    src="/web app icon.svg"
+                    alt="Web App Illustration"
                     className={commonStyles.heroImage}
                     loading="eager"
                   />
@@ -209,7 +223,21 @@ export default function WebDevelopmentDetailPage() {
             <p className={`${commonStyles.overviewDesc} ${themeStyles.overviewDesc}`}>{service.description}</p>
           </div>
           <div className={commonStyles.overviewImageBlock}>
-            <img src="/ds&ai-icon.svg" alt="AI Service Overview" className={`${commonStyles.overviewImage} ${themeStyles.overviewImage}`} data-animate="fade-in" />
+            <img
+              src="/web app icon.svg"
+              alt="Web App Development Overview"
+              className={`${commonStyles.overviewImage} ${themeStyles.overviewImage}`}
+              data-animate="fade-in"
+              style={{ 
+                width: 180, 
+                maxWidth: '100%', 
+                borderRadius: 32, 
+                boxShadow: '0 8px 32px #4ea8ff33', 
+                background: isDark ? 'rgba(36,41,54,0.98)' : '#fff', 
+                padding: 18, 
+                border: `2px solid ${palette.cardInnerBorder}` 
+              }}
+            />
           </div>
         </section>
 
@@ -220,12 +248,12 @@ export default function WebDevelopmentDetailPage() {
           <h2 className={`${commonStyles.whyTitle} ${themeStyles.whyTitle}`}>Why It Matters</h2>
           <div className={commonStyles.whyStatsRow}>
             <div className={`${commonStyles.whyStatCard} ${themeStyles.whyStatCard}`}>
-              <span data-animate="countup" data-value="78">78%</span>
-              <div className={`${commonStyles.whyStatDesc} ${themeStyles.whyStatDesc}`}>of businesses believe AI will impact their industry (PwC)</div>
+              <span data-animate="countup" data-value="85">85%</span>
+              <div className={`${commonStyles.whyStatDesc} ${themeStyles.whyStatDesc}`}>of customers judge businesses by their websites</div>
             </div>
             <div className={`${commonStyles.whyStatCard} ${themeStyles.whyStatCard}`}>
-              <span data-animate="countup" data-value="2">2x</span>
-              <div className={`${commonStyles.whyStatDesc} ${themeStyles.whyStatDesc}`}>revenue growth for AI adoption leaders</div>
+              <span data-animate="countup" data-value="40">40%</span>
+              <div className={`${commonStyles.whyStatDesc} ${themeStyles.whyStatDesc}`}>higher conversion rate with optimized web apps</div>
             </div>
           </div>
         </section>
@@ -274,28 +302,12 @@ export default function WebDevelopmentDetailPage() {
               let Icon = null;
               let color = undefined;
               switch (t.toLowerCase()) {
-                case "python": Icon = SiPython; color = "#3776AB"; break;
-                case "tensorflow": Icon = SiTensorflow; color = "#FF6F00"; break;
-                case "pytorch": Icon = SiPytorch; color = "#EE4C2C"; break;
-                case "scikit-learn": Icon = SiScikitlearn; color = "#F7931E"; break;
-                case "aws":
-                case "amazon aws":
-                case "amazon web services": Icon = SiAmazon; color = "#FF9900"; break;
-                case "google cloud": Icon = SiGooglecloud; color = "#4285F4"; break;
-                case "openai":
-                  try {
-                    Icon = require("react-icons/si").SiOpenai;
-                    color = "#412991";
-                  } catch { Icon = null; color = undefined; }
-                  break;
-                case "azureai":
-                case "azure ai":
-                case "microsoft azure":
-                  try {
-                    Icon = require("react-icons/si").SiMicrosoftazure;
-                    color = "#0089D6";
-                  } catch { Icon = null; color = undefined; }
-                  break;
+                case "react": Icon = SiReact; color = "#61DAFB"; break;
+                case "next.js": Icon = SiNextdotjs; color = "#000000"; break;
+                case "node.js": Icon = SiNodedotjs; color = "#339933"; break;
+                case "spring boot": Icon = SiSpringboot; color = "#6DB33F"; break;
+                case "aws": Icon = SiAmazon; color = "#FF9900"; break;
+                case "docker": Icon = SiDocker; color = "#2496ED"; break;
                 default: Icon = null; color = undefined;
               }
               return (
@@ -395,10 +407,10 @@ export default function WebDevelopmentDetailPage() {
           {/* Glassmorphism overlay */}
           <div className={`${commonStyles.ctaOverlay} ${themeStyles.ctaOverlay}`} />
           <a href="/contact" className={`${commonStyles.ctaBtnMain} ${themeStyles.ctaBtnMain}`} data-animate="cta-bounce">
-            <FaRobot className={commonStyles.ctaBtnIcon} title="AI Consultant" />
-            Talk to AI Consultant
+            <FaCode className={commonStyles.ctaBtnIcon} title="Web Development Consultant" />
+            Start Your Web Project
           </a>
-          <div className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}>Ready to unlock the power of AI? Let's talk about your vision.</div>
+          <div className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}>Ready to build your next web app? Let's talk about your vision.</div>
         </section>
       </main>
       <Footer />
