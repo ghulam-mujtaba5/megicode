@@ -1,16 +1,43 @@
 "use client";
-import React from "react";
+import Footer from "../../../components/Footer/Footer";
+import commonStyles from "./cloud-devops-common.module.css";
+import lightStyles from "./cloud-devops-light.module.css";
+import darkStyles from "./cloud-devops-dark.module.css";
+import GmIcon from "../../../components/Icon/sbicon";
+
+import React, { useMemo } from "react";
 import { useTheme } from "../../../context/ThemeContext";
 import { useInViewAnimation } from "../../../hooks/useInViewAnimation";
 import servicesData from "../servicesData";
 import { OurProcess, EngagementModels, MethodologyAndCommunication, ServiceFAQs } from "../ServiceDetailSections";
-import { SiAmazon, SiDocker, SiKubernetes, SiTerraform, SiGithubactions, SiJenkins, SiGooglecloud } from "react-icons/si";
-import { FaCloud, FaServer, FaSync, FaLock, FaCogs, FaLifeRing, FaRocket, FaDatabase } from "react-icons/fa";
+import { 
+  SiAmazon,
+  SiDocker, 
+  SiKubernetes, 
+  SiTerraform, 
+  SiGithubactions, 
+  SiJenkins, 
+  SiGooglecloud 
+} from "react-icons/si";
+import { 
+  FaCloud, 
+  FaCodeBranch, 
+  FaServer, 
+  FaShieldAlt, 
+  FaChartLine,
+  FaSearch,
+  FaCogs,
+  FaRocket,
+  FaLifeRing
+} from "react-icons/fa";
 
-import Footer from "../../../components/Footer/Footer";
-
+import NavBarMobile from "../../../components/NavBar_Mobile/NavBar-mobile";
+import NavBar from "../../../components/NavBar_Desktop_Company/nav-bar-Company";
+// Clone the service object and override the techs array to remove 'AI' and 'Azure', and add other relevant technologies
 const service = {
-  ...servicesData.find(s => s.slug === "cloud-devops-services"),
+  ...servicesData.find(s => s.slug === "cloud-devops"),
+  title: "Cloud & DevOps Services",
+  description: "Cloud migration, CI/CD, and infrastructure automation for scalable, secure, and efficient operations.",
   techs: [
     "AWS",
     "Azure",
@@ -23,26 +50,66 @@ const service = {
   ]
 };
 
+// Import additional icons we'll need
+import { RiPriceTag3Fill, RiTeamFill, RiTimeFill } from 'react-icons/ri';
+import { BsCheckCircleFill } from 'react-icons/bs';
+
+const engagementModels = [
+  {
+    title: "Fixed Price",
+    icon: <RiPriceTag3Fill size={40} />,
+    benefits: [
+      "Defined Project Scope",
+      "Predictable Budget",
+      "Milestone-Based Billing"
+    ],
+    color: "#4FACFE",
+    isPopular: false
+  },
+  {
+    title: "Dedicated Team",
+    icon: <RiTeamFill size={40} />,
+    benefits: [
+      "Scalable Team Extension",
+      "Direct Expert Access",
+      "Seamless Integration"
+    ],
+    color: "#6EA8FF",
+    isPopular: true
+  },
+  {
+    title: "Time & Material",
+    icon: <RiTimeFill size={40} />,
+    benefits: [
+      "Flexible Scope",
+      "Agile Development",
+      "Pay-as-you-go"
+    ],
+    color: "#45B7DF",
+    isPopular: false
+  }
+];
+
 const processSteps = [
   {
     title: "Assessment & Planning",
     desc: "Infra & cloud goals.",
-    icon: <FaDatabase color="#4ea8ff" size={36} title="Assessment & Planning" />
+    icon: <FaSearch color="#4ea8ff" size={36} title="Assessment & Planning" />
   },
   {
     title: "Architecture & Setup",
     desc: "Cloud & CI/CD setup.",
-    icon: <FaCloud color="#4ea8ff" size={36} title="Architecture & Setup" />
+    icon: <FaServer color="#4ea8ff" size={36} title="Architecture & Setup" />
   },
   {
     title: "Migration & Automation",
     desc: "Migrate & automate.",
-    icon: <FaSync color="#4ea8ff" size={36} title="Migration & Automation" />
+    icon: <FaCloud color="#4ea8ff" size={36} title="Migration & Automation" />
   },
   {
     title: "Monitoring & Optimization",
     desc: "Monitor & optimize.",
-    icon: <FaCogs color="#4ea8ff" size={36} title="Monitoring & Optimization" />
+    icon: <FaChartLine color="#4ea8ff" size={36} title="Monitoring & Optimization" />
   },
   {
     title: "Ongoing Support",
@@ -52,18 +119,19 @@ const processSteps = [
 ];
 
 const faqs = [
-  { q: "Can you migrate from on-prem to cloud?", a: "Yes, we handle full cloud migrations and hybrid setups." },
-  { q: "What DevOps tools do you use?", a: "We use AWS, Azure, Docker, Kubernetes, Terraform, GitHub Actions, Jenkins, and more." },
-  { q: "How do you ensure uptime and security?", a: "We implement best practices for monitoring, backups, and security compliance." },
+  { q: "Can you migrate from on-prem to cloud?", a: "Yes, we specialize in seamless migration from on-premises to cloud infrastructure with minimal disruption." },
+  { q: "What DevOps tools do you use?", a: "We use industry-leading tools including AWS, Azure, Docker, Kubernetes, Terraform, GitHub Actions, and Jenkins." },
+  { q: "How do you ensure uptime and security?", a: "We implement robust monitoring, automated failover, and industry best practices for security and compliance." },
   { q: "Do you offer managed services?", a: "Yes, we provide ongoing management and optimization." }
 ];
 
+// Features/deliverables with icons
 const features = [
   { icon: <FaCloud color="#4ea8ff" size={36} title="Cloud Migration" />, label: "Cloud Migration" },
-  { icon: <FaSync color="#4ea8ff" size={36} title="CI/CD Automation" />, label: "CI/CD Automation" },
-  { icon: <FaServer color="#4ea8ff" size={36} title="Infrastructure as Code" />, label: "Infrastructure as Code" },
-  { icon: <FaLock color="#4ea8ff" size={36} title="Security & Compliance" />, label: "Security & Compliance" },
-  { icon: <FaCogs color="#4ea8ff" size={36} title="Monitoring & Optimization" />, label: "Monitoring & Optimization" },
+  { icon: <FaCodeBranch color="#4ea8ff" size={36} title="CI/CD Automation" />, label: "CI/CD Automation" },
+  { icon: <FaCogs color="#4ea8ff" size={36} title="Infrastructure as Code" />, label: "Infrastructure as Code" },
+  { icon: <FaShieldAlt color="#4ea8ff" size={36} title="Security & Compliance" />, label: "Security & Compliance" },
+  { icon: <FaChartLine color="#4ea8ff" size={36} title="Monitoring & Optimization" />, label: "Monitoring & Optimization" },
 ];
 
 const testimonial = {
@@ -72,155 +140,144 @@ const testimonial = {
   company: "SaaS Platform"
 };
 
-export default function CloudDevOpsServicesDetailPage() {
+export default function CloudDevOpsPage() {
   const { theme } = useTheme();
+  const themeStyles = useMemo(() => (theme === 'dark' ? darkStyles : lightStyles), [theme]);
   useInViewAnimation();
   if (!service) return null;
-  const isDark = theme === 'dark';
-  const palette = {
-    bgMain: isDark ? 'linear-gradient(120deg, #181c22 70%, #232946 100%)' : 'linear-gradient(120deg, #f7fafd 70%, #eaf6ff 100%)',
-    border: isDark ? '#23272f' : '#eaf6ff',
-    boxShadow: isDark ? '0 12px 64px #181c2244, 0 1.5px 0 #23272f' : '0 12px 64px #4ea8ff33, 0 1.5px 0 #fff',
-    cardBg: isDark ? 'rgba(24,28,34,0.98)' : 'rgba(255,255,255,0.96)',
-    cardBgGlass: isDark ? 'rgba(36,41,54,0.88)' : 'rgba(255,255,255,0.92)',
-    textMain: isDark ? '#eaf6ff' : '#222b3a',
-    textAccent: isDark ? '#6ea8ff' : '#4ea8ff',
-    textSubtle: isDark ? '#b0c4d8' : '#3a4a5d',
-    heroGradient: isDark ? 'linear-gradient(100deg, #232946 0%, #4ea8ff 60%, #6ea8ff 100%)' : 'linear-gradient(100deg, #4ea8ff 0%, #6ea8ff 60%, #cfe8ef 100%)',
-    heroOverlay: isDark ? 'rgba(24,28,34,0.18)' : 'rgba(255,255,255,0.13)',
-    divider: isDark ? '#263040' : '#eaf6ff',
-    testimonialBg: isDark ? 'linear-gradient(100deg, #232946 60%, #181c22 100%)' : 'linear-gradient(100deg, #e3e6ea 60%, #f7fafd 100%)',
-    ctaBg: isDark ? 'linear-gradient(100deg, #232946 0%, #4ea8ff 60%, #6ea8ff 100%)' : 'linear-gradient(100deg, #4ea8ff 0%, #6ea8ff 60%, #cfe8ef 100%)',
-    ctaBtn: isDark ? 'rgba(36,41,54,0.98)' : 'rgba(255,255,255,0.96)',
-    ctaBtnHover: isDark ? '#232946' : '#eaf6ff',
-    ctaBtnText: isDark ? '#6ea8ff' : '#4ea8ff',
-    ctaBtnBorder: isDark ? '#263040' : '#fff',
-    iconBg: isDark ? '#232946' : '#f7fafd',
-    iconBorder: isDark ? '#263040' : '#eaf6ff',
-    cardInner: isDark ? 'rgba(36,41,54,0.92)' : 'rgba(255,255,255,0.96)',
-    cardInnerBorder: isDark ? '#232946' : '#eaf6ff',
-  };
+
   return (
-    <>
-      <div style={{ background: palette.bgMain, overflowX: 'hidden', position: 'relative', minHeight: '100vh', colorScheme: isDark ? 'dark' : 'light', transition: 'background 0.4s, color 0.3s' }}>
-        <main id="main-content"
-          style={{
-            maxWidth: 1160,
-            margin: '2.5rem auto',
-            padding: '0 1.2rem 5rem 1.2rem',
-            fontFamily: 'Inter, sans-serif',
-            background: 'linear-gradient(120deg, rgba(36,41,54,0.98) 60%, rgba(70,115,223,0.10) 100%)',
-            borderRadius: 36,
-            boxShadow: palette.boxShadow,
-            position: 'relative',
-            overflow: 'hidden',
-            border: `1.5px solid ${palette.border}`,
-            color: palette.textMain,
-            transition: 'background 0.4s, box-shadow 0.3s, border 0.3s',
-            minHeight: '80vh',
-            display: 'flex',
-            flexDirection: 'column',
-          }}
-          aria-label="Cloud & DevOps Services Detail"
-        >
-        {/* Hero Section */}
+    <div className={`${commonStyles.aiMLBoxSizingAll} ${themeStyles.main}`}>
+      {/* NavBars */}
+      <div className="desktop-navbar-wrapper" style={{ width: '100%', position: 'sticky', top: 0, zIndex: 2100 }}>
+        <NavBar />
+      </div>
+      <div className="mobile-navbar-wrapper" style={{ width: '100%', position: 'sticky', top: 0, zIndex: 2000 }}>
+        <NavBarMobile />
+      </div>
+      <GmIcon />
+
+      <main
+        id="main-content"
+        className={commonStyles.mainContent}
+        aria-label="Cloud & DevOps Service Detail"
+        style={{ 
+          paddingTop: '88px',
+          maxWidth: '1440px',
+          margin: '0 auto',
+          padding: '88px 24px 64px'
+        }}
+      >
+        {/* Soft background shapes for extra depth */}
+        <div className={commonStyles.bgShapeLeft} aria-hidden="true" />
+        <div className={commonStyles.bgShapeRight} aria-hidden="true" />
+        {/* Hero Section - Full-width gradient, Lottie/SVG, CTA */}
         <section
-          style={{
-            width: '100%',
-            background: palette.heroGradient,
-            borderRadius: '0 0 3.5rem 3.5rem',
-            padding: '4.2rem 3.2rem 3.2rem 3.2rem',
-            marginBottom: 64,
-            boxShadow: isDark ? '0 12px 48px #23294666' : '0 12px 48px #4ea8ff33',
-            position: 'relative',
-            overflow: 'hidden',
-            minHeight: 320,
-            zIndex: 1,
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: 64, flexWrap: 'wrap', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 3 }}>
-            <div style={{ flex: 1, minWidth: 320 }}>
-              <h1 style={{ fontSize: '3rem', fontWeight: 900, color: isDark ? '#eaf6ff' : '#fff', marginBottom: 20, letterSpacing: -2, textShadow: isDark ? '0 6px 32px #23294699, 0 1px 0 #23294644' : '0 6px 32px #4ea8ff66, 0 1px 0 #fff2', lineHeight: 1.08 }}>{service.title}</h1>
-              <p style={{ fontSize: '1.22rem', color: isDark ? '#b0c4d8' : '#eaf6ff', marginBottom: 28, fontWeight: 600, lineHeight: 1.75, textShadow: isDark ? '0 3px 16px #23294644' : '0 3px 16px #4ea8ff33', letterSpacing: 0.01 }}>{service.description}</p>
-              <a
-                href="/contact"
-                style={{
-                  background: palette.ctaBtn,
-                  color: palette.ctaBtnText,
-                  fontWeight: 900,
-                  fontSize: '1.18rem',
-                  borderRadius: 18,
-                  padding: '1.1rem 2.8rem',
-                  textDecoration: 'none',
-                  boxShadow: isDark ? '0 6px 32px #23294644, 0 0 0 2.5px #263040' : '0 6px 32px #4ea8ff33, 0 0 0 2.5px #eaf6ff',
-                  transition: 'background 0.2s, box-shadow 0.2s, transform 0.15s',
-                  display: 'inline-block',
-                  marginTop: 18,
-                  border: `2.5px solid ${palette.ctaBtnBorder}`,
-                  letterSpacing: 0.22,
-                  backdropFilter: 'blur(2.5px)',
-                  cursor: 'pointer',
-                  filter: isDark ? 'drop-shadow(0 2px 12px #23294644)' : 'drop-shadow(0 2px 12px #4ea8ff33)',
-                }}
-                onMouseOver={e => {
-                  e.currentTarget.style.background = palette.ctaBtnHover;
-                  e.currentTarget.style.transform = 'scale(1.045)';
-                  e.currentTarget.style.boxShadow = isDark ? '0 12px 48px #23294666, 0 0 0 2.5px #263040' : '0 12px 48px #4ea8ff44, 0 0 0 2.5px #eaf6ff';
-                }}
-                onMouseOut={e => {
-                  e.currentTarget.style.background = palette.ctaBtn;
-                  e.currentTarget.style.transform = 'scale(1)';
-                  e.currentTarget.style.boxShadow = isDark ? '0 6px 32px #23294644, 0 0 0 2.5px #263040' : '0 6px 32px #4ea8ff33, 0 0 0 2.5px #eaf6ff';
-                }}
-              >Start Your Cloud Project</a>
-            </div>
-            <div style={{ flex: 1, minWidth: 260, textAlign: 'center', position: 'relative' }}>
-              <div style={{
-                display: 'inline-block',
-                background: isDark ? 'rgba(36,41,54,0.22)' : 'rgba(255,255,255,0.22)',
-                borderRadius: 40,
-                boxShadow: '0 8px 32px #4ea8ff33',
-                padding: 22,
-                border: `2.5px solid ${palette.cardInnerBorder}`,
-                backdropFilter: 'blur(2.5px)',
-                transition: 'box-shadow 0.2s',
-                position: 'relative',
-              }}>
-                <img
-                  src="/meta/rm.svg"
-                  alt="Cloud & DevOps RM Illustration"
-                  style={{ width: 180, maxWidth: '100%', borderRadius: 32, boxShadow: '0 8px 32px #4ea8ff33', background: isDark ? 'rgba(36,41,54,0.98)' : '#fff', padding: 18, border: `2px solid ${palette.cardInnerBorder}` }}
-                />
+            className={`${commonStyles.heroSection} ${themeStyles.heroSection} service-hero-gradient`}
+            data-animate="fade-in"
+            aria-labelledby="hero-title"
+          >
+            <div className={`${commonStyles.heroOverlay} ${themeStyles.heroOverlay}`} aria-hidden="true" />
+            <div 
+              className={`${commonStyles.heroBlurCircle} ${themeStyles.heroBlurCircle}`}
+              aria-hidden="true"
+            />
+            <div className={commonStyles.heroContent}>
+              <div className={commonStyles.heroTextBlock}>
+                <h1 id="hero-title" className={`${commonStyles.heroTitle} ${themeStyles.heroTitle}`}>
+                  <span className={commonStyles.gradientText}>{service.title}</span>
+                </h1>
+                <p className={`${commonStyles.heroDesc} ${themeStyles.heroDesc}`} data-animate="typewriter">
+                  {service.description}
+                </p>
+                <div className={commonStyles.heroCTAWrapper}>
+                  <a
+                    href="/contact"
+                    className={commonStyles.ctaBtn}
+                    data-animate="cta-bounce"
+                    aria-label="Get Started with Cloud & DevOps Services"
+                  >
+                    Get Started
+                    <span className={commonStyles.ctaBtnArrow} aria-hidden="true">→</span>
+                  </a>
+                </div>
               </div>
+              <div className={commonStyles.heroImageBlock} aria-hidden="true">
+                <div className={commonStyles.heroImageCard} data-animate="float">
+                  <img
+                    src="/Desktop App Dark.svg"
+                    alt="Cloud & DevOps Illustration"
+                    className={commonStyles.heroImage}
+                    loading="eager"
+                  />
+                  <div className={commonStyles.heroImageDot} />
+                  <div className={commonStyles.heroImageSparkles}>
+                    {[...Array(3)].map((_, i) => (
+                      <div key={i} className={commonStyles.sparkle} style={{ animationDelay: `${i * 0.2}s` }} />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+        {/* Service Overview - Side-by-side layout */}
+        {/* Section divider */}
+        <div className={`${commonStyles.sectionDivider} ${themeStyles.sectionDivider}`} />
+        <section className={`${commonStyles.overviewSection} ${themeStyles.overviewSection}`} data-animate="slide-left">
+          <div className={commonStyles.overviewTextBlock}>
+            <h2 className={`${commonStyles.overviewTitle} ${themeStyles.overviewTitle}`}>Overview</h2>
+            <p className={`${commonStyles.overviewDesc} ${themeStyles.overviewDesc}`}>{service.description}</p>
+          </div>
+          <div className={commonStyles.overviewImageBlock}>
+            <img src="/devlopment-icon.svg" alt="Cloud & DevOps Overview" className={`${commonStyles.overviewImage} ${themeStyles.overviewImage}`} data-animate="fade-in" />
+          </div>
+        </section>
+
+        {/* Why It Matters - Animated counters, impact */}
+        {/* Section divider */}
+        <div className={`${commonStyles.sectionDivider} ${themeStyles.sectionDivider}`} />
+        <section className={`${commonStyles.whySection} ${themeStyles.whySection}`} data-animate="fade-in">
+          <h2 className={`${commonStyles.whyTitle} ${themeStyles.whyTitle}`}>Why It Matters</h2>
+          <div className={commonStyles.whyStatsRow}>
+            <div className={`${commonStyles.whyStatCard} ${themeStyles.whyStatCard}`}>
+              <span data-animate="countup" data-value="60">60%</span>
+              <div className={`${commonStyles.whyStatDesc} ${themeStyles.whyStatDesc}`}>faster deployment with cloud DevOps</div>
+            </div>
+            <div className={`${commonStyles.whyStatCard} ${themeStyles.whyStatCard}`}>
+              <span data-animate="countup" data-value="45">45%</span>
+              <div className={`${commonStyles.whyStatDesc} ${themeStyles.whyStatDesc}`}>cost reduction through cloud optimization</div>
             </div>
           </div>
         </section>
 
-        {/* Process Stepper */}
-        <section style={{ margin: '3.2rem 0', background: palette.cardBg, borderRadius: 26, boxShadow: isDark ? '0 8px 32px #23294633' : '0 8px 32px #4ea8ff11', padding: '3rem 2.5rem', border: `1.5px solid ${palette.border}`, backdropFilter: 'blur(2.5px)' }}>
-          <h2 style={{ fontSize: '1.38rem', fontWeight: 900, color: palette.textAccent, marginBottom: 36, letterSpacing: 0.14, textShadow: isDark ? '0 2px 8px #23294633' : '0 2px 8px #4ea8ff11', lineHeight: 1.1, textAlign: 'center' }}>Our Process</h2>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 0, flexWrap: 'wrap', margin: '0 auto', maxWidth: 980 }}>
+        {/* Process Stepper - Timeline ready for animation */}
+        {/* Section divider */}
+        <div className={`${commonStyles.sectionDivider} ${themeStyles.sectionDivider}`} />
+        <section className={`${commonStyles.processSection} ${themeStyles.processSection}`} data-animate="timeline">
+          <h2 className={`${commonStyles.processTitle} ${themeStyles.processTitle}`}>Our Process</h2>
+          <div className={commonStyles.processStepsRow}>
             {processSteps.map((step, idx) => (
-              <div key={idx} style={{ flex: 1, minWidth: 160, maxWidth: 220, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', margin: '0 8px', position: 'relative' }}>
-                <div style={{ background: isDark ? '#232946' : '#f7fafd', borderRadius: '50%', width: 64, height: 64, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 12, border: `2.5px solid ${palette.border}`, boxShadow: isDark ? '0 4px 18px #23294633' : '0 4px 18px #4ea8ff11' }}>
-                  {step.icon}
-                </div>
-                <div style={{ fontWeight: 900, fontSize: '1.08rem', color: palette.textAccent, marginBottom: 6 }}>{step.title}</div>
-                <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginBottom: 0 }}>{step.desc}</div>
+              <div key={idx} className={commonStyles.processStepCard}>
+                <div className={`${commonStyles.processStepIcon} ${themeStyles.processStepIcon}`}>{step.icon}</div>
+                <div className={`${commonStyles.processStepTitle} ${themeStyles.processStepTitle}`}>{step.title}</div>
+                <div className={`${commonStyles.processStepDesc} ${themeStyles.processStepDesc}`}>{step.desc}</div>
                 {idx < processSteps.length - 1 && (
-                  <div style={{ position: 'absolute', right: -8, top: 32, width: 24, height: 2, background: isDark ? '#263040' : '#eaf6ff', opacity: 0.7, zIndex: 1, left: '100%', marginLeft: 0, marginRight: 0, display: 'block' }} />
+                  <div className={`${commonStyles.processStepConnector} ${themeStyles.processStepConnector}`} />
                 )}
               </div>
             ))}
           </div>
         </section>
 
-        {/* Features as Cards */}
-        <section style={{ margin: '3.2rem 0' }}>
-          <h2 style={{ fontSize: '1.38rem', fontWeight: 900, color: '#4ea8ff', marginBottom: 26, letterSpacing: 0.14, textShadow: '0 2px 8px #4ea8ff11', lineHeight: 1.1 }}>What You Get</h2>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 32 }}>
+        {/* Features as Cards - Deliverables Grid */}
+        {/* Section divider */}
+        <div className={`${commonStyles.sectionDivider} ${themeStyles.sectionDivider}`} />
+        <section className={`${commonStyles.featuresSection} ${themeStyles.featuresSection}`} data-animate="stagger-fade">
+          <h2 className={`${commonStyles.featuresTitle} ${themeStyles.featuresTitle}`}>What You Get</h2>
+          <div className={commonStyles.featuresRow}>
             {features.map((f, i) => (
-              <div key={i} style={{ background: palette.cardBgGlass, borderRadius: 22, padding: '1.7rem 1.8rem', minWidth: 180, flex: 1, fontWeight: 900, color: palette.textMain, boxShadow: isDark ? '0 8px 32px #23294633' : '0 8px 32px #4ea8ff11', fontSize: '1.16rem', display: 'flex', alignItems: 'center', gap: 22, border: `1.5px solid ${palette.border}`, transition: 'box-shadow 0.2s, transform 0.15s', backdropFilter: 'blur(2px)', cursor: 'pointer', filter: isDark ? 'drop-shadow(0 2px 12px #23294633)' : 'drop-shadow(0 2px 12px #4ea8ff11)' }}>
+              <div key={i} className={`${commonStyles.featureCard} ${themeStyles.featureCard}`} data-animate="fade-in">
                 {f.icon}
                 {f.label}
               </div>
@@ -229,27 +286,32 @@ export default function CloudDevOpsServicesDetailPage() {
         </section>
 
         {/* Technologies as Logo Cloud */}
-        <section style={{ margin: '3.2rem 0', background: palette.cardBg, borderRadius: 26, boxShadow: isDark ? '0 8px 32px #23294633' : '0 8px 32px #4ea8ff11', padding: '3rem 2.5rem', border: `1.5px solid ${palette.border}`, backdropFilter: 'blur(2.5px)' }}>
-          <h2 style={{ fontSize: '1.28rem', fontWeight: 900, color: '#4ea8ff', marginBottom: 26, letterSpacing: 0.14, textShadow: '0 2px 8px #4ea8ff11', lineHeight: 1.1 }}>Technologies</h2>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 32, alignItems: 'center' }}>
+        {/* Section divider */}
+        <div className={`${commonStyles.sectionDivider} ${themeStyles.sectionDivider}`} />
+        <section className={`${commonStyles.techSection} ${themeStyles.techSection}`} data-animate="logo-cloud">
+          <h2 className={`${commonStyles.techTitle} ${themeStyles.techTitle}`}>Technologies</h2>
+          <div className={commonStyles.techRow}>
             {service.techs.map((t, i) => {
-              let Icon = null;
-              let color = undefined;
-              switch (t.toLowerCase()) {
-                case "aws": Icon = SiAmazon; color = "#FF9900"; break;
-                case "azure": Icon = FaCloud; color = "#0089D6"; break;
-                case "docker": Icon = SiDocker; color = "#2496ED"; break;
-                case "kubernetes": Icon = SiKubernetes; color = "#326CE5"; break;
-                case "terraform": Icon = SiTerraform; color = "#623CE4"; break;
-                case "github actions": Icon = SiGithubactions; color = "#2088FF"; break;
-                case "jenkins": Icon = SiJenkins; color = "#D24939"; break;
-                case "google cloud": Icon = SiGooglecloud; color = "#4285F4"; break;
-                default: Icon = null; color = undefined;
-              }
+              const getTechIcon = (tech: string) => {
+                switch (tech.toLowerCase()) {
+                  case "aws": return { icon: SiAmazon, color: "#FF9900" };
+                  case "azure": return { icon: FaCloud, color: "#0089D6" };
+                  case "docker": return { icon: SiDocker, color: "#2496ED" };
+                  case "kubernetes": return { icon: SiKubernetes, color: "#326CE5" };
+                  case "terraform": return { icon: SiTerraform, color: "#623CE4" };
+                  case "github actions": return { icon: SiGithubactions, color: "#2088FF" };
+                  case "jenkins": return { icon: SiJenkins, color: "#D24939" };
+                  case "google cloud": return { icon: SiGooglecloud, color: "#4285F4" };
+                  default: return null;
+                }
+              };
+              
+              const techIcon = getTechIcon(t);
+              
               return (
-                <span key={i} style={{ background: palette.cardBgGlass, borderRadius: 14, padding: '0.7rem 1.7rem', fontWeight: 900, fontSize: '1.16rem', letterSpacing: 0.24, boxShadow: isDark ? '0 4px 18px #23294633' : '0 4px 18px #4ea8ff11', display: 'flex', alignItems: 'center', gap: 16, border: `1.5px solid ${palette.border}`, transition: 'box-shadow 0.2s, transform 0.15s', backdropFilter: 'blur(2px)', cursor: 'pointer', filter: isDark ? 'drop-shadow(0 2px 12px #23294633)' : 'drop-shadow(0 2px 12px #4ea8ff11)' }}>
-                  {Icon ? (
-                    <Icon size={40} style={{ marginRight: 12 }} title={t} color={color} />
+                <span key={i} className={`${commonStyles.techCard} ${themeStyles.techCard}`} data-animate="scale-on-hover">
+                  {techIcon ? (
+                    <techIcon.icon size={40} style={{ marginRight: 12 }} title={t} color={techIcon.color} />
                   ) : (
                     <img
                       src={`/meta/${t.replace(/\s/g, '')}.png`}
@@ -265,113 +327,87 @@ export default function CloudDevOpsServicesDetailPage() {
         </section>
 
         {/* How We Work Section */}
-        <section style={{ margin: '3.2rem 0', background: isDark ? 'linear-gradient(100deg, #232946 60%, #181c22 100%)' : 'linear-gradient(100deg, #e3e6ea 60%, #f7fafd 100%)', borderRadius: 32, boxShadow: isDark ? '0 12px 48px #23294633' : '0 12px 48px #4ea8ff11', padding: '3.2rem 2.8rem', border: `2px solid ${palette.border}`, position: 'relative', overflow: 'hidden', color: palette.textMain }} aria-labelledby="how-we-work-title">
-          <h2 id="how-we-work-title" style={{ fontSize: '1.55rem', fontWeight: 900, color: palette.textAccent, marginBottom: 18, letterSpacing: 0.13, textShadow: isDark ? '0 2px 8px #23294633' : '0 2px 8px #4ea8ff11', lineHeight: 1.1, textAlign: 'center' }}>
-            How We Work: Partnership, Process & Delivery
+        {/* Section divider */}
+        <div className={`${commonStyles.sectionDivider} ${themeStyles.sectionDivider}`} />
+        <section className={`${commonStyles.howSection} ${themeStyles.howSection}`} aria-labelledby="how-we-work-title">
+          <h2 id="how-we-work-title" className={`${commonStyles.howTitle} ${themeStyles.howTitle}`}>
+            How We Work
           </h2>
-          <div style={{ maxWidth: 900, margin: '0 auto', marginBottom: 32, color: palette.textSubtle, fontWeight: 600, fontSize: '1.13rem', textAlign: 'center' }}>
-            We operate as your strategic partner—combining robust engagement models, agile execution, and enterprise-grade governance. Our operational workflow ensures risk-managed, transparent, and value-driven cloud and DevOps delivery: on time, on budget, and with full business visibility.
+          <div className={`${commonStyles.howDesc} ${themeStyles.howDesc}`}>
+            Choose your ideal engagement model for maximum value and efficiency.
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 36, alignItems: 'stretch', margin: '0 auto', maxWidth: 980 }}>
-            <div style={{ background: palette.cardBgGlass, borderRadius: 22, padding: '2.1rem 1.7rem', boxShadow: isDark ? '0 8px 32px #23294633' : '0 8px 32px #4ea8ff11', border: `1.5px solid ${palette.cardInnerBorder}`, display: 'flex', flexDirection: 'column', gap: 18, minHeight: 240, justifyContent: 'flex-start', alignItems: 'flex-start', position: 'relative' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 6 }}>
-                <span style={{ fontSize: '2rem' }} aria-label="Engagement Models" role="img">💼</span>
-                <span style={{ fontWeight: 800, fontSize: '1.13rem', color: palette.textAccent }}>Engagement Models</span>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-                <span style={{ fontSize: '1.3rem' }} aria-label="Fixed Price" role="img">📊</span>
-                <div>
-                  <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Fixed Price</div>
-                  <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Defined scope, predictable budget, and milestone-based billing. Best for projects with clear requirements and risk management needs.</div>
+          <div className={commonStyles.howGrid}>
+            {engagementModels.map((model, index) => (
+              <div 
+                key={model.title} 
+                className={`${commonStyles.howCard} ${themeStyles.howCard}`}
+                style={{
+                  borderColor: model.isPopular ? model.color : undefined,
+                  transform: model.isPopular ? 'scale(1.05)' : undefined,
+                }}
+              >
+                {model.isPopular && (
+                  <div className={commonStyles.popularBadge}>
+                    Most Popular
+                  </div>
+                )}
+                <div className={`${commonStyles.iconWrapper} ${themeStyles.iconWrapper}`} style={{ color: model.color }}>
+                  {model.icon}
+                </div>
+                <h3>{model.title}</h3>
+                <div className={commonStyles.benefitsList}>
+                  {model.benefits.map((benefit, idx) => (
+                    <div key={idx} className={`${commonStyles.benefitItem} ${themeStyles.benefitItem}`}>
+                      <BsCheckCircleFill
+                        size={16}
+                        style={{ color: model.color, flexShrink: 0 }}
+                      />
+                      <span>{benefit}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
-              <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-                <span style={{ fontSize: '1.3rem' }} aria-label="Dedicated Team" role="img">🤝</span>
-                <div>
-                  <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Dedicated Team</div>
-                  <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Scalable, cross-functional team extension. Direct access to certified Megicode experts, rapid onboarding, and seamless enterprise collaboration.</div>
-                </div>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-                <span style={{ fontSize: '1.3rem' }} aria-label="Time & Material" role="img">⏱️</span>
-                <div>
-                  <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Time & Material</div>
-                  <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Agile, transparent billing for evolving requirements. Ideal for innovation, R&D, and projects with dynamic scope.</div>
-                </div>
-              </div>
-            </div>
-            <div style={{ background: palette.cardBgGlass, borderRadius: 22, padding: '2.1rem 1.7rem', boxShadow: isDark ? '0 8px 32px #23294633' : '0 8px 32px #4ea8ff11', border: `1.5px solid ${palette.cardInnerBorder}`, display: 'flex', flexDirection: 'column', gap: 18, minHeight: 260, justifyContent: 'flex-start', alignItems: 'flex-start', position: 'relative' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 6 }}>
-                <span style={{ fontSize: '2rem' }} aria-label="Methodology & Communication" role="img">🧭</span>
-                <span style={{ fontWeight: 800, fontSize: '1.13rem', color: palette.textAccent }}>Methodology & Communication</span>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-                <span style={{ fontSize: '1.3rem' }} aria-label="Agile, CMMI L3+" role="img">⚡</span>
-                <div>
-                  <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Agile, CMMI L3+</div>
-                  <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Iterative, sprint-based delivery with continuous improvement. CMMI L3+ for process maturity and global best practices in cloud and DevOps.</div>
-                </div>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-                <span style={{ fontSize: '1.3rem' }} aria-label="Transparent Updates" role="img">📢</span>
-                <div>
-                  <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Transparent Updates</div>
-                  <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Weekly demos, open communication, and real-time dashboards for full project transparency and stakeholder alignment.</div>
-                </div>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-                <span style={{ fontSize: '1.3rem' }} aria-label="Jira, Figma, GitHub" role="img">🛠️</span>
-                <div>
-                  <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Jira, Figma, GitHub</div>
-                  <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Enterprise-grade tools for project tracking, secure design collaboration, and code quality assurance.</div>
-                </div>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-                <span style={{ fontSize: '1.3rem' }} aria-label="Risk Management & Governance" role="img">🛡️</span>
-                <div>
-                  <div style={{ fontWeight: 700, fontSize: '1.05rem', color: palette.textMain }}>Risk Management & Governance</div>
-                  <div style={{ color: palette.textSubtle, fontWeight: 600, fontSize: '0.99rem', marginTop: 2 }}>Proactive risk identification, regulatory compliance (GDPR, SOC2), and executive reporting for enterprise assurance.</div>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </section>
 
         {/* Testimonial */}
-        <section style={{ margin: '3.2rem 0', background: palette.testimonialBg, borderRadius: 32, padding: '3.2rem 2.8rem', boxShadow: isDark ? '0 12px 48px #23294633' : '0 12px 48px #4ea8ff11', textAlign: 'center', border: `2.5px solid ${palette.border}`, position: 'relative', overflow: 'hidden', color: palette.textMain }}>
-          <div style={{ fontSize: '1.38rem', fontWeight: 900, color: palette.textMain, marginBottom: 22, fontStyle: 'italic', letterSpacing: 0.14, textShadow: isDark ? '0 3px 16px #23294644' : '0 3px 16px #4ea8ff22', position: 'relative', zIndex: 2, lineHeight: 1.3 }}>
-            “{testimonial.quote}”
+        {/* Section divider */}
+        <div className={`${commonStyles.sectionDivider} ${themeStyles.sectionDivider}`} />
+        <section className={`${commonStyles.testimonialSection} ${themeStyles.testimonialSection}`} data-animate="fade-in">
+          {/* Animated spark/dot */}
+          <div className={commonStyles.testimonialDot} />
+          {/* Glassmorphism overlay */}
+          <div className={`${commonStyles.testimonialOverlay} ${themeStyles.testimonialOverlay}`} />
+          <div className={`${commonStyles.testimonialQuote} ${themeStyles.testimonialQuote}`}>
+            "{testimonial.quote}"
           </div>
-          <div style={{ color: palette.textAccent, fontWeight: 900, fontSize: '1.18rem', letterSpacing: 0.14, position: 'relative', zIndex: 2 }}>{testimonial.name} <span style={{ color: palette.textMain, fontWeight: 800 }}>| {testimonial.company}</span></div>
+          <div className={`${commonStyles.testimonialAuthor} ${themeStyles.testimonialAuthor}`}>
+            {testimonial.name} <span className={`${commonStyles.testimonialCompany} ${themeStyles.testimonialCompany}`}>| {testimonial.company}</span>
+          </div>
         </section>
 
         {/* FAQs */}
-        <div style={{ margin: '3.2rem 0', background: palette.cardBg, borderRadius: 26, boxShadow: isDark ? '0 8px 32px #23294633' : '0 8px 32px #4ea8ff11', padding: '3rem 2.5rem', border: `1.5px solid ${palette.border}`, backdropFilter: 'blur(2.5px)', color: palette.textMain }}>
+        {/* Section divider */}
+        <div className={`${commonStyles.sectionDivider} ${themeStyles.sectionDivider}`} />
+        <div className={commonStyles.faqSection}>
           <ServiceFAQs faqs={faqs} />
         </div>
 
-        {/* CTA */}
-        <section style={{ margin: '4.2rem 0 0 0', textAlign: 'center', background: palette.ctaBg, borderRadius: 32, padding: '3.5rem 2.8rem', boxShadow: isDark ? '0 12px 48px #23294633' : '0 12px 48px #4ea8ff22', position: 'relative', overflow: 'hidden' }}>
-          <a href="/contact" style={{ background: palette.ctaBtn, color: palette.ctaBtnText, fontWeight: 900, fontSize: '1.18rem', borderRadius: 18, padding: '1.1rem 2.8rem', textDecoration: 'none', boxShadow: isDark ? '0 8px 32px #23294644' : '0 8px 32px #4ea8ff33', display: 'inline-block', border: `2.5px solid ${palette.ctaBtnBorder}`, letterSpacing: 0.22, backdropFilter: 'blur(2.5px)', cursor: 'pointer', position: 'relative', zIndex: 2, filter: isDark ? 'drop-shadow(0 2px 12px #23294644)' : 'drop-shadow(0 2px 12px #4ea8ff33)', borderImage: 'linear-gradient(90deg, #4ea8ff, #6ea8ff, #cfe8ef, #4ea8ff) 1', transition: 'background 0.2s, box-shadow 0.2s, transform 0.15s' }}
-            onMouseOver={e => {
-              e.currentTarget.style.background = palette.ctaBtnHover;
-              e.currentTarget.style.transform = 'scale(1.045)';
-              e.currentTarget.style.boxShadow = isDark ? '0 16px 56px #23294666' : '0 16px 56px #4ea8ff44';
-            }}
-            onMouseOut={e => {
-              e.currentTarget.style.background = palette.ctaBtn;
-              e.currentTarget.style.transform = 'scale(1)';
-              e.currentTarget.style.boxShadow = isDark ? '0 8px 32px #23294644' : '0 8px 32px #4ea8ff33';
-            }}
-          >
-            <FaCloud style={{ marginRight: 14, fontSize: '1.5rem', verticalAlign: 'middle' }} title="Cloud Consultant" />
+        {/* CTA - Full-width colored strip */}
+        {/* Section divider */}
+        <div className={`${commonStyles.sectionDivider} ${themeStyles.sectionDivider}`} />
+        <section className={`${commonStyles.ctaSection} ${themeStyles.ctaSection}`} data-animate="cta-strip">
+          {/* Glassmorphism overlay */}
+          <div className={`${commonStyles.ctaOverlay} ${themeStyles.ctaOverlay}`} />
+          <a href="/contact" className={`${commonStyles.ctaBtnMain} ${themeStyles.ctaBtnMain}`} data-animate="cta-bounce">
+            <FaCloud className={commonStyles.ctaBtnIcon} title="Cloud Consultant" />
             Start Your Cloud Project
           </a>
-          <div style={{ marginTop: 22, color: palette.textMain, fontSize: '1.18rem', fontWeight: 800, textShadow: isDark ? '0 3px 16px #23294644' : '0 3px 16px #4ea8ff22', position: 'relative', zIndex: 2 }}>Ready to modernize your infrastructure? Let’s talk about your vision.</div>
+          <div className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}>Ready to modernize your infrastructure? Let's talk about your vision.</div>
         </section>
-        </main>
-        <Footer />
-      </div>
-    </>
+      </main>
+      <Footer />
+    </div>
   );
 }
