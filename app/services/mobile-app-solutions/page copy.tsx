@@ -1,8 +1,8 @@
 "use client";
 import Footer from "../../../components/Footer/Footer";
-import commonStyles from "./it-consulting-common.module.css";
-import lightStyles from "./it-consulting-light.module.css";
-import darkStyles from "./it-consulting-dark.module.css";
+import commonStyles from "./ai-machine-learning-common.module.css";
+import lightStyles from "./ai-machine-learning-light.module.css";
+import darkStyles from "./ai-machine-learning-dark.module.css";
 import GmIcon from "../../../components/Icon/sbicon";
 
 import React, { useMemo } from "react";
@@ -10,37 +10,22 @@ import { useTheme } from "../../../context/ThemeContext";
 import { useInViewAnimation } from "../../../hooks/useInViewAnimation";
 import servicesData from "../servicesData";
 import { OurProcess, EngagementModels, MethodologyAndCommunication, ServiceFAQs } from "../ServiceDetailSections";
-import { 
-  SiJira, 
-  SiGooglechrome, 
-  SiAmazon,
-  SiDocker,
-  SiSlack
-} from "react-icons/si";
-import { 
-  FaChartLine, 
-  FaNetworkWired, 
-  FaServer, 
-  FaUserCog, 
-  FaHeadset, 
-  FaShieldAlt, 
-  FaTools, 
-  FaBook, 
-  FaProjectDiagram,
-  FaClipboardCheck
-} from "react-icons/fa";
+import { SiPython, SiTensorflow, SiPytorch, SiScikitlearn, SiAmazon, SiGooglecloud } from "react-icons/si";
+import { FaRobot, FaLanguage, FaEye, FaCogs, FaSearch, FaDatabase, FaRocket, FaLifeRing } from "react-icons/fa";
 
 import NavBarMobile from "../../../components/NavBar_Mobile/NavBar-mobile";
 import NavBar from "../../../components/NavBar_Desktop_Company/nav-bar-Company";
 // Clone the service object and override the techs array to remove 'AI' and 'Azure', and add other relevant technologies
 const service = {
-  ...servicesData.find(s => s.slug === "it-consulting-support"),
+  ...servicesData.find(s => s.slug === "ai-machine-learning"),
   techs: [
-    "Jira",
+    "Python",
+    "TensorFlow",
+    "PyTorch",
+    "Scikit-learn",
     "AWS",
-    "Google Workspace",
-    "Docker",
-    "Slack"
+    "Google Cloud",
+    "OpenAI"
   ]
 };
 
@@ -53,9 +38,9 @@ const engagementModels = [
     title: "Fixed Price",
     icon: <RiPriceTag3Fill size={40} />,
     benefits: [
-      "Defined scope",
-      "Predictable budget",
-      "Risk management"
+      "Defined Project Scope",
+      "Predictable Budget",
+      "Milestone-Based Billing"
     ],
     color: "#4FACFE",
     isPopular: false
@@ -64,9 +49,9 @@ const engagementModels = [
     title: "Dedicated Team",
     icon: <RiTeamFill size={40} />,
     benefits: [
-      "Scalable team extension",
-      "Certified experts",
-      "Enterprise collaboration"
+      "Scalable Team Extension",
+      "Direct Expert Access",
+      "Seamless Integration"
     ],
     color: "#6EA8FF",
     isPopular: true
@@ -75,9 +60,9 @@ const engagementModels = [
     title: "Time & Material",
     icon: <RiTimeFill size={40} />,
     benefits: [
-      "Agile development",
-      "Dynamic scope",
-      "Innovation focus"
+      "Flexible Scope",
+      "Agile Development",
+      "Pay-as-you-go"
     ],
     color: "#45B7DF",
     isPopular: false
@@ -86,55 +71,55 @@ const engagementModels = [
 
 const processSteps = [
   {
-    title: "Assessment & Strategy",
-    desc: "IT landscape & strategy.",
-    icon: <FaChartLine color="#4573df" size={36} title="Assessment & Strategy" />
+    title: "Discovery & Consultation",
+    desc: "Business goals & AI opportunities.",
+    icon: <FaSearch color="#4573df" size={36} title="Discovery & Consultation" />
   },
   {
-    title: "Solution Design",
-    desc: "Design solutions.",
-    icon: <FaProjectDiagram color="#4573df" size={36} title="Solution Design" />
+    title: "Data Preparation",
+    desc: "Data collection & cleaning.",
+    icon: <FaDatabase color="#4573df" size={36} title="Data Preparation" />
   },
   {
-    title: "Implementation",
-    desc: "Deploy & configure.",
-    icon: <FaServer color="#4573df" size={36} title="Implementation" />
+    title: "Model Development",
+    desc: "Custom AI/ML model design.",
+    icon: <FaCogs color="#4573df" size={36} title="Model Development" />
   },
   {
-    title: "Training & Documentation",
-    desc: "Train & document.",
-    icon: <FaBook color="#4573df" size={36} title="Training & Documentation" />
+    title: "Integration & Deployment",
+    desc: "Workflow integration & launch.",
+    icon: <FaRocket color="#4573df" size={36} title="Integration & Deployment" />
   },
   {
-    title: "Ongoing Support",
-    desc: "Monitor & improve.",
-    icon: <FaHeadset color="#4573df" size={36} title="Ongoing Support" />
+    title: "Monitoring & Support",
+    desc: "Ongoing tuning & support.",
+    icon: <FaLifeRing color="#4573df" size={36} title="Monitoring & Support" />
   }
 ];
 
 const faqs = [
-  { q: "Do you provide 24/7 support?", a: "Yes, we offer various support packages including 24/7 coverage with different SLA levels to match your business needs." },
-  { q: "Can you help with compliance?", a: "Absolutely! We help organizations achieve and maintain compliance with GDPR, ISO 27001, HIPAA, and other standards." },
-  { q: "What platforms do you support?", a: "We support all major platforms including Windows, Linux, macOS, cloud services (AWS, Azure, GCP), and enterprise applications." },
-  { q: "How do you ensure security?", a: "We implement industry best practices, conduct regular security audits, and follow strict protocols for data protection and access control." }
+  { q: "How do you ensure data privacy and security?", a: "We follow strict security protocols, comply with GDPR, and use secure cloud infrastructure for all AI projects." },
+  { q: "Can you work with our existing data and systems?", a: "Yes, we specialize in integrating AI solutions with your current tech stack and data sources." },
+  { q: "What is the typical project timeline?", a: "AI projects usually take 6-16 weeks, depending on complexity and data readiness." },
+  { q: "Do you provide post-launch support?", a: "Absolutely. We offer ongoing monitoring, retraining, and support packages." }
 ];
 
 // Features/deliverables with icons
 const features = [
-  { icon: <FaChartLine color="#4573df" size={36} title="Technology Strategy" />, label: "Technology Strategy & Roadmapping" },
-  { icon: <FaNetworkWired color="#4573df" size={36} title="IT Infrastructure" />, label: "IT Infrastructure Consulting" },
-  { icon: <FaShieldAlt color="#4573df" size={36} title="Security Audits" />, label: "Security Audits & Compliance" },
-  { icon: <FaTools color="#4573df" size={36} title="Maintenance" />, label: "Ongoing Maintenance & Support" },
-  { icon: <FaBook color="#4573df" size={36} title="Training" />, label: "Training & Documentation" },
+  { icon: <FaRobot color="#4573df" size={36} title="AI Model Development" />, label: "AI Model Development" },
+  { icon: <SiTensorflow color="#FF6F00" size={36} title="Machine Learning Integration" />, label: "Machine Learning Integration" },
+  { icon: <FaLanguage color="#4573df" size={36} title="Natural Language Processing" />, label: "Natural Language Processing" },
+  { icon: <FaEye color="#4573df" size={36} title="Computer Vision" />, label: "Computer Vision" },
+  { icon: <FaCogs color="#4573df" size={36} title="AI-Powered Automation" />, label: "AI-Powered Automation" },
 ];
 
 const testimonial = {
-  quote: "Megicode's IT consulting team helped us achieve compliance and secure our infrastructure.",
-  name: "David P.",
-  company: "Legal Services Firm"
+  quote: "Megicode delivered a custom AI solution that transformed our business insights and automated key processes. Their expertise and communication were top-notch!",
+  name: "Sarah L.",
+  company: "FinTech Client"
 };
 
-export default function ITConsultingSupportPage() {
+export default function AIMachineLearningDetailPage() {
   const { theme } = useTheme();
   const themeStyles = useMemo(() => (theme === 'dark' ? darkStyles : lightStyles), [theme]);
   useInViewAnimation();
@@ -154,7 +139,7 @@ export default function ITConsultingSupportPage() {
       <main
         id="main-content"
         className={commonStyles.mainContent}
-        aria-label="IT Consulting & Support Service Detail"
+        aria-label="AI & Machine Learning Service Detail"
         style={{ 
           paddingTop: '88px',
           maxWidth: '1440px',
@@ -199,7 +184,7 @@ export default function ITConsultingSupportPage() {
               <div className={commonStyles.heroImageBlock} aria-hidden="true">
                 <div className={commonStyles.heroImageCard} data-animate="float">
                   <img
-                    src="/it-consulting-support-icon.svg"
+                    src="/Ai icon.svg"
                     alt=""
                     className={commonStyles.heroImage}
                     loading="eager"
@@ -224,7 +209,7 @@ export default function ITConsultingSupportPage() {
             <p className={`${commonStyles.overviewDesc} ${themeStyles.overviewDesc}`}>{service.description}</p>
           </div>
           <div className={commonStyles.overviewImageBlock}>
-            <img src="/it-consulting-support-icon.svg" alt="IT Service Overview" className={`${commonStyles.overviewImage} ${themeStyles.overviewImage}`} data-animate="fade-in" />
+            <img src="/ds&ai-icon.svg" alt="AI Service Overview" className={`${commonStyles.overviewImage} ${themeStyles.overviewImage}`} data-animate="fade-in" />
           </div>
         </section>
 
@@ -289,25 +274,27 @@ export default function ITConsultingSupportPage() {
               let Icon = null;
               let color = undefined;
               switch (t.toLowerCase()) {
-                case "jira": 
-                  Icon = SiJira; 
-                  color = "#0052CC"; 
+                case "python": Icon = SiPython; color = "#3776AB"; break;
+                case "tensorflow": Icon = SiTensorflow; color = "#FF6F00"; break;
+                case "pytorch": Icon = SiPytorch; color = "#EE4C2C"; break;
+                case "scikit-learn": Icon = SiScikitlearn; color = "#F7931E"; break;
+                case "aws":
+                case "amazon aws":
+                case "amazon web services": Icon = SiAmazon; color = "#FF9900"; break;
+                case "google cloud": Icon = SiGooglecloud; color = "#4285F4"; break;
+                case "openai":
+                  try {
+                    Icon = require("react-icons/si").SiOpenai;
+                    color = "#412991";
+                  } catch { Icon = null; color = undefined; }
                   break;
-                case "aws": 
-                  Icon = SiAmazon; 
-                  color = "#FF9900"; 
-                  break;
-                case "google workspace": 
-                  Icon = SiGooglechrome; 
-                  color = "#4285F4"; 
-                  break;
-                case "docker":
-                  Icon = SiDocker;
-                  color = "#2496ED";
-                  break;
-                case "slack":
-                  Icon = SiSlack;
-                  color = "#4A154B";
+                case "azureai":
+                case "azure ai":
+                case "microsoft azure":
+                  try {
+                    Icon = require("react-icons/si").SiMicrosoftazure;
+                    color = "#0089D6";
+                  } catch { Icon = null; color = undefined; }
                   break;
                 default: Icon = null; color = undefined;
               }
@@ -408,10 +395,10 @@ export default function ITConsultingSupportPage() {
           {/* Glassmorphism overlay */}
           <div className={`${commonStyles.ctaOverlay} ${themeStyles.ctaOverlay}`} />
           <a href="/contact" className={`${commonStyles.ctaBtnMain} ${themeStyles.ctaBtnMain}`} data-animate="cta-bounce">
-            <FaUserCog className={commonStyles.ctaBtnIcon} title="IT Consultant" />
-            Start Your IT Project
+            <FaRobot className={commonStyles.ctaBtnIcon} title="AI Consultant" />
+            Talk to AI Consultant
           </a>
-          <div className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}>Ready for secure, reliable IT? Let's talk about your vision.</div>
+          <div className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}>Ready to unlock the power of AI? Let's talk about your vision.</div>
         </section>
       </main>
       <Footer />
