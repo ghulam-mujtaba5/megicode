@@ -98,10 +98,10 @@ const processSteps = [
 ];
 
 const faqs = [
-  { q: "What processes can be automated?", a: "We can automate repetitive tasks, data entry, workflow approvals, report generation, and system integrations among others." },
-  { q: "How do you ensure seamless integration with existing systems?", a: "We use industry-standard APIs and protocols, thoroughly test all integrations, and follow best practices for system compatibility." },
-  { q: "What is the typical ROI for automation projects?", a: "Most clients see ROI within 3-6 months through reduced manual work, fewer errors, and improved efficiency." },
-  { q: "Do you provide maintenance and updates?", a: "Yes, we offer ongoing maintenance, monitoring, and optimization services to ensure your automated processes run smoothly." }
+  { q: "Can you automate legacy systems?", a: "Yes, we can integrate and automate legacy systems through various approaches including API integration, RPA, and custom middleware solutions." },
+  { q: "What tools do you use for automation?", a: "We use a comprehensive stack including Python, Zapier, Make, Selenium, Node.js, REST APIs, and Power Automate, choosing the best tool for each specific requirement." },
+  { q: "How do you ensure reliability?", a: "We implement robust error handling, monitoring systems, automated testing, and failover mechanisms to ensure reliable operation of all automated processes." },
+  { q: "Is training included?", a: "Yes, we provide training and documentation for all solutions." }
 ];
 
 // Features/deliverables with icons
