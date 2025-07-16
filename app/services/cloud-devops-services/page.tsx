@@ -143,6 +143,10 @@ const testimonial = {
 export default function CloudDevOpsPage() {
   const { theme } = useTheme();
   const themeStyles = useMemo(() => (theme === 'dark' ? darkStyles : lightStyles), [theme]);
+  const isDark = theme === 'dark';
+  const palette = {
+    cardInnerBorder: isDark ? 'rgba(78, 168, 255, 0.2)' : 'rgba(78, 168, 255, 0.1)'
+  };
   useInViewAnimation();
   if (!service) return null;
 
@@ -205,10 +209,9 @@ export default function CloudDevOpsPage() {
               <div className={commonStyles.heroImageBlock} aria-hidden="true">
                 <div className={commonStyles.heroImageCard} data-animate="float">
                   <img
-                    src="/Desktop App Dark.svg"
-                    alt="Cloud & DevOps Illustration"
-                    className={commonStyles.heroImage}
-                    loading="eager"
+                    src="/meta/rm.svg"
+                    alt="Cloud & DevOps RM Illustration"
+                    style={{ width: 180, maxWidth: '100%', borderRadius: 32, boxShadow: '0 8px 32px #4ea8ff33', background: isDark ? 'rgba(36,41,54,0.98)' : '#fff', padding: 18, border: `2px solid ${palette.cardInnerBorder}` }}
                   />
                   <div className={commonStyles.heroImageDot} />
                   <div className={commonStyles.heroImageSparkles}>
@@ -230,7 +233,13 @@ export default function CloudDevOpsPage() {
             <p className={`${commonStyles.overviewDesc} ${themeStyles.overviewDesc}`}>{service.description}</p>
           </div>
           <div className={commonStyles.overviewImageBlock}>
-            <img src="/devlopment-icon.svg" alt="Cloud & DevOps Overview" className={`${commonStyles.overviewImage} ${themeStyles.overviewImage}`} data-animate="fade-in" />
+            <img
+              src="/meta/rm.svg"
+              alt="Cloud & DevOps Overview"
+              className={`${commonStyles.overviewImage} ${themeStyles.overviewImage}`}
+              data-animate="fade-in"
+              style={{ width: 180, maxWidth: '100%', borderRadius: 32, boxShadow: '0 8px 32px #4ea8ff33', background: isDark ? 'rgba(36,41,54,0.98)' : '#fff', padding: 18, border: `2px solid ${palette.cardInnerBorder}` }}
+            />
           </div>
         </section>
 
