@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Reviews & Testimonials | Megicode',
     description: 'Read what our clients say about their experience working with Megicode. Discover success stories and testimonials from our satisfied clients across various industries.',
-    url: 'https://www.megicode.com/reviews',
+  url: 'https://megicode.com/reviews',
     images: [
       {
         url: '/meta/reviews-og.png',

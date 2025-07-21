@@ -16,10 +16,10 @@ const servicesData = [
     openGraph: {
       title: "AI & Machine Learning Solutions | Megicode",
       description: "Custom AI models, automation, and intelligent systems to drive innovation and efficiency for your business.",
-      url: "https://www.megicode.com/services/ai-machine-learning",
+  url: "https://megicode.com/services/ai-machine-learning",
       images: [
         {
-          url: "https://www.megicode.com/images/og-ai.jpg",
+          url: "https://megicode.com/images/og-ai.jpg",
           width: 1200,
           height: 630,
           alt: "AI & Machine Learning Solutions",
@@ -30,9 +30,9 @@ const servicesData = [
       card: "summary_large_image",
       title: "AI & Machine Learning Solutions | Megicode",
       description: "Custom AI models, automation, and intelligent systems to drive innovation and efficiency for your business.",
-      images: ["https://www.megicode.com/images/twitter-ai.jpg"],
+  images: ["https://megicode.com/images/twitter-ai.jpg"],
     },
-    canonical: "https://www.megicode.com/services/ai-machine-learning",
+  canonical: "https://megicode.com/services/ai-machine-learning",
   },
   {
     icon: "/ds&ai-icon.svg",
@@ -51,10 +51,10 @@ const servicesData = [
     openGraph: {
       title: "Data Analytics & Business Intelligence | Megicode",
       description: "Transform data into actionable insights with analytics, dashboards, and business intelligence solutions.",
-      url: "https://www.megicode.com/services/data-analytics-bi",
+  url: "https://megicode.com/services/data-analytics-bi",
       images: [
         {
-          url: "https://www.megicode.com/images/og-data.jpg",
+          url: "https://megicode.com/images/og-data.jpg",
           width: 1200,
           height: 630,
           alt: "Data Analytics & Business Intelligence",
@@ -65,9 +65,9 @@ const servicesData = [
       card: "summary_large_image",
       title: "Data Analytics & Business Intelligence | Megicode",
       description: "Transform data into actionable insights with analytics, dashboards, and business intelligence solutions.",
-      images: ["https://www.megicode.com/images/twitter-data.jpg"],
+  images: ["https://megicode.com/images/twitter-data.jpg"],
     },
-    canonical: "https://www.megicode.com/services/data-analytics-bi",
+  canonical: "https://megicode.com/services/data-analytics-bi",
   },
   {
     icon: "/web app icon.svg",
@@ -86,10 +86,10 @@ const servicesData = [
     openGraph: {
       title: "Custom Web Development | Megicode",
       description: "Robust, scalable, and secure web applications tailored to your business goals and user needs.",
-      url: "https://www.megicode.com/services/custom-web-development",
+  url: "https://megicode.com/services/custom-web-development",
       images: [
         {
-          url: "https://www.megicode.com/images/og-web.jpg",
+          url: "https://megicode.com/images/og-web.jpg",
           width: 1200,
           height: 630,
           alt: "Custom Web Development",
@@ -100,9 +100,9 @@ const servicesData = [
       card: "summary_large_image",
       title: "Custom Web Development | Megicode",
       description: "Robust, scalable, and secure web applications tailored to your business goals and user needs.",
-      images: ["https://www.megicode.com/images/twitter-web.jpg"],
+  images: ["https://megicode.com/images/twitter-web.jpg"],
     },
-    canonical: "https://www.megicode.com/services/custom-web-development",
+  canonical: "https://megicode.com/services/custom-web-development",
   },
   {
     icon: "/mobile app icon.svg",
@@ -121,10 +121,10 @@ const servicesData = [
     openGraph: {
       title: "Mobile App Solutions | Megicode",
       description: "Native and cross-platform mobile apps for iOS and Android, designed for performance and engagement.",
-      url: "https://www.megicode.com/services/mobile-app-solutions",
+  url: "https://megicode.com/services/mobile-app-solutions",
       images: [
         {
-          url: "https://www.megicode.com/images/og-mobile.jpg",
+          url: "https://megicode.com/images/og-mobile.jpg",
           width: 1200,
           height: 630,
           alt: "Mobile App Solutions",
@@ -135,9 +135,9 @@ const servicesData = [
       card: "summary_large_image",
       title: "Mobile App Solutions | Megicode",
       description: "Native and cross-platform mobile apps for iOS and Android, designed for performance and engagement.",
-      images: ["https://www.megicode.com/images/twitter-mobile.jpg"],
+  images: ["https://megicode.com/images/twitter-mobile.jpg"],
     },
-    canonical: "https://www.megicode.com/services/mobile-app-solutions",
+  canonical: "https://megicode.com/services/mobile-app-solutions",
   },
   {
     icon: "/meta/rm.svg",
@@ -156,10 +156,10 @@ const servicesData = [
     openGraph: {
       title: "Cloud & DevOps Services | Megicode",
       description: "Cloud migration, CI/CD, and infrastructure automation for scalable, secure, and efficient operations.",
-      url: "https://www.megicode.com/services/cloud-devops-services",
+  url: "https://megicode.com/services/cloud-devops-services",
       images: [
         {
-          url: "https://www.megicode.com/images/og-cloud.jpg",
+          url: "https://megicode.com/images/og-cloud.jpg",
           width: 1200,
           height: 630,
           alt: "Cloud & DevOps Services",
@@ -170,9 +170,9 @@ const servicesData = [
       card: "summary_large_image",
       title: "Cloud & DevOps Services | Megicode",
       description: "Cloud migration, CI/CD, and infrastructure automation for scalable, secure, and efficient operations.",
-      images: ["https://www.megicode.com/images/twitter-cloud.jpg"],
+  images: ["https://megicode.com/images/twitter-cloud.jpg"],
     },
-    canonical: "https://www.megicode.com/services/cloud-devops-services",
+  canonical: "https://megicode.com/services/cloud-devops-services",
   },
   {
     icon: "/data scrapping icon.svg",
@@ -191,10 +191,10 @@ const servicesData = [
     openGraph: {
       title: "Automation & Integration | Megicode",
       description: "Workflow automation, data integration, and process optimization to streamline your business.",
-      url: "https://www.megicode.com/services/automation-integration",
+  url: "https://megicode.com/services/automation-integration",
       images: [
         {
-          url: "https://www.megicode.com/images/og-automation.jpg",
+          url: "https://megicode.com/images/og-automation.jpg",
           width: 1200,
           height: 630,
           alt: "Automation & Integration",
@@ -205,9 +205,9 @@ const servicesData = [
       card: "summary_large_image",
       title: "Automation & Integration | Megicode",
       description: "Workflow automation, data integration, and process optimization to streamline your business.",
-      images: ["https://www.megicode.com/images/twitter-automation.jpg"],
+  images: ["https://megicode.com/images/twitter-automation.jpg"],
     },
-    canonical: "https://www.megicode.com/services/automation-integration",
+  canonical: "https://megicode.com/services/automation-integration",
   },
   {
     icon: "/Ui&Ux-icon.svg",
@@ -226,10 +226,10 @@ const servicesData = [
     openGraph: {
       title: "UI/UX & Product Design | Megicode",
       description: "User-centered design for engaging, intuitive, and accessible digital products.",
-      url: "https://www.megicode.com/services/ui-ux-product-design",
+  url: "https://megicode.com/services/ui-ux-product-design",
       images: [
         {
-          url: "https://www.megicode.com/images/og-uiux.jpg",
+          url: "https://megicode.com/images/og-uiux.jpg",
           width: 1200,
           height: 630,
           alt: "UI/UX & Product Design",
@@ -240,9 +240,9 @@ const servicesData = [
       card: "summary_large_image",
       title: "UI/UX & Product Design | Megicode",
       description: "User-centered design for engaging, intuitive, and accessible digital products.",
-      images: ["https://www.megicode.com/images/twitter-uiux.jpg"],
+  images: ["https://megicode.com/images/twitter-uiux.jpg"],
     },
-    canonical: "https://www.megicode.com/services/ui-ux-product-design",
+  canonical: "https://megicode.com/services/ui-ux-product-design",
   },
   {
     icon: "/it-consulting-support-icon.svg",
@@ -261,10 +261,10 @@ const servicesData = [
     openGraph: {
       title: "IT Consulting & Support | Megicode",
       description: "Expert guidance, security, and ongoing support to help you achieve your technology goals.",
-      url: "https://www.megicode.com/services/it-consulting-support",
+  url: "https://megicode.com/services/it-consulting-support",
       images: [
         {
-          url: "https://www.megicode.com/images/og-it.jpg",
+          url: "https://megicode.com/images/og-it.jpg",
           width: 1200,
           height: 630,
           alt: "IT Consulting & Support",
@@ -275,9 +275,9 @@ const servicesData = [
       card: "summary_large_image",
       title: "IT Consulting & Support | Megicode",
       description: "Expert guidance, security, and ongoing support to help you achieve your technology goals.",
-      images: ["https://www.megicode.com/images/twitter-it.jpg"],
+  images: ["https://megicode.com/images/twitter-it.jpg"],
     },
-    canonical: "https://www.megicode.com/services/it-consulting-support",
+  canonical: "https://megicode.com/services/it-consulting-support",
   }
 ];
 

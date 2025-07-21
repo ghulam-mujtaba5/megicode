@@ -44,7 +44,7 @@ export default function ContactInfoCard({ onlyCard = false }) {
         </p>
         <div style={{ display: "flex", flexDirection: "column", gap: 10, alignItems: "center", marginBottom: 18 }}>
           <span style={{ display: "flex", alignItems: "center", gap: 8, color: theme === "dark" ? "#fff" : "#1d2127" }}>
-            <FaEnvelope /> megicode@gmail.com
+            <FaEnvelope /> info@megicode.com
           </span>
           <span style={{ display: "flex", alignItems: "center", gap: 8, color: theme === "dark" ? "#fff" : "#1d2127" }}>
             <FaPhone /> +123 456 7890

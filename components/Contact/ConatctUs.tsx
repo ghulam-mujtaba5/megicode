@@ -13,7 +13,7 @@ const EMAILJS_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
 const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
 const ContactSection = ({
-  email = "megicode@gmail.com",
+  email = "info@megicode.com",
   phoneNumber = "+92 317 7107849",
   showCertificationBadge = false,
   showAdditionalCertificationBadge = false

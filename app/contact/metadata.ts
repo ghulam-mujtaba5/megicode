@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Contact | Megicode',
     description: "Get in touch with Megicode for your software development needs. Let's discuss your project.",
-    url: 'https://www.megicode.com/contact',
+  url: 'https://megicode.com/contact',
     images: [
       {
         url: '/meta/contact-og.png',

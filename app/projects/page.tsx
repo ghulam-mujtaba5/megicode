@@ -21,7 +21,7 @@ export default function ProjectsPage() {
   const instagramUrl = "https://www.instagram.com/megicode/";
   const githubUrl = "https://github.com/megicode";
   const copyrightText = "Copyright 2025 Megicode. All Rights Reserved.";
-  const contactEmail = "megicode@gmail.com";
+  const contactEmail = "info@megicode.com";
   const contactPhoneNumber = "+123 456 7890";
   const sections = [
     { id: 'home', label: 'Home', href: '/' },

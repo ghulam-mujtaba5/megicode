@@ -53,7 +53,7 @@ utils/       # Utility functions
 Megicode partners with businesses worldwide to deliver best-in-class software solutions. Our mission is to drive efficiency, productivity, and growth through emerging technologies and a client-focused approach.
 
 ## 📞 Contact Us
-- Email: megicode@gmail.com
+- Email: info@megicode.com
 - LinkedIn: [linkedin.com/company/megicode](https://www.linkedin.com/company/megicode)
 - Instagram: [instagram.com/megicode](https://www.instagram.com/megicode/)
 - GitHub: [github.com/megicode](https://github.com/megicode)

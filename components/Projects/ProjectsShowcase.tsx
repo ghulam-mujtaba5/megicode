@@ -22,7 +22,7 @@ const projects: Project[] = [
     description: "Enterprise-level analytics platform with machine learning capabilities for real-time data insights and predictive analytics.",
     technologies: ["React", "Python", "TensorFlow", "AWS"],
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=80",
-    link: "https://megicode.com/projects/analytics",
+  link: "https://megicode.com/projects/analytics",
     category: "ai"
   },
   {
@@ -31,7 +31,7 @@ const projects: Project[] = [
     description: "Full-featured e-commerce mobile application with AR product visualization and personalized recommendations.",
     technologies: ["React Native", "Node.js", "MongoDB", "Firebase"],
     image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&auto=format&fit=crop&q=80",
-    link: "https://megicode.com/projects/ecommerce",
+  link: "https://megicode.com/projects/ecommerce",
     category: "mobile"
   },
   {
@@ -40,7 +40,7 @@ const projects: Project[] = [
     description: "Desktop application for enterprise resource planning with advanced automation and workflow management.",
     technologies: ["Electron", "TypeScript", "PostgreSQL", "Docker"],
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop&q=80",
-    link: "https://megicode.com/projects/resource-management",
+  link: "https://megicode.com/projects/resource-management",
     category: "desktop"
   },
   {
@@ -49,7 +49,7 @@ const projects: Project[] = [
     description: "Interactive data visualization platform with real-time analytics and customizable dashboards.",
     technologies: ["D3.js", "Vue.js", "Python", "FastAPI"],
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=80",
-    link: "https://megicode.com/projects/data-viz",
+  link: "https://megicode.com/projects/data-viz",
     category: "data"
   },
   {
@@ -58,7 +58,7 @@ const projects: Project[] = [
     description: "Scalable web application built with microservices architecture and containerized deployment.",
     technologies: ["Next.js", "Kubernetes", "GraphQL", "MongoDB"],
     image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&auto=format&fit=crop&q=80",
-    link: "https://megicode.com/projects/cloud-app",
+  link: "https://megicode.com/projects/cloud-app",
     category: "web"
   }
 ];

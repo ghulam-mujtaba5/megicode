@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Services | Megicode',
     description: 'Explore our comprehensive software development services including web, mobile, desktop applications, AI solutions, and data science.',
-    url: 'https://www.megicode.com/services',
+  url: 'https://megicode.com/services',
     images: [
       {
         url: '/meta/services-og.png',
