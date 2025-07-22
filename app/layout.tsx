@@ -84,8 +84,70 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const orgJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Megicode",
+    "url": "https://megicode.com",
+    "logo": "https://megicode.com/meta/android-chrome-512x512.png",
+    "email": "info@megicode.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Lahore",
+      "addressCountry": "PK"
+    },
+    "contactPoint": [{
+      "@type": "ContactPoint",
+      "email": "info@megicode.com",
+      "contactType": "customer support"
+    }],
+    "sameAs": [
+      "https://www.linkedin.com/company/megicode",
+      "https://www.instagram.com/megicode/",
+      "https://github.com/megicode"
+    ]
+  };
+
+  const websiteJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Megicode",
+    "url": "https://megicode.com",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://megicode.com/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  };
+
+  const navJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SiteNavigationElement",
+    "name": [
+      "About",
+      "Services",
+      "Projects",
+      "Reviews",
+      "Contact",
+      "Privacy Policy"
+    ],
+    "url": [
+      "https://megicode.com/about",
+      "https://megicode.com/services",
+      "https://megicode.com/projects",
+      "https://megicode.com/reviews",
+      "https://megicode.com/contact",
+      "https://megicode.com/privacy-policy"
+    ]
+  };
+
   return (
     <html lang="en">
+      <head>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(navJsonLd) }} />
+      </head>
       <body>
         <Providers>
           <ClientLayout>
