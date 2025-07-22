@@ -17,10 +17,15 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: '/',
-        destination: '/megicode',
-        permanent: false,
+        source: '/megicode',
+        destination: '/',
+        permanent: true,
       },
+      {
+        source: '/megicode/:path*',
+        destination: '/:path*',
+        permanent: true,
+      }
     ];
   },
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
