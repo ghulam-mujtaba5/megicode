@@ -1,45 +1,89 @@
 "use client";
-import React, { useState, useCallback } from "react";
-import { useTheme } from "../../context/ThemeContext";
+import React, { useState, Suspense } from 'react';
+import { useTheme } from '../../context/ThemeContext';
+import dynamic from 'next/dynamic';
+import styles from './contact.module.css';
+import LoadingAnimation from '@/components/LoadingAnimation/LoadingAnimation';
+
+// Static imports for critical components
 import NavBarDesktop from "../../components/NavBar_Desktop_Company/nav-bar-Company";
 import NavBarMobile from "../../components/NavBar_Mobile/NavBar-mobile";
-import Footer from "../../components/Footer/Footer";
 import ThemeToggleIcon from "../../components/Icon/sbicon";
-import ParticleBackground from "../../components/ParticleBackground/ParticleBackground";
-import styles from "./contact.module.css";
+
+// Component interfaces
+interface FooterProps {
+  linkedinUrl: string;
+  instagramUrl: string;
+  githubUrl: string;
+  copyrightText: string;
+}
+
+// Dynamic imports for non-critical components
+const Footer = dynamic<FooterProps>(
+  () => import("../../components/Footer/Footer").then(mod => mod.default), {
+  loading: () => <LoadingAnimation size="medium" />
+});
+
+const ParticleBackground = dynamic(
+  () => import("../../components/ParticleBackground/ParticleBackground"), {
+  loading: () => <LoadingAnimation size="medium" />
+});
 
 function FAQAccordion() {
   const [openIndex, setOpenIndex] = React.useState<number | null>(null);
   const faqs = [
     {
       question: 'How quickly do you respond?',
-      answer: 'We typically respond within 24 hours during business days.'
+      answer: 'We typically respond within 24 hours during business days. Our team is committed to providing timely support and quick turnaround times for all inquiries.',
+      icon: '⚡'
     },
     {
       question: 'Do you offer free consultations?',
-      answer: 'Yes, we offer a free initial consultation to discuss your project needs.'
+      answer: 'Yes, we offer a free initial consultation to discuss your project needs, timeline, and budget. This helps us understand your vision and provide the best solution.',
+      icon: '💬'
     },
     {
       question: 'What services do you provide?',
-      answer: 'We specialize in web development, mobile apps, UI/UX design, and technical consulting.'
+      answer: 'We specialize in web development, mobile apps, UI/UX design, technical consulting, cloud solutions, and digital transformation services.',
+      icon: '🚀'
+    },
+    {
+      question: 'What is your development process?',
+      answer: 'We follow an agile development methodology with regular updates, milestone reviews, and continuous client collaboration to ensure project success.',
+      icon: '⚙️'
+    },
+    {
+      question: 'Do you provide ongoing support?',
+      answer: 'Yes, we offer comprehensive post-launch support including maintenance, updates, bug fixes, and feature enhancements to keep your solution running smoothly.',
+      icon: '🛠️'
     }
   ];
+
   return (
-    <div>
+    <div className={styles.faqContainer}>
       {faqs.map((faq, idx) => (
-        <div key={idx} className={styles.faqItem}>
+        <div key={idx} className={`${styles.faqItem} ${openIndex === idx ? styles.faqItemOpen : ''}`}>
           <button
-  type="button"
-  className={styles.faqQuestion}
-  aria-expanded={openIndex === idx}
-  onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
->
-  {faq.question}
-  <span className={styles.faqArrow}>▶</span>
-</button>
-{openIndex === idx && (
-  <div className={styles.faqAnswer}>{faq.answer}</div>
-)}
+            type="button"
+            className={styles.faqQuestion}
+            aria-expanded={openIndex === idx}
+            onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
+          >
+            <div className={styles.faqQuestionContent}>
+              <span className={styles.faqIcon}>{faq.icon}</span>
+              <span className={styles.faqQuestionText}>{faq.question}</span>
+            </div>
+            <span className={`${styles.faqArrow} ${openIndex === idx ? styles.faqArrowOpen : ''}`}>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M6 4L10 8L6 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </span>
+          </button>
+          <div className={`${styles.faqAnswerWrapper} ${openIndex === idx ? styles.faqAnswerOpen : ''}`}>
+            <div className={styles.faqAnswer}>
+              {faq.answer}
+            </div>
+          </div>
         </div>
       ))}
     </div>
@@ -47,7 +91,13 @@ function FAQAccordion() {
 }
 
 export default function ContactPage() {
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
+
+  // Social/contact info
+  const linkedinUrl = "https://www.linkedin.com/company/megicode";
+  const instagramUrl = "https://www.instagram.com/megicode/";
+  const githubUrl = "https://github.com/megicode";
+  const copyrightText = "Copyright 2025 Megicode. All Rights Reserved.";
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -61,9 +111,7 @@ export default function ContactPage() {
   const [submitStatus, setSubmitStatus] = useState('');
   const [showSuccess, setShowSuccess] = useState(false);
 
-  const onDarkModeButtonContainerClick = useCallback(() => {
-    toggleTheme();
-  }, [toggleTheme]);
+
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -85,34 +133,51 @@ export default function ContactPage() {
     }, 2000);
   };
 
-  const linkedinUrl = "https://www.linkedin.com/company/megicode";
-  const instagramUrl = "https://www.instagram.com/megicode/";
-  const githubUrl = "https://github.com/megicode";
-  const copyrightText = "Copyright 2025 Megicode. All Rights Reserved.";
-
   return (
-    <div className={styles.container} data-theme={theme}>
-      {/* Enhanced Background with Particles */}
-      <div className={styles.backgroundGradient}></div>
-      <ParticleBackground />
-      
-      {/* Enhanced Navigation Container */}
-      <div className={styles.navigation}>
-          {/* Theme Toggle */}
-          <div 
-            className={styles.themeToggle}
-            id="theme-toggle" 
-            role="button" 
-            tabIndex={0} 
-            onClick={onDarkModeButtonContainerClick}
-            title="Toggle dark/light theme"
-            aria-label="Toggle dark/light theme"
-          >
-            <ThemeToggleIcon />
-          </div>
+    <div 
+      style={{ 
+        backgroundColor: theme === "dark" ? "#181c22" : "#ffffff", 
+        minHeight: "100vh", 
+        overflowX: "hidden" 
+      }}
+    >
+      {/* Theme Toggle Icon */}
+      <div 
+        id="theme-toggle" 
+        role="button" 
+        tabIndex={0} 
+        aria-label="Toggle theme"
+      >
+        <ThemeToggleIcon />
+      </div>
+
+      {/* Navigation */}
+      <header>
+        {/* Desktop NavBar */}
+        <nav 
+          id="desktop-navbar" 
+          aria-label="Main Navigation"
+          className="hidden md:block"
+        >
           <NavBarDesktop />
+        </nav>
+
+        {/* Mobile NavBar */}
+        <nav 
+          id="mobile-navbar" 
+          aria-label="Mobile Navigation"
+          className="block md:hidden"
+        >
           <NavBarMobile />
-        </div>
+        </nav>
+      </header>
+
+      {/* Main Content */}
+      <main className={`${styles.container}`} data-theme={theme}>
+        <div className={styles.backgroundGradient}></div>
+        <Suspense fallback={<LoadingAnimation size="medium" />}>
+          <ParticleBackground />
+        </Suspense>
 
         {/* Hero Section */}
         <section className={styles.heroSection}>
@@ -318,7 +383,7 @@ export default function ContactPage() {
                 
                 <div className={styles.contactItem}>
                   <span className={styles.contactIcon}>
-  <span role="img" aria-label="Address icon" style={{fontSize: 24, verticalAlign: 'middle'}}>📍</span>
+  <span role="img" aria-label="Address icon" className={styles.emojiIcon}>📍</span>
 </span>
                   <div className={styles.contactDetails}>
                     <h4>Address</h4>
@@ -328,7 +393,7 @@ export default function ContactPage() {
                 
                 <div className={styles.contactItem}>
                   <span className={styles.contactIcon}>
-  <span role="img" aria-label="Business hours icon" style={{fontSize: 24, verticalAlign: 'middle'}}>🕒</span>
+  <span role="img" aria-label="Business hours icon" className={styles.emojiIcon}>🕒</span>
 </span>
                   <div className={styles.contactDetails}>
                     <h4>Business Hours</h4>
@@ -363,21 +428,68 @@ export default function ContactPage() {
           </section>
 
         <div className={styles.sectionDivider}></div>
-        {/* Map Section */}
+        {/* Location Section */}
         <section className={styles.mapSection}>
           <div className={styles.card}>
-            <h3>Find Us</h3>
-            <div className={styles.mapPlaceholder}>
-              <div>
-                <span className={styles.mapIcon}>🗺️</span>
-                <div>Interactive Map Coming Soon</div>
-                <div className={styles.mapText}>We're located in the heart of the tech district</div>
+            <h3>Our Location</h3>
+            <div className={styles.locationContainer}>
+              <div className={styles.locationHeader}>
+                <span className={styles.locationIcon}>🌍</span>
+                <div className={styles.locationInfo}>
+                  <h4>Lahore, Pakistan</h4>
+                  <p>Serving clients globally from the heart of Pakistan's tech hub</p>
+                </div>
+              </div>
+              
+              <div className={styles.locationDetails}>
+                <div className={styles.locationItem}>
+                  <span className={styles.detailIcon}>🏙️</span>
+                  <div>
+                    <strong>City</strong>
+                    <p>Lahore - Cultural & Tech Capital</p>
+                  </div>
+                </div>
+                
+                <div className={styles.locationItem}>
+                  <span className={styles.detailIcon}>🇵🇰</span>
+                  <div>
+                    <strong>Country</strong>
+                    <p>Pakistan - South Asia</p>
+                  </div>
+                </div>
+                
+                <div className={styles.locationItem}>
+                  <span className={styles.detailIcon}>🌐</span>
+                  <div>
+                    <strong>Service Area</strong>
+                    <p>Global - Remote & On-site</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className={styles.locationFooter}>
+                <p>🚀 Ready to work with clients worldwide through modern technology and communication</p>
               </div>
             </div>
           </div>
         </section>
-        
-        <Footer />
+      </main>
+
+      {/* Footer */}
+      <footer 
+        id="footer-section" 
+        aria-label="Footer" 
+        style={{ width: "100%", overflow: "hidden" }}
+      >
+        <Suspense fallback={<LoadingAnimation size="medium" />}>
+          <Footer
+            linkedinUrl={linkedinUrl}
+            instagramUrl={instagramUrl}
+            githubUrl={githubUrl}
+            copyrightText={copyrightText}
+          />
+        </Suspense>
+      </footer>
     </div>
   );
 }
