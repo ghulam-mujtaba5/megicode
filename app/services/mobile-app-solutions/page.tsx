@@ -6,6 +6,7 @@ import darkStyles from "./mobile-app-dark.module.css";
 import GmIcon from "../../../components/Icon/sbicon";
 
 import React, { useMemo } from "react";
+import { useCalendlyModal } from "../../../components/CalendlyModal";
 import { useTheme } from "../../../context/ThemeContext";
 import { useInViewAnimation } from "../../../hooks/useInViewAnimation";
 import servicesData from "../servicesData";
@@ -126,6 +127,7 @@ export default function MobileAppSolutionsPage() {
   const { theme } = useTheme();
   const themeStyles = useMemo(() => (theme === 'dark' ? darkStyles : lightStyles), [theme]);
   useInViewAnimation();
+  const [openCalendly, calendlyModalElement] = useCalendlyModal();
   if (!service) return null;
 
   return (
@@ -173,15 +175,16 @@ export default function MobileAppSolutionsPage() {
                   {service.description}
                 </p>
                 <div className={commonStyles.heroCTAWrapper}>
-                  <a
-                    href="/contact"
+                  <button
+                    type="button"
                     className={commonStyles.ctaBtn}
                     data-animate="cta-bounce"
-                    aria-label="Get Started with AI & Machine Learning Services"
+                    aria-label="Get Started with Mobile App Services"
+                    onClick={openCalendly}
                   >
                     Get Started
                     <span className={commonStyles.ctaBtnArrow} aria-hidden="true">→</span>
-                  </a>
+                  </button>
                 </div>
               </div>
               <div className={commonStyles.heroImageBlock} aria-hidden="true">
@@ -382,14 +385,21 @@ export default function MobileAppSolutionsPage() {
         <section className={`${commonStyles.ctaSection} ${themeStyles.ctaSection}`} data-animate="cta-strip">
           {/* Glassmorphism overlay */}
           <div className={`${commonStyles.ctaOverlay} ${themeStyles.ctaOverlay}`} />
-          <a href="/contact" className={`${commonStyles.ctaBtnMain} ${themeStyles.ctaBtnMain}`} data-animate="cta-bounce">
+          <button
+            type="button"
+            className={`${commonStyles.ctaBtnMain} ${themeStyles.ctaBtnMain}`}
+            data-animate="cta-bounce"
+            onClick={openCalendly}
+            aria-label="Start Your Mobile Project"
+          >
             <FaMobileAlt className={commonStyles.ctaBtnIcon} title="Mobile App Expert" />
             Start Your Mobile Project
-          </a>
+          </button>
           <div className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}>Ready to unlock the power of AI? Let's talk about your vision.</div>
         </section>
       </main>
-      <Footer />
+  {calendlyModalElement}
+  <Footer />
     </div>
   );
 }

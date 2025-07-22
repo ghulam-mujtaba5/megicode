@@ -6,6 +6,7 @@ import darkStyles from "./it-consulting-dark.module.css";
 import GmIcon from "../../../components/Icon/sbicon";
 
 import React, { useMemo } from "react";
+import { useCalendlyModal } from "../../../components/CalendlyModal";
 import { useTheme } from "../../../context/ThemeContext";
 import { useInViewAnimation } from "../../../hooks/useInViewAnimation";
 import servicesData from "../servicesData";
@@ -138,6 +139,7 @@ export default function ITConsultingSupportPage() {
   const { theme } = useTheme();
   const themeStyles = useMemo(() => (theme === 'dark' ? darkStyles : lightStyles), [theme]);
   useInViewAnimation();
+  const [openCalendly, calendlyModalElement] = useCalendlyModal();
   if (!service) return null;
 
   return (
@@ -185,15 +187,16 @@ export default function ITConsultingSupportPage() {
                   {service.description}
                 </p>
                 <div className={commonStyles.heroCTAWrapper}>
-                  <a
-                    href="/contact"
+                  <button
+                    type="button"
                     className={commonStyles.ctaBtn}
                     data-animate="cta-bounce"
-                    aria-label="Get Started with AI & Machine Learning Services"
+                    aria-label="Get Started with IT Consulting & Support Services"
+                    onClick={openCalendly}
                   >
                     Get Started
                     <span className={commonStyles.ctaBtnArrow} aria-hidden="true">→</span>
-                  </a>
+                  </button>
                 </div>
               </div>
               <div className={commonStyles.heroImageBlock} aria-hidden="true">
@@ -407,14 +410,21 @@ export default function ITConsultingSupportPage() {
         <section className={`${commonStyles.ctaSection} ${themeStyles.ctaSection}`} data-animate="cta-strip">
           {/* Glassmorphism overlay */}
           <div className={`${commonStyles.ctaOverlay} ${themeStyles.ctaOverlay}`} />
-          <a href="/contact" className={`${commonStyles.ctaBtnMain} ${themeStyles.ctaBtnMain}`} data-animate="cta-bounce">
+          <button
+            type="button"
+            className={`${commonStyles.ctaBtnMain} ${themeStyles.ctaBtnMain}`}
+            data-animate="cta-bounce"
+            onClick={openCalendly}
+            aria-label="Start Your IT Project"
+          >
             <FaUserCog className={commonStyles.ctaBtnIcon} title="IT Consultant" />
             Start Your IT Project
-          </a>
+          </button>
           <div className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}>Ready for secure, reliable IT? Let's talk about your vision.</div>
         </section>
       </main>
-      <Footer />
+  {calendlyModalElement}
+  <Footer />
     </div>
   );
 }

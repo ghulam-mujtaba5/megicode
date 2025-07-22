@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import { useCalendlyModal } from "../../../components/CalendlyModal";
 import { useTheme } from "../../../context/ThemeContext";
 import { useInViewAnimation } from "../../../hooks/useInViewAnimation";
 import servicesData from "../servicesData";
@@ -118,6 +119,7 @@ export default function UIUXProductDesignDetailPage() {
   const { theme } = useTheme();
   const themeStyles = React.useMemo(() => (theme === 'dark' ? darkStyles : lightStyles), [theme]);
   useInViewAnimation();
+  const [openCalendly, calendlyModal] = useCalendlyModal();
   if (!service) return null;
 
   return (
@@ -165,15 +167,16 @@ export default function UIUXProductDesignDetailPage() {
                   {service.description}
                 </p>
                 <div className={commonStyles.heroCTAWrapper}>
-                  <a
-                    href="/contact"
+                  <button
+                    type="button"
                     className={commonStyles.ctaBtn}
                     data-animate="cta-bounce"
                     aria-label="Get Started with UI/UX Design Services"
+                    onClick={openCalendly}
                   >
                     Get Started
                     <span className={commonStyles.ctaBtnArrow} aria-hidden="true">→</span>
-                  </a>
+                  </button>
                 </div>
               </div>
               <div className={commonStyles.heroImageBlock} aria-hidden="true">
@@ -371,14 +374,21 @@ export default function UIUXProductDesignDetailPage() {
         <section className={`${commonStyles.ctaSection} ${themeStyles.ctaSection}`} data-animate="cta-strip">
           {/* Glassmorphism overlay */}
           <div className={`${commonStyles.ctaOverlay} ${themeStyles.ctaOverlay}`} />
-          <a href="/contact" className={`${commonStyles.ctaBtnMain} ${themeStyles.ctaBtnMain}`} data-animate="cta-bounce">
+          <button
+            type="button"
+            className={`${commonStyles.ctaBtnMain} ${themeStyles.ctaBtnMain}`}
+            data-animate="cta-bounce"
+            onClick={openCalendly}
+            aria-label="Start Your Design Project"
+          >
             <FaPalette className={commonStyles.ctaBtnIcon} title="Design Consultant" />
             Start Your Design Project
-          </a>
+          </button>
           <div className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}>Ready to elevate your product? Let's talk about your vision.</div>
         </section>
       </main>
-      <Footer />
+  {calendlyModal}
+  <Footer />
     </div>
   );
 }

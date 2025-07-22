@@ -6,6 +6,7 @@ import darkStyles from "./cloud-devops-dark.module.css";
 import GmIcon from "../../../components/Icon/sbicon";
 
 import React, { useMemo } from "react";
+import { useCalendlyModal } from "../../../components/CalendlyModal";
 import { useTheme } from "../../../context/ThemeContext";
 import { useInViewAnimation } from "../../../hooks/useInViewAnimation";
 import servicesData from "../servicesData";
@@ -148,6 +149,7 @@ export default function CloudDevOpsPage() {
     cardInnerBorder: isDark ? 'rgba(78, 168, 255, 0.2)' : 'rgba(78, 168, 255, 0.1)'
   };
   useInViewAnimation();
+  const [openCalendly, calendlyModalElement] = useCalendlyModal();
   if (!service) return null;
 
   return (
@@ -195,15 +197,16 @@ export default function CloudDevOpsPage() {
                   {service.description}
                 </p>
                 <div className={commonStyles.heroCTAWrapper}>
-                  <a
-                    href="/contact"
+                  <button
+                    type="button"
                     className={commonStyles.ctaBtn}
                     data-animate="cta-bounce"
                     aria-label="Get Started with Cloud & DevOps Services"
+                    onClick={openCalendly}
                   >
                     Get Started
                     <span className={commonStyles.ctaBtnArrow} aria-hidden="true">→</span>
-                  </a>
+                  </button>
                 </div>
               </div>
               <div className={commonStyles.heroImageBlock} aria-hidden="true">
@@ -409,14 +412,21 @@ export default function CloudDevOpsPage() {
         <section className={`${commonStyles.ctaSection} ${themeStyles.ctaSection}`} data-animate="cta-strip">
           {/* Glassmorphism overlay */}
           <div className={`${commonStyles.ctaOverlay} ${themeStyles.ctaOverlay}`} />
-          <a href="/contact" className={`${commonStyles.ctaBtnMain} ${themeStyles.ctaBtnMain}`} data-animate="cta-bounce">
+          <button
+            type="button"
+            className={`${commonStyles.ctaBtnMain} ${themeStyles.ctaBtnMain}`}
+            data-animate="cta-bounce"
+            onClick={openCalendly}
+            aria-label="Start Your Cloud Project"
+          >
             <FaCloud className={commonStyles.ctaBtnIcon} title="Cloud Consultant" />
             Start Your Cloud Project
-          </a>
+          </button>
           <div className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}>Ready to modernize your infrastructure? Let's talk about your vision.</div>
         </section>
       </main>
-      <Footer />
+  {calendlyModalElement}
+  <Footer />
     </div>
   );
 }

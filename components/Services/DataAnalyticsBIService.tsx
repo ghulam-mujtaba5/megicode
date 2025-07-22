@@ -1,7 +1,9 @@
 import styles from './ServiceDetail.module.css';
 import Image from 'next/image';
+import { useCalendlyModal } from '../CalendlyModal';
 
 export default function DataAnalyticsBIService() {
+  const [openCalendly, calendlyModal] = useCalendlyModal();
   return (
     <section className={styles.serviceDetail}>
       {/* Hero Section */}
@@ -9,7 +11,17 @@ export default function DataAnalyticsBIService() {
         <div className={styles.heroText}>
           <h1>Actionable Insights from Complex Data</h1>
           <p>Turn raw data into executive intelligence with custom dashboards, prediction models, and KPI analytics. Empower your team with clean, interactive visualizations and predictive tooling.</p>
-          <a href="/contact" className={styles.ctaButton} style={{ marginTop: '1.2rem' }}>Get Started</a>
+          <>
+            <button
+              type="button"
+              className={styles.ctaButton}
+              style={{ marginTop: '1.2rem' }}
+              onClick={openCalendly}
+            >
+              Get Started
+            </button>
+            {calendlyModal}
+          </>
         </div>
         <div className={styles.heroVisual}>
           {/* Lottie animation placeholder */}
@@ -128,7 +140,10 @@ export default function DataAnalyticsBIService() {
 
       {/* Call to Action */}
       <div className={styles.ctaSection}>
-        <a href="/contact" className={styles.ctaButton}>Talk to Us</a>
+        <button type="button" className={styles.ctaButton} onClick={openCalendly}>
+          Talk to Us
+        </button>
+        {calendlyModal}
       </div>
     </section>
   );

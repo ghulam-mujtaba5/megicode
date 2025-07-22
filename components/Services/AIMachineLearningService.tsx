@@ -1,7 +1,9 @@
 import styles from './ServiceDetail.module.css';
 import Image from 'next/image';
+import { useCalendlyModal } from '../CalendlyModal';
 
 export default function AIMachineLearningService() {
+  const [openCalendly, calendlyModal] = useCalendlyModal();
   return (
     <section className={styles.serviceDetail}>
       {/* Hero Section */}
@@ -11,9 +13,17 @@ export default function AIMachineLearningService() {
             <span>Smarter Business</span> <span className={styles.emphasis}>Starts with Custom <span className={styles.gradientText}>AI</span></span>
           </h1>
           <p className={styles.heroSubtitle} data-animate="typewriter">Integrate AI to automate, predict, and personalize. Megicode delivers intelligent agents, data-driven models, and smart solutions that scale.</p>
-          <a href="/contact" className={styles.ctaButton} data-animate="cta-bounce">
-            <span role="img" aria-label="Talk to AI Consultant" style={{ marginRight: 8 }}>🤖</span>Get Started
-          </a>
+          <>
+            <button
+              type="button"
+              className={styles.ctaButton}
+              data-animate="cta-bounce"
+              onClick={openCalendly}
+            >
+              <span role="img" aria-label="Talk to AI Consultant" style={{ marginRight: 8 }}>🤖</span>Get Started
+            </button>
+            {calendlyModal}
+          </>
         </div>
         <div className={styles.heroVisual}>
           {/* Lottie animation placeholder */}
@@ -183,9 +193,10 @@ export default function AIMachineLearningService() {
 
       {/* Call to Action */}
       <div className={styles.ctaSection} style={{ background: 'linear-gradient(90deg, #4573df 0%, #cfe8ef 100%)', borderRadius: 12, marginTop: 32, padding: '2rem 1rem' }}>
-        <a href="/contact" className={styles.ctaButton} data-animate="cta-bounce">
+        <button type="button" className={styles.ctaButton} data-animate="cta-bounce" onClick={openCalendly}>
           <span role="img" aria-label="Talk to AI Consultant" style={{ marginRight: 8 }}>🤖</span>Request Demo
-        </a>
+        </button>
+        {calendlyModal}
       </div>
     </section>
   );
