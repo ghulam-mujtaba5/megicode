@@ -3,6 +3,7 @@ import React from "react";
 import { Providers } from "./providers";
 import dynamic from "next/dynamic";
 import ClientLayout from "./ClientLayout";
+import GoogleAnalytics from "@/components/GoogleAnalytics/GoogleAnalytics";
 
 if (process.env.NODE_ENV !== 'production' && typeof window !== 'undefined') {
   require('../utils/axe-a11y');
@@ -147,6 +148,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(navJsonLd) }} />
+        <GoogleAnalytics />
       </head>
       <body>
         <Providers>
