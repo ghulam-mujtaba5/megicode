@@ -1,0 +1,208 @@
+.leadershipSection {
+  position: relative;
+  padding: 4rem 0;
+  overflow: hidden;
+}
+
+.sectionTitle {
+  text-align: center;
+  margin-bottom: 4rem;
+  position: relative;
+  z-index: 2;
+  padding: 0 1rem;
+}
+
+.sectionTitle h2 {
+  font-size: 3rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #4573df 0%, #2d4fa2 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  margin-bottom: 1.2rem;
+  letter-spacing: -0.02em;
+  position: relative;
+  display: inline-block;
+}
+
+.sectionTitle h2::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, #4573df, #2d4fa2);
+  border-radius: 2px;
+}
+
+.sectionTitle p {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  margin: 1.5rem auto 0;
+  line-height: 1.6;
+  opacity: 0.9;
+  position: relative;
+}
+
+.foundersGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.founderCard {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 24px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  backdrop-filter: blur(10px);
+}
+
+.founderCard:hover {
+  transform: translateY(-8px);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.imageContainer {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.imageWrapper {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(135deg, rgba(69,115,223,0.1), rgba(69,115,223,0.05));
+  box-shadow: 
+    0 10px 30px -5px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(69,115,223,0.1);
+}
+
+.imageWrapper img[src*="mesh-circuit"] {
+  opacity: 0.7;
+  filter: hue-rotate(15deg) saturate(0.8);
+  mix-blend-mode: soft-light;
+  background: linear-gradient(135deg, rgba(69,115,223,0.2), rgba(45,79,162,0.2));
+}
+
+.founderImage {
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.founderCard:hover .founderImage {
+  transform: scale(1.05);
+}
+
+.founderInfo {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.founderName {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #4573df, #2d4fa2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.founderRole {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  background: rgba(69,115,223,0.1);
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.founderQuote {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin: 1rem 0;
+  min-height: 80px;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.socialLink {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(69,115,223,0.1);
+  transition: all 0.3s ease;
+}
+
+.socialLink:hover {
+  transform: translateY(-3px);
+  background: rgba(69,115,223,0.2);
+}
+
+@media (max-width: 1024px) {
+  .foundersGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .foundersGrid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+  }
+  
+  .sectionTitle h2 {
+    font-size: 2rem;
+  }
+  
+  .founderCard {
+    padding: 1.5rem;
+  }
+  
+  .imageContainer {
+    width: 180px;
+    height: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .leadershipSection {
+    padding: 3rem 0;
+  }
+  
+  .sectionTitle h2 {
+    font-size: 1.75rem;
+  }
+  
+  .imageContainer {
+    width: 160px;
+    height: 160px;
+  }
+}

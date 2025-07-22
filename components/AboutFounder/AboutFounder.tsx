@@ -7,6 +7,7 @@ import lightStyles from './AboutFounderLight.module.css';
 import darkStyles from './AboutFounderDark.module.css';
 import { useTheme } from '../../context/ThemeContext';
 import Link from 'next/link';
+import styles from './AboutFounderGrid.module.css';
 
 const AboutFounder = () => {
   const { theme } = useTheme();
@@ -21,109 +22,160 @@ const AboutFounder = () => {
     }
   };
 
+  const founders = [
+    {
+      name: "Azan Wahla",
+      role: "Founder & CEO",
+      image: "/azan.png",
+      quote: "Leading Megicode's vision to transform businesses through innovative technology solutions.",
+      github: "https://github.com/AzanWahla",
+      linkedin: "https://www.linkedin.com/in/azanwahla"
+    },
+    {
+      name: "Ghulam Mujtaba",
+      role: "Founder & CTO",
+      image: "/images/portfolio-picture.png",
+      quote: "Driving technological excellence and innovation to create impactful solutions for our clients.",
+      github: "https://github.com/ghulam-mujtaba5",
+      linkedin: "https://pk.linkedin.com/in/ghulamujtabaofficial"
+    },
+    {
+      name: "Muhammad Waqar ul Mulk",
+      role: "Founder & COO/CMO",
+      image: "/mesh-circuit-dark.svg",
+      quote: "Building strategic partnerships and ensuring operational excellence in everything we do.",
+      github: "https://github.com/Mwaqarulmulk",
+      linkedin: "https://www.linkedin.com/in/mwaqarulmulk"
+    }
+  ];
+
   return (
-    <section className={`${commonStyles.founderSection} ${themeStyles.founderSection}`}>
+    <section className={styles.leadershipSection}>
       <motion.div 
-        className={`${commonStyles.container}`}
+        className={styles.sectionTitle}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <motion.h2
+          variants={{
+            hidden: { y: 20, opacity: 0 },
+            visible: { 
+              y: 0, 
+              opacity: 1,
+              transition: {
+                duration: 0.6,
+                ease: [0.215, 0.610, 0.355, 1.000]
+              }
+            }
+          }}
+        >
+          Leadership Team
+        </motion.h2>
+        <motion.p
+          variants={{
+            hidden: { y: 20, opacity: 0 },
+            visible: { 
+              y: 0, 
+              opacity: 1,
+              transition: {
+                duration: 0.6,
+                delay: 0.2,
+                ease: [0.215, 0.610, 0.355, 1.000]
+              }
+            }
+          }}
+        >
+          Meet the visionaries behind Megicode's success
+        </motion.p>
+      </motion.div>
+
+      <motion.div 
+        className={styles.foundersGrid}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
         variants={{
           visible: {
             transition: {
-              staggerChildren: 0.2
+              staggerChildren: 0.15
             }
           }
         }}
       >
-        <motion.div 
-          className={commonStyles.imageContainer}
-          variants={fadeInUp}
-        >
-          <div className={commonStyles.imageGlow}></div>
+        {founders.map((founder, index) => (
           <motion.div 
-            className={commonStyles.imageWrapper}
-            whileHover={{ y: -8 }}
-            transition={{ duration: 0.4 }}
-          >
-            <Image
-              src="/images/portfolio-picture.png"
-              alt="Ghulam Mujtaba - Founder of Megicode"
-              width={400}
-              height={400}
-              className={commonStyles.founderImage}
-              priority
-            />
-          </motion.div>
-        </motion.div>
-
-        <motion.div 
-          className={`${commonStyles.content} ${themeStyles.content}`}
-          variants={fadeInUp}
-        >
-          <motion.span 
-            className={commonStyles.title}
+            key={founder.name}
+            className={styles.founderCard}
             variants={fadeInUp}
           >
-            Meet the Founder
-          </motion.span>
+            <div className={styles.imageContainer}>
+              <motion.div 
+                className={styles.imageWrapper}
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+              >
+                <Image
+                  src={founder.image}
+                  alt={`${founder.name} - ${founder.role}`}
+                  width={200}
+                  height={200}
+                  className={styles.founderImage}
+                  priority={index === 0}
+                />
+              </motion.div>
+            </div>
 
-          <motion.div variants={fadeInUp}>
-            <h3 className={`${commonStyles.name} ${themeStyles.name}`}>Ghulam Mujtaba</h3>
-            <div className={`${commonStyles.role} ${themeStyles.role}`}>
-              Founder & Lead Developer
+            <div className={styles.founderInfo}>
+              <h3 className={styles.founderName}>{founder.name}</h3>
+              <span className={styles.founderRole}>
+                {founder.role}
+              </span>
+              <p className={styles.founderQuote}>
+                {founder.quote}
+              </p>
+
+              <div className={styles.socialLinks}>
+                <Link 
+                  href={founder.github}
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className={styles.socialLink}
+                >
+                  <motion.div
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Image
+                      src={theme === 'dark' ? "/GithubDark.svg" : "/github_icon.svg"}
+                      alt="GitHub"
+                      width={20}
+                      height={20}
+                    />
+                  </motion.div>
+                </Link>
+                <Link 
+                  href={founder.linkedin}
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className={styles.socialLink}
+                >
+                  <motion.div
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Image
+                      src={theme === 'dark' ? "/LinkedinDark.svg" : "/linkedin-icon.svg"}
+                      alt="LinkedIn"
+                      width={20}
+                      height={20}
+                    />
+                  </motion.div>
+                </Link>
+              </div>
             </div>
           </motion.div>
-
-          <motion.blockquote
-            className={`${commonStyles.quote} ${themeStyles.quote}`}
-            variants={fadeInUp}
-          >
-            After years of experience in <span className={commonStyles.highlight}>software engineering</span> and <span className={commonStyles.highlight}>AI</span>, I founded <span className={commonStyles.highlight}>Megicode</span> to help businesses achieve breakthrough results using intelligent systems.
-          </motion.blockquote>
-
-          <motion.div 
-            className={commonStyles.socialLinks}
-            variants={fadeInUp}
-          >
-            <Link 
-              href="https://github.com/ghulam-mujtaba5" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className={commonStyles.socialLink}
-            >
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Image
-                  src={theme === 'dark' ? "/GithubDark.svg" : "/github_icon.svg"}
-                  alt="GitHub"
-                  width={24}
-                  height={24}
-                />
-              </motion.div>
-            </Link>
-            <Link 
-              href="https://pk.linkedin.com/in/ghulamujtabaofficial" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className={commonStyles.socialLink}
-            >
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Image
-                  src={theme === 'dark' ? "/LinkedinDark.svg" : "/linkedin-icon.svg"}
-                  alt="LinkedIn"
-                  width={24}
-                  height={24}
-                />
-              </motion.div>
-            </Link>
-          </motion.div>
-        </motion.div>
+        ))}
       </motion.div>
     </section>
   );
