@@ -1,7 +1,7 @@
 /* Dark theme styles for AboutFounder */
 
 .founderSection {
-  background: linear-gradient(180deg, rgba(69,115,223,0.05) 0%, rgba(0,0,0,0) 100%);
+  background: #23272f;
 }
 
 .title {
@@ -32,7 +32,7 @@
 }
 
 .content {
-  background: linear-gradient(145deg, rgba(36,44,62,0.95) 0%, rgba(28,35,50,0.98) 100%);
+  background: #23272f;
   border: 1px solid rgba(69,115,223,0.15);
 }
 

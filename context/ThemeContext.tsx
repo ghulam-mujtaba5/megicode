@@ -49,6 +49,25 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   useEffect(() => {
     localStorage.setItem('theme', theme);
     document.documentElement.setAttribute('data-theme', theme);
+    // Update CSS variables for theme colors
+    if (theme === 'dark') {
+      document.documentElement.style.setProperty('--card-bg', '#23272f');
+      document.documentElement.style.setProperty('--text-color', '#e1e5f2');
+      document.documentElement.style.setProperty('--quote-color', '#b4b9c5');
+      document.documentElement.style.setProperty('--role-color', '#4573df');
+      document.documentElement.style.setProperty('--role-bg', '#2a2f38');
+      document.documentElement.style.setProperty('--role-border', 'rgba(69,115,223,0.2)');
+      document.documentElement.style.setProperty('--border-color', '#2a2f38');
+      document.documentElement.style.setProperty('--section-bg', '#23272f');
+    } else {
+      document.documentElement.style.setProperty('--card-bg', 'rgba(255, 255, 255, 0.8)');
+      document.documentElement.style.setProperty('--text-color', '#4a5568');
+      document.documentElement.style.setProperty('--quote-color', '#4a5568');
+      document.documentElement.style.setProperty('--role-color', '#4573df');
+      document.documentElement.style.setProperty('--role-bg', 'rgba(69,115,223,0.08)');
+      document.documentElement.style.setProperty('--role-border', 'rgba(69,115,223,0.15)');
+      document.documentElement.style.setProperty('--border-color', 'white');
+    }
   }, [theme]);
 
   // Effect to listen to changes in system color scheme preference
