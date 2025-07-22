@@ -1,14 +1,19 @@
 "use client";
-import React from "react";
+import React, { Suspense } from "react";
 import CookieConsentBanner from "../components/CookieConsentBanner/CookieConsentBanner";
 import { usePageView } from "@/hooks/usePageView";
 
-export default function ClientLayout({ children }: { children: React.ReactNode }) {
-  // Track page views
+function AnalyticsWrapper() {
   usePageView();
+  return null;
+}
 
+export default function ClientLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
+      <Suspense fallback={null}>
+        <AnalyticsWrapper />
+      </Suspense>
       <CookieConsentBanner />
       {children}
     </>
