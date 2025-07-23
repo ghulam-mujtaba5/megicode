@@ -67,7 +67,7 @@ const NavBar = () => {
         <div className={styles.skillsText}>Services</div>
       </div>
 
-      {/* Logo and Name Animation (Megicode Icon Component, 100% consistent) */}
+      {/* Logo and Wordmark Combined */}
       <div
         className={styles.logoAnimation}
         role="button"
@@ -75,29 +75,16 @@ const NavBar = () => {
         aria-label="Home"
         onClick={() => navigateTo("/")}
         onKeyPress={(e) => e.key === 'Enter' && navigateTo("/")}
-        style={{ cursor: 'pointer' }}
+        style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}
       >
-        {/* Use the gmicon component for 100% design and animation parity */}
-        {typeof window !== 'undefined' && (
-          (() => {
-            const GmIcon = require('../Icon/gmicon').default;
-            return (
-              <GmIcon showOnDesktop={true} />
-            );
-          })()
-        )}
-        <div className={styles.typo}>
-          <span style={{position: 'relative', display: 'inline-block'}}>
-            <img
-              className={styles.nameIcon}
-              loading="lazy"
-              alt="Megicode Name"
-              src="/megicode-wordmark.svg"
-              style={{ maxWidth: "100%", height: "auto" }}
-            />
-            <span className="crystal-shine" style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%'}}></span>
-          </span>
-        </div>
+        <span className={styles.crystalShine} aria-hidden="true"></span>
+        <img
+          src="/megicode-navbar-logo.svg"
+          alt="Megicode Logo and Wordmark"
+          className={styles.navbarLogo}
+          style={{ maxHeight: 48, width: 'auto', display: 'block' }}
+          loading="eager"
+        />
       </div>
 
       {/* Article page */}

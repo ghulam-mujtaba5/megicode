@@ -7,9 +7,122 @@
   position: relative;
 }
 
-.nameIcon {
+.navbarLogo {
+  display: block;
+  max-height: 56px;
+  width: auto;
+  height: auto;
+  margin-right: 24px;
+  margin-left: 8px;
+  vertical-align: middle;
+  filter: drop-shadow(0 2px 8px rgba(69,115,223,0.25));
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), filter 0.3s cubic-bezier(0.4,0,0.2,1);
+  will-change: transform, filter;
+  animation: logoFloat 5s ease-in-out infinite;
+}
+
+.logoAnimation:hover .navbarLogo,
+.logoAnimation:focus .navbarLogo {
+  transform: scale(1.06) rotate(-2deg);
+  filter: drop-shadow(0 8px 24px #4573df55) drop-shadow(0 0px 32px #eaf6ff33);
+}
+
+@keyframes logoFloat {
+  0%   { transform: translateY(0) scale(1); }
+  50%  { transform: translateY(-3px) scale(1.02); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+
+/* Tagline under logo (if present in SVG) */
+.navbarLogoTagline {
+  display: block;
+  font-size: 11px;
+  color: #eaf6ff;
+  opacity: 0.92;
+  letter-spacing: 0.04em;
+  margin-top: -4px;
+  margin-left: 2px;
+  font-family: 'Open Sans', 'Manrope', sans-serif;
+}
+
+@media (max-width: 1100px) {
+  .navbarLogo {
+    max-height: 40px;
+    margin-right: 12px;
+  }
+  .navbarLogoTagline {
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 800px) {
+  .navbarLogo {
+    max-height: 32px;
+    margin-right: 6px;
+  }
+  .navbarLogoTagline {
+    display: none;
+  }
+}
+
+.logoAnimation {
   position: relative;
-  z-index: 1;
+  display: flex;
+  align-items: center;
+  min-height: 56px;
+  transition: filter 0.3s cubic-bezier(0.4,0,0.2,1), transform 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+.logoAnimation:focus-within,
+.logoAnimation:focus,
+.logoAnimation:hover {
+  filter: drop-shadow(0 2px 8px #4573df55);
+  transform: scale(1.045);
+  outline: none;
+  background: none;
+  border-radius: 0;
+  transition: filter 0.3s cubic-bezier(0.4,0,0.2,1), transform 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+.logoAnimation:hover .crystal-shine,
+.logoAnimation:focus .crystal-shine {
+  left: 120%;
+  transition: left 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+
+.logoAnimation .crystal-shine {
+  transition: left 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+
+.logoAnimation:focus-visible {
+  outline: 2px solid #4573df;
+  outline-offset: 2px;
+}
+
+.logoAnimation .crystal-shine {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.08) 100%);
+  transform: skewX(-24deg);
+  pointer-events: none;
+  transition: left 0.7s cubic-bezier(0.4,0,0.2,1);
+  z-index: 2;
+}
+
+.logoAnimation:hover .crystal-shine,
+.logoAnimation:focus .crystal-shine {
+  left: 110%;
+}
+
+@media (max-width: 800px) {
+  .logoAnimation {
+    min-height: 40px;
+  }
 }
 
 /* Crystal shine effect */
