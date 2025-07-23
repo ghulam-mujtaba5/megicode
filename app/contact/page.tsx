@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import styles from './contact.module.css';
 import LoadingAnimation from '@/components/LoadingAnimation/LoadingAnimation';
 import {
-  FaEnvelope, FaPhoneAlt, FaMapMarkerAlt, FaClock, FaLinkedin, FaGithub, FaInstagram, FaCheckCircle, FaBolt, FaComments, FaRocket, FaCogs, FaTools
+  FaEnvelope, FaPhoneAlt, FaMapMarkerAlt, FaClock, FaLinkedin, FaGithub, FaInstagram, FaCheckCircle, FaExclamationCircle, FaBolt, FaComments, FaRocket, FaCogs, FaTools, FaCity, FaFlag, FaGlobe, FaFileInvoiceDollar
 } from 'react-icons/fa';
 import { FiChevronRight } from 'react-icons/fi';
 
@@ -38,29 +38,29 @@ function FAQAccordion() {
   const [openIndex, setOpenIndex] = React.useState<number | null>(null);
   const faqs = [
     {
-      question: 'How quickly do you respond?',
-      answer: 'We typically respond within 24 hours during business days. Our team is committed to providing timely support and quick turnaround times for all inquiries.',
-      icon: <FaBolt />
-    },
-    {
-      question: 'Do you offer free consultations?',
-      answer: 'Yes, we offer a free initial consultation to discuss your project needs, timeline, and budget. This helps us understand your vision and provide the best solution.',
-      icon: <FaComments />
-    },
-    {
-      question: 'What services do you provide?',
-      answer: 'We specialize in web development, mobile apps, UI/UX design, technical consulting, cloud solutions, and digital transformation services.',
+      question: 'What types of projects do you specialize in?',
+      answer: 'We specialize in building custom web applications, scalable mobile apps, and robust e-commerce solutions. We have extensive experience in SaaS development, enterprise software, and digital platform engineering for startups and established businesses.',
       icon: <FaRocket />
     },
     {
-      question: 'What is your development process?',
-      answer: 'We follow an agile development methodology with regular updates, milestone reviews, and continuous client collaboration to ensure project success.',
+      question: 'Which technologies do you work with?',
+      answer: 'Our team is proficient in a modern tech stack, including React, Next.js, and Node.js for web development, and React Native for mobile apps. We leverage cloud platforms like AWS and Vercel for scalable infrastructure and follow best practices in CI/CD and DevOps.',
       icon: <FaCogs />
     },
     {
-      question: 'Do you provide ongoing support?',
-      answer: 'Yes, we offer comprehensive post-launch support including maintenance, updates, bug fixes, and feature enhancements to keep your solution running smoothly.',
-      icon: <FaTools />
+      question: 'What does your typical project timeline look like?',
+      answer: 'A typical project is divided into four phases: Discovery & Strategy (1-2 weeks), Design & Prototyping (2-4 weeks), Development & Testing (6-12 weeks), and Deployment & Support. Timelines vary based on project complexity, but we always provide a detailed roadmap upfront.',
+      icon: <FaClock />
+    },
+    {
+      question: 'How do you handle project management and communication?',
+      answer: 'We use an agile approach with weekly sprints and regular check-ins. You\'ll have a dedicated project manager and access to a shared Slack channel and project board (like Jira or Trello) for transparent communication and real-time progress tracking.',
+      icon: <FaComments />
+    },
+    {
+      question: 'What are your pricing models?',
+      answer: 'We offer flexible pricing models to fit your needs, including fixed-price contracts for well-defined projects, time and materials for iterative development, and dedicated team retainers for ongoing collaboration. We provide a detailed proposal after our initial consultation.',
+      icon: <FaFileInvoiceDollar />
     }
   ];
 
@@ -111,8 +111,8 @@ export default function ContactPage() {
     service: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState('');
   const [showSuccess, setShowSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   const [errors, setErrors] = useState<{[key: string]: string}>({});
   const [touched, setTouched] = useState<{[key: string]: boolean}>({});
 
@@ -128,6 +128,8 @@ export default function ContactPage() {
         return value.trim().length < 3 ? 'Subject must be at least 3 characters' : '';
       case 'message':
         return value.trim().length < 10 ? 'Message must be at least 10 characters' : '';
+      case 'service':
+        return !value ? 'Please select a service' : '';
       case 'phone':
         if (value && !/^\+?[0-9\s\-\(\)]{10,}$/.test(value.replace(/\s/g, ''))) {
           return 'Please enter a valid phone number';
@@ -140,7 +142,7 @@ export default function ContactPage() {
 
   const validateForm = () => {
     const newErrors: {[key: string]: string} = {};
-    const requiredFields = ['name', 'email', 'subject', 'message'];
+    const requiredFields = ['name', 'email', 'subject', 'message', 'service'];
     
     requiredFields.forEach(field => {
       const error = validateField(field, formData[field as keyof typeof formData]);
@@ -183,12 +185,11 @@ export default function ContactPage() {
     e.preventDefault();
 
     if (!validateForm()) {
-      setSubmitStatus('Please fix the errors above before submitting.');
       return;
     }
 
     setIsSubmitting(true);
-    setSubmitStatus('');
+    setSubmitError('');
 
     try {
       const response = await fetch('/api/contact', {
@@ -199,22 +200,23 @@ export default function ContactPage() {
 
       if (response.ok) {
         setShowSuccess(true);
-        setSubmitStatus('Thank you! Your message has been sent successfully. We\'ll get back to you within 24 hours.');
         setFormData({ name: '', email: '', phone: '', company: '', subject: '', message: '', service: '' });
         setErrors({});
         setTouched({});
         
         setTimeout(() => {
           setShowSuccess(false);
-          setSubmitStatus('');
         }, 6000);
       } else {
         const errorData = await response.json();
-        setSubmitStatus(errorData.error || 'Sorry, there was an error sending your message.');
+        const errorMessage = errorData.error || 'Sorry, there was an error sending your message.';
+        setSubmitError(errorMessage);
+        setTimeout(() => setSubmitError(''), 6000);
       }
     } catch (error) {
-      setSubmitStatus('Sorry, there was an error sending your message. Please try again or contact us directly.');
+      setSubmitError('Sorry, there was an error sending your message. Please try again or contact us directly.');
       console.error('Form submission error:', error);
+      setTimeout(() => setSubmitError(''), 6000);
     } finally {
       setIsSubmitting(false);
     }
@@ -291,14 +293,17 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Success Message */}
-              {submitStatus && !showSuccess && (
-                <div className={styles.statusMessage} role="alert">{submitStatus}</div>
-              )}
+              {/* Status Messages */}
               {showSuccess && (
                 <div className={styles.successMessage}>
                   <FaCheckCircle className={styles.successIcon} aria-hidden="true" />
                   <span>Thank you! Your message has been sent successfully. We'll get back to you soon.</span>
+                </div>
+              )}
+              {submitError && (
+                <div className={styles.errorMessage} role="alert">
+                  <FaExclamationCircle className={styles.successIcon} aria-hidden="true" />
+                  <span>{submitError}</span>
                 </div>
               )}
 
@@ -402,10 +407,12 @@ export default function ContactPage() {
                       name="service"
                       value={formData.service}
                       onChange={handleInputChange}
-                      className={styles.input}
+                      onBlur={handleBlur}
+                      className={`${styles.input} ${errors.service ? styles.inputError : ''}`}
                       aria-label="Service of interest"
+                      required
                     >
-                      <option value="">Select a service</option>
+                      <option value="" disabled hidden>Select a service...</option>
                       <option value="web-development">Web Development</option>
                       <option value="mobile-apps">Mobile Applications</option>
                       <option value="ui-ux-design">UI/UX Design</option>
@@ -414,8 +421,13 @@ export default function ContactPage() {
                       <option value="digital-transformation">Digital Transformation</option>
                       <option value="other">Other</option>
                     </select>
-                    <label htmlFor="service" className={styles.floatingLabel}>Service Interest</label>
+                    <label htmlFor="service" className={styles.floatingLabel}>Service Interest *</label>
                   </div>
+                  {errors.service ? (
+                    <span className={styles.errorText}>{errors.service}</span>
+                  ) : (
+                    <span className={styles.helperText}>Required</span>
+                  )}
                 </div>
 
                 {/* Subject */}
@@ -450,7 +462,8 @@ export default function ContactPage() {
                       name="message"
                       value={formData.message}
                       onChange={handleInputChange}
-                      className={`${styles.input} ${styles.textarea}`}
+                      onBlur={handleBlur}
+                      className={`${styles.input} ${styles.textarea} ${errors.message ? styles.inputError : ''}`}
                       rows={5}
                       aria-label="Your message"
                       placeholder=" "
@@ -504,24 +517,13 @@ export default function ContactPage() {
                   </div>
                 </div>
                 
-                <div className={styles.contactItem}>
-                  <span className={styles.contactIcon} aria-hidden="true">
-                    <FaPhoneAlt />
-                  </span>
-                  <div className={styles.contactDetails}>
-                                        {/* TODO: Replace with your actual phone number */}
-                    <h4>Phone</h4>
-                    <p>+1 (555) 123-4567</p>
-                    <p className={styles.contactNote}>WhatsApp Available</p>
-                  </div>
-                </div>
+
                 
                 <div className={styles.contactItem}>
                   <span className={styles.contactIcon} aria-hidden="true">
                     <FaMapMarkerAlt />
                   </span>
                   <div className={styles.contactDetails}>
-                                        {/* TODO: Verify and update your business location */}
                     <h4>Location</h4>
                     <p>Lahore, Pakistan<br />Serving clients globally</p>
                   </div>
@@ -532,9 +534,8 @@ export default function ContactPage() {
                     <FaClock />
                   </span>
                   <div className={styles.contactDetails}>
-                                        {/* TODO: Update with your actual business hours */}
                     <h4>Business Hours</h4>
-                    <p>Mon - Fri, 9 AM - 5 PM PST</p>
+                    <p>Mon - Fri, 9 AM - 6 PM PKT</p>
                   </div>
                 </div>
               </div>
@@ -552,19 +553,21 @@ export default function ContactPage() {
                   <a href="https://www.instagram.com/megicode/" className={`${styles.socialLink} ${styles.instagramLink}`} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                     <FaInstagram />
                   </a>
-                </div>                </div>
-              </div>
-
-              <div className={styles.sectionDivider}></div>
-                {/* FAQ Section */}
-                <div className={styles.faqSection}>
-                  <h3>Frequently Asked Questions</h3>
-                  <FAQAccordion />
                 </div>
+              </div>
             </div>
-          </section>
+          </div>
+        </section>
 
-        <div className={styles.sectionDivider}></div>
+        {/* FAQ Section */}
+        <section className={styles.faqSection}>
+          <h2 className={styles.faqTitle}>
+            Frequently Asked Questions
+            <span className={styles.titleAccent}>.</span>
+          </h2>
+          <FAQAccordion />
+        </section>
+
         {/* Location Section */}
         <section className={styles.mapSection}>
           <div className={styles.card}>
@@ -580,7 +583,7 @@ export default function ContactPage() {
               
               <div className={styles.locationDetails}>
                 <div className={styles.locationItem}>
-                  <span className={styles.detailIcon}>🏙️</span>
+                  <span className={styles.detailIcon}><FaCity /></span>
                   <div>
                     <strong>City</strong>
                     <p>Lahore - Cultural & Tech Capital</p>
@@ -588,7 +591,7 @@ export default function ContactPage() {
                 </div>
                 
                 <div className={styles.locationItem}>
-                  <span className={styles.detailIcon}>🇵🇰</span>
+                  <span className={styles.detailIcon}><FaFlag /></span>
                   <div>
                     <strong>Country</strong>
                     <p>Pakistan - South Asia</p>
@@ -596,7 +599,7 @@ export default function ContactPage() {
                 </div>
                 
                 <div className={styles.locationItem}>
-                  <span className={styles.detailIcon}>🌐</span>
+                  <span className={styles.detailIcon}><FaGlobe /></span>
                   <div>
                     <strong>Service Area</strong>
                     <p>Global - Remote & On-site</p>

@@ -1,31 +1,41 @@
 import { NextResponse } from 'next/server';
+import { Resend } from 'resend';
+import React from 'react';
+import { ContactFormEmail } from '../../../components/Email/ContactFormEmail';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+const fromEmail = process.env.FROM_EMAIL;
+const toEmail = process.env.TO_EMAIL;
 
 export async function POST(request: Request) {
+  if (!fromEmail || !toEmail || !process.env.RESEND_API_KEY) {
+    return NextResponse.json(
+      { error: 'Missing required environment variables for email configuration.' },
+      { status: 500 }
+    );
+  }
   try {
     const body = await request.json();
     const { name, email, subject, message, phone, company, service } = body;
 
-    // --- Basic Server-Side Validation ---
-    if (!name || !email || !subject || !message) {
+    // --- Server-Side Validation ---
+    if (!name || !email || !subject || !message || !service) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
-    // --- TODO: Implement real email sending logic here ---
-    // For example, using a service like Resend, Nodemailer, or SendGrid.
-    // console.log('Simulating email sending...');
-    // console.log(`To: your-email@example.com`);
-    // console.log(`From: ${email}`);
-    // console.log(`Subject: ${subject}`);
-    // console.log(`Message: ${message}`);
-    // console.log(`--- Additional Info ---`);
-    // console.log(`Name: ${name}`);
-    // console.log(`Phone: ${phone || 'Not provided'}`);
-    // console.log(`Company: ${company || 'Not provided'}`);
-    // console.log(`Service: ${service || 'Not specified'}`);
-    // console.log('-------------------------');
+    // --- Send Email using Resend ---
+    const { data, error } = await resend.emails.send({
+      from: fromEmail,
+      to: [toEmail],
+      subject: `New Message from ${name}: ${subject}`,
+      replyTo: email,
+      react: ContactFormEmail({ name, email, subject, message, phone, company, service }) as React.ReactElement,
+    });
 
-    // Simulate a delay to mimic a real API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    if (error) {
+      console.error('Resend API Error:', error);
+      return NextResponse.json({ error: 'Error sending message.' }, { status: 500 });
+    }
 
     return NextResponse.json({ message: 'Message sent successfully!' }, { status: 200 });
 

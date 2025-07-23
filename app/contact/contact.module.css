@@ -13,27 +13,31 @@
 .container[data-theme="dark"] {
   --bg-color: #181c22;
   --text-color: #ffffff;
-  --card-bg: linear-gradient(145deg, #232946 0%, #1e2329 100%);
+  --card-bg: #1e2329;
   --input-bg: rgba(35, 41, 70, 0.8);
   --input-border: rgba(255, 255, 255, 0.1);
   --border-color: rgba(255, 255, 255, 0.1);
-  --primary: #374151;
-  --primary-light: #6b7280;
+  --primary: #667eea;
+  --primary-light: #764ba2;
   --primary-dark: #1f2937;
   --text-secondary: #b0c4d8;
+  --accent-color-weak: #667eea;
+  --accent-color-strong: #764ba2;
 }
 
 .container[data-theme="light"] {
   --bg-color: #ffffff;
   --text-color: #181c22;
-  --card-bg: linear-gradient(145deg, #ffffff 0%, #f5f7fa 100%);
+  --card-bg: #ffffff;
   --input-bg: rgba(255, 255, 255, 0.95);
   --input-border: rgba(107, 114, 128, 0.1);
   --border-color: rgba(107, 114, 128, 0.15);
-  --primary: #374151;
-  --primary-light: #6b7280;
+  --primary: #667eea;
+  --primary-light: #764ba2;
   --primary-dark: #1f2937;
   --text-secondary: #637a96;
+  --accent-color-weak: #667eea;
+  --accent-color-strong: #764ba2;
 }
 
 /* Background Effects */
@@ -132,7 +136,7 @@
 }
 
 .heroTitle {
-  font-size: clamp(2rem, 6vw, 4rem);
+  font-size: clamp(2.5rem, 6vw, 4rem);
   font-weight: 800;
   margin-bottom: clamp(1.5rem, 3vh, 2.5rem);
   -webkit-backdrop-filter: blur(10px);
@@ -220,15 +224,11 @@
 
 /* Card Styles */
 .card {
-  background-color: var(--card-bg-color);
+  background: var(--card-bg);
+  color: var(--text-color);
   border-radius: clamp(16px, 4vw, 24px);
   padding: clamp(1.25rem, 4vw, 2.5rem);
-  border: 1px solid transparent;
-  background-image: linear-gradient(var(--card-bg-color), var(--card-bg-color)),
-                    linear-gradient(to right, var(--accent-color-weak), var(--accent-color-strong));
-  background-origin: border-box;
-  background-clip: padding-box, border-box;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.04), 0 8px 16px rgba(0,0,0,0.08);
+  border: 1px solid var(--border-color);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   overflow: hidden;
@@ -241,7 +241,8 @@
 }
 
 .container[data-theme="dark"] .card {
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1), 0 8px 16px rgba(0,0,0,0.2);
+  background: linear-gradient(145deg, #232946 0%, #1e2329 100%);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0px rgba(255, 255, 255, 0.05);
 }
 
 .container[data-theme="dark"] .card:hover {
@@ -249,10 +250,8 @@
 }
 
 .container[data-theme="light"] .card {
-  box-shadow: 
-    0 20px 60px rgba(0, 0, 0, 0.08), 
-    0 8px 25px rgba(0, 0, 0, 0.04), 
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  background: linear-gradient(145deg, #ffffff 0%, #f5f7fa 100%);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08), 0 8px 25px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 /* Form Styles */
@@ -291,7 +290,7 @@
 }
 
 .formTitle {
-  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-size: clamp(1.5rem, 4vw, 2rem);
   font-weight: 700;
   margin: 0;
   color: var(--text-color);
@@ -323,10 +322,9 @@
   }
 }
 
-.successMessage {
+.successMessage, .errorMessage {
   padding: 1rem;
   border-radius: 8px;
-  background: #10b981;
   color: white;
   margin-bottom: 1.5rem;
   text-align: center;
@@ -336,6 +334,14 @@
   gap: 0.5rem;
   animation: slideInDown 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
+
+.successMessage {
+  background: #10b981;
+}
+
+.errorMessage {
+  background: #ef4444;
+}
 .successIcon {
   font-size: 1.5rem;
   margin-right: 8px;
@@ -344,7 +350,7 @@
 /* Form Grid */
 .formGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
   gap: clamp(0.75rem, 2vw, 1rem);
   margin-bottom: clamp(0.75rem, 2vw, 1rem);
   width: 100%;
@@ -551,7 +557,7 @@
 /* Contact Information Styles */
 .contactInfo {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem;
   margin-bottom: 1.5rem;
 }
@@ -591,6 +597,8 @@
 
 .contactDetails p {
   margin: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .contactDetails a {
@@ -604,6 +612,16 @@
 
 .container[data-theme="light"] .contactDetails p {
   color: #6b7280;
+}
+
+@media (max-width: 480px) {
+  .heroTitle {
+    font-size: 2.2rem;
+  }
+
+  .formTitle {
+    font-size: 1.4rem;
+  }
 }
 
 /* Social Links */
@@ -646,16 +664,21 @@
 }
 
 /* FAQ Section */
-.faqSection h3 {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 1.5rem;
+.faqSection {
+  padding: 4rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 .faqContainer {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .faqItem {
