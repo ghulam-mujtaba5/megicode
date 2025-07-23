@@ -3,14 +3,23 @@ import { Resend } from 'resend';
 import React from 'react';
 import { ContactFormEmail } from '../../../components/Email/ContactFormEmail';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+let resend: Resend | null = null;
+if (process.env.RESEND_API_KEY) {
+  resend = new Resend(process.env.RESEND_API_KEY);
+}
 const fromEmail = process.env.FROM_EMAIL;
 const toEmail = process.env.TO_EMAIL;
 
 export async function POST(request: Request) {
-  if (!fromEmail || !toEmail || !process.env.RESEND_API_KEY) {
+  if (!fromEmail || !toEmail) {
     return NextResponse.json(
       { error: 'Missing required environment variables for email configuration.' },
+      { status: 500 }
+    );
+  }
+  if (!resend) {
+    return NextResponse.json(
+      { error: 'Missing Resend API key. Please set RESEND_API_KEY in your environment.' },
       { status: 500 }
     );
   }
