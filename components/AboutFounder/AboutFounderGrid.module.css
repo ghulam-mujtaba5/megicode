@@ -2,10 +2,7 @@
   position: relative;
   padding: 4rem 0;
   overflow: hidden;
-  background: var(--section-bg, linear-gradient(180deg, 
-    rgba(69,115,223,0.03) 0%,
-    rgba(69,115,223,0.02) 100%
-  ));
+  background: #fff; /* Matches site light background for consistency */
 }
 
 [data-theme='dark'] .leadershipSection {
