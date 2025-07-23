@@ -1,26 +1,32 @@
-<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="megicodeGradient" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#4573df" />
-      <stop offset="100%" stop-color="#cfe8ef" />
-    </linearGradient>
-    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
-      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#4573df" flood-opacity="0.15"/>
-    </filter>
-  </defs>
-
-  <!-- Background Circle -->
-  <circle cx="32" cy="32" r="30" fill="none" stroke="url(#megicodeGradient)" stroke-width="3.5" filter="url(#shadow)"/>
-
-  <!-- Stylized "M" for Megicode with cleared intersection -->
-  <path d="M20 44V22L32 34L44 22V44" stroke="url(#megicodeGradient)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-
-  <!-- Minimalist AI Circuit Nodes -->
-  <circle cx="20" cy="22" r="1.5" fill="#4573df"/>
-  <circle cx="44" cy="22" r="1.5" fill="#4573df"/>
-  <circle cx="32" cy="34" r="1.5" fill="#4573df"/>
-
-  <!-- Code Angle Brackets -->
-  <path d="M17 32 L13.5 28 L17 24" stroke="url(#megicodeGradient)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M47 32 L50.5 28 L47 24" stroke="url(#megicodeGradient)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_1_30)">
+<path d="M32 62C48.5685 62 62 48.5685 62 32C62 15.4315 48.5685 2 32 2C15.4315 2 2 15.4315 2 32C2 48.5685 15.4315 62 32 62Z" stroke="url(#paint0_linear_1_30)" stroke-width="3.5"/>
+<path d="M20 44V22L32 34L44 22V44" stroke="url(#paint1_linear_1_30)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M20 23.5C20.8284 23.5 21.5 22.8284 21.5 22C21.5 21.1716 20.8284 20.5 20 20.5C19.1716 20.5 18.5 21.1716 18.5 22C18.5 22.8284 19.1716 23.5 20 23.5Z" fill="#4573DF"/>
+<path d="M44 23.5C44.8284 23.5 45.5 22.8284 45.5 22C45.5 21.1716 44.8284 20.5 44 20.5C43.1716 20.5 42.5 21.1716 42.5 22C42.5 22.8284 43.1716 23.5 44 23.5Z" fill="#4573DF"/>
+<path d="M32 35.5C32.8284 35.5 33.5 34.8284 33.5 34C33.5 33.1716 32.8284 32.5 32 32.5C31.1716 32.5 30.5 33.1716 30.5 34C30.5 34.8284 31.1716 35.5 32 35.5Z" fill="#4573DF"/>
+<path d="M16 38L10 31L16 24" stroke="url(#paint2_linear_1_30)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M48 38L54 31L48 24" stroke="url(#paint3_linear_1_30)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_1_30" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+<stop stop-color="#4573DF"/>
+<stop offset="1" stop-color="#CFE8EF"/>
+</linearGradient>
+<linearGradient id="paint1_linear_1_30" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+<stop stop-color="#4573DF"/>
+<stop offset="1" stop-color="#CFE8EF"/>
+</linearGradient>
+<linearGradient id="paint2_linear_1_30" x1="-13.1429" y1="-18" x2="98.8333" y2="91.691" gradientUnits="userSpaceOnUse">
+<stop stop-color="#4573DF"/>
+<stop offset="1" stop-color="#CFE8EF"/>
+</linearGradient>
+<linearGradient id="paint3_linear_1_30" x1="-32.5714" y1="-18" x2="79.4048" y2="91.691" gradientUnits="userSpaceOnUse">
+<stop stop-color="#4573DF"/>
+<stop offset="1" stop-color="#CFE8EF"/>
+</linearGradient>
+<clipPath id="clip0_1_30">
+<rect width="64" height="64" fill="white"/>
+</clipPath>
+</defs>
 </svg>
