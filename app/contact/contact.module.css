@@ -261,6 +261,17 @@
   width: 100%;
   margin: 0;
   box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* Mobile-specific section constraints */
+@media (max-width: 767px) {
+  .contactSection {
+    padding: 0.75rem 0 1.5rem 0;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
 }
 
 /* Mobile-first grid layout */
@@ -273,6 +284,16 @@
   box-sizing: border-box;
   max-width: 100vw;
   overflow-x: hidden;
+}
+
+/* Force mobile stacking on small screens */
+@media (max-width: 767px) {
+  .contactGrid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem;
+    padding: 0 0.75rem;
+  }
 }
 
 /* Tablet breakpoint */
@@ -335,6 +356,20 @@
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
+  max-width: 100%;
+}
+
+/* Force mobile card constraints */
+@media (max-width: 767px) {
+  .card {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0.875rem !important;
+    box-sizing: border-box !important;
+    overflow: hidden;
+  }
 }
 
 /* Tablet card styles */
@@ -687,6 +722,17 @@
   gap: 1rem;
   margin-bottom: 1rem;
   width: 100%;
+  box-sizing: border-box;
+}
+
+/* Mobile contact info constraints */
+@media (max-width: 767px) {
+  .contactInfo {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden;
+    gap: 0.75rem;
+  }
 }
 
 .contactItem {
