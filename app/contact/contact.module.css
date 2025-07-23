@@ -176,7 +176,7 @@
 
 /* Contact Content Section */
 .contactSection {
-  padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 3vw, 2rem);
+  padding: clamp(2rem, 5vw, 4rem) 0;
   max-width: 1400px;
   margin: 0 auto;
   width: 100%;
@@ -193,6 +193,7 @@
   box-sizing: border-box;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 clamp(1rem, 3vw, 2rem);
 }
 
 @media (min-width: 1024px) {
