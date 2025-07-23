@@ -4,6 +4,10 @@ import { useTheme } from '../../context/ThemeContext';
 import dynamic from 'next/dynamic';
 import styles from './contact.module.css';
 import LoadingAnimation from '@/components/LoadingAnimation/LoadingAnimation';
+import {
+  FaEnvelope, FaPhoneAlt, FaMapMarkerAlt, FaClock, FaLinkedin, FaGithub, FaInstagram, FaCheckCircle, FaBolt, FaComments, FaRocket, FaCogs, FaTools
+} from 'react-icons/fa';
+import { FiChevronRight } from 'react-icons/fi';
 
 // Static imports for critical components
 import NavBarDesktop from "../../components/NavBar_Desktop_Company/nav-bar-Company";
@@ -29,33 +33,34 @@ const ParticleBackground = dynamic(
   loading: () => <LoadingAnimation size="medium" />
 });
 
+// TODO: Update FAQ content to be more specific to your services.
 function FAQAccordion() {
   const [openIndex, setOpenIndex] = React.useState<number | null>(null);
   const faqs = [
     {
       question: 'How quickly do you respond?',
       answer: 'We typically respond within 24 hours during business days. Our team is committed to providing timely support and quick turnaround times for all inquiries.',
-      icon: '⚡'
+      icon: <FaBolt />
     },
     {
       question: 'Do you offer free consultations?',
       answer: 'Yes, we offer a free initial consultation to discuss your project needs, timeline, and budget. This helps us understand your vision and provide the best solution.',
-      icon: '💬'
+      icon: <FaComments />
     },
     {
       question: 'What services do you provide?',
       answer: 'We specialize in web development, mobile apps, UI/UX design, technical consulting, cloud solutions, and digital transformation services.',
-      icon: '🚀'
+      icon: <FaRocket />
     },
     {
       question: 'What is your development process?',
       answer: 'We follow an agile development methodology with regular updates, milestone reviews, and continuous client collaboration to ensure project success.',
-      icon: '⚙️'
+      icon: <FaCogs />
     },
     {
       question: 'Do you provide ongoing support?',
       answer: 'Yes, we offer comprehensive post-launch support including maintenance, updates, bug fixes, and feature enhancements to keep your solution running smoothly.',
-      icon: '🛠️'
+      icon: <FaTools />
     }
   ];
 
@@ -70,13 +75,11 @@ function FAQAccordion() {
             onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
           >
             <div className={styles.faqQuestionContent}>
-              <span className={styles.faqIcon}>{faq.icon}</span>
+              <span className={styles.faqIcon} aria-hidden="true">{faq.icon}</span>
               <span className={styles.faqQuestionText}>{faq.question}</span>
             </div>
-            <span className={`${styles.faqArrow} ${openIndex === idx ? styles.faqArrowOpen : ''}`}>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M6 4L10 8L6 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+                        <span className={`${styles.faqArrow} ${openIndex === idx ? styles.faqArrowOpen : ''}`} aria-hidden="true">
+              <FiChevronRight />
             </span>
           </button>
           <div className={`${styles.faqAnswerWrapper} ${openIndex === idx ? styles.faqAnswerOpen : ''}`}>
@@ -110,27 +113,111 @@ export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState('');
   const [showSuccess, setShowSuccess] = useState(false);
+  const [errors, setErrors] = useState<{[key: string]: string}>({});
+  const [touched, setTouched] = useState<{[key: string]: boolean}>({});
 
+  // Validation functions
+  const validateField = (name: string, value: string) => {
+    switch (name) {
+      case 'name':
+        return value.trim().length < 2 ? 'Name must be at least 2 characters' : '';
+      case 'email':
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return !emailRegex.test(value) ? 'Please enter a valid email address' : '';
+      case 'subject':
+        return value.trim().length < 3 ? 'Subject must be at least 3 characters' : '';
+      case 'message':
+        return value.trim().length < 10 ? 'Message must be at least 10 characters' : '';
+      case 'phone':
+        if (value && !/^\+?[0-9\s\-\(\)]{10,}$/.test(value.replace(/\s/g, ''))) {
+          return 'Please enter a valid phone number';
+        }
+        return '';
+      default:
+        return '';
+    }
+  };
 
+  const validateForm = () => {
+    const newErrors: {[key: string]: string} = {};
+    const requiredFields = ['name', 'email', 'subject', 'message'];
+    
+    requiredFields.forEach(field => {
+      const error = validateField(field, formData[field as keyof typeof formData]);
+      if (error) newErrors[field] = error;
+    });
+    
+    // Validate optional phone field if provided
+    if (formData.phone) {
+      const phoneError = validateField('phone', formData.phone);
+      if (phoneError) newErrors.phone = phoneError;
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: '' }));
+    }
+    
+    // Mark field as touched
+    setTouched(prev => ({ ...prev, [name]: true }));
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setTouched(prev => ({ ...prev, [name]: true }));
+    
+    // Validate field on blur
+    const error = validateField(name, value);
+    setErrors(prev => ({ ...prev, [name]: error }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!validateForm()) {
+      setSubmitStatus('Please fix the errors above before submitting.');
+      return;
+    }
+
     setIsSubmitting(true);
-    
-    setTimeout(() => {
+    setSubmitStatus('');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setShowSuccess(true);
+        setSubmitStatus('Thank you! Your message has been sent successfully. We\'ll get back to you within 24 hours.');
+        setFormData({ name: '', email: '', phone: '', company: '', subject: '', message: '', service: '' });
+        setErrors({});
+        setTouched({});
+        
+        setTimeout(() => {
+          setShowSuccess(false);
+          setSubmitStatus('');
+        }, 6000);
+      } else {
+        const errorData = await response.json();
+        setSubmitStatus(errorData.error || 'Sorry, there was an error sending your message.');
+      }
+    } catch (error) {
+      setSubmitStatus('Sorry, there was an error sending your message. Please try again or contact us directly.');
+      console.error('Form submission error:', error);
+    } finally {
       setIsSubmitting(false);
-      setShowSuccess(true);
-      setSubmitStatus('Thank you! Your message has been sent successfully.');
-      setFormData({ name: '', email: '', phone: '', company: '', subject: '', message: '', service: '' });
-      
-      // Hide success message after 5 seconds
-      setTimeout(() => setShowSuccess(false), 5000);
-    }, 2000);
+    }
   };
 
   return (
@@ -197,7 +284,7 @@ export default function ContactPage() {
               
               {/* Form Header */}
               <div className={styles.formHeader}>
-                <div className={styles.formIcon}>📧</div>
+                <div className={styles.formIcon} aria-hidden="true"><FaEnvelope /></div>
                 <div>
                   <h2 className={styles.formTitle}>Send us a Message</h2>
                   <p className={styles.formSubtitle}>We'll get back to you within 24 hours</p>
@@ -205,12 +292,15 @@ export default function ContactPage() {
               </div>
 
               {/* Success Message */}
+              {submitStatus && !showSuccess && (
+                <div className={styles.statusMessage} role="alert">{submitStatus}</div>
+              )}
               {showSuccess && (
-  <div className={styles.successMessage}>
-    <span role="img" aria-label="Success" className={styles.successIcon}>✅</span>
-    <span>Thank you! Your message has been sent successfully. We'll get back to you soon.</span>
-  </div>
-)}
+                <div className={styles.successMessage}>
+                  <FaCheckCircle className={styles.successIcon} aria-hidden="true" />
+                  <span>Thank you! Your message has been sent successfully. We'll get back to you soon.</span>
+                </div>
+              )}
 
               {/* Contact Form */}
               <form onSubmit={handleSubmit} autoComplete="off">
@@ -224,14 +314,19 @@ export default function ContactPage() {
           name="name"
           value={formData.name}
           onChange={handleInputChange}
-          className={styles.input}
+          onBlur={handleBlur}
+          className={`${styles.input} ${errors.name ? styles.inputError : ''}`}
           required
           aria-label="Full name"
           placeholder=" "
         />
         <label htmlFor="name" className={styles.floatingLabel}>Name *</label>
       </div>
-      <span className={styles.helperText}>Required</span>
+      {errors.name ? (
+        <span className={styles.errorText}>{errors.name}</span>
+      ) : (
+        <span className={styles.helperText}>Required</span>
+      )}
     </div>
     <div className={styles.formGroup}>
       <div className={styles.floatingLabelGroup}>
@@ -241,95 +336,133 @@ export default function ContactPage() {
           name="email"
           value={formData.email}
           onChange={handleInputChange}
-          className={styles.input}
+          onBlur={handleBlur}
+          className={`${styles.input} ${errors.email ? styles.inputError : ''}`}
           required
           aria-label="Email address"
           placeholder=" "
         />
         <label htmlFor="email" className={styles.floatingLabel}>Email *</label>
       </div>
-      <span className={styles.helperText}>Required</span>
+      {errors.email ? (
+        <span className={styles.errorText}>{errors.email}</span>
+      ) : (
+        <span className={styles.helperText}>Required</span>
+      )}
     </div>
   </div>
 
                 {/* Second Row - Phone and Company */}
                 <div className={styles.formGrid}>
                   <div className={styles.formGroup}>
-                    <label htmlFor="phone" className={styles.label}>Phone</label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      placeholder="+1 (555) 123-4567"
-                      className={styles.input}
-                      aria-label="Phone number"
-                    />
+                    <div className={styles.floatingLabelGroup}>
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                        onBlur={handleBlur}
+                        className={`${styles.input} ${errors.phone ? styles.inputError : ''}`}
+                        aria-label="Phone number"
+                        placeholder=" "
+                      />
+                      <label htmlFor="phone" className={styles.floatingLabel}>Phone</label>
+                    </div>
+                    {errors.phone ? (
+                      <span className={styles.errorText}>{errors.phone}</span>
+                    ) : (
+                      <span className={styles.helperText}>Optional</span>
+                    )}
                   </div>
                   <div className={styles.formGroup}>
-                    <label htmlFor="company" className={styles.label}>Company</label>
-                    <input
-                      type="text"
-                      id="company"
-                      name="company"
-                      value={formData.company}
-                      onChange={handleInputChange}
-                      placeholder="Your company name"
-                      className={styles.input}
-                      aria-label="Company name"
-                    />
+                    <div className={styles.floatingLabelGroup}>
+                      <input
+                        type="text"
+                        id="company"
+                        name="company"
+                        value={formData.company}
+                        onChange={handleInputChange}
+                        onBlur={handleBlur}
+                        className={styles.input}
+                        aria-label="Company name"
+                        placeholder=" "
+                      />
+                      <label htmlFor="company" className={styles.floatingLabel}>Company</label>
+                    </div>
+                    <span className={styles.helperText}>Optional</span>
                   </div>
                 </div>
 
                 {/* Service Interest */}
                 <div className={styles.formGroupFull}>
-                  <label htmlFor="service" className={styles.label}>Service Interest</label>
-                  <select
-                    id="service"
-                    name="service"
-                    value={formData.service}
-                    onChange={handleInputChange}
-                    className={styles.input}
-                    aria-label="Service of interest"
-                  >
-                    <option value="">Select a service</option>
-                    <option value="web-development">Web Development</option>
-                    <option value="mobile-apps">Mobile Applications</option>
-                    <option value="ui-ux-design">UI/UX Design</option>
-                    <option value="consulting">Technical Consulting</option>
-                    <option value="other">Other</option>
-                  </select>
+                  <div className={styles.floatingLabelGroup}>
+                    <select
+                      id="service"
+                      name="service"
+                      value={formData.service}
+                      onChange={handleInputChange}
+                      className={styles.input}
+                      aria-label="Service of interest"
+                    >
+                      <option value="">Select a service</option>
+                      <option value="web-development">Web Development</option>
+                      <option value="mobile-apps">Mobile Applications</option>
+                      <option value="ui-ux-design">UI/UX Design</option>
+                      <option value="consulting">Technical Consulting</option>
+                      <option value="cloud-solutions">Cloud Solutions</option>
+                      <option value="digital-transformation">Digital Transformation</option>
+                      <option value="other">Other</option>
+                    </select>
+                    <label htmlFor="service" className={styles.floatingLabel}>Service Interest</label>
+                  </div>
                 </div>
 
                 {/* Subject */}
                 <div className={styles.formGroupFull}>
-                  <label htmlFor="subject" className={styles.label}>Subject</label>
-                  <input
-                    type="text"
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleInputChange}
-                    placeholder="Brief subject of your inquiry"
-                    className={styles.input}
-                    aria-label="Message subject"
-                  />
+                  <div className={styles.floatingLabelGroup}>
+                    <input
+                      type="text"
+                      id="subject"
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleInputChange}
+                      onBlur={handleBlur}
+                      className={`${styles.input} ${errors.subject ? styles.inputError : ''}`}
+                      required
+                      aria-label="Message subject"
+                      placeholder=" "
+                    />
+                    <label htmlFor="subject" className={styles.floatingLabel}>Subject *</label>
+                  </div>
+                  {errors.subject ? (
+                    <span className={styles.errorText}>{errors.subject}</span>
+                  ) : (
+                    <span className={styles.helperText}>Required</span>
+                  )}
                 </div>
 
                 {/* Message */}
                 <div className={styles.formGroupFull}>
-                  <label htmlFor="message" className={styles.label}>Message</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    placeholder="Tell us about your project or inquiry..."
-                    className={`${styles.input} ${styles.textarea}`}
-                    rows={5}
-                    aria-label="Your message"
-                  ></textarea>
+                  <div className={styles.floatingLabelGroup}>
+                    <textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      className={`${styles.input} ${styles.textarea}`}
+                      rows={5}
+                      aria-label="Your message"
+                      placeholder=" "
+                      required
+                    ></textarea>
+                    <label htmlFor="message" className={styles.floatingLabel}>Message *</label>
+                  </div>
+                  {errors.message ? (
+                    <span className={styles.errorText}>{errors.message}</span>
+                  ) : (
+                    <span className={styles.helperText}>Required - Tell us about your project</span>
+                  )}
                 </div>
 
                 {/* Submit Button */}
@@ -362,9 +495,9 @@ export default function ContactPage() {
               
               <div className={styles.contactInfo}>
                 <div className={styles.contactItem}>
-                  <span className={styles.contactIcon}>
-  <img src="/email icon.svg" alt="Email icon" width={24} height={24} />
-</span>
+                  <span className={styles.contactIcon} aria-hidden="true">
+                    <FaEnvelope />
+                  </span>
                   <div className={styles.contactDetails}>
                     <h4>Email</h4>
                     <p><a href="mailto:info@megicode.com">info@megicode.com</a></p>
@@ -372,32 +505,36 @@ export default function ContactPage() {
                 </div>
                 
                 <div className={styles.contactItem}>
-                  <span className={styles.contactIcon}>
-  <img src="/phone-icon.svg" alt="Phone icon" width={24} height={24} />
-</span>
+                  <span className={styles.contactIcon} aria-hidden="true">
+                    <FaPhoneAlt />
+                  </span>
                   <div className={styles.contactDetails}>
+                                        {/* TODO: Replace with your actual phone number */}
                     <h4>Phone</h4>
-                    <p>+123 456 7890</p>
+                    <p>+1 (555) 123-4567</p>
+                    <p className={styles.contactNote}>WhatsApp Available</p>
                   </div>
                 </div>
                 
                 <div className={styles.contactItem}>
-                  <span className={styles.contactIcon}>
-  <span role="img" aria-label="Address icon" className={styles.emojiIcon}>📍</span>
-</span>
+                  <span className={styles.contactIcon} aria-hidden="true">
+                    <FaMapMarkerAlt />
+                  </span>
                   <div className={styles.contactDetails}>
-                    <h4>Address</h4>
-                    <p>123 Innovation Street<br />Tech District, CA 90210</p>
+                                        {/* TODO: Verify and update your business location */}
+                    <h4>Location</h4>
+                    <p>Lahore, Pakistan<br />Serving clients globally</p>
                   </div>
                 </div>
                 
                 <div className={styles.contactItem}>
-                  <span className={styles.contactIcon}>
-  <span role="img" aria-label="Business hours icon" className={styles.emojiIcon}>🕒</span>
-</span>
+                  <span className={styles.contactIcon} aria-hidden="true">
+                    <FaClock />
+                  </span>
                   <div className={styles.contactDetails}>
+                                        {/* TODO: Update with your actual business hours */}
                     <h4>Business Hours</h4>
-                    <p>24/7 Support Available</p>
+                    <p>Mon - Fri, 9 AM - 5 PM PST</p>
                   </div>
                 </div>
               </div>
@@ -406,16 +543,16 @@ export default function ContactPage() {
               <div className={styles.socialSection}>
                 <h4>Follow Us</h4>
                 <div className={styles.socialLinks}>
-  <a href="https://www.linkedin.com/company/megicode" className={`${styles.socialLink} ${styles.linkedinLink}`} target="_blank" rel="noopener" aria-label="LinkedIn">
-    <img src="/linkedin-icon.svg" alt="LinkedIn" width={28} height={28} />
-  </a>
-  <a href="https://github.com/megicode" className={`${styles.socialLink} ${styles.githubLink}`} target="_blank" rel="noopener" aria-label="GitHub">
-    <img src="/github_icon.svg" alt="GitHub" width={28} height={28} />
-  </a>
-  <a href="https://www.instagram.com/megicode/" className={`${styles.socialLink} ${styles.instagramLink}`} target="_blank" rel="noopener" aria-label="Instagram">
-    <img src="/Instagram-icon.svg" alt="Instagram" width={28} height={28} />
-  </a>
-</div>                </div>
+                  <a href="https://www.linkedin.com/company/megicode" className={`${styles.socialLink} ${styles.linkedinLink}`} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <FaLinkedin />
+                  </a>
+                  <a href="https://github.com/megicode" className={`${styles.socialLink} ${styles.githubLink}`} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                    <FaGithub />
+                  </a>
+                  <a href="https://www.instagram.com/megicode/" className={`${styles.socialLink} ${styles.instagramLink}`} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                    <FaInstagram />
+                  </a>
+                </div>                </div>
               </div>
 
               <div className={styles.sectionDivider}></div>

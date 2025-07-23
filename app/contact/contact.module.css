@@ -134,7 +134,10 @@
 .heroTitle {
   font-size: clamp(2rem, 6vw, 4rem);
   font-weight: 800;
-  margin-bottom: clamp(1rem, 3vh, 2rem);
+  margin-bottom: clamp(1.5rem, 3vh, 2.5rem);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  position: relative;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   background-clip: text;
   -webkit-background-clip: text;
@@ -179,11 +182,30 @@
 
 .contactGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(500px, 100%), 1fr));
+  grid-template-columns: 1fr;
   gap: clamp(2rem, 4vw, 3rem);
   align-items: start;
   min-width: 0;
   box-sizing: border-box;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (min-width: 1024px) {
+  .contactGrid {
+    grid-template-columns: 1.2fr 0.8fr;
+  }
+}
+
+@media (max-width: 1023px) {
+  .contactGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .card {
+    max-width: 100%;
+    overflow: hidden;
+  }
 }
 
 /* Section Divider */
@@ -198,34 +220,32 @@
 
 /* Card Styles */
 .card {
-  background: var(--card-bg);
+  background-color: var(--card-bg-color);
   border-radius: clamp(16px, 4vw, 24px);
   padding: clamp(1.25rem, 4vw, 2.5rem);
-  border: 1px solid var(--border-color);
-  margin-bottom: clamp(1.5rem, 3vh, 2.5rem);
-  backdrop-filter: blur(10px);
+  border: 1px solid transparent;
+  background-image: linear-gradient(var(--card-bg-color), var(--card-bg-color)),
+                    linear-gradient(to right, var(--accent-color-weak), var(--accent-color-strong));
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.04), 0 8px 16px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   overflow: hidden;
   height: fit-content;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
-  transform: translateY(-2px);
-}
-
-@media (max-width: 768px) {
-  .card {
-    margin-bottom: 1rem;
-    padding: clamp(1rem, 3vw, 1.5rem);
-  }
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.06), 0 12px 24px rgba(0,0,0,0.12);
 }
 
 .container[data-theme="dark"] .card {
-  box-shadow: 
-    0 20px 60px rgba(0, 0, 0, 0.4), 
-    0 8px 25px rgba(0, 0, 0, 0.15), 
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1), 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.container[data-theme="dark"] .card:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15), 0 12px 24px rgba(0,0,0,0.3);
 }
 
 .container[data-theme="light"] .card {
@@ -292,6 +312,17 @@
 }
 
 /* Success Message */
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .successMessage {
   padding: 1rem;
   border-radius: 8px;
@@ -303,6 +334,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  animation: slideInDown 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 .successIcon {
   font-size: 1.5rem;
@@ -359,11 +391,51 @@
 }
 
 /* Helper Text */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .helperText {
   font-size: 0.78rem;
   color: #64748b;
   margin-top: 0.1rem;
   margin-left: 0.25rem;
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Contact Note */
+.contactNote {
+  font-size: 0.75rem;
+  color: #10b981;
+  margin-top: 0.25rem;
+  font-weight: 500;
+}
+
+/* Error Styling */
+.errorText {
+  font-size: 0.78rem;
+  color: #ef4444;
+  margin-top: 0.1rem;
+  margin-left: 0.25rem;
+  font-weight: 500;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.inputError {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+}
+
+.inputError:focus {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2) !important;
 }
 
 /* Input Styles */
@@ -385,6 +457,7 @@
   font-weight: 500;
   outline: none;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   box-sizing: border-box;
 }
@@ -477,6 +550,9 @@
 
 /* Contact Information Styles */
 .contactInfo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  gap: 1.5rem;
   margin-bottom: 1.5rem;
 }
 
@@ -731,7 +807,7 @@
 
 .locationDetails {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
   gap: 1rem;
 }
 
