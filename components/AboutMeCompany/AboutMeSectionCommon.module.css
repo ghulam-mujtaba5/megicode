@@ -54,6 +54,10 @@
     }
 }
 
+.title {
+    font-weight: 600;
+}
+
 
 .cardSurface:focus-within, .cardSurface:hover {
 
