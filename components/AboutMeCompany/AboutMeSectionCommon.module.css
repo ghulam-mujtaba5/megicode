@@ -4,7 +4,7 @@
     border-radius: 18px;
     padding: 3.5rem 2.5rem;
     margin: 3rem auto 2rem auto;
-    width: min(100% - 2rem, 1150px);
+    width: min(100% - 2rem, 1080px);
     transition: box-shadow 0.3s;
 }
 
