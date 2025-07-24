@@ -1,0 +1,34 @@
+/* Light theme overrides for OpenPositions */
+.positionsSection {
+  background: var(--section-bg);
+}
+.heading {
+  color: var(--heading-color);
+}
+.positionCard {
+  background: var(--card-bg);
+  border-color: var(--card-border);
+}
+.positionCard:hover {
+  background: var(--card-hover-bg);
+  border-color: var(--brand-blue);
+}
+.title {
+  color: var(--brand-blue);
+}
+.meta {
+  color: var(--brand-blue);
+}
+.location, .type {
+  color: var(--brand-blue);
+}
+.description {
+  color: var(--body-color);
+}
+.applyBtn {
+  background: var(--brand-blue);
+  color: #fff;
+}
+.applyBtn:hover {
+  background: #2d4fa2;
+}

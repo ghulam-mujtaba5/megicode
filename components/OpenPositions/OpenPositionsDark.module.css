@@ -1,0 +1,35 @@
+/* Dark theme overrides for OpenPositions */
+.positionsSection {
+  background: linear-gradient(135deg, rgba(27, 35, 48, 0.98) 0%, rgba(20, 25, 34, 0.97) 100%);
+}
+.heading {
+  color: #b8c6e7;
+}
+.positionCard {
+  background: linear-gradient(135deg, rgba(35, 41, 54, 0.98) 0%, rgba(27, 35, 48, 0.97) 100%);
+  border-color: var(--card-border);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.20), 0 1px 2px rgba(60,60,60,0.13);
+}
+.positionCard:hover {
+  background: #232936;
+  border-color: #7ba0ff;
+}
+.title {
+  color: #7ba0ff;
+}
+.meta {
+  color: #7ba0ff;
+}
+.location, .type {
+  color: #7ba0ff;
+}
+.description {
+  color: #a3b3d1;
+}
+.applyBtn {
+  background: #4573df;
+  color: #fff;
+}
+.applyBtn:hover {
+  background: #2d4fa2;
+}

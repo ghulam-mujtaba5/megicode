@@ -1,0 +1,64 @@
+/* Dark theme overrides for CareersApplication */
+.applicationSection {
+  background: linear-gradient(135deg, rgba(27, 35, 48, 0.98) 0%, rgba(20, 25, 34, 0.97) 100%);
+}
+.heading {
+  color: #b8c6e7;
+}
+.intro {
+  color: #a3b3d1;
+}
+.email {
+  color: #7ba0ff;
+}
+.successMsg {
+  background: linear-gradient(135deg, rgba(35, 41, 54, 0.98) 0%, rgba(27, 35, 48, 0.97) 100%);
+  color: #7ba0ff;
+  border-color: var(--card-border);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.20), 0 1px 2px rgba(60,60,60,0.13);
+}
+.form {
+  background: #232936;
+  border-color: var(--card-border);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.20), 0 1px 2px rgba(60,60,60,0.13);
+}
+.submitBtn {
+  background: #4573df;
+  color: #fff;
+}
+.submitBtn:hover, .submitBtn:focus {
+  background: #2d4fa2;
+  color: #fff;
+}
+.formGroup input[type="text"],
+.formGroup input[type="email"],
+.formGroup input[type="file"],
+.formGroup textarea {
+  background: #232936;
+  color: #cfd8e3;
+  border: 1.5px solid #3a4664;
+}
+.formGroup input[type="text"]:focus,
+.formGroup input[type="email"]:focus,
+.formGroup input[type="file"]:focus,
+.formGroup textarea:focus {
+  border-color: #7ba0ff;
+}
+.formGroup input[type="file"],
+.formGroup textarea {
+  background: #232936;
+  color: #cfd8e3;
+  border: 1px solid #3a4664;
+}
+@media (max-width: 700px) {
+  .applicationSection {
+    padding: 2rem 0 1rem 0;
+  }
+  .heading {
+    font-size: 1.3rem;
+  }
+  .form {
+    padding: 1.2rem 0.7rem;
+    gap: 0.7rem;
+  }
+}

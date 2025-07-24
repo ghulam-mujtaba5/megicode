@@ -1,0 +1,114 @@
+.positionsSection {
+  width: 100%;
+  padding: 3rem 0 2rem 0;
+  background: var(--section-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: background 0.3s;
+}
+.heading {
+  font-family: 'Poppins', 'Open Sans', Arial, sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--heading-color);
+  margin-bottom: 2rem;
+  letter-spacing: -0.5px;
+  text-align: center;
+}
+.positionsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  max-width: 1100px;
+}
+.positionCard {
+  background: var(--card-bg);
+  border-radius: 1rem;
+  box-shadow: 0 1px 3px rgba(60,60,60,0.09), 0 1px 2px rgba(60,60,60,0.13);
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: box-shadow 0.2s, transform 0.2s, background 0.3s;
+  border: 1.5px solid var(--card-border);
+}
+
+.darkTheme .positionCard {
+  /* Add a subtle dark gradient overlay for depth */
+  background: linear-gradient(135deg, rgba(35, 41, 54, 0.98) 0%, rgba(27, 35, 48, 0.97) 100%);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.20), 0 1px 2px rgba(60,60,60,0.13);
+  border: 1.5px solid var(--card-border);
+}
+.positionCard:hover {
+  box-shadow: 0 6px 16px rgba(69,115,223,0.13), 0 3px 6px rgba(60,60,60,0.13);
+  transform: translateY(-3px) scale(1.03);
+  background: var(--card-hover-bg);
+  border-color: var(--brand-blue);
+}
+.title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--brand-blue);
+  margin-bottom: 0.5rem;
+}
+.meta {
+  font-size: 0.95rem;
+  color: var(--brand-blue);
+  margin-bottom: 0.7rem;
+  display: flex;
+  gap: 1.5rem;
+}
+.location {
+  font-weight: 500;
+}
+.type {
+  font-style: italic;
+}
+.description {
+  font-size: 1rem;
+  color: var(--body-color);
+  margin-bottom: 0.8rem;
+}
+.requirements {
+  margin: 0 0 1rem 1.2rem;
+  padding: 0;
+  color: var(--body-color);
+  font-size: 0.98rem;
+}
+.applyBtn {
+  background: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  padding: 0.7rem 2rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 1px 3px rgba(60,60,60,0.12), 0 1px 2px rgba(60,60,60,0.24);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  margin-top: 0.5rem;
+  outline: none;
+}
+.applyBtn:hover, .applyBtn:focus {
+  background: var(--button-hover-bg);
+  color: var(--button-text);
+  box-shadow: 0 4px 16px rgba(69,115,223,0.18), 0 3px 6px rgba(60,60,60,0.13);
+}
+/* .applyBtn:hover handled above with variable-based styling */
+@media (max-width: 700px) {
+  .positionsSection {
+    padding: 2rem 0 1rem 0;
+  }
+  .heading {
+    font-size: 1.3rem;
+  }
+  .positionsGrid {
+    gap: 1rem;
+  }
+  .positionCard {
+    padding: 1.2rem 0.7rem;
+  }
+}

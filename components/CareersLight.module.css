@@ -1,0 +1,19 @@
+/* Careers Light Theme */
+.lightTheme {
+  --background: #f9fafb;
+  --text-color: #1a1a1a;
+  --section-bg: #f9fafb;
+  --heading-color: #23272f;
+  --body-color: #23272f;
+  --brand-blue: #4573df;
+  --card-bg: #fff;
+  --card-hover-bg: #f1f5ff;
+  --card-border: #e4e8f0;
+  --input-bg: #fff;
+  --input-border: #dbe4ee;
+  --input-text: #1a1a1a;
+  --button-bg: #4573df;
+  --button-text: #fff;
+  --button-hover-bg: #365bb3;
+  --button-border: #4573df;
+}

@@ -1,0 +1,19 @@
+/* Careers Dark Theme */
+.darkTheme {
+  --background: #181a1b;
+  --text-color: #f2f2f2;
+  --section-bg: #181a1b;
+  --heading-color: #f2f2f2;
+  --body-color: #e4e8f0;
+  --brand-blue: #4573df;
+  --card-bg: #23272a;
+  --card-hover-bg: #1b2330;
+  --card-border: #2c3440;
+  --input-bg: #23272a;
+  --input-border: #2c3440;
+  --input-text: #f2f2f2;
+  --button-bg: #4573df;
+  --button-text: #fff;
+  --button-hover-bg: #365bb3;
+  --button-border: #4573df;
+}

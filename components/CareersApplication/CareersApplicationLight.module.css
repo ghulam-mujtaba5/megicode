@@ -1,0 +1,87 @@
+/* Light theme overrides for CareersApplication */
+.applicationSection {
+  background: var(--section-bg);
+}
+.heading {
+  color: var(--heading-color);
+}
+.intro {
+  color: var(--body-color);
+}
+.email {
+  color: var(--brand-blue);
+}
+.successMsg {
+  background: var(--card-bg);
+  color: var(--brand-blue);
+  border-color: var(--card-border);
+}
+.form {
+  background: var(--card-bg);
+  border-color: var(--card-border);
+}
+.submitBtn {
+  background: var(--button-bg, var(--brand-blue));
+  color: var(--button-text, #fff);
+}
+.submitBtn:hover, .submitBtn:focus {
+  background: var(--button-hover-bg, #2d4fa2);
+  color: var(--button-text, #fff);
+}
+.formGroup input[type="text"],
+.formGroup input[type="email"],
+.formGroup input[type="file"],
+.formGroup textarea {
+  background: var(--input-bg, #fff);
+  color: var(--input-text, #23272f);
+  border: 1.5px solid var(--input-border, #c7d0e1);
+}
+.formGroup input[type="text"]:focus,
+.formGroup input[type="email"]:focus,
+.formGroup input[type="file"]:focus,
+.formGroup textarea:focus {
+  border-color: var(--brand-blue);
+}
+.formGroup input[type="file"],
+.formGroup textarea {
+  background: #fff;
+  color: #23272f;
+  border: 1px solid #c7d0e1;
+}
+@media (max-width: 700px) {
+  .applicationSection {
+    padding: 2rem 0 1rem 0;
+  }
+  .heading {
+    font-size: 1.3rem;
+  }
+  .form {
+    padding: 1.2rem 0.7rem;
+    gap: 0.7rem;
+  }
+}
+.heading {
+  color: var(--heading-color);
+}
+.intro {
+  color: var(--body-color);
+}
+.email {
+  color: var(--brand-blue);
+}
+.successMsg {
+  background: var(--card-bg);
+  color: var(--brand-blue);
+  border-color: var(--card-border);
+}
+.form {
+  background: var(--card-bg);
+  border-color: var(--card-border);
+}
+.submitBtn {
+  background: var(--brand-blue);
+  color: #fff;
+}
+.submitBtn:hover {
+  background: #2d4fa2;
+}

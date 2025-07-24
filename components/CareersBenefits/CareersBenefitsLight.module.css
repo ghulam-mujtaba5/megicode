@@ -1,0 +1,21 @@
+/* Light theme overrides for CareersBenefits */
+.benefitsSection {
+  background: var(--section-bg);
+}
+.heading {
+  color: var(--heading-color);
+}
+.benefitCard {
+  background: var(--card-bg);
+  border-color: var(--card-border);
+}
+.benefitCard:hover, .benefitCard:focus {
+  background: var(--card-hover-bg);
+  border-color: var(--brand-blue);
+}
+.title {
+  color: var(--brand-blue);
+}
+.description {
+  color: var(--body-color);
+}

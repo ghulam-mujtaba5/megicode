@@ -1,0 +1,22 @@
+/* Light theme styles for WhyWorkWithUs component */
+.whyWorkSection {
+  background: var(--section-bg, #f5f7fa);
+}
+.heading {
+  color: var(--heading-color, #23272f);
+}
+.reasonCard {
+  background: var(--card-bg, #fff);
+  color: var(--body-color, #23272f);
+  border: 1.5px solid var(--card-border, #e3eefe);
+}
+.icon {
+  color: var(--brand-blue, #4573df);
+  filter: drop-shadow(0 1px 2px rgba(69,115,223,0.15));
+}
+.title {
+  color: var(--brand-blue, #4573df);
+}
+.description {
+  color: var(--body-color, #23272f);
+}

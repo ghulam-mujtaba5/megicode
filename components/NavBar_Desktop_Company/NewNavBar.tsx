@@ -49,7 +49,7 @@ const NewNavBar = () => {
           <li><Link href="/article" className={themeStyles.navLink}>Article</Link></li>
           <li><Link href="/contact" className={themeStyles.navLink}>Contact</Link></li>
           <li><Link href="/reviews" className={themeStyles.navLink}>Reviews</Link></li>
-          <li><Link href="/career" className={themeStyles.navLink}>Careers</Link></li>
+          <li><Link href="/careers" className={themeStyles.navLink}>Careers</Link></li>
         </ul>
       </div>
     </nav>

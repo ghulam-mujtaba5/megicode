@@ -58,9 +58,37 @@ utils/
    ```
 
 ## Theming
-- The theme (light/dark) is managed via React context (`ThemeContext`).
-- The toggle icon in the UI allows users to switch themes.
-- Styles adapt based on the current theme.
+## Theming
+
+The project uses a robust, modular theming system to support both light and dark modes across all major sections and components (except the careers page, which has a separate approach).
+
+### Three-File CSS Module Structure
+For each main section or component, there are three CSS module files:
+- **Common Styles:** `[Component]Common.module.css` — Contains shared styles used in both themes.
+- **Light Theme Styles:** `[Component]Light.module.css` — Contains styles specific to light mode.
+- **Dark Theme Styles:** `[Component]Dark.module.css` — Contains styles specific to dark mode.
+
+#### Example (About Section):
+- `components/AboutHero/AboutHeroCommon.module.css`
+- `components/AboutHero/AboutHeroLight.module.css`
+- `components/AboutHero/AboutHeroDark.module.css`
+
+This pattern is consistently applied throughout the project for sections like About, Services, Contact, and more. For example, the Services section uses:
+- `app/services/ai-machine-learning-common.module.css`
+- `app/services/ai-machine-learning-light.module.css`
+- `app/services/ai-machine-learning-dark.module.css`
+
+### How It Works
+- **Theme Context:** The current theme (light or dark) is managed via React context (`ThemeContext`).
+- **Dynamic Imports:** Components dynamically import and apply the appropriate CSS module(s) based on the active theme.
+- **Class Composition:** Shared classes from the Common file are always applied. Light or Dark classes are conditionally applied depending on the theme.
+- **Global Theme Class:** A global `.darkTheme` or `.lightTheme` class may be applied to the `<body>` or a top-level wrapper, aiding in CSS specificity for theme overrides.
+
+### Why This Structure?
+- **Separation of Concerns:** Keeps shared, light-only, and dark-only styles organized and maintainable.
+- **Scalability:** Makes it easy to update or extend theming for new components or sections.
+- **Consistency:** Ensures a uniform approach to theming across the codebase.
+
 
 ## Accessibility
 
