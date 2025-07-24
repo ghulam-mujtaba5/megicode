@@ -15,7 +15,7 @@ const Tagline = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
       >
-        If You Can Imagine It, We Can Build It
+        If You Can <span className={styles.highlight}>Imagine</span> It, We Can <span className={styles.highlight}>Build</span> It
       </motion.h2>
     </section>
   );
