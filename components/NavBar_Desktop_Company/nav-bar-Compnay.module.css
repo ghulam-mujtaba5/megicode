@@ -24,7 +24,7 @@
 .logoAnimation:hover .navbarLogo,
 .logoAnimation:focus .navbarLogo {
   transform: scale(1.06) rotate(-2deg);
-  filter: drop-shadow(0 8px 24px #4573df55) drop-shadow(0 0px 32px #eaf6ff33);
+  /* filter removed to eliminate shadow on hover */
 }
 
 @keyframes logoFloat {
