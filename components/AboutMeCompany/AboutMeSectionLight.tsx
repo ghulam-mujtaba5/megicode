@@ -61,7 +61,7 @@ const AboutMeSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3, ease: 'easeOut' }}
           >
-            If You Can Imagine It, We Can Build It
+            Your Vision, Our Expertise
           </motion.p>
           <motion.div
             className={`${commonStyles.description} ${themeStyles.description}`}
