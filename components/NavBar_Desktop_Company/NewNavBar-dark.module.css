@@ -1,0 +1,48 @@
+/* NewNavBar-dark.module.css */
+.navbar {
+  background: linear-gradient(145deg, rgba(40,44,52,0.96) 0%, rgba(27,30,37,0.92) 100%);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(69, 115, 223, 0.13);
+  box-shadow: 0 4px 24px 0 rgba(69,115,223,0.05), 0 1.5px 6px 0 rgba(0,0,0,0.12);
+}
+
+.navLink {
+  color: #e1e5f2;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease-in-out;
+  position: relative;
+  padding-bottom: 0.3rem;
+}
+
+.navLink:hover {
+  color: #fff;
+}
+
+.navLink::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background: linear-gradient(90deg, #4573df, #2d4fa2);
+    transition: all 0.3s ease-in-out;
+    transform: translateX(-50%);
+}
+
+.navLink:hover::after {
+    width: 100%;
+}
+
+.navLink {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease-in-out;
+}
+
+.navLink:hover {
+  color: #58a6ff; /* Sample primary color for dark mode */
+}

@@ -4,7 +4,7 @@ import React, { Suspense } from "react";
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { useTheme } from "../../context/ThemeContext";
-import NavBarDesktop from "../../components/NavBar_Desktop_Company/nav-bar-Company";
+import NewNavBar from "../../components/NavBar_Desktop_Company/NewNavBar";
 import NavBarMobile from "../../components/NavBar_Mobile/NavBar-mobile";
 import Footer from "../../components/Footer/Footer";
 import ThemeToggleIcon from "../../components/Icon/sbicon";
@@ -45,7 +45,7 @@ export default function ServicesPage() {
 
       {/* Desktop NavBar */}
       <nav id="desktop-navbar" aria-label="Main Navigation">
-        <NavBarDesktop />
+        <NewNavBar />
       </nav>
 
       {/* Mobile NavBar */}

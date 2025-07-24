@@ -9,12 +9,13 @@ import { FaPencilRuler, FaPalette, FaUserCheck, FaRegObjectGroup, FaUsers, FaRoc
 import { SiFigma, SiAdobe, SiSketch, SiInvision } from "react-icons/si";
 
 import NavBarMobile from "../../../components/NavBar_Mobile/NavBar-mobile";
-import NavBar from "../../../components/NavBar_Desktop_Company/nav-bar-Company";
+import NewNavBar from "../../../components/NavBar_Desktop_Company/NewNavBar";
 import Footer from "../../../components/Footer/Footer";
 import GmIcon from "../../../components/Icon/sbicon";
 import commonStyles from "./ui-ux-product-design-common.module.css";
 import lightStyles from "./ui-ux-product-design-light.module.css";
 import darkStyles from "./ui-ux-product-design-dark.module.css";
+import styles from "./ui-ux-product-design.module.css";
 const service = {
   ...servicesData.find(s => s.slug === "ui-ux-product-design"),
   techs: [
@@ -125,10 +126,10 @@ export default function UIUXProductDesignDetailPage() {
   return (
     <div className={`${commonStyles.aiMLBoxSizingAll} ${themeStyles.main}`}>
       {/* NavBars */}
-      <div className="desktop-navbar-wrapper" style={{ width: '100%', position: 'sticky', top: 0, zIndex: 2100 }}>
-        <NavBar />
+      <div className={styles.desktopNavbarWrapper}>
+        <NewNavBar />
       </div>
-      <div className="mobile-navbar-wrapper" style={{ width: '100%', position: 'sticky', top: 0, zIndex: 2000 }}>
+      <div className={styles.mobileNavbarWrapper}>
         <NavBarMobile />
       </div>
       <GmIcon />
@@ -137,12 +138,7 @@ export default function UIUXProductDesignDetailPage() {
         id="main-content"
         className={commonStyles.mainContent}
         aria-label="UI/UX Product Design Service Detail"
-        style={{ 
-          paddingTop: '88px',
-          maxWidth: '1440px',
-          margin: '0 auto',
-          padding: '88px 24px 64px'
-        }}
+        
       >
         {/* Soft background shapes for extra depth */}
         <div className={commonStyles.bgShapeLeft} aria-hidden="true" />
@@ -281,7 +277,7 @@ export default function UIUXProductDesignDetailPage() {
               return (
                 <span key={i} className={`${commonStyles.techCard} ${themeStyles.techCard}`} data-animate="scale-on-hover">
                   {Icon ? (
-                    <Icon size={40} style={{ marginRight: 12 }} title={t} color={color} />
+                    <Icon size={40} className={styles.techIcon} title={t} color={color} />
                   ) : (
                     <img
                       src={`/meta/${
@@ -290,7 +286,7 @@ export default function UIUXProductDesignDetailPage() {
                           : `${t.replace(/\s/g, '')}.png`
                       }`}
                       alt={t}
-                      style={{ width: 40, height: 40, marginRight: 12 }}
+                      className={styles.techImage}
                     />
                   )}
                   {t}
@@ -317,7 +313,7 @@ export default function UIUXProductDesignDetailPage() {
                 className={`${commonStyles.howCard} ${themeStyles.howCard}`}
                 style={{
                   borderColor: model.isPopular ? model.color : undefined,
-                  transform: model.isPopular ? 'scale(1.05)' : undefined,
+                  transform: model.isPopular ? 'scale(1.05)' : undefined
                 }}
               >
                 {model.isPopular && (
@@ -334,7 +330,8 @@ export default function UIUXProductDesignDetailPage() {
                     <div key={idx} className={`${commonStyles.benefitItem} ${themeStyles.benefitItem}`}>
                       <BsCheckCircleFill
                         size={16}
-                        style={{ color: model.color, flexShrink: 0 }}
+                        style={{ color: model.color }}
+                        className={styles.benefitIcon}
                       />
                       <span>{benefit}</span>
                     </div>

@@ -15,7 +15,7 @@ import { SiReact, SiFlutter, SiSwift, SiKotlin, SiFirebase, SiApple, SiAndroid }
 import { FaMobileAlt, FaCode, FaPaintBrush, FaRocket, FaLifeRing, FaAppStoreIos, FaGooglePlay, FaCogs, FaUserFriends, FaMobile, FaShieldAlt, FaSearch, FaPencilAlt, FaTools, FaCloudUploadAlt, FaChartLine } from "react-icons/fa";
 
 import NavBarMobile from "../../../components/NavBar_Mobile/NavBar-mobile";
-import NavBar from "../../../components/NavBar_Desktop_Company/nav-bar-Company";
+import NewNavBar from "../../../components/NavBar_Desktop_Company/NewNavBar";
 const service = servicesData.find(s => s.slug === "mobile-app-solutions");
 
 const keyFeatures = [
@@ -134,7 +134,7 @@ export default function MobileAppSolutionsPage() {
     <div className={`${commonStyles.aiMLBoxSizingAll} ${themeStyles.main}`}>
       {/* NavBars */}
       <div className="desktop-navbar-wrapper" style={{ width: '100%', position: 'sticky', top: 0, zIndex: 2100 }}>
-        <NavBar />
+        <NewNavBar />
       </div>
       <div className="mobile-navbar-wrapper" style={{ width: '100%', position: 'sticky', top: 0, zIndex: 2000 }}>
         <NavBarMobile />

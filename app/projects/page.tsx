@@ -1,6 +1,6 @@
 "use client";
 import React from 'react';
-import NavBarDesktop from "../../components/NavBar_Desktop_Company/nav-bar-Company";
+import NewNavBar from "../../components/NavBar_Desktop_Company/NewNavBar";
 import NavBarMobile from "../../components/NavBar_Mobile/NavBar-mobile";
 import Footer from "../../components/Footer/Footer";
 import ProjectsShowcase from '../../components/Projects/ProjectsShowcase';
@@ -49,7 +49,7 @@ export default function ProjectsPage() {
           <ThemeToggleIcon />
         </div>
         <h1 style={{position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden'}}>Projects Portfolio</h1>
-        <NavBarDesktop />
+        <NewNavBar />
         <NavBarMobile />
         <ProjectHero />
         <ProjectsShowcase />

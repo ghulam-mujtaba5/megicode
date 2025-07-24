@@ -1,7 +1,7 @@
 "use client";
 import React, { useCallback } from "react";
 import { useTheme } from "../context/ThemeContext";
-import NavBarDesktop from "../components/NavBar_Desktop_Company/nav-bar-Company";
+import NewNavBar from "../components/NavBar_Desktop_Company/NewNavBar";
 import NavBarMobile from "../components/NavBar_Mobile/NavBar-mobile";
 import WelcomeFrame from "../components/welcomeCompany/welcome";
 import AboutMeSection from "../components/AboutMeCompany/AboutMeSectionLight";
@@ -47,7 +47,7 @@ export default function HomePage() {
           <ThemeToggleIcon />
         </div>
         <main className="main-content">
-          <NavBarDesktop />
+          <NewNavBar />
           <NavBarMobile />
           {/* Welcome Frame + Advanced Hero Animation */}
           <section

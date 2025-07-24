@@ -25,7 +25,7 @@ import {
 } from "react-icons/fa";
 
 import NavBarMobile from "../../../components/NavBar_Mobile/NavBar-mobile";
-import NavBar from "../../../components/NavBar_Desktop_Company/nav-bar-Company";
+import NewNavBar from "../../../components/NavBar_Desktop_Company/NewNavBar";
 // Clone the service object and override the techs array to remove 'AI' and 'Azure', and add other relevant technologies
 const service = {
   ...servicesData.find(s => s.slug === "data-analytics-bi"),
@@ -144,7 +144,7 @@ export default function DataAnalyticsDetailPage() {
     <div className={`${commonStyles.aiMLBoxSizingAll} ${themeStyles.main}`}>
       {/* NavBars */}
       <div className="desktop-navbar-wrapper" style={{ width: '100%', position: 'sticky', top: 0, zIndex: 2100 }}>
-        <NavBar />
+        <NewNavBar />
       </div>
       <div className="mobile-navbar-wrapper" style={{ width: '100%', position: 'sticky', top: 0, zIndex: 2000 }}>
         <NavBarMobile />

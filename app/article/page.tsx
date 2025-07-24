@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import NavBarDesktop from "../../components/NavBar_Desktop_Company/nav-bar-Company";
+import NewNavBar from "../../components/NavBar_Desktop_Company/NewNavBar";
 import NavBarMobile from "../../components/NavBar_Mobile/NavBar-mobile";
 import Footer from "../../components/Footer/Footer";
 import ThemeToggleIcon from "../../components/Icon/sbicon";
@@ -39,7 +39,7 @@ const ArticlePage = () => {
         <ThemeToggleIcon />
       </div>
       <nav id="desktop-navbar" aria-label="Main Navigation">
-        <NavBarDesktop />
+        <NewNavBar />
       </nav>
       <nav id="mobile-navbar" aria-label="Mobile Navigation">
         <NavBarMobile />

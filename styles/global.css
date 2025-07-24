@@ -30,6 +30,13 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Apply top padding only on desktop screens where the fixed navbar is visible */
+@media (min-width: 769px) {
+  body {
+    padding-top: 72px;
+  }
+}
+
 /* Dark mode support */
 [data-theme="dark"] {
   background: #181c22;

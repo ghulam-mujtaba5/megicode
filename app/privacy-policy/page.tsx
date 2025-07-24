@@ -1,9 +1,7 @@
-
-
 "use client";
 import React, { useMemo } from "react";
 import styles from "./PrivacyPolicy.module.css";
-import NavBarDesktop from "../../components/NavBar_Desktop_Company/nav-bar-Company";
+import NewNavBar from "../../components/NavBar_Desktop_Company/NewNavBar";
 import NavBarMobile from "../../components/NavBar_Mobile/NavBar-mobile";
 import Footer from "../../components/Footer/Footer";
 import Link from "next/link";
@@ -14,6 +12,7 @@ export default function PrivacyPolicyPage() {
   const themeClass = useMemo(() => theme === "dark" ? styles.darkTheme : styles.lightTheme, [theme]);
   return (
     <div className={themeClass} style={{ minHeight: "100vh", width: "100vw", position: "relative", zIndex: 0, boxSizing: "border-box", transition: "background 0.3s" }}>
+      <NewNavBar />
       <NavBarMobile />
       <main className={styles.privacyMain}>
         <section className={styles.section} aria-labelledby="privacy-policy-title">

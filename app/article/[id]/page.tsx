@@ -1,4 +1,4 @@
-import NavBarDesktop from "../../../components/NavBar_Desktop_Company/nav-bar-Company";
+import NewNavBar from "../../../components/NavBar_Desktop_Company/NewNavBar";
 import NavBarMobile from "../../../components/NavBar_Mobile/NavBar-mobile";
 import Footer from "../../../components/Footer/Footer";
 import { ThemeToggleClient } from "../../../components/Icon";
@@ -133,7 +133,7 @@ const ArticleDetailPage = async ({ params }: { params: { id: string } }) => {
         <ThemeToggleClient style={{ margin: "0 0 0 1.5rem", paddingTop: 18, width: 40 }} />
         <nav id="desktop-navbar" aria-label="Main Navigation">
           {/* Ensure NavBarDesktop renders a <ul> with <li> for navigation links */}
-          <NavBarDesktop />
+          <NewNavBar />
         </nav>
         <nav id="mobile-navbar" aria-label="Mobile Navigation">
           {/* Ensure NavBarMobile renders a <ul> with <li> for navigation links */}

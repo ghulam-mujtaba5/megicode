@@ -7,7 +7,7 @@ import LoadingAnimation from '@/components/LoadingAnimation/LoadingAnimation';
 
 
 // Static imports for critical components
-import NavBarDesktop from "../../components/NavBar_Desktop_Company/nav-bar-Company";
+import NewNavBar from "../../components/NavBar_Desktop_Company/NewNavBar";
 import NavBarMobile from "../../components/NavBar_Mobile/NavBar-mobile";
 import ThemeToggleIcon from "../../components/Icon/sbicon";
 import AboutHero from "../../components/AboutHero/AboutHero";
@@ -86,7 +86,7 @@ export default function AboutPage() {
           aria-label="Main Navigation"
           className="hidden md:block"
         >
-          <NavBarDesktop />
+          <NewNavBar />
         </nav>
 
         {/* Mobile NavBar */}

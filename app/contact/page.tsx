@@ -10,7 +10,7 @@ import {
 import { FiChevronRight } from 'react-icons/fi';
 
 // Static imports for critical components
-import NavBarDesktop from "../../components/NavBar_Desktop_Company/nav-bar-Company";
+import NewNavBar from "../../components/NavBar_Desktop_Company/NewNavBar";
 import NavBarMobile from "../../components/NavBar_Mobile/NavBar-mobile";
 import ThemeToggleIcon from "../../components/Icon/sbicon";
 
@@ -248,7 +248,7 @@ export default function ContactPage() {
           aria-label="Main Navigation"
           className="hidden md:block"
         >
-          <NavBarDesktop />
+          <NewNavBar />
         </nav>
 
         {/* Mobile NavBar */}
