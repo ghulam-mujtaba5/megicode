@@ -136,9 +136,8 @@ const AboutIntro: React.FC<AboutIntroProps> = () => {
               <h3 className={themeStyles['mission h3']}>Our Mission</h3>
             </div>
             <p className={themeStyles['mission p']}>
-              To deliver impactful AI-driven software and digital experiences that help organizations 
-              innovate, optimize, and lead in their industries.
-            </p>
+  We deliver excellence in every project—building intelligent, scalable solutions that create lasting value for our clients, teams, and the global digital ecosystem.
+</p>
           </motion.div>
 
           <motion.div 
@@ -248,9 +247,8 @@ const AboutIntro: React.FC<AboutIntroProps> = () => {
               <h3 className={themeStyles['vision h3']}>Our Vision</h3>
             </div>
             <p className={themeStyles['vision p']}>
-              To become a global leader in AI and intelligent software systems, enabling businesses to 
-              unlock the full potential of data and automation.
-            </p>
+  To set the ideal standard of quality and innovation in business and technology, shaping a better digital world.
+</p>
           </motion.div>
         </div>
       </div>
