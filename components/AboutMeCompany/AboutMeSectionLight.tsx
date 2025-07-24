@@ -37,7 +37,7 @@ const AboutMeSection = () => {
     <>
       <LetsTalkButton />
       <motion.section
-        className={`${commonStyles.cardSurface} ${containerClass}`}
+        className={`${commonStyles.cardSurface} ${themeStyles.cardSurface} ${containerClass}`}
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
@@ -45,10 +45,10 @@ const AboutMeSection = () => {
         aria-labelledby="aboutus-heading"
       >
         <div className={sectionClass}>
-          <div className={commonStyles.accentBar} />
+          <div className={`${commonStyles.accentBar} ${themeStyles.accentBar}`} />
           <motion.h2
             id="aboutus-heading"
-            className={titleClass}
+            className={`${commonStyles.title} ${themeStyles.title}`}
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2, ease: 'easeOut' }}
@@ -56,7 +56,7 @@ const AboutMeSection = () => {
             ABOUT US
           </motion.h2>
           <motion.p
-            className={commonStyles.subtitle}
+            className={`${commonStyles.subtitle} ${themeStyles.subtitle}`}
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3, ease: 'easeOut' }}
@@ -64,15 +64,15 @@ const AboutMeSection = () => {
             If You Can Imagine It, We Can Build It
           </motion.p>
           <motion.div
-            className={descriptionClass}
+            className={`${commonStyles.description} ${themeStyles.description}`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4, ease: 'easeOut' }}
           >
-            <p className={commonStyles.aboutDescription}>
+            <p className={`${commonStyles.aboutDescription} ${themeStyles.aboutDescription}`}>
               Megicode specializes in emerging technologies to drive efficiency, productivity, and growth for businesses worldwide. From ideation to implementation, we collaborate with clients to bring their vision to life with excellence.
             </p>
-            <p className={commonStyles.missionStatement}>
+            <p className={`${commonStyles.missionStatement} ${themeStyles.missionStatement}`}>
               Our mission is to exceed expectations by delivering best-in-class software solutions, with a strong focus on integrating emerging technologies such as data science and AI.
             </p>
           </motion.div>

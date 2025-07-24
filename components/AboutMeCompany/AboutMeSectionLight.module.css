@@ -1,2 +1,28 @@
+.cardSurface {
+  background: #fff;
+  box-shadow: 0 4px 16px 0 rgba(60, 80, 120, 0.08);
+  border: 1.5px solid #e8ebee;
+}
 
+.accentBar {
+  background: #4573df;
+  opacity: 1;
+}
 
+.title {
+  color: #1a202c;
+}
+
+.subtitle {
+  color: #4573df;
+}
+
+.description,
+.aboutDescription {
+  color: #23272f;
+}
+
+.missionStatement {
+  color: #4573df;
+  border-top: 1px solid #dbeafe;
+}
