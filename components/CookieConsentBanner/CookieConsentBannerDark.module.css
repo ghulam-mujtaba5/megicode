@@ -1,16 +1,17 @@
 .root {
   background: #181c23;
   color: #f3f6fa;
-  border: 1px solid #23272f;
-  box-shadow: 0 4px 32px rgba(20,30,50,0.22);
+  border: none;
+  box-shadow: none; /* Removed all outer effects */
 }
 .banner {
   background: rgba(35, 42, 54, 0.85);
   color: #f3f6fa;
-  border: 1px solid rgba(35, 39, 47, 0.3);
-  box-shadow: 0 4px 32px rgba(20, 30, 50, 0.15);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  border: none;
+  box-shadow: none;
+  /* Removed all blur and outer effects */
+  /* backdrop-filter: blur(8px); */
+  /* -webkit-backdrop-filter: blur(8px); */
 }
 .buttonSecondary {
   color: #7ab4ff;

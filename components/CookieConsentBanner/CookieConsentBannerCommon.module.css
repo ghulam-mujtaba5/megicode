@@ -42,7 +42,7 @@
 
 .banner {
   position: fixed;
-  bottom: 2.5vw;
+  bottom: 1vw; /* Reduced bottom padding for minimal space */
   left: 50%;
   transform: translateX(-50%);
   width: 96vw;
@@ -55,14 +55,15 @@
   z-index: 1000;
   font-family: 'Open Sans', 'Manrope', 'Poppins', 'Inter', sans-serif;
   font-size: 1rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-  border-radius: 16px;
+  /* Removed box-shadow for minimal look */
+  border-radius: 12px;
   margin: 0 auto;
   transition: all 0.3s ease;
   gap: 1.2rem;
   border: none;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  /* Removed backdrop-filter for minimal look */
+  /* -webkit-backdrop-filter: blur(8px); */
+  /* backdrop-filter: blur(8px); */
 }
 
 .text {

@@ -144,32 +144,7 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
         aria-label="Megicode quantum animation with orbiting service icons"
         role="img"
       >
-        <defs>
-          <radialGradient id="quantumGlow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#4573df" stopOpacity="0.3" />
-            <stop offset="100%" stopColor="#4573df" stopOpacity="0" />
-          </radialGradient>
-          <filter id="quantumBlur">
-            <feGaussianBlur stdDeviation="2" />
-          </filter>
-        </defs>
-
-        {/* Quantum background effect */}
-        <motion.path
-          d={`M0,-240 L208,-120 L208,120 L0,240 L-208,120 L-208,-120 Z`}
-          fill="url(#quantumGlow)"
-          opacity="0.15"
-          style={{ filter: 'url(#quantumBlur)' }}
-          animate={{
-            opacity: [0.15, 0.25, 0.15],
-            scale: [1, 1.02, 1],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: easeInOut
-          }}
-        />
+        {/* Removed quantumGlow radialGradient and quantumBlur filter for minimal look */}
 
         {/* Quantum particles */}
         {quantumParticles.map((particle, i) => (
@@ -328,7 +303,7 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
                       height={32}
                       rx={12}
                       fill={themeValue === 'dark' ? 'rgba(30,34,54,0.82)' : 'rgba(255,255,255,0.82)'}
-                      style={{ filter: 'blur(1.5px)', stroke: themeValue === 'dark' ? '#4573df' : '#2d4fa2', strokeWidth: 1 }}
+                      style={{ filter: 'blur(1.5px)', stroke: '#f1792e', strokeWidth: 2 }}
                     />
                     <motion.text
                       x={cx}
