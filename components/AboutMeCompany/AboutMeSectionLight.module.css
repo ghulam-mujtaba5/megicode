@@ -15,7 +15,17 @@
 }
 
 .subtitle {
+  /* fallback solid color */
   color: #4573df;
+}
+
+.subtitle-gradient {
+  background: linear-gradient(90deg, #4573df 0%, #6ca8ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  font-weight: 600;
 }
 
 .description,
@@ -24,6 +34,20 @@
 }
 
 .missionStatement {
+  /* fallback solid color */
   color: #4573df;
-  border-top: 1px solid #dbeafe;
+  border-top: 1px solid #e8ebee;
+  margin-top: 2.2rem;
+  padding-top: 1.2rem;
+  font-weight: 600;
 }
+
+.mission-gradient {
+  background: linear-gradient(90deg, #4573df 0%, #6ca8ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  font-weight: 600;
+}
+

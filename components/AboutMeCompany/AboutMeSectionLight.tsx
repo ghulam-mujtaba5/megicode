@@ -40,9 +40,18 @@ const AboutMeSection = () => {
         className={`${commonStyles.cardSurface} ${themeStyles.cardSurface} ${containerClass}`}
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
+        whileHover={{ scale: 1.025 }}
+        whileTap={{ scale: 0.99 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
         role="region"
         aria-labelledby="aboutus-heading"
+        tabIndex={0}
+        style={{ cursor: 'pointer' }}
+        onClick={() => {
+          if (typeof window !== 'undefined') {
+            window.location.href = '/about';
+          }
+        }}
       >
         <div className={sectionClass}>
           <div className={`${commonStyles.accentBar} ${themeStyles.accentBar}`} />
@@ -56,7 +65,7 @@ const AboutMeSection = () => {
             ABOUT US
           </motion.h2>
           <motion.p
-            className={`${commonStyles.subtitle} ${themeStyles.subtitle}`}
+            className={`${commonStyles.subtitle} ${themeStyles.subtitle} ${themeStyles['subtitle-gradient']}`}
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3, ease: 'easeOut' }}
@@ -72,7 +81,7 @@ const AboutMeSection = () => {
             <p className={`${commonStyles.aboutDescription} ${themeStyles.aboutDescription}`}>
               Megicode specializes in emerging technologies to drive efficiency, productivity, and growth for businesses worldwide. From ideation to implementation, we collaborate with clients to bring their vision to life with excellence.
             </p>
-            <p className={`${commonStyles.missionStatement} ${themeStyles.missionStatement}`}>
+            <p className={`${commonStyles.missionStatement} ${themeStyles.missionStatement} ${themeStyles['mission-gradient']}`}>
               Our mission is to exceed expectations by delivering best-in-class software solutions, with a strong focus on integrating emerging technologies such as data science and AI.
             </p>
           </motion.div>
