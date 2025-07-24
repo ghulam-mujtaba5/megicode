@@ -1,52 +1,106 @@
+.cardSurface {
+    background: var(--md-surface, #fff);
+    box-shadow: var(--md-elevation-2, 0 3px 6px rgba(60,60,60,0.16), 0 3px 6px rgba(60,60,60,0.23));
+    border-radius: 18px;
+    padding: 3.5rem 1.5rem;
+    margin: 3rem auto 2rem auto;
+    max-width: 950px;
+    transition: box-shadow 0.3s;
+}
+
+.cardSurface:focus-within, .cardSurface:hover {
+    box-shadow: var(--md-elevation-3, 0 10px 20px rgba(60,60,60,0.19), 0 6px 6px rgba(60,60,60,0.23));
+}
+
+.accentBar {
+    width: 56px;
+    height: 5px;
+    background: #4573df;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+}
+
 .container {
-    margin-top: 10%;
     position: relative;
-    height: 100%;
     width: 100%;
-    border-radius: 15px; /* Rounded corners */
+    padding: 0;
 }
 
 .aboutMeSection {
-    text-align: left;
-    font-family: 'Open Sans';
-    max-width: 90%;
+    max-width: 960px;
     margin: 0 auto;
-    padding: 50px 80px;
-   
+    padding: 0 20px;
+    text-align: left;
 }
 
 .title {
-    font-weight: bold;
-    font-size: 1.5rem;
-    margin-bottom: 20px;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.7rem;
+    color: var(--md-on-background, #1a202c);
+    font-family: 'Poppins', 'Open Sans', Arial, sans-serif;
+    letter-spacing: -0.02em;
+    text-align: left;
+}
+
+.subtitle {
+    font-size: 1.35rem;
+    font-weight: 600;
+    margin-bottom: 2.2rem;
+    color: #4573df;
+    letter-spacing: 0.01em;
+    font-family: 'Poppins', 'Open Sans', Arial, sans-serif;
 }
 
 .description {
-    font-size: 24px;
-    font-weight: lighter;
-    line-height: 1.5;
-    text-align: justify;
+    font-size: 1.16rem;
+    line-height: 1.65;
+    color: var(--md-on-background, #23272f);
+    font-family: 'Open Sans', 'Poppins', Arial, sans-serif;
+    text-align: left;
+}
+
+.description p {
+    margin-bottom: 20px;
+}
+
+.aboutDescription {
+    color: var(--md-on-background, #23272f);
+    font-weight: 500;
+}
+
+.missionStatement {
+    font-weight: 700;
+    color: #4573df;
+    margin-top: 2.5rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid #dbeafe;
+    font-size: 1.13rem;
+    letter-spacing: 0.01em;
 }
 
 /* Responsive styles */
 @media (max-width: 768px) {
     .container {
-        margin-top: 5%;
-      
+        padding: 60px 0;
     }
+
     .title {
-        font-size: 22px;
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 1.125rem;
     }
 
     .description {
-        font-size: 18px;
+        font-size: 1rem;
     }
 }
 
 @media (max-width: 576px) {
-
     .container {
-        margin-top: 3%;
+        padding: 40px 0;
        
     }
 
