@@ -1,25 +1,24 @@
 .cardSurface {
+    box-sizing: border-box;
     background: var(--md-surface, #fff);
     border-radius: 18px;
     padding: 3.5rem 2.5rem;
     margin: 3rem auto 2rem auto;
-    max-width: 1150px;
-    width: 100%;
+    width: min(100% - 2rem, 1150px);
     transition: box-shadow 0.3s;
 }
 
 @media (max-width: 1100px) {
     .cardSurface {
-        max-width: 98vw;
         padding: 2rem 1.1rem;
     }
 }
 
 @media (max-width: 768px) {
     .cardSurface {
-        max-width: 99vw;
-        padding: 1.2rem 0.5rem;
-        margin: 1.2rem auto;
+        padding: 1.2rem 0.8rem;
+        margin-top: 1.2rem;
+        margin-bottom: 1.2rem;
         border-radius: 13px;
     }
     .title {
@@ -38,7 +37,7 @@
 
 @media (max-width: 480px) {
     .cardSurface {
-        padding: 0.7rem 0.2rem;
+        padding: 1rem 0.8rem;
         border-radius: 9px;
     }
     .title {
@@ -70,8 +69,6 @@
 
 .container {
     position: relative;
-    width: 100%;
-    padding: 0;
 }
 
 .aboutMeSection {
