@@ -1,4 +1,4 @@
-import NewNavBar from "../../../components/NavBar_Desktop_Company/NewNavBar";
+import NavBarDesktop from "../../../components/NavBar_Desktop_Company/NewNavBar";
 import NavBarMobile from "../../../components/NavBar_Mobile/NavBar-mobile";
 import Footer from "../../../components/Footer/Footer";
 import { ThemeToggleClient } from "../../../components/Icon";
@@ -63,17 +63,15 @@ export async function generateStaticParams() {
 
 async function getArticle(id: string) {
   if (!id) return null;
-  
+
   try {
-    // Create a URL object to ensure proper URL construction
-    const url = new URL(`/api/posts/${id}`, process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000');
-    const res = await fetch(url.toString(), { next: { revalidate: 60 } });
-    
+    const res = await fetch(`https://payloadw.onrender.com/api/posts/${id}`, { next: { revalidate: 60 } });
+
     if (!res.ok) {
       console.error(`Failed to fetch article: ${res.status} ${res.statusText}`);
       return null;
     }
-    
+
     const data = await res.json();
     return data?.doc || data;
   } catch (error) {
@@ -133,7 +131,7 @@ const ArticleDetailPage = async ({ params }: { params: { id: string } }) => {
         <ThemeToggleClient style={{ margin: "0 0 0 1.5rem", paddingTop: 18, width: 40 }} />
         <nav id="desktop-navbar" aria-label="Main Navigation">
           {/* Ensure NavBarDesktop renders a <ul> with <li> for navigation links */}
-          <NewNavBar />
+          <NavBarDesktop />
         </nav>
         <nav id="mobile-navbar" aria-label="Mobile Navigation">
           {/* Ensure NavBarMobile renders a <ul> with <li> for navigation links */}
