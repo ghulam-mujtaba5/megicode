@@ -4,7 +4,7 @@
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.07);
-  box-shadow: 0 4px 24px 0 rgba(69,115,223,0.04), 0 1.5px 6px 0 rgba(0,0,0,0.04);
+  /* box-shadow: 0 4px 24px 0 rgba(69,115,223,0.04), 0 1.5px 6px 0 rgba(0,0,0,0.04); */
 }
 
 .navLink {
