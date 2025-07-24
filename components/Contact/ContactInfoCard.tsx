@@ -30,16 +30,16 @@ export default function ContactInfoCard({ onlyCard = false }) {
         borderRadius: 20,
         background: theme === "dark" ? "#23272f" : "#f5f7fa",
         boxShadow: theme === "dark"
-          ? "0 4px 24px 0 rgba(30,33,39,0.18)"
+          ? "0 4px 24px 0 rgba(45,79,162,0.18)"
           : "0 4px 24px 0 rgba(69,115,223,0.08)",
-        border: theme === "dark" ? "1px solid #23272f" : "1px solid #e5e7eb",
+        border: theme === "dark" ? "1px solid #2d4fa2" : "1px solid #4573df",
         textAlign: "center",
         zIndex: 2
       }}
     >
       <motion.div initial={{ scale: 0.8 }} animate={{ scale: 1 }} transition={{ duration: 0.5, delay: 0.2 }}>
         <h2 style={{ fontSize: 24, fontWeight: 700, marginBottom: 8, color: theme === "dark" ? "#fff" : "#1d2127" }}>Contact Details</h2>
-        <p style={{ color: theme === "dark" ? "#cbd5e1" : "#475569", fontSize: 16, marginBottom: 18 }}>
+        <p style={{ color: theme === "dark" ? "#eaf6ff" : "#4573df", fontSize: 16, marginBottom: 18 }}>
           Reach out to us directly via email, phone, or social media.
         </p>
         <div style={{ display: "flex", flexDirection: "column", gap: 10, alignItems: "center", marginBottom: 18 }}>
@@ -61,7 +61,7 @@ export default function ContactInfoCard({ onlyCard = false }) {
               whileHover={{ scale: 1.18, rotate: [0, 8, -8, 0] }}
               transition={{ type: "spring", stiffness: 300 }}
               style={{
-                color: theme === "dark" ? "#4573df" : "#1d2127",
+                color: theme === "dark" ? "#4573df" : "#23272f",
                 fontSize: 26,
                 background: theme === "dark" ? "#181b20" : "#e5e7eb",
                 borderRadius: "50%",
