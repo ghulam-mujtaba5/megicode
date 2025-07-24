@@ -1,0 +1,31 @@
+.taglineSection {
+  padding: 4rem 2rem;
+  text-align: center;
+  background-color: transparent; /* Make it blend with the page background */
+  border-top: 1px solid rgba(128, 128, 128, 0.2);
+  border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+  margin: 2rem 0;
+}
+
+.taglineText {
+  font-size: 2.25rem; /* 36px */
+  font-weight: 300; /* Lighter font weight for elegance */
+  font-family: 'Open Sans', sans-serif;
+  font-style: italic;
+  color: #334155; /* A softer text color for light mode */
+  margin: 0;
+  line-height: 1.4;
+}
+
+.taglineSection.dark .taglineText {
+  color: #cbd5e1; /* A softer text color for dark mode */
+}
+
+@media (max-width: 768px) {
+  .taglineText {
+    font-size: 1.875rem; /* 30px */
+  }
+  .taglineSection {
+    padding: 3rem 1rem;
+  }
+}

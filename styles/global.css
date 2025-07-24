@@ -88,3 +88,56 @@ h6 {
   font-weight: 400;
   color: #666;
 }
+
+html.light, body.light {
+  background: #f8fafc !important;
+}
+
+html.dark, body.dark {
+  background: #1d2127 !important;
+}
+
+.page-container {
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  transition: background 0.4s, box-shadow 0.3s, border 0.3s;
+}
+
+.page-container.light {
+  background: linear-gradient(135deg, #f8fafc 0%, #e8eaf6 100%);
+  color-scheme: light;
+  border: 1.5px solid #e3e8ee;
+  box-shadow: 0 4px 24px 0 rgba(60,60,120,0.07);
+}
+
+.page-container.dark {
+  background: #1d2127;
+  color-scheme: dark;
+  border: 1.5px solid #23272f;
+  box-shadow: 0 4px 32px 0 rgba(0,0,0,0.25);
+}
+
+.particle-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 150vh;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.main-content {
+  position: relative;
+  z-index: 10;
+  min-height: 100vh;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.content-section {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
