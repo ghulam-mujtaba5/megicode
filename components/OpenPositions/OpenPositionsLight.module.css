@@ -1,6 +1,5 @@
 /* Light theme overrides for OpenPositions */
 .positionsSection {
-  background: var(--section-bg);
 }
 .heading {
   color: var(--heading-color);

@@ -1,6 +1,5 @@
 /* Light theme styles for WhyWorkWithUs component */
 .whyWorkSection {
-  background: var(--section-bg, #f5f7fa);
 }
 .heading {
   color: var(--heading-color, #23272f);

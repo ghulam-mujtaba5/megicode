@@ -1,6 +1,5 @@
 /* Light theme overrides for CareersApplication */
 .applicationSection {
-  background: var(--section-bg);
 }
 .heading {
   color: var(--heading-color);
