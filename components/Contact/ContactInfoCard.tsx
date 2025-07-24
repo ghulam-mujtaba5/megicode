@@ -9,7 +9,7 @@ const socialLinks = [
     icon: <FaLinkedin />, url: "https://www.linkedin.com/company/megicode", label: "LinkedIn"
   },
   {
-    icon: <FaGithub />, url: "https://github.com/megicode", label: "GitHub"
+    icon: <FaGithub />, url: "https://github.com/megicodes", label: "GitHub"
   },
   {
     icon: <FaInstagram />, url: "https://www.instagram.com/megicode/", label: "Instagram"

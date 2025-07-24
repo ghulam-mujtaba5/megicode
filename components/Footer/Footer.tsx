@@ -6,10 +6,10 @@ import lightStyles from './FooterLight.module.css'; // Import light mode styles
 import darkStyles from './FooterDark.module.css'; // Import dark mode styles
 
 const Footer = ({
-  copyrightText = "Copyright 2024 Ghulam Mujtaba Official",
-  linkedinUrl = "https://www.linkedin.com/in/ghulamujtabaofficial",
+  copyrightText = "Copyright 2025 Megicode. All Rights Reserved.",
+  linkedinUrl = "https://www.linkedin.com/company/megicode",
   instagramUrl = "https://www.instagram.com/ghulamujtabaofficial/",
-  githubUrl = "https://github.com/ghulam-mujtaba5"
+  githubUrl = "https://github.com/megicodes"
 }) => {
   const { theme } = useTheme();
 

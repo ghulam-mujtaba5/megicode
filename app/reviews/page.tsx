@@ -56,7 +56,7 @@ export default function ReviewsPage() {
             <Footer 
                 linkedinUrl="https://www.linkedin.com/company/megicode"
                 instagramUrl="https://www.instagram.com/megicode"
-                githubUrl="https://github.com/megicode"
+                githubUrl="https://github.com/megicodes"
                 copyrightText="© 2025 Megicode. All rights reserved."
             />
         </div>

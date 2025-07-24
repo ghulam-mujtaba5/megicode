@@ -102,7 +102,7 @@ export default function PrivacyPolicyPage() {
             <li><strong>Email:</strong> <a href="mailto:info@megicode.com">info@megicode.com</a></li>
             <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/company/megicode" target="_blank" rel="noopener noreferrer">megicode</a></li>
             <li><strong>Instagram:</strong> <a href="https://www.instagram.com/megicode/" target="_blank" rel="noopener noreferrer">megicode</a></li>
-            <li><strong>GitHub:</strong> <a href="https://github.com/megicode" target="_blank" rel="noopener noreferrer">megicode</a></li>
+            <li><strong>GitHub:</strong> <a href="https://github.com/megicodes" target="_blank" rel="noopener noreferrer">megicodes</a></li>
           </ul>
           <p>
             You may also <Link href="/#contact-section">contact us via the contact form</Link> for any privacy-related requests or feedback.

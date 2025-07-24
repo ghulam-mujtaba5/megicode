@@ -23,7 +23,7 @@ export default function HomePage() {
   // Social/contact info
   const linkedinUrl = "https://www.linkedin.com/company/megicode";
   const instagramUrl = "https://www.instagram.com/megicode/";
-  const githubUrl = "https://github.com/megicode";
+  const githubUrl = "https://github.com/megicodes";
   const copyrightText = "Copyright 2025 Megicode. All Rights Reserved.";
   const contactEmail = "info@megicode.com";
   const contactPhoneNumber = "+123 456 7890";

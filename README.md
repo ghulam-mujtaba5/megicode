@@ -56,7 +56,7 @@ Megicode partners with businesses worldwide to deliver best-in-class software so
 - Email: info@megicode.com
 - LinkedIn: [linkedin.com/company/megicode](https://www.linkedin.com/company/megicode)
 - Instagram: [instagram.com/megicode](https://www.instagram.com/megicode/)
-- GitHub: [github.com/megicode](https://github.com/megicode)
+- GitHub: [github.com/megicodes](https://github.com/megicodes)
 
 ---
 > Designed & built by Megicode | Ghulam Mujtaba

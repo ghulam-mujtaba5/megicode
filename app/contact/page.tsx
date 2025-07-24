@@ -99,7 +99,7 @@ export default function ContactPage() {
   // Social/contact info
   const linkedinUrl = "https://www.linkedin.com/company/megicode";
   const instagramUrl = "https://www.instagram.com/megicode/";
-  const githubUrl = "https://github.com/megicode";
+  const githubUrl = "https://github.com/megicodes";
   const copyrightText = "Copyright 2025 Megicode. All Rights Reserved.";
   const [formData, setFormData] = useState({
     name: '',
@@ -547,7 +547,7 @@ export default function ContactPage() {
                   <a href="https://www.linkedin.com/company/megicode" className={`${styles.socialLink} ${styles.linkedinLink}`} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                     <FaLinkedin />
                   </a>
-                  <a href="https://github.com/megicode" className={`${styles.socialLink} ${styles.githubLink}`} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                  <a href="https://github.com/megicodes" className={`${styles.socialLink} ${styles.githubLink}`} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                     <FaGithub />
                   </a>
                   <a href="https://www.instagram.com/megicode/" className={`${styles.socialLink} ${styles.instagramLink}`} target="_blank" rel="noopener noreferrer" aria-label="Instagram">

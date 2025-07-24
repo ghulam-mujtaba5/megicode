@@ -138,4 +138,4 @@ Copyright 2025 Megicode. All Rights Reserved.
 
 ---
 
-For questions or contributions, contact [Megicode on LinkedIn](https://www.linkedin.com/company/megicode) or [GitHub](https://github.com/megicode).
+For questions or contributions, contact [Megicode on LinkedIn](https://www.linkedin.com/company/megicode) or [GitHub](https://github.com/megicodes).

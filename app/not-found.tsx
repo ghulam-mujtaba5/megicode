@@ -62,7 +62,7 @@ function NotFound() {
   // Social/contact info (reuse from other pages)
   const linkedinUrl = "https://www.linkedin.com/company/megicode";
   const instagramUrl = "https://www.instagram.com/megicode/";
-  const githubUrl = "https://github.com/megicode";
+  const githubUrl = "https://github.com/megicodes";
   const copyrightText = "Copyright 2025 Megicode. All Rights Reserved.";
   const sections = [
     { id: "home-section", label: "Home" },

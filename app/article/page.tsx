@@ -148,7 +148,7 @@ const ArticlePage = () => {
       <Footer
         linkedinUrl="https://www.linkedin.com/company/megicode"
         instagramUrl="https://www.instagram.com/megicode/"
-        githubUrl="https://github.com/megicode"
+        githubUrl="https://github.com/megicodes"
         copyrightText="Copyright 2025 Megicode. All Rights Reserved."
       />
     </div>

@@ -105,7 +105,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     "sameAs": [
       "https://www.linkedin.com/company/megicode",
       "https://www.instagram.com/megicode/",
-      "https://github.com/megicode"
+      "https://github.com/megicodes"
     ]
   };
 

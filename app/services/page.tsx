@@ -24,7 +24,7 @@ export default function ServicesPage() {
 
   const linkedinUrl = "https://www.linkedin.com/company/megicode";
   const instagramUrl = "https://www.instagram.com/megicode/";
-  const githubUrl = "https://github.com/megicode";
+  const githubUrl = "https://github.com/megicodes";
   const copyrightText = "Copyright 2025 Megicode. All Rights Reserved.";
 
   const sections = [
