@@ -95,7 +95,7 @@ export default function ServicesPage() {
         .service-card {
           background: ${theme === "dark" ? "linear-gradient(135deg, #181c22 80%, #23272f 100%)" : "linear-gradient(135deg, #f8f9fa 80%, #e3e6ea 100%)"};
           border-radius: 20px;
-          box-shadow: 0 4px 24px 0 rgba(78,168,255,0.10), 0 1.5px 8px 0 rgba(0,0,0,0.07);
+          box-shadow: 0 4px 24px 0 rgba(69,115,223,0.10), 0 1.5px 8px 0 rgba(0,0,0,0.07);
           padding: 2rem 1.5rem 1.5rem 1.5rem;
           min-height: 460px;
           display: flex;
@@ -105,9 +105,9 @@ export default function ServicesPage() {
           border: 1.5px solid ${theme === "dark" ? "#263040" : "#dbeafe"};
         }
         .service-card:hover {
-          box-shadow: 0 8px 32px 0 rgba(78,168,255,0.18), 0 2px 12px 0 rgba(0,0,0,0.10);
+          box-shadow: 0 8px 32px 0 rgba(69,115,223,0.18), 0 2px 12px 0 rgba(0,0,0,0.10);
           transform: translateY(-6px) scale(1.015);
-          border-color: #4ea8ff;
+          border-color: #4573df;
         }
         .service-card-icon {
           width: 64px;
@@ -118,7 +118,7 @@ export default function ServicesPage() {
           justify-content: center;
           border-radius: 16px;
           background: ${theme === "dark" ? "#23272f" : "#e3e6ea"};
-          box-shadow: 0 4px 16px 0 rgba(78,168,255,0.12);
+          box-shadow: 0 4px 16px 0 rgba(69,115,223,0.12);
           border: 1.5px solid ${theme === "dark" ? "#263040" : "#dbeafe"};
           overflow: hidden;
         }
@@ -138,7 +138,7 @@ export default function ServicesPage() {
           font-size: 1.32rem;
           font-weight: 800;
           margin-bottom: 0.45rem;
-          color: #4ea8ff;
+          color: #4573df;
           letter-spacing: 0.01em;
         }
         .service-card-desc {
@@ -161,15 +161,15 @@ export default function ServicesPage() {
           gap: 0.5rem;
         }
         .service-card-tech {
-          background: ${theme === "dark" ? "#1d2127" : "#e3e6ea"};
-          color: #4ea8ff;
+          background: ${theme === "dark" ? "#23272f" : "#f5f7fa"};
+          color: #4573df;
           border-radius: 8px;
           padding: 0.25rem 0.75rem;
           font-size: 0.97rem;
           margin-bottom: 0.25rem;
           font-weight: 600;
           letter-spacing: 0.01em;
-          border: 1px solid ${theme === "dark" ? "#263040" : "#dbeafe"};
+          border: 1px solid ${theme === "dark" ? "#2d4fa2" : "#4573df"};
         }
       `}</style>
 
