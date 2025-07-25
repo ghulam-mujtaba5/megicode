@@ -42,7 +42,7 @@ const AboutFounder = () => {
     {
       name: "Muhammad Waqar ul Mulk",
       role: "Founder & COO/CMO",
-      image: "/mesh-circuit-dark.svg",
+      image: "/waqar.png",
       quote: "Building strategic partnerships and ensuring operational excellence in everything we do.",
       github: "https://github.com/Mwaqarulmulk",
       linkedin: "https://www.linkedin.com/in/mwaqarulmulk"
