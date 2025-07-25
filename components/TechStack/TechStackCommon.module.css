@@ -58,6 +58,11 @@
   font-weight: 500;
 }
 
+.techIcon {
+  font-size: 1.5rem;
+  margin-right: 0.75rem;
+}
+
 .techName {
   line-height: 1;
 }

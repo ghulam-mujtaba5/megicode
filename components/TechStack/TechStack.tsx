@@ -6,6 +6,14 @@ import common from './TechStackCommon.module.css';
 import light from './TechStackLight.module.css';
 import dark from './TechStackDark.module.css';
 import { fadeIn } from '../../utils/animations';
+import {
+  SiTensorflow, SiPytorch, SiOpenai, SiScikitlearn, SiMicrosoftazure,
+  SiPython, SiPowerbi, SiTableau, SiApachespark, SiReact, SiNextdotjs,
+  SiNodedotjs, SiTypescript, SiGraphql, SiFlutter, SiSwift, SiKotlin,
+  SiFirebase, SiAmazonaws, SiDocker, SiKubernetes, SiTerraform, SiJenkins,
+  SiFigma, SiAdobexd, SiSketch, SiInvision, SiZeplin
+} from 'react-icons/si';
+import { DiDatabase } from 'react-icons/di';
 
 const techCategories = {
   'AI & Machine Learning': ['TensorFlow', 'PyTorch', 'OpenAI', 'Scikit-learn', 'Azure AI'],
@@ -14,6 +22,72 @@ const techCategories = {
   'Mobile Development': ['React Native', 'Flutter', 'Swift', 'Kotlin', 'Firebase'],
   'Cloud & DevOps': ['AWS', 'Docker', 'Kubernetes', 'Terraform', 'Jenkins'],
   'Design': ['Figma', 'Adobe XD', 'Sketch', 'InVision', 'Zeplin'],
+};
+
+const colorMap: { [key: string]: string } = {
+  'TensorFlow': '#FF6F00',
+  'PyTorch': '#EE4C2C',
+  'OpenAI': '#4A90E2',
+  'Scikit-learn': '#F7931E',
+  'Azure AI': '#0078D4',
+  'Python': '#3776AB',
+  'Power BI': '#F2C811',
+  'Tableau': '#E97627',
+  'SQL': '#00758F',
+  'Spark': '#E25A1C',
+  'React': '#61DAFB',
+  'Next.js': '#000000',
+  'Node.js': '#339933',
+  'TypeScript': '#3178C6',
+  'GraphQL': '#E10098',
+  'React Native': '#61DAFB',
+  'Flutter': '#02569B',
+  'Swift': '#F05138',
+  'Kotlin': '#7F52FF',
+  'Firebase': '#FFCA28',
+  'AWS': '#FF9900',
+  'Docker': '#2496ED',
+  'Kubernetes': '#326CE5',
+  'Terraform': '#7B42BC',
+  'Jenkins': '#D24939',
+  'Figma': '#F24E1E',
+  'Adobe XD': '#FF61F6',
+  'Sketch': '#F7B500',
+  'InVision': '#FF3366',
+  'Zeplin': '#FBC238',
+};
+
+const iconMap: { [key: string]: React.ElementType } = {
+  'TensorFlow': SiTensorflow,
+  'PyTorch': SiPytorch,
+  'OpenAI': SiOpenai,
+  'Scikit-learn': SiScikitlearn,
+  'Azure AI': SiMicrosoftazure,
+  'Python': SiPython,
+  'Power BI': SiPowerbi,
+  'Tableau': SiTableau,
+  'SQL': DiDatabase,
+  'Spark': SiApachespark,
+  'React': SiReact,
+  'Next.js': SiNextdotjs,
+  'Node.js': SiNodedotjs,
+  'TypeScript': SiTypescript,
+  'GraphQL': SiGraphql,
+  'React Native': SiReact,
+  'Flutter': SiFlutter,
+  'Swift': SiSwift,
+  'Kotlin': SiKotlin,
+  'Firebase': SiFirebase,
+  'AWS': SiAmazonaws,
+  'Docker': SiDocker,
+  'Kubernetes': SiKubernetes,
+  'Terraform': SiTerraform,
+  'Jenkins': SiJenkins,
+  'Figma': SiFigma,
+  'Adobe XD': SiAdobexd,
+  'Sketch': SiSketch,
+  'InVision': SiInvision,
+  'Zeplin': SiZeplin,
 };
 
 const TechStack: React.FC = () => {
@@ -54,12 +128,16 @@ const TechStack: React.FC = () => {
             >
               <h3 className={cx(common.categoryTitle, themed.categoryTitle)}>{category}</h3>
               <div className={common.techGrid}>
-                {techs.map((tech) => (
-                  <div key={tech} className={cx(common.techItem, themed.techItem)}>
-                    {/* Placeholder for icon */}
-                    <span className={cx(common.techName, themed.techName)}>{tech}</span>
-                  </div>
-                ))}
+                {techs.map((tech) => {
+                  const Icon = iconMap[tech];
+                  const color = colorMap[tech];
+                  return (
+                    <div key={tech} className={cx(common.techItem, themed.techItem)}>
+                      {Icon && <Icon className={common.techIcon} style={{ color }} />}
+                      <span className={cx(common.techName, themed.techName)}>{tech}</span>
+                    </div>
+                  );
+                })}
               </div>
             </motion.div>
           ))}
