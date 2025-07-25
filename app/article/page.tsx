@@ -168,7 +168,6 @@ const ArticlePage = () => {
           copyrightText="Copyright 2025 Megicode. All Rights Reserved."
         />
       </div>
-      />
     </div>
   );
 };
