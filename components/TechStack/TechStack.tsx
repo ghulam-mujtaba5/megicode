@@ -7,17 +7,17 @@ import light from './TechStackLight.module.css';
 import dark from './TechStackDark.module.css';
 import { fadeIn } from '../../utils/animations';
 import {
-  SiTensorflow, SiPytorch, SiOpenai, SiScikitlearn, SiMicrosoftazure,
-  SiPython, SiPowerbi, SiTableau, SiApachespark, SiReact, SiNextdotjs,
+  SiTensorflow, SiPytorch, SiOpenai, SiScikitlearn,
+  SiPython, SiTableau, SiApachespark, SiReact, SiNextdotjs,
   SiNodedotjs, SiTypescript, SiGraphql, SiFlutter, SiSwift, SiKotlin,
   SiFirebase, SiAmazon, SiDocker, SiKubernetes, SiTerraform, SiJenkins,
-  SiFigma, SiAdobexd, SiSketch, SiInvision, SiAdobe
+  SiFigma, SiAdobexd, SiSketch, SiInvision, SiAdobe,
 } from 'react-icons/si';
 import { DiDatabase } from 'react-icons/di';
 
 const techCategories = {
-  'AI & Machine Learning': ['TensorFlow', 'PyTorch', 'OpenAI', 'Scikit-learn', 'Azure'],
-  'Data & Analytics': ['Python', 'Power BI', 'Tableau', 'SQL', 'Spark'],
+  'AI & Machine Learning': ['TensorFlow', 'PyTorch', 'OpenAI', 'Scikit-learn'],
+  'Data & Analytics': ['Python', 'Tableau', 'SQL', 'Spark'],
   'Web Development': ['React', 'Next.js', 'Node.js', 'TypeScript', 'GraphQL'],
   'Mobile Development': ['React Native', 'Flutter', 'Swift', 'Kotlin', 'Firebase'],
   'Cloud & DevOps': ['Amazon Web Services', 'Docker', 'Kubernetes', 'Terraform', 'Jenkins'],
@@ -29,9 +29,7 @@ const colorMap: { [key: string]: string } = {
   'PyTorch': '#EE4C2C',
   'OpenAI': '#4A90E2',
   'Scikit-learn': '#F7931E',
-  'Azure': '#0078D4',
   'Python': '#3776AB',
-  'Power BI': '#F2C811',
   'Tableau': '#E97627',
   'SQL': '#00758F',
   'Spark': '#E25A1C',
@@ -62,9 +60,7 @@ const iconMap: { [key: string]: React.ElementType } = {
   'PyTorch': SiPytorch,
   'OpenAI': SiOpenai,
   'Scikit-learn': SiScikitlearn,
-  'Azure': SiMicrosoftazure,
   'Python': SiPython,
-  'Power BI': SiPowerbi,
   'Tableau': SiTableau,
   'SQL': DiDatabase,
   'Spark': SiApachespark,
