@@ -1,0 +1,38 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Light bulb base -->
+  <circle cx="24" cy="20" r="12" fill="#ff9800"/>
+  <circle cx="24" cy="20" r="8" fill="#4573df"/>
+  
+  <!-- Filament inside bulb -->
+  <path d="M20 16C20 16 22 18 24 16C26 18 28 16 28 16" 
+        stroke="#ffffff" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M20 20C20 20 22 22 24 20C26 22 28 20 28 20" 
+        stroke="#ffffff" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M20 24C20 24 22 26 24 24C26 26 28 24 28 24" 
+        stroke="#ffffff" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  
+  <!-- Bulb base/screw -->
+  <rect x="20" y="32" width="8" height="4" fill="#2d4fa2"/>
+  <rect x="19" y="36" width="10" height="2" fill="#667eea"/>
+  <rect x="18" y="38" width="12" height="2" fill="#2d4fa2"/>
+  
+  <!-- Impact rays/energy -->
+  <path d="M24 4L24 8" stroke="#ff9800" stroke-width="3" stroke-linecap="round"/>
+  <path d="M35.3 8.7L32.5 11.5" stroke="#ff9800" stroke-width="2" stroke-linecap="round"/>
+  <path d="M40 20L36 20" stroke="#ff9800" stroke-width="3" stroke-linecap="round"/>
+  <path d="M35.3 31.3L32.5 28.5" stroke="#ff9800" stroke-width="2" stroke-linecap="round"/>
+  <path d="M12.7 8.7L15.5 11.5" stroke="#ff9800" stroke-width="2" stroke-linecap="round"/>
+  <path d="M8 20L12 20" stroke="#ff9800" stroke-width="3" stroke-linecap="round"/>
+  <path d="M12.7 31.3L15.5 28.5" stroke="#ff9800" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Innovation sparks -->
+  <circle cx="12" cy="12" r="1.5" fill="#667eea"/>
+  <circle cx="36" cy="12" r="1.5" fill="#4573df"/>
+  <circle cx="12" cy="28" r="1.5" fill="#4573df"/>
+  <circle cx="36" cy="28" r="1.5" fill="#667eea"/>
+  
+  <!-- Result indicators (small icons showing impact) -->
+  <path d="M6 42L10 38L14 42" stroke="#4573df" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="24" cy="44" r="2" fill="#ff9800"/>
+  <path d="M34 42L38 38L42 42" stroke="#2d4fa2" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

@@ -1,0 +1,30 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Team members (3 people) -->
+  <!-- Person 1 -->
+  <circle cx="16" cy="14" r="6" fill="#4573df"/>
+  <path d="M8 32C8 26.4772 12.4772 22 18 22H14C11.7909 22 10 23.7909 10 26V32H8Z" fill="#2d4fa2"/>
+  
+  <!-- Person 2 (center, slightly larger) -->
+  <circle cx="24" cy="12" r="7" fill="#ff9800"/>
+  <path d="M14 34C14 27.3726 19.3726 22 26 22H22C18.6863 22 16 24.6863 16 28V34H14Z" fill="#4573df"/>
+  
+  <!-- Person 3 -->
+  <circle cx="32" cy="14" r="6" fill="#2d4fa2"/>
+  <path d="M40 32C40 26.4772 35.5228 22 30 22H34C36.2091 22 38 23.7909 38 26V32H40Z" fill="#667eea"/>
+  
+  <!-- Connection lines between people -->
+  <path d="M20 16L28 14" stroke="#667eea" stroke-width="2" stroke-linecap="round"/>
+  <path d="M28 16L36 16" stroke="#667eea" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Collaboration symbols -->
+  <!-- Handshake in center -->
+  <path d="M18 28L22 24L26 28L30 24" stroke="#ff9800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  
+  <!-- Unity circle -->
+  <circle cx="24" cy="32" r="12" stroke="#4573df" stroke-width="2" fill="none" opacity="0.3"/>
+  
+  <!-- Success indicators -->
+  <circle cx="12" cy="40" r="1.5" fill="#ff9800"/>
+  <circle cx="36" cy="40" r="1.5" fill="#667eea"/>
+  <circle cx="24" cy="44" r="1.5" fill="#4573df"/>
+</svg>

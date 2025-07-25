@@ -9,27 +9,27 @@ const reasons = [
   {
     title: "Innovative Projects",
     description: "Shape the future with AI-driven, web, and mobile solutions for forward-thinking businesses.",
-    icon: "🚀"
+    icon: "/icons/innovation-icon.svg"
   },
   {
     title: "Growth & Learning",
     description: "Accelerate your career with continuous learning, mentorship, and real-world challenges.",
-    icon: "📚"
+    icon: "/icons/growth-icon.svg"
   },
   {
     title: "Collaborative Culture",
     description: "Thrive in a team that values openness, creativity, and diverse perspectives.",
-    icon: "🤝"
+    icon: "/icons/collaboration-icon.svg"
   },
   {
     title: "Flexible Work",
     description: "Enjoy hybrid/remote options and a healthy work-life balance—your well-being matters.",
-    icon: "🌍"
+    icon: "/icons/flexibility-icon.svg"
   },
   {
     title: "Real Impact",
     description: "See your ideas come to life and drive meaningful results for clients and industries.",
-    icon: "💡"
+    icon: "/icons/impact-icon.svg"
   },
 ];
 
@@ -44,7 +44,9 @@ const WhyWorkWithUs: React.FC = () => {
       <div className={cx(common.reasonsGrid, themed.reasonsGrid)}>
         {reasons.map((reason, idx) => (
           <div className={cx(common.reasonCard, themed.reasonCard)} key={idx}>
-            <span className={cx(common.icon, themed.icon)}>{reason.icon}</span>
+            <div className={cx(common.icon, themed.icon)}>
+              <img src={reason.icon} alt={`${reason.title} icon`} />
+            </div>
             <h3 className={cx(common.title, themed.title)}>{reason.title}</h3>
             <p className={cx(common.description, themed.description)}>{reason.description}</p>
           </div>

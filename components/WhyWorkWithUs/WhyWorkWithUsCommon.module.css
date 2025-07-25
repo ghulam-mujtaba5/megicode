@@ -33,8 +33,18 @@
   position: relative;
 }
 .icon {
-  font-size: 2.5rem;
   margin-bottom: 1rem;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 .title {
   font-size: 1.2rem;
@@ -77,6 +87,7 @@
     padding: 1.5rem 1rem;
   }
   .icon {
-    font-size: 2.2rem;
+    width: 48px;
+    height: 48px;
   }
 }

@@ -1,0 +1,22 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Rocket body -->
+  <path d="M24 4L28 12H20L24 4Z" fill="#4573df"/>
+  <path d="M20 12H28V32C28 34.2091 26.2091 36 24 36C21.7909 36 20 34.2091 20 32V12Z" fill="#2d4fa2"/>
+  
+  <!-- Rocket fins -->
+  <path d="M16 20L20 16V24L16 28V20Z" fill="#ff9800"/>
+  <path d="M32 20L28 16V24L32 28V20Z" fill="#ff9800"/>
+  
+  <!-- Window -->
+  <circle cx="24" cy="20" r="3" fill="#ffffff" stroke="#4573df" stroke-width="1"/>
+  
+  <!-- Flame/exhaust -->
+  <path d="M20 36L22 42L24 38L26 42L28 36" fill="#ff9800"/>
+  <path d="M22 42L23 46L24 44L25 46L26 42" fill="#667eea"/>
+  
+  <!-- Stars/particles -->
+  <circle cx="12" cy="8" r="1" fill="#667eea"/>
+  <circle cx="36" cy="12" r="1" fill="#667eea"/>
+  <circle cx="8" cy="24" r="1" fill="#ff9800"/>
+  <circle cx="40" cy="28" r="1" fill="#ff9800"/>
+</svg>

@@ -1,0 +1,34 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Globe/World -->
+  <circle cx="24" cy="24" r="16" fill="#4573df" stroke="#2d4fa2" stroke-width="2"/>
+  
+  <!-- Continents/landmasses -->
+  <path d="M12 18C14 16 18 14 22 16C24 18 26 16 28 18C30 20 32 18 36 20" 
+        stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M10 28C12 26 16 28 20 26C22 24 26 26 30 28C32 30 36 28 38 30" 
+        stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round"/>
+  
+  <!-- Remote work indicators -->
+  <!-- Laptop -->
+  <rect x="14" y="32" width="8" height="6" rx="1" fill="#ff9800"/>
+  <rect x="15" y="33" width="6" height="3" fill="#2d4fa2"/>
+  <rect x="13" y="38" width="10" height="1" fill="#ff9800"/>
+  
+  <!-- Home -->
+  <path d="M28 32L32 28L36 32V38H28V32Z" fill="#667eea"/>
+  <rect x="30" y="35" width="2" height="3" fill="#ffffff"/>
+  <path d="M32 28L30 30H34L32 28Z" fill="#ff9800"/>
+  
+  <!-- Connection waves -->
+  <path d="M22 26C24 24 26 26 28 24" stroke="#ff9800" stroke-width="1.5" 
+        fill="none" stroke-linecap="round" stroke-dasharray="2,2"/>
+  
+  <!-- Work-life balance symbol -->
+  <circle cx="24" cy="24" r="4" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+  <path d="M24 20V28M20 24H28" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+  
+  <!-- Freedom indicators -->
+  <circle cx="8" cy="12" r="1" fill="#ff9800"/>
+  <circle cx="40" cy="36" r="1" fill="#667eea"/>
+  <circle cx="6" cy="36" r="1" fill="#4573df"/>
+</svg>
