@@ -4,6 +4,7 @@ import React, { useMemo } from 'react';
 import LetsTalkButton from '../CTA/LetsTalkButton';
 import { useTheme } from '../../context/ThemeContext';
 import { motion } from 'framer-motion';
+import { fadeInUp, fadeInDown, staggerContainer, scaleOnHover } from '../../utils/animations';
 import commonStyles from './AboutMeSectionCommon.module.css';
 import lightStyles from './AboutMeSectionLight.module.css';
 import darkStyles from './AboutMeSectionDark.module.css';
@@ -38,11 +39,12 @@ const AboutMeSection = () => {
       <LetsTalkButton />
       <motion.section
         className={`${commonStyles.cardSurface} ${themeStyles.cardSurface} ${containerClass}`}
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        whileHover={{ scale: 1.025 }}
-        whileTap={{ scale: 0.99 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
+        variants={scaleOnHover}
+        initial="hidden"
+        whileInView="visible"
+        whileHover="hover"
+        whileTap="tap"
+        viewport={{ once: true }}
         role="region"
         aria-labelledby="aboutus-heading"
         tabIndex={0}
@@ -53,30 +55,27 @@ const AboutMeSection = () => {
           }
         }}
       >
-        <div className={sectionClass}>
+        <motion.div 
+          className={sectionClass}
+          variants={staggerContainer}
+        >
           <div className={`${commonStyles.accentBar} ${themeStyles.accentBar}`} />
           <motion.h2
             id="aboutus-heading"
             className={`${commonStyles.title} ${themeStyles.title}`}
-            initial={{ opacity: 0, y: -30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2, ease: 'easeOut' }}
+            variants={fadeInDown}
           >
             ABOUT US
           </motion.h2>
           <motion.p
             className={`${commonStyles.subtitle} ${themeStyles.subtitle} ${themeStyles['subtitle-gradient']}`}
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3, ease: 'easeOut' }}
+            variants={fadeInDown}
           >
             Your Vision, Our Expertise
           </motion.p>
           <motion.div
             className={`${commonStyles.description} ${themeStyles.description}`}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4, ease: 'easeOut' }}
+            variants={fadeInUp}
           >
             <p className={`${commonStyles.aboutDescription} ${themeStyles.aboutDescription}`}>
               Megicode specializes in emerging technologies to drive efficiency, productivity, and growth for businesses worldwide. From ideation to implementation, we collaborate with clients to bring their vision to life with excellence.
@@ -85,7 +84,7 @@ const AboutMeSection = () => {
               Our mission is to exceed expectations by delivering best-in-class software solutions, with a strong focus on integrating emerging technologies such as data science and AI.
             </p>
           </motion.div>
-        </div>
+        </motion.div>
       </motion.section>
     </>
   );

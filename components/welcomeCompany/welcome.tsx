@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import styles from './welcomeLight.module.css'; // Import the light mode CSS file
 import darkStyles from './welcomeDark.module.css'; // Import the dark mode CSS file
 import commonStyles from './welcomeCommon.module.css'; // Import the common CSS file
+import { fadeInUp } from '../../utils/animations';
 
 const Frame = () => {
   const { theme } = useTheme(); // Destructure theme from the context
@@ -55,16 +56,15 @@ const Frame = () => {
     <section
       className={`${commonStyles.container} ${theme === 'dark' ? darkStyles.darkContainer : styles.container}`}
       aria-label="Welcome to Megicode"
-      style={{ position: 'relative', minHeight: 320 }}
     >
       <div
         className={`${commonStyles.textContainer} ${theme === 'dark' ? darkStyles.textContainer : styles.textContainer}`}
-        style={{ zIndex: 2 }}
       >
         <motion.h1
           className={`${commonStyles.text} ${theme === 'dark' ? darkStyles.text : styles.text}`}
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          variants={fadeInUp}
+          initial="hidden"
+          animate="visible"
           transition={{ duration: 0.8, ease: 'easeOut' }}
         >
           {welcomeText}
@@ -79,8 +79,9 @@ const Frame = () => {
         </motion.h1>
         <motion.p
           className={`${commonStyles.paragraph} ${theme === 'dark' ? darkStyles.paragraph : styles.paragraph}`}
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          variants={fadeInUp}
+          initial="hidden"
+          animate="visible"
           transition={{ duration: 0.8, ease: 'easeOut', delay: (welcomeText.length * 40 + 500 + megicodeText.length * 40) / 1000 + 1 }}
         >
           {serviceText}

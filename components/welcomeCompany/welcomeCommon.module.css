@@ -8,12 +8,13 @@
   padding-top: 4%;
   height: auto;
   position: relative; /* Allows for absolute positioning of child elements */
+  min-height: 320px;
 }
 
 .textContainer {
   width: 45%; /* Take full width */
   position: relative; /* Relative positioning to control absolute child elements */
- 
+  z-index: 2;
 
   min-height: 120px;
 }

@@ -4,20 +4,14 @@ import commonStyles from './AboutHeroCommon.module.css';
 import lightStyles from './AboutHeroLight.module.css';
 import darkStyles from './AboutHeroDark.module.css';
 import { useTheme } from '../../context/ThemeContext';
-import { motion, easeOut } from 'framer-motion';
+import { motion } from 'framer-motion';
+import { fadeInUp, staggerContainer } from '../../utils/animations';
 
 const AboutHero = () => {
   const { theme } = useTheme();
   const themeStyles = theme === 'dark' ? darkStyles : lightStyles;
 
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: { duration: 0.6, ease: easeOut }
-    }
-  };
+
 
   return (
     <section className={`${commonStyles.heroContainer} ${themeStyles.heroContainer}`}>
@@ -30,13 +24,7 @@ const AboutHero = () => {
         className={commonStyles.contentWrapper}
         initial="hidden"
         animate="visible"
-        variants={{
-          visible: {
-            transition: {
-              staggerChildren: 0.15
-            }
-          }
-        }}
+        variants={staggerContainer}
       >
         <motion.h1 
           className={`${commonStyles.heading} ${themeStyles.heading}`}

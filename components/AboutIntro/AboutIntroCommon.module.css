@@ -55,7 +55,25 @@
   .mission h3, .vision h3 {
     font-size: 1.5rem;
   }
-  .mission p, .vision p {
+  .mission p, .iconWrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.iconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  background: linear-gradient(135deg, #eaf1ff 0%, #f5f9ff 100%);
+  border-radius: 14px;
+  box-shadow: 0 2px 12px #4573df22, inset 0 1px 1px #ffffff;
+}
+
+.vision p {
     font-size: 1rem;
   }
 }

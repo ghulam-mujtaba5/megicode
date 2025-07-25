@@ -6,6 +6,7 @@ import lightStyles from './AboutStatsLight.module.css';
 import darkStyles from './AboutStatsDark.module.css';
 import { useTheme } from '../../context/ThemeContext';
 import { ProjectsIcon, GlobalIcon, ClientsIcon, TechStackIcon } from '../IconSystem/StatsIcons';
+import { staggerContainer, fadeInUp, scaleIn } from '../../utils/animations';
 
 interface StatItemProps {
   Icon: React.ComponentType<{ size?: number; color?: string }>;
@@ -23,25 +24,14 @@ const StatItem: React.FC<StatItemProps> = ({ Icon, number, label, delay }) => {
   return (
     <motion.div 
       className={`${commonStyles.statItem} ${themeStyles.statItem}`}
-      initial={{ scale: 0.9, opacity: 0 }}
-      whileInView={{ scale: 1, opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ 
-        duration: 0.5,
-        delay,
-        type: "spring",
-        stiffness: 100
-      }}
+      variants={scaleIn}
     >
       <div className={`${commonStyles.iconWrapper} ${themeStyles.iconWrapper}`}>
         <Icon size={40} color={iconColor} />
       </div>
       <motion.div 
         className={`${commonStyles.number} ${themeStyles.number}`}
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: delay + 0.2 }}
+        variants={fadeInUp}
       >
         {number}
       </motion.div>
@@ -79,12 +69,16 @@ const AboutStats = () => {  const stats = [
     <section className={`${commonStyles.statsSection} ${themeStyles.statsSection}`}>
       <motion.div 
         className={commonStyles.container}
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-      >        <h2 className={`${commonStyles.title} ${themeStyles.title}`}>Key Milestones & Metrics</h2>
-        <div className={commonStyles.statsGrid}>
+        variants={fadeInUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <h2 className={`${commonStyles.title} ${themeStyles.title}`}>Key Milestones & Metrics</h2>
+        <motion.div 
+          className={commonStyles.statsGrid}
+          variants={staggerContainer}
+        >
           {stats.map((stat, index) => (
             <StatItem
               key={stat.label}
@@ -94,7 +88,7 @@ const AboutStats = () => {  const stats = [
               delay={index * 0.1}
             />
           ))}
-        </div>
+        </motion.div>
       </motion.div>
     </section>
   );

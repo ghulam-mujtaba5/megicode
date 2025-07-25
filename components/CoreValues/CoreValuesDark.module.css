@@ -5,7 +5,7 @@
 }
 
 .coreValuesSection {
-  background: linear-gradient(180deg, rgba(69,115,223,0.05) 0%, rgba(0,0,0,0) 100%);
+  background: #1d2127;
 }
 
 .sectionTitle {
@@ -25,13 +25,13 @@
 }
 
 .valueCard {
-  background: linear-gradient(145deg, rgba(45,55,75,0.95) 0%, rgba(32,40,58,0.98) 100%);
+  background: #1d2127;
   box-shadow: 0 8px 24px rgba(17, 17, 17, 0.2);
   border: 1px solid rgba(69,115,223,0.1);
 }
 
 .valueCard:hover {
-  background: linear-gradient(145deg, rgba(50,60,85,0.98) 0%, rgba(35,45,65,1) 100%);
+  background: #1d2127;
   border: 1px solid rgba(69,115,223,0.2);
   box-shadow: 0 12px 32px rgba(69,115,223,0.15);
 }

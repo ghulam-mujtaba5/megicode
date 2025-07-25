@@ -6,6 +6,7 @@ import lightStyles from './CoreValuesLight.module.css';
 import darkStyles from './CoreValuesDark.module.css';
 import { useTheme } from '../../context/ThemeContext';
 import IconWrapper from '../IconSystem/IconWrapper';
+import { staggerContainer, fadeInUp } from '../../utils/animations';
 import {
   InnovationIcon,
   ExcellenceIcon,
@@ -19,20 +20,16 @@ interface ValueCardProps {
   title: string;
   description: string;
   Icon: React.ComponentType<{ size?: number; color?: string }>;
-  delay: number;
 }
 
-const ValueCard: React.FC<ValueCardProps> = ({ title, description, Icon, delay }) => {
+const ValueCard: React.FC<ValueCardProps> = ({ title, description, Icon }) => {
   const { theme } = useTheme();
   const themeStyles = theme === 'dark' ? darkStyles : lightStyles;
   
   return (
     <motion.div 
       className={`${commonStyles.valueCard} ${themeStyles.valueCard}`}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay }}
+      variants={fadeInUp}
     >
       <div className={commonStyles.iconWrapper}>
         <IconWrapper size={72}>
@@ -87,10 +84,7 @@ const CoreValues = () => {
       <div className={commonStyles.container}>
         <motion.div 
           className={commonStyles.header}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          variants={fadeInUp}
         >
           <h2 className={`${commonStyles.title} ${themeStyles.title}`}>Our Core Values</h2>
           <p className={`${commonStyles.subtitle} ${themeStyles.subtitle}`}>
@@ -98,17 +92,19 @@ const CoreValues = () => {
           </p>
         </motion.div>
         
-        <div className={commonStyles.valuesGrid}>
+        <motion.div 
+          className={commonStyles.valuesGrid}
+          variants={staggerContainer}
+        >
           {values.map((value, index) => (
             <ValueCard
               key={value.title}
               title={value.title}
               description={value.description}
               Icon={value.Icon}
-              delay={0.2 + index * 0.1}
             />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
