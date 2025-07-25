@@ -23,14 +23,7 @@ const AboutFounder = () => {
   };
 
   const founders = [
-    {
-      name: "Azan Wahla",
-      role: "Founder & CEO",
-      image: "/azan.png",
-      quote: "Leading Megicode's vision to transform businesses through innovative technology solutions.",
-      github: "https://github.com/AzanWahla",
-      linkedin: "https://www.linkedin.com/in/azanwahla"
-    },
+
     {
       name: "Ghulam Mujtaba",
       role: "Founder & CTO",
@@ -38,6 +31,14 @@ const AboutFounder = () => {
       quote: "Driving technological excellence and innovation to create impactful solutions for our clients.",
       github: "https://github.com/ghulam-mujtaba5",
       linkedin: "https://pk.linkedin.com/in/ghulamujtabaofficial"
+    },
+    {
+      name: "Azan Wahla",
+      role: "Founder & CEO",
+      image: "/azan1.png",
+      quote: "Leading Megicode's vision to transform businesses through innovative technology solutions.",
+      github: "https://github.com/AzanWahla",
+      linkedin: "https://www.linkedin.com/in/azanwahla"
     },
     {
       name: "Muhammad Waqar ul Mulk",
