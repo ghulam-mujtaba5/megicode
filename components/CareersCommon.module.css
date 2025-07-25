@@ -11,6 +11,13 @@
   transition: background 0.3s, color 0.3s;
 }
 
+.careersPage *,
+.careersPage *::before,
+.careersPage *::after {
+  box-sizing: border-box;
+
+}
+
 .section {
   width: 100%;
   max-width: 1200px;
