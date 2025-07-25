@@ -2,7 +2,7 @@
 .positionsSection {
 }
 .heading {
-  color: #b8c6e7;
+  color: var(--brand-blue);
 }
 .positionCard {
   background: linear-gradient(135deg, rgba(35, 41, 54, 0.98) 0%, rgba(27, 35, 48, 0.97) 100%);

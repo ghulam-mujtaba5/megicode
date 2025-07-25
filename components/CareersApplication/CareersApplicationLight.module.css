@@ -1,5 +1,58 @@
 /* Light theme overrides for CareersApplication */
 .applicationSection {
+  background: linear-gradient(135deg, #fafdff 0%, #f5f7fa 100%);
+}
+.heading {
+  color: #23272f;
+}
+.intro {
+  color: #23272f;
+}
+.email {
+  color: #4573df;
+}
+.successMsg {
+  background: #eaf1fb;
+  color: #4573df;
+  border: 1.5px solid #4573df;
+}
+.form {
+  background: #f5f7fa;
+  border: 1.5px solid #e2e8f0;
+  box-shadow: 0 2px 8px rgba(69,115,223,0.06), 0 1.5px 4px rgba(60,60,60,0.06);
+}
+.formGroup input[type="text"],
+.formGroup input[type="email"],
+.formGroup input[type="file"],
+.formGroup textarea {
+  background: #fff;
+  color: #23272f;
+  border-color: #c7d0e1;
+}
+.formGroup input[type="text"]:focus,
+.formGroup input[type="email"]:focus,
+.formGroup input[type="file"]:focus,
+.formGroup textarea:focus {
+  border-color: #4573df;
+}
+.formGroup input[type="file"],
+.formGroup textarea {
+  background: #fff;
+  color: #23272f;
+  border: 1px solid #c7d0e1;
+}
+.submitBtn {
+  background: #4573df;
+  color: #fff;
+}
+.submitBtn:hover, .submitBtn:focus {
+  background: #2d4fa2;
+  color: #fff;
+}
+
+.applicationSection {
+  padding: 2.5rem 0;
+  margin-bottom: 2rem;
 }
 .heading {
   color: var(--heading-color);
@@ -8,21 +61,43 @@
   color: var(--body-color);
 }
 .email {
-  color: var(--brand-blue);
+  color: #4573df;
 }
 .successMsg {
-  background: var(--card-bg);
-  color: var(--brand-blue);
-  border-color: var(--card-border);
+  background: #eaf1fb;
+  color: #4573df;
+  border: 1.5px solid #4573df;
+border-radius: 1rem;
+padding: 1.2rem 1.5rem;
+font-size: 1.08rem;
+font-weight: 600;
+text-align: center;
+margin-bottom: 1.5rem;
 }
 .form {
-  background: var(--card-bg);
-  border-color: var(--card-border);
+  background: #f5f7fa;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(69,115,223,0.06), 0 1.5px 4px rgba(60,60,60,0.06);
+  transition: box-shadow 0.2s, background 0.3s, border-color 0.2s;
 }
 .submitBtn {
-  background: var(--button-bg, var(--brand-blue));
-  color: var(--button-text, #fff);
+  background: #4573df;
+  color: #4573df;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  font-size: 1.08rem;
+  box-shadow: 0 1px 3px rgba(60,60,60,0.12), 0 1px 2px rgba(60,60,60,0.24);
+  transition: background 0.2s, box-shadow 0.2s;
+  padding: 0.8rem 2.2rem;
+  outline: none;
 }
+.submitBtn:hover, .submitBtn:focus {
+  background: #2d4fa2;
+  color: #4573df;
+  box-shadow: 0 4px 16px rgba(69,115,223,0.18), 0 3px 6px rgba(60,60,60,0.13);
+}
+
 .submitBtn:hover, .submitBtn:focus {
   background: var(--button-hover-bg, #2d4fa2);
   color: var(--button-text, #fff);
@@ -39,7 +114,7 @@
 .formGroup input[type="email"]:focus,
 .formGroup input[type="file"]:focus,
 .formGroup textarea:focus {
-  border-color: var(--brand-blue);
+  border-color: #4573df;
 }
 .formGroup input[type="file"],
 .formGroup textarea {
@@ -66,20 +141,41 @@
   color: var(--body-color);
 }
 .email {
-  color: var(--brand-blue);
+  color: #4573df;
 }
 .successMsg {
-  background: var(--card-bg);
-  color: var(--brand-blue);
-  border-color: var(--card-border);
+  background: #eaf1fb;
+  color: #4573df;
+  border: 1.5px solid #4573df;
+border-radius: 1rem;
+padding: 1.2rem 1.5rem;
+font-size: 1.08rem;
+font-weight: 600;
+text-align: center;
+margin-bottom: 1.5rem;
 }
 .form {
-  background: var(--card-bg);
-  border-color: var(--card-border);
+  background: #f5f7fa;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(69,115,223,0.06), 0 1.5px 4px rgba(60,60,60,0.06);
+  transition: box-shadow 0.2s, background 0.3s, border-color 0.2s;
 }
 .submitBtn {
-  background: var(--brand-blue);
+  background: #4573df;
   color: #fff;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  font-size: 1.08rem;
+  box-shadow: 0 1px 3px rgba(60,60,60,0.12), 0 1px 2px rgba(60,60,60,0.24);
+  transition: background 0.2s, box-shadow 0.2s;
+  padding: 0.8rem 2.2rem;
+  outline: none;
+}
+.submitBtn:hover, .submitBtn:focus {
+  background: #2d4fa2;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(69,115,223,0.18), 0 3px 6px rgba(60,60,60,0.13);
 }
 .submitBtn:hover {
   background: #2d4fa2;

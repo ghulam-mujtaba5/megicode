@@ -1,16 +1,36 @@
 /* Light theme styles for WhyWorkWithUs component */
 .whyWorkSection {
+  padding: 2.5rem 0;
+  margin-bottom: 2rem;
+  background: linear-gradient(135deg, #fafdff 0%, #f5f7fa 100%);
+  position: relative;
 }
 .heading {
   color: var(--heading-color, #23272f);
 }
 .reasonCard {
-  background: var(--card-bg, #fff);
-  color: var(--body-color, #23272f);
-  border: 1.5px solid var(--card-border, #e3eefe);
+  background: #f5f7fa;
+  color: #23272f;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(69,115,223,0.06), 0 1.5px 4px rgba(60,60,60,0.06);
+  transition: box-shadow 0.2s, transform 0.2s, background 0.3s, border-color 0.2s;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.reasonCard:hover, .reasonCard:focus {
+  background: #eaf1fb;
+  border-color: #4573df;
+  box-shadow: 0 6px 24px rgba(69,115,223,0.13), 0 3px 8px rgba(60,60,60,0.13);
+  transform: translateY(-2px) scale(1.025);
+  outline: none;
 }
 .icon {
-  color: var(--brand-blue, #4573df);
+  color: #4573df;
+  font-size: 2.2rem;
+  margin-bottom: 0.7rem;
   filter: drop-shadow(0 1px 2px rgba(69,115,223,0.15));
 }
 .title {

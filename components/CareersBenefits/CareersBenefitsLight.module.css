@@ -1,16 +1,23 @@
 /* Light theme overrides for CareersBenefits */
 .benefitsSection {
+  padding: 2.5rem 0;
+  margin-bottom: 2rem;
 }
 .heading {
   color: var(--heading-color);
 }
 .benefitCard {
-  background: var(--card-bg);
-  border-color: var(--card-border);
+  background: #f5f7fa;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(69,115,223,0.06), 0 1.5px 4px rgba(60,60,60,0.06);
+  transition: box-shadow 0.2s, transform 0.2s, background 0.3s, border-color 0.2s;
 }
 .benefitCard:hover, .benefitCard:focus {
-  background: var(--card-hover-bg);
-  border-color: var(--brand-blue);
+  background: #eaf1fb;
+  border-color: #4573df;
+  box-shadow: 0 6px 24px rgba(69,115,223,0.13), 0 3px 8px rgba(60,60,60,0.13);
+  transform: translateY(-2px) scale(1.025);
 }
 .title {
   color: var(--brand-blue);

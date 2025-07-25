@@ -1,119 +1,72 @@
+/* Common styles for CareersApplication (no colors) */
 .applicationSection {
   width: 100%;
-  padding: 3rem 0 2rem 0;
+  padding: 2.5rem 0 2rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: background 0.3s;
 }
 .heading {
   font-family: 'Poppins', 'Open Sans', Arial, sans-serif;
-  font-size: 2rem;
+  font-size: 2.1rem;
   font-weight: 700;
-  color: var(--heading-color);
-  margin-bottom: 1.2rem;
+  margin-bottom: 2rem;
   letter-spacing: -0.5px;
   text-align: center;
 }
 .intro {
   font-size: 1.1rem;
-  color: var(--body-color);
-  margin-bottom: 1.8rem;
+  font-weight: 500;
+  margin-bottom: 1.2rem;
   text-align: center;
 }
 .email {
-  color: var(--brand-blue);
   font-weight: 600;
-  text-decoration: underline;
+  text-decoration: underline dotted;
+  word-break: break-all;
 }
 .successMsg {
-  background: var(--card-bg);
-  color: var(--brand-blue);
-  padding: 1.3rem 2rem;
-  border-radius: 1rem;
-  font-size: 1.1rem;
-  margin-top: 2rem;
+  font-size: 1.08rem;
+  font-weight: 600;
   text-align: center;
-  box-shadow: 0 1px 3px rgba(60,60,60,0.09), 0 1px 2px rgba(60,60,60,0.13);
-  border: 1.5px solid var(--card-border);
-}
-
-.darkTheme .successMsg {
-  background: linear-gradient(135deg, rgba(35, 41, 54, 0.98) 0%, rgba(27, 35, 48, 0.97) 100%);
-  color: #7ba0ff;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.20), 0 1px 2px rgba(60,60,60,0.13);
-  border: 1.5px solid var(--card-border);
+  margin-bottom: 1.5rem;
 }
 .form {
   width: 100%;
   max-width: 500px;
-  background: var(--card-bg);
-  padding: 2rem 1.5rem;
-  border-radius: 1rem;
-  box-shadow: 0 1px 3px rgba(60,60,60,0.09), 0 1px 2px rgba(60,60,60,0.13);
+  padding: 2rem 1.7rem;
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
-  border: 1.5px solid var(--card-border);
-  transition: background 0.3s;
-}
-
-.darkTheme .form {
-  background: linear-gradient(135deg, rgba(35, 41, 54, 0.98) 0%, rgba(27, 35, 48, 0.97) 100%);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.20), 0 1px 2px rgba(60,60,60,0.13);
-  border: 1.5px solid var(--card-border);
+  gap: 1.1rem;
+  border-radius: 1rem;
+  box-sizing: border-box;
 }
 .formGroup {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 0.4rem;
 }
 .formGroup label {
-  font-size: 1rem;
   font-weight: 600;
-  color: var(--heading-color);
+  margin-bottom: 0.2rem;
 }
 .formGroup input[type="text"],
 .formGroup input[type="email"],
 .formGroup input[type="file"],
 .formGroup textarea {
-  background: var(--input-bg);
-  color: var(--input-text);
-  border: 1.5px solid var(--input-border);
+  font-size: 1rem;
   border-radius: 0.5rem;
   padding: 0.7rem 1rem;
-  font-size: 1rem;
-  transition: border 0.2s, background 0.2s, color 0.2s;
+  border: 1.5px solid;
   outline: none;
-  box-sizing: border-box;
-}
-.formGroup input[type="text"]:focus,
-.formGroup input[type="email"]:focus,
-.formGroup input[type="file"]:focus,
-.formGroup textarea:focus {
-  border-color: var(--brand-blue);
-  background: var(--input-bg);
-  color: var(--input-text);
-}
-.formGroup input[type="file"],
-.formGroup textarea {
-  padding: 0.6rem 0.9rem;
-  border-radius: 0.4rem;
-  border: 1px solid #c7d0e1;
-  font-size: 1rem;
-  background: #fff;
-  color: #23272f;
-  margin-top: 0.1rem;
-}
-.formGroup input[type="file"] {
-  padding: 0.3rem 0.2rem;
+  margin-bottom: 0.1rem;
+  font-family: inherit;
 }
 .formGroup textarea {
   resize: vertical;
+  min-height: 90px;
 }
 .submitBtn {
-  background: var(--button-bg);
-  color: var(--button-text);
   border: none;
   padding: 0.8rem 2.2rem;
   border-radius: 0.5rem;
@@ -125,11 +78,19 @@
   transition: background 0.2s, color 0.2s, box-shadow 0.2s;
   outline: none;
 }
-.submitBtn:hover, .submitBtn:focus {
-  background: var(--button-hover-bg);
-  color: var(--button-text);
-  box-shadow: 0 4px 16px rgba(69,115,223,0.18), 0 3px 6px rgba(60,60,60,0.13);
+.submitBtn:focus {
+  outline: 2px solid #4573df;
+  outline-offset: 2px;
 }
-.submitBtn:hover {
-  background: var(--button-hover-bg);
+@media (max-width: 700px) {
+  .applicationSection {
+    padding: 1.5rem 0 1rem 0;
+  }
+  .heading {
+    font-size: 1.3rem;
+  }
+  .form {
+    padding: 1.2rem 0.7rem;
+    gap: 0.7rem;
+  }
 }
