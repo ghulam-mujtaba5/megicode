@@ -1,44 +1,54 @@
 /* Light theme overrides for OpenPositions */
 .positionsSection {
-  padding: 2.5rem 0;
-  margin-bottom: 2rem;
+  background-color: #f8f9fa;
 }
+
 .heading {
-  color: var(--heading-color);
+  color: #2c3e50;
 }
+
 .positionCard {
-  background: #f5f7fa;
-  border: 1.5px solid #e2e8f0;
-  border-radius: 1rem;
-  box-shadow: 0 2px 8px rgba(69,115,223,0.06), 0 1.5px 4px rgba(60,60,60,0.06);
-  transition: box-shadow 0.2s, transform 0.2s, background 0.3s, border-color 0.2s;
+  background-color: #ffffff;
+  border: 1px solid #e9ecef;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
-.positionCard:hover {
-  background: #eaf1fb;
-  border-color: #4573df;
-  box-shadow: 0 6px 24px rgba(69,115,223,0.13), 0 3px 8px rgba(60,60,60,0.13);
-  transform: translateY(-2px) scale(1.025);
-}
+
 .title {
-  color: var(--brand-blue);
+  color: #212529;
 }
+
 .meta {
-  color: var(--brand-blue);
+  color: #6c757d;
 }
-.location, .type {
-  color: var(--brand-blue);
+
+.location,
+.type {
+  background-color: #e9ecef;
+  color: #495057;
 }
+
 .description {
-  color: var(--body-color);
+  color: #495057;
 }
+
+.requirements {
+  color: #495057;
+}
+
 .applyBtn {
-  background: #4573df;
-  color: #fff;
-  border-radius: 0.5rem;
-  font-weight: 600;
-  box-shadow: 0 1px 3px rgba(60,60,60,0.12), 0 1px 2px rgba(60,60,60,0.24);
-  transition: background 0.2s, box-shadow 0.2s;
+  background-color: #007bff;
+  color: white;
+  border: 1px solid #007bff;
 }
+
 .applyBtn:hover {
-  background: #2d4fa2;
+  background-color: #0056b3;
+  border-color: #0056b3;
+  box-shadow: 0 10px 20px -10px rgba(0, 123, 255, 0.4);
+}
+
+.noOpenings {
+  background-color: #ffffff;
+  border: 1px solid #e9ecef;
+  color: #495057;
 }

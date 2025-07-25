@@ -1,9 +1,9 @@
 /* Dark theme overrides for CareersApplication */
 .applicationSection {
-  background: linear-gradient(135deg, #232936 0%, #232a3a 100%);
+  background: transparent;
 }
 .heading {
-  color: #b8c6e7;
+  color: #ffffff;
 }
 .intro {
   color: #a3b3d1;

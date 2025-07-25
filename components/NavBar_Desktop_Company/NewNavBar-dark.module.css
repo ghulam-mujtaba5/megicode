@@ -10,7 +10,6 @@
 .navLink {
   color: #e1e5f2; /* Light color for readability on dark background */
   text-decoration: none;
-  font-weight: 600;
   transition: color 0.2s ease-in-out;
   position: relative;
   padding-bottom: 0.3rem;

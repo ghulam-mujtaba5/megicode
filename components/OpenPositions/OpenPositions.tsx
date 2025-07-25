@@ -5,6 +5,8 @@ import light from './OpenPositionsLight.module.css';
 import dark from './OpenPositionsDark.module.css';
 import { useTheme } from '../../context/ThemeContext';
 
+// To re-enable job listings, uncomment the array below and comment out the empty array.
+/*
 const positions = [
   {
     title: "Frontend Engineer",
@@ -43,6 +45,9 @@ const positions = [
     applyLink: "mailto:info@megicode.com?subject=Application%20for%20AI%2FML%20Engineer"
   }
 ];
+*/
+
+const positions: any[] = [];
 
 const OpenPositions: React.FC = () => {
   const { theme } = useTheme();
@@ -52,24 +57,30 @@ const OpenPositions: React.FC = () => {
   <section className={cx(common.positionsSection, themed.positionsSection)}>
     <h2 className={cx(common.heading, themed.heading)}>Open Positions</h2>
     <div className={common.positionsGrid}>
-      {positions.map((pos, idx) => (
-        <div className={cx(common.positionCard, themed.positionCard)} key={idx}>
-          <h3 className={cx(common.title, themed.title)}>{pos.title}</h3>
-          <div className={cx(common.meta, themed.meta)}>
-            <span className={cx(common.location, themed.location)}>{pos.location}</span>
-            <span className={cx(common.type, themed.type)}>{pos.type}</span>
+      {positions.length > 0 ? (
+        positions.map((pos, idx) => (
+          <div className={cx(common.positionCard, themed.positionCard)} key={idx}>
+            <h3 className={cx(common.title, themed.title)}>{pos.title}</h3>
+            <div className={cx(common.meta, themed.meta)}>
+              <span className={cx(common.location, themed.location)}>{pos.location}</span>
+              <span className={cx(common.type, themed.type)}>{pos.type}</span>
+            </div>
+            <p className={cx(common.description, themed.description)}>{pos.description}</p>
+            <ul className={cx(common.requirements, themed.requirements)}>
+              {pos.requirements.map((req, i) => (
+                <li key={i}>{req}</li>
+              ))}
+            </ul>
+            <a href={pos.applyLink} className={cx(common.applyBtn, themed.applyBtn)} target="_blank" rel="noopener noreferrer">
+              Apply Now
+            </a>
           </div>
-          <p className={cx(common.description, themed.description)}>{pos.description}</p>
-          <ul className={cx(common.requirements, themed.requirements)}>
-            {pos.requirements.map((req, i) => (
-              <li key={i}>{req}</li>
-            ))}
-          </ul>
-          <a href={pos.applyLink} className={cx(common.applyBtn, themed.applyBtn)} target="_blank" rel="noopener noreferrer">
-            Apply Now
-          </a>
+        ))
+      ) : (
+        <div className={cx(common.noOpenings, themed.noOpenings)}>
+          <p>We have no open roles at present, but we're always looking for innovative talent to help us build intelligent solutions. Submit your resume below to be considered for future opportunities.</p>
         </div>
-      ))}
+      )}
     </div>
   </section>
   );
