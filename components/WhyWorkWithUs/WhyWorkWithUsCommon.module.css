@@ -49,20 +49,34 @@
   word-break: break-word;
   margin-bottom: 0;
 }
-@media (max-width: 700px) {
+@media (max-width: 768px) {
   .whyWorkSection {
-    padding: 2rem 0 1rem 0;
+    padding: 3rem 1rem;
   }
   .heading {
-    font-size: 1.3rem;
+    font-size: 2rem;
   }
   .reasonsGrid {
-    gap: 1rem;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .whyWorkSection {
+    padding: 2rem 1rem;
+  }
+  .reasonsGrid {
+    grid-template-columns: 1fr;
+    max-width: 380px;
+    margin: 0 auto;
+  }
+  .heading {
+    font-size: 1.8rem;
   }
   .reasonCard {
-    padding: 1.2rem 0.7rem;
+    padding: 1.5rem 1rem;
   }
   .icon {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
 }

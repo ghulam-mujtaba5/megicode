@@ -1,5 +1,6 @@
-/* Careers Common Styles */
+
 .careersPage {
+  overflow-x: hidden; /* Prevent horizontal scroll */
   font-family: 'Inter', Arial, sans-serif;
   box-sizing: border-box;
   padding: 0;

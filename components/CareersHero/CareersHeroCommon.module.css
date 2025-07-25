@@ -114,3 +114,85 @@ Common styles for CareersHero component
   box-shadow: 0 1px 3px rgba(60,60,60,0.09), 0 1px 2px rgba(60,60,60,0.13);
   max-width: 260px;
 }
+
+@media (max-width: 992px) {
+  .heroContent {
+    gap: 2rem;
+  }
+  .title {
+    font-size: 2.2rem;
+  }
+  .subtitle {
+    font-size: 1.1rem;
+  }
+  .heroImage {
+    width: 280px;
+    height: 280px;
+  }
+}
+
+@media (max-width: 768px) {
+  .careersHero {
+    padding: 4rem 0 2rem;
+  }
+  .container {
+    padding: 0 1rem;
+  }
+  .heroContent {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 2.5rem;
+  }
+  .textContent {
+    align-items: center;
+  }
+  .title {
+    font-size: 2rem;
+  }
+  .subtitle {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+  .stats {
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+  .ctaButtons {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
+  }
+  .primaryBtn,
+  .secondaryBtn {
+    width: 100%;
+    max-width: 320px;
+  }
+  .visualContent {
+    margin-top: 1rem;
+    width: 100%;
+  }
+  .heroImage {
+    width: 100%;
+    max-width: 320px;
+    height: 320px;
+  }
+  .floatingCard {
+    margin: 1rem;
+    padding: 1rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.8rem;
+  }
+  .statNumber {
+    font-size: 1.8rem;
+  }
+  .heroImage {
+    height: 280px;
+  }
+}

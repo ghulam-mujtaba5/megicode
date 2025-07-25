@@ -1,5 +1,5 @@
 "use client";
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import { useTheme } from "../../context/ThemeContext";
 import dynamic from 'next/dynamic';
 import LoadingAnimation from '@/components/LoadingAnimation/LoadingAnimation';
@@ -57,7 +57,11 @@ const Footer = dynamic<FooterProps>(
 });
 
 export default function CareersPage() {
-  const { theme } = useTheme();
+  const { theme, toggleTheme } = useTheme();
+
+  useEffect(() => {
+    // Ensure the theme is set on the server to avoid a hydration mismatch
+  }, [theme]);
 
   // Social/contact info
   const linkedinUrl = "https://www.linkedin.com/company/megicode";
@@ -75,17 +79,11 @@ export default function CareersPage() {
         {/* Theme Toggle Icon */}
         <div
           id="theme-toggle"
+          className={styles.themeToggle}
           role="button"
           tabIndex={0}
           aria-label="Toggle theme"
-          onClick={() => {}}
-          style={{
-            position: 'fixed',
-            top: '20px',
-            right: '20px',
-            zIndex: 1000,
-            cursor: 'pointer',
-          }}
+          onClick={toggleTheme}
         >
           <ThemeToggleIcon />
         </div>
