@@ -8,16 +8,16 @@
 }
 
 .navLink {
-  color: #e1e5f2;
+  color: #e1e5f2; /* Light color for readability on dark background */
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
   transition: color 0.2s ease-in-out;
   position: relative;
   padding-bottom: 0.3rem;
 }
 
 .navLink:hover {
-  color: #fff;
+  color: #ffffff; /* Brighter on hover */
 }
 
 .navLink::after {
@@ -34,15 +34,4 @@
 
 .navLink:hover::after {
     width: 100%;
-}
-
-.navLink {
-  color: #ffffff;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s ease-in-out;
-}
-
-.navLink:hover {
-  color: #58a6ff; /* Sample primary color for dark mode */
 }

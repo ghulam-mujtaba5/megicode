@@ -1,21 +1,22 @@
 /* NewNavBar-light.module.css */
 .navbar {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(232, 235, 238, 0.85); /* Consistent with page background */
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
-  /* box-shadow: 0 4px 24px 0 rgba(69,115,223,0.04), 0 1.5px 6px 0 rgba(0,0,0,0.04); */
+  border-bottom: 1px solid rgba(45, 79, 162, 0.15);
 }
 
 .navLink {
-  font-weight: 600;
-  background: linear-gradient(90deg, #4573df, #2d4fa2);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  padding-bottom: 0.3rem;
+  color: #2d4fa2; /* Consistent link color */
   text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease-in-out;
+  padding-bottom: 0.3rem;
   position: relative;
+}
+
+.navLink:hover {
+  color: #4573df; /* Lighter blue on hover */
 }
 
 .navLink::after {
@@ -32,15 +33,4 @@
 
 .navLink:hover::after {
     width: 100%;
-}
-
-.navLink {
-  color: #333333;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s ease-in-out;
-}
-
-.navLink:hover {
-  color: #0070f3; /* Sample primary color */
 }
