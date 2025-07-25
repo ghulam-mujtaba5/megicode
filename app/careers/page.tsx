@@ -63,6 +63,18 @@ export default function CareersPage() {
     // Ensure the theme is set on the server to avoid a hydration mismatch
   }, [theme]);
 
+  // Navigation sections for consistent navigation
+  const sections = [
+    { id: 'home', label: 'Home', href: '/' },
+    { id: 'about', label: 'About', href: '/about' },
+    { id: 'services', label: 'Services', href: '/services' },
+    { id: 'projects', label: 'Projects', href: '/projects' },
+    { id: 'article', label: 'Article', href: '/article' },
+    { id: 'contact', label: 'Contact', href: '/contact' },
+    { id: 'reviews', label: 'Reviews', href: '/reviews' },
+    { id: 'careers', label: 'Careers', href: '/careers' },
+  ];
+
   // Social/contact info
   const linkedinUrl = "https://www.linkedin.com/company/megicode";
   const instagramUrl = "https://www.instagram.com/megicode/";

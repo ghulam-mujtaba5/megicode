@@ -28,8 +28,10 @@ export default function ProjectsPage() {
     { id: 'about', label: 'About', href: '/about' },
     { id: 'services', label: 'Services', href: '/services' },
     { id: 'projects', label: 'Projects', href: '/projects' },
-    { id: 'reviews', label: 'Reviews', href: '/reviews' },
+    { id: 'article', label: 'Article', href: '/article' },
     { id: 'contact', label: 'Contact', href: '/contact' },
+    { id: 'reviews', label: 'Reviews', href: '/reviews' },
+    { id: 'careers', label: 'Careers', href: '/careers' },
   ];  return (
     <div style={{ backgroundColor: theme === "dark" ? "#1d2127" : "#ffffff", overflowX: "hidden", position: "relative" }}>
       <div style={{ 

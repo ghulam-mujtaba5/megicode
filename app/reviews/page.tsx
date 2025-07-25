@@ -20,12 +20,14 @@ export default function ReviewsPage() {
     const { theme } = useTheme();
 
     const sections = [
-        { label: "Home", route: "/" },
-        { label: "About", route: "/about" },
-        { label: "Services", route: "/services" },
-        { label: "Reviews", route: "/reviews" },
-        { label: "Project", route: "/project" },
-        { label: "Contact", route: "/contact" },
+        { id: 'home', label: 'Home', href: '/' },
+        { id: 'about', label: 'About', href: '/about' },
+        { id: 'services', label: 'Services', href: '/services' },
+        { id: 'projects', label: 'Projects', href: '/projects' },
+        { id: 'article', label: 'Article', href: '/article' },
+        { id: 'contact', label: 'Contact', href: '/contact' },
+        { id: 'reviews', label: 'Reviews', href: '/reviews' },
+        { id: 'careers', label: 'Careers', href: '/careers' },
     ];
 
     return (

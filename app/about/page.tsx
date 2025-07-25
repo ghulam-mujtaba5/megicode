@@ -45,20 +45,23 @@ const Footer = dynamic<FooterProps>(
 export default function AboutPage() {
   const { theme } = useTheme();
 
+  // Navigation sections for consistent navigation
+  const sections = [
+    { id: 'home', label: 'Home', href: '/' },
+    { id: 'about', label: 'About', href: '/about' },
+    { id: 'services', label: 'Services', href: '/services' },
+    { id: 'projects', label: 'Projects', href: '/projects' },
+    { id: 'article', label: 'Article', href: '/article' },
+    { id: 'contact', label: 'Contact', href: '/contact' },
+    { id: 'reviews', label: 'Reviews', href: '/reviews' },
+    { id: 'careers', label: 'Careers', href: '/careers' },
+  ];
+
   // Social/contact info
   const linkedinUrl = "https://www.linkedin.com/company/megicode";
   const instagramUrl = "https://www.instagram.com/megicode/";
   const githubUrl = "https://github.com/megicodes";
   const copyrightText = "Copyright 2025 Megicode. All Rights Reserved.";
-
-  const sections = [
-    { label: "Home", route: "/" },
-    { label: "About", route: "/about" },
-    { label: "Services", route: "/services" },
-    { label: "Reviews", route: "/reviews" },
-    { label: "Project", route: "/project" },
-    { label: "Contact", route: "/contact" },
-  ];
 
   return (
     <div 

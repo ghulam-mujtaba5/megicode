@@ -10,11 +10,14 @@ import darkStyles from './NavBarMobileDark.module.css';
 
 const NavBar = () => {
     const sections = [
+        { id: 'home', label: 'Home', href: '/' },
         { id: 'about', label: 'About', href: '/about' },
         { id: 'services', label: 'Services', href: '/services' },
         { id: 'projects', label: 'Projects', href: '/projects' },
         { id: 'article', label: 'Article', href: '/article' },
         { id: 'contact', label: 'Contact', href: '/contact' },
+        { id: 'reviews', label: 'Reviews', href: '/reviews' },
+        { id: 'careers', label: 'Careers', href: '/careers' },
     ];
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { theme, toggleTheme } = useTheme(); // Ensure toggleTheme is destructured from the context
