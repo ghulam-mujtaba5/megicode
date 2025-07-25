@@ -10,18 +10,18 @@ import {
   SiTensorflow, SiPytorch, SiOpenai, SiScikitlearn, SiMicrosoftazure,
   SiPython, SiPowerbi, SiTableau, SiApachespark, SiReact, SiNextdotjs,
   SiNodedotjs, SiTypescript, SiGraphql, SiFlutter, SiSwift, SiKotlin,
-  SiFirebase, SiAmazonaws, SiDocker, SiKubernetes, SiTerraform, SiJenkins,
-  SiFigma, SiAdobexd, SiSketch, SiInvision, SiZeplin
+  SiFirebase, SiAmazon, SiDocker, SiKubernetes, SiTerraform, SiJenkins,
+  SiFigma, SiAdobexd, SiSketch, SiInvision, SiAdobe
 } from 'react-icons/si';
 import { DiDatabase } from 'react-icons/di';
 
 const techCategories = {
-  'AI & Machine Learning': ['TensorFlow', 'PyTorch', 'OpenAI', 'Scikit-learn', 'Azure AI'],
+  'AI & Machine Learning': ['TensorFlow', 'PyTorch', 'OpenAI', 'Scikit-learn', 'Azure'],
   'Data & Analytics': ['Python', 'Power BI', 'Tableau', 'SQL', 'Spark'],
   'Web Development': ['React', 'Next.js', 'Node.js', 'TypeScript', 'GraphQL'],
   'Mobile Development': ['React Native', 'Flutter', 'Swift', 'Kotlin', 'Firebase'],
-  'Cloud & DevOps': ['AWS', 'Docker', 'Kubernetes', 'Terraform', 'Jenkins'],
-  'Design': ['Figma', 'Adobe XD', 'Sketch', 'InVision', 'Zeplin'],
+  'Cloud & DevOps': ['Amazon Web Services', 'Docker', 'Kubernetes', 'Terraform', 'Jenkins'],
+  'Design': ['Figma', 'Adobe XD', 'Sketch', 'InVision', 'Adobe Creative'],
 };
 
 const colorMap: { [key: string]: string } = {
@@ -29,7 +29,7 @@ const colorMap: { [key: string]: string } = {
   'PyTorch': '#EE4C2C',
   'OpenAI': '#4A90E2',
   'Scikit-learn': '#F7931E',
-  'Azure AI': '#0078D4',
+  'Azure': '#0078D4',
   'Python': '#3776AB',
   'Power BI': '#F2C811',
   'Tableau': '#E97627',
@@ -45,7 +45,7 @@ const colorMap: { [key: string]: string } = {
   'Swift': '#F05138',
   'Kotlin': '#7F52FF',
   'Firebase': '#FFCA28',
-  'AWS': '#FF9900',
+  'Amazon Web Services': '#FF9900',
   'Docker': '#2496ED',
   'Kubernetes': '#326CE5',
   'Terraform': '#7B42BC',
@@ -54,7 +54,7 @@ const colorMap: { [key: string]: string } = {
   'Adobe XD': '#FF61F6',
   'Sketch': '#F7B500',
   'InVision': '#FF3366',
-  'Zeplin': '#FBC238',
+  'Adobe Creative': '#FF0000',
 };
 
 const iconMap: { [key: string]: React.ElementType } = {
@@ -62,7 +62,7 @@ const iconMap: { [key: string]: React.ElementType } = {
   'PyTorch': SiPytorch,
   'OpenAI': SiOpenai,
   'Scikit-learn': SiScikitlearn,
-  'Azure AI': SiMicrosoftazure,
+  'Azure': SiMicrosoftazure,
   'Python': SiPython,
   'Power BI': SiPowerbi,
   'Tableau': SiTableau,
@@ -78,7 +78,7 @@ const iconMap: { [key: string]: React.ElementType } = {
   'Swift': SiSwift,
   'Kotlin': SiKotlin,
   'Firebase': SiFirebase,
-  'AWS': SiAmazonaws,
+  'Amazon Web Services': SiAmazon,
   'Docker': SiDocker,
   'Kubernetes': SiKubernetes,
   'Terraform': SiTerraform,
@@ -87,7 +87,7 @@ const iconMap: { [key: string]: React.ElementType } = {
   'Adobe XD': SiAdobexd,
   'Sketch': SiSketch,
   'InVision': SiInvision,
-  'Zeplin': SiZeplin,
+  'Adobe Creative': SiAdobe,
 };
 
 const TechStack: React.FC = () => {
