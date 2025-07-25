@@ -33,16 +33,24 @@ export const fadeInDown: Variants = {
   },
 };
 
-export const fadeIn: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        duration: 0.8,
-        ease: 'easeInOut',
-      },
+export const fadeIn = (direction: 'up' | 'down' | 'left' | 'right' = 'up', delay: number = 0): Variants => ({
+  hidden: {
+    x: direction === 'left' ? -40 : direction === 'right' ? 40 : 0,
+    y: direction === 'up' ? 40 : direction === 'down' ? -40 : 0,
+    opacity: 0,
+  },
+  show: {
+    x: 0,
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: 'tween',
+      duration: 0.8,
+      delay,
+      ease: 'easeOut',
     },
-  };
+  },
+});
 
 export const scaleOnHover = {
     hover: {

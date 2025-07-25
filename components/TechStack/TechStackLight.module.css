@@ -1,0 +1,32 @@
+.techStackSection {
+  background-color: #f8f9fa;
+  color: #343a40;
+}
+
+.heading {
+  color: #212529;
+}
+
+.subheading {
+  color: #6c757d;
+}
+
+.categoryCard {
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.categoryCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.categoryTitle {
+  border-color: #4573df; /* Primary brand color */
+  color: #343a40;
+}
+
+.techItem {
+  background-color: #e9ecef;
+  color: #495057;
+}

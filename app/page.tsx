@@ -12,6 +12,7 @@ import ThemeToggleIcon from "../components/Icon/sbicon";
 import MegicodeHeroAnimationAdvancedClient from "./megicode/MegicodeHeroAnimationAdvancedClient";
 import ParticleBackgroundClient from "./megicode/ParticleBackgroundClient";
 import Tagline from "../components/Tagline/Tagline";
+import TechStack from "../components/TechStack/TechStack";
 
 export default function HomePage() {
   const { theme, toggleTheme } = useTheme();
@@ -86,6 +87,15 @@ export default function HomePage() {
             className="content-section"
           >
             <ServicesFrame />
+          </section>
+
+          {/* Tech Stack Section */}
+          <section
+            id="tech-stack-section"
+            aria-labelledby="tech-stack-heading"
+            className="content-section"
+          >
+            <TechStack />
           </section>
           {/* Contact Section */}
           <section
