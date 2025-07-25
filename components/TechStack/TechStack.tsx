@@ -12,13 +12,14 @@ import {
   SiNodedotjs, SiTypescript, SiGraphql, SiFlutter, SiSwift, SiKotlin,
   SiFirebase, SiAmazon, SiDocker, SiKubernetes, SiTerraform, SiJenkins,
   SiFigma, SiAdobexd, SiSketch, SiInvision, SiAdobe,
+  SiSpringboot, SiExpress,
 } from 'react-icons/si';
 import { DiDatabase } from 'react-icons/di';
 
 const techCategories = {
   'AI & Machine Learning': ['TensorFlow', 'PyTorch', 'OpenAI', 'Scikit-learn'],
   'Data & Analytics': ['Python', 'Tableau', 'SQL', 'Spark'],
-  'Web Development': ['React', 'Next.js', 'Node.js', 'TypeScript', 'GraphQL'],
+  'Web Development': ['React', 'Next.js', 'Node.js', 'Spring Boot', 'Express.js'],
   'Mobile Development': ['React Native', 'Flutter', 'Swift', 'Kotlin', 'Firebase'],
   'Cloud & DevOps': ['Amazon Web Services', 'Docker', 'Kubernetes', 'Terraform', 'Jenkins'],
   'Design': ['Figma', 'Adobe XD', 'Sketch', 'InVision', 'Adobe Creative'],
@@ -36,8 +37,8 @@ const colorMap: { [key: string]: string } = {
   'React': '#61DAFB',
   'Next.js': '#000000',
   'Node.js': '#339933',
-  'TypeScript': '#3178C6',
-  'GraphQL': '#E10098',
+  'Spring Boot': '#6DB33F',
+  'Express.js': '#000000',
   'React Native': '#61DAFB',
   'Flutter': '#02569B',
   'Swift': '#F05138',
@@ -67,8 +68,8 @@ const iconMap: { [key: string]: React.ElementType } = {
   'React': SiReact,
   'Next.js': SiNextdotjs,
   'Node.js': SiNodedotjs,
-  'TypeScript': SiTypescript,
-  'GraphQL': SiGraphql,
+  'Spring Boot': SiSpringboot,
+  'Express.js': SiExpress,
   'React Native': SiReact,
   'Flutter': SiFlutter,
   'Swift': SiSwift,
