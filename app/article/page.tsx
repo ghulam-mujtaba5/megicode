@@ -40,14 +40,16 @@ const ArticlePage = () => {
   return (
     <div
       style={{
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh',
         background: theme === "dark" ? "linear-gradient(135deg, #181c22 0%, #232946 100%)" : "linear-gradient(135deg, #f8fafc 0%, #e8eaf6 100%)",
-        minHeight: "100vh",
         overflowX: "hidden",
         transition: "background 0.3s"
       }}
     >
       {/* Theme Toggle Icon */}
-      <div id="theme-toggle" role="button" tabIndex={0} onClick={toggleTheme} style={{ margin: "0 0 0 1.5rem", width: 40 }}>
+      <div id="theme-toggle" role="button" tabIndex={0} onClick={toggleTheme} style={{ margin: "0 0 0 1.5rem", width: 40, zIndex: 50, position: 'fixed' }}>
         <ThemeToggleIcon />
       </div>
       <nav id="desktop-navbar" aria-label="Main Navigation">
@@ -58,10 +60,11 @@ const ArticlePage = () => {
       </nav>
       <main
         style={{
+          flex: '1 0 auto',
           maxWidth: 900,
-          margin: "0 auto",
-          padding: "3.5rem 1rem 2rem 1rem",
-          minHeight: "80vh"
+          width: '100%',
+          margin: '0 auto',
+          padding: '5rem 1rem 4rem 1rem',
         }}
       >
         <h1
@@ -157,11 +160,14 @@ const ArticlePage = () => {
           </div>
         )}
       </main>
-      <Footer
-        linkedinUrl="https://www.linkedin.com/company/megicode"
-        instagramUrl="https://www.instagram.com/megicode/"
-        githubUrl="https://github.com/megicodes"
-        copyrightText="Copyright 2025 Megicode. All Rights Reserved."
+      <div style={{ flexShrink: 0, width: '100%' }}>
+        <Footer
+          linkedinUrl="https://www.linkedin.com/company/megicode"
+          instagramUrl="https://www.instagram.com/megicode/"
+          githubUrl="https://github.com/megicodes"
+          copyrightText="Copyright 2025 Megicode. All Rights Reserved."
+        />
+      </div>
       />
     </div>
   );
