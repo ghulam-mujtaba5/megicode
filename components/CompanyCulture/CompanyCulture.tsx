@@ -34,7 +34,7 @@ const CompanyCulture: React.FC = () => {
   const themed = theme === 'dark' ? dark : light;
 
   return (
-    <section className={[
+    <section id="company-culture" className={[
       common.cultureSection,
       themed.cultureSection
     ].join(' ')}>

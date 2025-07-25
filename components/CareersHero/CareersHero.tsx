@@ -10,6 +10,16 @@ const CareersHero: React.FC = () => {
   const themed = theme === 'dark' ? dark : light;
   const cx = (...classes: (string | undefined)[]) => classes.filter(Boolean).join(' ');
 
+  const handleScroll = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
+  };
+
   return (
     <section className={cx(common.careersHero, themed.careersHero)}>
       <div className={common.container}>
@@ -37,10 +47,10 @@ const CareersHero: React.FC = () => {
               </div>
             </div>
             <div className={common.ctaButtons}>
-              <button className={cx(common.primaryBtn, themed.primaryBtn)}>
+              <button className={cx(common.primaryBtn, themed.primaryBtn)} onClick={() => handleScroll('open-positions')}>
                 View Open Positions
               </button>
-              <button className={cx(common.secondaryBtn, themed.secondaryBtn)}>
+              <button className={cx(common.secondaryBtn, themed.secondaryBtn)} onClick={() => handleScroll('company-culture')}>
                 Learn About Our Culture
               </button>
             </div>

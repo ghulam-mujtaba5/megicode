@@ -54,7 +54,7 @@ const OpenPositions: React.FC = () => {
   const themed = theme === 'dark' ? dark : light;
   const cx = (...classes: (string | undefined)[]) => classes.filter(Boolean).join(' ');
   return (
-  <section className={cx(common.positionsSection, themed.positionsSection)}>
+  <section id="open-positions" className={cx(common.positionsSection, themed.positionsSection)}>
     <h2 className={cx(common.heading, themed.heading)}>Open Positions</h2>
     <div className={common.positionsGrid}>
       {positions.length > 0 ? (
