@@ -13,13 +13,16 @@
 }
 
 .nameInput,
-.emailInput,
-.messageInput {
-
+.emailInput {
     border: 1px solid #fff;
-  
     background-color: #fff;
-  
+    color: #272b32;
+}
+
+.messageInput {
+    border: 1px solid #fff;
+    background-color: #fff;
+    color: #272b32;
 }
 
 .sendButtonBorder {
