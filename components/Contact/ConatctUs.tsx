@@ -11,7 +11,7 @@ import SuccessToast from "./SuccessToast";
 
 
 const ContactSection = ({
-  email = "info@megicode.com",
+  email = "contact@megicode.com",
   phoneNumber = "+92 317 7107849",
   showCertificationBadge = false,
   showAdditionalCertificationBadge = false

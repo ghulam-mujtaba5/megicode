@@ -28,7 +28,7 @@ export default function PrivacyPolicyPage() {
         <section className={styles.section}>
           <h2 className={styles.subheading}>2. Information We Collect</h2>
           <ul>
-            <li><strong>Personal Information:</strong> If you contact us via forms or email (info@megicode.com), we collect your name, email address, and message content for communication purposes only.</li>
+            <li><strong>Personal Information:</strong> If you contact us via forms or email (contact@megicode.com), we collect your name, email address, and message content for communication purposes only.</li>
             <li><strong>Usage Data:</strong> We collect information about your visit (pages viewed, time spent, browser/device info) via cookies and analytics tools (e.g., Google Analytics) to improve our site and services.</li>
             <li><strong>Cookies:</strong> Cookies are used to enhance your experience, remember preferences, and manage consent. You can accept or decline cookies via the cookie consent banner.</li>
             <li><strong>Social Links:</strong> If you visit our external profiles (LinkedIn, Instagram, GitHub), those platforms may collect data per their own privacy policies.</li>
@@ -39,7 +39,7 @@ export default function PrivacyPolicyPage() {
           <ul>
             <li>To provide, operate, and maintain our website and services.</li>
             <li>To improve and personalize your experience.</li>
-            <li>To respond to your inquiries or feedback sent to <a href="mailto:info@megicode.com">info@megicode.com</a>.</li>
+            <li>To respond to your inquiries or feedback sent to <a href="mailto:contact@megicode.com">contact@megicode.com</a>.</li>
             <li>To analyze usage and trends for site improvement.</li>
             <li>To comply with legal obligations and protect the rights of Megicode.</li>
           </ul>
@@ -98,7 +98,7 @@ export default function PrivacyPolicyPage() {
           </p>
           <ul>
             <li><strong>Name:</strong> Megicode</li>
-            <li><strong>Email:</strong> <a href="mailto:info@megicode.com">info@megicode.com</a></li>
+            <li><strong>Email:</strong> <a href="mailto:contact@megicode.com">contact@megicode.com</a></li>
             <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/company/megicode" target="_blank" rel="noopener noreferrer">megicode</a></li>
             <li><strong>Instagram:</strong> <a href="https://www.instagram.com/megicode/" target="_blank" rel="noopener noreferrer">megicode</a></li>
             <li><strong>GitHub:</strong> <a href="https://github.com/megicodes" target="_blank" rel="noopener noreferrer">megicodes</a></li>

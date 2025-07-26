@@ -18,7 +18,7 @@ const positions = [
       "Strong CSS/JS/TS skills",
       "Passion for UX/UI"
     ],
-    applyLink: "mailto:info@megicode.com?subject=Application%20for%20Frontend%20Engineer"
+    applyLink: "mailto:contact@megicode.com?subject=Application%20for%20Frontend%20Engineer"
   },
   {
     title: "Backend Engineer",
@@ -30,7 +30,7 @@ const positions = [
       "Familiarity with databases (SQL/NoSQL)",
       "API design best practices"
     ],
-    applyLink: "mailto:info@megicode.com?subject=Application%20for%20Backend%20Engineer"
+    applyLink: "mailto:contact@megicode.com?subject=Application%20for%20Backend%20Engineer"
   },
   {
     title: "AI/ML Engineer",
@@ -42,7 +42,7 @@ const positions = [
       "Familiarity with LLMs, NLP, or CV",
       "Problem-solving mindset"
     ],
-    applyLink: "mailto:info@megicode.com?subject=Application%20for%20AI%2FML%20Engineer"
+    applyLink: "mailto:contact@megicode.com?subject=Application%20for%20AI%2FML%20Engineer"
   }
 ];
 */

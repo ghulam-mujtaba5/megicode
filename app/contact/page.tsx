@@ -525,7 +525,7 @@ export default function ContactPage() {
                   </span>
                   <div className={styles.contactDetails}>
                     <h4>Email</h4>
-                    <p><a href="mailto:info@megicode.com">info@megicode.com</a></p>
+                    <p><a href="mailto:contact@megicode.com">contact@megicode.com</a></p>
                   </div>
                 </div>
                 

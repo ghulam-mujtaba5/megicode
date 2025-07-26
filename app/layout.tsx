@@ -91,7 +91,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     "name": "Megicode",
     "url": "https://megicode.com",
     "logo": "https://megicode.com/meta/android-chrome-512x512.png",
-    "email": "info@megicode.com",
+    "email": "contact@megicode.com",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Lahore",
@@ -99,7 +99,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     },
     "contactPoint": [{
       "@type": "ContactPoint",
-      "email": "info@megicode.com",
+      "email": "contact@megicode.com",
       "contactType": "customer support"
     }],
     "sameAs": [
