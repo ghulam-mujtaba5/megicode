@@ -7,9 +7,9 @@
 }
 
 .navLink {
-  color: #2d4fa2; /* Consistent link color */
+  color: #4573df; /* Updated to user-requested blue */
   text-decoration: none;
-  font-weight: 600;
+  
   transition: color 0.2s ease-in-out;
   padding-bottom: 0.3rem;
   position: relative;
