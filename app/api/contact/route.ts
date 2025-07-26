@@ -1,25 +1,13 @@
 import { NextResponse } from 'next/server';
-import { Resend } from 'resend';
-import React from 'react';
-import { ContactFormEmail } from '../../../components/Email/ContactFormEmail';
+import nodemailer from 'nodemailer';
 
-let resend: Resend | null = null;
-if (process.env.RESEND_API_KEY) {
-  resend = new Resend(process.env.RESEND_API_KEY);
-}
-const fromEmail = process.env.FROM_EMAIL;
-const toEmail = process.env.TO_EMAIL;
+const zohoUser = process.env.ZOHO_USER;
+const zohoPass = process.env.ZOHO_PASS;
 
 export async function POST(request: Request) {
-  if (!fromEmail || !toEmail) {
+  if (!zohoUser || !zohoPass) {
     return NextResponse.json(
-      { error: 'Missing required environment variables for email configuration.' },
-      { status: 500 }
-    );
-  }
-  if (!resend) {
-    return NextResponse.json(
-      { error: 'Missing Resend API key. Please set RESEND_API_KEY in your environment.' },
+      { error: 'Missing required environment variables for Zoho SMTP.' },
       { status: 500 }
     );
   }
@@ -28,28 +16,35 @@ export async function POST(request: Request) {
     const { name, email, subject, message, phone, company, service } = body;
 
     // --- Server-Side Validation ---
-    if (!name || !email || !subject || !message || !service) {
+    if (!name || !email || !message) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
-    // --- Send Email using Resend ---
-    const { data, error } = await resend.emails.send({
-      from: fromEmail,
-      to: [toEmail],
-      subject: `New Message from ${name}: ${subject}`,
-      replyTo: email,
-      react: ContactFormEmail({ name, email, subject, message, phone, company, service }) as React.ReactElement,
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.zoho.com',
+      port: 465,
+      secure: true,
+      auth: {
+        user: zohoUser,
+        pass: zohoPass,
+      },
     });
 
-    if (error) {
-      console.error('Resend API Error:', error);
-      return NextResponse.json({ error: 'Error sending message.' }, { status: 500 });
-    }
+    // Compose the email content
+    const emailSubject = subject ? `New Message from ${name}: ${subject}` : `New Message from ${name}`;
+    const emailText = `Name: ${name}\nEmail: ${email}\n${phone ? `Phone: ${phone}\n` : ''}${company ? `Company: ${company}\n` : ''}${service ? `Service: ${service}\n` : ''}Message: ${message}`;
+
+    await transporter.sendMail({
+      from: `"Megicode Contact Form" <${zohoUser}>`,
+      to: zohoUser,
+      subject: emailSubject,
+      text: emailText,
+      replyTo: email,
+    });
 
     return NextResponse.json({ message: 'Message sent successfully!' }, { status: 200 });
-
   } catch (error) {
-    console.error('API Error:', error);
+    console.error('Zoho SMTP API Error:', error);
     return NextResponse.json({ error: 'An internal server error occurred.' }, { status: 500 });
   }
 }

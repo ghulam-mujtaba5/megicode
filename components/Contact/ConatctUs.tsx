@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useCallback, useMemo, useRef, useEffect } from 'react';
-import emailjs from 'emailjs-com';
+
 import { useTheme } from '../../context/ThemeContext';
 import commonStyles from './ContactUsCommon.module.css';
 import lightStyles from './ContactUsLight.module.css';
@@ -8,9 +8,7 @@ import darkStyles from './ContactUsDark.module.css';
 import { motion, useAnimation } from 'framer-motion';
 import SuccessToast from "./SuccessToast";
 
-const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-const EMAILJS_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
-const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+
 
 const ContactSection = ({
   email = "info@megicode.com",
@@ -55,7 +53,7 @@ const ContactSection = ({
   }, []);
 
   const handleSubmit = useCallback(
-    (event) => {
+    async (event) => {
       event.preventDefault();
       setIsSending(true);
       setError(null);
@@ -70,28 +68,27 @@ const ContactSection = ({
         setIsSending(false);
         return;
       }
-      emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        {
-          from_name: name,
-          from_email: emailInput,
-          message: message,
-        },
-        EMAILJS_PUBLIC_KEY
-      )
-      .then((result) => {
-        setResponse('Message sent successfully!');
-        setShowSuccess(true);
-        setName('');
-        setEmailInput('');
-        setMessage('');
-      }, (error) => {
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email: emailInput, message }),
+        });
+        const result = await res.json();
+        if (res.ok) {
+          setResponse(result.message || 'Message sent successfully!');
+          setShowSuccess(true);
+          setName('');
+          setEmailInput('');
+          setMessage('');
+        } else {
+          setError(result.message || 'Failed to send message. Please try again later.');
+        }
+      } catch (err) {
         setError('Failed to send message. Please try again later.');
-      })
-      .finally(() => {
+      } finally {
         setIsSending(false);
-      });
+      }
     },
     [name, emailInput, message, validateEmail]
   );
