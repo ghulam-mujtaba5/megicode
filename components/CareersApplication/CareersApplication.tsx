@@ -15,7 +15,7 @@ const CareersApplication: React.FC = () => {
   return (
     <section className={cx(common.applicationSection, themed.applicationSection)}>
       <h2 className={cx(common.heading, themed.heading)}>Apply Now</h2>
-      <p className={cx(common.intro, themed.intro)}>Ready to join Megicode? Send your CV and a short intro to <a href="mailto:info@megicode.com" className={cx(common.email, themed.email)}>info@megicode.com</a> or use the form below:</p>
+      <p className={cx(common.intro, themed.intro)}>Ready to join Megicode? Send your CV and a short intro to <a href="mailto:contact@megicode.com" className={cx(common.email, themed.email)}>contact@megicode.com</a> or use the form below:</p>
       {submitted ? (
         <div className={cx(common.successMsg, themed.successMsg)}>Thank you for applying! We’ll review your application and get in touch soon.</div>
       ) : (

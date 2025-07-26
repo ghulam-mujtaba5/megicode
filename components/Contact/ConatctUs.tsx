@@ -12,7 +12,7 @@ import SuccessToast from "./SuccessToast";
 
 const ContactSection = ({
   email = "contact@megicode.com",
-  phoneNumber = "+92 317 7107849",
+  phoneNumber = "+9200000000000",
   showCertificationBadge = false,
   showAdditionalCertificationBadge = false
 }) => {
