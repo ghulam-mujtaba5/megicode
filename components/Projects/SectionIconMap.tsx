@@ -1,17 +1,30 @@
-import { FaExclamationCircle, FaLightbulb, FaChartLine, FaCogs, FaTools, FaRoute, FaBookOpen, FaArrowUp, FaRegFileAlt, FaRocket, FaCheckCircle, FaUserTie, FaQuoteLeft, FaListAlt } from 'react-icons/fa';
+import React from 'react';
+import { FaPuzzlePiece, FaLightbulb, FaChartLine, FaCogs, FaTasks, FaTools, FaFileAlt, FaGraduationCap, FaArrowRight, FaRocket, FaUsers, FaQuoteLeft, FaCalendarAlt, FaCheckCircle } from 'react-icons/fa';
 
-export const sectionIconMap: Record<string, JSX.Element> = {
-  Problem: <FaExclamationCircle color="#e57373" />,
-  Challenge: <FaLightbulb color="#fbc02d" />,
-  Solution: <FaCogs color="#64b5f6" />,
-  Impact: <FaChartLine color="#43a047" />,
-  Implementation: <FaTools color="#7e57c2" />,
-  Process: <FaRoute color="#29b6f6" />,
-  Tools: <FaTools color="#ffa726" />,
-  Artifacts: <FaRegFileAlt color="#90a4ae" />,
-  Lessons: <FaBookOpen color="#ffb300" />,
-  NextSteps: <FaRocket color="#00bcd4" />,
-  Metrics: <FaArrowUp color="#43a047" />,
-  Testimonial: <FaQuoteLeft color="#ab47bc" />,
-  TechStack: <FaListAlt color="#1976d2" />,
+const sectionIconMap: Record<string, React.ReactNode> = {
+  'Problem': <FaPuzzlePiece color="#1e90ff" />,
+  'Challenge': <FaLightbulb color="#f6c700" />,
+  'Solution': <FaLightbulb color="#1e90ff" />,
+  'Impact': <FaChartLine color="#22c55e" />,
+  'Implementation': <FaCogs color="#6366f1" />,
+  'Process': <FaTasks color="#6366f1" />,
+  'Tools Used': <FaTools color="#1e90ff" />,
+  'Artifacts': <FaFileAlt color="#6366f1" />,
+  'Lessons Learned': <FaGraduationCap color="#f6c700" />,
+  'Next Steps': <FaArrowRight color="#6366f1" />,
+  'Tech Stack': <FaRocket color="#6366f1" />,
+  'Testimonial': <FaQuoteLeft color="#f6c700" />,
+  'Process Step': <FaCheckCircle color="#22c55e" />,
+  'Timeline': <FaCalendarAlt color="#1e90ff" />,
+  // Add more as needed
 };
+
+export function SectionIcon({ name, size = 22 }: { name: string, size?: number }) {
+  const icon = sectionIconMap[name];
+  if (icon) {
+    return React.cloneElement(icon as React.ReactElement, { size });
+  }
+  return null;
+}
+
+export default sectionIconMap;
