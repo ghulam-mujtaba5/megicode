@@ -73,7 +73,57 @@ const servicesData = [
     icon: "/web app icon.svg",
     title: "Custom Web Development",
     slug: "custom-web-development",
-    description: "Robust, scalable, and secure web applications tailored to your business goals and user needs.",
+    description: "Robust, scalable, and secure web applications tailored to your business goals and user needs. We build high-performance sites and applications that not only look great but are also optimized for search engines and conversions.",
+    process: [
+      {
+        title: "1. Discovery & Strategy",
+        description: "We start by understanding your business goals, target audience, and technical requirements to create a detailed project roadmap and strategy."
+      },
+      {
+        title: "2. UI/UX Design & Prototyping",
+        description: "Our design team creates intuitive wireframes and high-fidelity prototypes to visualize the user experience before development begins."
+      },
+      {
+        title: "3. Agile Development & Testing",
+        description: "We use an agile methodology to build your application in iterative sprints, with continuous testing to ensure quality and reliability."
+      },
+      {
+        title: "4. Deployment & Launch",
+        description: "We handle the entire deployment process, ensuring a smooth launch on scalable cloud infrastructure."
+      },
+      {
+        title: "5. Ongoing Support & Optimization",
+        description: "After launch, we provide ongoing maintenance, support, and performance optimization to ensure your application continues to meet your needs."
+      }
+    ],
+    benefits: [
+      {
+        title: "Scalable Architecture",
+        description: "We build applications on modern, scalable architectures that can grow with your business, handling increased traffic and functionality without compromising performance."
+      },
+      {
+        title: "Enhanced Security",
+        description: "Security is at the core of our development process. We implement best practices to protect your application and user data from threats."
+      },
+      {
+        title: "SEO-Friendly by Design",
+        description: "We build with SEO in mind from the start, ensuring your application is optimized for search engines to attract organic traffic."
+      }
+    ],
+    faqs: [
+      {
+        question: "How long does it take to build a custom web application?",
+        answer: "The timeline for a custom web application can vary significantly based on the complexity and features required. A simple project might take 2-3 months, while a more complex application could take 6 months or longer. We provide a detailed timeline after the initial discovery phase."
+      },
+      {
+        question: "Do you provide ongoing support after the application is launched?",
+        answer: "Yes, we offer a range of ongoing support and maintenance packages to ensure your application remains secure, up-to-date, and performs optimally. We can tailor a support plan to fit your specific needs."
+      },
+      {
+        question: "Can you integrate the web application with our existing systems?",
+        answer: "Absolutely. We specialize in creating custom APIs and integrations to connect your new web application with your existing software, such as CRMs, ERPs, and other third-party services."
+      }
+    ],
     features: [
       "Full-Stack Development",
       "API & Microservices",
@@ -102,7 +152,7 @@ const servicesData = [
       description: "Robust, scalable, and secure web applications tailored to your business goals and user needs.",
   images: ["https://megicode.com/images/twitter-web.jpg"],
     },
-  canonical: "https://megicode.com/services/custom-web-development",
+    canonical: "https://megicode.com/services/custom-web-development"
   },
   {
     icon: "/mobile app icon.svg",

@@ -17,7 +17,7 @@ export const viewport = {
 };
 
 export const metadata = {
-  metadataBase: new URL('https://megicode.com'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://megicode.com'),
   title: {
     default: "Megicode - Modern Software Solutions",
     template: "%s | Megicode"
