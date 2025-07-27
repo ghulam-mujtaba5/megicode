@@ -3,129 +3,93 @@ import styles from './ProjectsShowcaseCommon.module.css';
 import darkStyles from './ProjectsShowcaseDark.module.css';
 import lightStyles from './ProjectsShowcaseLight.module.css';
 import { useTheme } from '../../context/ThemeContext';
+import { projects } from "../../data/projects";
 import Image from 'next/image';
 
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  technologies: string[];
-  image: string;
-  link: string;
-  category: 'web' | 'mobile' | 'desktop' | 'ai' | 'data';
+export interface Artifact {
+  type: string;
+  url: string;
 }
 
-const projects: Project[] = [
-  {
-    id: 1,
-    title: "AI-Powered Analytics Dashboard",
-    description: "Enterprise-level analytics platform with machine learning capabilities for real-time data insights and predictive analytics.",
-    technologies: ["React", "Python", "TensorFlow", "AWS"],
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=80",
-  link: "https://github.com/megicodes",
-    category: "ai"
-  },
-  {
-    id: 2,
-    title: "E-Commerce Mobile App",
-    description: "Full-featured e-commerce mobile application with AR product visualization and personalized recommendations.",
-    technologies: ["React Native", "Node.js", "MongoDB", "Firebase"],
-    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&auto=format&fit=crop&q=80",
-  link: "https://github.com/megicodes",
-    category: "mobile"
-  },
-  {
-    id: 3,
-    title: "Smart Resource Management System",
-    description: "Desktop application for enterprise resource planning with advanced automation and workflow management.",
-    technologies: ["Electron", "TypeScript", "PostgreSQL", "Docker"],
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop&q=80",
-  link: "https://github.com/megicodes",
-    category: "desktop"
-  },
-  {
-    id: 4,
-    title: "Data Visualization Platform",
-    description: "Interactive data visualization platform with real-time analytics and customizable dashboards.",
-    technologies: ["D3.js", "Vue.js", "Python", "FastAPI"],
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=80",
-  link: "https://github.com/megicodes",
-    category: "data"
-  },
-  {
-    id: 5,
-    title: "Cloud-Native Web Application",
-    description: "Scalable web application built with microservices architecture and containerized deployment.",
-    technologies: ["Next.js", "Kubernetes", "GraphQL", "MongoDB"],
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&auto=format&fit=crop&q=80",
-  link: "https://github.com/megicodes",
-    category: "web"
-  }
-];
+export interface Project {
+  slug: string;
+  title: string;
+  category: 'uiux' | 'mobile' | 'desktop' | 'ai' | 'data-engineering';
+  description: string;
+  problem: string;
+  challenge?: string;
+  solution: string;
+  impact: string;
+  implementation?: string;
+  process?: string[];
+  toolsUsed?: string[];
+  artifacts?: Artifact[];
+  lessonsLearned?: string[];
+  nextSteps?: string;
+  techStack: string[];
+  github?: string;
+  screenshots?: string[];
+  metrics?: Record<string, string>;
+  testimonial?: string;
+  image: string;
+}
 
+import Link from "next/link";
 const ProjectsShowcase = () => {
   const { theme } = useTheme();
   const themeStyles = theme === 'dark' ? darkStyles : lightStyles;
   const [activeCategory, setActiveCategory] = React.useState<string>('all');
+  const categories = [
+    { key: 'all', label: 'All' },
+    { key: 'uiux', label: 'UI/UX' },
+    { key: 'mobile', label: 'Mobile' },
+    { key: 'desktop', label: 'Desktop' },
+    { key: 'ai', label: 'AI' },
+    { key: 'data-engineering', label: 'Data Engineering' }
+  ];
 
-  const filteredProjects = activeCategory === 'all' 
-    ? projects 
+  const filteredProjects = activeCategory === 'all'
+    ? projects
     : projects.filter(project => project.category === activeCategory);
 
   return (
     <section className={`${styles.showcaseSection} ${themeStyles.showcaseSection}`}>
       <div className={styles.categoryFilter}>
-        {['all', 'web', 'mobile', 'desktop', 'ai', 'data'].map((category) => (
+        {categories.map(({ key, label }) => (
           <button
-            key={category}
-            className={`${styles.filterButton} ${themeStyles.filterButton} 
-              ${activeCategory === category ? styles.activeFilter : ''}`}
-            onClick={() => setActiveCategory(category)}
+            key={key}
+            className={`${styles.filterButton} ${themeStyles.filterButton} ${activeCategory === key ? styles.activeFilter : ''}`}
+            onClick={() => setActiveCategory(key)}
           >
-            {category.charAt(0).toUpperCase() + category.slice(1)}
+            {label}
           </button>
         ))}
       </div>
-
       <div className={styles.projectsGrid}>
         {filteredProjects.map((project) => (
-          <div key={project.id} className={`${styles.projectCard} ${themeStyles.projectCard}`}>
-            <div className={styles.imageContainer}>
-              <Image
-                src={project.image}
-                alt={project.title}
-                width={400}
-                height={300}
-                className={styles.projectImage}
-              />
-            </div>
-            <div className={styles.projectContent}>
-              <h3 className={`${styles.projectTitle} ${themeStyles.projectTitle}`}>
-                {project.title}
-              </h3>
-              <p className={`${styles.projectDescription} ${themeStyles.projectDescription}`}>
-                {project.description}
-              </p>
-              <div className={styles.technologies}>
-                {project.technologies.map((tech, index) => (
-                  <span 
-                    key={index} 
-                    className={`${styles.techTag} ${themeStyles.techTag}`}
-                  >
-                    {tech}
-                  </span>
-                ))}
+          <Link key={project.slug} href={`/projects/${project.slug}`} className={styles.projectCardLink}>
+            <div className={`${styles.projectCard} ${themeStyles.projectCard}`} tabIndex={0} aria-label={`View details for ${project.title}`}>
+              <div className={styles.imageContainer}>
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  width={400}
+                  height={300}
+                  className={styles.projectImage}
+                />
               </div>
-              <a 
-                href={project.link}
-                className={`${styles.projectLink} ${themeStyles.projectLink}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                View Project
-              </a>
+              <div className={styles.projectContent}>
+                <h3 className={`${styles.projectTitle} ${themeStyles.projectTitle}`}>{project.title}</h3>
+                <p className={`${styles.projectDescription} ${themeStyles.projectDescription}`}>{project.description}</p>
+                <div className={styles.technologies}>
+                  {project.techStack.map((tech, index) => (
+                    <span key={index} className={`${styles.techTag} ${themeStyles.techTag}`}>{tech}</span>
+                  ))}
+                </div>
+                <span className={`${styles.detailLink} ${themeStyles.detailLink}`}>View Details →</span>
+              </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </section>

@@ -1,0 +1,14 @@
+.detailWrapper {
+  --background: #fff;
+  color: #23272f;
+}
+.metricsSection {
+  background: rgba(30,144,255,0.04);
+}
+.screenshotImg {
+  box-shadow: 0 2px 12px rgba(30,144,255,0.08);
+}
+.testimonial {
+  background: rgba(30,144,255,0.07);
+  border-left-color: #1e90ff;
+}

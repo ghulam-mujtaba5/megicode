@@ -1,0 +1,10 @@
+.pageWrapper {
+  overflow-x: hidden;
+}
+
+.themeToggle {
+  margin: 0 0 0 1.5rem;
+  padding-top: 1.5rem;
+  cursor: pointer;
+  align-self: flex-start;
+}

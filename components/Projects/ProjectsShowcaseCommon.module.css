@@ -13,9 +13,15 @@
 .filterButton {
   padding: 0.5rem 1.5rem;
   border-radius: 9999px;
-  font-weight: 500;
-  transition: all 0.3s ease;
+  font-family: 'Poppins', 'Open Sans', Arial, sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #4573df;
+  background: #f5f7fa;
   border: 2px solid transparent;
+  transition: all 0.3s ease;
+  letter-spacing: 0.01em;
+  cursor: pointer;
 }
 
 .filterButton:hover {
@@ -23,8 +29,11 @@
 }
 
 .activeFilter {
-  background: linear-gradient(135deg, #4338ca, #3b82f6);
-  color: white;
+  background: linear-gradient(135deg, #4573df 60%, #2d4fa2 100%);
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 2px 12px rgba(69, 115, 223, 0.09);
+  border: 2px solid #4573df;
 }
 
 .projectsGrid {
@@ -35,13 +44,31 @@
   margin: 0 auto;
 }
 
+.projectCardLink {
+  text-decoration: none;
+  color: inherit;
+  outline: none;
+  border-radius: 1.25rem;
+  box-shadow: none;
+  transition: box-shadow 0.2s;
+  display: block;
+}
+.projectCardLink:focus .projectCard,
+.projectCardLink:hover .projectCard {
+  box-shadow: 0 6px 24px rgba(69, 115, 223, 0.14);
+  outline: 2px solid #4573df;
+}
+
 .projectCard {
-  border-radius: 1rem;
+  border-radius: 1.25rem;
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(.4,0,.2,1);
   height: 100%;
   display: flex;
   flex-direction: column;
+  background: var(--background, #fff);
+  box-shadow: 0 2px 12px rgba(60,60,60,0.06);
+  font-family: 'Open Sans', Arial, sans-serif;
 }
 
 .projectCard:hover {
@@ -77,14 +104,19 @@
 
 .projectTitle {
   font-size: 1.25rem;
-  font-weight: 600;
+  font-family: 'Open Sans', Arial, sans-serif;
+  font-weight: 700;
   margin-bottom: 0.75rem;
+  color: #4573df;
+  letter-spacing: -0.5px;
 }
 
 .projectDescription {
-  font-size: 0.875rem;
-  line-height: 1.5;
+  font-size: 1rem;
+  font-family: 'Open Sans', Arial, sans-serif;
+  line-height: 1.6;
   margin-bottom: 1rem;
+  color: #23272f;
   flex-grow: 1;
 }
 
@@ -98,8 +130,29 @@
 .techTag {
   padding: 0.25rem 0.75rem;
   border-radius: 9999px;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
+  font-family: 'Inter', Arial, sans-serif;
   font-weight: 500;
+  background: #f5f7fa;
+  color: #2d4fa2;
+  border: 1.5px solid #e2e8f0;
+  margin-bottom: 2px;
+}
+
+.detailLink {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-family: 'Poppins', Arial, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #4573df;
+  letter-spacing: 0.01em;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+.detailLink:hover {
+  color: #2d4fa2;
+  text-decoration: underline;
 }
 
 .projectLink {
