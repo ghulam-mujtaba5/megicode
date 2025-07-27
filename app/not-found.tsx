@@ -186,29 +186,27 @@ export default function NotFound() {
         perspective: "1000px"
       }}
     >
-      {/* Theme Toggle Icon */}
-      <div id="theme-toggle" role="button" tabIndex={0} style={{ position: 'absolute', top: 24, right: 32 }}>
+      {/* Desktop NavBar - Always on Top */}
+      <nav id="desktop-navbar" aria-label="Main Navigation" className={styles.desktopNavbar}>
+        <NewNavBar />
+      </nav>
+      {/* Mobile NavBar - Always on Top */}
+      <nav id="mobile-navbar" aria-label="Mobile Navigation" className={styles.mobileNavbar}>
+        <NavBarMobile />
+      </nav>
+      {/* Theme Toggle Icon - Offset for nav height */}
+      <div id="theme-toggle" role="button" tabIndex={0} style={{ position: 'absolute', top: 80, right: 32 }}>
         <ThemeToggleIcon />
       </div>
 
-      {/* Desktop NavBar */}
-      <nav id="desktop-navbar" aria-label="Main Navigation">
-        <NewNavBar />
-      </nav>
-
-      {/* Mobile NavBar */}
-      <nav id="mobile-navbar" aria-label="Mobile Navigation">
-        <NavBarMobile />
-      </nav>
-
-      {/* Enhanced 404 Content */}
+      {/* Enhanced 404 Content - add top margin for navbar height */}
       <motion.div 
         className={styles.wrapper} 
         data-theme={theme}
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        style={transformStyle}
+        style={{...transformStyle, marginTop: `var(--navbar-height, 72px)`}}
       >
         {/* Parallax/animated background layer */}
         <div className={styles.bgParallax} aria-hidden="true">

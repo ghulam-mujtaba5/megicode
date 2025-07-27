@@ -44,7 +44,7 @@ body {
 /* Apply top padding only on desktop screens where the fixed navbar is visible */
 @media (min-width: 769px) {
   body {
-    padding-top: 72px;
+    /* padding-top: 72px; */
   }
 }
 
