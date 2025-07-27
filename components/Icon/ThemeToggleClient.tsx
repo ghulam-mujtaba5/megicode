@@ -10,7 +10,7 @@ import React, { useEffect, useState } from "react";
 import ThemeToggleIcon from "./sbicon";
 
 // This client component manages theme switching and provides the theme to its children
-const ThemeToggleClient = ({ style = {} }) => {
+const ThemeToggleClient = ({ className = '' }: { className?: string }) => {
   const [theme, setTheme] = useState("light");
 
   useEffect(() => {
@@ -45,7 +45,14 @@ const ThemeToggleClient = ({ style = {} }) => {
 
 
   return (
-    <div id="theme-toggle" role="button" tabIndex={0} onClick={toggleTheme} style={style}>
+    <div 
+      id="theme-toggle" 
+      role="button" 
+      tabIndex={0} 
+      onClick={toggleTheme} 
+      className={className}
+      aria-label="Toggle theme"
+    >
       <ThemeToggleIcon />
     </div>
   );

@@ -1,0 +1,58 @@
+.serviceContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.serviceTitle {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #4ea8ff;
+  margin-bottom: 1rem;
+}
+
+.serviceDescription {
+  font-size: 1.15rem;
+  color: #444;
+  margin-bottom: 1.5rem;
+}
+
+.featuresTitle {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-top: 2rem;
+}
+
+.featuresList {
+  margin-bottom: 1.5rem;
+  margin-top: 8px;
+  list-style-position: inside;
+  padding-left: 0;
+}
+
+.featureItem {
+  font-size: 1.05rem;
+  margin-bottom: 4px;
+}
+
+.techsTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-top: 1.5rem;
+}
+
+.techsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.techItem {
+  background: #e3e6ea;
+  color: #4ea8ff;
+  border-radius: 8px;
+  padding: 0.25rem 0.75rem;
+  font-weight: 600;
+  font-size: 1rem;
+}

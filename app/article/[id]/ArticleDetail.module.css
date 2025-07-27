@@ -1,0 +1,46 @@
+.articleDetailThemeBg {
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background 0.3s;
+}
+
+.themeToggle {
+  margin: 0 0 0 1.5rem;
+  padding-top: 18px;
+  width: 40px;
+}
+
+.mainContent {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3.5rem 1rem 2rem 1rem;
+  min-height: 80vh;
+}
+
+.coverImage {
+  width: 100%;
+  max-height: 360px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 28px;
+}
+
+.articleTitle {
+  font-size: 40px;
+  font-weight: 800;
+  margin-bottom: 24px;
+  letter-spacing: -1px;
+}
+
+.articleMeta {
+  font-size: 15px;
+  margin-bottom: 18px;
+  font-weight: 500;
+}
+
+.articleContent {
+  font-size: 18px;
+  line-height: 1.7;
+  margin-bottom: 0;
+  font-weight: 400;
+}
