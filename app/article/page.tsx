@@ -76,16 +76,20 @@ const ArticlePage = () => {
         }}
       >
         <h1
-          style={{
-            fontSize: 40,
-            fontWeight: 800,
-            marginBottom: 36,
-            color: theme === "dark" ? "#e3e8ee" : "#1d2127",
-            letterSpacing: "-1px"
-          }}
-        >
-          Articles
-        </h1>
+  style={{
+    fontSize: 40,
+    fontWeight: 800,
+    marginBottom: 36,
+    letterSpacing: "-1px",
+    background: "linear-gradient(135deg, #4573df 0%, #2d4fa2 100%)",
+    WebkitBackgroundClip: "text",
+    backgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+    color: "#4573df"
+  }}
+>
+  Articles
+</h1>
         {loading ? (
           <div style={{ 
             display: 'flex', 
