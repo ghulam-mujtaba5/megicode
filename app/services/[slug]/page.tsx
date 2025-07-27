@@ -5,7 +5,13 @@ import ServiceSchema from '@/components/SEO/ServiceSchema';
 import styles from './ServiceDetail.module.css';
 
 export async function generateStaticParams() {
-  return servicesData.map(service => ({ slug: service.slug }));
+  // Filter out the 'ai-machine-learning' slug to prevent this dynamic route from handling it.
+  // This allows the dedicated static page at /services/ai-machine-learning/page.tsx to be used instead.
+  const paths = servicesData
+    .filter(service => service.slug !== 'ai-machine-learning')
+    .map(service => ({ slug: service.slug }));
+
+  return paths;
 }
 
 // Accept params as a Promise to match generated types
