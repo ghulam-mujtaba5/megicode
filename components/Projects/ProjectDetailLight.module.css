@@ -1,14 +1,71 @@
 .detailWrapper {
   --background: #fff;
   color: #23272f;
+  font-family: 'Open Sans', 'Inter', Arial, sans-serif;
 }
-.metricsSection {
-  background: rgba(30,144,255,0.04);
+
+.visualSectionHeader {
+  color: #4573df;
 }
+.sect.iconRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem 1.5rem;
+  margin-top: 0.5rem;
+  align-items: center;
+}
+.techWithIcon {
+  background: rgba(69,115,223,0.07);
+  color: #23272f;
+  border: 1px solid rgba(102,126,234,0.07);
+}
+.techWithIcon:hover {
+  background: rgba(69,115,223,0.13);
+  color: #ff9800;
+}
+
+.metricsCards {
+  background: none;
+}
+.metricCard {
+  background: rgba(69,115,223,0.07);
+  color: #23272f;
+  box-shadow: 0 2px 8px rgba(69,115,223,0.06);
+  border: 1px solid rgba(102,126,234,0.10);
+}
+.metricCard:hover {
+  background: rgba(69,115,223,0.13);
+}
+.metricLabel {
+  color: #23272f;
+}
+.metricValue {
+  color: #ff9800;
+}
+
 .screenshotImg {
-  box-shadow: 0 2px 12px rgba(30,144,255,0.08);
+  box-shadow: 0 2px 12px rgba(69,115,223,0.09);
+  border: 1px solid rgba(102,126,234,0.07);
 }
+.artifactGallery {
+  background: none;
+}
+.artifactCard {
+  background: rgba(99,102,241,0.08);
+  color: #23272f;
+  border: 1px solid rgba(102,126,234,0.06);
+}
+.artifactCard:hover {
+  background: rgba(99,102,241,0.15);
+  color: #ff9800;
+}
+
 .testimonial {
-  background: rgba(30,144,255,0.07);
-  border-left-color: #1e90ff;
+  background: rgba(69,115,223,0.07);
+  border-left-color: #ff9800;
+  color: #23272f;
 }
+.testimonial:before {
+  color: #ff9800;
+}
+
