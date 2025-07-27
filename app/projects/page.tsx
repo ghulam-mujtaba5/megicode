@@ -23,7 +23,7 @@ export default function ProjectsPage() {
   const githubUrl = "https://github.com/megicodes";
   const copyrightText = "Copyright 2025 Megicode. All Rights Reserved.";
   const contactEmail = "contact@megicode.com";
-  const contactPhoneNumber = "+123 456 7890";
+
   const sections = [
     { id: 'home', label: 'Home', href: '/' },
     { id: 'about', label: 'About', href: '/about' },

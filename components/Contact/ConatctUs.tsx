@@ -12,7 +12,7 @@ import SuccessToast from "./SuccessToast";
 
 const ContactSection = ({
   email = "contact@megicode.com",
-  phoneNumber = "+9200000000000",
+
   showCertificationBadge = false,
   showAdditionalCertificationBadge = false
 }) => {
@@ -198,7 +198,7 @@ const ContactSection = ({
         )}
         <div className={`${commonStyles.contactDetails} ${themeStyles.contactDetails}`}>
           <p className={`${commonStyles.contactEmail} ${themeStyles.contactEmail}`}>{email}</p>
-          <div className={`${commonStyles.contactPhoneNo} ${themeStyles.contactPhoneNo}`}>{phoneNumber}</div>
+
           <h2 className={`${commonStyles.contactMeDescription} ${themeStyles.contactMeDescription}`}>Contact Me</h2>
           <div className={`${commonStyles.contactMeLabel} ${themeStyles.contactMeLabel}`}>
             <p className={`${commonStyles.doYouHave} ${themeStyles.doYouHave}`}>Do you have any project idea?</p>
@@ -210,12 +210,7 @@ const ContactSection = ({
             src={theme === 'light' ? "email icon.svg" : "EmailDark.svg"}
             loading="lazy"
           />
-          <img
-            className={`${commonStyles.phoneIcon} ${themeStyles.phoneIcon}`}
-            alt="Phone"
-            src={theme === 'light' ? "phone-icon.svg" : "PhoneDark.svg"}
-            loading="lazy"
-          />
+
           <button
             className={`${commonStyles.darkModeButton} ${themeStyles.darkModeButton}`}
             onClick={handleDarkModeButtonClick}

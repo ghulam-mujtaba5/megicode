@@ -39,7 +39,7 @@ export default function HomePage() {
   const githubUrl = "https://github.com/megicodes";
   const copyrightText = "Copyright 2025 Megicode. All Rights Reserved.";
   const contactEmail = "contact@megicode.com";
-  const contactPhoneNumber = "+123 456 7890";
+
 
   return (
     <>
@@ -105,7 +105,7 @@ export default function HomePage() {
           >
             <ContactSection
               email={contactEmail}
-              phoneNumber={contactPhoneNumber}
+
               showCertificationBadge={false}
             />
           </section>

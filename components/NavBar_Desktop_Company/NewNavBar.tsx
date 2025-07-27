@@ -45,7 +45,7 @@ const NewNavBar = () => {
           <li><Link href="/" className={themeStyles.navLink}>Home</Link></li>
           <li><Link href="/about" className={themeStyles.navLink}>About</Link></li>
           <li><Link href="/services" className={themeStyles.navLink}>Services</Link></li>
-          <li><Link href="/project" className={themeStyles.navLink}>Project</Link></li>
+          <li><Link href="/projects" className={themeStyles.navLink}>Project</Link></li>
           <li><Link href="/article" className={themeStyles.navLink}>Article</Link></li>
           <li><Link href="/contact" className={themeStyles.navLink}>Contact</Link></li>
           <li><Link href="/reviews" className={themeStyles.navLink}>Reviews</Link></li>
