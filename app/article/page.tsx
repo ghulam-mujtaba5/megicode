@@ -12,6 +12,11 @@ const ArticlePage = () => {
   const { theme, toggleTheme } = useTheme();
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
   
   // Navigation sections for consistent navigation
   const sections = [
@@ -36,6 +41,8 @@ const ArticlePage = () => {
         setLoading(false);
       });
   }, []);
+
+  const isMobile = isClient && window.innerWidth < 768;
 
   return (
     <div
@@ -64,7 +71,8 @@ const ArticlePage = () => {
           maxWidth: 900,
           width: '100%',
           margin: '0 auto',
-          padding: '5rem 1rem 4rem 1rem',
+          padding: isMobile ? '4rem 1.5rem 3rem' : '5rem 1rem 4rem',
+          boxSizing: 'border-box'
         }}
       >
         <h1
