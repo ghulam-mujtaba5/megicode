@@ -19,9 +19,9 @@ function hexToRgba(hex: string, alpha: number) {
 }
 
 export default function PlexusCanvas({
-  maxNodes = 80,
-  maxDistance = 120,
-  speed = 0.2,
+  maxNodes = 200, // Max density
+  maxDistance = 100, // Finely tuned distance
+  speed = 2, // User preferred speed
 }: PlexusCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const animationRef = useRef<number | null>(null);
@@ -34,19 +34,15 @@ export default function PlexusCanvas({
       return {
         node: brandAccentWeak,
         line: brandPrimary,
-        mouseLine: brandAccentWeak,
-        nodeAlpha: 0.9,
-        lineAlpha: 0.4, // Increased for visibility
-        mouseLineAlpha: 0.6, // Increased for visibility
+        nodeAlpha: 1.0, // Max visibility
+        lineAlpha: 0.8, // Max visibility
       };
     }
     return {
       node: brandPrimary,
       line: brandPrimary,
-      mouseLine: brandPrimary,
-      nodeAlpha: 0.9,
-      lineAlpha: 0.5, // Increased for visibility
-      mouseLineAlpha: 0.7, // Increased for visibility
+      nodeAlpha: 1.0, // Max visibility
+      lineAlpha: 0.9, // Max visibility
     };
   }, [theme]);
 
@@ -56,32 +52,34 @@ export default function PlexusCanvas({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const pr = 1;
-    let w = 0;
-    let h = 0;
-    type Node = { x: number; y: number; vx: number; vy: number; radius: number };
+    let w = 0, h = 0;
+    const fov = 350; // Max field of view
+    const mouse = { x: w / 2, y: h / 2, active: false };
+    const mouseRadius = 150; // Max force field
+
+    type Node = { x: number; y: number; z: number; vx: number; vy: number; vz: number; px: number; py: number; scale: number; };
     let nodes: Node[] = [];
     let running = true;
-    const mouse = { x: -9999, y: -9999 };
 
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
-      w = Math.max(1, Math.floor(rect.width));
-      h = Math.max(1, Math.floor(rect.height));
-      canvas.width = w * pr;
-      canvas.height = h * pr;
-      ctx.setTransform(pr, 0, 0, pr, 0, 0);
-
-      const area = w * h;
-      const heuristic = Math.floor(area / 20000); // Denser nodes
-      const targetCount = Math.max(20, Math.min(maxNodes, heuristic));
-      nodes = Array.from({ length: targetCount }, () => ({
-        x: Math.random() * w,
-        y: Math.random() * h,
+      w = canvas.width = rect.width;
+      h = canvas.height = rect.height;
+      nodes = Array.from({ length: maxNodes }, () => ({
+        x: (Math.random() - 0.5) * w * 2,
+        y: (Math.random() - 0.5) * h * 2,
+        z: Math.random() * fov,
         vx: (Math.random() - 0.5) * speed,
         vy: (Math.random() - 0.5) * speed,
-        radius: Math.random() * 1.5 + 1, // Larger, more variable radius
+        vz: (Math.random() - 0.5) * speed * 3, // Warp speed effect
+        px: 0, py: 0, scale: 0,
       }));
+    };
+
+    const project = (node: Node) => {
+      node.scale = fov / (fov + node.z);
+      node.px = node.x * node.scale + w / 2;
+      node.py = node.y * node.scale + h / 2;
     };
 
     const step = () => {
@@ -89,64 +87,71 @@ export default function PlexusCanvas({
 
       ctx.clearRect(0, 0, w, h);
 
-      // Update & Draw Nodes
-      ctx.fillStyle = hexToRgba(colors.node, colors.nodeAlpha);
       for (const n of nodes) {
-        n.x += n.vx;
-        n.y += n.vy;
-        if (n.x < 0 || n.x > w) n.vx *= -1;
-        if (n.y < 0 || n.y > h) n.vy *= -1;
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
-        ctx.fill();
+        // Mouse force field
+        if (mouse.active) {
+            const dx = n.px - mouse.x;
+            const dy = n.py - mouse.y;
+            const dist = Math.hypot(dx, dy);
+            if (dist < mouseRadius) {
+                const force = (mouseRadius - dist) / mouseRadius;
+                n.vx += dx * force * 0.1;
+                n.vy += dy * force * 0.1;
+            }
+        }
+
+        // Update position
+        n.x += n.vx; n.y += n.vy; n.z += n.vz;
+        n.vx *= 0.97; n.vy *= 0.97; // Damping
+
+        // Boundary checks (warp effect)
+        if (n.z < -fov) n.z = fov;
+        else if (n.z > fov) n.z = -fov;
+
+        project(n);
       }
 
-      // Draw Lines
+      nodes.sort((a, b) => b.z - a.z);
+
+      // Draw lines and nodes
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
-          const d = Math.hypot(nodes[i].x - nodes[j].x, nodes[i].y - nodes[j].y);
+          const d = Math.hypot(nodes[i].x - nodes[j].x, nodes[i].y - nodes[j].y, nodes[i].z - nodes[j].z);
           if (d < maxDistance) {
-            const a = Math.max(0, 1 - d / maxDistance) * colors.lineAlpha;
+            const a = Math.max(0, 1 - d / maxDistance) * colors.lineAlpha * Math.min(nodes[i].scale, nodes[j].scale);
             ctx.strokeStyle = hexToRgba(colors.line, a);
-            ctx.lineWidth = 1.5; // Thicker lines
+            ctx.lineWidth = 2 * Math.min(nodes[i].scale, nodes[j].scale);
             ctx.beginPath();
-            ctx.moveTo(nodes[i].x, nodes[i].y);
-            ctx.lineTo(nodes[j].x, nodes[j].y);
+            ctx.moveTo(nodes[i].px, nodes[i].py);
+            ctx.lineTo(nodes[j].px, nodes[j].py);
             ctx.stroke();
           }
         }
-        // Mouse interaction lines
-        const dMouse = Math.hypot(nodes[i].x - mouse.x, nodes[i].y - mouse.y);
-        if (dMouse < maxDistance * 1.5) {
-            const a = Math.max(0, 1 - dMouse / (maxDistance * 1.5)) * colors.mouseLineAlpha;
-            ctx.strokeStyle = hexToRgba(colors.mouseLine, a);
-            ctx.lineWidth = 2; // Thicker mouse lines
-            ctx.beginPath();
-            ctx.moveTo(nodes[i].x, nodes[i].y);
-            ctx.lineTo(mouse.x, mouse.y);
-            ctx.stroke();
-        }
+      }
+      
+      ctx.fillStyle = hexToRgba(colors.node, colors.nodeAlpha);
+      for (const n of nodes) {
+        if(n.px < 0 || n.px > w || n.py < 0 || n.py > h) continue;
+        ctx.beginPath();
+        ctx.arc(n.px, n.py, 2.5 * n.scale, 0, Math.PI * 2); // Max size nodes
+        ctx.fill();
       }
 
       animationRef.current = requestAnimationFrame(step);
     };
 
     const onMouseMove = (e: MouseEvent) => {
-        const rect = canvas.getBoundingClientRect();
-        mouse.x = e.clientX - rect.left;
-        mouse.y = e.clientY - rect.top;
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+      mouse.active = true;
     };
 
-    const onMouseOut = () => {
-        mouse.x = -9999;
-        mouse.y = -9999;
-    };
+    const onMouseOut = () => { mouse.active = false; };
 
     const onVisibilityChange = () => {
       running = !document.hidden;
-      if (running) {
-        animationRef.current = requestAnimationFrame(step);
-      }
+      if (running) animationRef.current = requestAnimationFrame(step);
     };
 
     resize();
