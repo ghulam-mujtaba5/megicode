@@ -19,9 +19,9 @@ function hexToRgba(hex: string, alpha: number) {
 }
 
 export default function PlexusCanvas({
-  maxNodes = 200, // Max density
-  maxDistance = 100, // Finely tuned distance
-  speed = 2, // User preferred speed
+  maxNodes = 150, // Optimal for 2D performance
+  maxDistance = 120, // Optimal for 2D connections
+  speed = 1, // Balanced speed
 }: PlexusCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const animationRef = useRef<number | null>(null);
@@ -30,19 +30,10 @@ export default function PlexusCanvas({
   const colors = useMemo(() => {
     const brandPrimary = "#4573df";
     const brandAccentWeak = "#667eea";
-    if (theme === "dark") {
-      return {
-        node: brandAccentWeak,
-        line: brandPrimary,
-        nodeAlpha: 1.0, // Max visibility
-        lineAlpha: 0.8, // Max visibility
-      };
-    }
-    return {
-      node: brandPrimary,
-      line: brandPrimary,
-      nodeAlpha: 1.0, // Max visibility
-      lineAlpha: 0.9, // Max visibility
+    return theme === "dark" ? {
+      node: brandAccentWeak, line: brandPrimary, nodeAlpha: 0.9, lineAlpha: 0.5 // Increased visibility
+    } : {
+      node: brandPrimary, line: brandPrimary, nodeAlpha: 0.9, lineAlpha: 0.4 // Increased visibility
     };
   }, [theme]);
 
@@ -53,11 +44,9 @@ export default function PlexusCanvas({
     if (!ctx) return;
 
     let w = 0, h = 0;
-    const fov = 350; // Max field of view
-    const mouse = { x: w / 2, y: h / 2, active: false };
-    const mouseRadius = 150; // Max force field
+    const mouse = { x: w / 2, y: h / 2 };
 
-    type Node = { x: number; y: number; z: number; vx: number; vy: number; vz: number; px: number; py: number; scale: number; };
+    type Node = { x: number; y: number; vx: number; vy: number; size: number; };
     let nodes: Node[] = [];
     let running = true;
 
@@ -66,20 +55,12 @@ export default function PlexusCanvas({
       w = canvas.width = rect.width;
       h = canvas.height = rect.height;
       nodes = Array.from({ length: maxNodes }, () => ({
-        x: (Math.random() - 0.5) * w * 2,
-        y: (Math.random() - 0.5) * h * 2,
-        z: Math.random() * fov,
+        x: Math.random() * w,
+        y: Math.random() * h,
         vx: (Math.random() - 0.5) * speed,
         vy: (Math.random() - 0.5) * speed,
-        vz: (Math.random() - 0.5) * speed * 3, // Warp speed effect
-        px: 0, py: 0, scale: 0,
+        size: Math.random() * 2 + 1, // Subtle depth illusion
       }));
-    };
-
-    const project = (node: Node) => {
-      node.scale = fov / (fov + node.z);
-      node.px = node.x * node.scale + w / 2;
-      node.py = node.y * node.scale + h / 2;
     };
 
     const step = () => {
@@ -87,54 +68,49 @@ export default function PlexusCanvas({
 
       ctx.clearRect(0, 0, w, h);
 
+      // Update and draw nodes
       for (const n of nodes) {
-        // Mouse force field
-        if (mouse.active) {
-            const dx = n.px - mouse.x;
-            const dy = n.py - mouse.y;
-            const dist = Math.hypot(dx, dy);
-            if (dist < mouseRadius) {
-                const force = (mouseRadius - dist) / mouseRadius;
-                n.vx += dx * force * 0.1;
-                n.vy += dy * force * 0.1;
-            }
-        }
+        n.x += n.vx; n.y += n.vy;
 
-        // Update position
-        n.x += n.vx; n.y += n.vy; n.z += n.vz;
-        n.vx *= 0.97; n.vy *= 0.97; // Damping
+        // Boundary checks
+        if (n.x < 0 || n.x > w) n.vx *= -1;
+        if (n.y < 0 || n.y > h) n.vy *= -1;
 
-        // Boundary checks (warp effect)
-        if (n.z < -fov) n.z = fov;
-        else if (n.z > fov) n.z = -fov;
-
-        project(n);
+        ctx.fillStyle = hexToRgba(colors.node, colors.nodeAlpha);
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.size, 0, Math.PI * 2);
+        ctx.fill();
       }
 
-      nodes.sort((a, b) => b.z - a.z);
-
-      // Draw lines and nodes
+      // Draw lines
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
-          const d = Math.hypot(nodes[i].x - nodes[j].x, nodes[i].y - nodes[j].y, nodes[i].z - nodes[j].z);
+          const d = Math.hypot(nodes[i].x - nodes[j].x, nodes[i].y - nodes[j].y);
           if (d < maxDistance) {
-            const a = Math.max(0, 1 - d / maxDistance) * colors.lineAlpha * Math.min(nodes[i].scale, nodes[j].scale);
-            ctx.strokeStyle = hexToRgba(colors.line, a);
-            ctx.lineWidth = 2 * Math.min(nodes[i].scale, nodes[j].scale);
+            const opacity = Math.max(0, 1 - d / maxDistance) * colors.lineAlpha;
+            ctx.strokeStyle = hexToRgba(colors.line, opacity);
+            ctx.lineWidth = 1.5; // Thicker lines
             ctx.beginPath();
-            ctx.moveTo(nodes[i].px, nodes[i].py);
-            ctx.lineTo(nodes[j].px, nodes[j].py);
+            ctx.moveTo(nodes[i].x, nodes[i].y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
             ctx.stroke();
           }
         }
       }
       
-      ctx.fillStyle = hexToRgba(colors.node, colors.nodeAlpha);
+      // Mouse interaction lines
+      const mouseNode = { ...mouse, size: 0 };
       for (const n of nodes) {
-        if(n.px < 0 || n.px > w || n.py < 0 || n.py > h) continue;
-        ctx.beginPath();
-        ctx.arc(n.px, n.py, 2.5 * n.scale, 0, Math.PI * 2); // Max size nodes
-        ctx.fill();
+        const d = Math.hypot(mouseNode.x - n.x, mouseNode.y - n.y);
+        if (d < maxDistance * 1.5) {
+          const opacity = Math.max(0, 1 - d / (maxDistance * 1.5)) * colors.lineAlpha * 3; // Stronger mouse lines
+          ctx.strokeStyle = hexToRgba(colors.line, opacity);
+          ctx.lineWidth = 1.5; // Thicker lines
+          ctx.beginPath();
+          ctx.moveTo(mouseNode.x, mouseNode.y);
+          ctx.lineTo(n.x, n.y);
+          ctx.stroke();
+        }
       }
 
       animationRef.current = requestAnimationFrame(step);
@@ -144,10 +120,7 @@ export default function PlexusCanvas({
       const rect = canvas.getBoundingClientRect();
       mouse.x = e.clientX - rect.left;
       mouse.y = e.clientY - rect.top;
-      mouse.active = true;
     };
-
-    const onMouseOut = () => { mouse.active = false; };
 
     const onVisibilityChange = () => {
       running = !document.hidden;
@@ -159,7 +132,6 @@ export default function PlexusCanvas({
 
     window.addEventListener("resize", resize);
     canvas.addEventListener("mousemove", onMouseMove);
-    canvas.addEventListener("mouseout", onMouseOut);
     document.addEventListener("visibilitychange", onVisibilityChange);
 
     return () => {
@@ -167,7 +139,6 @@ export default function PlexusCanvas({
       if (animationRef.current) cancelAnimationFrame(animationRef.current);
       window.removeEventListener("resize", resize);
       canvas.removeEventListener("mousemove", onMouseMove);
-      canvas.removeEventListener("mouseout", onMouseOut);
       document.removeEventListener("visibilitychange", onVisibilityChange);
     };
   }, [colors, maxNodes, maxDistance, speed]);
