@@ -7,6 +7,7 @@ import lightStyles from './ContactUsLight.module.css';
 import darkStyles from './ContactUsDark.module.css';
 import { motion, useAnimation } from 'framer-motion';
 import SuccessToast from "./SuccessToast";
+import PlexusCanvas from "../Backgrounds/PlexusCanvas";
 
 
 
@@ -103,33 +104,40 @@ const ContactSection = ({
   const controls = useAnimation();
   const ref = useRef(null);
 
-  const handleScroll = useCallback(() => {
-    if (ref.current) {
-      const observer = new IntersectionObserver(([entry]) => {
-        if (entry.isIntersecting) {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
           controls.start({ opacity: 1, y: 0 });
         } else {
           controls.start({ opacity: 0, y: 50 });
         }
-      }, { threshold: 0.1 });
+      },
+      { threshold: 0.1 }
+    );
 
-      observer.observe(ref.current);
-
-      return () => {
-        observer.disconnect();
-      };
+    const formElement = document.querySelector(`.${commonStyles.contactForm}`);
+    if (formElement) {
+      observer.observe(formElement);
     }
+
+    return () => {
+      if (formElement) {
+        observer.unobserve(formElement);
+      }
+    };
   }, [controls]);
 
-  useEffect(() => {
-    handleScroll();
-  }, [handleScroll]);
+
 
   return (
     <>
       <SuccessToast show={showSuccess} onClose={() => setShowSuccess(false)} />
       <section className={`${commonStyles.contactSection} ${themeStyles.contactSection}`}>
-        <div className={`${commonStyles.contactFormBackground} ${themeStyles.contactFormBackground}`} />
+        <div className={`${commonStyles.contactFormBackground} ${themeStyles.contactFormBackground}`}>
+          {/* Themed plexus canvas background (conservative settings) */}
+          <PlexusCanvas maxNodes={100} maxDistance={120} speed={0.15} />
+        </div>
         <motion.form
           className={`${commonStyles.contactForm} ${themeStyles.contactForm}`}
           onSubmit={handleSubmit}
