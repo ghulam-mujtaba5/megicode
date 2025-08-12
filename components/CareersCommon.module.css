@@ -28,6 +28,18 @@
   background: var(--section-bg);
 }
 
+/* Offset for fixed desktop navbar (NewNavBar has min-height: 72px and position: fixed) */
+@media (min-width: 769px) {
+  .careersPage {
+    padding-top: 72px; /* prevent top content from hiding under navbar */
+  }
+}
+
+/* Improve anchor scrolling so sections don't get hidden behind fixed navbar */
+.section {
+  scroll-margin-top: 80px;
+}
+
 @media (max-width: 768px) {
   .section {
     padding: 0.5rem;
