@@ -154,5 +154,13 @@ export default function PlexusCanvas({
     };
   }, [colors, maxNodes, maxDistance, speed]);
 
-  return <canvas ref={canvasRef} className={styles.plexusCanvas} />;
+  return (
+    <canvas
+      ref={canvasRef}
+      className={styles.plexusCanvas}
+      aria-hidden="true"
+      role="presentation"
+      tabIndex={-1}
+    />
+  );
 }
