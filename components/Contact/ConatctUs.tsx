@@ -102,9 +102,11 @@ const ContactSection = ({
 
   // Framer Motion animation setup
   const controls = useAnimation();
-  const ref = useRef(null);
+  const ref = useRef<HTMLFormElement | null>(null);
 
   useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
@@ -115,17 +117,8 @@ const ContactSection = ({
       },
       { threshold: 0.1 }
     );
-
-    const formElement = document.querySelector(`.${commonStyles.contactForm}`);
-    if (formElement) {
-      observer.observe(formElement);
-    }
-
-    return () => {
-      if (formElement) {
-        observer.unobserve(formElement);
-      }
-    };
+    observer.observe(el);
+    return () => observer.unobserve(el);
   }, [controls]);
 
 
@@ -207,7 +200,7 @@ const ContactSection = ({
         <div className={`${commonStyles.contactDetails} ${themeStyles.contactDetails}`}>
           <p className={`${commonStyles.contactEmail} ${themeStyles.contactEmail}`}>{email}</p>
 
-          <h2 className={`${commonStyles.contactMeDescription} ${themeStyles.contactMeDescription}`}>Contact Me</h2>
+          <h2 className={`${commonStyles.contactMeDescription} ${themeStyles.contactMeDescription}`}>Contact Us</h2>
           <div className={`${commonStyles.contactMeLabel} ${themeStyles.contactMeLabel}`}>
             <p className={`${commonStyles.doYouHave} ${themeStyles.doYouHave}`}>Do you have any project idea?</p>
             <p className={`${commonStyles.doyouHave} ${themeStyles.doyouHave}`}>Let’s discuss and turn them into reality!</p>
