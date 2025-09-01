@@ -167,6 +167,9 @@
   line-height: 1.2;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  transform-origin: center center;
+  will-change: transform;
+  transition: transform 180ms cubic-bezier(.2,.9,.2,1);
 }
 
 .formTitle {
@@ -257,6 +260,19 @@
   background: #e5e7eb;
   margin: 0 auto;
   border-radius: 2px;
+  transform-origin: center center;
+  will-change: transform;
+  transition: transform 220ms cubic-bezier(.2,.9,.2,1);
+}
+
+/* Reduce motion preference support */
+@media (prefers-reduced-motion: reduce) {
+  .heroTitle,
+  .heroAccent {
+    transition: none !important;
+    will-change: auto !important;
+    transform: none !important;
+  }
 }
 
 /* Contact Content Section - Mobile First Approach */

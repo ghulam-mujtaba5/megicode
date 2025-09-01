@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, Suspense } from 'react';
+import React, { useState, Suspense, useRef, useEffect } from 'react';
 import { useTheme } from '../../context/ThemeContext';
 import dynamic from 'next/dynamic';
 import styles from './contact.module.css';
@@ -95,6 +95,9 @@ function FAQAccordion() {
 
 export default function ContactPage() {
   const { theme } = useTheme();
+  const heroRef = useRef<HTMLElement | null>(null);
+  const titleRef = useRef<HTMLHeadingElement | null>(null);
+  const accentRef = useRef<HTMLDivElement | null>(null);
 
   // Navigation sections for consistent navigation
   const sections = [
@@ -122,6 +125,58 @@ export default function ContactPage() {
     message: '',
     service: ''
   });
+
+  // Parallax mouse interaction
+  useEffect(() => {
+    const heroEl = heroRef.current;
+    const titleEl = titleRef.current;
+    const accentEl = accentRef.current;
+    if (!heroEl || !titleEl || !accentEl) return;
+
+    let rafId: number | null = null;
+
+    function handleMove(e: MouseEvent) {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        const rect = heroEl.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+
+        // Calculate gentle rotation and translate values
+        const rotX = (y / rect.height) * -6; // tilt based on y
+        const rotY = (x / rect.width) * 6; // tilt based on x
+        const tx = (x / rect.width) * 10; // subtle translate
+        const ty = (y / rect.height) * 6;
+
+        titleEl.style.transform = `translate3d(${tx}px, ${ty}px, 0) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+        accentEl.style.transform = `translate3d(${tx * 0.6}px, ${ty * 0.6}px, 0) scale(1.02)`;
+      });
+    }
+
+    function handleLeave() {
+      if (rafId) cancelAnimationFrame(rafId);
+      titleEl.style.transition = 'transform 600ms cubic-bezier(.2,.9,.2,1)';
+      accentEl.style.transition = 'transform 600ms cubic-bezier(.2,.9,.2,1)';
+      titleEl.style.transform = '';
+      accentEl.style.transform = '';
+      // remove transition after it finishes so mouse move remains immediate
+      setTimeout(() => {
+        titleEl.style.transition = '';
+        accentEl.style.transition = '';
+      }, 650);
+    }
+
+    heroEl.addEventListener('mousemove', handleMove);
+    heroEl.addEventListener('mouseleave', handleLeave);
+    heroEl.addEventListener('touchstart', handleLeave);
+
+    return () => {
+      heroEl.removeEventListener('mousemove', handleMove);
+      heroEl.removeEventListener('mouseleave', handleLeave);
+      heroEl.removeEventListener('touchstart', handleLeave);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+  }, []);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [submitError, setSubmitError] = useState('');
@@ -281,12 +336,12 @@ export default function ContactPage() {
         </Suspense>
 
         {/* Hero Section */}
-        <section className={styles.heroSection}>
-          <h1 className={styles.heroTitle}>Contact Us</h1>
+        <section className={styles.heroSection} ref={heroRef}>
+          <h1 ref={titleRef} className={styles.heroTitle}>Contact Us</h1>
           <p className={styles.heroDescription}>
             Ready to transform your business? Get in touch with our expert team and let's discuss how we can help you achieve your goals.
           </p>
-          <div className={styles.heroAccent}></div>
+          <div ref={accentRef} className={styles.heroAccent}></div>
         </section>
 
         {/* Contact Content */}
