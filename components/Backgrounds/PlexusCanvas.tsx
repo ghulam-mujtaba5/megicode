@@ -45,6 +45,7 @@ export default function PlexusCanvas({
 
     let w = 0, h = 0;
     const mouse = { x: w / 2, y: h / 2 };
+    let dpr = 1;
 
     type Node = { x: number; y: number; vx: number; vy: number; size: number; };
     let nodes: Node[] = [];
@@ -52,8 +53,17 @@ export default function PlexusCanvas({
 
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
-      w = canvas.width = rect.width;
-      h = canvas.height = rect.height;
+      // Handle high-DPI displays for crisp rendering
+      dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+      canvas.width = Math.floor(rect.width * dpr);
+      canvas.height = Math.floor(rect.height * dpr);
+      // Set CSS size to match layout size
+      canvas.style.width = `${rect.width}px`;
+      canvas.style.height = `${rect.height}px`;
+      // Use CSS pixel space for drawing coordinates
+      w = rect.width;
+      h = rect.height;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       nodes = Array.from({ length: maxNodes }, () => ({
         x: Math.random() * w,
         y: Math.random() * h,
@@ -131,14 +141,15 @@ export default function PlexusCanvas({
     step();
 
     window.addEventListener("resize", resize);
-    canvas.addEventListener("mousemove", onMouseMove);
+    // Listen on window so it still works with pointer-events: none on the canvas
+    window.addEventListener("mousemove", onMouseMove);
     document.addEventListener("visibilitychange", onVisibilityChange);
 
     return () => {
       running = false;
       if (animationRef.current) cancelAnimationFrame(animationRef.current);
       window.removeEventListener("resize", resize);
-      canvas.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mousemove", onMouseMove);
       document.removeEventListener("visibilitychange", onVisibilityChange);
     };
   }, [colors, maxNodes, maxDistance, speed]);
