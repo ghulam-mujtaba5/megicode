@@ -153,13 +153,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Dynamic favicons for light/dark mode using user's transparent logo variants */}
         <link
           rel="icon"
-          href="/logo-main-light.svg"
+          href="/meta/megicode-logo1.svg"
           type="image/svg+xml"
           media="(prefers-color-scheme: light)"
         />
         <link
           rel="icon"
-          href="/logo-main-dark.svg"
+          href="/meta/megicode-logo1.svg"
           type="image/svg+xml"
           media="(prefers-color-scheme: dark)"
         />

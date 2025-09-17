@@ -50,3 +50,8 @@ All logo assets now follow this pattern:
 1. Consider creating a centralized logo constants file for easier management
 2. Add TypeScript types for logo variants
 3. Consider implementing a logo component that handles theme switching automatically
+
+## PWA Icon Update
+On 2025-09-17 the PWA / app icon was switched to `public/meta/megicode-logo1.svg`.
+This file is now referenced in `public/meta/site.webmanifest` and by the theme-aware
+favicon links in `app/layout.tsx` so the PWA icon will be the `megicode-logo1.svg` file.

@@ -12,13 +12,13 @@
   "categories": ["business", "productivity", "technology"],
   "icons": [
     {
-      "src": "/logo-main-light.svg",
+      "src": "/meta/megicode-logo1.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"
     },
     {
-      "src": "/logo-main-dark.svg",
+      "src": "/meta/megicode-logo1.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"
