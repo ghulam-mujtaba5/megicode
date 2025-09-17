@@ -1,7 +1,7 @@
 
 import React, { useCallback, useMemo, useState, useEffect, useRef } from 'react';
 import { useTheme } from '../../context/ThemeContext';
-import { LOGO_ICON } from '@/lib/logo';
+import { LOGO_MAIN_LIGHT, LOGO_MAIN_DARK } from '@/lib/logo';
 import Image from 'next/image';
 import styles from './gmicon.module.css';
 
@@ -25,8 +25,8 @@ const GmIcon: React.FC<GmIconProps> = ({ showOnDesktop = false }) => {
   }, [theme, isInView, styles]);
 
   const iconSrc = useMemo(() => {
-    return LOGO_ICON;
-  }, []);
+    return theme === 'dark' ? LOGO_MAIN_DARK : LOGO_MAIN_LIGHT;
+  }, [theme]);
 
   const checkInView = () => {
     if (iconRef.current && !hasAnimated) {
@@ -70,8 +70,8 @@ const GmIcon: React.FC<GmIconProps> = ({ showOnDesktop = false }) => {
   if (mounted && typeof window !== 'undefined') {
     isMobile = window.matchMedia('(max-width: 768px)').matches;
   }
-  // Per requirement: Do not render this icon on light theme; show only in dark mode
-  if (mounted && theme !== 'dark') return null;
+  // Per requirement: Show different icons for light/dark theme
+  if (mounted && theme !== 'dark' && theme !== 'light') return null;
   if (!showOnDesktop && !isMobile) return null;
 
   return (

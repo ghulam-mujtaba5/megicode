@@ -5,7 +5,7 @@ import React, { useCallback, useMemo, useRef, useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation';
 import { useTheme } from '../../context/ThemeContext';
 import Image from 'next/image';
-import { LOGO_ICON } from '@/lib/logo';
+import { LOGO_MAIN_LIGHT, LOGO_MAIN_DARK } from '@/lib/logo';
 import styles from './sbicon.module.css'; // Ensure the correct path and module import
 
 const ThemeToggleIcon = () => {
@@ -24,8 +24,8 @@ const ThemeToggleIcon = () => {
   }, [theme, animate]);
 
   const iconSrc = useMemo(() => {
-    return LOGO_ICON;
-  }, []);
+    return theme === 'dark' ? LOGO_MAIN_DARK : LOGO_MAIN_LIGHT;
+  }, [theme]);
 
   useEffect(() => {
     // Only show on mobile screens
@@ -58,8 +58,8 @@ const ThemeToggleIcon = () => {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
   const isMobile = mounted && typeof window !== 'undefined' ? window.matchMedia('(max-width: 768px)').matches : false;
-  // Per requirement: Do not render on light theme; show only on dark
-  if (mounted && theme !== 'dark') return null;
+  // Per requirement: Show different icons for light/dark theme
+  if (mounted && theme !== 'dark' && theme !== 'light') return null;
   if (!isMobile) return null;
 
   return (
