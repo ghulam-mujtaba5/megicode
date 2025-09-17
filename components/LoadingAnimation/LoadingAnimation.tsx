@@ -2,7 +2,8 @@
 
 import { useEffect, useState, useRef } from "react";
 import styles from "./LoadingAnimation.module.css";
-import Image from "next/image";
+import Image from 'next/image';
+import { LOGO_ICON } from '@/lib/logo';
 import { useTheme } from "@/context/ThemeContext";
 
 interface LoadingAnimationProps {
@@ -190,7 +191,7 @@ export const LoadingAnimation = ({
           <div className={styles.logo}>
             <div className={styles.logoGlow} />
             <Image
-              src="/logo-icon.svg"
+              src={LOGO_ICON}
               alt="Megicode Logo"
               width={size === 'small' ? 20 : size === 'large' ? 60 : 40}
               height={size === 'small' ? 20 : size === 'large' ? 60 : 40}

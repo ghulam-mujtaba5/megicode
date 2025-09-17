@@ -1,5 +1,6 @@
 "use client";
 import React, { useContext } from 'react';
+import { LOGO_NAVBAR_DARK, LOGO_NAVBAR_LIGHT } from '@/lib/logo';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -25,7 +26,7 @@ const NewNavBar = () => {
   const { theme } = useContext(ThemeContext) || { theme: 'light' };
 
   const themeStyles = theme === 'dark' ? darkStyles : lightStyles;
-  const logoSrc = theme === 'dark' ? '/logo-navbar-dark.svg' : '/logo-navbar-light.svg';
+  const logoSrc = theme === 'dark' ? LOGO_NAVBAR_DARK : LOGO_NAVBAR_LIGHT;
 
   return (
     <nav className={`${styles.navbar} ${themeStyles.navbar}`}>

@@ -1,6 +1,7 @@
 
 import React, { useCallback, useMemo, useState, useEffect, useRef } from 'react';
 import { useTheme } from '../../context/ThemeContext';
+import { LOGO_ICON } from '@/lib/logo';
 import Image from 'next/image';
 import styles from './gmicon.module.css';
 
@@ -24,7 +25,7 @@ const GmIcon: React.FC<GmIconProps> = ({ showOnDesktop = false }) => {
   }, [theme, isInView, styles]);
 
   const iconSrc = useMemo(() => {
-    return "/logo-icon.svg";
+    return LOGO_ICON;
   }, []);
 
   const checkInView = () => {

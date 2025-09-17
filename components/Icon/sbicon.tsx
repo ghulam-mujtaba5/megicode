@@ -5,6 +5,7 @@ import React, { useCallback, useMemo, useRef, useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation';
 import { useTheme } from '../../context/ThemeContext';
 import Image from 'next/image';
+import { LOGO_ICON } from '@/lib/logo';
 import styles from './sbicon.module.css'; // Ensure the correct path and module import
 
 const ThemeToggleIcon = () => {
@@ -23,7 +24,7 @@ const ThemeToggleIcon = () => {
   }, [theme, animate]);
 
   const iconSrc = useMemo(() => {
-    return "/logo-icon.svg";
+    return LOGO_ICON;
   }, []);
 
   useEffect(() => {

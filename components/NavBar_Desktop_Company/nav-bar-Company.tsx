@@ -1,6 +1,7 @@
 "use client";
 import styles from "./nav-bar-Compnay.module.css";
 import { useState } from "react";
+import { LOGO_NAVBAR_DARK } from '@/lib/logo';
 import { useRouter, usePathname } from 'next/navigation';
 
 const NavBar = () => {
@@ -79,7 +80,7 @@ const NavBar = () => {
       >
         <span className={styles.crystalShine} aria-hidden="true"></span>
         <img
-          src="/logo-navbar-dark.svg"
+          src={LOGO_NAVBAR_DARK}
           alt="Megicode Logo and Wordmark"
           className={styles.navbarLogo}
           style={{ maxHeight: 48, width: 'auto', display: 'block' }}

@@ -4,6 +4,7 @@ import { Providers } from "./providers";
 import dynamic from "next/dynamic";
 import ClientLayout from "./ClientLayout";
 import GoogleAnalytics from "@/components/GoogleAnalytics/GoogleAnalytics";
+import { PWA_ICON, LOGO_MAIN_LIGHT, LOGO_MAIN_DARK } from "@/lib/logo";
 
 if (process.env.NODE_ENV !== 'production' && typeof window !== 'undefined') {
   require('../utils/axe-a11y');
@@ -35,8 +36,8 @@ export const metadata = {
   icons: {
     icon: [
       // Theme-aware favicons
-      { url: "/logo-main-light.svg", media: "(prefers-color-scheme: light)", type: "image/svg+xml" },
-      { url: "/logo-main-dark.svg", media: "(prefers-color-scheme: dark)", type: "image/svg+xml" },
+      { url: LOGO_MAIN_LIGHT, media: "(prefers-color-scheme: light)", type: "image/svg+xml" },
+      { url: LOGO_MAIN_DARK, media: "(prefers-color-scheme: dark)", type: "image/svg+xml" },
       // Canonical svg + fallbacks
       { url: "/favicon.svg", type: "image/svg+xml" },
       { url: "/meta/favicon-16x16.png", sizes: "16x16", type: "image/png" },
@@ -153,13 +154,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Dynamic favicons for light/dark mode using user's transparent logo variants */}
         <link
           rel="icon"
-          href="/meta/megicode-logo1.svg"
+          href={PWA_ICON}
           type="image/svg+xml"
           media="(prefers-color-scheme: light)"
         />
         <link
           rel="icon"
-          href="/meta/megicode-logo1.svg"
+          href={PWA_ICON}
           type="image/svg+xml"
           media="(prefers-color-scheme: dark)"
         />

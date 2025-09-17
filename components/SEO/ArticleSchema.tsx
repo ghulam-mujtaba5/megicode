@@ -1,4 +1,5 @@
 import React from 'react';
+import { PWA_ICON } from '@/lib/logo';
 
 // Define a more specific type for the article data
 interface Article {
@@ -42,10 +43,10 @@ const ArticleSchema: React.FC<ArticleSchemaProps> = ({ article }) => {
     'publisher': {
       '@type': 'Organization',
       'name': 'Megicode',
-      'logo': {
-        '@type': 'ImageObject',
-            'url': 'https://megicode.com/logo-icon.svg',
-      },
+  'logo': {
+    '@type': 'ImageObject',
+    'url': `https://megicode.com${PWA_ICON}`,
+  },
     },
   };
 

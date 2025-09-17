@@ -3,6 +3,7 @@
 import { useTheme } from "../../../context/ThemeContext";
 import Link from "next/link";
 import Image from "next/image";
+import { LOGO_ICON } from '@/lib/logo';
 
 export default function ArticleError() {
   const { theme } = useTheme();
@@ -21,7 +22,7 @@ export default function ArticleError() {
       }}
     >
       <Image
-        src="/logo-icon.svg"
+        src={LOGO_ICON}
         alt="Megicode Logo"
         width={80}
         height={80}
