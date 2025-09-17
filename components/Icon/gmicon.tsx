@@ -70,6 +70,8 @@ const GmIcon: React.FC<GmIconProps> = ({ showOnDesktop = false }) => {
   if (mounted && typeof window !== 'undefined') {
     isMobile = window.matchMedia('(max-width: 768px)').matches;
   }
+  // Per requirement: Do not render this icon on light theme; show only in dark mode
+  if (mounted && theme !== 'dark') return null;
   if (!showOnDesktop && !isMobile) return null;
 
   return (

@@ -96,7 +96,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     "@type": "Organization",
     "name": "Megicode",
     "url": "https://megicode.com",
-    "logo": "https://megicode.com/meta/android-chrome-512x512.png",
+  "logo": `https://megicode.com${PWA_ICON}`,
     "email": "contact@megicode.com",
     "address": {
       "@type": "PostalAddress",

@@ -72,3 +72,16 @@ This avoids hard-coded strings and makes future changes one-line updates.
 On 2025-09-17 the PWA / app icon was switched to `public/meta/megicode-logo1.svg`.
 This file is now referenced in `public/meta/site.webmanifest` and by the theme-aware
 favicon links in `app/layout.tsx` so the PWA icon will be the `megicode-logo1.svg` file.
+
+## 2025-09-17 — PNGs regenerated from PWA SVG and JSON-LD aligned
+
+- Updated `scripts/generate-meta-images.ts` to rasterize from `public/meta/megicode-logo1.svg` (with safe fallback to embedded SVG) and adjusted path resolution to be repo-root-relative.
+- Regenerated the following assets via `npm run generate-meta`:
+	- `public/meta/favicon-16x16.png`
+	- `public/meta/favicon-32x32.png`
+	- `public/meta/favicon-48x48.png`
+	- `public/meta/favicon.ico`
+	- `public/meta/apple-touch-icon.png`
+	- `public/meta/android-chrome-192x192.png`
+	- `public/meta/android-chrome-512x512.png`
+- Switched Organization JSON-LD `logo` in `app/layout.tsx` to the SVG PWA icon for consistency: `https://megicode.com/meta/megicode-logo1.svg`.

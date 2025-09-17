@@ -55,7 +55,11 @@ const ThemeToggleIcon = () => {
   }, [hasAnimated]);
 
   // Only render on mobile screens
-  const isMobile = typeof window !== 'undefined' ? window.matchMedia('(max-width: 768px)').matches : false;
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  const isMobile = mounted && typeof window !== 'undefined' ? window.matchMedia('(max-width: 768px)').matches : false;
+  // Per requirement: Do not render on light theme; show only on dark
+  if (mounted && theme !== 'dark') return null;
   if (!isMobile) return null;
 
   return (
