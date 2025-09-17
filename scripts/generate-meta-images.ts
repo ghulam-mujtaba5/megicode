@@ -89,7 +89,7 @@ async function generateFavicons() {  // Base SVG for the favicon using existing 
     .toFile(path.join(META_DIR, 'favicon.ico'));
 }
 
-async function generateOpenGraphImage() {  // Compose OG/Twitter images from the official logo SVG
+async function generateOpenGraphImage() {  // Create branded OG/Twitter images with the official logo SVG
   const svgPath = path.join(META_DIR, 'megicode-logo1.svg');
   let svgBuffer: Buffer;
   try {
@@ -101,27 +101,92 @@ async function generateOpenGraphImage() {  // Compose OG/Twitter images from the
     svgBuffer = Buffer.from('<svg width="512" height="512" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="megicodeGradient" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#4573df" /><stop offset="100%" stop-color="#cfe8ef" /></linearGradient></defs><circle cx="32" cy="32" r="30" fill="#ffffff" stroke="url(#megicodeGradient)" stroke-width="3.5"/><path d="M20 44V22L32 34L44 22V44" stroke="url(#megicodeGradient)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>');
   }
 
-  // Helper to compose a centered logo on a white background
-  async function composeImage(outPath: string, width: number, height: number, logoMax: number) {
-    const logoPngBuf = await sharp(svgBuffer)
-      .resize({ width: logoMax, height: logoMax, fit: 'inside', withoutEnlargement: true })
+  // Helper to create branded social cards with logo and text
+  async function createBrandedCard(outPath: string, width: number, height: number) {
+    // Create branded background SVG
+    const cardSvg = `
+      <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#4573df" stop-opacity="0.08"/>
+            <stop offset="100%" stop-color="#cfe8ef" stop-opacity="0.15"/>
+          </linearGradient>
+          <filter id="textShadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#4573df" flood-opacity="0.1"/>
+          </filter>
+        </defs>
+        
+        <!-- Background -->
+        <rect width="100%" height="100%" fill="#ffffff"/>
+        <rect width="100%" height="100%" fill="url(#bgGradient)"/>
+        
+        <!-- Decorative elements -->
+        <circle cx="100" cy="100" r="50" fill="#4573df" opacity="0.03"/>
+        <circle cx="${width - 80}" cy="80" r="30" fill="#cfe8ef" opacity="0.08"/>
+        <circle cx="${width - 120}" cy="${height - 60}" r="40" fill="#4573df" opacity="0.05"/>
+        
+        <!-- Main content area -->
+        <g transform="translate(${width * 0.08}, ${height * 0.2})">
+          <!-- Company name -->
+          <text x="0" y="0" font-family="Arial, sans-serif" font-size="64" font-weight="bold" fill="#4573df" filter="url(#textShadow)">
+            Megicode
+          </text>
+          
+          <!-- Tagline -->
+          <text x="0" y="80" font-family="Arial, sans-serif" font-size="32" fill="#666666" filter="url(#textShadow)">
+            Modern Software Solutions
+          </text>
+          
+          <!-- Services -->
+          <g transform="translate(0, 140)" font-family="Arial, sans-serif" font-size="24" fill="#4573df">
+            <g transform="translate(0, 0)">
+              <circle cx="0" cy="-6" r="4" fill="#4573df"/>
+              <text x="20" y="0">Web &amp; Mobile Development</text>
+            </g>
+            <g transform="translate(0, 40)">
+              <circle cx="0" cy="-6" r="4" fill="#4573df"/>
+              <text x="20" y="0">AI &amp; Data Science</text>
+            </g>
+            <g transform="translate(0, 80)">
+              <circle cx="0" cy="-6" r="4" fill="#4573df"/>
+              <text x="20" y="0">Custom Software Solutions</text>
+            </g>
+          </g>
+        </g>
+        
+        <!-- Logo placement (right side) -->
+        <g transform="translate(${width * 0.65}, ${height * 0.15})">
+          <circle cx="100" cy="100" r="90" fill="#ffffff" stroke="#4573df" stroke-width="3" opacity="0.9" filter="url(#textShadow)"/>
+        </g>
+      </svg>
+    `;
+
+    // Generate base card
+    const cardBuffer = await sharp(Buffer.from(cardSvg))
+      .resize(width, height)
       .png()
       .toBuffer();
 
-    const meta = await sharp(logoPngBuf).metadata();
-    const lw = meta.width || Math.min(logoMax, width);
-    const lh = meta.height || Math.min(logoMax, height);
-    const left = Math.round((width - lw) / 2);
-    const top = Math.round((height - lh) / 2);
-
-    await sharp({ create: { width, height, channels: 4, background: '#FFFFFF' } })
+    // Prepare logo
+    const logoSize = Math.min(180, width * 0.15);
+    const logoPngBuf = await sharp(svgBuffer)
+      .resize({ width: logoSize, height: logoSize, fit: 'inside', withoutEnlargement: true })
       .png()
-      .composite([{ input: logoPngBuf, left, top }])
+      .toBuffer();
+
+    // Position logo on the right side
+    const logoLeft = Math.round(width * 0.65 + 100 - logoSize/2);
+    const logoTop = Math.round(height * 0.15 + 100 - logoSize/2);
+
+    // Composite everything
+    await sharp(cardBuffer)
+      .composite([{ input: logoPngBuf, left: logoLeft, top: logoTop }])
+      .png()
       .toFile(outPath);
   }
 
-  await composeImage(path.join(META_DIR, 'og-image.png'), 1200, 630, 540);
-  await composeImage(path.join(META_DIR, 'twitter-card.png'), 1200, 600, 520);
+  await createBrandedCard(path.join(META_DIR, 'og-image.png'), 1200, 630);
+  await createBrandedCard(path.join(META_DIR, 'twitter-card.png'), 1200, 600);
 }
 
 async function main() {
