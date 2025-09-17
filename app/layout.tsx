@@ -35,8 +35,8 @@ export const metadata = {
   icons: {
     icon: [
       // Theme-aware favicons
-      { url: "/megicode-logo-transparent -backgorund-for light screen.svg", media: "(prefers-color-scheme: light)", type: "image/svg+xml" },
-      { url: "/megicode-logo-transparent -backgorund-for dark screen.svg", media: "(prefers-color-scheme: dark)", type: "image/svg+xml" },
+      { url: "/logo-main-light.svg", media: "(prefers-color-scheme: light)", type: "image/svg+xml" },
+      { url: "/logo-main-dark.svg", media: "(prefers-color-scheme: dark)", type: "image/svg+xml" },
       // Canonical svg + fallbacks
       { url: "/favicon.svg", type: "image/svg+xml" },
       { url: "/meta/favicon-16x16.png", sizes: "16x16", type: "image/png" },
@@ -153,13 +153,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Dynamic favicons for light/dark mode using user's transparent logo variants */}
         <link
           rel="icon"
-          href="/megicode-logo-transparent -backgorund-for light screen.svg"
+          href="/logo-main-light.svg"
           type="image/svg+xml"
           media="(prefers-color-scheme: light)"
         />
         <link
           rel="icon"
-          href="/megicode-logo-transparent -backgorund-for dark screen.svg"
+          href="/logo-main-dark.svg"
           type="image/svg+xml"
           media="(prefers-color-scheme: dark)"
         />

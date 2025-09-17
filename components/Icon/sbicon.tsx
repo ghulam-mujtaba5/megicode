@@ -23,7 +23,7 @@ const ThemeToggleIcon = () => {
   }, [theme, animate]);
 
   const iconSrc = useMemo(() => {
-    return "/megicode-logo-without-border.svg";
+    return "/logo-icon.svg";
   }, []);
 
   useEffect(() => {

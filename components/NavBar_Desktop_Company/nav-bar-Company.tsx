@@ -79,7 +79,7 @@ const NavBar = () => {
       >
         <span className={styles.crystalShine} aria-hidden="true"></span>
         <img
-          src="/megicode-navbar-logo.svg"
+          src="/logo-navbar-dark.svg"
           alt="Megicode Logo and Wordmark"
           className={styles.navbarLogo}
           style={{ maxHeight: 48, width: 'auto', display: 'block' }}

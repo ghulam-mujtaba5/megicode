@@ -25,7 +25,7 @@ const NewNavBar = () => {
   const { theme } = useContext(ThemeContext) || { theme: 'light' };
 
   const themeStyles = theme === 'dark' ? darkStyles : lightStyles;
-  const logoSrc = theme === 'dark' ? '/megicode-navbar-logo.svg' : '/megicode-navbar-logo 2.svg';
+  const logoSrc = theme === 'dark' ? '/logo-navbar-dark.svg' : '/logo-navbar-light.svg';
 
   return (
     <nav className={`${styles.navbar} ${themeStyles.navbar}`}>
