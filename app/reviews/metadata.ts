@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
-import { createMetadata } from '@/lib/metadata'
 
-export const metadata: Metadata = createMetadata({
+export const metadata: Metadata = {
   title: 'Reviews & Testimonials | Megicode',
   description: "What our clients say about Megicode—If You Can Imagine It, We Can Build It. Read real testimonials and success stories from businesses who partnered with us to build intelligent, scalable solutions.",
   keywords: ['reviews', 'testimonials', 'client feedback', 'megicode reviews', 'software development reviews', 'brand tagline'],
@@ -24,4 +23,4 @@ export const metadata: Metadata = createMetadata({
     description: "What our clients say about Megicode—If You Can Imagine It, We Can Build It.",
     images: ['/meta/reviews-og.png'],
   },
-});
+};
