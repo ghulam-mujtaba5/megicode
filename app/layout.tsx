@@ -35,9 +35,9 @@ export const metadata = {
   },
   icons: {
     icon: [
-      // Theme-aware favicons
-      { url: LOGO_MAIN_LIGHT, media: "(prefers-color-scheme: light)", type: "image/svg+xml" },
-      { url: LOGO_MAIN_DARK, media: "(prefers-color-scheme: dark)", type: "image/svg+xml" },
+  // Theme-aware favicons (both map to PWA icon)
+  { url: LOGO_MAIN_LIGHT, media: "(prefers-color-scheme: light)", type: "image/svg+xml" },
+  { url: LOGO_MAIN_DARK, media: "(prefers-color-scheme: dark)", type: "image/svg+xml" },
       // Canonical svg + fallbacks
       { url: "/favicon.svg", type: "image/svg+xml" },
       { url: "/meta/favicon-16x16.png", sizes: "16x16", type: "image/png" },
