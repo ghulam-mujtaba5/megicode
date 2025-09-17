@@ -101,138 +101,256 @@ async function generateOpenGraphImage() {  // Create premium branded OG/Twitter 
     svgBuffer = Buffer.from('<svg width="512" height="512" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="megicodeGradient" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#4573df" /><stop offset="100%" stop-color="#cfe8ef" /></linearGradient></defs><circle cx="32" cy="32" r="30" fill="#ffffff" stroke="url(#megicodeGradient)" stroke-width="3.5"/><path d="M20 44V22L32 34L44 22V44" stroke="url(#megicodeGradient)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>');
   }
 
-  // Helper to create premium branded social cards with logo and enhanced design
-  async function createPremiumCard(outPath: string, width: number, height: number) {
-    // Create sophisticated branded background SVG
+  // Helper to create ultra-modern, cutting-edge social cards with maximum sophistication
+  async function createUltraModernCard(outPath: string, width: number, height: number) {
+    // Create sophisticated modern design with glass morphism and neural network aesthetics
     const cardSvg = `
       <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <linearGradient id="mainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#4573df" stop-opacity="0.12"/>
-            <stop offset="50%" stop-color="#6b8ef5" stop-opacity="0.08"/>
-            <stop offset="100%" stop-color="#cfe8ef" stop-opacity="0.18"/>
+          <!-- Modern gradient definitions -->
+          <linearGradient id="mainBg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#667eea"/>
+            <stop offset="25%" stop-color="#764ba2"/>
+            <stop offset="50%" stop-color="#4573df"/>
+            <stop offset="75%" stop-color="#6b8ef5"/>
+            <stop offset="100%" stop-color="#a8edea"/>
           </linearGradient>
-          <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          
+          <linearGradient id="overlayGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+            <stop offset="30%" stop-color="#f8faff" stop-opacity="0.9"/>
+            <stop offset="100%" stop-color="#ffffff" stop-opacity="0.85"/>
+          </linearGradient>
+          
+          <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#1a202c"/>
+            <stop offset="50%" stop-color="#2d3748"/>
+            <stop offset="100%" stop-color="#4a5568"/>
+          </linearGradient>
+          
+          <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stop-color="#4573df"/>
-            <stop offset="100%" stop-color="#6b8ef5"/>
+            <stop offset="25%" stop-color="#667eea"/>
+            <stop offset="50%" stop-color="#764ba2"/>
+            <stop offset="75%" stop-color="#6b8ef5"/>
+            <stop offset="100%" stop-color="#4573df"/>
           </linearGradient>
-          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-            <feMerge> 
+
+          <linearGradient id="accentGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#4573df" stop-opacity="0.6"/>
+            <stop offset="50%" stop-color="#6b8ef5" stop-opacity="0.4"/>
+            <stop offset="100%" stop-color="#a8edea" stop-opacity="0.8"/>
+          </linearGradient>
+          
+          <!-- Advanced filters and effects -->
+          <filter id="neuralGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+            <feColorMatrix in="coloredBlur" values="1 0 1 0 0  0 1 1 0 0  1 0 1 0 0  0 0 0 1 0"/>
+            <feMerge>
               <feMergeNode in="coloredBlur"/>
               <feMergeNode in="SourceGraphic"/>
             </feMerge>
           </filter>
-          <filter id="textShadow" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#4573df" flood-opacity="0.15"/>
+          
+          <filter id="glassMorph" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="12" result="blur"/>
+            <feColorMatrix in="blur" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.1 0"/>
+            <feMerge>
+              <feMergeNode in="blur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
           </filter>
-          <pattern id="circuit" patternUnits="userSpaceOnUse" width="40" height="40">
-            <path d="M0,20 L40,20 M20,0 L20,40" stroke="#4573df" stroke-width="0.5" opacity="0.1"/>
-            <circle cx="20" cy="20" r="2" fill="#4573df" opacity="0.1"/>
+          
+          <filter id="textGlow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+            <feColorMatrix in="coloredBlur" values="0 0 1 0 0  0 0 1 0 0  1 0 0 0 0  0 0 0 0.6 0"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+          
+          <filter id="logoGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="15" result="coloredBlur"/>
+            <feColorMatrix in="coloredBlur" values="0 0 1 0 0  0 1 0 0 0  1 0 1 0 0  0 0 0 0.8 0"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+          
+          <!-- Neural network pattern -->
+          <pattern id="neuralNet" patternUnits="userSpaceOnUse" width="120" height="120">
+            <circle cx="20" cy="20" r="3" fill="#4573df" opacity="0.15"/>
+            <circle cx="100" cy="40" r="2" fill="#6b8ef5" opacity="0.12"/>
+            <circle cx="60" cy="80" r="2.5" fill="#764ba2" opacity="0.1"/>
+            <circle cx="40" cy="100" r="2" fill="#a8edea" opacity="0.15"/>
+            <path d="M20,20 Q60,40 100,40 Q80,60 60,80 Q30,90 40,100" stroke="#4573df" stroke-width="0.8" opacity="0.08" fill="none"/>
+            <path d="M100,40 Q70,50 60,80" stroke="#6b8ef5" stroke-width="0.6" opacity="0.06" fill="none"/>
           </pattern>
+          
+          <!-- Glass morphism shapes -->
+          <filter id="glass" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="10" result="blur"/>
+            <feColorMatrix values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.1 0"/>
+          </filter>
         </defs>
         
-        <!-- Background with premium gradient -->
-        <rect width="100%" height="100%" fill="#ffffff"/>
-        <rect width="100%" height="100%" fill="url(#mainGradient)"/>
+        <!-- Ultra-modern background with neural network -->
+        <rect width="100%" height="100%" fill="url(#mainBg)"/>
+        <rect width="100%" height="100%" fill="url(#neuralNet)" opacity="0.4"/>
         
-        <!-- Subtle circuit pattern -->
-        <rect width="100%" height="100%" fill="url(#circuit)" opacity="0.3"/>
+        <!-- Glass morphism overlay -->
+        <rect width="100%" height="100%" fill="url(#overlayGrad)" filter="url(#glassMorph)"/>
         
-        <!-- Accent bar at top -->
-        <rect width="100%" height="6" fill="url(#accentGradient)"/>
-        
-        <!-- Decorative geometric elements -->
-        <g opacity="0.08">
-          <polygon points="0,0 120,0 100,80 0,60" fill="#4573df"/>
-          <polygon points="${width},${height} ${width-100},${height} ${width-80},${height-60} ${width},${height-40}" fill="#6b8ef5"/>
+        <!-- Floating geometric elements with glow -->
+        <g opacity="0.3" filter="url(#neuralGlow)">
+          <circle cx="150" cy="100" r="80" fill="url(#accentGlow)"/>
+          <polygon points="50,50 150,30 120,120 30,100" fill="url(#brandGrad)" opacity="0.4"/>
+          <circle cx="${width-200}" cy="120" r="60" fill="url(#accentGlow)"/>
+          <polygon points="${width-100},80 ${width-50},120 ${width-150},140 ${width-120},60" fill="url(#brandGrad)" opacity="0.3"/>
+          <circle cx="${width-300}" cy="${height-100}" r="70" fill="url(#accentGlow)"/>
         </g>
         
-        <!-- Floating elements -->
-        <g opacity="0.06">
-          <circle cx="200" cy="120" r="60" fill="#4573df"/>
-          <circle cx="${width - 150}" cy="100" r="40" fill="#cfe8ef"/>
-          <circle cx="${width - 200}" cy="${height - 80}" r="50" fill="#6b8ef5"/>
+        <!-- Dynamic flowing lines -->
+        <g stroke-width="3" fill="none" opacity="0.15" filter="url(#neuralGlow)">
+          <path d="M0,${height/3} Q${width/4},${height/4} ${width/2},${height/3} Q${width*0.75},${height*0.4} ${width},${height/3}" stroke="url(#brandGrad)"/>
+          <path d="M0,${height*0.6} Q${width/3},${height*0.5} ${width*0.7},${height*0.65} Q${width*0.9},${height*0.7} ${width},${height*0.6}" stroke="url(#accentGlow)"/>
+          <path d="M${width*0.2},0 Q${width*0.4},${height*0.3} ${width*0.6},${height*0.2} Q${width*0.8},${height*0.1} ${width},${height*0.15}" stroke="url(#brandGrad)"/>
         </g>
         
-        <!-- Main content area with enhanced typography -->
-        <g transform="translate(${width * 0.08}, ${height * 0.18})">
-          <!-- Company name with enhanced styling -->
-          <text x="0" y="0" font-family="Arial, sans-serif" font-size="72" font-weight="900" fill="url(#accentGradient)" filter="url(#textShadow)">
-            Megicode
+        <!-- Main content with modern typography -->
+        <g transform="translate(${width * 0.08}, ${height * 0.15})">
+          <!-- Ultra-modern company name with multiple text effects -->
+          <g filter="url(#textGlow)">
+            <text x="0" y="0" font-family="SF Pro Display, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Arial" 
+                  font-size="84" font-weight="900" fill="url(#brandGrad)" 
+                  letter-spacing="-2px" style="paint-order: stroke;">
+              <tspan>Megi</tspan><tspan fill="url(#accentGlow)">code</tspan>
+            </text>
+          </g>
+          
+          <!-- Modern tagline with glassmorphism background -->
+          <rect x="-10" y="25" width="620" height="60" rx="30" fill="#ffffff" opacity="0.15" filter="url(#glass)"/>
+          <text x="0" y="70" font-family="SF Pro Display, system-ui, -apple-system" 
+                font-size="38" font-weight="600" fill="url(#textGrad)" 
+                letter-spacing="-1px">
+            Next-Generation Software Solutions
           </text>
           
-          <!-- Tagline with premium styling -->
-          <text x="0" y="85" font-family="Arial, sans-serif" font-size="36" font-weight="500" fill="#2d3748" filter="url(#textShadow)">
-            Modern Software Solutions
-          </text>
+          <!-- Premium accent line with gradient -->
+          <rect x="0" y="95" width="400" height="4" rx="2" fill="url(#brandGrad)" filter="url(#neuralGlow)"/>
           
-          <!-- Accent line -->
-          <rect x="0" y="105" width="300" height="3" fill="url(#accentGradient)" rx="1.5"/>
-          
-          <!-- Premium services list -->
-          <g transform="translate(0, 155)" font-family="Arial, sans-serif" font-size="26" font-weight="500" fill="#4a5568">
-            <g transform="translate(0, 0)">
-              <circle cx="0" cy="-8" r="6" fill="url(#accentGradient)" filter="url(#glow)"/>
-              <text x="25" y="0">Full-Stack Web &amp; Mobile Development</text>
-            </g>
-            <g transform="translate(0, 45)">
-              <circle cx="0" cy="-8" r="6" fill="url(#accentGradient)" filter="url(#glow)"/>
-              <text x="25" y="0">AI &amp; Machine Learning Solutions</text>
-            </g>
-            <g transform="translate(0, 90)">
-              <circle cx="0" cy="-8" r="6" fill="url(#accentGradient)" filter="url(#glow)"/>
-              <text x="25" y="0">Custom Enterprise Software</text>
+          <!-- Ultra-modern services grid -->
+          <g transform="translate(0, 140)">
+            <!-- Service cards with glassmorphism -->
+            <g font-family="SF Pro Display, system-ui" font-weight="500">
+              <!-- Row 1 -->
+              <g transform="translate(0, 0)">
+                <rect x="-15" y="-25" width="280" height="50" rx="25" fill="#ffffff" opacity="0.2" filter="url(#glass)"/>
+                <circle cx="0" cy="0" r="8" fill="url(#brandGrad)" filter="url(#neuralGlow)"/>
+                <text x="25" y="6" font-size="26" fill="url(#textGrad)">AI &amp; Machine Learning</text>
+              </g>
+              
+              <g transform="translate(320, 0)">
+                <rect x="-15" y="-25" width="260" height="50" rx="25" fill="#ffffff" opacity="0.2" filter="url(#glass)"/>
+                <circle cx="0" cy="0" r="8" fill="url(#accentGlow)" filter="url(#neuralGlow)"/>
+                <text x="25" y="6" font-size="26" fill="url(#textGrad)">Cloud &amp; DevOps</text>
+              </g>
+              
+              <!-- Row 2 -->
+              <g transform="translate(0, 60)">
+                <rect x="-15" y="-25" width="320" height="50" rx="25" fill="#ffffff" opacity="0.2" filter="url(#glass)"/>
+                <circle cx="0" cy="0" r="8" fill="url(#brandGrad)" filter="url(#neuralGlow)"/>
+                <text x="25" y="6" font-size="26" fill="url(#textGrad)">Full-Stack Development</text>
+              </g>
+              
+              <g transform="translate(350, 60)">
+                <rect x="-15" y="-25" width="280" height="50" rx="25" fill="#ffffff" opacity="0.2" filter="url(#glass)"/>
+                <circle cx="0" cy="0" r="8" fill="url(#accentGlow)" filter="url(#neuralGlow)"/>
+                <text x="25" y="6" font-size="26" fill="url(#textGrad)">Enterprise Solutions</text>
+              </g>
             </g>
           </g>
           
-          <!-- Call to action -->
-          <g transform="translate(0, 330)">
-            <text x="0" y="0" font-family="Arial, sans-serif" font-size="22" font-weight="400" fill="#718096">
-              Transform your ideas into powerful software solutions
+          <!-- Call-to-action with modern styling -->
+          <g transform="translate(0, 320)">
+            <rect x="-20" y="-15" width="680" height="45" rx="22" fill="url(#brandGrad)" opacity="0.1" filter="url(#glass)"/>
+            <text x="0" y="10" font-family="SF Pro Display, system-ui" 
+                  font-size="24" font-weight="400" fill="url(#textGrad)" opacity="0.9">
+              🚀 Transforming Ideas Into Intelligent Software Solutions
             </text>
           </g>
         </g>
         
-        <!-- Premium logo container (right side) -->
-        <g transform="translate(${width * 0.68}, ${height * 0.12})">
-          <!-- Glowing background circle -->
-          <circle cx="120" cy="120" r="110" fill="#ffffff" stroke="url(#accentGradient)" stroke-width="4" opacity="0.95" filter="url(#glow)"/>
-          <!-- Inner glow -->
-          <circle cx="120" cy="120" r="95" fill="url(#mainGradient)" opacity="0.3"/>
+        <!-- Ultra-prominent logo section with advanced effects -->
+        <g transform="translate(${width * 0.72}, ${height * 0.08})">
+          <!-- Outer glow ring -->
+          <circle cx="140" cy="140" r="150" fill="none" stroke="url(#brandGrad)" stroke-width="2" opacity="0.3" filter="url(#neuralGlow)"/>
+          <circle cx="140" cy="140" r="130" fill="none" stroke="url(#accentGlow)" stroke-width="1.5" opacity="0.4" filter="url(#neuralGlow)"/>
+          
+          <!-- Glass morphism container -->
+          <circle cx="140" cy="140" r="120" fill="#ffffff" opacity="0.25" filter="url(#glassMorph)"/>
+          <circle cx="140" cy="140" r="115" fill="url(#overlayGrad)" opacity="0.3"/>
+          
+          <!-- Inner premium background -->
+          <circle cx="140" cy="140" r="110" fill="#ffffff" opacity="0.9" filter="url(#glass)"/>
+          
+          <!-- Neural network decoration around logo -->
+          <g opacity="0.2" filter="url(#neuralGlow)">
+            <circle cx="80" cy="80" r="4" fill="url(#brandGrad)"/>
+            <circle cx="200" cy="90" r="3" fill="url(#accentGlow)"/>
+            <circle cx="210" cy="190" r="4" fill="url(#brandGrad)"/>
+            <circle cx="70" cy="200" r="3" fill="url(#accentGlow)"/>
+            <path d="M80,80 Q140,100 200,90 Q180,140 210,190 Q160,180 70,200 Q90,140 80,80" 
+                  stroke="url(#brandGrad)" stroke-width="1" fill="none" opacity="0.6"/>
+          </g>
+          
+          <!-- Premium logo shadow -->
+          <circle cx="145" cy="145" r="85" fill="url(#brandGrad)" opacity="0.1" filter="url(#logoGlow)"/>
         </g>
         
-        <!-- Bottom accent -->
-        <rect x="0" y="${height-6}" width="100%" height="6" fill="url(#accentGradient)"/>
+        <!-- Modern footer accent -->
+        <rect x="0" y="${height-8}" width="100%" height="8" fill="url(#brandGrad)" filter="url(#neuralGlow)"/>
+        
+        <!-- Floating particles for ultra-modern feel -->
+        <g opacity="0.6" filter="url(#neuralGlow)">
+          <circle cx="100" cy="200" r="2" fill="url(#brandGrad)"/>
+          <circle cx="300" cy="150" r="1.5" fill="url(#accentGlow)"/>
+          <circle cx="500" cy="250" r="2" fill="url(#brandGrad)"/>
+          <circle cx="700" cy="180" r="1.5" fill="url(#accentGlow)"/>
+          <circle cx="900" cy="220" r="2" fill="url(#brandGrad)"/>
+          <circle cx="${width-100}" cy="300" r="1.5" fill="url(#accentGlow)"/>
+        </g>
       </svg>
     `;
 
-    // Generate base card
+    // Generate ultra-high quality base card
     const cardBuffer = await sharp(Buffer.from(cardSvg))
       .resize(width, height)
-      .png()
+      .png({ quality: 100, compressionLevel: 1 })
       .toBuffer();
 
-    // Prepare premium logo
-    const logoSize = Math.min(200, width * 0.16);
+    // Prepare ultra-prominent logo
+    const logoSize = Math.min(220, width * 0.18);
     const logoPngBuf = await sharp(svgBuffer)
       .resize({ width: logoSize, height: logoSize, fit: 'inside', withoutEnlargement: true })
-      .png()
+      .png({ quality: 100 })
       .toBuffer();
 
-    // Position logo in the premium container
-    const logoLeft = Math.round(width * 0.68 + 120 - logoSize/2);
-    const logoTop = Math.round(height * 0.12 + 120 - logoSize/2);
+    // Position logo in the premium ultra-modern container
+    const logoLeft = Math.round(width * 0.72 + 140 - logoSize/2);
+    const logoTop = Math.round(height * 0.08 + 140 - logoSize/2);
 
-    // Composite everything
+    // Composite with premium quality
     await sharp(cardBuffer)
       .composite([{ input: logoPngBuf, left: logoLeft, top: logoTop }])
-      .png()
+      .png({ quality: 100, compressionLevel: 1 })
       .toFile(outPath);
   }
 
-  await createPremiumCard(path.join(META_DIR, 'og-image.png'), 1200, 630);
-  await createPremiumCard(path.join(META_DIR, 'twitter-card.png'), 1200, 600);
+  await createUltraModernCard(path.join(META_DIR, 'og-image.png'), 1200, 630);
+  await createUltraModernCard(path.join(META_DIR, 'twitter-card.png'), 1200, 600);
 }
 
 async function main() {
