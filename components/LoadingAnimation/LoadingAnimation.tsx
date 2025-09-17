@@ -190,7 +190,7 @@ export const LoadingAnimation = ({
           <div className={styles.logo}>
             <div className={styles.logoGlow} />
             <Image
-              src="/megicode-logo-alt.svg"
+              src="/megicode-logo-without-border.svg"
               alt="Megicode Logo"
               width={size === 'small' ? 20 : size === 'large' ? 60 : 40}
               height={size === 'small' ? 20 : size === 'large' ? 60 : 40}

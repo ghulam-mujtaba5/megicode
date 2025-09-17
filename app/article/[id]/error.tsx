@@ -21,7 +21,7 @@ export default function ArticleError() {
       }}
     >
       <Image
-        src="/megicode-logo-alt.svg"
+        src="/megicode-logo-without-border.svg"
         alt="Megicode Logo"
         width={80}
         height={80}

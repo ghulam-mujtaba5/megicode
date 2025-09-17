@@ -44,7 +44,7 @@ const ArticleSchema: React.FC<ArticleSchemaProps> = ({ article }) => {
       'name': 'Megicode',
       'logo': {
         '@type': 'ImageObject',
-        'url': 'https://megicode.com/megicode-logo-alt.svg',
+            'url': 'https://megicode.com/megicode-logo-without-border.svg',
       },
     },
   };

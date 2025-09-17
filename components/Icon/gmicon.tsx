@@ -24,7 +24,7 @@ const GmIcon: React.FC<GmIconProps> = ({ showOnDesktop = false }) => {
   }, [theme, isInView, styles]);
 
   const iconSrc = useMemo(() => {
-    return "/megicode-logo-alt.svg";
+    return "/megicode-logo-without-border.svg";
   }, []);
 
   const checkInView = () => {
