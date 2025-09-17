@@ -39,13 +39,13 @@ body {
   color: var(--md-on-background);
   font-family: 'Open Sans', 'Poppins', 'Inter', Arial, sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
+  /* Prevent mobile browser UI from affecting viewport */
+  touch-action: manipulation;
 }
 
 /* Apply top padding only on desktop screens where the fixed navbar is visible */
 @media (min-width: 769px) {
-  body {
-    /* padding-top: 72px; */
-  }
+  /* Padding adjustments for desktop screens if needed */
 }
 
 /* Dark mode support */
@@ -117,6 +117,7 @@ html.dark, body.dark {
 
 .page-container {
   min-height: 100vh;
+  min-height: 100dvh; /* Use dynamic viewport height for mobile browsers */
   overflow-x: hidden;
   position: relative;
   transition: background 0.4s, box-shadow 0.3s, border 0.3s;
@@ -150,6 +151,7 @@ html.dark, body.dark {
   position: relative;
   z-index: 10;
   min-height: 100vh;
+  min-height: 100dvh; /* Use dynamic viewport height for mobile browsers */
   padding-top: 0;
   padding-bottom: 0;
 }
@@ -158,4 +160,30 @@ html.dark, body.dark {
   width: 100%;
   overflow: hidden;
   position: relative;
+}
+
+/* Mobile-specific viewport fixes */
+@media (max-width: 768px) {
+  body {
+    /* Prevent mobile browser UI from creating layout shifts */
+    position: relative;
+    overflow-x: hidden;
+  }
+  
+  .page-container {
+    /* Use viewport units that work better on mobile */
+    min-height: 100vh;
+    min-height: 100dvh;
+    /* Prevent any gaps or extra space at bottom */
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+  
+  .main-content {
+    /* Ensure content fills the available space properly */
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
 }

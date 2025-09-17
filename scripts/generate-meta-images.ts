@@ -107,39 +107,31 @@ async function generateOpenGraphImage() {  // Create premium branded OG/Twitter 
     const cardSvg = `
       <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <!-- Modern gradient definitions -->
+        <defs>
+          <!-- Megicode Brand Colors -->
           <linearGradient id="mainBg" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#667eea"/>
-            <stop offset="25%" stop-color="#764ba2"/>
-            <stop offset="50%" stop-color="#4573df"/>
-            <stop offset="75%" stop-color="#6b8ef5"/>
-            <stop offset="100%" stop-color="#a8edea"/>
+            <stop offset="0%" stop-color="#4573df"/>
+            <stop offset="100%" stop-color="#2d4fa2"/>
           </linearGradient>
           
           <linearGradient id="overlayGrad" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
-            <stop offset="30%" stop-color="#f8faff" stop-opacity="0.9"/>
-            <stop offset="100%" stop-color="#ffffff" stop-opacity="0.85"/>
+            <stop offset="100%" stop-color="#f8faff" stop-opacity="0.9"/>
           </linearGradient>
           
           <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stop-color="#1a202c"/>
-            <stop offset="50%" stop-color="#2d3748"/>
-            <stop offset="100%" stop-color="#4a5568"/>
+            <stop offset="100%" stop-color="#2d3748"/>
           </linearGradient>
           
           <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stop-color="#4573df"/>
-            <stop offset="25%" stop-color="#667eea"/>
-            <stop offset="50%" stop-color="#764ba2"/>
-            <stop offset="75%" stop-color="#6b8ef5"/>
-            <stop offset="100%" stop-color="#4573df"/>
+            <stop offset="100%" stop-color="#2d4fa2"/>
           </linearGradient>
 
           <linearGradient id="accentGlow" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#4573df" stop-opacity="0.6"/>
-            <stop offset="50%" stop-color="#6b8ef5" stop-opacity="0.4"/>
-            <stop offset="100%" stop-color="#a8edea" stop-opacity="0.8"/>
+            <stop offset="0%" stop-color="#4573df" stop-opacity="0.8"/>
+            <stop offset="100%" stop-color="#2d4fa2" stop-opacity="0.6"/>
           </linearGradient>
           
           <!-- Advanced filters and effects -->
@@ -179,14 +171,14 @@ async function generateOpenGraphImage() {  // Create premium branded OG/Twitter 
             </feMerge>
           </filter>
           
-          <!-- Neural network pattern -->
+          <!-- Neural network pattern with brand colors -->
           <pattern id="neuralNet" patternUnits="userSpaceOnUse" width="120" height="120">
             <circle cx="20" cy="20" r="3" fill="#4573df" opacity="0.15"/>
-            <circle cx="100" cy="40" r="2" fill="#6b8ef5" opacity="0.12"/>
-            <circle cx="60" cy="80" r="2.5" fill="#764ba2" opacity="0.1"/>
-            <circle cx="40" cy="100" r="2" fill="#a8edea" opacity="0.15"/>
+            <circle cx="100" cy="40" r="2" fill="#2d4fa2" opacity="0.12"/>
+            <circle cx="60" cy="80" r="2.5" fill="#4573df" opacity="0.1"/>
+            <circle cx="40" cy="100" r="2" fill="#2d4fa2" opacity="0.15"/>
             <path d="M20,20 Q60,40 100,40 Q80,60 60,80 Q30,90 40,100" stroke="#4573df" stroke-width="0.8" opacity="0.08" fill="none"/>
-            <path d="M100,40 Q70,50 60,80" stroke="#6b8ef5" stroke-width="0.6" opacity="0.06" fill="none"/>
+            <path d="M100,40 Q70,50 60,80" stroke="#2d4fa2" stroke-width="0.6" opacity="0.06" fill="none"/>
           </pattern>
           
           <!-- Glass morphism shapes -->
@@ -296,31 +288,31 @@ async function generateOpenGraphImage() {  // Create premium branded OG/Twitter 
           <!-- Inner premium background -->
           <circle cx="140" cy="140" r="110" fill="#ffffff" opacity="0.9" filter="url(#glass)"/>
           
-          <!-- Neural network decoration around logo -->
+          <!-- Neural network decoration around logo with brand colors -->
           <g opacity="0.2" filter="url(#neuralGlow)">
-            <circle cx="80" cy="80" r="4" fill="url(#brandGrad)"/>
-            <circle cx="200" cy="90" r="3" fill="url(#accentGlow)"/>
-            <circle cx="210" cy="190" r="4" fill="url(#brandGrad)"/>
-            <circle cx="70" cy="200" r="3" fill="url(#accentGlow)"/>
+            <circle cx="80" cy="80" r="4" fill="#4573df"/>
+            <circle cx="200" cy="90" r="3" fill="#2d4fa2"/>
+            <circle cx="210" cy="190" r="4" fill="#4573df"/>
+            <circle cx="70" cy="200" r="3" fill="#2d4fa2"/>
             <path d="M80,80 Q140,100 200,90 Q180,140 210,190 Q160,180 70,200 Q90,140 80,80" 
-                  stroke="url(#brandGrad)" stroke-width="1" fill="none" opacity="0.6"/>
+                  stroke="#4573df" stroke-width="1" fill="none" opacity="0.6"/>
           </g>
           
-          <!-- Premium logo shadow -->
-          <circle cx="145" cy="145" r="85" fill="url(#brandGrad)" opacity="0.1" filter="url(#logoGlow)"/>
+          <!-- Premium logo shadow with brand color -->
+          <circle cx="145" cy="145" r="85" fill="#4573df" opacity="0.1" filter="url(#logoGlow)"/>
         </g>
         
         <!-- Modern footer accent -->
         <rect x="0" y="${height-8}" width="100%" height="8" fill="url(#brandGrad)" filter="url(#neuralGlow)"/>
         
-        <!-- Floating particles for ultra-modern feel -->
+        <!-- Floating particles with brand colors -->
         <g opacity="0.6" filter="url(#neuralGlow)">
-          <circle cx="100" cy="200" r="2" fill="url(#brandGrad)"/>
-          <circle cx="300" cy="150" r="1.5" fill="url(#accentGlow)"/>
-          <circle cx="500" cy="250" r="2" fill="url(#brandGrad)"/>
-          <circle cx="700" cy="180" r="1.5" fill="url(#accentGlow)"/>
-          <circle cx="900" cy="220" r="2" fill="url(#brandGrad)"/>
-          <circle cx="${width-100}" cy="300" r="1.5" fill="url(#accentGlow)"/>
+          <circle cx="100" cy="200" r="2" fill="#4573df"/>
+          <circle cx="300" cy="150" r="1.5" fill="#2d4fa2"/>
+          <circle cx="500" cy="250" r="2" fill="#4573df"/>
+          <circle cx="700" cy="180" r="1.5" fill="#2d4fa2"/>
+          <circle cx="900" cy="220" r="2" fill="#4573df"/>
+          <circle cx="${width-100}" cy="300" r="1.5" fill="#2d4fa2"/>
         </g>
       </svg>
     `;
