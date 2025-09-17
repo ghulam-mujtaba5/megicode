@@ -46,6 +46,23 @@ All logo assets now follow this pattern:
 - ✅ All logo assets properly renamed
 - ✅ All code references updated
 
+## Centralized logo constants
+
+Added `lib/logo.ts` exporting constants for all logo paths:
+
+- `LOGO_MAIN_LIGHT`, `LOGO_MAIN_DARK`
+- `LOGO_NAVBAR_LIGHT`, `LOGO_NAVBAR_DARK`
+- `LOGO_ICON`, `LOGO_LEGACY`
+- `PWA_ICON` (currently `/meta/megicode-logo1.svg`)
+
+Usage example:
+
+```ts
+import { LOGO_ICON, PWA_ICON } from '@/lib/logo';
+```
+
+This avoids hard-coded strings and makes future changes one-line updates.
+
 ## Future Recommendations
 1. Consider creating a centralized logo constants file for easier management
 2. Add TypeScript types for logo variants
