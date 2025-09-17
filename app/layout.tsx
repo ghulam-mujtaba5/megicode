@@ -34,6 +34,10 @@ export const metadata = {
   },
   icons: {
     icon: [
+      // Theme-aware favicons
+      { url: "/megicode-logo-transparent -backgorund-for light screen.svg", media: "(prefers-color-scheme: light)", type: "image/svg+xml" },
+      { url: "/megicode-logo-transparent -backgorund-for dark screen.svg", media: "(prefers-color-scheme: dark)", type: "image/svg+xml" },
+      // Canonical svg + fallbacks
       { url: "/favicon.svg", type: "image/svg+xml" },
       { url: "/meta/favicon-16x16.png", sizes: "16x16", type: "image/png" },
       { url: "/meta/favicon-32x32.png", sizes: "32x32", type: "image/png" },
@@ -146,6 +150,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
+        {/* Dynamic favicons for light/dark mode using user's transparent logo variants */}
+        <link
+          rel="icon"
+          href="/megicode-logo-transparent -backgorund-for light screen.svg"
+          type="image/svg+xml"
+          media="(prefers-color-scheme: light)"
+        />
+        <link
+          rel="icon"
+          href="/megicode-logo-transparent -backgorund-for dark screen.svg"
+          type="image/svg+xml"
+          media="(prefers-color-scheme: dark)"
+        />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(navJsonLd) }} />

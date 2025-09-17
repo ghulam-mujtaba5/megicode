@@ -16,6 +16,7 @@ const nextConfig = {
       },
     ],
   },
+  // Root favicon.ico will be generated in public/ by our build script
 };
 
 export default nextConfig;

@@ -2,7 +2,7 @@
     "scripts": {
         "dev": "next dev",
         "build": "next build",
-        "postbuild": "next-sitemap",
+    "postbuild": "next-sitemap && ts-node scripts/generate-icons.ts",
         "start": "next start",
         "lint": "next lint",
         "generate-meta": "cd scripts && ts-node generate-meta-images.ts",

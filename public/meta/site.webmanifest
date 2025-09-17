@@ -12,6 +12,18 @@
   "categories": ["business", "productivity", "technology"],
   "icons": [
     {
+      "src": "/megicode-logo-transparent -backgorund-for light screen.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/megicode-logo-transparent -backgorund-for dark screen.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
       "src": "/favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
