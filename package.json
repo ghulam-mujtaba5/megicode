@@ -2,10 +2,11 @@
     "scripts": {
         "dev": "next dev",
         "build": "next build",
-    "postbuild": "next-sitemap && ts-node scripts/generate-icons.ts",
+        "postbuild": "next-sitemap",
         "start": "next start",
         "lint": "next lint",
         "generate-meta": "cd scripts && ts-node generate-meta-images.ts",
+        "icons:inspect": "ts-node scripts/inspect-ico.ts",
         "icons:generate": "ts-node scripts/generate-icons.ts"
     },
     "dependencies": {
@@ -13,6 +14,7 @@
         "framer-motion": "^12.15.0",
         "next": "^15.4.1",
         "nodemailer": "^7.0.5",
+            "icojs": "^0.3.2",
         "react": "^19.1.0",
         "react-dom": "^19.1.0",
         "react-icons": "^5.5.0",
