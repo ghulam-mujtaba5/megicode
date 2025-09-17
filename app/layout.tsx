@@ -34,6 +34,7 @@ export const metadata = {
   },
   icons: {
     icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
       { url: "/meta/favicon-16x16.png", sizes: "16x16", type: "image/png" },
       { url: "/meta/favicon-32x32.png", sizes: "32x32", type: "image/png" },
       { url: "/meta/favicon.ico", sizes: "48x48" },
