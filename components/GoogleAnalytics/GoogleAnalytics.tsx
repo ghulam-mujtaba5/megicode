@@ -30,15 +30,12 @@ export default function GoogleAnalytics() {
       <Script id="google-analytics" strategy="afterInteractive">
         {`
           window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
+          function gtag(){dataLayer.push(arguments);} 
           gtag('js', new Date());
-
           gtag('config', '${measurementId}', {
             page_path: window.location.pathname,
-            transport_url: 'https://www.megicode.com',
             cookie_domain: 'megicode.com',
-            cookie_flags: 'SameSite=None;Secure',
-            debug_mode: false
+            cookie_flags: 'SameSite=None;Secure'
           });
         `}
       </Script>
