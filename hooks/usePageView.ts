@@ -6,33 +6,39 @@ import { trackPageView } from '@/lib/analytics';
 
 export function usePageView() {
   const pathname = usePathname();
-  // Make searchParams optional since it requires Suspense
   let searchString = '';
   try {
     const searchParams = useSearchParams();
     searchString = searchParams?.toString() || '';
-  } catch (e) {
-    // Handle case where searchParams is not available
-    console.debug('Search params not available for analytics');
-  }
+  } catch {}
 
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const sentRef = useRef<string | null>(null);
 
   useEffect(() => {
     if (process.env.NODE_ENV !== 'production') return;
     if (!pathname) return;
 
+    const key = pathname + '?' + searchString;
     let attempts = 0;
     const maxAttempts = 10;
 
     function trySend() {
       if (typeof window !== 'undefined' && window.gtag) {
-        trackPageView(pathname, searchString, window.location.href);
+        if (sentRef.current !== key) {
+          trackPageView(pathname, searchString, window.location.href);
+          sentRef.current = key;
+        }
         return;
       }
       if (attempts < maxAttempts) {
         attempts += 1;
         timeoutRef.current = setTimeout(trySend, 200);
+      } else {
+        if (process.env.NEXT_PUBLIC_GA_DEBUG === 'true') {
+          // eslint-disable-next-line no-console
+          console.warn('[GA] gtag not available after retries');
+        }
       }
     }
 
