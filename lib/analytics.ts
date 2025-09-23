@@ -4,12 +4,7 @@ export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || ''
 
 type GTagEventParams = Record<string, any>;
 
-declare global {
-  interface Window {
-    gtag?: (...args: any[]) => void;
-    dataLayer?: any[];
-  }
-}
+// (Window interface already augmented elsewhere; avoid redeclaration to prevent TS conflicts.)
 
 const isProd = process.env.NODE_ENV === 'production';
 const debug = process.env.NEXT_PUBLIC_GA_DEBUG === 'true';
