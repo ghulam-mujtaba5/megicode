@@ -23,7 +23,6 @@ const AboutFounder = () => {
   };
 
   const founders = [
-
     {
       name: "Ghulam Mujtaba",
       role: "Founder & CTO",
@@ -39,14 +38,6 @@ const AboutFounder = () => {
       quote: "Leading Megicode's vision to transform businesses through innovative technology solutions.",
       github: "https://github.com/AzanWahla",
       linkedin: "https://www.linkedin.com/in/azanwahla"
-    },
-    {
-      name: "Muhammad Waqar ul Mulk",
-      role: "Founder & COO/CMO",
-      image: "/waqar.png",
-      quote: "Building strategic partnerships and ensuring operational excellence in everything we do.",
-      github: "https://github.com/Mwaqarulmulk",
-      linkedin: "https://www.linkedin.com/in/mwaqarulmulk"
     }
   ];
 

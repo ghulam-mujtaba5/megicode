@@ -27,17 +27,9 @@ const NavBar = () => {
         setIsMenuOpen((prev) => !prev);
     }, []);
 
-    const handleScrollOrRoute = useCallback((sectionOrRoute) => {
-        if (typeof sectionOrRoute === 'string' && sectionOrRoute.startsWith('/')) {
-            router.push(sectionOrRoute);
-            setIsMenuOpen(false);
-        } else if (typeof sectionOrRoute === 'string') {
-            const section = document.getElementById(sectionOrRoute);
-            if (section) {
-                section.scrollIntoView({ behavior: 'smooth' });
-                setIsMenuOpen(false);
-            }
-        }
+    const handleNavigate = useCallback((route: string) => {
+        router.push(route);
+        setIsMenuOpen(false);
     }, [router]);
 
     const themeStyles = theme === 'light' ? lightStyles : darkStyles;
@@ -68,12 +60,12 @@ const NavBar = () => {
                             <li
                                 key={section.id}
                                 className={`${commonStyles.menuItem} ${themeStyles.menuItem}`}
-                                onClick={() => handleScrollOrRoute(section.href)}
+                                onClick={() => handleNavigate(section.href)}
                                 role="menuitem"
                                 tabIndex={0}
                                 onKeyPress={(e) => {
                                     if (e.key === 'Enter') {
-                                        handleScrollOrRoute(section.href);
+                                        handleNavigate(section.href);
                                     }
                                 }}
                             >
