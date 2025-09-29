@@ -13,15 +13,17 @@ interface ServiceCardProps {
   features: string[];
   techs: string[];
   delay?: number;
+  href?: string;
 }
 
-const ServiceCard: React.FC<ServiceCardProps> = ({ 
-  icon, 
-  title, 
-  description, 
-  features, 
+const ServiceCard: React.FC<ServiceCardProps> = ({
+  icon,
+  title,
+  description,
+  features,
   techs,
-  delay = 0 
+  delay = 0,
+  href
 }) => {
   const { theme } = useTheme();
   const themeStyles = theme === 'dark' ? darkStyles : lightStyles;
@@ -63,72 +65,86 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   };
 
   return (
-    <motion.div 
+    <motion.div
       className={`${commonStyles.card} ${themeStyles.card}`}
       variants={cardVariants}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-50px" }}
     >
-      <div className={commonStyles.cardContent}>
-        <motion.div 
-          className={`${commonStyles.iconWrapper} ${themeStyles.iconWrapper}`}
-          whileHover={{ scale: 1.05 }}
-          transition={{ type: "spring", stiffness: 400, damping: 10 }}
-        >
-          <img src={icon} alt={`${title} icon`} className={commonStyles.icon} />
-        </motion.div>
+      <a
+        href={href}
+        className={commonStyles.cardLink}
+        aria-label={`${title} service details`}
+      >
+        <div className={commonStyles.cardContent}>
+          <motion.div
+            className={`${commonStyles.iconWrapper} ${themeStyles.iconWrapper}`}
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 300, damping: 18 }}
+          >
+            <img src={icon} alt={`${title} icon`} className={commonStyles.icon} />
+          </motion.div>
 
-        <motion.div variants={contentVariants} initial="hidden" animate="visible">
-          <motion.h3 
-            className={`${commonStyles.title} ${themeStyles.title}`}
-            variants={itemVariants}
-          >
-            {title}
-          </motion.h3>
-          
-          <motion.p 
-            className={`${commonStyles.description} ${themeStyles.description}`}
-            variants={itemVariants}
-          >
-            {description}
-          </motion.p>
-          
-          <motion.div 
-            className={`${commonStyles.featuresContainer} ${themeStyles.featuresContainer}`}
-            variants={contentVariants}
-          >
-            <motion.div className={commonStyles.featuresList}>
-              {features.map((feature, index) => (
-                <motion.div 
-                  key={index}
-                  className={`${commonStyles.feature} ${themeStyles.feature}`}
-                  variants={itemVariants}
-                >
-                  <span className={`${commonStyles.featureDot} ${themeStyles.featureDot}`} />
-                  {feature}
-                </motion.div>
-              ))}
-            </motion.div>
+          <motion.div variants={contentVariants} initial="hidden" animate="visible">
+            <motion.h3
+              className={`${commonStyles.title} ${themeStyles.title}`}
+              variants={itemVariants}
+            >
+              {title}
+            </motion.h3>
 
-            <motion.div 
-              className={commonStyles.techsList}
+            <motion.p
+              className={`${commonStyles.description} ${themeStyles.description}`}
+              variants={itemVariants}
+            >
+              {description}
+            </motion.p>
+
+            <motion.div
+              className={`${commonStyles.featuresContainer} ${themeStyles.featuresContainer}`}
               variants={contentVariants}
             >
-              {techs.map((tech, index) => (
-                <motion.span
-                  key={index}
-                  className={`${commonStyles.techBadge} ${themeStyles.techBadge}`}
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.05 }}
-                >
-                  {tech}
-                </motion.span>
-              ))}
+              <motion.div className={commonStyles.featuresList}>
+                {features.slice(0, 3).map((feature, index) => (
+                  <motion.div
+                    key={index}
+                    className={`${commonStyles.feature} ${themeStyles.feature}`}
+                    variants={itemVariants}
+                  >
+                    <span className={`${commonStyles.featureDot} ${themeStyles.featureDot}`} />
+                    {feature}
+                  </motion.div>
+                ))}
+              </motion.div>
+
+              <motion.div
+                className={commonStyles.techsList}
+                variants={contentVariants}
+              >
+                {techs.slice(0, 4).map((tech, index) => (
+                  <motion.span
+                    key={index}
+                    className={`${commonStyles.techBadge} ${themeStyles.techBadge}`}
+                    variants={itemVariants}
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    {tech}
+                  </motion.span>
+                ))}
+              </motion.div>
+
+              <motion.div
+                className={`${commonStyles.ctaRow} ${themeStyles.ctaRow}`}
+                variants={itemVariants}
+              >
+                Explore service
+                <span className={commonStyles.ctaIcon}>→</span>
+              </motion.div>
             </motion.div>
           </motion.div>
-        </motion.div>
-      </div>
+        </div>
+      </a>
     </motion.div>
   );
 };
