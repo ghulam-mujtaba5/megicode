@@ -1,0 +1,25 @@
+/* Popover Dark Theme Styles */
+.popoverContent {
+  background: #2a2f38;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #eaf6ff;
+}
+
+.popoverContent::backdrop {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.popoverTrigger:hover {
+  background: rgba(69, 115, 223, 0.15);
+  border-radius: 8px;
+}
+
+.popoverHeader {
+  background: linear-gradient(135deg, #23272f 0%, #1d2127 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: #eaf6ff;
+}
+
+.popoverDivider {
+  border-color: rgba(255, 255, 255, 0.1);
+}

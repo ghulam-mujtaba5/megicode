@@ -11,7 +11,24 @@ interface CalendlyWidget {
 }
 interface Window {
   Calendly?: CalendlyWidget;
-}declare global {
+}
+
+// CSSStyleDeclaration extensions for modern CSS features
+interface CSSStyleDeclaration {
+  anchorName?: string;
+  positionAnchor?: string;
+  viewTransitionName?: string;
+}
+
+// HTMLElement extensions for Popover API
+interface HTMLElement {
+  popover?: 'auto' | 'manual' | '';
+  showPopover?: () => void;
+  hidePopover?: () => void;
+  togglePopover?: () => boolean;
+}
+
+declare global {
   interface Window {
     __megicodeTheme?: string;
   }

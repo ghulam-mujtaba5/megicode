@@ -13,6 +13,9 @@ body {
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap");
+
+/* Import modern animations */
+@import './animations.css';
 /* Material Design Color Palette */
 :root {
   --md-primary: #4573df;

@@ -1,0 +1,1 @@
+export { AnimatedText, default } from './AnimatedText';

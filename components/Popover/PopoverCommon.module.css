@@ -1,0 +1,98 @@
+/* Popover Common Styles */
+.popover-container {
+  position: relative;
+  display: inline-flex;
+}
+
+.popover-trigger {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+}
+
+.popover-trigger:focus-visible {
+  outline: 2px solid var(--md-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.popover-content {
+  z-index: 1000;
+  border-radius: 12px;
+  box-shadow: var(--md-elevation-3);
+  overflow: hidden;
+  min-width: 200px;
+  max-width: 90vw;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+/* Native popover overrides */
+.popover-content-native {
+  border: none;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+}
+
+.popover-content-native::backdrop {
+  background: rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(2px);
+  animation: popover-backdrop-fade-in 0.2s ease;
+}
+
+@keyframes popover-backdrop-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Native popover animations */
+.popover-content-native {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: 
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    display 0.2s ease allow-discrete,
+    overlay 0.2s ease allow-discrete;
+}
+
+.popover-content-native:popover-open {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@starting-style {
+  .popover-content-native:popover-open {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+/* Scrollbar styling for popover content */
+.popover-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.popover-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.popover-content::-webkit-scrollbar-thumb {
+  background-color: rgba(128, 128, 128, 0.4);
+  border-radius: 3px;
+}
+
+.popover-content::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(128, 128, 128, 0.6);
+}

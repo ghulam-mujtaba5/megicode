@@ -32,7 +32,7 @@ const NewNavBar = () => {
     <nav className={`${styles.navbar} ${themeStyles.navbar}`}>
       <div className={styles.navbarContent}>
         <div className={styles.logoContainer}>
-          <Link href="/" passHref>
+          <Link href="/">
             <Image
               src={logoSrc}
               alt="Megicode Logo"

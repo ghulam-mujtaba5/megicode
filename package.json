@@ -10,6 +10,9 @@
         "icons:generate": "ts-node scripts/generate-icons.ts"
     },
     "dependencies": {
+        "@react-three/drei": "^10.7.7",
+        "@react-three/fiber": "^9.4.2",
+        "@types/three": "^0.182.0",
         "emailjs-com": "^3.2.0",
         "framer-motion": "^12.15.0",
         "next": "^15.4.1",
@@ -17,15 +20,16 @@
         "react": "^19.1.0",
         "react-dom": "^19.1.0",
         "react-icons": "^5.5.0",
-        "resend": "^4.7.0"
+        "resend": "^4.7.0",
+        "three": "^0.182.0"
     },
     "devDependencies": {
         "@axe-core/react": "^4.10.2",
         "@types/node": "22.15.29",
         "@types/react": "19.1.6",
         "@types/sharp": "^0.31.1",
-            "png-to-ico": "^2.1.8",
         "next-sitemap": "^4.2.3",
+        "png-to-ico": "^2.1.8",
         "sharp": "^0.34.2",
         "ts-node": "^10.9.2",
         "typescript": "^5.8.3"
