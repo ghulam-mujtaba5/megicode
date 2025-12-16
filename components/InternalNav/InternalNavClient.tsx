@@ -27,6 +27,9 @@ export default function InternalNavClient({
           <Link href="/internal/projects" className={styles.link}>
             Projects
           </Link>
+          <Link href="/internal/instances" className={styles.link}>
+            Instances
+          </Link>
           <Link href="/internal/tasks" className={styles.link}>
             My Tasks
           </Link>

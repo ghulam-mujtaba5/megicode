@@ -1,260 +1,285 @@
-# Megicode — Software Delivery & Project Management Automation (Internal Portal)
+# Internal Workflow Automation — TODO (Megicode)
 
-This TODO is the implementation roadmap for an internal portal that automates and monitors Megicode’s end‑to‑end software delivery process (from first client request → delivery → feedback), aligned with BPMN “TO‑BE” process modeling.
+Scope: ONLY internal portal + business process automation under `/internal`. Exclude public website pages.
 
-It is designed for:
-- A 2‑founder team (part‑time, project‑based collaborators at first)
-- $0 cost where possible (free tiers first)
-- A modern 2025 stack (this repo already uses Next.js 15 + React 19 + TypeScript)
-- High observability: event logs, status colors, instance monitoring, and audit history
-
-Owner: Ghulam Mujtaba (COMSATS, Lahore) — Company: https://megicode.com
-
----
-
-## 1) Goals (what “done” means)
-
-### Core automation goals
-- Convert inbound requests into structured “work” automatically (lead → project → tasks)
-- Move work forward through a clear process (handoffs from PM → Dev → QA → Delivery)
-- Reduce manual/duplicate work using integrations + templates
-
-### Monitoring & control goals (must-have)
-- Each process instance is trackable with a clear status + timeline
-- Status colors are consistent (UI badges + filters later if needed)
-- Full execution/event logs (who did what, when, and why)
-- “Work forwarding” is explicit (task assignment + ownership transitions)
-- Role-based access control (users only see what they should)
-- Process structures are changeable (versioned process definitions)
-
-### Practical business outcomes
-- Faster onboarding (less setup work per project)
-- Consistent project tracking and client updates
-- Easier reporting for class submission (BPMN + implementation mapping)
+## Current (already built)
+- [x] Auth: Google OAuth + role gate (`admin|pm|dev|qa|viewer`)
+- [x] DB tables: `users`, `leads`, `projects`, `process_definitions`, `process_instances`, `tasks`, `events`, `audit_events`
+- [x] Leads: list/create + detail + Convert → Project + Start Process + auto-generate tasks
+- [x] Projects: list + detail (process view + tasks update + event log + status derivation)
+- [x] My Tasks
+- [x] Process Admin (read-only definitions)
 
 ---
 
-## 2) Constraints & principles
-
-- Free-tier first: choose tools with generous free plans.
-- BYO-keys: any AI features must work only when API keys exist; the system must still work without AI.
-- Minimal operations: avoid complex infra at MVP (no Kubernetes, no heavy workflow engine to start).
-- Keep within this codebase style:
-	- Next.js App Router
-	- CSS Modules + existing theme context
-	- Avoid hardcoding new design tokens; reuse existing patterns
+## Goal (what we are building)
+Run business end-to-end inside `/internal`:
+Lead → qualify → proposal → approval → project setup → delivery → QA → deploy → invoice → close → support.
 
 ---
 
-## 3) Proposed MVP product scope (v0)
+## Roles (permissions, simple)
+- `admin`: users, roles, process versions, billing, integrations, delete/restore
+- `pm`: leads, proposals, projects, assignment, client comms
+- `dev`: tasks, estimates, time logs, deploy notes
+- `qa`: QA queue, bugs, signoff
+- `viewer`: read-only
 
-### A) Authentication & users
-- Google login (OAuth)
-- Roles: Founder/Admin, PM, Developer, QA, Viewer
-- Organization: single org (Megicode) for MVP
-
-### B) Intake → project creation
-- Create Lead from:
-	- Website contact form submission (existing route can be extended)
-	- Manual entry inside the portal
-- Convert Lead → Project with:
-	- Target delivery date, budget estimate, priority
-	- Project owner (PM) assigned
-
-### C) Process + tasks
-- Process definition: a versioned “Megicode Delivery Process” model
-- Process instance: created automatically when Project is created
-- Tasks: generated from the process definition (PM review, dev, QA, delivery, feedback)
-- Task assignment + reassignment (handoff tracking)
-
-### D) Monitoring / dashboards (must)
-- “My Work” view: tasks assigned to me + due dates
-- Project page: status badge, timeline, current stage, assigned team
-- Instance monitoring: list of all running instances + progress
-- Logs:
-	- Event log (state changes, assignments, comments, emails sent)
-	- Audit log (auth actions, role changes, config changes)
-
-### E) Email automation (free-tier friendly)
-- Send confirmation email to lead/client
-- Send weekly status update (manual trigger at MVP; later scheduled)
-- Delivery package email (links + summary)
+Hard rules
+- Server-side guard for every action/page (`requireRole` pattern)
+- Every write: create `events` + `audit_events`
 
 ---
 
-## 4) Recommended tools (free-tier friendly)
+## Modules → Pages → Features (MAX list, short words)
 
-### Database
-- Turso (libSQL) free tier
+### 1) Dashboard / Control Center
+Pages
+- [ ] `/internal` dashboard v2
+Features
+- [ ] KPI tiles: new leads, approved, converted, active projects, blocked, overdue
+- [ ] My queue: tasks by status + due
+- [ ] PM queue: approvals waiting, QA waiting, invoices overdue
+- [ ] Alerts: SLA breach, blocked > N days, due in 48h
 
-### ORM / migrations (recommended)
-- Drizzle ORM (simple, TypeScript-first)
+### 2) Leads (CRM-lite)
+Pages
+- [x] `/internal/leads`
+- [x] `/internal/leads/[id]`
+Add
+- [ ] `/internal/leads/pipeline` (kanban)
+- [ ] `/internal/leads/import` (CSV)
+- [ ] `/internal/leads/rules` (auto actions)
+Features
+- [ ] Assign owner (PM)
+- [ ] Notes/comments + mentions
+- [ ] Tags + priority + budget range
+- [ ] Dedupe + merge (email/phone)
+- [ ] Lead scoring (simple rules)
+- [ ] Qualification checklist + call outcome
+- [ ] Convert guard: require approved + owner + due
+Automation
+- [ ] Auto-create lead from inbound (contact form → internal lead) + event
+- [ ] Auto-create follow-up tasks on new lead (call, email, meeting)
 
-### Auth
-- Auth.js / NextAuth (Google provider)
+### 3) Client / Accounts
+Pages
+- [ ] `/internal/clients`
+- [ ] `/internal/clients/[id]`
+Features
+- [ ] Client profile: company, contacts, timezone, billing info
+- [ ] Contact list: roles (CEO/PO/Finance), preferred channel
+- [ ] Communication history (email + meetings)
 
-### Email
-- Use existing email path (project already has nodemailer + resend dependency)
-- Pick one for MVP:
-	- Resend (recommended if the free plan fits), or
-	- Nodemailer via Zoho SMTP (already used by the website contact route)
+### 4) Proposal / Quote / SOW
+Pages
+- [ ] `/internal/proposals`
+- [ ] `/internal/proposals/[id]`
+- [ ] `/internal/templates` (proposal/SOW/email)
+Features
+- [ ] Proposal lifecycle: draft → sent → revised → accepted/declined
+- [ ] Cost models: fixed / T&M / retainer
+- [ ] Items: milestone, rate, hours, discounts
+- [ ] Admin approval step before sending
+- [ ] PDF export + send email
+- [ ] Attach NDA/SOW (upload)
 
-### Optional integrations (later)
-- Trello or Notion for workspace creation (free plans; implement after core portal works)
-- HubSpot free CRM sync (optional, but API constraints may apply)
+### 5) Projects (Delivery hub)
+Pages
+- [x] `/internal/projects`
+- [x] `/internal/projects/[id]`
+Add
+- [ ] `/internal/projects/[id]/timeline`
+- [ ] `/internal/projects/[id]/files`
+- [ ] `/internal/projects/[id]/risks`
+- [ ] `/internal/projects/[id]/billing`
+- [ ] `/internal/projects/[id]/comm`
+Features
+- [ ] Project profile: repo links, env URLs, slack channel, meeting link
+- [ ] Milestones + deliverables
+- [ ] Risks/issues log + owner + due
+- [ ] Decision log
+- [ ] Acceptance criteria checklist
+- [ ] Closeout checklist (handover, docs, credentials, warranty)
 
-### Optional AI (later, BYO-key)
-- Requirement clarification: turn lead notes → user stories + acceptance criteria
-- Weekly update drafting: summarize timeline + blockers
+### 6) Workflow Engine (Process Definitions + Instances)
+Pages
+- [x] `/internal/admin/process` (read-only)
+Add
+- [ ] `/internal/admin/process/builder`
+- [ ] `/internal/admin/process/[key]/versions`
+- [ ] `/internal/projects/[id]/process` (instance detail)
+Must
+- [ ] CRUD definitions: key, version, activate, rollback
+- [ ] Step meta: role, default due days, required fields, checklist
+- [ ] Task generation rules: role-based assignment + due offsets
+- [ ] Instance actions: start/pause/cancel/complete
+- [ ] Step gating: cannot advance until required tasks done
+Advanced
+- [ ] Branching steps (if/else)
+- [ ] Parallel steps (multi-active)
+- [ ] Dependencies (task A blocks B)
+- [ ] Approval step type (approve/reject)
+- [ ] SLA policy per step + breach events
+- [ ] Rollback/reopen step
+
+### 7) Tasks (work mgmt)
+Pages
+- [x] `/internal/tasks` (My Tasks)
+Add
+- [ ] `/internal/tasks/all`
+- [ ] `/internal/tasks/[id]`
+- [ ] `/internal/team` workload
+Features
+- [ ] Comments + mentions
+- [ ] Attachments
+- [ ] Subtasks/checklists
+- [ ] Labels: bug/feature/chore
+- [ ] Estimate + time tracking
+- [ ] Dependencies + blocker reason
+- [ ] Bulk ops: assign/status/due
+Automation
+- [ ] Reminders: due soon, overdue
+- [ ] Auto-escalate blocked tasks to PM/admin
+
+### 8) QA / Bugs / Release
+Pages
+- [ ] `/internal/qa/queue`
+- [ ] `/internal/projects/[id]/qa`
+- [ ] `/internal/bugs`
+Features
+- [ ] Bug tracker: severity, env, steps, screenshots
+- [ ] Test plan templates + test runs
+- [ ] Release checklist + signoff
+- [ ] QA gate: cannot deploy until QA signoff
+
+### 9) Billing / Invoices / Payments
+Pages
+- [ ] `/internal/invoices`
+- [ ] `/internal/invoices/[id]`
+- [ ] `/internal/projects/[id]/billing`
+Features
+- [ ] Invoice draft from milestones or time logs
+- [ ] Status: unpaid/partial/paid
+- [ ] Reminders schedule
+- [ ] Revenue dashboard
+
+### 10) Communication (Email + Meetings)
+Pages
+- [ ] `/internal/projects/[id]/comm`
+- [ ] `/internal/meetings`
+Features
+- [ ] Email templates: follow-up, proposal, kickoff, weekly status, delivery
+- [ ] Email log per lead/project (sent)
+- [ ] Meeting notes + action items → tasks
+
+### 11) Integrations + Webhooks
+Pages
+- [ ] `/internal/admin/integrations`
+Features
+- [ ] Outbound webhooks: lead.created, lead.converted, task.updated, instance.started
+- [ ] Slack notify (channel per project)
+- [ ] GitHub link: repo URL, release notes, deploy log
+- [ ] Zapier/Make support (signed payload)
+
+### 12) Reporting (Ops)
+Pages
+- [ ] `/internal/reports/funnel`
+- [ ] `/internal/reports/cycle-time`
+- [ ] `/internal/reports/sla`
+- [ ] `/internal/reports/team`
+Metrics
+- [ ] Lead funnel + conversion rate
+- [ ] Cycle time per step
+- [ ] Task aging + WIP
+- [ ] SLA breaches + reasons
+
+### 13) Admin (Users + Security)
+Pages
+- [ ] `/internal/admin/users`
+- [ ] `/internal/admin/audit`
+- [ ] `/internal/admin/settings`
+Features
+- [ ] Add/update role, deactivate
+- [ ] Allowed emails/domains UI (optional DB override)
+- [ ] Audit search (actor/action/target/date)
 
 ---
 
-## 5) Process model (BPMN mapping)
+## Flows (exact system behavior)
 
-### BPMN “TO-BE” flow (source of truth)
-1. Start: Client submits request
-2. Automated: Record request (Lead created)
-3. User task: PM reviews request
-4. Gateway: Approved? (Approve / Reject)
-5. Automated: Create project workspace (optional integration)
-6. User/rule: Assign developer(s)
-7. Optional AI task: Requirements clarification
-8. Subprocess: Design → Dev → Test → Review → QA
-9. Automated: Weekly status email
-10. User task: Final review + deployment
-11. Automated: Delivery package + summary
-12. User task: Client feedback collection
-13. End: Close project / instance
+### Flow A: Lead intake → qualification
+1) Create lead (manual/import/inbound)
+2) Assign PM owner
+3) Auto tasks: `schedule_call`, `send_intro`, `collect_requirements`
+4) PM marks lead `in_review` + notes
+5) Approve/reject → event + audit
 
-### Implementation mapping idea
-- “Process definition” = versioned JSON model (MVP)
-- “Instance” = a row with current stage + timestamps
-- “Tasks” = rows generated per instance
-- “Events” = append-only log table
+### Flow B: Proposal → acceptance
+1) Create proposal from lead (template)
+2) Admin approval required
+3) Send proposal PDF/email
+4) Track status: sent/revised/accepted/declined
 
----
+### Flow C: Convert → project + process instance (already exists, extend)
+1) Convert lead to project (requires approved)
+2) Start process instance from active definition
+3) Create tasks from steps; assign by role rules
+4) Current step derived from first incomplete task
 
-## 6) Data model (initial draft)
+### Flow D: Task updates → instance step → project status (already exists, extend)
+1) Task status change logs event
+2) Recompute instance current step
+3) Derive project status
+4) Trigger notifications + SLA checks
 
-MVP tables (names can change during implementation):
-- users (id, name, email, role, createdAt)
-- leads (id, name, email, company, message, source, status, createdAt)
-- projects (id, leadId, name, ownerUserId, status, priority, startAt, dueAt)
-- process_definitions (id, key, version, json, isActive, createdAt)
-- process_instances (id, processDefinitionId, projectId, status, currentStepKey, startedAt, endedAt)
-- tasks (id, instanceId, key, title, status, assignedToUserId, dueAt, completedAt)
-- events (id, instanceId, projectId, type, actorUserId, payloadJson, createdAt)
-
-Notes:
-- Keep event payload flexible (JSON) so logs are future-proof.
-- Keep “status” enums limited and consistent across UI.
+### Flow E: Delivery → invoice → close
+1) Delivery tasks done → “delivery package” step complete
+2) Auto invoice draft
+3) Payment recorded
+4) Close checklist done → project closed
 
 ---
 
-## 7) Statuses + colors (UI standard)
-
-Define a small, consistent set for MVP:
-- NEW (gray)
-- IN_REVIEW (blue)
-- APPROVED (green)
-- REJECTED (red)
-- IN_PROGRESS (blue)
-- BLOCKED (yellow)
-- IN_QA (purple)
-- DELIVERED (green)
-- CLOSED (gray)
-
-Implementation note: centralize status → label → color mapping in one utility so every UI uses the same colors.
+## Automation Engine (rules)
+- [ ] Rule model: `WHEN event.type IF condition THEN actions[]`
+- [ ] Actions: create task, assign, set due, send email, webhook, slack
+- [ ] Idempotency + retries + dead-letter table
 
 ---
 
-## 8) Pages / routes (MVP)
-
-Internal routes (suggestion):
-- /internal/login
-- /internal (dashboard)
-- /internal/tasks (my tasks)
-- /internal/leads (list + create)
-- /internal/leads/[id]
-- /internal/projects (list)
-- /internal/projects/[id] (project + instance + timeline)
-- /internal/admin/process (process definition versions)
+## Internal APIs (for integrations)
+Add `app/api/internal/*`
+- [ ] `POST /api/internal/leads/import`
+- [ ] `POST /api/internal/webhooks/*` (inbound)
+- [ ] `POST /api/internal/process/activate`
+- [ ] `POST /api/internal/invoices/send`
 
 ---
 
-## 9) Pre-work checklist (do this before coding features)
-
-### Local dev
-- Install deps: npm install
-- Run: npm run dev
-
-### Turso
-- Create DB: turso db create megicode-internal
-- Create token + URL for libSQL
-
-### Environment variables (draft)
-- NEXT_PUBLIC_SITE_URL
-- AUTH_SECRET (or NEXTAUTH_SECRET depending on auth library choice)
-- GOOGLE_CLIENT_ID
-- GOOGLE_CLIENT_SECRET
-- TURSO_DATABASE_URL
-- TURSO_AUTH_TOKEN
-- EMAIL_PROVIDER (resend|zoho)
-- RESEND_API_KEY (if using Resend)
-- ZOHO_USER, ZOHO_PASS (if using Zoho SMTP)
-
-### Decisions to confirm
-- Email provider for MVP: Resend vs Zoho SMTP
-- Workspace integration target: Trello vs Notion (pick one later)
+## DB Additions (next)
+Must next
+- [ ] `task_comments`, `lead_notes`, `attachments`
+- [ ] `clients`, `client_contacts`
+Soon
+- [ ] `proposals`, `proposal_versions`, `proposal_items`
+- [ ] `invoices`, `payments`
+Advanced
+- [ ] `approvals`, `sla_policies`, `instance_fields`
+- [ ] `bugs`, `test_runs`, `signoffs`
+- [ ] `integrations`, `webhook_deliveries`
 
 ---
 
-## 10) Implementation plan (milestones)
-
-### Milestone 0 — Foundation (1–2 days)
-- Add DB + migrations (Turso + Drizzle)
-- Add Google auth + roles
-- Create minimal internal layout with theme support
-
-### Milestone 1 — Core entities (2–4 days)
-- Leads CRUD (create/list/view)
-- Convert Lead → Project
-- Create default process definition (v1)
-
-### Milestone 2 — Workflow execution (3–6 days)
-- Create process instance on project creation
-- Generate tasks from definition
-- Task assignment + handoff
-- Status transitions with event logging
-
-### Milestone 3 — Monitoring + logs (2–4 days)
-- Instance monitoring list
-- Timeline/event log UI
-- Audit actions (role changes, definition changes)
-
-### Milestone 4 — Email automation (1–3 days)
-- Confirmation email
-- Weekly status email (manual trigger first)
-- Delivery email
-
-### Milestone 5 — “Nice later” (backlog)
-- Trello/Notion auto-board creation
-- AI requirement clarification (BYO-key)
-- BPMN diagram rendering (bpmn-js) inside admin page
-- Scheduling/cron for weekly emails (only after MVP is stable)
-
----
-
-## 11) Acceptance criteria (MVP)
-
-- A founder can log in with Google.
-- A lead can be created (from contact submission or manually).
-- A project can be created from a lead.
-- A process instance is created automatically and generates tasks.
-- Tasks can be assigned/reassigned; the portal shows “My Tasks”.
-- Every transition writes an immutable event log.
-- Monitoring pages show instance status clearly with colors.
-- Email sending works for at least confirmation + delivery.
+## Build Order (fast value)
+1) Comments/notes + attachments
+2) Lead pipeline + owner + dedupe
+3) Process builder (CRUD + activate)
+4) Task detail + reminders + deps
+5) Proposal + approvals + PDF
+6) Billing
+7) Reports
+8) Integrations
 
 
 

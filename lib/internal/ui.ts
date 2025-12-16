@@ -24,6 +24,13 @@ export function taskStatusColor(status: string): BadgeColor {
   return 'gray' as const;
 }
 
+export function instanceStatusColor(status: string): BadgeColor {
+  if (status === 'completed') return 'green' as const;
+  if (status === 'canceled') return 'red' as const;
+  if (status === 'running') return 'blue' as const;
+  return 'gray' as const;
+}
+
 export function formatDateTime(value?: Date | number | null) {
   if (!value) return '';
   const date = typeof value === 'number' ? new Date(value) : value;
