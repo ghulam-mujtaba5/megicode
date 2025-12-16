@@ -4,8 +4,9 @@ import { desc, eq, inArray, sql } from 'drizzle-orm';
 import s from '../styles.module.css';
 import { requireInternalSession } from '@/lib/internal/auth';
 import { getDb } from '@/lib/db';
-import { tasks, processInstances, projects } from '@/lib/db/schema';
+import { tasks, processInstances, projects, users } from '@/lib/db/schema';
 import { taskStatusColor, type BadgeColor, formatDateTime } from '@/lib/internal/ui';
+import { TasksView } from '@/components/TasksView';
 
 // Icons
 const Icons = {
@@ -77,8 +78,16 @@ export default async function MyTasksPage() {
     ? await db.select().from(projects).where(inArray(projects.id, projectIds)).all()
     : [];
 
+  const userRows = await db.select().from(users).where(eq(users.id, userId)).all();
+  const currentUser = userRows[0];
+
   const instancesById = new Map(instances.map((i) => [i.id, i] as const));
-  const projectsById = new Map(projectRows.map((p) => [p.id, p] as const));
+  const projectsMap = projectRows.reduce((acc, p) => {
+    acc[p.id] = { title: p.name };
+    return acc;
+  }, {} as Record<string, { title: string }>);
+
+  const usersMap = currentUser ? { [currentUser.id]: currentUser } : {};
 
   return (
     <main className={s.page}>
@@ -129,84 +138,8 @@ export default async function MyTasksPage() {
       {/* Tasks List */}
       <div className={s.dashboardGrid} style={{ gridTemplateColumns: '1fr' }}>
         <section className={s.card}>
-          <div className={s.cardHeader}>
-            <div className={s.cardHeaderLeft}>
-              <div className={s.cardIcon}>{Icons.tasks}</div>
-              <h2 className={s.cardTitle}>All Tasks</h2>
-              <span className={s.badge}>{taskStats.total}</span>
-            </div>
-          </div>
           <div className={s.cardBody}>
-            {myTasks.length > 0 ? (
-              <div className={s.tableContainer}>
-                <table className={s.table}>
-                  <thead>
-                    <tr>
-                      <th>Task</th>
-                      <th>Status</th>
-                      <th>Priority</th>
-                      <th>Project</th>
-                      <th>Updated</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {myTasks.map((t) => {
-                      const instance = instancesById.get(t.instanceId);
-                      const project = instance ? projectsById.get(instance.projectId) : null;
-                      return (
-                        <tr key={t.id}>
-                          <td>
-                            <div className={s.leadContent}>
-                              <span className={s.leadName}>{t.title}</span>
-                              <span className={s.leadCompany}>{t.key}</span>
-                            </div>
-                          </td>
-                          <td>
-                            <span className={getBadgeClass(taskStatusColor(t.status))}>
-                              {t.status.replace('_', ' ')}
-                            </span>
-                          </td>
-                          <td>
-                            {t.priority && (
-                              <span className={`${s.badgeOutline} ${
-                                t.priority === 'critical' ? s.badgeDanger :
-                                t.priority === 'high' ? s.badgeWarning :
-                                t.priority === 'medium' ? s.badgePrimary :
-                                s.badgeDefault
-                              }`}>
-                                {t.priority}
-                              </span>
-                            )}
-                          </td>
-                          <td>
-                            {project ? (
-                              <Link href={`/internal/projects/${project.id}`} className={s.textPrimary}>
-                                {project.name}
-                              </Link>
-                            ) : (
-                              <span className={s.textMuted}>—</span>
-                            )}
-                          </td>
-                          <td className={s.textMuted}>{formatDateTime(t.updatedAt)}</td>
-                          <td>
-                            <Link href={`/internal/tasks/${t.id}`} className={s.tableAction}>
-                              Open {Icons.arrowRight}
-                            </Link>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
-            ) : (
-              <div className={s.emptyState}>
-                <div className={s.emptyStateIcon}>{Icons.tasks}</div>
-                <p className={s.emptyStateText}>No tasks assigned</p>
-                <p className={s.textMuted}>Tasks will appear here when assigned to you</p>
-              </div>
-            )}
+            <TasksView tasks={myTasks} projects={projectsMap} users={usersMap} />
           </div>
         </section>
       </div>

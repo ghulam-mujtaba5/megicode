@@ -1,9 +1,10 @@
 import { fetchPostById } from '../fetchPostById';
+import { NextRequest } from 'next/server';
 
 export async function GET(
-  request: Request,
-  { params }: { params: { id: string } }
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const { id } = await Promise.resolve(params);
+  const { id } = await params;
   return fetchPostById(id);
 }

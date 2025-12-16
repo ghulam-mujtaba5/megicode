@@ -2,42 +2,35 @@ import { eq, and, desc } from 'drizzle-orm';
 
 import { getDb } from '@/lib/db';
 import { processDefinitions, type UserRole } from '@/lib/db/schema';
+import type { ProcessDefinitionJson } from '@/lib/types/json-types';
 
 export type ProcessStep = {
   key: string;
   title: string;
-  recommendedRole?: UserRole;
+  type: 'task' | 'approval' | 'notification';
+  assigneeRole?: string;
+  next?: string;
 };
 
-export type ProcessDefinitionJson = {
-  key: string;
-  version: number;
-  name: string;
-  steps: ProcessStep[];
-};
-
-const DEFAULT_PROCESS_KEY = 'megicode_delivery';
+export const DEFAULT_PROCESS_KEY = 'megicode_delivery';
 
 export function getDefaultProcessJson(): ProcessDefinitionJson {
   return {
-    key: DEFAULT_PROCESS_KEY,
-    version: 1,
-    name: 'Megicode Delivery Process',
     steps: [
-      { key: 'client_request', title: 'Client Request', recommendedRole: 'pm' },
-      { key: 'pm_review', title: 'PM Review', recommendedRole: 'pm' },
-      { key: 'approval', title: 'Approval', recommendedRole: 'admin' },
-      { key: 'assign_team', title: 'Assign Team', recommendedRole: 'pm' },
+      { key: 'client_request', title: 'Client Request', type: 'task', assigneeRole: 'pm' },
+      { key: 'pm_review', title: 'PM Review', type: 'task', assigneeRole: 'pm' },
+      { key: 'approval', title: 'Approval', type: 'approval', assigneeRole: 'admin' },
+      { key: 'assign_team', title: 'Assign Team', type: 'task', assigneeRole: 'pm' },
       { key: 'requirements', title: 'Requirements', recommendedRole: 'pm' },
       { key: 'design', title: 'Design', recommendedRole: 'dev' },
       { key: 'development', title: 'Development', recommendedRole: 'dev' },
       { key: 'testing', title: 'Testing', recommendedRole: 'qa' },
       { key: 'review', title: 'Review', recommendedRole: 'pm' },
       { key: 'qa', title: 'QA', recommendedRole: 'qa' },
-      { key: 'deployment', title: 'Deployment', recommendedRole: 'dev' },
-      { key: 'delivery', title: 'Delivery Package', recommendedRole: 'pm' },
-      { key: 'feedback', title: 'Client Feedback', recommendedRole: 'pm' },
-      { key: 'close', title: 'Close', recommendedRole: 'admin' },
+      { key: 'deployment', title: 'Deployment', type: 'task', assigneeRole: 'dev' },
+      { key: 'delivery', title: 'Delivery Package', type: 'task', assigneeRole: 'pm' },
+      { key: 'feedback', title: 'Client Feedback', type: 'task', assigneeRole: 'pm' },
+      { key: 'close', title: 'Close', type: 'task', assigneeRole: 'admin' },
     ],
   };
 }
@@ -55,7 +48,9 @@ export async function ensureActiveDefaultProcessDefinition() {
   if (active) {
     return {
       id: active.id,
-      json: JSON.parse(active.json) as ProcessDefinitionJson,
+      key: active.key,
+      version: active.version,
+      json: active.json,
     };
   }
 
@@ -65,12 +60,12 @@ export async function ensureActiveDefaultProcessDefinition() {
   const id = crypto.randomUUID();
   await db.insert(processDefinitions).values({
     id,
-    key: json.key,
-    version: json.version,
+    key: DEFAULT_PROCESS_KEY,
+    version: 1,
     isActive: true,
-    json: JSON.stringify(json),
+    json: json,
     createdAt: now,
   });
 
-  return { id, json };
+  return { id, key: DEFAULT_PROCESS_KEY, version: 1, json };
 }

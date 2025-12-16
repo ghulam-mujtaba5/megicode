@@ -7,6 +7,11 @@ import { requireRole } from '@/lib/internal/auth';
 import { getDb } from '@/lib/db';
 import { clients, clientContacts, projects, proposals, invoices, meetings, events } from '@/lib/db/schema';
 import { formatDateTime } from '@/lib/internal/ui';
+import {
+  safeValidateFormData,
+  createClientContactFormSchema,
+  updateClientFormSchema,
+} from '@/lib/validations';
 
 // Icons
 const Icons = {
@@ -55,7 +60,7 @@ const Icons = {
 };
 
 export default async function ClientDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const session = await requireRole(['admin', 'pm']);
+  await requireRole(['admin', 'pm']);
   const { id } = await params;
   const db = getDb();
 
@@ -73,14 +78,9 @@ export default async function ClientDetailPage({ params }: { params: Promise<{ i
     await requireRole(['admin', 'pm']);
     const db = getDb();
 
-    const clientId = String(formData.get('clientId') ?? '').trim();
-    const name = String(formData.get('name') ?? '').trim();
-    const email = String(formData.get('email') ?? '').trim() || null;
-    const phone = String(formData.get('phone') ?? '').trim() || null;
-    const role = String(formData.get('role') ?? '').trim() || null;
-    const isPrimary = formData.get('isPrimary') === 'on';
-
-    if (!name || !clientId) return;
+    const result = safeValidateFormData(createClientContactFormSchema, formData);
+    if (!result.success) return;
+    const { clientId, name, email, phone, role, isPrimary } = result.data;
 
     await db.insert(clientContacts).values({
       id: crypto.randomUUID(),
@@ -101,11 +101,9 @@ export default async function ClientDetailPage({ params }: { params: Promise<{ i
     const session = await requireRole(['admin', 'pm']);
     const db = getDb();
 
-    const id = String(formData.get('id') ?? '').trim();
-    const status = String(formData.get('status') ?? '').trim() as 'active' | 'inactive' | 'churned';
-    const notes = String(formData.get('notes') ?? '').trim() || null;
-
-    if (!id) return;
+    const result = safeValidateFormData(updateClientFormSchema, formData);
+    if (!result.success) return;
+    const { id, status, notes } = result.data;
 
     const now = new Date();
     await db.update(clients).set({ status, notes, updatedAt: now }).where(eq(clients.id, id));
@@ -114,7 +112,7 @@ export default async function ClientDetailPage({ params }: { params: Promise<{ i
       id: crypto.randomUUID(),
       type: 'client.updated',
       actorUserId: session.user.id ?? null,
-      payloadJson: JSON.stringify({ clientId: id, status }),
+      payloadJson: { clientId: id, status },
       createdAt: now,
     });
 

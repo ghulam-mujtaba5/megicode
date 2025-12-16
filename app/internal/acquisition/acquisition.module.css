@@ -1,0 +1,370 @@
+/**
+ * Acquisition Page Styles
+ * 
+ * Styles for the client acquisition & onboarding workflow visualization
+ */
+
+/* Pipeline Container */
+.pipelineContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--int-space-4);
+}
+
+/* Toolbar */
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--int-space-2) 0;
+}
+
+.viewToggle {
+  display: flex;
+  gap: var(--int-space-1);
+  background: var(--int-bg-secondary);
+  border-radius: var(--int-radius-md);
+  padding: var(--int-space-1);
+}
+
+.viewBtn {
+  display: flex;
+  align-items: center;
+  gap: var(--int-space-2);
+  padding: var(--int-space-2) var(--int-space-3);
+  border: none;
+  background: transparent;
+  color: var(--int-text-muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: var(--int-radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.viewBtn:hover {
+  color: var(--int-text);
+  background: var(--int-bg-tertiary);
+}
+
+.viewBtn.active {
+  color: var(--int-primary);
+  background: var(--int-bg);
+  box-shadow: var(--int-shadow-sm);
+}
+
+.viewBtn .icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Pipeline Grid */
+.pipelineGrid {
+  display: flex;
+  gap: var(--int-space-4);
+  overflow-x: auto;
+  padding: var(--int-space-2);
+  margin: calc(-1 * var(--int-space-2));
+}
+
+/* Stage Column */
+.stageColumn {
+  flex: 0 0 200px;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--int-space-3);
+  position: relative;
+}
+
+.stageColumn.selected .stageHeader {
+  box-shadow: 0 0 0 2px var(--stage-color);
+}
+
+/* Stage Header */
+.stageHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--int-space-3);
+  padding: var(--int-space-3);
+  border-radius: var(--int-radius-lg);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.stageHeader:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--int-shadow-md);
+}
+
+.stageIcon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stageIcon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.stageInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.stageTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stageMeta {
+  display: flex;
+  gap: var(--int-space-2);
+  margin-top: var(--int-space-1);
+  font-size: 0.75rem;
+  color: var(--int-text-muted);
+}
+
+.stageCount {
+  font-weight: 500;
+}
+
+.stageValue {
+  color: var(--int-success);
+  font-weight: 600;
+}
+
+/* Stage Items */
+.stageItems {
+  display: flex;
+  flex-direction: column;
+  gap: var(--int-space-2);
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.emptyStage {
+  padding: var(--int-space-6);
+  text-align: center;
+  color: var(--int-text-muted);
+  font-size: 0.875rem;
+  background: var(--int-bg-secondary);
+  border-radius: var(--int-radius-md);
+  border: 1px dashed var(--int-border);
+}
+
+/* Pipeline Card */
+.pipelineCard {
+  display: block;
+  padding: var(--int-space-3);
+  background: var(--int-bg);
+  border-radius: var(--int-radius-md);
+  border: 1px solid var(--int-border);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+}
+
+.pipelineCard:hover {
+  border-color: var(--int-primary);
+  box-shadow: var(--int-shadow-sm);
+  transform: translateX(4px);
+}
+
+.cardHeader {
+  margin-bottom: var(--int-space-2);
+}
+
+.cardTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--int-text);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  gap: var(--int-space-1);
+  font-size: 0.75rem;
+  color: var(--int-text-muted);
+  margin-top: var(--int-space-1);
+}
+
+.cardMeta .icon {
+  width: 12px;
+  height: 12px;
+  opacity: 0.7;
+}
+
+.showMore {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--int-space-1);
+  padding: var(--int-space-2);
+  font-size: 0.75rem;
+  color: var(--int-primary);
+  text-decoration: none;
+  border-radius: var(--int-radius-sm);
+  background: var(--int-bg-secondary);
+  transition: all 0.2s ease;
+}
+
+.showMore:hover {
+  background: var(--int-bg-tertiary);
+}
+
+.showMore .icon {
+  width: 12px;
+  height: 12px;
+}
+
+/* Stage Arrow */
+.stageArrow {
+  position: absolute;
+  right: -20px;
+  top: 30px;
+  width: 16px;
+  height: 16px;
+  color: var(--int-text-muted);
+  opacity: 0.5;
+  z-index: 1;
+}
+
+.stageArrow .icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Funnel View */
+.funnelView {
+  display: flex;
+  flex-direction: column;
+  gap: var(--int-space-4);
+  padding: var(--int-space-4) 0;
+}
+
+.funnelStage {
+  display: flex;
+  align-items: center;
+  gap: var(--int-space-4);
+}
+
+.funnelLabel {
+  width: 140px;
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.funnelTitle {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--int-text);
+}
+
+.funnelRate {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--int-text-muted);
+  margin-top: 2px;
+}
+
+.funnelBar {
+  flex: 1;
+  height: 40px;
+  border-radius: var(--int-radius-md);
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--int-space-3);
+  transition: all 0.3s ease;
+}
+
+.funnelCount {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--int-text);
+}
+
+.funnelValue {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--int-success);
+}
+
+/* Lanes Legend */
+.lanesLegend {
+  margin-top: var(--int-space-4);
+  padding-top: var(--int-space-4);
+  border-top: 1px solid var(--int-border);
+}
+
+.lanesLegend h4 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--int-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 var(--int-space-2) 0;
+}
+
+.lanesList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--int-space-2);
+}
+
+.laneTag {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--int-space-1) var(--int-space-2);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--int-text-muted);
+  background: var(--int-bg-secondary);
+  border-radius: var(--int-radius-sm);
+  border: 1px solid var(--int-border);
+}
+
+/* Icon Helper */
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .pipelineGrid {
+    flex-direction: column;
+  }
+
+  .stageColumn {
+    flex: 0 0 auto;
+    min-width: 100%;
+  }
+
+  .stageArrow {
+    display: none;
+  }
+
+  .funnelLabel {
+    width: 100px;
+  }
+}

@@ -122,6 +122,30 @@
   color: #4573df;
 }
 
+.internalPortalLink {
+  display: flex;
+  align-items: center;
+  opacity: 0.7;
+  transition: opacity 0.3s ease, transform 0.2s ease;
+}
+
+.internalPortalLink:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.internalPortalLink {
+  display: flex;
+  align-items: center;
+  opacity: 0.7;
+  transition: opacity 0.3s ease, transform 0.2s ease;
+}
+
+.internalPortalLink:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
 .ctaButton {
   background-color: #4573df;
   color: #ffffff;

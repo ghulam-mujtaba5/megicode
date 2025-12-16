@@ -93,6 +93,7 @@ export const authOptions: NextAuthOptions = {
           set: {
             name: user.name ?? null,
             image: user.image ?? null,
+            role,
             updatedAt: now,
           },
         });
@@ -109,6 +110,8 @@ export const authOptions: NextAuthOptions = {
       if (row) {
         token.uid = row.id;
         token.role = row.role;
+        // @ts-ignore
+        token.status = row.status;
       }
 
       return token;
@@ -117,6 +120,8 @@ export const authOptions: NextAuthOptions = {
       if (session.user) {
         session.user.id = typeof token.uid === 'string' ? token.uid : undefined;
         session.user.role = typeof token.role === 'string' ? (token.role as UserRole) : 'viewer';
+        // @ts-ignore
+        session.user.status = typeof token.status === 'string' ? token.status : 'pending';
       }
       return session;
     },

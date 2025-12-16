@@ -1,29 +1,81 @@
-# dependencies
+# Dependencies
 node_modules/
+.pnpm-store/
+
+# Build outputs
 .next/
 out/
 build/
+dist/
 coverage/
 
-# production
+# Environment files
+.env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+.env*.local
 
-# misc
-.DS_Store
-*.log*
+# Logs
+*.log
+*.log.*
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.swp
+*.swo
+*~
 
 # IDE files
 .idea/
 .vscode/
 *.code-workspace
+*.sublime-project
+*.sublime-workspace
 
 # Next.js specific
 *.pnp.*
-.next
 .cache
-.next.js
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Testing
+coverage/
+.nyc_output/
+
+# Debug
+*.pid
+*.seed
+*.pid.lock
+
+# Optional npm cache
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional stylelint cache
+.stylelintcache
+
+# Turbo
+.turbo
+
+# PWA
+**/public/sw.js
+**/public/workbox-*.js
+**/public/swe-worker-*.js

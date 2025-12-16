@@ -1,0 +1,99 @@
+.editor {
+  border: 1px solid var(--border-color, #e5e7eb);
+  border-radius: 8px;
+  background: var(--bg-surface, #fff);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.editor:focus-within {
+  border-color: var(--primary, #3b82f6);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 8px;
+  border-bottom: 1px solid var(--border-color, #e5e7eb);
+  background: var(--bg-surface-alt, #f9fafb);
+}
+
+.toolbarButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text-secondary, #6b7280);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.toolbarButton:hover {
+  background: var(--bg-surface-hover, #e5e7eb);
+  color: var(--text-primary, #111827);
+}
+
+.toolbarButton.active {
+  background: var(--primary-light, #eff6ff);
+  color: var(--primary, #3b82f6);
+  border-color: rgba(59, 130, 246, 0.2);
+}
+
+.content {
+  padding: 12px;
+  min-height: 150px;
+  cursor: text;
+}
+
+.content :global(.ProseMirror) {
+  outline: none;
+  min-height: 150px;
+}
+
+.content :global(.ProseMirror p.is-editor-empty:first-child::before) {
+  color: var(--text-muted, #9ca3af);
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Typography inside editor */
+.content :global(.ProseMirror h1) { font-size: 1.5em; font-weight: 700; margin: 0.5em 0; }
+.content :global(.ProseMirror h2) { font-size: 1.25em; font-weight: 600; margin: 0.5em 0; }
+.content :global(.ProseMirror h3) { font-size: 1.1em; font-weight: 600; margin: 0.5em 0; }
+.content :global(.ProseMirror ul), 
+.content :global(.ProseMirror ol) { padding-left: 1.5em; margin: 0.5em 0; }
+.content :global(.ProseMirror blockquote) { 
+  border-left: 3px solid var(--border-color, #e5e7eb); 
+  padding-left: 1em; 
+  margin: 0.5em 0;
+  color: var(--text-secondary, #6b7280);
+}
+.content :global(.ProseMirror code) {
+  background: var(--bg-surface-alt, #f3f4f6);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+.content :global(.ProseMirror pre) {
+  background: #1f2937;
+  color: #f9fafb;
+  padding: 0.75em 1em;
+  border-radius: 6px;
+  font-family: monospace;
+  margin: 0.5em 0;
+}
+.content :global(.ProseMirror pre code) {
+  background: none;
+  color: inherit;
+  padding: 0;
+}

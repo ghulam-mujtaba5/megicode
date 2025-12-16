@@ -1,0 +1,2 @@
+ALTER TABLE `process_suggestions` ALTER COLUMN "submitted_by_user_id" TO "submitted_by_user_id" text REFERENCES users(id) ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE `process_suggestions` ALTER COLUMN "reviewed_by_user_id" TO "reviewed_by_user_id" text REFERENCES users(id) ON DELETE no action ON UPDATE no action;

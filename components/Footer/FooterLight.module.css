@@ -6,3 +6,12 @@
 .footer {
     color: #000;
 }
+
+.internalPortalLink {
+    color: #4573df;
+}
+
+.internalPortalLink:hover {
+    color: #2d4fa2;
+    opacity: 1;
+}

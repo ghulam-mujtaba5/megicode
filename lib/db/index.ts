@@ -28,4 +28,26 @@ export function getDb() {
   return _db;
 }
 
+/**
+ * Execute multiple database operations in a transaction.
+ * If any operation fails, all changes are rolled back.
+ * 
+ * @example
+ * ```ts
+ * await withTransaction(async (tx) => {
+ *   await tx.update(accounts).set({ balance: sql`${accounts.balance} - 100` }).where(eq(accounts.userId, fromId));
+ *   await tx.update(accounts).set({ balance: sql`${accounts.balance} + 100` }).where(eq(accounts.userId, toId));
+ * });
+ * ```
+ */
+export async function withTransaction<T>(
+  fn: (tx: Parameters<Parameters<ReturnType<typeof getDb>['transaction']>[0]>[0]) => Promise<T>
+): Promise<T> {
+  const db = getDb();
+  return db.transaction(fn);
+}
+
+// Export db as a named export for convenience
+export const db = getDb();
+
 export { schema };

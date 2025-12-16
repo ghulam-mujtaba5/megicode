@@ -1,0 +1,338 @@
+/**
+ * ProcessTimeline Styles
+ * Premium BPMN swimlane visualization
+ */
+
+.timeline {
+  background: var(--int-surface);
+  border-radius: var(--int-radius-lg);
+  border: 1px solid var(--int-border);
+  overflow-x: auto;
+  padding: var(--int-space-4);
+}
+
+.laneContainer {
+  display: flex;
+  flex-direction: column;
+  min-width: 800px;
+}
+
+/* ========== LANE ========== */
+.lane {
+  display: flex;
+  border-bottom: 1px solid var(--int-border);
+}
+
+.lane:last-child {
+  border-bottom: none;
+}
+
+.laneHeader {
+  width: 180px;
+  min-width: 180px;
+  padding: var(--int-space-4);
+  background: linear-gradient(135deg, var(--int-bg-alt) 0%, var(--int-surface) 100%);
+  border-right: 2px solid var(--int-primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--int-space-1);
+}
+
+.laneName {
+  font-size: var(--int-text-sm);
+  font-weight: var(--int-font-semibold);
+  color: var(--int-text);
+}
+
+.laneRole {
+  font-size: var(--int-text-xs);
+  color: var(--int-text-muted);
+  text-transform: capitalize;
+}
+
+.laneBody {
+  flex: 1;
+  padding: var(--int-space-4);
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+}
+
+/* ========== STEPS ROW ========== */
+.stepsRow {
+  display: flex;
+  align-items: center;
+  gap: var(--int-space-2);
+  flex-wrap: nowrap;
+}
+
+.stepWrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--int-space-2);
+}
+
+/* ========== CONNECTOR ========== */
+.connector {
+  width: 40px;
+  height: 2px;
+  background: var(--int-border);
+  position: relative;
+}
+
+.connector.completed {
+  background: var(--int-success);
+}
+
+.connector.current {
+  background: linear-gradient(90deg, var(--int-success) 0%, var(--int-primary) 100%);
+}
+
+.connector::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 4px solid transparent;
+  border-left-color: inherit;
+  background: transparent;
+}
+
+/* ========== STEP ========== */
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--int-space-2);
+  padding: var(--int-space-3);
+  border-radius: var(--int-radius-md);
+  border: 2px solid var(--int-border);
+  background: var(--int-surface);
+  cursor: pointer;
+  transition: all var(--int-transition) var(--int-ease-out);
+  min-width: 100px;
+  max-width: 140px;
+  text-align: center;
+  position: relative;
+}
+
+.step:hover:not(:disabled) {
+  border-color: var(--int-primary);
+  box-shadow: var(--int-shadow-md);
+  transform: translateY(-2px);
+}
+
+.step:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Step type styles */
+.step.start_event,
+.step.end_event {
+  border-radius: 50%;
+  min-width: 60px;
+  max-width: 60px;
+  min-height: 60px;
+  max-height: 60px;
+  padding: var(--int-space-2);
+}
+
+.step.gateway {
+  transform: rotate(0deg);
+  border-radius: var(--int-radius-sm);
+  min-width: 70px;
+  max-width: 70px;
+  min-height: 70px;
+  max-height: 70px;
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+/* Step status styles */
+.step.completed {
+  border-color: var(--int-success);
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.05) 100%);
+}
+
+.step.current {
+  border-color: var(--int-primary);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(99, 102, 241, 0.05) 100%);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+  animation: pulse 2s infinite;
+}
+
+.step.pending {
+  border-color: var(--int-border);
+  background: var(--int-bg-alt);
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(99, 102, 241, 0.1);
+  }
+}
+
+/* ========== STEP ICON ========== */
+.stepIcon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stepIcon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.step.completed .stepIcon {
+  color: var(--int-success);
+}
+
+.step.current .stepIcon {
+  color: var(--int-primary);
+}
+
+.step.pending .stepIcon {
+  color: var(--int-text-muted);
+}
+
+/* ========== STEP LABEL ========== */
+.stepLabel {
+  font-size: var(--int-text-xs);
+  font-weight: var(--int-font-medium);
+  color: var(--int-text);
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.step.start_event .stepLabel,
+.step.end_event .stepLabel,
+.step.gateway .stepLabel {
+  display: none;
+}
+
+/* ========== AUTOMATION BADGE ========== */
+.automationBadge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  font-size: 9px;
+  font-weight: var(--int-font-bold);
+  background: var(--int-warning);
+  color: var(--int-warning-contrast, #000);
+  padding: 2px 6px;
+  border-radius: var(--int-radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ========== COMPACT TIMELINE ========== */
+.compactTimeline {
+  display: flex;
+  align-items: center;
+  gap: var(--int-space-1);
+  padding: var(--int-space-2) 0;
+  overflow-x: auto;
+}
+
+.compactStepWrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--int-space-1);
+  flex-shrink: 0;
+}
+
+.compactConnector {
+  width: 20px;
+  height: 2px;
+  background: var(--int-border);
+}
+
+.compactConnector.completed {
+  background: var(--int-success);
+}
+
+.compactConnector.current {
+  background: var(--int-primary);
+}
+
+.compactStep {
+  display: flex;
+  align-items: center;
+  gap: var(--int-space-2);
+  padding: var(--int-space-1) var(--int-space-2);
+  border-radius: var(--int-radius-full);
+  background: var(--int-bg-alt);
+  border: 1px solid var(--int-border);
+  white-space: nowrap;
+}
+
+.compactStep.completed {
+  background: rgba(34, 197, 94, 0.1);
+  border-color: var(--int-success);
+}
+
+.compactStep.current {
+  background: rgba(99, 102, 241, 0.15);
+  border-color: var(--int-primary);
+}
+
+.compactDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--int-text-muted);
+}
+
+.compactStep.completed .compactDot {
+  background: var(--int-success);
+}
+
+.compactStep.current .compactDot {
+  background: var(--int-primary);
+  animation: pulse 2s infinite;
+}
+
+.compactLabel {
+  font-size: var(--int-text-xs);
+  font-weight: var(--int-font-medium);
+  color: var(--int-text);
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ellipsis {
+  color: var(--int-text-muted);
+  font-size: var(--int-text-sm);
+  padding: 0 var(--int-space-1);
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .laneHeader {
+    width: 120px;
+    min-width: 120px;
+  }
+  
+  .step {
+    min-width: 80px;
+    max-width: 100px;
+    padding: var(--int-space-2);
+  }
+  
+  .stepIcon {
+    width: 20px;
+    height: 20px;
+  }
+}

@@ -8,8 +8,9 @@ import { getDb } from '@/lib/db';
 import { processDefinitions } from '@/lib/db/schema';
 import { formatDateTime } from '@/lib/internal/ui';
 
-type Step = { key: string; title: string; recommendedRole?: string };
-type ProcessJson = { key?: string; name?: string; version: number; steps: Step[] };
+import type { ProcessDefinitionJson, LegacyProcessDefinition } from '@/lib/types/json-types';
+
+type Step = { key: string; title: string; type: 'task' | 'approval' | 'notification'; assigneeRole?: string; next?: string };
 
 export default async function ProcessDefinitionDetailPage({ params }: { params: Promise<{ id: string }> }) {
   await requireRole(['admin']);
@@ -19,7 +20,7 @@ export default async function ProcessDefinitionDetailPage({ params }: { params: 
   const definition = await db.select().from(processDefinitions).where(eq(processDefinitions.id, id)).get();
   if (!definition) notFound();
 
-  const json = (typeof definition.json === 'string' ? JSON.parse(definition.json) : definition.json) as ProcessJson;
+  const json = definition.json as LegacyProcessDefinition;
   const steps = json.steps ?? [];
 
   async function addStep(formData: FormData) {
@@ -37,13 +38,13 @@ export default async function ProcessDefinitionDetailPage({ params }: { params: 
     const def = await db.select().from(processDefinitions).where(eq(processDefinitions.id, id)).get();
     if (!def) return;
 
-    const currentJson = (typeof def.json === 'string' ? JSON.parse(def.json) : def.json) as ProcessJson;
-    const newSteps = [...currentJson.steps, { key, title, recommendedRole }];
-    const newJson = { ...currentJson, steps: newSteps, version: currentJson.version + 1 };
+    const currentJson = def.json as LegacyProcessDefinition;
+    const newSteps = [...currentJson.steps, { key, title, type: 'task' as const, assigneeRole: recommendedRole }];
+    const newJson: LegacyProcessDefinition = { steps: newSteps };
 
     await db.update(processDefinitions).set({ 
-      json: JSON.stringify(newJson), 
-      version: newJson.version 
+      json: newJson,
+      version: (def.version || 0) + 1
     }).where(eq(processDefinitions.id, id));
 
     redirect(`/internal/admin/process/${id}`);
@@ -62,13 +63,13 @@ export default async function ProcessDefinitionDetailPage({ params }: { params: 
     const def = await db.select().from(processDefinitions).where(eq(processDefinitions.id, id)).get();
     if (!def) return;
 
-    const currentJson = (typeof def.json === 'string' ? JSON.parse(def.json) : def.json) as ProcessJson;
+    const currentJson = def.json as LegacyProcessDefinition;
     const newSteps = currentJson.steps.filter(s => s.key !== stepKey);
-    const newJson = { ...currentJson, steps: newSteps, version: currentJson.version + 1 };
+    const newJson: LegacyProcessDefinition = { steps: newSteps };
 
     await db.update(processDefinitions).set({ 
-      json: JSON.stringify(newJson), 
-      version: newJson.version 
+      json: newJson,
+      version: (def.version || 0) + 1
     }).where(eq(processDefinitions.id, id));
 
     redirect(`/internal/admin/process/${id}`);
@@ -88,7 +89,7 @@ export default async function ProcessDefinitionDetailPage({ params }: { params: 
     const def = await db.select().from(processDefinitions).where(eq(processDefinitions.id, id)).get();
     if (!def) return;
 
-    const currentJson = (typeof def.json === 'string' ? JSON.parse(def.json) : def.json) as ProcessJson;
+    const currentJson = def.json as LegacyProcessDefinition;
     const idx = currentJson.steps.findIndex(s => s.key === stepKey);
     if (idx === -1) return;
 
@@ -97,11 +98,11 @@ export default async function ProcessDefinitionDetailPage({ params }: { params: 
 
     const newSteps = [...currentJson.steps];
     [newSteps[idx], newSteps[newIdx]] = [newSteps[newIdx], newSteps[idx]];
-    const newJson = { ...currentJson, steps: newSteps, version: currentJson.version + 1 };
+    const newJson: LegacyProcessDefinition = { steps: newSteps };
 
     await db.update(processDefinitions).set({ 
-      json: JSON.stringify(newJson), 
-      version: newJson.version 
+      json: newJson, 
+      version: (def.version || 0) + 1
     }).where(eq(processDefinitions.id, id));
 
     redirect(`/internal/admin/process/${id}`);
@@ -136,7 +137,7 @@ export default async function ProcessDefinitionDetailPage({ params }: { params: 
   return (
     <main className={commonStyles.page}>
       <div className={commonStyles.row}>
-        <h1>{json.name || definition.key}</h1>
+        <h1>{definition.key}</h1>
         <Link href="/internal/admin/process">Back</Link>
       </div>
 

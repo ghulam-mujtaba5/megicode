@@ -1,12 +1,19 @@
 import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
-import { eq, desc, sql } from 'drizzle-orm';
+import { eq, desc } from 'drizzle-orm';
 
 import styles from '../../styles.module.css';
 import { requireRole } from '@/lib/internal/auth';
 import { getDb } from '@/lib/db';
 import { invoices, invoiceItems, clients, projects, payments, events } from '@/lib/db/schema';
 import { formatDateTime } from '@/lib/internal/ui';
+import {
+  safeValidateFormData,
+  invoiceAddItemFormSchema,
+  recordPaymentFormSchema,
+  invoiceUpdateStatusFormSchema,
+  invoiceSendFormSchema,
+} from '@/lib/validations';
 
 // Icons
 const Icons = {
@@ -55,7 +62,7 @@ const Icons = {
 };
 
 export default async function InvoiceDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const session = await requireRole(['admin', 'pm']);
+  await requireRole(['admin', 'pm']);
   const { id } = await params;
   const db = getDb();
 
@@ -72,12 +79,9 @@ export default async function InvoiceDetailPage({ params }: { params: Promise<{ 
     await requireRole(['admin', 'pm']);
     const db = getDb();
 
-    const invoiceId = String(formData.get('invoiceId') ?? '').trim();
-    const description = String(formData.get('description') ?? '').trim();
-    const quantity = parseInt(String(formData.get('quantity') ?? '1'), 10);
-    const unitPrice = Math.round(parseFloat(String(formData.get('unitPrice') ?? '0')) * 100);
-
-    if (!description || !invoiceId) return;
+    const result = safeValidateFormData(invoiceAddItemFormSchema, formData);
+    if (!result.success) return;
+    const { invoiceId, description, quantity, unitPrice } = result.data;
 
     await db.insert(invoiceItems).values({
       id: crypto.randomUUID(),
@@ -100,13 +104,9 @@ export default async function InvoiceDetailPage({ params }: { params: Promise<{ 
     const session = await requireRole(['admin', 'pm']);
     const db = getDb();
 
-    const invoiceId = String(formData.get('invoiceId') ?? '').trim();
-    const amount = Math.round(parseFloat(String(formData.get('amount') ?? '0')) * 100);
-    const method = String(formData.get('method') ?? '').trim() || null;
-    const reference = String(formData.get('referenceNumber') ?? '').trim() || null;
-    const paidAt = formData.get('paidAt') ? new Date(String(formData.get('paidAt'))) : new Date();
-
-    if (!invoiceId || amount <= 0) return;
+    const result = safeValidateFormData(recordPaymentFormSchema, formData);
+    if (!result.success) return;
+    const { invoiceId, amount, method, referenceNumber: reference, paidAt } = result.data;
 
     const now = new Date();
     await db.insert(payments).values({
@@ -133,7 +133,7 @@ export default async function InvoiceDetailPage({ params }: { params: Promise<{ 
       projectId: inv?.projectId,
       type: 'payment.received',
       actorUserId: session.user.id ?? null,
-      payloadJson: JSON.stringify({ invoiceId, amount }),
+      payloadJson: { invoiceId, amount },
       createdAt: now,
     });
 
@@ -145,12 +145,12 @@ export default async function InvoiceDetailPage({ params }: { params: Promise<{ 
     const session = await requireRole(['admin', 'pm']);
     const db = getDb();
 
-    const id = String(formData.get('id') ?? '').trim();
-    const status = String(formData.get('status') ?? '').trim() as typeof invoice.status;
-    if (!id) return;
+    const result = safeValidateFormData(invoiceUpdateStatusFormSchema, formData);
+    if (!result.success) return;
+    const { id, status } = result.data;
 
     const now = new Date();
-    const updates: Partial<typeof invoice> = { status, updatedAt: now };
+    const updates: Record<string, unknown> = { status, updatedAt: now };
     if (status === 'sent') updates.sentAt = now;
 
     await db.update(invoices).set(updates).where(eq(invoices.id, id));
@@ -160,7 +160,7 @@ export default async function InvoiceDetailPage({ params }: { params: Promise<{ 
       projectId: invoice.projectId,
       type: `invoice.${status}`,
       actorUserId: session.user.id ?? null,
-      payloadJson: JSON.stringify({ invoiceId: id, status }),
+      payloadJson: { invoiceId: id, status },
       createdAt: now,
     });
 
@@ -171,8 +171,10 @@ export default async function InvoiceDetailPage({ params }: { params: Promise<{ 
     'use server';
     const session = await requireRole(['admin', 'pm']);
     const db = getDb();
-    const id = String(formData.get('id') ?? '').trim();
-    if (!id) return;
+
+    const result = safeValidateFormData(invoiceSendFormSchema, formData);
+    if (!result.success) return;
+    const { id } = result.data;
 
     const now = new Date();
     await db.update(invoices).set({ status: 'sent', sentAt: now, updatedAt: now }).where(eq(invoices.id, id));
@@ -182,7 +184,7 @@ export default async function InvoiceDetailPage({ params }: { params: Promise<{ 
       projectId: invoice.projectId,
       type: 'invoice.sent',
       actorUserId: session.user.id ?? null,
-      payloadJson: JSON.stringify({ invoiceId: id, method: 'email_simulation' }),
+      payloadJson: { invoiceId: id, method: 'email_simulation' },
       createdAt: now,
     });
 

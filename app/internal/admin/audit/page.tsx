@@ -28,6 +28,21 @@ export default async function AuditLogPage() {
     .limit(100)
     .all();
 
+  // Helper to safely stringify payload
+  const stringifyPayload = (payload: any) => {
+    if (payload === null || payload === undefined) return '';
+    if (typeof payload === 'string') {
+      try {
+        // If it's a JSON string, parse and re-stringify with formatting
+        const parsed = JSON.parse(payload);
+        return JSON.stringify(parsed);
+      } catch {
+        return payload;
+      }
+    }
+    return JSON.stringify(payload);
+  };
+
   return (
     <main className={s.page}>
       <div className={s.pageHeader}>
@@ -90,7 +105,7 @@ export default async function AuditLogPage() {
                       textOverflow: 'ellipsis', 
                       whiteSpace: 'nowrap' 
                     }}>
-                      {event.payloadJson}
+                      {stringifyPayload(event.payloadJson)}
                     </div>
                   </td>
                 </tr>

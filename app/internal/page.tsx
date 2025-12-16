@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import { desc, eq, sql, and } from 'drizzle-orm';
+import { desc, eq, sql, and, lte, gte, isNotNull } from 'drizzle-orm';
 
-import { requireInternalSession } from '@/lib/internal/auth';
+import { requireActiveUser } from '@/lib/internal/auth';
 import { getDb } from '@/lib/db';
 import { leads, projects, tasks, processInstances, invoices, clients } from '@/lib/db/schema';
 import s from './styles.module.css';
@@ -21,10 +21,11 @@ const Icons = {
   calendar: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>,
   trendUp: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="23,6 13.5,15.5 8.5,10.5 1,18"/><polyline points="17,6 23,6 23,12"/></svg>,
   trendDown: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="23,18 13.5,8.5 8.5,13.5 1,6"/><polyline points="17,18 23,18 23,12"/></svg>,
+  refresh: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>,
 };
 
 export default async function InternalDashboardPage() {
-  const session = await requireInternalSession();
+  const session = await requireActiveUser();
   const db = getDb();
   const userId = session.user.id;
   const userRole = session.user.role ?? 'viewer';
@@ -84,6 +85,23 @@ export default async function InternalDashboardPage() {
   // Projects needing attention
   const attentionProjects = ['admin', 'pm'].includes(userRole)
     ? await db.select().from(projects).where(sql`status in ('blocked', 'in_qa')`).orderBy(desc(projects.updatedAt)).limit(4).all()
+    : [];
+
+  // Renewal reminders - projects with contracts expiring within 30 days
+  const thirtyDaysFromNow = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
+  const upcomingRenewals = ['admin', 'pm'].includes(userRole)
+    ? await db.select()
+        .from(projects)
+        .where(
+          and(
+            isNotNull(projects.contractRenewalAt),
+            lte(projects.contractRenewalAt, thirtyDaysFromNow),
+            gte(projects.contractRenewalAt, now)
+          )
+        )
+        .orderBy(projects.contractRenewalAt)
+        .limit(5)
+        .all()
     : [];
 
   // Calculate completion rate
@@ -418,6 +436,49 @@ export default async function InternalDashboardPage() {
                     ))}
                   </tbody>
                 </table>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Renewal Reminders (PM/Admin) */}
+        {['admin', 'pm'].includes(userRole) && upcomingRenewals.length > 0 && (
+          <section className={s.card}>
+            <div className={s.cardHeader}>
+              <div className={s.cardHeaderLeft}>
+                <div className={`${s.cardIcon} ${s.cardIconWarning}`}>{Icons.refresh}</div>
+                <h2 className={s.cardTitle}>Renewal Reminders</h2>
+                <span className={s.badge}>{upcomingRenewals.length}</span>
+              </div>
+              <Link href="/internal/projects" className={s.cardHeaderLink}>
+                View All {Icons.arrowRight}
+              </Link>
+            </div>
+            <div className={s.cardBody}>
+              <div className={s.leadList}>
+                {upcomingRenewals.map((p) => {
+                  const daysUntil = p.contractRenewalAt 
+                    ? Math.ceil((p.contractRenewalAt.getTime() - now.getTime()) / (1000 * 60 * 60 * 24))
+                    : 0;
+                  const isUrgent = daysUntil <= 7;
+                  
+                  return (
+                    <Link key={p.id} href={`/internal/projects/${p.id}`} className={s.leadItem}>
+                      <div className={s.leadAvatar} style={{ background: isUrgent ? 'var(--int-error)' : 'var(--int-warning)' }}>
+                        {Icons.refresh}
+                      </div>
+                      <div className={s.leadContent}>
+                        <span className={s.leadName}>{p.name}</span>
+                        <span className={s.leadCompany}>
+                          {p.contractRenewalAt?.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                        </span>
+                      </div>
+                      <span className={`${s.badge} ${isUrgent ? s.badgeDanger : s.badgeWarning}`}>
+                        {daysUntil === 0 ? 'Today' : daysUntil === 1 ? 'Tomorrow' : `${daysUntil} days`}
+                      </span>
+                    </Link>
+                  );
+                })}
               </div>
             </div>
           </section>

@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { desc } from 'drizzle-orm';
+import { desc, sql, and, notInArray, inArray } from 'drizzle-orm';
 
 import s from '../styles.module.css';
 import { requireRole } from '@/lib/internal/auth';
 import { getDb } from '@/lib/db';
-import { leads, events } from '@/lib/db/schema';
+import { leads, events, estimations } from '@/lib/db/schema';
 import { leadStatusColor, type BadgeColor, formatDateTime } from '@/lib/internal/ui';
 
 // Icons
@@ -18,6 +18,7 @@ const Icons = {
   phone: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>,
   briefcase: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>,
   message: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>,
+  clipboard: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg>,
 };
 
 function getBadgeClass(color: BadgeColor) {
@@ -71,7 +72,7 @@ export default async function LeadsPage() {
       leadId,
       type: 'lead.created',
       actorUserId: session.user.id ?? null,
-      payloadJson: JSON.stringify({ source: 'internal_manual' }),
+      payloadJson: { source: 'internal_manual' },
       createdAt: now,
     });
 
@@ -79,6 +80,15 @@ export default async function LeadsPage() {
   }
 
   const rows = await db.select().from(leads).orderBy(desc(leads.createdAt)).all();
+
+  // Resource Availability Check: Leads ready for scoping (new/in_review without estimations)
+  const leadsWithEstimations = await db.select({ leadId: estimations.leadId }).from(estimations).all();
+  const estimatedLeadIds = new Set(leadsWithEstimations.map(e => e.leadId));
+  
+  const leadsReadyForScoping = rows.filter(lead => 
+    (lead.status === 'new' || lead.status === 'in_review') && 
+    !estimatedLeadIds.has(lead.id)
+  ).slice(0, 5);
 
   return (
     <main className={s.page}>
@@ -125,6 +135,53 @@ export default async function LeadsPage() {
           </div>
         </div>
       </section>
+
+      {/* Ready for Scoping Quick View */}
+      {leadsReadyForScoping.length > 0 && (
+        <section className={s.card} style={{ marginBottom: '1.5rem' }}>
+          <div className={s.cardHeader}>
+            <div className={s.cardHeaderLeft}>
+              <div className={`${s.cardIcon} ${s.cardIconWarning}`}>{Icons.clipboard}</div>
+              <h2 className={s.cardTitle}>Ready for Scoping</h2>
+              <span className={s.badge}>{leadsReadyForScoping.length}</span>
+            </div>
+            <span className={s.textMuted} style={{ fontSize: '0.75rem' }}>Leads without estimations</span>
+          </div>
+          <div className={s.cardBody} style={{ padding: 0 }}>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              {leadsReadyForScoping.map((lead) => (
+                <Link 
+                  key={lead.id} 
+                  href={`/internal/leads/${lead.id}`}
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    padding: '0.75rem 1rem',
+                    borderBottom: '1px solid var(--int-border, #e5e7eb)',
+                    textDecoration: 'none',
+                    color: 'inherit',
+                    transition: 'background 0.15s ease',
+                  }}
+                >
+                  <div>
+                    <div style={{ fontWeight: 500 }}>{lead.name}</div>
+                    <div className={s.textMuted} style={{ fontSize: '0.75rem' }}>
+                      {lead.company || 'No company'} • {lead.service || 'No service specified'}
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <span className={getBadgeClass(leadStatusColor(lead.status))}>
+                      {lead.status.replace('_', ' ')}
+                    </span>
+                    <span style={{ color: 'var(--int-primary)' }}>{Icons.arrowRight}</span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Main Content */}
       <div className={s.dashboardGrid}>

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://playwright.dev/config-schema.json",
+  "testDir": "./tests/e2e",
+  "timeout": 30000,
+  "fullyParallel": false,
+  "forbidOnly": true,
+  "retries": 1,
+  "workers": 1,
+  "reporter": [
+    ["html", { "outputFolder": "playwright-report" }],
+    ["list"]
+  ],
+  "use": {
+    "baseURL": "http://localhost:3000",
+    "trace": "on-first-retry",
+    "screenshot": "only-on-failure",
+    "video": "retain-on-failure"
+  },
+  "projects": [
+    {
+      "name": "chromium",
+      "use": {
+        "browserName": "chromium"
+      }
+    }
+  ],
+  "webServer": {
+    "command": "npm run dev",
+    "port": 3000,
+    "timeout": 120000,
+    "reuseExistingServer": true
+  }
+}

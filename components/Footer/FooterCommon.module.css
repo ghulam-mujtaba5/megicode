@@ -70,6 +70,19 @@
     right: 140px; /* Changed from 100px to 140px */
 }
 
+.internalPortalLink {
+    position: absolute;
+    top: 39%;
+    right: 180px;
+    font-size: 13px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    opacity: 0.7;
+    transition: opacity 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+}
+
 .footerFrame {
     position: relative;
     width: 100%;

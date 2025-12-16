@@ -6,17 +6,23 @@ interface IconWrapperProps {
   size?: number;
   gradient?: boolean;
   className?: string;
+  ariaLabel?: string;
+  role?: string;
 }
 
 const IconWrapper = ({ 
   children, 
   size = 64,
   gradient = true,
-  className = ''
+  className = '',
+  ariaLabel,
+  role = 'img'
 }: IconWrapperProps) => {
   return (
     <motion.div
       className={`icon-wrapper ${className}`}
+      role={role}
+      aria-label={ariaLabel}
       style={{
         width: size,
         height: size,

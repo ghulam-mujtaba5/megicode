@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
+import type { ProcessDefinitionJson } from '@/lib/types/json-types';
 
 import s from '../../../styles.module.css';
 import { requireRole } from '@/lib/internal/auth';
@@ -34,9 +35,10 @@ export default async function NewProcessPage() {
 
     if (!key || !jsonStr) return;
 
-    // Validate JSON
+    // Parse and validate JSON
+    let parsedJson: ProcessDefinitionJson;
     try {
-      JSON.parse(jsonStr);
+      parsedJson = JSON.parse(jsonStr);
     } catch (e) {
       // In a real app, we'd return an error state. For now, just return.
       return;
@@ -66,7 +68,7 @@ export default async function NewProcessPage() {
       key,
       version,
       isActive: true,
-      json: jsonStr,
+      json: parsedJson,
       createdAt: new Date(),
     });
 

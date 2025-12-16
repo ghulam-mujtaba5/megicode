@@ -53,11 +53,10 @@ export default async function ProcessAdminPage() {
   const ensured = await ensureActiveDefaultProcessDefinition();
 
   const current = active.find((d) => d.id === ensured.id) ?? active[0] ?? null;
-  const json = current ? JSON.parse(current.json) : ensured.json;
+  const json = (current ? current.json : ensured.json) as { steps?: Array<{ key: string; title: string; recommendedRole?: string }> };
 
-  const jsonWithSteps = json as { steps?: unknown };
-  const steps = Array.isArray(jsonWithSteps.steps)
-    ? (jsonWithSteps.steps as Array<{ key: string; title: string; recommendedRole?: string }>)
+  const steps = Array.isArray(json.steps)
+    ? json.steps
     : [];
 
   return (
@@ -91,14 +90,14 @@ export default async function ProcessAdminPage() {
         <div className={`${styles.kpiCard} ${styles.kpiGreen}`}>
           <div className={styles.kpiIcon}>{Icons.versions}</div>
           <div className={styles.kpiContent}>
-            <span className={styles.kpiValue}>v{json.version}</span>
+            <span className={styles.kpiValue}>v{current?.version ?? ensured.version ?? 1}</span>
             <span className={styles.kpiLabel}>Current Version</span>
           </div>
         </div>
         <div className={`${styles.kpiCard} ${styles.kpiOrange}`}>
           <div className={styles.kpiIcon}>{Icons.code}</div>
           <div className={styles.kpiContent}>
-            <span className={styles.kpiValue}>{json.key}</span>
+            <span className={styles.kpiValue}>{current?.key ?? ensured.key ?? 'N/A'}</span>
             <span className={styles.kpiLabel}>Process Key</span>
           </div>
         </div>
@@ -144,7 +143,7 @@ export default async function ProcessAdminPage() {
             <span className={styles.cardIcon}>{Icons.model}</span>
           </div>
           <p className={styles.cardSubtitle}>
-            Key: <strong>{json.key}</strong> · Version: <strong>{json.version}</strong> · Name: <strong>{json.name}</strong>
+            Key: <strong>{current?.key ?? ensured.key ?? 'N/A'}</strong> · Version: <strong>{current?.version ?? ensured.version ?? 1}</strong>
           </p>
           <div className={styles.stepsList}>
             {steps.map((s, index) => (

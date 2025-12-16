@@ -1,15 +1,43 @@
 import { NextResponse } from 'next/server';
 import { sendEmail } from '@/lib/email';
+import { z } from 'zod';
+
+const contactSchema = z
+  .object({
+    name: z.string().trim().min(1, 'Name is required').max(200),
+    email: z.string().trim().email('Valid email is required').max(320),
+    subject: z.string().trim().max(200).optional().or(z.literal('')),
+    message: z.string().trim().min(1, 'Message is required').max(10000),
+    phone: z.string().trim().max(50).optional().or(z.literal('')),
+    company: z.string().trim().max(200).optional().or(z.literal('')),
+    service: z.string().trim().max(200).optional().or(z.literal('')),
+  })
+  .strict();
+
+function zodIssuesToFieldErrors(error: z.ZodError) {
+  const fieldErrors: Record<string, string> = {};
+  for (const issue of error.issues) {
+    const path = issue.path.join('.') || 'root';
+    if (!fieldErrors[path]) fieldErrors[path] = issue.message;
+  }
+  return fieldErrors;
+}
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
-    const { name, email, subject, message, phone, company, service } = body;
-
-    // --- Server-Side Validation ---
-    if (!name || !email || !message) {
-      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+    const body = await request.json().catch(() => null);
+    const parsed = contactSchema.safeParse(body);
+    if (!parsed.success) {
+      return NextResponse.json(
+        {
+          error: 'Validation failed',
+          fieldErrors: zodIssuesToFieldErrors(parsed.error),
+        },
+        { status: 400 }
+      );
     }
+
+    const { name, email, subject, message, phone, company, service } = parsed.data;
 
     // Compose the email content
     const emailSubject = subject ? `New Message from ${name}: ${subject}` : `New Message from ${name}`;

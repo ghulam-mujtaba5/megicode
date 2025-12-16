@@ -3,10 +3,24 @@ import { notFound, redirect } from 'next/navigation';
 import { eq, desc, and } from 'drizzle-orm';
 
 import styles from '../../styles.module.css';
-import { requireInternalSession, requireRole } from '@/lib/internal/auth';
+import { requireInternalSession } from '@/lib/internal/auth';
 import { getDb } from '@/lib/db';
-import { tasks, taskComments, taskChecklists, timeEntries, processInstances, projects, users, events, attachments } from '@/lib/db/schema';
+import { tasks, taskComments, taskChecklists, timeEntries, processInstances, projects, users, attachments } from '@/lib/db/schema';
 import { formatDateTime, taskStatusColor, type BadgeColor } from '@/lib/internal/ui';
+import { logAuditEvent } from '@/lib/audit';
+import {
+  createTaskAttachmentFromTaskSchema,
+  createTaskChecklistItemSchema,
+  createTaskCommentSchema,
+  createTaskTimeEntryFromTaskSchema,
+  safeValidateFormData,
+  toggleTaskChecklistSchema,
+  updateTaskDetailSchema,
+} from '@/lib/validations';
+
+import { FormDatePicker } from '@/components/DatePicker';
+import { RichTextEditor } from '@/components/RichTextEditor';
+import { AttachmentList } from '@/components/AttachmentList';
 
 // Icons
 const Icons = {
@@ -68,10 +82,9 @@ function badgeClass(color: BadgeColor) {
 }
 
 export default async function TaskDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const session = await requireInternalSession();
+  await requireInternalSession();
   const { id } = await params;
   const db = getDb();
-  const userId = session.user.id;
 
   const task = await db.select().from(tasks).where(eq(tasks.id, id)).get();
   if (!task) notFound();
@@ -118,23 +131,37 @@ export default async function TaskDetailPage({ params }: { params: Promise<{ id:
     await requireInternalSession();
     const db = getDb();
 
-    const id = String(formData.get('id') ?? '').trim();
-    const status = String(formData.get('status') ?? '').trim() as typeof task.status;
-    const assignedToUserId = String(formData.get('assignedToUserId') ?? '').trim() || null;
-    const dueAt = formData.get('dueAt') ? new Date(String(formData.get('dueAt'))) : null;
+    const parsed = safeValidateFormData(updateTaskDetailSchema, formData);
+    if (!parsed.success) return;
 
-    if (!id) return;
+    const { id, status, assignedToUserId, dueAt, sprintNumber, description } = parsed.data;
 
     const now = new Date();
     const completedAt = status === 'done' ? now : null;
+
+    const oldTask = await db.select().from(tasks).where(eq(tasks.id, id)).get();
 
     await db.update(tasks).set({
       status,
       assignedToUserId,
       dueAt,
+      sprintNumber,
+      description,
       completedAt,
       updatedAt: now,
     }).where(eq(tasks.id, id));
+
+    if (oldTask) {
+      const changes: Record<string, any> = {};
+      if (oldTask.status !== status) changes.status = { from: oldTask.status, to: status };
+      if (oldTask.assignedToUserId !== assignedToUserId) changes.assignedToUserId = { from: oldTask.assignedToUserId, to: assignedToUserId };
+      if (oldTask.sprintNumber !== sprintNumber) changes.sprintNumber = { from: oldTask.sprintNumber, to: sprintNumber };
+      if (oldTask.description !== description) changes.description = 'changed';
+      
+      if (Object.keys(changes).length > 0) {
+        await logAuditEvent('TASK_UPDATED', `task:${id}`, changes);
+      }
+    }
 
     redirect(`/internal/tasks/${id}`);
   }
@@ -144,10 +171,10 @@ export default async function TaskDetailPage({ params }: { params: Promise<{ id:
     const session = await requireInternalSession();
     const db = getDb();
 
-    const taskId = String(formData.get('taskId') ?? '').trim();
-    const content = String(formData.get('content') ?? '').trim();
+    const parsed = safeValidateFormData(createTaskCommentSchema, formData);
+    if (!parsed.success) return;
 
-    if (!taskId || !content) return;
+    const { taskId, content } = parsed.data;
 
     await db.insert(taskComments).values({
       id: crypto.randomUUID(),
@@ -157,6 +184,8 @@ export default async function TaskDetailPage({ params }: { params: Promise<{ id:
       createdAt: new Date(),
     });
 
+    await logAuditEvent('TASK_COMMENT_ADDED', `task:${taskId}`);
+
     redirect(`/internal/tasks/${taskId}`);
   }
 
@@ -165,10 +194,10 @@ export default async function TaskDetailPage({ params }: { params: Promise<{ id:
     await requireInternalSession();
     const db = getDb();
 
-    const taskId = String(formData.get('taskId') ?? '').trim();
-    const title = String(formData.get('label') ?? '').trim();
+    const parsed = safeValidateFormData(createTaskChecklistItemSchema, formData);
+    if (!parsed.success) return;
 
-    if (!taskId || !title) return;
+    const { taskId, label: title } = parsed.data;
 
     const existing = await db.select().from(taskChecklists).where(eq(taskChecklists.taskId, taskId)).all();
 
@@ -180,6 +209,8 @@ export default async function TaskDetailPage({ params }: { params: Promise<{ id:
       sortOrder: existing.length,
     });
 
+    await logAuditEvent('TASK_CHECKLIST_ADDED', `task:${taskId}`, { title });
+
     redirect(`/internal/tasks/${taskId}`);
   }
 
@@ -188,15 +219,16 @@ export default async function TaskDetailPage({ params }: { params: Promise<{ id:
     await requireInternalSession();
     const db = getDb();
 
-    const id = String(formData.get('id') ?? '').trim();
-    const isCompleted = formData.get('checked') === 'true';
+    const parsed = safeValidateFormData(toggleTaskChecklistSchema, formData);
+    if (!parsed.success) return;
 
-    if (!id) return;
+    const { id, checked: isCompleted } = parsed.data;
 
     await db.update(taskChecklists).set({ isCompleted: !isCompleted }).where(eq(taskChecklists.id, id));
 
     const item = await db.select().from(taskChecklists).where(eq(taskChecklists.id, id)).get();
     if (item) {
+      await logAuditEvent('TASK_CHECKLIST_TOGGLED', `task:${item.taskId}`, { checklistItemId: id, isCompleted: !isCompleted });
       redirect(`/internal/tasks/${item.taskId}`);
     }
   }
@@ -206,12 +238,10 @@ export default async function TaskDetailPage({ params }: { params: Promise<{ id:
     const session = await requireInternalSession();
     const db = getDb();
 
-    const taskId = String(formData.get('taskId') ?? '').trim();
-    const minutes = parseInt(String(formData.get('minutes') ?? '0'), 10);
-    const description = String(formData.get('description') ?? '').trim() || null;
-    const date = formData.get('date') ? new Date(String(formData.get('date'))) : new Date();
+    const parsed = safeValidateFormData(createTaskTimeEntryFromTaskSchema, formData);
+    if (!parsed.success) return;
 
-    if (!taskId || minutes <= 0) return;
+    const { taskId, minutes, description, date } = parsed.data;
 
     const t = await db.select().from(tasks).where(eq(tasks.id, taskId)).get();
     const inst = t ? await db.select().from(processInstances).where(eq(processInstances.id, t.instanceId)).get() : null;
@@ -223,9 +253,11 @@ export default async function TaskDetailPage({ params }: { params: Promise<{ id:
       userId: session.user.id ?? null,
       minutes,
       description,
-      date,
+      date: date ?? new Date(),
       createdAt: new Date(),
     });
+
+    await logAuditEvent('TASK_TIME_LOGGED', `task:${taskId}`, { minutes, description });
 
     redirect(`/internal/tasks/${taskId}`);
   }
@@ -235,11 +267,10 @@ export default async function TaskDetailPage({ params }: { params: Promise<{ id:
     const session = await requireInternalSession();
     const db = getDb();
 
-    const taskId = String(formData.get('taskId') ?? '').trim();
-    const filename = String(formData.get('filename') ?? '').trim();
-    const url = String(formData.get('url') ?? '').trim();
+    const parsed = safeValidateFormData(createTaskAttachmentFromTaskSchema, formData);
+    if (!parsed.success) return;
 
-    if (!taskId || !filename || !url) return;
+    const { taskId, filename, url } = parsed.data;
 
     await db.insert(attachments).values({
       id: crypto.randomUUID(),
@@ -250,6 +281,8 @@ export default async function TaskDetailPage({ params }: { params: Promise<{ id:
       uploadedByUserId: session.user.id ?? null,
       createdAt: new Date(),
     });
+
+    await logAuditEvent('TASK_ATTACHMENT_ADDED', `task:${taskId}`, { filename });
 
     redirect(`/internal/tasks/${taskId}`);
   }
@@ -317,6 +350,12 @@ export default async function TaskDetailPage({ params }: { params: Promise<{ id:
                       <span>{task.dueAt ? formatDateTime(task.dueAt) : <span className={styles.textMuted}>No due date</span>}</span>
                     </div>
                   </div>
+                  <div>
+                    <p className={styles.label}>Sprint</p>
+                    <span className={`${styles.badge} ${task.sprintNumber ? styles.badgeInfo : ''}`} style={{ fontWeight: 600 }}>
+                      {task.sprintNumber ? `Sprint ${task.sprintNumber}` : <span className={styles.textMuted}>Backlog</span>}
+                    </span>
+                  </div>
                 </div>
               </div>
             </section>
@@ -379,25 +418,14 @@ export default async function TaskDetailPage({ params }: { params: Promise<{ id:
                 <h2 className={styles.cardTitle}>Attachments ({attachmentsList.length})</h2>
               </div>
               <div className={styles.cardBody}>
-                {attachmentsList.length > 0 ? (
-                  <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 24px 0' }}>
-                    {attachmentsList.map(({ attachment, uploaderName }) => (
-                      <li key={attachment.id} style={{ marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '12px', padding: '8px', background: 'var(--int-bg-alt)', borderRadius: 'var(--int-radius)' }}>
-                        <div style={{ color: 'var(--int-primary)' }}>{Icons.paperclip}</div>
-                        <div style={{ flex: 1, overflow: 'hidden' }}>
-                          <a href={attachment.url} target="_blank" rel="noopener noreferrer" style={{ display: 'block', fontWeight: 500, color: 'var(--int-text)', textDecoration: 'none', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                            {attachment.filename}
-                          </a>
-                          <div style={{ fontSize: '0.75rem', color: 'var(--int-text-muted)' }}>
-                            Added by {uploaderName || 'Unknown'} • {formatDateTime(attachment.createdAt)}
-                          </div>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p className={styles.textMuted} style={{ marginBottom: '24px' }}>No attachments</p>
-                )}
+                <AttachmentList 
+                  attachments={attachmentsList.map(({ attachment, uploaderName }) => ({
+                    ...attachment,
+                    uploaderName
+                  }))}
+                  formatDateTime={formatDateTime}
+                  Icons={Icons}
+                />
                 
                 <form action={addAttachment} className={styles.form}>
                   <input type="hidden" name="taskId" value={task.id} />
@@ -484,9 +512,9 @@ export default async function TaskDetailPage({ params }: { params: Promise<{ id:
                     <select className={styles.select} name="status" defaultValue={task.status}>
                       <option value="todo">Todo</option>
                       <option value="in_progress">In Progress</option>
-                      <option value="review">Review</option>
                       <option value="done">Done</option>
                       <option value="blocked">Blocked</option>
+                      <option value="canceled">Canceled</option>
                     </select>
                   </div>
 
@@ -502,7 +530,21 @@ export default async function TaskDetailPage({ params }: { params: Promise<{ id:
 
                   <div>
                     <label className={styles.formLabel}>Due Date</label>
-                    <input className={styles.input} name="dueAt" type="date" defaultValue={task.dueAt?.toISOString().split('T')[0] ?? ''} />
+                    <FormDatePicker name="dueAt" defaultValue={task.dueAt} className={styles.input} />
+                  </div>
+
+                  <div>
+                    <label className={styles.formLabel}>Sprint</label>
+                    <input className={styles.input} name="sprintNumber" type="number" min="1" placeholder="Sprint #" defaultValue={task.sprintNumber ?? ''} />
+                  </div>
+
+                  <div>
+                    <label className={styles.formLabel}>Description</label>
+                    <RichTextEditor 
+                      content={task.description || ''} 
+                      name="description" 
+                      placeholder="Task description..." 
+                    />
                   </div>
 
                   <button className={`${styles.btn} ${styles.btnPrimary}`} type="submit" style={{ width: '100%', marginTop: '8px' }}>

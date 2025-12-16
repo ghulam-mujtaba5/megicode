@@ -1,13 +1,20 @@
 import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
-import { eq, desc } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
 
 import styles from '../../styles.module.css';
-import { requireRole, requireInternalSession } from '@/lib/internal/auth';
+import { requireRole } from '@/lib/internal/auth';
 import { getDb } from '@/lib/db';
 import { proposals, proposalItems, leads, clients, events, projects, processInstances, tasks } from '@/lib/db/schema';
 import { ensureActiveDefaultProcessDefinition } from '@/lib/workflow/processDefinition';
 import { formatDateTime } from '@/lib/internal/ui';
+import {
+  proposalAddItemSchema,
+  proposalDeleteItemSchema,
+  proposalUpdateStatusSchema,
+  proposalConvertSchema,
+  safeValidateFormData,
+} from '@/lib/validations';
 
 // Icons
 const Icons = {
@@ -86,15 +93,13 @@ export default async function ProposalDetailPage({ params }: { params: Promise<{
     await requireRole(['admin', 'pm']);
     const db = getDb();
 
-    const proposalId = String(formData.get('proposalId') ?? '').trim();
-    const description = String(formData.get('description') ?? '').trim();
-    const quantity = parseInt(String(formData.get('quantity') ?? '1'), 10);
-    const unitPrice = Math.round(parseFloat(String(formData.get('unitPrice') ?? '0')) * 100);
+    const parsed = safeValidateFormData(proposalAddItemSchema, formData);
+    if (!parsed.success) return;
 
-    if (!description || !proposalId) return;
+    const { proposalId, description, quantity, unitPrice } = parsed.data;
 
-    const maxSort = await db.select().from(proposalItems).where(eq(proposalItems.proposalId, proposalId)).all();
-    const sortOrder = maxSort.length;
+    const existing = await db.select().from(proposalItems).where(eq(proposalItems.proposalId, proposalId)).all();
+    const sortOrder = existing.length;
 
     await db.insert(proposalItems).values({
       id: crypto.randomUUID(),
@@ -117,10 +122,10 @@ export default async function ProposalDetailPage({ params }: { params: Promise<{
     'use server';
     await requireRole(['admin', 'pm']);
     const db = getDb();
-    const itemId = String(formData.get('itemId') ?? '').trim();
-    const proposalId = String(formData.get('proposalId') ?? '').trim();
+    const parsed = safeValidateFormData(proposalDeleteItemSchema, formData);
+    if (!parsed.success) return;
 
-    if (!itemId || !proposalId) return;
+    const { itemId, proposalId } = parsed.data;
 
     await db.delete(proposalItems).where(eq(proposalItems.id, itemId));
 
@@ -136,11 +141,10 @@ export default async function ProposalDetailPage({ params }: { params: Promise<{
     'use server';
     const session = await requireRole(['admin', 'pm']);
     const db = getDb();
+    const parsed = safeValidateFormData(proposalUpdateStatusSchema, formData);
+    if (!parsed.success) return;
 
-    const id = String(formData.get('id') ?? '').trim();
-    const status = String(formData.get('status') ?? '').trim() as typeof proposal.status;
-
-    if (!id) return;
+    const { id, status } = parsed.data;
 
     const now = new Date();
     const updates: Partial<typeof proposal> = { status, updatedAt: now };
@@ -156,7 +160,7 @@ export default async function ProposalDetailPage({ params }: { params: Promise<{
       leadId: proposal.leadId,
       type: `proposal.${status}`,
       actorUserId: session.user.id ?? null,
-      payloadJson: JSON.stringify({ proposalId: id, status }),
+      payloadJson: { proposalId: id, status },
       createdAt: now,
     });
 
@@ -167,14 +171,16 @@ export default async function ProposalDetailPage({ params }: { params: Promise<{
     'use server';
     const session = await requireRole(['admin']);
     const db = getDb();
-    const id = String(formData.get('id') ?? '').trim();
-    if (!id) return;
+    const parsed = safeValidateFormData(proposalUpdateStatusSchema, formData);
+    if (!parsed.success) return;
+
+    const { id } = parsed.data;
 
     const now = new Date();
     await db.update(proposals).set({ 
-        status: 'approved', 
-        approvedByUserId: session.user.id,
-        updatedAt: now 
+      status: 'approved', 
+      approvedByUserId: session.user.id,
+      updatedAt: now 
     }).where(eq(proposals.id, id));
 
     await db.insert(events).values({
@@ -182,7 +188,7 @@ export default async function ProposalDetailPage({ params }: { params: Promise<{
       leadId: proposal.leadId,
       type: 'proposal.approved',
       actorUserId: session.user.id,
-      payloadJson: JSON.stringify({ proposalId: id }),
+      payloadJson: { proposalId: id },
       createdAt: now,
     });
     redirect(`/internal/proposals/${id}`);
@@ -192,8 +198,10 @@ export default async function ProposalDetailPage({ params }: { params: Promise<{
     'use server';
     const session = await requireRole(['admin', 'pm']);
     const db = getDb();
-    const id = String(formData.get('id') ?? '').trim();
-    if (!id) return;
+    const parsed = safeValidateFormData(proposalUpdateStatusSchema, formData);
+    if (!parsed.success) return;
+
+    const { id } = parsed.data;
 
     const now = new Date();
     await db.update(proposals).set({ 
@@ -207,7 +215,7 @@ export default async function ProposalDetailPage({ params }: { params: Promise<{
       leadId: proposal.leadId,
       type: 'proposal.sent',
       actorUserId: session.user.id,
-      payloadJson: JSON.stringify({ proposalId: id }),
+      payloadJson: { proposalId: id },
       createdAt: now,
     });
     redirect(`/internal/proposals/${id}`);
@@ -217,11 +225,10 @@ export default async function ProposalDetailPage({ params }: { params: Promise<{
     'use server';
     const session = await requireRole(['admin', 'pm']);
     const db = getDb();
+    const parsed = safeValidateFormData(proposalConvertSchema, formData);
+    if (!parsed.success) return;
 
-    const proposalId = String(formData.get('proposalId') ?? '').trim();
-    const projectName = String(formData.get('projectName') ?? '').trim();
-
-    if (!proposalId || !projectName) return;
+    const { proposalId, projectName } = parsed.data;
 
     const prop = await db.select().from(proposals).where(eq(proposals.id, proposalId)).get();
     if (!prop || prop.status !== 'accepted') return;
@@ -267,7 +274,7 @@ export default async function ProposalDetailPage({ params }: { params: Promise<{
         key: step.key,
         title: step.title,
         status: 'todo',
-        assignedToUserId: step.recommendedRole === 'pm' ? session.user.id : null,
+        assignedToUserId: ('recommendedRole' in step && step.recommendedRole === 'pm') ? session.user.id : null,
         createdAt: now,
         updatedAt: now,
       });
@@ -278,7 +285,7 @@ export default async function ProposalDetailPage({ params }: { params: Promise<{
       projectId,
       type: 'project.created_from_proposal',
       actorUserId: session.user.id ?? null,
-      payloadJson: JSON.stringify({ proposalId, projectId }),
+      payloadJson: { proposalId, projectId },
       createdAt: now,
     });
 

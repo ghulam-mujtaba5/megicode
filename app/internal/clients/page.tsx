@@ -150,7 +150,7 @@ export default async function ClientsPage() {
       id: crypto.randomUUID(),
       type: 'client.created',
       actorUserId: session.user.id ?? null,
-      payloadJson: JSON.stringify({ clientId, name }),
+      payloadJson: { clientId, name },
       createdAt: now,
     });
 

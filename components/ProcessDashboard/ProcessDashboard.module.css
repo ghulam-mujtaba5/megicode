@@ -1,0 +1,432 @@
+/**
+ * ProcessDashboard Styles
+ * Premium analytics dashboard styling
+ */
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--int-space-6);
+}
+
+/* ========== HEADER ========== */
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--int-space-4);
+}
+
+.title {
+  font-size: var(--int-text-2xl);
+  font-weight: var(--int-font-bold);
+  color: var(--int-text);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--int-space-3);
+}
+
+.subtitle {
+  font-size: var(--int-text-sm);
+  color: var(--int-text-muted);
+  margin: var(--int-space-1) 0 0;
+}
+
+.refreshBtn {
+  padding: var(--int-space-2);
+  background: var(--int-surface);
+  border: 1px solid var(--int-border);
+  border-radius: var(--int-radius-md);
+  cursor: pointer;
+  transition: all var(--int-transition);
+}
+
+.refreshBtn:hover {
+  background: var(--int-bg-alt);
+  border-color: var(--int-primary);
+}
+
+/* ========== LOADING / ERROR ========== */
+.loading,
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--int-space-3);
+  padding: var(--int-space-8);
+  color: var(--int-text-muted);
+}
+
+.error {
+  color: var(--int-danger);
+}
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid var(--int-border);
+  border-top-color: var(--int-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.retryBtn {
+  padding: var(--int-space-2) var(--int-space-4);
+  background: var(--int-primary);
+  color: white;
+  border: none;
+  border-radius: var(--int-radius-md);
+  cursor: pointer;
+}
+
+/* ========== STATS GRID ========== */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--int-space-4);
+}
+
+.statCard {
+  display: flex;
+  align-items: center;
+  gap: var(--int-space-4);
+  padding: var(--int-space-5);
+  background: var(--int-surface);
+  border-radius: var(--int-radius-lg);
+  border: 1px solid var(--int-border);
+  transition: all var(--int-transition);
+}
+
+.statCard:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--int-shadow-md);
+}
+
+.statIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--int-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.statIcon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.statIcon.total {
+  background: rgba(99, 102, 241, 0.15);
+  color: var(--int-primary);
+}
+
+.statIcon.running {
+  background: rgba(59, 130, 246, 0.15);
+  color: rgb(59, 130, 246);
+}
+
+.statIcon.completed {
+  background: rgba(34, 197, 94, 0.15);
+  color: var(--int-success);
+}
+
+.statIcon.rate {
+  background: rgba(168, 85, 247, 0.15);
+  color: rgb(168, 85, 247);
+}
+
+.statIcon.time {
+  background: rgba(245, 158, 11, 0.15);
+  color: rgb(245, 158, 11);
+}
+
+.statIcon.error {
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--int-danger);
+}
+
+.statContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.statValue {
+  font-size: var(--int-text-2xl);
+  font-weight: var(--int-font-bold);
+  color: var(--int-text);
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: var(--int-text-sm);
+  color: var(--int-text-muted);
+  margin-top: var(--int-space-1);
+}
+
+/* ========== SECTIONS ========== */
+.section {
+  background: var(--int-surface);
+  border-radius: var(--int-radius-lg);
+  border: 1px solid var(--int-border);
+  padding: var(--int-space-5);
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--int-space-4);
+}
+
+.sectionTitle {
+  font-size: var(--int-text-lg);
+  font-weight: var(--int-font-semibold);
+  color: var(--int-text);
+  margin: 0;
+}
+
+.viewAllLink {
+  display: flex;
+  align-items: center;
+  gap: var(--int-space-1);
+  font-size: var(--int-text-sm);
+  color: var(--int-primary);
+  text-decoration: none;
+  transition: all var(--int-transition);
+}
+
+.viewAllLink:hover {
+  color: var(--int-primary-dark);
+}
+
+/* ========== EMPTY STATE ========== */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--int-space-2);
+  padding: var(--int-space-8);
+  color: var(--int-text-muted);
+}
+
+.emptyState .icon {
+  width: 48px;
+  height: 48px;
+  opacity: 0.5;
+}
+
+/* ========== INSTANCES LIST ========== */
+.instancesList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--int-space-3);
+}
+
+.instanceCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--int-space-2);
+  padding: var(--int-space-4);
+  background: var(--int-bg-alt);
+  border-radius: var(--int-radius-md);
+  border: 1px solid var(--int-border);
+  text-decoration: none;
+  transition: all var(--int-transition);
+}
+
+.instanceCard:hover {
+  border-color: var(--int-primary);
+  transform: translateX(4px);
+}
+
+.instanceHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--int-space-2);
+}
+
+.instanceName {
+  font-weight: var(--int-font-semibold);
+  color: var(--int-text);
+}
+
+.instanceStatus {
+  font-size: var(--int-text-xs);
+  font-weight: var(--int-font-medium);
+  padding: var(--int-space-1) var(--int-space-2);
+  border-radius: var(--int-radius-full);
+  text-transform: capitalize;
+}
+
+.instanceStatus.running {
+  background: rgba(59, 130, 246, 0.15);
+  color: rgb(59, 130, 246);
+}
+
+.instanceStatus.completed {
+  background: rgba(34, 197, 94, 0.15);
+  color: var(--int-success);
+}
+
+.instanceMeta {
+  font-size: var(--int-text-sm);
+  color: var(--int-text-muted);
+}
+
+.instanceStep {
+  display: flex;
+  align-items: center;
+  gap: var(--int-space-2);
+  font-size: var(--int-text-sm);
+}
+
+.stepTitle {
+  color: var(--int-text);
+}
+
+/* ========== LANE BADGES ========== */
+.laneBadge {
+  font-size: var(--int-text-xs);
+  font-weight: var(--int-font-medium);
+  padding: var(--int-space-1) var(--int-space-2);
+  border-radius: var(--int-radius-full);
+}
+
+.laneBadge.Client {
+  background: rgba(59, 130, 246, 0.15);
+  color: rgb(59, 130, 246);
+}
+
+.laneBadge.BusinessDevelopment {
+  background: rgba(168, 85, 247, 0.15);
+  color: rgb(168, 85, 247);
+}
+
+.laneBadge.AutomationCRM {
+  background: rgba(245, 158, 11, 0.15);
+  color: rgb(245, 158, 11);
+}
+
+.laneBadge.ProjectManagement {
+  background: rgba(34, 197, 94, 0.15);
+  color: rgb(34, 197, 94);
+}
+
+/* ========== BOTTLENECKS ========== */
+.bottlenecksList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--int-space-2);
+}
+
+.bottleneckCard {
+  display: flex;
+  align-items: center;
+  gap: var(--int-space-3);
+  padding: var(--int-space-3);
+  background: rgba(245, 158, 11, 0.05);
+  border-radius: var(--int-radius-md);
+  border-left: 3px solid rgb(245, 158, 11);
+}
+
+.bottleneckCount {
+  font-size: var(--int-text-2xl);
+  font-weight: var(--int-font-bold);
+  color: rgb(245, 158, 11);
+  min-width: 48px;
+  text-align: center;
+}
+
+.bottleneckContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--int-space-1);
+}
+
+.bottleneckTitle {
+  font-weight: var(--int-font-medium);
+  color: var(--int-text);
+}
+
+/* ========== AUTOMATION GRID ========== */
+.automationGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--int-space-3);
+}
+
+.automationCard {
+  padding: var(--int-space-4);
+  background: var(--int-bg-alt);
+  border-radius: var(--int-radius-md);
+  border: 1px solid var(--int-border);
+}
+
+.automationHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--int-space-2);
+  margin-bottom: var(--int-space-2);
+}
+
+.automationName {
+  font-size: var(--int-text-sm);
+  font-family: var(--font-mono, monospace);
+  color: var(--int-primary);
+  background: rgba(99, 102, 241, 0.1);
+  padding: var(--int-space-1) var(--int-space-2);
+  border-radius: var(--int-radius-sm);
+}
+
+.successRate {
+  font-weight: var(--int-font-bold);
+  font-size: var(--int-text-lg);
+}
+
+.successRate.good {
+  color: var(--int-success);
+}
+
+.successRate.ok {
+  color: rgb(245, 158, 11);
+}
+
+.successRate.bad {
+  color: var(--int-danger);
+}
+
+.automationStats {
+  display: flex;
+  gap: var(--int-space-3);
+  font-size: var(--int-text-sm);
+  color: var(--int-text-muted);
+}
+
+.automationStat.failed {
+  color: var(--int-danger);
+}
+
+/* ========== ICON ========== */
+.icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.icon svg {
+  width: 100%;
+  height: 100%;
+}

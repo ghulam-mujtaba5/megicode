@@ -48,7 +48,7 @@ export default async function NewBugPage() {
       projectId,
       type: 'bug.reported',
       actorUserId: session.user.id,
-      payloadJson: JSON.stringify({ bugId, title, severity }),
+      payloadJson: { bugId, title, severity },
       createdAt: now,
     });
 

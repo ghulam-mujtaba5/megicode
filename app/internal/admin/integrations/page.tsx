@@ -27,15 +27,25 @@ export default async function IntegrationsPage() {
 
     const name = String(formData.get('name') ?? '').trim();
     const type = String(formData.get('type') ?? '').trim();
-    const config = String(formData.get('config') ?? '').trim();
+    const configStr = String(formData.get('config') ?? '').trim();
 
     if (!name || !type) return;
+    
+    // Parse config JSON, default to empty object if invalid
+    let config: Record<string, any> = {};
+    if (configStr) {
+      try {
+        config = JSON.parse(configStr);
+      } catch {
+        config = {};
+      }
+    }
 
     await db.insert(integrations).values({
       id: crypto.randomUUID(),
       name,
       type: type as any,
-      config: config || '{}',
+      config,
       isActive: true,
       createdAt: new Date(),
       updatedAt: new Date(),

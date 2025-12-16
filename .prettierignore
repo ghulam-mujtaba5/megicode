@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+.next/
+out/
+build/
+dist/
+
+# Cache
+.cache/
+
+# Public assets that shouldn't be reformatted
+public/
+
+# Generated files
+*.generated.*
+drizzle/
+
+# Package manager files
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Minified files
+*.min.js
+*.min.css

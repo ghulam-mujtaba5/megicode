@@ -170,7 +170,7 @@ export default async function ProposalsPage() {
       leadId,
       type: 'proposal.created',
       actorUserId: session.user.id ?? null,
-      payloadJson: JSON.stringify({ proposalId, title }),
+      payloadJson: { proposalId, title },
       createdAt: now,
     });
 

@@ -1,0 +1,513 @@
+/* Workflow Actions Component Styles */
+
+.container {
+  padding: 1.5rem;
+  background: var(--card-bg, #fff);
+  border-radius: 12px;
+  border: 1px solid var(--border-color, #e5e7eb);
+}
+
+/* Step Info */
+.stepInfo {
+  margin-bottom: 1.5rem;
+}
+
+.stepHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.stepTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary, #1f2937);
+  margin: 0;
+}
+
+.stepDescription {
+  color: var(--text-secondary, #6b7280);
+  font-size: 0.875rem;
+  margin: 0.5rem 0;
+}
+
+.stepMeta {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.75rem;
+  color: var(--text-muted, #9ca3af);
+}
+
+.metaItem .icon {
+  width: 14px;
+  height: 14px;
+}
+
+/* Lane Badges */
+.laneBadge {
+  display: inline-block;
+  padding: 0.25rem 0.625rem;
+  border-radius: 999px;
+  font-size: 0.625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.laneClient {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.laneBusinessDevelopment {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.laneAutomationCRM {
+  background: #f3e8ff;
+  color: #7c3aed;
+}
+
+.laneProjectManagement {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+/* Status Card */
+.statusCard {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: var(--bg-muted, #f9fafb);
+  border-radius: 8px;
+  color: var(--text-secondary, #6b7280);
+}
+
+.statusCard .icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Messages */
+.errorMessage,
+.successMessage {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+}
+
+.errorMessage {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fee2e2;
+}
+
+.successMessage {
+  background: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid #dcfce7;
+}
+
+.errorMessage .icon,
+.successMessage .icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* Gateway Actions */
+.gatewayActions {
+  margin-bottom: 1.5rem;
+}
+
+.gatewayPrompt {
+  font-size: 0.875rem;
+  color: var(--text-secondary, #6b7280);
+  margin-bottom: 0.75rem;
+}
+
+.gatewayButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.gatewayBtn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.gatewayBtnPrimary {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+}
+
+.gatewayBtnPrimary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  transform: translateY(-1px);
+}
+
+.gatewayBtnDefault {
+  background: var(--bg-muted, #f3f4f6);
+  color: var(--text-secondary, #6b7280);
+}
+
+.gatewayBtnDefault:hover:not(:disabled) {
+  background: #e5e7eb;
+}
+
+.gatewayBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Form */
+.stepForm {
+  margin-bottom: 1rem;
+}
+
+.formFields {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.formField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.fieldLabel {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary, #374151);
+}
+
+.required {
+  color: #ef4444;
+  margin-left: 0.25rem;
+}
+
+.input,
+.textarea {
+  padding: 0.625rem 0.875rem;
+  border: 1px solid var(--border-color, #d1d5db);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  background: var(--input-bg, #fff);
+  color: var(--text-primary, #1f2937);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Action Buttons */
+.actionButtons {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.btnPrimary,
+.btnSecondary,
+.btnDanger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.btnPrimary {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+}
+
+.btnPrimary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #059669, #047857);
+  transform: translateY(-1px);
+}
+
+.btnSecondary {
+  background: var(--bg-muted, #f3f4f6);
+  color: var(--text-secondary, #6b7280);
+  border: 1px solid var(--border-color, #e5e7eb);
+}
+
+.btnSecondary:hover:not(:disabled) {
+  background: #e5e7eb;
+}
+
+.btnDanger {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+}
+
+.btnDanger:hover:not(:disabled) {
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  transform: translateY(-1px);
+}
+
+.btnPrimary:disabled,
+.btnSecondary:disabled,
+.btnDanger:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btnPrimary .icon,
+.btnSecondary .icon,
+.btnDanger .icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Spinner */
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Automation Info */
+.automationInfo {
+  padding: 1rem;
+  background: #f3e8ff;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.automationBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  background: #7c3aed;
+  color: white;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.automationBadge .icon {
+  width: 12px;
+  height: 12px;
+}
+
+.automationDesc {
+  font-size: 0.875rem;
+  color: #5b21b6;
+  margin-bottom: 0.75rem;
+}
+
+.automationDesc code {
+  background: rgba(255, 255, 255, 0.5);
+  padding: 0.125rem 0.375rem;
+  border-radius: 4px;
+  font-family: 'Monaco', 'Menlo', monospace;
+  font-size: 0.75rem;
+}
+
+/* Admin Actions */
+.adminActions {
+  margin-top: 1.5rem;
+}
+
+.divider {
+  height: 1px;
+  background: var(--border-color, #e5e7eb);
+  margin-bottom: 1rem;
+}
+
+.adminLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted, #9ca3af);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.75rem;
+}
+
+.adminButtons {
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* Modal */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+}
+
+.modal {
+  background: var(--card-bg, #fff);
+  padding: 1.5rem;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.modalTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary, #1f2937);
+  margin: 0 0 0.5rem;
+}
+
+.modalDesc {
+  font-size: 0.875rem;
+  color: var(--text-secondary, #6b7280);
+  margin-bottom: 1rem;
+}
+
+.modalButtons {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  margin-top: 1.25rem;
+}
+
+/* Icon utility */
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+
+.icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Dark theme overrides */
+:global([data-theme="dark"]) .container {
+  --card-bg: #1f2937;
+  --border-color: #374151;
+  --text-primary: #f9fafb;
+  --text-secondary: #d1d5db;
+  --text-muted: #9ca3af;
+  --bg-muted: #374151;
+  --input-bg: #111827;
+}
+
+:global([data-theme="dark"]) .laneClient {
+  background: #1e3a5f;
+  color: #93c5fd;
+}
+
+:global([data-theme="dark"]) .laneBusinessDevelopment {
+  background: #14532d;
+  color: #86efac;
+}
+
+:global([data-theme="dark"]) .laneAutomationCRM {
+  background: #4c1d95;
+  color: #c4b5fd;
+}
+
+:global([data-theme="dark"]) .laneProjectManagement {
+  background: #78350f;
+  color: #fcd34d;
+}
+
+:global([data-theme="dark"]) .automationInfo {
+  background: #4c1d95;
+}
+
+:global([data-theme="dark"]) .automationDesc {
+  color: #c4b5fd;
+}
+
+:global([data-theme="dark"]) .errorMessage {
+  background: #450a0a;
+  border-color: #7f1d1d;
+  color: #fca5a5;
+}
+
+:global([data-theme="dark"]) .successMessage {
+  background: #052e16;
+  border-color: #14532d;
+  color: #86efac;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .stepHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .gatewayButtons,
+  .adminButtons,
+  .actionButtons {
+    flex-direction: column;
+  }
+
+  .gatewayBtn,
+  .btnPrimary,
+  .btnSecondary,
+  .btnDanger {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .modalButtons {
+    flex-direction: column-reverse;
+  }
+}

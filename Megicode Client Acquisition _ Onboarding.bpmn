@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             id="Definitions_Megicode_Client_Acquisition___Onboarding"
+             targetNamespace="http://example.com/bpmn">
+
+  <message id="Message_Megicode_Client_Acquisition___Onboarding" name="Megicode Client Acquisition &amp; Onboarding"/>
+  <message id="Message_ReceiveLeadSubmission" name="ReceiveLeadSubmission"/>
+  <collaboration id="Collaboration_Megicode_Client_Acquisition___Onboarding">
+    <participant id="Participant_Client" name="Client" processRef="Process_Client"/>
+    <participant id="Participant_BusinessDevelopment" name="BusinessDevelopment" processRef="Process_BusinessDevelopment"/>
+    <participant id="Participant_AutomationCRM" name="AutomationCRM" processRef="Process_AutomationCRM"/>
+    <participant id="Participant_ProjectManagement" name="ProjectManagement" processRef="Process_ProjectManagement"/>
+    <messageFlow id="Flow_rel-SubmitContactForm-ReceiveLeadSubmission-forward_dashed-Lead_Submission" name="Lead Submission" sourceRef="SubmitContactForm" targetRef="ReceiveLeadSubmission"/>
+    <messageFlow id="Flow_rel-LeadScoreGateway-GenerateFollowUpEmail-forward-Yes" name="Yes" sourceRef="LeadScoreGateway" targetRef="GenerateFollowUpEmail"/>
+    <messageFlow id="Flow_rel-SendFollowUpEmail-CreateFollowUpTask-forward" sourceRef="SendFollowUpEmail" targetRef="CreateFollowUpTask"/>
+    <messageFlow id="Flow_rel-ScheduleDiscoveryCall-AttendDiscoveryCall-forward_dashed-Discovery_Call_Invite" name="Discovery Call Invite" sourceRef="ScheduleDiscoveryCall" targetRef="AttendDiscoveryCall"/>
+    <messageFlow id="Flow_rel-AttendDiscoveryCall-GatherClientRequirements-forward" sourceRef="AttendDiscoveryCall" targetRef="GatherClientRequirements"/>
+    <messageFlow id="Flow_rel-SendProposalToClient-ReviewProposalClient-forward_dashed-Proposal" name="Proposal" sourceRef="SendProposalToClient" targetRef="ReviewProposalClient"/>
+    <messageFlow id="Flow_rel-RequestRevisionClient-PrepareProposalDraft-forward_dashed-Revision_Request" name="Revision Request" sourceRef="RequestRevisionClient" targetRef="PrepareProposalDraft"/>
+    <messageFlow id="Flow_rel-SignContractClient-ReceiveSignedContract-forward_dashed-Signed_Contract" name="Signed Contract" sourceRef="SignContractClient" targetRef="ReceiveSignedContract"/>
+    <messageFlow id="Flow_rel-GenerateProjectSummary-CreateProjectWorkspace-forward" sourceRef="GenerateProjectSummary" targetRef="CreateProjectWorkspace"/>
+  </collaboration>
+  <process id="Process_Client" isExecutable="true">
+    <laneSet id="LaneSet_Client">
+      <lane id="Lane_WebsiteVisitorClient" name="WebsiteVisitorClient">
+        <flowNodeRef>StartLeadSubmission</flowNodeRef>
+        <flowNodeRef>SubmitContactForm</flowNodeRef>
+        <flowNodeRef>AttendDiscoveryCall</flowNodeRef>
+        <flowNodeRef>ReviewProposalClient</flowNodeRef>
+        <flowNodeRef>ClientAcceptProposalGateway</flowNodeRef>
+        <flowNodeRef>SignContractClient</flowNodeRef>
+        <flowNodeRef>EndOnboardedClient_1</flowNodeRef>
+        <flowNodeRef>RequestRevisionClient</flowNodeRef>
+      </lane>
+    </laneSet>
+    <startEvent id="StartLeadSubmission" name="StartLeadSubmission"/>
+    <task id="SubmitContactForm" name="SubmitContactForm"/>
+    <task id="AttendDiscoveryCall" name="AttendDiscoveryCall"/>
+    <task id="ReviewProposalClient" name="ReviewProposalClient"/>
+    <exclusiveGateway id="ClientAcceptProposalGateway" name="ClientAcceptProposalGateway"/>
+    <task id="SignContractClient" name="SignContractClient"/>
+    <endEvent id="EndOnboardedClient_1" name="EndOnboardedClient_1"></endEvent>
+    <task id="RequestRevisionClient" name="RequestRevisionClient"/>
+    <sequenceFlow id="Flow_rel-StartLeadSubmission-SubmitContactForm-forward" sourceRef="StartLeadSubmission" targetRef="SubmitContactForm"/>
+    <sequenceFlow id="Flow_rel-ReviewProposalClient-ClientAcceptProposalGateway-forward" sourceRef="ReviewProposalClient" targetRef="ClientAcceptProposalGateway"/>
+    <sequenceFlow id="Flow_rel-ClientAcceptProposalGateway-RequestRevisionClient-forward-No" sourceRef="ClientAcceptProposalGateway" targetRef="RequestRevisionClient" name="No"/>
+    <sequenceFlow id="Flow_rel-ClientAcceptProposalGateway-SignContractClient-forward-Yes" sourceRef="ClientAcceptProposalGateway" targetRef="SignContractClient" name="Yes"/>
+  </process>
+  <process id="Process_BusinessDevelopment" isExecutable="true">
+    <laneSet id="LaneSet_BusinessDevelopment">
+      <lane id="Lane_LeadIntakeSystem" name="LeadIntakeSystem">
+        <flowNodeRef>ReceiveLeadSubmission</flowNodeRef>
+        <flowNodeRef>CreateLeadRecord</flowNodeRef>
+        <flowNodeRef>AssignLeadScore</flowNodeRef>
+        <flowNodeRef>LeadScoreGateway</flowNodeRef>
+        <flowNodeRef>TriggerNurtureEmailSequence</flowNodeRef>
+        <flowNodeRef>EndNurturePipeline</flowNodeRef>
+        <flowNodeRef>CreateFollowUpTask</flowNodeRef>
+      </lane>
+      <lane id="Lane_BusinessDeveloperAzan" name="BusinessDeveloperAzan">
+        <flowNodeRef>ReviewLeadInformation</flowNodeRef>
+        <flowNodeRef>ScheduleDiscoveryCall</flowNodeRef>
+        <flowNodeRef>GatherClientRequirements</flowNodeRef>
+        <flowNodeRef>PrepareProposalDraft</flowNodeRef>
+        <flowNodeRef>ProposalApprovalGateway</flowNodeRef>
+        <flowNodeRef>SendProposalToClient</flowNodeRef>
+        <flowNodeRef>ModifyProposal</flowNodeRef>
+      </lane>
+    </laneSet>
+    <intermediateCatchEvent id="ReceiveLeadSubmission" name="ReceiveLeadSubmission">
+      <messageEventDefinition messageRef="Message_ReceiveLeadSubmission"/>
+    </intermediateCatchEvent>
+    <task id="CreateLeadRecord" name="CreateLeadRecord"/>
+    <task id="AssignLeadScore" name="AssignLeadScore"/>
+    <exclusiveGateway id="LeadScoreGateway" name="LeadScoreGateway"/>
+    <task id="TriggerNurtureEmailSequence" name="TriggerNurtureEmailSequence"/>
+    <endEvent id="EndNurturePipeline" name="EndNurturePipeline"></endEvent>
+    <task id="CreateFollowUpTask" name="CreateFollowUpTask"/>
+    <task id="ReviewLeadInformation" name="ReviewLeadInformation"/>
+    <task id="ScheduleDiscoveryCall" name="ScheduleDiscoveryCall"/>
+    <task id="GatherClientRequirements" name="GatherClientRequirements"/>
+    <task id="PrepareProposalDraft" name="PrepareProposalDraft"/>
+    <exclusiveGateway id="ProposalApprovalGateway" name="ProposalApprovalGateway"/>
+    <task id="SendProposalToClient" name="SendProposalToClient"/>
+    <task id="ModifyProposal" name="ModifyProposal"/>
+    <sequenceFlow id="Flow_rel-ReceiveLeadSubmission-CreateLeadRecord-forward" sourceRef="ReceiveLeadSubmission" targetRef="CreateLeadRecord"/>
+    <sequenceFlow id="Flow_rel-CreateLeadRecord-AssignLeadScore-forward" sourceRef="CreateLeadRecord" targetRef="AssignLeadScore"/>
+    <sequenceFlow id="Flow_rel-AssignLeadScore-LeadScoreGateway-forward" sourceRef="AssignLeadScore" targetRef="LeadScoreGateway"/>
+    <sequenceFlow id="Flow_rel-LeadScoreGateway-TriggerNurtureEmailSequence-forward-No" sourceRef="LeadScoreGateway" targetRef="TriggerNurtureEmailSequence" name="No"/>
+    <sequenceFlow id="Flow_rel-TriggerNurtureEmailSequence-EndNurturePipeline-forward" sourceRef="TriggerNurtureEmailSequence" targetRef="EndNurturePipeline"/>
+    <sequenceFlow id="Flow_rel-CreateFollowUpTask-ReviewLeadInformation-forward" sourceRef="CreateFollowUpTask" targetRef="ReviewLeadInformation"/>
+    <sequenceFlow id="Flow_rel-ReviewLeadInformation-ScheduleDiscoveryCall-forward" sourceRef="ReviewLeadInformation" targetRef="ScheduleDiscoveryCall"/>
+    <sequenceFlow id="Flow_rel-GatherClientRequirements-PrepareProposalDraft-forward" sourceRef="GatherClientRequirements" targetRef="PrepareProposalDraft"/>
+    <sequenceFlow id="Flow_rel-PrepareProposalDraft-ProposalApprovalGateway-forward" sourceRef="PrepareProposalDraft" targetRef="ProposalApprovalGateway"/>
+    <sequenceFlow id="Flow_rel-ProposalApprovalGateway-ModifyProposal-forward-No" sourceRef="ProposalApprovalGateway" targetRef="ModifyProposal" name="No"/>
+    <sequenceFlow id="Flow_rel-ModifyProposal-ProposalApprovalGateway-forward" sourceRef="ModifyProposal" targetRef="ProposalApprovalGateway"/>
+    <sequenceFlow id="Flow_rel-ProposalApprovalGateway-SendProposalToClient-forward-Yes" sourceRef="ProposalApprovalGateway" targetRef="SendProposalToClient" name="Yes"/>
+  </process>
+  <process id="Process_AutomationCRM" isExecutable="true">
+    <laneSet id="LaneSet_AutomationCRM">
+      <lane id="Lane_AIAssistant" name="AIAssistant">
+        <flowNodeRef>GenerateFollowUpEmail</flowNodeRef>
+        <flowNodeRef>SendFollowUpEmail</flowNodeRef>
+        <flowNodeRef>SendWelcomeEmail</flowNodeRef>
+        <flowNodeRef>ShareOnboardingDocumentation</flowNodeRef>
+        <flowNodeRef>GenerateProjectSummary</flowNodeRef>
+      </lane>
+      <lane id="Lane_CRMSystem" name="CRMSystem">
+        <flowNodeRef>ReceiveSignedContract</flowNodeRef>
+        <flowNodeRef>TriggerOnboardingAutomation</flowNodeRef>
+      </lane>
+    </laneSet>
+    <task id="GenerateFollowUpEmail" name="GenerateFollowUpEmail"/>
+    <task id="SendFollowUpEmail" name="SendFollowUpEmail"/>
+    <task id="SendWelcomeEmail" name="SendWelcomeEmail"/>
+    <task id="ShareOnboardingDocumentation" name="ShareOnboardingDocumentation"/>
+    <task id="GenerateProjectSummary" name="GenerateProjectSummary"/>
+    <intermediateCatchEvent id="ReceiveSignedContract" name="ReceiveSignedContract">
+    </intermediateCatchEvent>
+    <task id="TriggerOnboardingAutomation" name="TriggerOnboardingAutomation"/>
+    <sequenceFlow id="Flow_rel-GenerateFollowUpEmail-SendFollowUpEmail-forward" sourceRef="GenerateFollowUpEmail" targetRef="SendFollowUpEmail"/>
+    <sequenceFlow id="Flow_rel-ReceiveSignedContract-TriggerOnboardingAutomation-forward" sourceRef="ReceiveSignedContract" targetRef="TriggerOnboardingAutomation"/>
+    <sequenceFlow id="Flow_rel-TriggerOnboardingAutomation-SendWelcomeEmail-forward" sourceRef="TriggerOnboardingAutomation" targetRef="SendWelcomeEmail"/>
+    <sequenceFlow id="Flow_rel-SendWelcomeEmail-ShareOnboardingDocumentation-forward" sourceRef="SendWelcomeEmail" targetRef="ShareOnboardingDocumentation"/>
+    <sequenceFlow id="Flow_rel-ShareOnboardingDocumentation-GenerateProjectSummary-forward" sourceRef="ShareOnboardingDocumentation" targetRef="GenerateProjectSummary"/>
+  </process>
+  <process id="Process_ProjectManagement" isExecutable="true">
+    <laneSet id="LaneSet_ProjectManagement">
+      <lane id="Lane_ProjectManager" name="ProjectManager">
+        <flowNodeRef>CreateProjectWorkspace</flowNodeRef>
+        <flowNodeRef>AssignProjectTeam</flowNodeRef>
+        <flowNodeRef>ScheduleKickoffMeeting</flowNodeRef>
+      </lane>
+    </laneSet>
+    <task id="CreateProjectWorkspace" name="CreateProjectWorkspace"/>
+    <task id="AssignProjectTeam" name="AssignProjectTeam"/>
+    <task id="ScheduleKickoffMeeting" name="ScheduleKickoffMeeting"/>
+    <sequenceFlow id="Flow_rel-CreateProjectWorkspace-AssignProjectTeam-forward" sourceRef="CreateProjectWorkspace" targetRef="AssignProjectTeam"/>
+    <sequenceFlow id="Flow_rel-AssignProjectTeam-ScheduleKickoffMeeting-forward" sourceRef="AssignProjectTeam" targetRef="ScheduleKickoffMeeting"/>
+  </process>  <!-- DI layout so the viewer can render -->
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_Megicode_Client_Acquisition___Onboarding">
+      <bpmndi:BPMNShape id="Participant_Client_di" bpmnElement="Participant_Client" isHorizontal="true">
+        <dc:Bounds x="264" y="76" width="1583" height="299"/>
+        <bpmndi:BPMNLabel/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="LaneShape_WebsiteVisitorClient" bpmnElement="Lane_WebsiteVisitorClient">
+        <dc:Bounds x="294" y="76" width="1553" height="299"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_BusinessDevelopment_di" bpmnElement="Participant_BusinessDevelopment" isHorizontal="true">
+        <dc:Bounds x="264" y="410" width="1583" height="498"/>
+        <bpmndi:BPMNLabel/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="LaneShape_LeadIntakeSystem" bpmnElement="Lane_LeadIntakeSystem">
+        <dc:Bounds x="294" y="410" width="1553" height="249"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="LaneShape_BusinessDeveloperAzan" bpmnElement="Lane_BusinessDeveloperAzan">
+        <dc:Bounds x="294" y="659" width="1553" height="249"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_AutomationCRM_di" bpmnElement="Participant_AutomationCRM" isHorizontal="true">
+        <dc:Bounds x="264" y="943" width="1583" height="343"/>
+        <bpmndi:BPMNLabel/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="LaneShape_AIAssistant" bpmnElement="Lane_AIAssistant">
+        <dc:Bounds x="294" y="943" width="1553" height="171.5"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="LaneShape_CRMSystem" bpmnElement="Lane_CRMSystem">
+        <dc:Bounds x="294" y="1114.5" width="1553" height="171.5"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_ProjectManagement_di" bpmnElement="Participant_ProjectManagement" isHorizontal="true">
+        <dc:Bounds x="264" y="1321" width="1583" height="197"/>
+        <bpmndi:BPMNLabel/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="LaneShape_ProjectManager" bpmnElement="Lane_ProjectManager">
+        <dc:Bounds x="294" y="1321" width="1553" height="197"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_StartLeadSubmission" bpmnElement="StartLeadSubmission">
+        <dc:Bounds x="384" y="132" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_SubmitContactForm" bpmnElement="SubmitContactForm">
+        <dc:Bounds x="560" y="121" width="138" height="72"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_AttendDiscoveryCall" bpmnElement="AttendDiscoveryCall">
+        <dc:Bounds x="765" y="121" width="138" height="72"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_ReviewProposalClient" bpmnElement="ReviewProposalClient">
+        <dc:Bounds x="970" y="121" width="138" height="72"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_ClientAcceptProposalGateway" bpmnElement="ClientAcceptProposalGateway">
+        <dc:Bounds x="1222" y="132" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_SignContractClient" bpmnElement="SignContractClient">
+        <dc:Bounds x="1386" y="121" width="138" height="72"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_EndOnboardedClient_1" bpmnElement="EndOnboardedClient_1">
+        <dc:Bounds x="385" y="262" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_RequestRevisionClient" bpmnElement="RequestRevisionClient">
+        <dc:Bounds x="1386" y="251" width="138" height="72"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_ReceiveLeadSubmission" bpmnElement="ReceiveLeadSubmission">
+        <dc:Bounds x="378" y="487" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_CreateLeadRecord" bpmnElement="CreateLeadRecord">
+        <dc:Bounds x="548" y="476" width="138" height="72"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_AssignLeadScore" bpmnElement="AssignLeadScore">
+        <dc:Bounds x="753" y="476" width="138" height="72"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_LeadScoreGateway" bpmnElement="LeadScoreGateway">
+        <dc:Bounds x="1009" y="487" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_TriggerNurtureEmailSequence" bpmnElement="TriggerNurtureEmailSequence">
+        <dc:Bounds x="1177" y="476" width="138" height="72"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_EndNurturePipeline" bpmnElement="EndNurturePipeline">
+        <dc:Bounds x="1452" y="487" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_CreateFollowUpTask" bpmnElement="CreateFollowUpTask">
+        <dc:Bounds x="1639" y="476" width="138" height="72"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_ReviewLeadInformation" bpmnElement="ReviewLeadInformation">
+        <dc:Bounds x="325" y="667" width="138" height="72"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_ScheduleDiscoveryCall" bpmnElement="ScheduleDiscoveryCall">
+        <dc:Bounds x="530" y="667" width="138" height="72"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_GatherClientRequirements" bpmnElement="GatherClientRequirements">
+        <dc:Bounds x="735" y="667" width="138" height="72"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_PrepareProposalDraft" bpmnElement="PrepareProposalDraft">
+        <dc:Bounds x="940" y="667" width="138" height="72"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_ProposalApprovalGateway" bpmnElement="ProposalApprovalGateway">
+        <dc:Bounds x="1210" y="678" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_SendProposalToClient" bpmnElement="SendProposalToClient">
+        <dc:Bounds x="1392" y="667" width="138" height="72"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_ModifyProposal" bpmnElement="ModifyProposal">
+        <dc:Bounds x="1392" y="796" width="138" height="72"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_GenerateFollowUpEmail" bpmnElement="GenerateFollowUpEmail">
+        <dc:Bounds x="325" y="996" width="138" height="72"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_SendFollowUpEmail" bpmnElement="SendFollowUpEmail">
+        <dc:Bounds x="530" y="996" width="138" height="72"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_SendWelcomeEmail" bpmnElement="SendWelcomeEmail">
+        <dc:Bounds x="735" y="996" width="138" height="72"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_ShareOnboardingDocumentation" bpmnElement="ShareOnboardingDocumentation">
+        <dc:Bounds x="940" y="996" width="138" height="72"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_GenerateProjectSummary" bpmnElement="GenerateProjectSummary">
+        <dc:Bounds x="1145" y="996" width="138" height="72"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_ReceiveSignedContract" bpmnElement="ReceiveSignedContract">
+        <dc:Bounds x="374" y="1173" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_TriggerOnboardingAutomation" bpmnElement="TriggerOnboardingAutomation">
+        <dc:Bounds x="540" y="1162" width="139" height="72"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_CreateProjectWorkspace" bpmnElement="CreateProjectWorkspace">
+        <dc:Bounds x="325" y="1386" width="138" height="72"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_AssignProjectTeam" bpmnElement="AssignProjectTeam">
+        <dc:Bounds x="530" y="1386" width="138" height="72"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_ScheduleKickoffMeeting" bpmnElement="ScheduleKickoffMeeting">
+        <dc:Bounds x="735" y="1386" width="138" height="72"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Edge_Flow_rel-StartLeadSubmission-SubmitContactForm-forward" bpmnElement="Flow_rel-StartLeadSubmission-SubmitContactForm-forward">
+        <di:waypoint x="436" y="157"/>
+        <di:waypoint x="560" y="157"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_rel-SubmitContactForm-ReceiveLeadSubmission-forward_dashed-Lead_Submission" bpmnElement="Flow_rel-SubmitContactForm-ReceiveLeadSubmission-forward_dashed-Lead_Submission">
+        <di:waypoint x="628" y="193"/>
+        <di:waypoint x="628" y="463"/>
+        <di:waypoint x="402" y="463"/>
+        <di:waypoint x="402" y="487"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_rel-ReceiveLeadSubmission-CreateLeadRecord-forward" bpmnElement="Flow_rel-ReceiveLeadSubmission-CreateLeadRecord-forward">
+        <di:waypoint x="430" y="512"/>
+        <di:waypoint x="548" y="512"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_rel-CreateLeadRecord-AssignLeadScore-forward" bpmnElement="Flow_rel-CreateLeadRecord-AssignLeadScore-forward">
+        <di:waypoint x="686" y="512"/>
+        <di:waypoint x="753" y="512"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_rel-AssignLeadScore-LeadScoreGateway-forward" bpmnElement="Flow_rel-AssignLeadScore-LeadScoreGateway-forward">
+        <di:waypoint x="891" y="512"/>
+        <di:waypoint x="1009" y="512"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_rel-LeadScoreGateway-TriggerNurtureEmailSequence-forward-No" bpmnElement="Flow_rel-LeadScoreGateway-TriggerNurtureEmailSequence-forward-No">
+        <di:waypoint x="1056" y="512"/>
+        <di:waypoint x="1177" y="512"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_rel-TriggerNurtureEmailSequence-EndNurturePipeline-forward" bpmnElement="Flow_rel-TriggerNurtureEmailSequence-EndNurturePipeline-forward">
+        <di:waypoint x="1315" y="512"/>
+        <di:waypoint x="1452" y="512"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_rel-LeadScoreGateway-GenerateFollowUpEmail-forward-Yes" bpmnElement="Flow_rel-LeadScoreGateway-GenerateFollowUpEmail-forward-Yes">
+        <di:waypoint x="1033" y="534"/>
+        <di:waypoint x="1033" y="650"/>
+        <di:waypoint x="693" y="650"/>
+        <di:waypoint x="693" y="970"/>
+        <di:waypoint x="393" y="970"/>
+        <di:waypoint x="393" y="996"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_rel-GenerateFollowUpEmail-SendFollowUpEmail-forward" bpmnElement="Flow_rel-GenerateFollowUpEmail-SendFollowUpEmail-forward">
+        <di:waypoint x="463" y="1032"/>
+        <di:waypoint x="530" y="1032"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_rel-SendFollowUpEmail-CreateFollowUpTask-forward" bpmnElement="Flow_rel-SendFollowUpEmail-CreateFollowUpTask-forward">
+        <di:waypoint x="668" y="1032"/>
+        <di:waypoint x="718" y="1032"/>
+        <di:waypoint x="718" y="892"/>
+        <di:waypoint x="1608" y="892"/>
+        <di:waypoint x="1608" y="512"/>
+        <di:waypoint x="1639" y="512"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_rel-CreateFollowUpTask-ReviewLeadInformation-forward" bpmnElement="Flow_rel-CreateFollowUpTask-ReviewLeadInformation-forward">
+        <di:waypoint x="1639" y="500"/>
+        <di:waypoint x="1589" y="500"/>
+        <di:waypoint x="1589" y="640"/>
+        <di:waypoint x="393" y="640"/>
+        <di:waypoint x="393" y="667"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_rel-ReviewLeadInformation-ScheduleDiscoveryCall-forward" bpmnElement="Flow_rel-ReviewLeadInformation-ScheduleDiscoveryCall-forward">
+        <di:waypoint x="463" y="703"/>
+        <di:waypoint x="530" y="703"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_rel-ScheduleDiscoveryCall-AttendDiscoveryCall-forward_dashed-Discovery_Call_Invite" bpmnElement="Flow_rel-ScheduleDiscoveryCall-AttendDiscoveryCall-forward_dashed-Discovery_Call_Invite">
+        <di:waypoint x="598" y="667"/>
+        <di:waypoint x="598" y="567"/>
+        <di:waypoint x="728" y="567"/>
+        <di:waypoint x="728" y="157"/>
+        <di:waypoint x="765" y="157"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_rel-AttendDiscoveryCall-GatherClientRequirements-forward" bpmnElement="Flow_rel-AttendDiscoveryCall-GatherClientRequirements-forward">
+        <di:waypoint x="833" y="193"/>
+        <di:waypoint x="833" y="433"/>
+        <di:waypoint x="913" y="433"/>
+        <di:waypoint x="913" y="633"/>
+        <di:waypoint x="803" y="633"/>
+        <di:waypoint x="803" y="667"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_rel-GatherClientRequirements-PrepareProposalDraft-forward" bpmnElement="Flow_rel-GatherClientRequirements-PrepareProposalDraft-forward">
+        <di:waypoint x="873" y="703"/>
+        <di:waypoint x="940" y="703"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_rel-PrepareProposalDraft-ProposalApprovalGateway-forward" bpmnElement="Flow_rel-PrepareProposalDraft-ProposalApprovalGateway-forward">
+        <di:waypoint x="1078" y="703"/>
+        <di:waypoint x="1210" y="703"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_rel-ProposalApprovalGateway-ModifyProposal-forward-No" bpmnElement="Flow_rel-ProposalApprovalGateway-ModifyProposal-forward-No">
+        <di:waypoint x="1257" y="703"/>
+        <di:waypoint x="1360" y="703"/>
+        <di:waypoint x="1360" y="832"/>
+        <di:waypoint x="1392" y="832"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_rel-ModifyProposal-ProposalApprovalGateway-forward" bpmnElement="Flow_rel-ModifyProposal-ProposalApprovalGateway-forward">
+        <di:waypoint x="1392" y="840"/>
+        <di:waypoint x="1234" y="840"/>
+        <di:waypoint x="1234" y="751"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_rel-ProposalApprovalGateway-SendProposalToClient-forward-Yes" bpmnElement="Flow_rel-ProposalApprovalGateway-SendProposalToClient-forward-Yes">
+        <di:waypoint x="1247" y="690"/>
+        <di:waypoint x="1392" y="690"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_rel-SendProposalToClient-ReviewProposalClient-forward_dashed-Proposal" bpmnElement="Flow_rel-SendProposalToClient-ReviewProposalClient-forward_dashed-Proposal">
+        <di:waypoint x="1460" y="667"/>
+        <di:waypoint x="1460" y="597"/>
+        <di:waypoint x="1150" y="597"/>
+        <di:waypoint x="1150" y="217"/>
+        <di:waypoint x="1038" y="217"/>
+        <di:waypoint x="1038" y="193"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_rel-ReviewProposalClient-ClientAcceptProposalGateway-forward" bpmnElement="Flow_rel-ReviewProposalClient-ClientAcceptProposalGateway-forward">
+        <di:waypoint x="1108" y="157"/>
+        <di:waypoint x="1222" y="157"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_rel-ClientAcceptProposalGateway-RequestRevisionClient-forward-No" bpmnElement="Flow_rel-ClientAcceptProposalGateway-RequestRevisionClient-forward-No">
+        <di:waypoint x="1269" y="157"/>
+        <di:waypoint x="1362" y="157"/>
+        <di:waypoint x="1362" y="287"/>
+        <di:waypoint x="1386" y="287"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_rel-RequestRevisionClient-PrepareProposalDraft-forward_dashed-Revision_Request" bpmnElement="Flow_rel-RequestRevisionClient-PrepareProposalDraft-forward_dashed-Revision_Request">
+        <di:waypoint x="1386" y="310"/>
+        <di:waypoint x="1336" y="310"/>
+        <di:waypoint x="1336" y="650"/>
+        <di:waypoint x="1136" y="650"/>
+        <di:waypoint x="1136" y="680"/>
+        <di:waypoint x="1078" y="680"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_rel-ClientAcceptProposalGateway-SignContractClient-forward-Yes" bpmnElement="Flow_rel-ClientAcceptProposalGateway-SignContractClient-forward-Yes">
+        <di:waypoint x="1264" y="150"/>
+        <di:waypoint x="1302" y="150"/>
+        <di:waypoint x="1302" y="130"/>
+        <di:waypoint x="1382" y="130"/>
+        <di:waypoint x="1382" y="157"/>
+        <di:waypoint x="1386" y="157"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_rel-SignContractClient-ReceiveSignedContract-forward_dashed-Signed_Contract" bpmnElement="Flow_rel-SignContractClient-ReceiveSignedContract-forward_dashed-Signed_Contract">
+        <di:waypoint x="1386" y="130"/>
+        <di:waypoint x="1366" y="130"/>
+        <di:waypoint x="1366" y="60"/>
+        <di:waypoint x="176" y="60"/>
+        <di:waypoint x="176" y="1130"/>
+        <di:waypoint x="398" y="1130"/>
+        <di:waypoint x="398" y="1173"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_rel-ReceiveSignedContract-TriggerOnboardingAutomation-forward" bpmnElement="Flow_rel-ReceiveSignedContract-TriggerOnboardingAutomation-forward">
+        <di:waypoint x="426" y="1198"/>
+        <di:waypoint x="540" y="1198"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_rel-TriggerOnboardingAutomation-SendWelcomeEmail-forward" bpmnElement="Flow_rel-TriggerOnboardingAutomation-SendWelcomeEmail-forward">
+        <di:waypoint x="679" y="1198"/>
+        <di:waypoint x="803" y="1198"/>
+        <di:waypoint x="803" y="1068"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_rel-SendWelcomeEmail-ShareOnboardingDocumentation-forward" bpmnElement="Flow_rel-SendWelcomeEmail-ShareOnboardingDocumentation-forward">
+        <di:waypoint x="873" y="1032"/>
+        <di:waypoint x="940" y="1032"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_rel-ShareOnboardingDocumentation-GenerateProjectSummary-forward" bpmnElement="Flow_rel-ShareOnboardingDocumentation-GenerateProjectSummary-forward">
+        <di:waypoint x="1078" y="1032"/>
+        <di:waypoint x="1145" y="1032"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_rel-GenerateProjectSummary-CreateProjectWorkspace-forward" bpmnElement="Flow_rel-GenerateProjectSummary-CreateProjectWorkspace-forward">
+        <di:waypoint x="1213" y="1068"/>
+        <di:waypoint x="1213" y="1348"/>
+        <di:waypoint x="393" y="1348"/>
+        <di:waypoint x="393" y="1386"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_rel-CreateProjectWorkspace-AssignProjectTeam-forward" bpmnElement="Flow_rel-CreateProjectWorkspace-AssignProjectTeam-forward">
+        <di:waypoint x="463" y="1422"/>
+        <di:waypoint x="530" y="1422"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_rel-AssignProjectTeam-ScheduleKickoffMeeting-forward" bpmnElement="Flow_rel-AssignProjectTeam-ScheduleKickoffMeeting-forward">
+        <di:waypoint x="668" y="1422"/>
+        <di:waypoint x="735" y="1422"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_rel-ScheduleKickoffMeeting-End_Outboarded_Client-forward_dashed-Kickoff_Meeting_Invite" bpmnElement="Flow_rel-ScheduleKickoffMeeting-End_Outboarded_Client-forward_dashed-Kickoff_Meeting_Invite">
+        <di:waypoint x="803" y="1458"/>
+        <di:waypoint x="803" y="1508"/>
+        <di:waypoint x="403" y="1508"/>
+        <di:waypoint x="403" y="1578"/>
+        <di:waypoint x="374" y="1578"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

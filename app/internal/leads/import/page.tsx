@@ -56,7 +56,7 @@ export default async function ImportLeadsPage() {
         leadId,
         type: 'lead.created',
         actorUserId: session.user.id,
-        payloadJson: JSON.stringify({ source: 'csv_import' }),
+        payloadJson: { source: 'csv_import' },
         createdAt: now,
       });
 

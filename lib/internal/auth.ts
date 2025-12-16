@@ -21,3 +21,23 @@ export async function requireRole(allowed: UserRole[]) {
   }
   return session;
 }
+
+export async function requireActiveUser() {
+  const session = await requireInternalSession();
+  // @ts-ignore
+  const status = session.user.status;
+  // @ts-ignore
+  const role = session.user.role;
+
+  // Admins always bypass pending status
+  if (role === 'admin') {
+    return session;
+  }
+
+  // Non-admins must be active
+  if (status !== 'active') {
+    redirect('/internal/onboarding');
+  }
+  return session;
+}
+

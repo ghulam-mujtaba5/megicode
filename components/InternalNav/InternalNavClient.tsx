@@ -83,6 +83,33 @@ const Icons = {
       <line x1="21" y1="12" x2="9" y2="12" />
     </svg>
   ),
+  search: () => (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="11" cy="11" r="8" />
+      <path d="m21 21-4.35-4.35" />
+    </svg>
+  ),
+  resources: () => (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+      <circle cx="9" cy="7" r="4" />
+      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+    </svg>
+  ),
+  lightbulb: () => (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M9 18h6"/>
+      <path d="M10 22h4"/>
+      <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z"/>
+    </svg>
+  ),
+  book: () => (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+    </svg>
+  ),
 };
 
 export default function InternalNavClient({
@@ -182,6 +209,15 @@ export default function InternalNavClient({
           )}
           {isAdmin && (
             <Link 
+              href="/internal/admin/users" 
+              className={`${styles.link} ${isActive('/internal/admin/users') ? styles.linkActive : ''}`}
+            >
+              <Icons.users />
+              Users
+            </Link>
+          )}
+          {isAdmin && (
+            <Link 
               href="/internal/admin/process" 
               className={`${styles.link} ${isActive('/internal/admin/process') ? styles.linkActive : ''}`}
             >
@@ -189,6 +225,36 @@ export default function InternalNavClient({
               Process
             </Link>
           )}
+          <Link 
+            href="/internal/search" 
+            className={`${styles.link} ${isActive('/internal/search') ? styles.linkActive : ''}`}
+          >
+            <Icons.search />
+            Search
+          </Link>
+          {isPm && (
+            <Link 
+              href="/internal/resources" 
+              className={`${styles.link} ${isActive('/internal/resources') ? styles.linkActive : ''}`}
+            >
+              <Icons.resources />
+              Resources
+            </Link>
+          )}
+          <Link 
+            href="/internal/suggestions" 
+            className={`${styles.link} ${isActive('/internal/suggestions') ? styles.linkActive : ''}`}
+          >
+            <Icons.lightbulb />
+            Ideas
+          </Link>
+          <Link 
+            href="/internal/setup-guide" 
+            className={`${styles.link} ${isActive('/internal/setup-guide') ? styles.linkActive : ''}`}
+          >
+            <Icons.book />
+            Setup Guide
+          </Link>
         </nav>
       </div>
 
