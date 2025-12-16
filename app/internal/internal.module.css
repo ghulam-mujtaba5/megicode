@@ -1,0 +1,12 @@
+.container {
+  padding: 24px;
+}
+
+.button {
+  padding: 10px 14px;
+  cursor: pointer;
+}
+
+.message {
+  margin-top: 10px;
+}

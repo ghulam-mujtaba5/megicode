@@ -1,0 +1,132 @@
+.page {
+  padding: 20px 18px;
+}
+
+.card {
+  background: var(--md-surface);
+  box-shadow: var(--md-elevation-1);
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 900px) {
+  .grid2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  text-align: left;
+  padding: 10px 8px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  vertical-align: top;
+}
+
+:global([data-theme="dark"]) .table th,
+:global([data-theme="dark"]) .table td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.input,
+.textarea,
+.select {
+  width: 100%;
+  padding: 10px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: var(--md-background);
+  color: var(--md-on-background);
+}
+
+:global([data-theme="dark"]) .input,
+:global([data-theme="dark"]) .textarea,
+:global([data-theme="dark"]) .select {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.button {
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: var(--md-primary);
+  color: var(--md-on-primary);
+}
+
+.secondaryButton {
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: var(--md-surface);
+  color: var(--md-on-surface);
+}
+
+.muted {
+  opacity: 0.85;
+}
+
+.pre {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.badgeGray {
+  background: var(--md-surface);
+  color: var(--md-on-surface);
+}
+
+.badgeBlue {
+  background: color-mix(in srgb, var(--md-primary) 12%, transparent);
+  color: var(--md-on-background);
+}
+
+.badgeGreen {
+  background: color-mix(in srgb, var(--md-primary) 12%, transparent);
+  color: var(--md-on-background);
+}
+
+.badgeRed {
+  background: color-mix(in srgb, var(--md-error) 12%, transparent);
+  color: var(--md-on-background);
+}
+
+.badgeYellow {
+  background: color-mix(in srgb, var(--md-secondary) 14%, transparent);
+  color: var(--md-on-background);
+}
