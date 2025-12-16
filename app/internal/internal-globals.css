@@ -1,0 +1,89 @@
+/* ============================================
+   MEGICODE INTERNAL - CSS VARIABLES (Global)
+   ============================================ */
+
+:root {
+  /* Primary Colors */
+  --int-primary: #6366f1;
+  --int-primary-hover: #4f46e5;
+  --int-primary-light: rgba(99, 102, 241, 0.1);
+  --int-primary-glow: rgba(99, 102, 241, 0.4);
+  
+  /* Accent Colors */
+  --int-success: #10b981;
+  --int-success-light: rgba(16, 185, 129, 0.1);
+  --int-warning: #f59e0b;
+  --int-warning-light: rgba(245, 158, 11, 0.1);
+  --int-error: #ef4444;
+  --int-error-light: rgba(239, 68, 68, 0.1);
+  --int-info: #3b82f6;
+  --int-info-light: rgba(59, 130, 246, 0.1);
+  
+  /* Neutral Colors - Light Mode */
+  --int-bg: #f8fafc;
+  --int-bg-alt: #f1f5f9;
+  --int-surface: #ffffff;
+  --int-surface-hover: #f8fafc;
+  --int-border: #e2e8f0;
+  --int-border-light: #f1f5f9;
+  --int-text: #0f172a;
+  --int-text-secondary: #475569;
+  --int-text-muted: #94a3b8;
+  
+  /* Shadows - Light Mode */
+  --int-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --int-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --int-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --int-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --int-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  
+  /* Spacing */
+  --int-space-xs: 4px;
+  --int-space-sm: 8px;
+  --int-space-md: 16px;
+  --int-space-lg: 24px;
+  --int-space-xl: 32px;
+  --int-space-2xl: 48px;
+  
+  /* Border Radius */
+  --int-radius-sm: 6px;
+  --int-radius: 8px;
+  --int-radius-md: 12px;
+  --int-radius-lg: 16px;
+  --int-radius-xl: 24px;
+  --int-radius-full: 9999px;
+  
+  /* Transitions */
+  --int-transition-fast: 150ms ease;
+  --int-transition: 200ms ease;
+  --int-transition-slow: 300ms ease;
+  
+  /* Font Sizes */
+  --int-text-xs: 0.75rem;
+  --int-text-sm: 0.875rem;
+  --int-text-base: 1rem;
+  --int-text-lg: 1.125rem;
+  --int-text-xl: 1.25rem;
+  --int-text-2xl: 1.5rem;
+  --int-text-3xl: 1.875rem;
+  --int-text-4xl: 2.25rem;
+}
+
+/* Dark Mode Variables */
+[data-theme="dark"] {
+  --int-bg: #0f172a;
+  --int-bg-alt: #1e293b;
+  --int-surface: #1e293b;
+  --int-surface-hover: #334155;
+  --int-border: #334155;
+  --int-border-light: #1e293b;
+  --int-text: #f8fafc;
+  --int-text-secondary: #cbd5e1;
+  --int-text-muted: #64748b;
+  
+  --int-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --int-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
+  --int-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --int-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  --int-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.4);
+}

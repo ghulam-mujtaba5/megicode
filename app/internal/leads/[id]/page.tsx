@@ -2,12 +2,72 @@ import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
 import { and, desc, eq } from 'drizzle-orm';
 
-import commonStyles from '../../internalCommon.module.css';
+import styles from '../../styles.module.css';
 import { requireRole } from '@/lib/internal/auth';
 import { getDb } from '@/lib/db';
 import { leads, users, projects, processInstances, tasks, events, leadNotes, leadTags, proposals } from '@/lib/db/schema';
 import { ensureActiveDefaultProcessDefinition } from '@/lib/workflow/processDefinition';
 import { formatDateTime } from '@/lib/internal/ui';
+
+// Icons
+const Icons = {
+  back: (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M19 12H5M12 19l-7-7 7-7"/>
+    </svg>
+  ),
+  user: (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+      <circle cx="12" cy="7" r="4"/>
+    </svg>
+  ),
+  mail: (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+      <polyline points="22,6 12,13 2,6"/>
+    </svg>
+  ),
+  phone: (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+    </svg>
+  ),
+  building: (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="4" y="2" width="16" height="20" rx="2" ry="2"/>
+      <line x1="9" y1="22" x2="9" y2="22.01"/>
+      <line x1="15" y1="22" x2="15" y2="22.01"/>
+      <line x1="12" y1="22" x2="12" y2="22.01"/>
+      <line x1="12" y1="2" x2="12" y2="4"/>
+      <line x1="4" y1="10" x2="20" y2="10"/>
+    </svg>
+  ),
+  tag: (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
+      <line x1="7" y1="7" x2="7.01" y2="7"/>
+    </svg>
+  ),
+  send: (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="22" y1="2" x2="11" y2="13"/>
+      <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+    </svg>
+  ),
+  plus: (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="12" y1="5" x2="12" y2="19"/>
+      <line x1="5" y1="12" x2="19" y2="12"/>
+    </svg>
+  ),
+  trash: (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="3 6 5 6 21 6"/>
+      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+    </svg>
+  )
+};
 
 export default async function LeadDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const session = await requireRole(['admin', 'pm']);
@@ -211,179 +271,295 @@ export default async function LeadDetailPage({ params }: { params: Promise<{ id:
   }
 
   return (
-    <main className={commonStyles.page}>
-      <div className={commonStyles.row}>
-        <h1>Lead</h1>
-        <Link href="/internal/leads">Back</Link>
-      </div>
-
-      <section className={commonStyles.card}>
-        <div className={commonStyles.grid2}>
+    <main className={styles.page}>
+      <div className={styles.container}>
+        {/* Header */}
+        <div className={styles.pageHeader}>
           <div>
-            <h2>{lead.name}</h2>
-            <p className={commonStyles.muted}>{lead.email ?? ''}</p>
-            <p className={commonStyles.muted}>Created: {formatDateTime(lead.createdAt)}</p>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
+              <Link href="/internal/leads" className={styles.btnGhost} style={{ padding: '4px 8px' }}>
+                {Icons.back} Back
+              </Link>
+              <span className={styles.badge} style={{ background: 'var(--int-bg-alt)', color: 'var(--int-text-muted)' }}>Lead</span>
+            </div>
+            <h1 className={styles.pageTitle}>{lead.name}</h1>
+            <p className={styles.pageSubtitle}>Created {formatDateTime(lead.createdAt)}</p>
           </div>
-          <div>
-            <p>
-              <strong>Status:</strong> {lead.status}
-            </p>
-            <p>
-              <strong>Company:</strong> {lead.company ?? ''}
-            </p>
-            <p>
-              <strong>Phone:</strong> {lead.phone ?? ''}
-            </p>
-            <p>
-              <strong>Service:</strong> {lead.service ?? ''}
-            </p>
+          <div className={styles.pageActions}>
+            {/* Actions can go here */}
           </div>
         </div>
 
-        {lead.message ? (
-          <div>
-            <h3>Message</h3>
-            <p className={commonStyles.muted}>{lead.message}</p>
-          </div>
-        ) : null}
-      </section>
-
-      <section className={commonStyles.card}>
-        <h2>Convert to Project</h2>
-        <form action={convertToProject} className={commonStyles.grid}>
-          <input type="hidden" name="leadId" value={lead.id} />
-          <label>
-            Project name
-            <input className={commonStyles.input} name="projectName" defaultValue={`${lead.name} Project`} />
-          </label>
-
-          <label>
-            Owner (PM)
-            <select className={commonStyles.select} name="ownerUserId" defaultValue="">
-              <option value="">Unassigned</option>
-              {team.map((u) => (
-                <option key={u.id} value={u.id}>
-                  {u.email} ({u.role})
-                </option>
-              ))}
-            </select>
-          </label>
-
-          <label>
-            Priority
-            <select className={commonStyles.select} name="priority" defaultValue="medium">
-              <option value="low">low</option>
-              <option value="medium">medium</option>
-              <option value="high">high</option>
-            </select>
-          </label>
-
-          <label>
-            Due date
-            <input className={commonStyles.input} name="dueAt" type="date" />
-          </label>
-
-          <button className={commonStyles.button} type="submit">
-            Create Project + Start Process
-          </button>
-        </form>
-      </section>
-
-      {/* Status Update */}
-      <section className={commonStyles.card}>
-        <h2>Update Status</h2>
-        <form action={updateStatus} className={commonStyles.row}>
-          <input type="hidden" name="leadId" value={lead.id} />
-          <select className={commonStyles.select} name="status" defaultValue={lead.status} style={{ flex: 1 }}>
-            <option value="new">New</option>
-            <option value="contacted">Contacted</option>
-            <option value="qualified">Qualified</option>
-            <option value="proposal_sent">Proposal Sent</option>
-            <option value="negotiating">Negotiating</option>
-            <option value="converted">Converted</option>
-            <option value="lost">Lost</option>
-          </select>
-          <button className={commonStyles.secondaryButton} type="submit">Update</button>
-        </form>
-      </section>
-
-      {/* Tags */}
-      <section className={commonStyles.card}>
-        <h2>Tags</h2>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 16 }}>
-          {tags.length === 0 ? (
-            <span className={commonStyles.muted}>No tags</span>
-          ) : (
-            tags.map((t) => (
-              <form key={t.id} action={removeTag} style={{ display: 'inline' }}>
-                <input type="hidden" name="id" value={t.id} />
-                <input type="hidden" name="leadId" value={lead.id} />
-                <button 
-                  type="submit" 
-                  className={`${commonStyles.badge} ${commonStyles.badgeBlue}`}
-                  style={{ cursor: 'pointer', border: 'none' }}
-                  title="Click to remove"
-                >
-                  {t.tag} ×
-                </button>
-              </form>
-            ))
-          )}
-        </div>
-        <form action={addTag} className={commonStyles.row}>
-          <input type="hidden" name="leadId" value={lead.id} />
-          <input className={commonStyles.input} name="tag" placeholder="Add tag..." style={{ flex: 1 }} required />
-          <button className={commonStyles.secondaryButton} type="submit">Add</button>
-        </form>
-      </section>
-
-      {/* Proposals */}
-      <section className={commonStyles.card}>
-        <h2>Proposals ({leadProposals.length})</h2>
-        {leadProposals.length === 0 ? (
-          <p className={commonStyles.muted}>No proposals yet. <Link href={`/internal/proposals`}>Create one</Link></p>
-        ) : (
-          <table className={commonStyles.table}>
-            <thead>
-              <tr><th>Title</th><th>Status</th><th>Total</th><th>Created</th></tr>
-            </thead>
-            <tbody>
-              {leadProposals.map((p) => (
-                <tr key={p.id}>
-                  <td><Link href={`/internal/proposals/${p.id}`}>{p.title}</Link></td>
-                  <td><span className={`${commonStyles.badge} ${p.status === 'accepted' ? commonStyles.badgeGreen : p.status === 'declined' ? commonStyles.badgeRed : commonStyles.badgeBlue}`}>{p.status}</span></td>
-                  <td>${((p.totalAmount ?? 0) / 100).toFixed(2)}</td>
-                  <td>{formatDateTime(p.createdAt)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
-      </section>
-
-      {/* Notes */}
-      <section className={commonStyles.card}>
-        <h2>Notes ({notes.length})</h2>
-        {notes.length > 0 ? (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 16 }}>
-            {notes.map(({ note, authorName, authorEmail }) => (
-              <div key={note.id} style={{ borderLeft: '3px solid var(--border-color)', paddingLeft: 12 }}>
-                <div className={commonStyles.muted} style={{ fontSize: '0.85rem', marginBottom: 4 }}>
-                  <strong>{authorName || authorEmail || 'Unknown'}</strong> · {formatDateTime(note.createdAt)}
-                </div>
-                <p style={{ margin: 0 }}>{note.content}</p>
+        <div className={styles.grid} style={{ gridTemplateColumns: '2fr 1fr', gap: '24px' }}>
+          {/* Left Column: Details, Proposals, Notes */}
+          <div className={styles.form}>
+            
+            {/* Lead Details */}
+            <section className={styles.card}>
+              <div className={styles.cardHeader}>
+                <h2 className={styles.cardTitle}>Contact Information</h2>
               </div>
-            ))}
+              <div className={styles.cardBody}>
+                <div className={styles.grid2}>
+                  <div>
+                    <p className={styles.label}>{Icons.mail} Email</p>
+                    <p>{lead.email || <span className={styles.textMuted}>N/A</span>}</p>
+                  </div>
+                  <div>
+                    <p className={styles.label}>{Icons.phone} Phone</p>
+                    <p>{lead.phone || <span className={styles.textMuted}>N/A</span>}</p>
+                  </div>
+                  <div>
+                    <p className={styles.label}>{Icons.building} Company</p>
+                    <p>{lead.company || <span className={styles.textMuted}>N/A</span>}</p>
+                  </div>
+                  <div>
+                    <p className={styles.label}>Service Interest</p>
+                    <p>{lead.service || <span className={styles.textMuted}>N/A</span>}</p>
+                  </div>
+                </div>
+                {lead.message && (
+                  <div style={{ marginTop: '24px', paddingTop: '24px', borderTop: '1px solid var(--int-border)' }}>
+                    <p className={styles.label}>Message</p>
+                    <p style={{ whiteSpace: 'pre-wrap' }}>{lead.message}</p>
+                  </div>
+                )}
+              </div>
+            </section>
+
+            {/* Proposals */}
+            <section className={styles.card}>
+              <div className={styles.cardHeader}>
+                <h2 className={styles.cardTitle}>Proposals ({leadProposals.length})</h2>
+                <Link href="/internal/proposals" className={`${styles.btn} ${styles.btnSm} ${styles.btnSecondary}`}>
+                  {Icons.plus} Create Proposal
+                </Link>
+              </div>
+              <div className={styles.cardBody} style={{ padding: 0 }}>
+                {leadProposals.length === 0 ? (
+                  <div style={{ padding: '24px', textAlign: 'center', color: 'var(--int-text-muted)' }}>
+                    No proposals created yet.
+                  </div>
+                ) : (
+                  <div className={styles.tableWrapper} style={{ border: 'none', borderRadius: 0 }}>
+                    <table className={styles.table}>
+                      <thead>
+                        <tr>
+                          <th>Title</th>
+                          <th>Status</th>
+                          <th>Total</th>
+                          <th>Date</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {leadProposals.map((p) => (
+                          <tr key={p.id}>
+                            <td>
+                              <Link href={`/internal/proposals/${p.id}`} style={{ fontWeight: 500, color: 'var(--int-primary)' }}>
+                                {p.title}
+                              </Link>
+                            </td>
+                            <td>
+                              <span className={`${styles.badge} ${
+                                p.status === 'accepted' ? styles.badgeSuccess : 
+                                p.status === 'declined' ? styles.badgeError : 
+                                styles.badgeInfo
+                              }`}>
+                                {p.status}
+                              </span>
+                            </td>
+                            <td>${((p.totalAmount ?? 0) / 100).toFixed(2)}</td>
+                            <td>{formatDateTime(p.createdAt)}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </div>
+            </section>
+
+            {/* Notes */}
+            <section className={styles.card}>
+              <div className={styles.cardHeader}>
+                <h2 className={styles.cardTitle}>Notes & Activity</h2>
+              </div>
+              <div className={styles.cardBody}>
+                <form action={addNote} className={styles.form} style={{ marginBottom: '24px' }}>
+                  <input type="hidden" name="leadId" value={lead.id} />
+                  <div className={styles.inputGroup}>
+                    <textarea 
+                      className={styles.textarea} 
+                      name="content" 
+                      placeholder="Add a note..." 
+                      rows={3} 
+                      required 
+                      style={{ minHeight: '80px', borderBottomLeftRadius: 'var(--int-radius)', borderBottomRightRadius: 0 }}
+                    ></textarea>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '-1px' }}>
+                    <button className={`${styles.btn} ${styles.btnPrimary}`} type="submit" style={{ borderTopLeftRadius: 0, borderTopRightRadius: 0, width: '100%' }}>
+                      {Icons.send} Add Note
+                    </button>
+                  </div>
+                </form>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                  {notes.length === 0 ? (
+                    <p className={styles.textMuted} style={{ textAlign: 'center', padding: '20px' }}>No notes yet</p>
+                  ) : (
+                    notes.map(({ note, authorName, authorEmail }) => (
+                      <div key={note.id} style={{ display: 'flex', gap: '12px' }}>
+                        <div style={{ 
+                          width: '32px', height: '32px', borderRadius: '50%', 
+                          background: 'var(--int-bg-alt)', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                          color: 'var(--int-text-secondary)', flexShrink: 0
+                        }}>
+                          {Icons.user}
+                        </div>
+                        <div style={{ flex: 1 }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
+                            <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>{authorName || authorEmail || 'Unknown'}</span>
+                            <span style={{ fontSize: '0.8rem', color: 'var(--int-text-muted)' }}>{formatDateTime(note.createdAt)}</span>
+                          </div>
+                          <div style={{ background: 'var(--int-bg-alt)', padding: '12px', borderRadius: 'var(--int-radius)', fontSize: '0.95rem' }}>
+                            {note.content}
+                          </div>
+                        </div>
+                      </div>
+                    ))
+                  )}
+                </div>
+              </div>
+            </section>
           </div>
-        ) : (
-          <p className={commonStyles.muted}>No notes yet</p>
-        )}
-        <form action={addNote} className={commonStyles.grid}>
-          <input type="hidden" name="leadId" value={lead.id} />
-          <textarea className={commonStyles.textarea} name="content" placeholder="Add a note..." rows={3} required></textarea>
-          <button className={commonStyles.secondaryButton} type="submit">Add Note</button>
-        </form>
-      </section>
+
+          {/* Right Column: Status, Tags, Actions */}
+          <div className={styles.form}>
+            
+            {/* Status */}
+            <section className={styles.card}>
+              <div className={styles.cardHeader}>
+                <h2 className={styles.cardTitle}>Status</h2>
+              </div>
+              <div className={styles.cardBody}>
+                <form action={updateStatus} className={styles.form}>
+                  <input type="hidden" name="leadId" value={lead.id} />
+                  <div className={styles.inputGroup}>
+                    <select className={styles.select} name="status" defaultValue={lead.status}>
+                      <option value="new">New</option>
+                      <option value="contacted">Contacted</option>
+                      <option value="qualified">Qualified</option>
+                      <option value="proposal_sent">Proposal Sent</option>
+                      <option value="negotiating">Negotiating</option>
+                      <option value="converted">Converted</option>
+                      <option value="lost">Lost</option>
+                    </select>
+                    <button className={`${styles.btn} ${styles.btnSecondary}`} type="submit">Update</button>
+                  </div>
+                </form>
+              </div>
+            </section>
+
+            {/* Tags */}
+            <section className={styles.card}>
+              <div className={styles.cardHeader}>
+                <h2 className={styles.cardTitle}>Tags</h2>
+              </div>
+              <div className={styles.cardBody}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '16px' }}>
+                  {tags.length === 0 ? (
+                    <span className={styles.textMuted} style={{ fontSize: '0.9rem' }}>No tags</span>
+                  ) : (
+                    tags.map((t) => (
+                      <form key={t.id} action={removeTag}>
+                        <input type="hidden" name="id" value={t.id} />
+                        <input type="hidden" name="leadId" value={lead.id} />
+                        <button 
+                          type="submit" 
+                          className={`${styles.badge} ${styles.badgeInfo}`}
+                          style={{ cursor: 'pointer', border: 'none', paddingRight: '4px' }}
+                          title="Remove tag"
+                        >
+                          {t.tag} 
+                          <span style={{ marginLeft: '4px', opacity: 0.6 }}>{Icons.trash}</span>
+                        </button>
+                      </form>
+                    ))
+                  )}
+                </div>
+                <form action={addTag} className={styles.form}>
+                  <input type="hidden" name="leadId" value={lead.id} />
+                  <div className={styles.inputGroup}>
+                    <input className={styles.input} name="tag" placeholder="Add tag..." required />
+                    <button className={`${styles.btn} ${styles.btnSecondary}`} type="submit">{Icons.plus}</button>
+                  </div>
+                </form>
+              </div>
+            </section>
+
+            {/* Convert */}
+            <section className={`${styles.card} ${lead.status === 'converted' ? '' : styles.cardHoverable}`} style={{ borderColor: lead.status === 'converted' ? 'var(--int-success)' : 'var(--int-primary)' }}>
+              <div className={styles.cardHeader} style={{ background: lead.status === 'converted' ? 'var(--int-success-light)' : 'var(--int-primary-light)' }}>
+                <h2 className={styles.cardTitle} style={{ color: lead.status === 'converted' ? 'var(--int-success)' : 'var(--int-primary)' }}>
+                  {lead.status === 'converted' ? 'Converted to Project' : 'Convert to Project'}
+                </h2>
+              </div>
+              <div className={styles.cardBody}>
+                {lead.status === 'converted' ? (
+                  <div style={{ textAlign: 'center' }}>
+                    <p style={{ marginBottom: '16px' }}>This lead has been converted.</p>
+                    <Link href={`/internal/projects?fromLead=${lead.id}`} className={`${styles.btn} ${styles.btnSuccess}`}>
+                      View Project
+                    </Link>
+                  </div>
+                ) : (
+                  <form action={convertToProject} className={styles.form}>
+                    <input type="hidden" name="leadId" value={lead.id} />
+                    
+                    <div>
+                      <label className={styles.formLabel}>Project Name</label>
+                      <input className={styles.input} name="projectName" defaultValue={`${lead.name} Project`} />
+                    </div>
+
+                    <div>
+                      <label className={styles.formLabel}>Owner (PM)</label>
+                      <select className={styles.select} name="ownerUserId" defaultValue="">
+                        <option value="">Unassigned</option>
+                        {team.map((u) => (
+                          <option key={u.id} value={u.id}>
+                            {u.email} ({u.role})
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div className={styles.grid2} style={{ gap: '12px' }}>
+                      <div>
+                        <label className={styles.formLabel}>Priority</label>
+                        <select className={styles.select} name="priority" defaultValue="medium">
+                          <option value="low">Low</option>
+                          <option value="medium">Medium</option>
+                          <option value="high">High</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className={styles.formLabel}>Due Date</label>
+                        <input className={styles.input} name="dueAt" type="date" />
+                      </div>
+                    </div>
+
+                    <button className={`${styles.btn} ${styles.btnPrimary}`} type="submit" style={{ width: '100%', marginTop: '8px' }}>
+                      Create Project + Start Process
+                    </button>
+                  </form>
+                )}
+              </div>
+            </section>
+
+          </div>
+        </div>
+      </div>
     </main>
   );
 }

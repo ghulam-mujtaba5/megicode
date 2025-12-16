@@ -6,7 +6,8 @@ export const LOGO_MAIN_LIGHT = '/logo-main-light.svg';
 export const LOGO_MAIN_DARK = '/logo-main-dark.svg';
 export const LOGO_NAVBAR_LIGHT = '/logo-navbar-light.svg';
 export const LOGO_NAVBAR_DARK = '/logo-navbar-dark.svg';
-export const LOGO_ICON = PWA_ICON; // Default to PWA icon for general use
+// Use the icon-only mark (the 'M' logo) for compact spots like loaders and favicons
+export const LOGO_ICON = '/logo-icon.svg';
 export const LOGO_LEGACY = '/logo-legacy.svg';
 
 export default {

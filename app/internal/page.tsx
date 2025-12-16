@@ -3,19 +3,25 @@ import { desc, eq, sql, and } from 'drizzle-orm';
 
 import { requireInternalSession } from '@/lib/internal/auth';
 import { getDb } from '@/lib/db';
-import { leads, projects, tasks, processInstances } from '@/lib/db/schema';
-import commonStyles from './internalCommon.module.css';
-import styles from './internal.module.css';
+import { leads, projects, tasks, processInstances, invoices, clients } from '@/lib/db/schema';
+import s from './styles.module.css';
 
-function KPICard({ label, value, href, color }: { label: string; value: number | string; href?: string; color?: string }) {
-  const content = (
-    <div className={styles.kpiCard} style={{ borderLeftColor: color || '#4573df' }}>
-      <div className={styles.kpiValue}>{value}</div>
-      <div className={styles.kpiLabel}>{label}</div>
-    </div>
-  );
-  return href ? <Link href={href}>{content}</Link> : content;
-}
+// Icons as inline SVGs for the dashboard
+const Icons = {
+  leads: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
+  projects: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>,
+  tasks: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>,
+  workflow: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>,
+  clients: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9v.01"/><path d="M9 12v.01"/><path d="M9 15v.01"/><path d="M9 18v.01"/></svg>,
+  invoices: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>,
+  warning: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>,
+  clock: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>,
+  arrowRight: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>,
+  plus: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>,
+  calendar: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>,
+  trendUp: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="23,6 13.5,15.5 8.5,10.5 1,18"/><polyline points="17,6 23,6 23,12"/></svg>,
+  trendDown: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="23,18 13.5,8.5 8.5,13.5 1,6"/><polyline points="17,18 23,18 23,12"/></svg>,
+};
 
 export default async function InternalDashboardPage() {
   const session = await requireInternalSession();
@@ -24,9 +30,10 @@ export default async function InternalDashboardPage() {
   const userRole = session.user.role ?? 'viewer';
   const now = new Date();
   const in48h = new Date(now.getTime() + 48 * 60 * 60 * 1000);
+  const todayStr = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
   // KPIs
-  const [leadStats, projectStats, taskStats, instanceStats] = await Promise.all([
+  const [leadStats, projectStats, taskStats, instanceStats, clientStats, invoiceStats] = await Promise.all([
     db.select({
       total: sql<number>`count(*)`,
       new: sql<number>`sum(case when status = 'new' then 1 else 0 end)`,
@@ -45,6 +52,7 @@ export default async function InternalDashboardPage() {
       todo: sql<number>`sum(case when status = 'todo' then 1 else 0 end)`,
       inProgress: sql<number>`sum(case when status = 'in_progress' then 1 else 0 end)`,
       blocked: sql<number>`sum(case when status = 'blocked' then 1 else 0 end)`,
+      done: sql<number>`sum(case when status = 'done' then 1 else 0 end)`,
       overdue: sql<number>`sum(case when status not in ('done', 'canceled') and due_at < ${now.getTime()} then 1 else 0 end)`,
       dueSoon: sql<number>`sum(case when status not in ('done', 'canceled') and due_at >= ${now.getTime()} and due_at <= ${in48h.getTime()} then 1 else 0 end)`,
     }).from(tasks).where(userId ? eq(tasks.assignedToUserId, userId) : sql`1=1`).get(),
@@ -52,13 +60,20 @@ export default async function InternalDashboardPage() {
       running: sql<number>`sum(case when status = 'running' then 1 else 0 end)`,
       completed: sql<number>`sum(case when status = 'completed' then 1 else 0 end)`,
     }).from(processInstances).get(),
+    db.select({ total: sql<number>`count(*)` }).from(clients).get(),
+    db.select({
+      total: sql<number>`count(*)`,
+      pending: sql<number>`sum(case when status in ('draft', 'sent') then 1 else 0 end)`,
+      paid: sql<number>`sum(case when status = 'paid' then 1 else 0 end)`,
+      overdue: sql<number>`sum(case when status = 'overdue' then 1 else 0 end)`,
+    }).from(invoices).get(),
   ]);
 
   // My tasks
   const myTasks = userId
     ? await db.select().from(tasks)
         .where(and(eq(tasks.assignedToUserId, userId), sql`status not in ('done', 'canceled')`))
-        .orderBy(tasks.dueAt).limit(10).all()
+        .orderBy(tasks.dueAt).limit(6).all()
     : [];
 
   // Recent leads (PM/Admin)
@@ -68,141 +83,403 @@ export default async function InternalDashboardPage() {
 
   // Projects needing attention
   const attentionProjects = ['admin', 'pm'].includes(userRole)
-    ? await db.select().from(projects).where(sql`status in ('blocked', 'in_qa')`).orderBy(desc(projects.updatedAt)).limit(5).all()
+    ? await db.select().from(projects).where(sql`status in ('blocked', 'in_qa')`).orderBy(desc(projects.updatedAt)).limit(4).all()
     : [];
 
+  // Calculate completion rate
+  const taskTotal = (taskStats?.total ?? 0);
+  const taskDone = (taskStats?.done ?? 0);
+  const completionRate = taskTotal > 0 ? Math.round((taskDone / taskTotal) * 100) : 0;
+
+  // Alerts count
+  const alertsCount = (taskStats?.overdue ?? 0) + (taskStats?.blocked ?? 0) + (invoiceStats?.overdue ?? 0);
+
+  const getFirstName = (email: string) => {
+    const name = email.split('@')[0];
+    return name.charAt(0).toUpperCase() + name.slice(1);
+  };
+
+  const getStatusBadge = (status: string) => {
+    const map: Record<string, string> = {
+      new: s.badgePrimary,
+      in_review: s.badgeWarning,
+      approved: s.badgeSuccess,
+      converted: s.badgeSuccess,
+      todo: s.badgeDefault,
+      in_progress: s.badgePrimary,
+      blocked: s.badgeDanger,
+      done: s.badgeSuccess,
+      draft: s.badgeDefault,
+      sent: s.badgePrimary,
+      paid: s.badgeSuccess,
+      overdue: s.badgeDanger,
+    };
+    return map[status] || s.badgeDefault;
+  };
+
+  const getPriorityBadge = (priority: string) => {
+    const map: Record<string, string> = {
+      critical: s.badgeDanger,
+      high: s.badgeWarning,
+      medium: s.badgePrimary,
+      low: s.badgeDefault,
+    };
+    return map[priority] || s.badgeDefault;
+  };
+
   return (
-    <main className={commonStyles.page}>
-      <div className={commonStyles.row}>
-        <h1>Dashboard</h1>
-        <span className={commonStyles.muted}>Welcome, {session.user.email}</span>
+    <main className={s.page}>
+      {/* Header Section */}
+      <div className={s.pageHeader}>
+        <div className={s.pageHeaderContent}>
+          <div className={s.welcomeSection}>
+            <h1 className={s.pageTitle}>
+              Good {now.getHours() < 12 ? 'morning' : now.getHours() < 17 ? 'afternoon' : 'evening'}, {getFirstName(session.user.email || 'User')}
+            </h1>
+            <p className={s.pageSubtitle}>{todayStr}</p>
+          </div>
+          <div className={s.headerActions}>
+            {['admin', 'pm'].includes(userRole) && (
+              <Link href="/internal/leads" className={s.btnPrimary}>
+                <span className={s.btnIcon}>{Icons.plus}</span>
+                New Lead
+              </Link>
+            )}
+          </div>
+        </div>
       </div>
 
-      {/* KPI Grid */}
-      <section className={styles.kpiGrid}>
-        <KPICard label="New Leads" value={leadStats?.new ?? 0} href="/internal/leads?status=new" color="#6ea8ff" />
-        <KPICard label="In Review" value={leadStats?.inReview ?? 0} href="/internal/leads?status=in_review" color="#fbbf24" />
-        <KPICard label="Approved" value={leadStats?.approved ?? 0} href="/internal/leads?status=approved" color="#10b981" />
-        <KPICard label="Active Projects" value={projectStats?.active ?? 0} href="/internal/projects" color="#4573df" />
-        <KPICard label="Blocked" value={projectStats?.blocked ?? 0} href="/internal/projects?status=blocked" color="#ef4444" />
-        <KPICard label="Running Instances" value={instanceStats?.running ?? 0} href="/internal/instances" color="#8b5cf6" />
-      </section>
-
-      {/* Alerts */}
-      {((taskStats?.overdue ?? 0) > 0 || (taskStats?.blocked ?? 0) > 0) && (
-        <section className={`${commonStyles.card} ${styles.alertCard}`}>
-          <h2>⚠️ Alerts</h2>
-          <div className={styles.alertGrid}>
-            {(taskStats?.overdue ?? 0) > 0 && (
-              <div className={styles.alertItem} style={{ borderColor: '#ef4444' }}>
-                <strong>{taskStats?.overdue}</strong> overdue task(s)
-              </div>
-            )}
-            {(taskStats?.blocked ?? 0) > 0 && (
-              <div className={styles.alertItem} style={{ borderColor: '#fbbf24' }}>
-                <strong>{taskStats?.blocked}</strong> blocked task(s)
-              </div>
-            )}
-            {(taskStats?.dueSoon ?? 0) > 0 && (
-              <div className={styles.alertItem} style={{ borderColor: '#6ea8ff' }}>
-                <strong>{taskStats?.dueSoon}</strong> task(s) due in 48h
-              </div>
-            )}
+      {/* Alerts Banner */}
+      {alertsCount > 0 && (
+        <div className={s.alertBanner}>
+          <div className={s.alertBannerIcon}>{Icons.warning}</div>
+          <div className={s.alertBannerContent}>
+            <strong>Attention Required</strong>
+            <span>
+              {(taskStats?.overdue ?? 0) > 0 && `${taskStats?.overdue} overdue task(s)`}
+              {(taskStats?.blocked ?? 0) > 0 && ` • ${taskStats?.blocked} blocked task(s)`}
+              {(invoiceStats?.overdue ?? 0) > 0 && ` • ${invoiceStats?.overdue} overdue invoice(s)`}
+            </span>
           </div>
-        </section>
+          <Link href="/internal/tasks" className={s.alertBannerAction}>Review Now</Link>
+        </div>
       )}
 
-      <div className={commonStyles.grid2}>
-        {/* My Tasks */}
-        <section className={commonStyles.card}>
-          <div className={commonStyles.row}>
-            <h2>My Tasks</h2>
-            <Link href="/internal/tasks">View all</Link>
-          </div>
-          {myTasks.length > 0 ? (
-            <ul className={styles.taskList}>
-              {myTasks.map((t) => (
-                <li key={t.id} className={styles.taskItem}>
-                  <span className={`${commonStyles.badge} ${t.status === 'blocked' ? commonStyles.badgeYellow : t.status === 'in_progress' ? commonStyles.badgeBlue : commonStyles.badgeGray}`}>
-                    {t.status}
+      {/* KPI Cards Grid */}
+      <section className={s.kpiSection}>
+        <div className={s.kpiGrid}>
+          <Link href="/internal/leads" className={`${s.kpiCard} ${s.kpiCardPrimary}`}>
+            <div className={s.kpiIcon}>{Icons.leads}</div>
+            <div className={s.kpiContent}>
+              <span className={s.kpiValue}>{leadStats?.total ?? 0}</span>
+              <span className={s.kpiLabel}>Total Leads</span>
+            </div>
+            <div className={s.kpiMeta}>
+              <span className={s.kpiMetaItem}>
+                <span className={s.kpiMetaValue}>{leadStats?.new ?? 0}</span> new
+              </span>
+              <span className={s.kpiMetaItem}>
+                <span className={s.kpiMetaValue}>{leadStats?.approved ?? 0}</span> approved
+              </span>
+            </div>
+            <div className={s.kpiArrow}>{Icons.arrowRight}</div>
+          </Link>
+
+          <Link href="/internal/projects" className={`${s.kpiCard} ${s.kpiCardSuccess}`}>
+            <div className={s.kpiIcon}>{Icons.projects}</div>
+            <div className={s.kpiContent}>
+              <span className={s.kpiValue}>{projectStats?.active ?? 0}</span>
+              <span className={s.kpiLabel}>Active Projects</span>
+            </div>
+            <div className={s.kpiMeta}>
+              <span className={s.kpiMetaItem}>
+                <span className={s.kpiMetaValue}>{projectStats?.total ?? 0}</span> total
+              </span>
+              {(projectStats?.blocked ?? 0) > 0 && (
+                <span className={`${s.kpiMetaItem} ${s.kpiMetaDanger}`}>
+                  <span className={s.kpiMetaValue}>{projectStats?.blocked}</span> blocked
+                </span>
+              )}
+            </div>
+            <div className={s.kpiArrow}>{Icons.arrowRight}</div>
+          </Link>
+
+          <Link href="/internal/tasks" className={`${s.kpiCard} ${s.kpiCardWarning}`}>
+            <div className={s.kpiIcon}>{Icons.tasks}</div>
+            <div className={s.kpiContent}>
+              <span className={s.kpiValue}>{(taskStats?.todo ?? 0) + (taskStats?.inProgress ?? 0)}</span>
+              <span className={s.kpiLabel}>Open Tasks</span>
+            </div>
+            <div className={s.kpiMeta}>
+              <span className={s.kpiMetaItem}>
+                <span className={s.kpiMetaValue}>{taskStats?.inProgress ?? 0}</span> in progress
+              </span>
+              <span className={s.kpiMetaItem}>
+                <span className={s.kpiMetaValue}>{completionRate}%</span> done
+              </span>
+            </div>
+            <div className={s.kpiArrow}>{Icons.arrowRight}</div>
+          </Link>
+
+          <Link href="/internal/clients" className={`${s.kpiCard} ${s.kpiCardInfo}`}>
+            <div className={s.kpiIcon}>{Icons.clients}</div>
+            <div className={s.kpiContent}>
+              <span className={s.kpiValue}>{clientStats?.total ?? 0}</span>
+              <span className={s.kpiLabel}>Total Clients</span>
+            </div>
+            <div className={s.kpiMeta}>
+              <span className={s.kpiMetaItem}>Active accounts</span>
+            </div>
+            <div className={s.kpiArrow}>{Icons.arrowRight}</div>
+          </Link>
+
+          {['admin', 'pm'].includes(userRole) && (
+            <Link href="/internal/invoices" className={`${s.kpiCard} ${s.kpiCardDanger}`}>
+              <div className={s.kpiIcon}>{Icons.invoices}</div>
+              <div className={s.kpiContent}>
+                <span className={s.kpiValue}>{invoiceStats?.pending ?? 0}</span>
+                <span className={s.kpiLabel}>Pending Invoices</span>
+              </div>
+              <div className={s.kpiMeta}>
+                <span className={s.kpiMetaItem}>
+                  <span className={s.kpiMetaValue}>{invoiceStats?.paid ?? 0}</span> paid
+                </span>
+                {(invoiceStats?.overdue ?? 0) > 0 && (
+                  <span className={`${s.kpiMetaItem} ${s.kpiMetaDanger}`}>
+                    <span className={s.kpiMetaValue}>{invoiceStats?.overdue}</span> overdue
                   </span>
-                  <Link href={`/internal/tasks/${t.id}`}>{t.title}</Link>
-                  {t.dueAt && <span className={commonStyles.muted}>{new Date(t.dueAt).toLocaleDateString()}</span>}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className={commonStyles.muted}>No pending tasks</p>
+                )}
+              </div>
+              <div className={s.kpiArrow}>{Icons.arrowRight}</div>
+            </Link>
           )}
+
+          <Link href="/internal/admin/process" className={`${s.kpiCard} ${s.kpiCardPurple}`}>
+            <div className={s.kpiIcon}>{Icons.workflow}</div>
+            <div className={s.kpiContent}>
+              <span className={s.kpiValue}>{instanceStats?.running ?? 0}</span>
+              <span className={s.kpiLabel}>Running Workflows</span>
+            </div>
+            <div className={s.kpiMeta}>
+              <span className={s.kpiMetaItem}>
+                <span className={s.kpiMetaValue}>{instanceStats?.completed ?? 0}</span> completed
+              </span>
+            </div>
+            <div className={s.kpiArrow}>{Icons.arrowRight}</div>
+          </Link>
+        </div>
+      </section>
+
+      {/* Main Content Grid */}
+      <div className={s.dashboardGrid}>
+        {/* My Tasks Section */}
+        <section className={s.card}>
+          <div className={s.cardHeader}>
+            <div className={s.cardHeaderLeft}>
+              <div className={s.cardIcon}>{Icons.tasks}</div>
+              <h2 className={s.cardTitle}>My Tasks</h2>
+              {myTasks.length > 0 && <span className={s.badge}>{myTasks.length}</span>}
+            </div>
+            <Link href="/internal/tasks" className={s.cardHeaderLink}>
+              View All {Icons.arrowRight}
+            </Link>
+          </div>
+          <div className={s.cardBody}>
+            {myTasks.length > 0 ? (
+              <div className={s.taskList}>
+                {myTasks.map((t) => (
+                  <Link key={t.id} href={`/internal/tasks/${t.id}`} className={s.taskItem}>
+                    <div className={s.taskItemContent}>
+                      <span className={`${s.badge} ${getStatusBadge(t.status)}`}>
+                        {t.status.replace('_', ' ')}
+                      </span>
+                      <span className={s.taskTitle}>{t.title}</span>
+                    </div>
+                    <div className={s.taskItemMeta}>
+                      {t.priority && (
+                        <span className={`${s.badgeOutline} ${getPriorityBadge(t.priority)}`}>
+                          {t.priority}
+                        </span>
+                      )}
+                      {t.dueAt && (
+                        <span className={s.taskDue}>
+                          {Icons.calendar}
+                          {new Date(t.dueAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                        </span>
+                      )}
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <div className={s.emptyState}>
+                <div className={s.emptyStateIcon}>{Icons.tasks}</div>
+                <p className={s.emptyStateText}>No pending tasks</p>
+                <Link href="/internal/tasks" className={s.btnOutline}>
+                  Browse All Tasks
+                </Link>
+              </div>
+            )}
+          </div>
         </section>
 
         {/* Recent Leads (PM/Admin) */}
         {['admin', 'pm'].includes(userRole) && (
-          <section className={commonStyles.card}>
-            <div className={commonStyles.row}>
-              <h2>Recent Leads</h2>
-              <Link href="/internal/leads">View all</Link>
+          <section className={s.card}>
+            <div className={s.cardHeader}>
+              <div className={s.cardHeaderLeft}>
+                <div className={s.cardIcon}>{Icons.leads}</div>
+                <h2 className={s.cardTitle}>Recent Leads</h2>
+              </div>
+              <Link href="/internal/leads" className={s.cardHeaderLink}>
+                View All {Icons.arrowRight}
+              </Link>
             </div>
-            {recentLeads.length > 0 ? (
-              <ul className={styles.taskList}>
-                {recentLeads.map((l) => (
-                  <li key={l.id} className={styles.taskItem}>
-                    <span className={`${commonStyles.badge} ${l.status === 'new' ? commonStyles.badgeBlue : l.status === 'approved' ? commonStyles.badgeGreen : commonStyles.badgeGray}`}>
-                      {l.status}
-                    </span>
-                    <Link href={`/internal/leads/${l.id}`}>{l.name}</Link>
-                    <span className={commonStyles.muted}>{l.company || ''}</span>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className={commonStyles.muted}>No leads yet</p>
-            )}
+            <div className={s.cardBody}>
+              {recentLeads.length > 0 ? (
+                <div className={s.leadList}>
+                  {recentLeads.map((l) => (
+                    <Link key={l.id} href={`/internal/leads/${l.id}`} className={s.leadItem}>
+                      <div className={s.leadAvatar}>
+                        {l.name.charAt(0).toUpperCase()}
+                      </div>
+                      <div className={s.leadContent}>
+                        <span className={s.leadName}>{l.name}</span>
+                        <span className={s.leadCompany}>{l.company || 'No company'}</span>
+                      </div>
+                      <span className={`${s.badge} ${getStatusBadge(l.status)}`}>
+                        {l.status.replace('_', ' ')}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              ) : (
+                <div className={s.emptyState}>
+                  <div className={s.emptyStateIcon}>{Icons.leads}</div>
+                  <p className={s.emptyStateText}>No leads yet</p>
+                  <Link href="/internal/leads" className={s.btnPrimary}>
+                    Add First Lead
+                  </Link>
+                </div>
+              )}
+            </div>
           </section>
         )}
-      </div>
 
-      {/* Projects Needing Attention */}
-      {['admin', 'pm'].includes(userRole) && attentionProjects.length > 0 && (
-        <section className={commonStyles.card}>
-          <h2>Projects Needing Attention</h2>
-          <table className={commonStyles.table}>
-            <thead><tr><th>Project</th><th>Status</th><th>Priority</th><th></th></tr></thead>
-            <tbody>
-              {attentionProjects.map((p) => (
-                <tr key={p.id}>
-                  <td>{p.name}</td>
-                  <td><span className={`${commonStyles.badge} ${p.status === 'blocked' ? commonStyles.badgeYellow : commonStyles.badgeBlue}`}>{p.status}</span></td>
-                  <td>{p.priority}</td>
-                  <td><Link href={`/internal/projects/${p.id}`}>Open</Link></td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        {/* Projects Needing Attention */}
+        {['admin', 'pm'].includes(userRole) && attentionProjects.length > 0 && (
+          <section className={`${s.card} ${s.cardWide}`}>
+            <div className={s.cardHeader}>
+              <div className={s.cardHeaderLeft}>
+                <div className={`${s.cardIcon} ${s.cardIconWarning}`}>{Icons.warning}</div>
+                <h2 className={s.cardTitle}>Projects Needing Attention</h2>
+              </div>
+              <Link href="/internal/projects" className={s.cardHeaderLink}>
+                View All {Icons.arrowRight}
+              </Link>
+            </div>
+            <div className={s.cardBody}>
+              <div className={s.tableContainer}>
+                <table className={s.table}>
+                  <thead>
+                    <tr>
+                      <th>Project</th>
+                      <th>Status</th>
+                      <th>Priority</th>
+                      <th>Updated</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {attentionProjects.map((p) => (
+                      <tr key={p.id}>
+                        <td>
+                          <span className={s.projectName}>{p.name}</span>
+                        </td>
+                        <td>
+                          <span className={`${s.badge} ${getStatusBadge(p.status)}`}>
+                            {p.status.replace('_', ' ')}
+                          </span>
+                        </td>
+                        <td>
+                          <span className={`${s.badgeOutline} ${getPriorityBadge(p.priority)}`}>
+                            {p.priority}
+                          </span>
+                        </td>
+                        <td className={s.textMuted}>
+                          {new Date(p.updatedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                        </td>
+                        <td>
+                          <Link href={`/internal/projects/${p.id}`} className={s.tableAction}>
+                            Open {Icons.arrowRight}
+                          </Link>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Quick Actions */}
+        <section className={`${s.card} ${s.cardQuickActions}`}>
+          <div className={s.cardHeader}>
+            <h2 className={s.cardTitle}>Quick Actions</h2>
+          </div>
+          <div className={s.cardBody}>
+            <div className={s.quickActionsGrid}>
+              {['admin', 'pm'].includes(userRole) && (
+                <>
+                  <Link href="/internal/leads" className={s.quickActionItem}>
+                    <div className={`${s.quickActionIcon} ${s.quickActionIconPrimary}`}>{Icons.leads}</div>
+                    <span>Leads</span>
+                  </Link>
+                  <Link href="/internal/clients" className={s.quickActionItem}>
+                    <div className={`${s.quickActionIcon} ${s.quickActionIconSuccess}`}>{Icons.clients}</div>
+                    <span>Clients</span>
+                  </Link>
+                  <Link href="/internal/proposals" className={s.quickActionItem}>
+                    <div className={`${s.quickActionIcon} ${s.quickActionIconWarning}`}>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10,9 9,9 8,9"/></svg>
+                    </div>
+                    <span>Proposals</span>
+                  </Link>
+                </>
+              )}
+              <Link href="/internal/tasks" className={s.quickActionItem}>
+                <div className={`${s.quickActionIcon} ${s.quickActionIconInfo}`}>{Icons.tasks}</div>
+                <span>Tasks</span>
+              </Link>
+              <Link href="/internal/projects" className={s.quickActionItem}>
+                <div className={`${s.quickActionIcon} ${s.quickActionIconPurple}`}>{Icons.projects}</div>
+                <span>Projects</span>
+              </Link>
+              <Link href="/internal/reports" className={s.quickActionItem}>
+                <div className={`${s.quickActionIcon} ${s.quickActionIconDanger}`}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                </div>
+                <span>Reports</span>
+              </Link>
+              {userRole === 'admin' && (
+                <>
+                  <Link href="/internal/admin/users" className={s.quickActionItem}>
+                    <div className={`${s.quickActionIcon} ${s.quickActionIconPrimary}`}>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </div>
+                    <span>Users</span>
+                  </Link>
+                  <Link href="/internal/invoices" className={s.quickActionItem}>
+                    <div className={`${s.quickActionIcon} ${s.quickActionIconSuccess}`}>{Icons.invoices}</div>
+                    <span>Invoices</span>
+                  </Link>
+                </>
+              )}
+            </div>
+          </div>
         </section>
-      )}
-
-      {/* Quick Actions */}
-      <section className={commonStyles.card}>
-        <h2>Quick Actions</h2>
-        <div className={styles.quickActions}>
-          {['admin', 'pm'].includes(userRole) && (
-            <>
-              <Link href="/internal/leads" className={commonStyles.button}>+ New Lead</Link>
-              <Link href="/internal/clients" className={commonStyles.secondaryButton}>Clients</Link>
-              <Link href="/internal/proposals" className={commonStyles.secondaryButton}>Proposals</Link>
-            </>
-          )}
-          <Link href="/internal/tasks" className={commonStyles.secondaryButton}>My Tasks</Link>
-          <Link href="/internal/projects" className={commonStyles.secondaryButton}>Projects</Link>
-          {userRole === 'admin' && (
-            <>
-              <Link href="/internal/admin/users" className={commonStyles.secondaryButton}>Users</Link>
-              <Link href="/internal/invoices" className={commonStyles.secondaryButton}>Invoices</Link>
-            </>
-          )}
-        </div>
-      </section>
+      </div>
     </main>
   );
 }

@@ -2,6 +2,7 @@ import { getServerSession } from 'next-auth/next';
 
 import { authOptions } from '@/auth';
 import InternalNavClient from '@/components/InternalNav/InternalNavClient';
+import './internal-globals.css';
 
 export default async function InternalLayout({
   children,

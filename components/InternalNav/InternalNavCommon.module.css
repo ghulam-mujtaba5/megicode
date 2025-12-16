@@ -1,69 +1,232 @@
+/* ============================================
+   INTERNAL NAVIGATION - MODERN DESIGN
+   ============================================ */
+
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 18px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  background: var(--md-background);
-  color: var(--md-on-background);
+  padding: 12px 24px;
+  background: var(--int-surface, #ffffff);
+  border-bottom: 1px solid var(--int-border, #e2e8f0);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95);
 }
 
 :global([data-theme="dark"]) .header {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(30, 41, 59, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .left {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 32px;
 }
 
 .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-weight: 700;
+  font-size: 1.125rem;
   text-decoration: none;
   color: inherit;
+  transition: opacity 0.2s;
+}
+
+.brand:hover {
+  opacity: 0.8;
+}
+
+.brandIcon {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #6366f1 0%, #818cf8 100%);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+/* Logo image used in internal nav */
+.brandImage {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  object-fit: contain;
+  display: block;
 }
 
 .nav {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 4px;
 }
 
 .link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
   text-decoration: none;
-  color: inherit;
-  opacity: 0.9;
+  color: var(--int-text-secondary, #475569);
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 6px;
+  transition: all 0.2s;
 }
 
 .link:hover {
-  opacity: 1;
+  background: var(--int-bg-alt, #f1f5f9);
+  color: var(--int-text, #0f172a);
+}
+
+:global([data-theme="dark"]) .link:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.linkActive {
+  background: rgba(99, 102, 241, 0.1);
+  color: #6366f1;
+}
+
+.linkIcon {
+  font-size: 1rem;
+  opacity: 0.8;
 }
 
 .right {
   display: flex;
   align-items: center;
+  gap: 16px;
+}
+
+.userSection {
+  display: flex;
+  align-items: center;
   gap: 12px;
 }
 
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1 0%, #818cf8 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.userName {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--int-text, #0f172a);
+  line-height: 1.2;
+}
+
+.userRole {
+  font-size: 0.75rem;
+  color: var(--int-text-muted, #94a3b8);
+  text-transform: capitalize;
+}
+
 .user {
-  font-size: 0.9rem;
-  opacity: 0.85;
+  font-size: 0.875rem;
+  color: var(--int-text-secondary, #475569);
 }
 
 .button {
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  background: var(--md-surface);
-  color: var(--md-on-surface);
-  padding: 8px 10px;
-  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--int-border, #e2e8f0);
+  background: transparent;
+  color: var(--int-text-secondary, #475569);
+  font-size: 0.875rem;
+  font-weight: 500;
   cursor: pointer;
+  transition: all 0.2s;
+}
+
+.button:hover {
+  background: var(--int-bg-alt, #f1f5f9);
+  border-color: var(--int-text-muted, #94a3b8);
 }
 
 :global([data-theme="dark"]) .button {
   border: 1px solid rgba(255, 255, 255, 0.16);
 }
 
-.button:hover {
-  filter: brightness(0.98);
+:global([data-theme="dark"]) .button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Notification Bell */
+.notificationBtn {
+  position: relative;
+  padding: 8px;
+  border-radius: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--int-text-secondary, #475569);
+  transition: all 0.2s;
+}
+
+.notificationBtn:hover {
+  background: var(--int-bg-alt, #f1f5f9);
+  color: var(--int-text, #0f172a);
+}
+
+.notificationBadge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 8px;
+  height: 8px;
+  background: #ef4444;
+  border-radius: 50%;
+  border: 2px solid var(--int-surface, #ffffff);
+}
+
+/* Mobile Menu */
+.mobileMenuBtn {
+  display: none;
+  padding: 8px;
+  border-radius: 6px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--int-text, #0f172a);
+}
+
+@media (max-width: 1024px) {
+  .nav {
+    display: none;
+  }
+  
+  .mobileMenuBtn {
+    display: flex;
+  }
+  
+  .userInfo {
+    display: none;
+  }
 }
