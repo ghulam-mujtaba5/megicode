@@ -5,18 +5,113 @@ import { and, desc, eq } from 'drizzle-orm';
 import commonStyles from '../../internalCommon.module.css';
 import { requireRole } from '@/lib/internal/auth';
 import { getDb } from '@/lib/db';
-import { leads, users, projects, processInstances, tasks, events } from '@/lib/db/schema';
+import { leads, users, projects, processInstances, tasks, events, leadNotes, leadTags, proposals } from '@/lib/db/schema';
 import { ensureActiveDefaultProcessDefinition } from '@/lib/workflow/processDefinition';
 import { formatDateTime } from '@/lib/internal/ui';
 
 export default async function LeadDetailPage({ params }: { params: { id: string } }) {
-  await requireRole(['admin', 'pm']);
+  const session = await requireRole(['admin', 'pm']);
 
   const db = getDb();
   const lead = await db.select().from(leads).where(eq(leads.id, params.id)).get();
   if (!lead) notFound();
 
   const team = await db.select().from(users).orderBy(desc(users.createdAt)).all();
+  const notes = await db.select({
+    note: leadNotes,
+    authorName: users.name,
+    authorEmail: users.email,
+  })
+  .from(leadNotes)
+  .leftJoin(users, eq(leadNotes.authorUserId, users.id))
+  .where(eq(leadNotes.leadId, params.id))
+  .orderBy(desc(leadNotes.createdAt))
+  .all();
+
+  const tags = await db.select().from(leadTags).where(eq(leadTags.leadId, params.id)).all();
+  const leadProposals = await db.select().from(proposals).where(eq(proposals.leadId, params.id)).orderBy(desc(proposals.createdAt)).all();
+
+  async function addNote(formData: FormData) {
+    'use server';
+    const session = await requireRole(['admin', 'pm']);
+    const db = getDb();
+
+    const leadId = String(formData.get('leadId') ?? '').trim();
+    const content = String(formData.get('content') ?? '').trim();
+
+    if (!leadId || !content) return;
+
+    await db.insert(leadNotes).values({
+      id: crypto.randomUUID(),
+      leadId,
+      authorUserId: session.user.id ?? null,
+      content,
+      createdAt: new Date(),
+    });
+
+    redirect(`/internal/leads/${leadId}`);
+  }
+
+  async function addTag(formData: FormData) {
+    'use server';
+    await requireRole(['admin', 'pm']);
+    const db = getDb();
+
+    const leadId = String(formData.get('leadId') ?? '').trim();
+    const tag = String(formData.get('tag') ?? '').trim().toLowerCase();
+
+    if (!leadId || !tag) return;
+
+    // Check if tag already exists
+    const existing = await db.select().from(leadTags).where(and(eq(leadTags.leadId, leadId), eq(leadTags.tag, tag))).get();
+    if (!existing) {
+      await db.insert(leadTags).values({
+        id: crypto.randomUUID(),
+        leadId,
+        tag,
+      });
+    }
+
+    redirect(`/internal/leads/${leadId}`);
+  }
+
+  async function removeTag(formData: FormData) {
+    'use server';
+    await requireRole(['admin', 'pm']);
+    const db = getDb();
+
+    const id = String(formData.get('id') ?? '').trim();
+    const leadId = String(formData.get('leadId') ?? '').trim();
+
+    if (!id) return;
+
+    await db.delete(leadTags).where(eq(leadTags.id, id));
+    redirect(`/internal/leads/${leadId}`);
+  }
+
+  async function updateStatus(formData: FormData) {
+    'use server';
+    const session = await requireRole(['admin', 'pm']);
+    const db = getDb();
+
+    const leadId = String(formData.get('leadId') ?? '').trim();
+    const status = String(formData.get('status') ?? '').trim() as typeof lead.status;
+
+    if (!leadId) return;
+
+    await db.update(leads).set({ status, updatedAt: new Date() }).where(eq(leads.id, leadId));
+
+    await db.insert(events).values({
+      id: crypto.randomUUID(),
+      leadId,
+      type: `lead.status_changed`,
+      actorUserId: session.user.id ?? null,
+      payloadJson: JSON.stringify({ newStatus: status }),
+      createdAt: new Date(),
+    });
+
+    redirect(`/internal/leads/${leadId}`);
+  }
 
   async function convertToProject(formData: FormData) {
     'use server';
@@ -190,6 +285,102 @@ export default async function LeadDetailPage({ params }: { params: { id: string 
           <button className={commonStyles.button} type="submit">
             Create Project + Start Process
           </button>
+        </form>
+      </section>
+
+      {/* Status Update */}
+      <section className={commonStyles.card}>
+        <h2>Update Status</h2>
+        <form action={updateStatus} className={commonStyles.row}>
+          <input type="hidden" name="leadId" value={lead.id} />
+          <select className={commonStyles.select} name="status" defaultValue={lead.status} style={{ flex: 1 }}>
+            <option value="new">New</option>
+            <option value="contacted">Contacted</option>
+            <option value="qualified">Qualified</option>
+            <option value="proposal_sent">Proposal Sent</option>
+            <option value="negotiating">Negotiating</option>
+            <option value="converted">Converted</option>
+            <option value="lost">Lost</option>
+          </select>
+          <button className={commonStyles.secondaryButton} type="submit">Update</button>
+        </form>
+      </section>
+
+      {/* Tags */}
+      <section className={commonStyles.card}>
+        <h2>Tags</h2>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 16 }}>
+          {tags.length === 0 ? (
+            <span className={commonStyles.muted}>No tags</span>
+          ) : (
+            tags.map((t) => (
+              <form key={t.id} action={removeTag} style={{ display: 'inline' }}>
+                <input type="hidden" name="id" value={t.id} />
+                <input type="hidden" name="leadId" value={lead.id} />
+                <button 
+                  type="submit" 
+                  className={`${commonStyles.badge} ${commonStyles.badgeBlue}`}
+                  style={{ cursor: 'pointer', border: 'none' }}
+                  title="Click to remove"
+                >
+                  {t.tag} ×
+                </button>
+              </form>
+            ))
+          )}
+        </div>
+        <form action={addTag} className={commonStyles.row}>
+          <input type="hidden" name="leadId" value={lead.id} />
+          <input className={commonStyles.input} name="tag" placeholder="Add tag..." style={{ flex: 1 }} required />
+          <button className={commonStyles.secondaryButton} type="submit">Add</button>
+        </form>
+      </section>
+
+      {/* Proposals */}
+      <section className={commonStyles.card}>
+        <h2>Proposals ({leadProposals.length})</h2>
+        {leadProposals.length === 0 ? (
+          <p className={commonStyles.muted}>No proposals yet. <Link href={`/internal/proposals`}>Create one</Link></p>
+        ) : (
+          <table className={commonStyles.table}>
+            <thead>
+              <tr><th>Title</th><th>Status</th><th>Total</th><th>Created</th></tr>
+            </thead>
+            <tbody>
+              {leadProposals.map((p) => (
+                <tr key={p.id}>
+                  <td><Link href={`/internal/proposals/${p.id}`}>{p.title}</Link></td>
+                  <td><span className={`${commonStyles.badge} ${p.status === 'accepted' ? commonStyles.badgeGreen : p.status === 'declined' ? commonStyles.badgeRed : commonStyles.badgeBlue}`}>{p.status}</span></td>
+                  <td>${((p.totalAmount ?? 0) / 100).toFixed(2)}</td>
+                  <td>{formatDateTime(p.createdAt)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </section>
+
+      {/* Notes */}
+      <section className={commonStyles.card}>
+        <h2>Notes ({notes.length})</h2>
+        {notes.length > 0 ? (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 16 }}>
+            {notes.map(({ note, authorName, authorEmail }) => (
+              <div key={note.id} style={{ borderLeft: '3px solid var(--border-color)', paddingLeft: 12 }}>
+                <div className={commonStyles.muted} style={{ fontSize: '0.85rem', marginBottom: 4 }}>
+                  <strong>{authorName || authorEmail || 'Unknown'}</strong> · {formatDateTime(note.createdAt)}
+                </div>
+                <p style={{ margin: 0 }}>{note.content}</p>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className={commonStyles.muted}>No notes yet</p>
+        )}
+        <form action={addNote} className={commonStyles.grid}>
+          <input type="hidden" name="leadId" value={lead.id} />
+          <textarea className={commonStyles.textarea} name="content" placeholder="Add a note..." rows={3} required></textarea>
+          <button className={commonStyles.secondaryButton} type="submit">Add Note</button>
         </form>
       </section>
     </main>

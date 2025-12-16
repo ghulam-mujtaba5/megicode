@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import { desc, eq } from 'drizzle-orm';
 
 import commonStyles from '../../internalCommon.module.css';
-import { requireInternalSession } from '@/lib/internal/auth';
+import { requireInternalSession, requireRole } from '@/lib/internal/auth';
 import { getDb } from '@/lib/db';
 import {
   events,
@@ -12,6 +12,10 @@ import {
   projects,
   tasks,
   users,
+  milestones,
+  projectNotes,
+  timeEntries,
+  invoices,
   type TaskStatus,
 } from '@/lib/db/schema';
 import { taskStatusColor, type BadgeColor, formatDateTime, projectStatusColor } from '@/lib/internal/ui';
@@ -44,6 +48,7 @@ function deriveProjectStatus(currentStepKey: string | null, taskRows: Array<{ st
 export default async function ProjectDetailPage({ params }: { params: { id: string } }) {
   const session = await requireInternalSession();
   const db = getDb();
+  const isPmOrAdmin = session.user.role === 'pm' || session.user.role === 'admin';
 
   const project = await db.select().from(projects).where(eq(projects.id, params.id)).get();
   if (!project) notFound();
@@ -71,6 +76,7 @@ export default async function ProjectDetailPage({ params }: { params: { id: stri
     .from(events)
     .where(eq(events.projectId, project.id))
     .orderBy(desc(events.createdAt))
+    .limit(20)
     .all();
 
   const definitionRow = instance
@@ -80,6 +86,103 @@ export default async function ProjectDetailPage({ params }: { params: { id: stri
   const definitionJson = definitionRow
     ? (JSON.parse(definitionRow.json) as { steps: Array<{ key: string; title: string }> })
     : null;
+
+  const milestonesRows = await db.select().from(milestones).where(eq(milestones.projectId, project.id)).orderBy(milestones.dueAt).all();
+  
+  const notes = await db.select({
+    note: projectNotes,
+    authorName: users.name,
+    authorEmail: users.email,
+  })
+  .from(projectNotes)
+  .leftJoin(users, eq(projectNotes.authorUserId, users.id))
+  .where(eq(projectNotes.projectId, project.id))
+  .orderBy(desc(projectNotes.createdAt))
+  .all();
+
+  const projectTime = await db.select().from(timeEntries).where(eq(timeEntries.projectId, project.id)).all();
+  const totalMinutes = projectTime.reduce((sum, t) => sum + t.minutes, 0);
+
+  const projectInvoices = await db.select().from(invoices).where(eq(invoices.projectId, project.id)).orderBy(desc(invoices.createdAt)).all();
+
+  async function addMilestone(formData: FormData) {
+    'use server';
+    await requireRole(['admin', 'pm']);
+    const db = getDb();
+
+    const projectId = String(formData.get('projectId') ?? '').trim();
+    const title = String(formData.get('title') ?? '').trim();
+    const dueAt = formData.get('dueAt') ? new Date(String(formData.get('dueAt'))) : null;
+
+    if (!projectId || !title) return;
+
+    await db.insert(milestones).values({
+      id: crypto.randomUUID(),
+      projectId,
+      title,
+      dueAt,
+      createdAt: new Date(),
+    });
+
+    redirect(`/internal/projects/${projectId}`);
+  }
+
+  async function toggleMilestone(formData: FormData) {
+    'use server';
+    await requireRole(['admin', 'pm']);
+    const db = getDb();
+
+    const id = String(formData.get('id') ?? '').trim();
+    const completed = formData.get('completed') === 'true';
+    const projectId = String(formData.get('projectId') ?? '').trim();
+
+    if (!id) return;
+
+    const now = new Date();
+    const isCompleted = formData.get('completed') === 'true';
+    await db.update(milestones).set({ 
+      completedAt: isCompleted ? null : now 
+    }).where(eq(milestones.id, id));
+
+    redirect(`/internal/projects/${projectId}`);
+  }
+
+  async function addNote(formData: FormData) {
+    'use server';
+    const session = await requireInternalSession();
+    const db = getDb();
+
+    const projectId = String(formData.get('projectId') ?? '').trim();
+    const content = String(formData.get('content') ?? '').trim();
+
+    if (!projectId || !content) return;
+
+    await db.insert(projectNotes).values({
+      id: crypto.randomUUID(),
+      projectId,
+      authorUserId: session.user.id ?? null,
+      content,
+      createdAt: new Date(),
+    });
+
+    redirect(`/internal/projects/${projectId}`);
+  }
+
+  async function updateProject(formData: FormData) {
+    'use server';
+    await requireRole(['admin', 'pm']);
+    const db = getDb();
+
+    const projectId = String(formData.get('projectId') ?? '').trim();
+    const status = String(formData.get('status') ?? '').trim() as typeof project.status;
+    const priority = String(formData.get('priority') ?? '').trim() as typeof project.priority;
+
+    if (!projectId) return;
+
+    await db.update(projects).set({ status, priority, updatedAt: new Date() }).where(eq(projects.id, projectId));
+
+    redirect(`/internal/projects/${projectId}`);
+  }
 
   async function updateTask(formData: FormData) {
     'use server';
@@ -287,6 +390,138 @@ export default async function ProjectDetailPage({ params }: { params: { id: stri
           </tbody>
         </table>
         <p className={commonStyles.muted}>Viewer: {session.user.email}</p>
+      </section>
+
+      {/* Project Management Actions */}
+      {isPmOrAdmin && (
+        <section className={commonStyles.card}>
+          <h2>Project Settings</h2>
+          <form action={updateProject} className={commonStyles.row}>
+            <input type="hidden" name="projectId" value={project.id} />
+            <label style={{ flex: 1 }}>
+              Status
+              <select className={commonStyles.select} name="status" defaultValue={project.status}>
+                <option value="new">New</option>
+                <option value="active">Active</option>
+                <option value="in_progress">In Progress</option>
+                <option value="in_qa">In QA</option>
+                <option value="blocked">Blocked</option>
+                <option value="completed">Completed</option>
+                <option value="on_hold">On Hold</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+            </label>
+            <label style={{ flex: 1 }}>
+              Priority
+              <select className={commonStyles.select} name="priority" defaultValue={project.priority}>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+                <option value="urgent">Urgent</option>
+              </select>
+            </label>
+            <button className={commonStyles.secondaryButton} type="submit">Update</button>
+          </form>
+        </section>
+      )}
+
+      {/* Milestones */}
+      <section className={commonStyles.card}>
+        <h2>Milestones ({milestonesRows.filter(m => m.completedAt).length}/{milestonesRows.length})</h2>
+        {milestonesRows.length > 0 ? (
+          <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+            {milestonesRows.map((m) => (
+              <li key={m.id} style={{ marginBottom: 8, display: 'flex', alignItems: 'center', gap: 8 }}>
+                <form action={toggleMilestone} style={{ display: 'inline' }}>
+                  <input type="hidden" name="id" value={m.id} />
+                  <input type="hidden" name="completed" value={String(!!m.completedAt)} />
+                  <input type="hidden" name="projectId" value={project.id} />
+                  <button type="submit" style={{ 
+                    cursor: 'pointer', 
+                    background: m.completedAt ? 'var(--success)' : 'transparent',
+                    border: '2px solid var(--border-color)',
+                    borderRadius: 4,
+                    width: 22,
+                    height: 22,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'white',
+                  }}>
+                    {m.completedAt && '✓'}
+                  </button>
+                </form>
+                <span style={{ textDecoration: m.completedAt ? 'line-through' : 'none', opacity: m.completedAt ? 0.6 : 1 }}>
+                  <strong>{m.title}</strong>
+                  {m.dueAt && <span className={commonStyles.muted}> · Due: {formatDateTime(m.dueAt)}</span>}
+                </span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className={commonStyles.muted}>No milestones defined</p>
+        )}
+        {isPmOrAdmin && (
+          <form action={addMilestone} className={commonStyles.row} style={{ marginTop: 16 }}>
+            <input type="hidden" name="projectId" value={project.id} />
+            <input className={commonStyles.input} name="title" placeholder="New milestone..." style={{ flex: 1 }} required />
+            <input className={commonStyles.input} name="dueAt" type="date" style={{ width: 'auto' }} />
+            <button className={commonStyles.secondaryButton} type="submit">Add</button>
+          </form>
+        )}
+      </section>
+
+      {/* Time & Invoices Summary */}
+      <div className={commonStyles.grid2}>
+        <section className={commonStyles.card}>
+          <h2>Time Tracking</h2>
+          <p><strong>Total Time:</strong> {Math.floor(totalMinutes / 60)}h {totalMinutes % 60}m</p>
+          <p className={commonStyles.muted}>{projectTime.length} time entries</p>
+        </section>
+
+        <section className={commonStyles.card}>
+          <h2>Invoices</h2>
+          {projectInvoices.length === 0 ? (
+            <p className={commonStyles.muted}>No invoices. <Link href="/internal/invoices">Create one</Link></p>
+          ) : (
+            <table className={commonStyles.table}>
+              <thead><tr><th>#</th><th>Status</th><th>Total</th></tr></thead>
+              <tbody>
+                {projectInvoices.map((inv) => (
+                  <tr key={inv.id}>
+                    <td><Link href={`/internal/invoices/${inv.id}`}>{inv.invoiceNumber || 'Draft'}</Link></td>
+                    <td><span className={`${commonStyles.badge} ${inv.status === 'paid' ? commonStyles.badgeGreen : commonStyles.badgeYellow}`}>{inv.status}</span></td>
+                    <td>${((inv.totalAmount ?? 0) / 100).toFixed(2)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </section>
+      </div>
+
+      {/* Project Notes */}
+      <section className={commonStyles.card}>
+        <h2>Notes ({notes.length})</h2>
+        {notes.length > 0 ? (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 16 }}>
+            {notes.map(({ note, authorName, authorEmail }) => (
+              <div key={note.id} style={{ borderLeft: '3px solid var(--border-color)', paddingLeft: 12 }}>
+                <div className={commonStyles.muted} style={{ fontSize: '0.85rem', marginBottom: 4 }}>
+                  <strong>{authorName || authorEmail || 'Unknown'}</strong> · {formatDateTime(note.createdAt)}
+                </div>
+                <p style={{ margin: 0 }}>{note.content}</p>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className={commonStyles.muted}>No notes yet</p>
+        )}
+        <form action={addNote} className={commonStyles.grid}>
+          <input type="hidden" name="projectId" value={project.id} />
+          <textarea className={commonStyles.textarea} name="content" placeholder="Add a note..." rows={3} required></textarea>
+          <button className={commonStyles.secondaryButton} type="submit">Add Note</button>
+        </form>
       </section>
     </main>
   );

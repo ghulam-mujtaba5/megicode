@@ -15,6 +15,13 @@
       "when": 1765848077166,
       "tag": "0001_chilly_ken_ellis",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1765850073138,
+      "tag": "0002_flowery_power_man",
+      "breakpoints": true
     }
   ]
 }

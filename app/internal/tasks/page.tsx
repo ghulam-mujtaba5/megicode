@@ -76,14 +76,16 @@ export default async function MyTasksPage() {
               return (
                 <tr key={t.id}>
                   <td>
-                    <div>{t.title}</div>
-                    <div className={commonStyles.muted}>{t.key}</div>
+                    <Link href={`/internal/tasks/${t.id}`}>
+                      <div>{t.title}</div>
+                      <div className={commonStyles.muted}>{t.key}</div>
+                    </Link>
                   </td>
                   <td>
                     <span className={badgeClass(commonStyles, taskStatusColor(t.status))}>{t.status}</span>
                   </td>
                   <td>
-                    {project ? <Link href={`/internal/projects/${project.id}`}>{project.name}</Link> : ''}
+                    {project ? <Link href={`/internal/projects/${project.id}`}>{project.name}</Link> : '—'}
                   </td>
                   <td>{formatDateTime(t.updatedAt)}</td>
                 </tr>
