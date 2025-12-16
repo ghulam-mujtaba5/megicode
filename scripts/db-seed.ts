@@ -20,6 +20,11 @@ const { getDb } = require('../lib/db');
 const schema = require('../lib/db/schema');
 const { sql } = require('drizzle-orm');
 
+function getErrorMessage(error: unknown): string {
+  if (error instanceof Error) return error.message;
+  return String(error);
+}
+
 function generateId(): string {
   return crypto.randomUUID();
 }
@@ -37,7 +42,7 @@ async function seed() {
     // Disable foreign keys to allow deletion regardless of order
     await db.run(sql`PRAGMA foreign_keys = OFF`);
   } catch (e) {
-    console.warn('   Warning: Could not disable foreign keys:', e.message);
+    console.warn('   Warning: Could not disable foreign keys:', getErrorMessage(e));
   }
   
   const safeDelete = async (table: any, name: string) => {
@@ -45,7 +50,7 @@ async function seed() {
       await db.delete(table);
       console.log(`   Deleted ${name}`);
     } catch (e) {
-      console.warn(`   Failed to delete ${name}: ${e.message}`);
+      console.warn(`   Failed to delete ${name}: ${getErrorMessage(e)}`);
     }
   };
 
@@ -79,7 +84,7 @@ async function seed() {
     // Re-enable foreign keys
     await db.run(sql`PRAGMA foreign_keys = ON`);
   } catch (e) {
-    console.warn('   Warning: Could not re-enable foreign keys:', e.message);
+    console.warn('   Warning: Could not re-enable foreign keys:', getErrorMessage(e));
   }
   
   console.log('   Data cleared.\n');
