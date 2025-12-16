@@ -1,5 +1,6 @@
 import type { NextAuthOptions } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
+import CredentialsProvider from 'next-auth/providers/credentials';
 import { eq } from 'drizzle-orm';
 
 import { getDb } from '@/lib/db';
@@ -47,6 +48,24 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.GOOGLE_CLIENT_ID ?? '',
       clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? '',
     }),
+    // Dev-only credentials provider for testing without Google OAuth
+    ...(process.env.NODE_ENV === 'development' && process.env.DEV_LOGIN_ENABLED === 'true'
+      ? [
+          CredentialsProvider({
+            id: 'dev-login',
+            name: 'Dev Login',
+            credentials: {
+              email: { label: 'Email', type: 'email' },
+            },
+            async authorize(credentials) {
+              if (!credentials?.email) return null;
+              const email = credentials.email.toLowerCase();
+              if (!isEmailAllowed(email)) return null;
+              return { id: email, email, name: email.split('@')[0] };
+            },
+          }),
+        ]
+      : []),
   ],
   callbacks: {
     async signIn({ user }) {

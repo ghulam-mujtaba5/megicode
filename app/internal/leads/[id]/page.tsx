@@ -9,11 +9,12 @@ import { leads, users, projects, processInstances, tasks, events, leadNotes, lea
 import { ensureActiveDefaultProcessDefinition } from '@/lib/workflow/processDefinition';
 import { formatDateTime } from '@/lib/internal/ui';
 
-export default async function LeadDetailPage({ params }: { params: { id: string } }) {
+export default async function LeadDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const session = await requireRole(['admin', 'pm']);
+  const { id } = await params;
 
   const db = getDb();
-  const lead = await db.select().from(leads).where(eq(leads.id, params.id)).get();
+  const lead = await db.select().from(leads).where(eq(leads.id, id)).get();
   if (!lead) notFound();
 
   const team = await db.select().from(users).orderBy(desc(users.createdAt)).all();
@@ -24,12 +25,12 @@ export default async function LeadDetailPage({ params }: { params: { id: string 
   })
   .from(leadNotes)
   .leftJoin(users, eq(leadNotes.authorUserId, users.id))
-  .where(eq(leadNotes.leadId, params.id))
+  .where(eq(leadNotes.leadId, id))
   .orderBy(desc(leadNotes.createdAt))
   .all();
 
-  const tags = await db.select().from(leadTags).where(eq(leadTags.leadId, params.id)).all();
-  const leadProposals = await db.select().from(proposals).where(eq(proposals.leadId, params.id)).orderBy(desc(proposals.createdAt)).all();
+  const tags = await db.select().from(leadTags).where(eq(leadTags.leadId, id)).all();
+  const leadProposals = await db.select().from(proposals).where(eq(proposals.leadId, id)).orderBy(desc(proposals.createdAt)).all();
 
   async function addNote(formData: FormData) {
     'use server';

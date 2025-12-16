@@ -16,12 +16,13 @@ function badgeClass(styles: typeof commonStyles, color: BadgeColor) {
   return `${styles.badge} ${styles.badgeGray}`;
 }
 
-export default async function TaskDetailPage({ params }: { params: { id: string } }) {
+export default async function TaskDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const session = await requireInternalSession();
+  const { id } = await params;
   const db = getDb();
   const userId = session.user.id;
 
-  const task = await db.select().from(tasks).where(eq(tasks.id, params.id)).get();
+  const task = await db.select().from(tasks).where(eq(tasks.id, id)).get();
   if (!task) notFound();
 
   const comments = await db.select({
@@ -31,18 +32,18 @@ export default async function TaskDetailPage({ params }: { params: { id: string 
   })
   .from(taskComments)
   .leftJoin(users, eq(taskComments.authorUserId, users.id))
-  .where(eq(taskComments.taskId, params.id))
+  .where(eq(taskComments.taskId, id))
   .orderBy(desc(taskComments.createdAt))
   .all();
 
-  const checklists = await db.select().from(taskChecklists).where(eq(taskChecklists.taskId, params.id)).orderBy(taskChecklists.sortOrder).all();
+  const checklists = await db.select().from(taskChecklists).where(eq(taskChecklists.taskId, id)).orderBy(taskChecklists.sortOrder).all();
   const timeEntriesList = await db.select({
     entry: timeEntries,
     userName: users.name,
   })
   .from(timeEntries)
   .leftJoin(users, eq(timeEntries.userId, users.id))
-  .where(eq(timeEntries.taskId, params.id))
+  .where(eq(timeEntries.taskId, id))
   .orderBy(desc(timeEntries.createdAt))
   .all();
 

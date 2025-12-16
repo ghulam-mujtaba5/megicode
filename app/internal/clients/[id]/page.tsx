@@ -8,18 +8,19 @@ import { getDb } from '@/lib/db';
 import { clients, clientContacts, projects, proposals, invoices, meetings, events } from '@/lib/db/schema';
 import { formatDateTime } from '@/lib/internal/ui';
 
-export default async function ClientDetailPage({ params }: { params: { id: string } }) {
+export default async function ClientDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const session = await requireRole(['admin', 'pm']);
+  const { id } = await params;
   const db = getDb();
 
-  const client = await db.select().from(clients).where(eq(clients.id, params.id)).get();
+  const client = await db.select().from(clients).where(eq(clients.id, id)).get();
   if (!client) notFound();
 
-  const contacts = await db.select().from(clientContacts).where(eq(clientContacts.clientId, params.id)).all();
-  const clientProjects = await db.select().from(projects).where(eq(projects.leadId, params.id)).orderBy(desc(projects.createdAt)).all();
-  const clientProposals = await db.select().from(proposals).where(eq(proposals.clientId, params.id)).orderBy(desc(proposals.createdAt)).all();
-  const clientInvoices = await db.select().from(invoices).where(eq(invoices.clientId, params.id)).orderBy(desc(invoices.createdAt)).all();
-  const clientMeetings = await db.select().from(meetings).where(eq(meetings.clientId, params.id)).orderBy(desc(meetings.scheduledAt)).limit(10).all();
+  const contacts = await db.select().from(clientContacts).where(eq(clientContacts.clientId, id)).all();
+  const clientProjects = await db.select().from(projects).where(eq(projects.leadId, id)).orderBy(desc(projects.createdAt)).all();
+  const clientProposals = await db.select().from(proposals).where(eq(proposals.clientId, id)).orderBy(desc(proposals.createdAt)).all();
+  const clientInvoices = await db.select().from(invoices).where(eq(invoices.clientId, id)).orderBy(desc(invoices.createdAt)).all();
+  const clientMeetings = await db.select().from(meetings).where(eq(meetings.clientId, id)).orderBy(desc(meetings.scheduledAt)).limit(10).all();
 
   async function addContact(formData: FormData) {
     'use server';

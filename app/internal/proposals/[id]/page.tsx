@@ -9,15 +9,16 @@ import { proposals, proposalItems, leads, clients, events, projects, processInst
 import { ensureActiveDefaultProcessDefinition } from '@/lib/workflow/processDefinition';
 import { formatDateTime } from '@/lib/internal/ui';
 
-export default async function ProposalDetailPage({ params }: { params: { id: string } }) {
+export default async function ProposalDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const session = await requireRole(['admin', 'pm']);
+  const { id } = await params;
   const db = getDb();
   const isAdmin = session.user.role === 'admin';
 
-  const proposal = await db.select().from(proposals).where(eq(proposals.id, params.id)).get();
+  const proposal = await db.select().from(proposals).where(eq(proposals.id, id)).get();
   if (!proposal) notFound();
 
-  const items = await db.select().from(proposalItems).where(eq(proposalItems.proposalId, params.id)).orderBy(proposalItems.sortOrder).all();
+  const items = await db.select().from(proposalItems).where(eq(proposalItems.proposalId, id)).orderBy(proposalItems.sortOrder).all();
   const lead = proposal.leadId ? await db.select().from(leads).where(eq(leads.id, proposal.leadId)).get() : null;
   const client = proposal.clientId ? await db.select().from(clients).where(eq(clients.id, proposal.clientId)).get() : null;
 

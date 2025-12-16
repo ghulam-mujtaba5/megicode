@@ -45,12 +45,13 @@ function deriveProjectStatus(currentStepKey: string | null, taskRows: Array<{ st
   return 'new' as const;
 }
 
-export default async function ProjectDetailPage({ params }: { params: { id: string } }) {
+export default async function ProjectDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const session = await requireInternalSession();
+  const { id } = await params;
   const db = getDb();
   const isPmOrAdmin = session.user.role === 'pm' || session.user.role === 'admin';
 
-  const project = await db.select().from(projects).where(eq(projects.id, params.id)).get();
+  const project = await db.select().from(projects).where(eq(projects.id, id)).get();
   if (!project) notFound();
 
   const instance = await db

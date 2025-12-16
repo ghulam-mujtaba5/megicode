@@ -8,15 +8,16 @@ import { getDb } from '@/lib/db';
 import { invoices, invoiceItems, clients, projects, payments, events } from '@/lib/db/schema';
 import { formatDateTime } from '@/lib/internal/ui';
 
-export default async function InvoiceDetailPage({ params }: { params: { id: string } }) {
+export default async function InvoiceDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const session = await requireRole(['admin', 'pm']);
+  const { id } = await params;
   const db = getDb();
 
-  const invoice = await db.select().from(invoices).where(eq(invoices.id, params.id)).get();
+  const invoice = await db.select().from(invoices).where(eq(invoices.id, id)).get();
   if (!invoice) notFound();
 
-  const items = await db.select().from(invoiceItems).where(eq(invoiceItems.invoiceId, params.id)).all();
-  const paymentsList = await db.select().from(payments).where(eq(payments.invoiceId, params.id)).orderBy(desc(payments.paidAt)).all();
+  const items = await db.select().from(invoiceItems).where(eq(invoiceItems.invoiceId, id)).all();
+  const paymentsList = await db.select().from(payments).where(eq(payments.invoiceId, id)).orderBy(desc(payments.paidAt)).all();
   const client = invoice.clientId ? await db.select().from(clients).where(eq(clients.id, invoice.clientId)).get() : null;
   const project = invoice.projectId ? await db.select().from(projects).where(eq(projects.id, invoice.projectId)).get() : null;
 

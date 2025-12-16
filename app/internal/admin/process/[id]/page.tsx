@@ -11,11 +11,12 @@ import { formatDateTime } from '@/lib/internal/ui';
 type Step = { key: string; title: string; recommendedRole?: string };
 type ProcessJson = { key?: string; name?: string; version: number; steps: Step[] };
 
-export default async function ProcessDefinitionDetailPage({ params }: { params: { id: string } }) {
+export default async function ProcessDefinitionDetailPage({ params }: { params: Promise<{ id: string }> }) {
   await requireRole(['admin']);
+  const { id } = await params;
   const db = getDb();
 
-  const definition = await db.select().from(processDefinitions).where(eq(processDefinitions.id, params.id)).get();
+  const definition = await db.select().from(processDefinitions).where(eq(processDefinitions.id, id)).get();
   if (!definition) notFound();
 
   const json = (typeof definition.json === 'string' ? JSON.parse(definition.json) : definition.json) as ProcessJson;
