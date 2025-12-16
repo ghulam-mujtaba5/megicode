@@ -64,9 +64,10 @@ export default async function ProjectsPage() {
   // Calculate stats
   const projectStats = {
     total: rows.length,
-    active: rows.filter(p => p.status === 'active').length,
-    completed: rows.filter(p => p.status === 'completed').length,
-    onHold: rows.filter(p => p.status === 'on_hold').length,
+    // map persisted status values into the UI buckets
+    active: rows.filter(p => ['new', 'in_progress', 'in_qa', 'delivered'].includes(p.status)).length,
+    completed: rows.filter(p => p.status === 'closed' || p.status === 'delivered').length,
+    onHold: rows.filter(p => p.status === 'blocked').length,
   };
 
   return (

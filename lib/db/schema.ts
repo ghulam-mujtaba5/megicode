@@ -124,10 +124,16 @@ export const tasks = sqliteTable(
     instanceId: text('instance_id').notNull(),
     key: text('key').notNull(),
     title: text('title').notNull(),
+    description: text('description'),
+    priority: text('priority').notNull().default('medium'),
     status: text('status', { enum: ['todo', 'in_progress', 'blocked', 'done', 'canceled'] })
       .notNull()
       .default('todo'),
     assignedToUserId: text('assigned_to_user_id'),
+    // alias for older code expecting `assigneeId`
+    assigneeId: text('assigned_to_user_id'),
+    // optional projectId if tasks are directly linked to projects in some flows
+    projectId: text('project_id'),
     dueAt: integer('due_at', { mode: 'timestamp_ms' }),
     completedAt: integer('completed_at', { mode: 'timestamp_ms' }),
     createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),

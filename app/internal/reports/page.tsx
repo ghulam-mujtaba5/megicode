@@ -139,7 +139,7 @@ export default async function ReportsPage() {
     const estimatedCost = totalHours * 100; // $100/hr internal cost assumption
     
     const projectInvoices = await db.select().from(invoices).where(eq(invoices.projectId, p.id)).all();
-    const totalInvoiced = projectInvoices.reduce((sum, i) => sum + i.amount, 0); // in cents
+    const totalInvoiced = projectInvoices.reduce((sum, i) => sum + (i.totalAmount ?? 0), 0); // in cents
     
     return {
       ...p,
