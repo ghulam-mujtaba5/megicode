@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { desc, eq } from 'drizzle-orm';
 
-import s from '../../../styles.module.css';
+import s from '../../styles.module.css';
 import { requireRole } from '@/lib/internal/auth';
 import { getDb } from '@/lib/db';
 import { events, users } from '@/lib/db/schema';

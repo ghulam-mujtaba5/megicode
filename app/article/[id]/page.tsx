@@ -53,14 +53,9 @@ export const revalidate = 60;
 
 // Generate static params for all articles (optional: you can fetch all IDs from your API)
 export async function generateStaticParams() {
-  try {
-    const res = await fetch("https://payloadw.onrender.com/api/posts?limit=100", { next: { revalidate: 3600 } });
-    const data = await res.json();
-    const articles = data?.docs || [];
-    return articles.map((a) => ({ id: a.id?.toString() }));
-  } catch {
-    return [];
-  }
+  // Avoid pre-generating article pages during build to prevent long external
+  // API fetches from blocking the build. Pages will be rendered on demand.
+  return [];
 }
 
 async function getArticle(id: string) {
