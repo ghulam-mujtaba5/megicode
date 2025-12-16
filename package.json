@@ -43,6 +43,7 @@
     "@trivago/prettier-plugin-sort-imports": "^6.0.0",
     "@types/node": "22.15.29",
     "@types/react": "19.1.6",
+    "@types/react-dom": "19.1.6",
     "@types/sharp": "^0.31.1",
     "dotenv": "^16.6.1",
     "drizzle-kit": "^0.31.8",
