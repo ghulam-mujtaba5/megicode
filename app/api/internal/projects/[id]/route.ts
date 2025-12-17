@@ -6,10 +6,10 @@ import { eq } from 'drizzle-orm';
 // GET /api/internal/projects/[id] - Get single project
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await params;
     
     const project = await getDb().select()
       .from(projects)
@@ -39,10 +39,10 @@ export async function GET(
 // PATCH /api/internal/projects/[id] - Update project
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await params;
     const body = await request.json();
     
     const updated = await getDb().update(projects)
@@ -76,10 +76,10 @@ export async function PATCH(
 // DELETE /api/internal/projects/[id] - Delete project
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await params;
     
     const deleted = await getDb().delete(projects)
       .where(eq(projects.id, id))
