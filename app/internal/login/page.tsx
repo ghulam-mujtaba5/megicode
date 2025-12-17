@@ -108,18 +108,50 @@ export default function InternalLoginPage() {
             </button>
             
             {isDevLoginVisible && (
-              <form onSubmit={handleDevLogin} className={styles.devForm}>
-                <input
-                  type="email"
-                  placeholder="your@email.com"
-                  value={devEmail}
-                  onChange={(e) => setDevEmail(e.target.value)}
-                  className={styles.devInput}
-                />
-                <button type="submit" className={styles.devButton} disabled={loading}>
-                  {loading ? '...' : 'Login'}
-                </button>
-              </form>
+              <div className={styles.devLoginContainer}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginBottom: '16px' }}>
+                  <button 
+                    onClick={() => signIn('dev-login', { email: 'admin@megicode.com', callbackUrl: '/internal' })}
+                    className={styles.devButton}
+                    style={{ backgroundColor: '#333' }}
+                  >
+                    Admin
+                  </button>
+                  <button 
+                    onClick={() => signIn('dev-login', { email: 'pm@megicode.com', callbackUrl: '/internal' })}
+                    className={styles.devButton}
+                    style={{ backgroundColor: '#333' }}
+                  >
+                    PM
+                  </button>
+                  <button 
+                    onClick={() => signIn('dev-login', { email: 'dev@megicode.com', callbackUrl: '/internal' })}
+                    className={styles.devButton}
+                    style={{ backgroundColor: '#333' }}
+                  >
+                    Dev
+                  </button>
+                  <button 
+                    onClick={() => signIn('dev-login', { email: 'qa@megicode.com', callbackUrl: '/internal' })}
+                    className={styles.devButton}
+                    style={{ backgroundColor: '#333' }}
+                  >
+                    QA
+                  </button>
+                </div>
+                <form onSubmit={handleDevLogin} className={styles.devForm}>
+                  <input
+                    type="email"
+                    placeholder="your@email.com"
+                    value={devEmail}
+                    onChange={(e) => setDevEmail(e.target.value)}
+                    className={styles.devInput}
+                  />
+                  <button type="submit" className={styles.devButton} disabled={loading}>
+                    {loading ? '...' : 'Login'}
+                  </button>
+                </form>
+              </div>
             )}
           </div>
         </div>

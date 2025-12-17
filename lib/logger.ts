@@ -43,12 +43,12 @@ const getMinLogLevel = (): LogLevel => {
 };
 
 // Whether to output JSON (useful for log aggregation in production)
-const useJsonOutput = (): boolean => {
+const shouldUseJsonOutput = (): boolean => {
   return process.env.LOG_FORMAT === "json" || process.env.NODE_ENV === "production";
 };
 
 const formatLogEntry = (entry: LogEntry): string => {
-  if (useJsonOutput()) {
+  if (shouldUseJsonOutput()) {
     return JSON.stringify(entry);
   }
 

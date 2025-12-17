@@ -6,7 +6,7 @@ import ArticleSchema from "@/components/SEO/ArticleSchema";
 import styles from './ArticleDetail.module.css';
 import { Metadata } from "next";
 // Dynamic metadata for SEO
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;
   const article = await getArticle(id);
 
@@ -77,7 +77,7 @@ async function getArticle(id: string) {
   }
 }
 
-const ArticleDetailPage = async ({ params }: { params: { id: string } }) => {
+const ArticleDetailPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
   const article = await getArticle(id);
   // Theme is handled client-side; default to 'light' for SSR, but useEffect will update on client

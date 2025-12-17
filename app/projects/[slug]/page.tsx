@@ -1,6 +1,5 @@
 "use client";
-"use client";
-import React, { useCallback } from "react";
+import React, { useCallback, use } from "react";
 import { notFound } from "next/navigation";
 import ProjectDetailContent from "../../../components/Projects/ProjectDetailContent";
 import { Project } from "../../../components/Projects/ProjectsShowcase";
@@ -12,14 +11,15 @@ import ThemeToggleIcon from "../../../components/Icon/sbicon";
 import styles from './ProjectDetailLayout.module.css';
 import { projects } from "../../../data/projects";
 
-export default function ProjectDetailPage({ params }: { params: { slug: string } }) {
+export default function ProjectDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = use(params);
   const { theme, toggleTheme } = useTheme();
 
   const onDarkModeButtonContainerClick = useCallback(() => {
     toggleTheme();
   }, [toggleTheme]);
 
-  const project = projects.find((p) => p.slug === params.slug);
+  const project = projects.find((p) => p.slug === slug);
 
   if (!project) {
     return notFound();
