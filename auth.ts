@@ -76,7 +76,7 @@ export const authOptions: NextAuthOptions = {
 
       try {
         const db = getDb();
-        const now = Date.now(); // Get timestamp in milliseconds
+        const now = new Date();
         const role = getRoleForEmail(email);
 
         await db
@@ -87,8 +87,8 @@ export const authOptions: NextAuthOptions = {
             name: user.name ?? null,
             image: user.image ?? null,
             role,
-            createdAt: now as any,
-            updatedAt: now as any,
+            createdAt: now,
+            updatedAt: now,
           })
           .onConflictDoUpdate({
             target: users.email,
@@ -96,7 +96,7 @@ export const authOptions: NextAuthOptions = {
               name: user.name ?? null,
               image: user.image ?? null,
               role,
-              updatedAt: now as any,
+              updatedAt: now,
             },
           });
 
