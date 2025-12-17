@@ -69,3 +69,4 @@ export async function ensureActiveDefaultProcessDefinition() {
 
   return { id, key: DEFAULT_PROCESS_KEY, version: 1, json };
 }
+
