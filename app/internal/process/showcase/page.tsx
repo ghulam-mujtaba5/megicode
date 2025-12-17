@@ -35,6 +35,11 @@ const LANE_CONFIG: Record<string, { displayName: string; description: string; ic
     description: 'Project setup, coordination, and delivery',
     icon: '📋',
   },
+  Development: {
+    displayName: 'Development & QA',
+    description: 'Software engineering, testing, and deployment',
+    icon: '💻',
+  },
 };
 
 export default async function ProcessShowcasePage() {

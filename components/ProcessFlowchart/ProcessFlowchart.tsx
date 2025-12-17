@@ -29,6 +29,7 @@ const LANE_COLORS: Record<string, { bg: string; border: string; text: string }> 
   BusinessDevelopment: { bg: 'rgba(16, 185, 129, 0.1)', border: '#10b981', text: '#10b981' },
   AutomationCRM: { bg: 'rgba(245, 158, 11, 0.1)', border: '#f59e0b', text: '#f59e0b' },
   ProjectManagement: { bg: 'rgba(139, 92, 246, 0.1)', border: '#8b5cf6', text: '#8b5cf6' },
+  Development: { bg: 'rgba(6, 182, 212, 0.1)', border: '#06b6d4', text: '#06b6d4' },
 };
 
 interface ProcessStep {

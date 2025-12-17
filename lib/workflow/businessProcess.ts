@@ -31,13 +31,15 @@ export type ProcessParticipant =
   | 'business_developer'
   | 'ai_assistant'
   | 'crm_system'
-  | 'project_manager';
+  | 'project_manager'
+  | 'developer';
 
 export type ProcessLane = 
   | 'Client'
   | 'BusinessDevelopment'
   | 'AutomationCRM'
-  | 'ProjectManagement';
+  | 'ProjectManagement'
+  | 'Development';
 
 // Lane type alias for components
 export interface Lane {
@@ -272,7 +274,7 @@ export interface ProcessEvent {
 // DEFAULT BUSINESS PROCESS DEFINITION
 // =====================
 
-export const MEGICODE_BUSINESS_PROCESS_KEY = 'megicode_client_onboarding';
+export const MEGICODE_BUSINESS_PROCESS_KEY = 'megicode_software_delivery_v2';
 
 export function getDefaultBusinessProcessDefinition(): BusinessProcessDefinition {
   return {
@@ -291,447 +293,246 @@ export function getDefaultBusinessProcessDefinition(): BusinessProcessDefinition
     ],
     createdAt: new Date(),
     steps: [
-      // ============ CLIENT LANE ============
+      // 1. Client Submits Project Request (Start Event)
       {
-        key: 'start_lead_submission',
-        title: 'Start Lead Submission',
+        key: 'client_submit_request',
+        title: 'Client Submits Project Request',
         type: 'start_event',
         lane: 'Client',
         participant: 'client',
-        description: 'Client initiates contact through website',
-        nextSteps: ['submit_contact_form'],
-      },
-      {
-        key: 'submit_contact_form',
-        title: 'Submit Contact Form',
-        type: 'task',
-        lane: 'Client',
-        participant: 'client',
-        isManual: true,
-        description: 'Client fills and submits the contact form',
-        nextSteps: ['receive_lead_submission'],
-        estimatedMinutes: 5,
-      },
-      {
-        key: 'attend_discovery_call',
-        title: 'Attend Discovery Call',
-        type: 'task',
-        lane: 'Client',
-        participant: 'client',
-        isManual: true,
-        description: 'Client participates in discovery call',
-        estimatedMinutes: 60,
-        nextSteps: ['gather_client_requirements'],
-      },
-      {
-        key: 'review_proposal_client',
-        title: 'Review Proposal',
-        type: 'task',
-        lane: 'Client',
-        participant: 'client',
-        isManual: true,
-        description: 'Client reviews the proposal document',
-        estimatedMinutes: 30,
-        nextSteps: ['client_accept_proposal_gateway'],
-      },
-      {
-        key: 'client_accept_proposal_gateway',
-        title: 'Client Accept Proposal?',
-        type: 'gateway',
-        lane: 'Client',
-        participant: 'client',
-        gatewayType: 'exclusive',
-        gatewayConditions: [
-          {
-            label: 'Yes',
-            targetStepKey: 'sign_contract_client',
-            condition: { field: 'proposalStatus', operator: 'equals', value: 'accepted' },
-          },
-          {
-            label: 'No',
-            targetStepKey: 'request_revision_client',
-            isDefault: true,
-          },
-        ],
-      },
-      {
-        key: 'sign_contract_client',
-        title: 'Sign Contract',
-        type: 'task',
-        lane: 'Client',
-        participant: 'client',
-        isManual: true,
-        description: 'Client signs the contract/agreement',
-        estimatedMinutes: 15,
-        nextSteps: ['receive_signed_contract'],
-      },
-      {
-        key: 'request_revision_client',
-        title: 'Request Revision',
-        type: 'task',
-        lane: 'Client',
-        participant: 'client',
-        isManual: true,
-        description: 'Client requests revisions to the proposal',
-        estimatedMinutes: 10,
-        nextSteps: ['prepare_proposal_draft'],
-      },
-      {
-        key: 'end_onboarded_client',
-        title: 'Client Onboarded',
-        type: 'end_event',
-        lane: 'Client',
-        participant: 'client',
-        description: 'Client successfully onboarded',
+        description: 'Client submits a new project request via the portal',
+        nextSteps: ['crm_record_request'],
       },
 
-      // ============ BUSINESS DEVELOPMENT - LEAD INTAKE SYSTEM ============
+      // 2. CRM Auto-Records Request [Automated]
       {
-        key: 'receive_lead_submission',
-        title: 'Receive Lead Submission',
-        type: 'catch_event',
-        lane: 'BusinessDevelopment',
-        participant: 'lead_intake_system',
-        description: 'System receives the contact form submission',
-        nextSteps: ['create_lead_record'],
-      },
-      {
-        key: 'create_lead_record',
-        title: 'Create Lead Record',
+        key: 'crm_record_request',
+        title: 'CRM Auto-Records Request',
         type: 'task',
-        lane: 'BusinessDevelopment',
-        participant: 'lead_intake_system',
+        lane: 'AutomationCRM',
+        participant: 'crm_system',
         isManual: false,
         automationAction: 'create_lead_record',
-        description: 'Automatically create lead record in CRM',
+        description: 'System automatically records the request in CRM',
         estimatedMinutes: 0,
-        nextSteps: ['assign_lead_score'],
-      },
-      {
-        key: 'assign_lead_score',
-        title: 'Assign Lead Score',
-        type: 'task',
-        lane: 'BusinessDevelopment',
-        participant: 'lead_intake_system',
-        isManual: false,
-        automationAction: 'assign_lead_score',
-        description: 'AI-powered lead scoring based on criteria',
-        estimatedMinutes: 0,
-        nextSteps: ['lead_score_gateway'],
-      },
-      {
-        key: 'lead_score_gateway',
-        title: 'Lead Score Qualified?',
-        type: 'gateway',
-        lane: 'BusinessDevelopment',
-        participant: 'lead_intake_system',
-        gatewayType: 'exclusive',
-        gatewayConditions: [
-          {
-            label: 'Yes (Score >= 70)',
-            targetStepKey: 'generate_followup_email',
-            condition: { field: 'leadScore', operator: 'greater_than', value: 69 },
-          },
-          {
-            label: 'No (Score < 70)',
-            targetStepKey: 'trigger_nurture_sequence',
-            isDefault: true,
-          },
-        ],
-      },
-      {
-        key: 'trigger_nurture_sequence',
-        title: 'Trigger Nurture Email Sequence',
-        type: 'task',
-        lane: 'BusinessDevelopment',
-        participant: 'lead_intake_system',
-        isManual: false,
-        automationAction: 'trigger_nurture_sequence',
-        description: 'Add lead to automated nurture email campaign',
-        estimatedMinutes: 0,
-        nextSteps: ['end_nurture_pipeline'],
-      },
-      {
-        key: 'end_nurture_pipeline',
-        title: 'End (Nurture Pipeline)',
-        type: 'end_event',
-        lane: 'BusinessDevelopment',
-        participant: 'lead_intake_system',
-        description: 'Lead moved to nurture pipeline',
-      },
-      {
-        key: 'create_followup_task',
-        title: 'Create Follow-up Task',
-        type: 'task',
-        lane: 'BusinessDevelopment',
-        participant: 'lead_intake_system',
-        isManual: false,
-        automationAction: 'create_followup_task',
-        description: 'Create task for BD to review lead',
-        estimatedMinutes: 0,
-        nextSteps: ['review_lead_information'],
+        nextSteps: ['pm_review_request'],
       },
 
-      // ============ BUSINESS DEVELOPMENT - BUSINESS DEVELOPER ============
+      // 3. PM Reviews Request [User Task]
       {
-        key: 'review_lead_information',
-        title: 'Review Lead Information',
+        key: 'pm_review_request',
+        title: 'PM Reviews Request',
         type: 'task',
-        lane: 'BusinessDevelopment',
-        participant: 'business_developer',
+        lane: 'ProjectManagement',
+        participant: 'project_manager',
         isManual: true,
         recommendedRole: 'pm',
-        description: 'Business developer reviews lead details',
-        estimatedMinutes: 15,
-        nextSteps: ['schedule_discovery_call'],
-      },
-      {
-        key: 'schedule_discovery_call',
-        title: 'Schedule Discovery Call',
-        type: 'task',
-        lane: 'BusinessDevelopment',
-        participant: 'business_developer',
-        isManual: true,
-        recommendedRole: 'pm',
-        description: 'Schedule discovery call with client',
-        estimatedMinutes: 10,
-        nextSteps: ['attend_discovery_call'],
-      },
-      {
-        key: 'gather_client_requirements',
-        title: 'Gather Client Requirements',
-        type: 'task',
-        lane: 'BusinessDevelopment',
-        participant: 'business_developer',
-        isManual: true,
-        recommendedRole: 'pm',
-        description: 'Document requirements from discovery call',
-        estimatedMinutes: 30,
-        nextSteps: ['prepare_proposal_draft'],
-      },
-      {
-        key: 'prepare_proposal_draft',
-        title: 'Prepare Proposal Draft',
-        type: 'task',
-        lane: 'BusinessDevelopment',
-        participant: 'business_developer',
-        isManual: true,
-        recommendedRole: 'pm',
-        description: 'Create initial proposal document',
-        estimatedMinutes: 120,
-        nextSteps: ['proposal_approval_gateway'],
-      },
-      {
-        key: 'proposal_approval_gateway',
-        title: 'Proposal Approved?',
-        type: 'gateway',
-        lane: 'BusinessDevelopment',
-        participant: 'business_developer',
-        gatewayType: 'exclusive',
-        gatewayConditions: [
-          {
-            label: 'Yes',
-            targetStepKey: 'send_proposal_to_client',
-            condition: { field: 'proposalStatus', operator: 'equals', value: 'approved' },
-          },
-          {
-            label: 'No',
-            targetStepKey: 'modify_proposal',
-            isDefault: true,
-          },
-        ],
-      },
-      {
-        key: 'modify_proposal',
-        title: 'Modify Proposal',
-        type: 'task',
-        lane: 'BusinessDevelopment',
-        participant: 'business_developer',
-        isManual: true,
-        recommendedRole: 'pm',
-        description: 'Revise proposal based on feedback',
+        description: 'Project Manager reviews the incoming request',
         estimatedMinutes: 60,
-        nextSteps: ['proposal_approval_gateway'],
-      },
-      {
-        key: 'send_proposal_to_client',
-        title: 'Send Proposal to Client',
-        type: 'task',
-        lane: 'BusinessDevelopment',
-        participant: 'business_developer',
-        isManual: true,
-        recommendedRole: 'pm',
-        description: 'Email proposal document to client',
-        estimatedMinutes: 5,
-        nextSteps: ['review_proposal_client'],
+        nextSteps: ['approval_gateway'],
       },
 
-      // ============ AUTOMATION/CRM - AI ASSISTANT ============
+      // 4. Approval Gateway [Decision]
       {
-        key: 'generate_followup_email',
-        title: 'Generate Follow-up Email',
-        type: 'task',
-        lane: 'AutomationCRM',
-        participant: 'ai_assistant',
-        isManual: false,
-        automationAction: 'generate_followup_email',
-        description: 'AI generates personalized follow-up email',
-        estimatedMinutes: 0,
-        nextSteps: ['send_followup_email'],
-      },
-      {
-        key: 'send_followup_email',
-        title: 'Send Follow-up Email',
-        type: 'task',
-        lane: 'AutomationCRM',
-        participant: 'ai_assistant',
-        isManual: false,
-        automationAction: 'send_followup_email',
-        description: 'Automated email sent to lead',
-        estimatedMinutes: 0,
-        nextSteps: ['create_followup_task'],
-      },
-      {
-        key: 'send_welcome_email',
-        title: 'Send Welcome Email',
-        type: 'task',
-        lane: 'AutomationCRM',
-        participant: 'ai_assistant',
-        isManual: false,
-        automationAction: 'send_welcome_email',
-        description: 'Send onboarding welcome email to new client',
-        estimatedMinutes: 0,
-        nextSteps: ['share_onboarding_docs'],
-      },
-      {
-        key: 'share_onboarding_docs',
-        title: 'Share Onboarding Documentation',
-        type: 'task',
-        lane: 'AutomationCRM',
-        participant: 'ai_assistant',
-        isManual: false,
-        automationAction: 'share_onboarding_docs',
-        description: 'Share project onboarding materials',
-        estimatedMinutes: 0,
-        nextSteps: ['generate_project_summary'],
-      },
-      {
-        key: 'generate_project_summary',
-        title: 'Generate Project Summary',
-        type: 'task',
-        lane: 'AutomationCRM',
-        participant: 'ai_assistant',
-        isManual: false,
-        automationAction: 'generate_project_summary',
-        description: 'AI generates project summary document',
-        estimatedMinutes: 0,
-        nextSteps: ['create_project_workspace'],
+        key: 'approval_gateway',
+        title: 'Approval Gateway',
+        type: 'gateway',
+        lane: 'ProjectManagement',
+        participant: 'project_manager',
+        description: 'Decision to approve or reject the project request',
+        gatewayType: 'exclusive',
+        gatewayConditions: [
+          {
+            label: 'Approved',
+            targetStepKey: 'create_project_workspace',
+            condition: { field: 'approvalStatus', operator: 'equals', value: 'approved' },
+          },
+          {
+            label: 'Rejected',
+            targetStepKey: 'close_ticket', // Skip to end if rejected
+            condition: { field: 'approvalStatus', operator: 'equals', value: 'rejected' },
+            isDefault: true,
+          },
+        ],
       },
 
-      // ============ AUTOMATION/CRM - CRM SYSTEM ============
-      {
-        key: 'receive_signed_contract',
-        title: 'Receive Signed Contract',
-        type: 'catch_event',
-        lane: 'AutomationCRM',
-        participant: 'crm_system',
-        description: 'CRM receives the signed contract',
-        nextSteps: ['trigger_onboarding_automation'],
-      },
-      {
-        key: 'trigger_onboarding_automation',
-        title: 'Trigger Onboarding Automation',
-        type: 'task',
-        lane: 'AutomationCRM',
-        participant: 'crm_system',
-        isManual: false,
-        automationAction: 'trigger_onboarding',
-        description: 'Start automated onboarding workflow',
-        estimatedMinutes: 0,
-        nextSteps: ['send_welcome_email'],
-      },
-
-      // ============ PROJECT MANAGEMENT ============
+      // 5. Auto-Create Project Workspace [Automated]
       {
         key: 'create_project_workspace',
-        title: 'Create Project Workspace',
+        title: 'Auto-Create Project Workspace',
         type: 'task',
-        lane: 'ProjectManagement',
-        participant: 'project_manager',
+        lane: 'AutomationCRM',
+        participant: 'crm_system',
         isManual: false,
         automationAction: 'create_project_workspace',
-        recommendedRole: 'pm',
-        description: 'Set up project in PM tool with SRS URL',
+        description: 'System creates project workspace and repositories',
         estimatedMinutes: 0,
-        nextSteps: ['assign_project_team'],
+        nextSteps: ['assign_developer'],
       },
+
+      // 6. Assign Developer Based on Workload [User Task / Rule]
       {
-        key: 'assign_project_team',
-        title: 'Assign Project Team',
+        key: 'assign_developer',
+        title: 'Assign Developer',
         type: 'task',
         lane: 'ProjectManagement',
         participant: 'project_manager',
         isManual: true,
         recommendedRole: 'pm',
-        description: 'Assign team members to project',
+        description: 'Assign developer based on current workload',
         estimatedMinutes: 30,
-        nextSteps: ['schedule_kickoff_meeting'],
+        nextSteps: ['ai_requirement_clarification'],
       },
+
+      // 7. AI Requirement Clarification [AI Task]
       {
-        key: 'schedule_kickoff_meeting',
-        title: 'Schedule Kickoff Meeting',
+        key: 'ai_requirement_clarification',
+        title: 'AI Requirement Clarification',
+        type: 'task',
+        lane: 'AutomationCRM',
+        participant: 'ai_assistant',
+        isManual: false,
+        automationAction: 'generate_project_summary', // Reusing existing action type
+        description: 'AI analyzes requirements and suggests clarifications',
+        estimatedMinutes: 5,
+        nextSteps: ['development_subprocess'],
+      },
+
+      // 8. Development Subprocess [Sub-Process]
+      {
+        key: 'development_subprocess',
+        title: 'Development & QA',
+        type: 'task',
+        lane: 'Development',
+        participant: 'developer',
+        isManual: true,
+        recommendedRole: 'dev',
+        description: 'Development and QA execution phase',
+        estimatedMinutes: 2400, // 1 week placeholder
+        nextSteps: ['weekly_status_email'],
+      },
+
+      // 9. Weekly Status Auto Email [Automated]
+      {
+        key: 'weekly_status_email',
+        title: 'Weekly Status Auto Email',
+        type: 'task',
+        lane: 'AutomationCRM',
+        participant: 'crm_system',
+        isManual: false,
+        automationAction: 'send_followup_email', // Reusing existing action type
+        description: 'System sends automated weekly status update',
+        estimatedMinutes: 0,
+        nextSteps: ['final_review_deployment'],
+      },
+
+      // 10. Final Review & Deployment [User Task]
+      {
+        key: 'final_review_deployment',
+        title: 'Final Review & Deployment',
         type: 'task',
         lane: 'ProjectManagement',
         participant: 'project_manager',
         isManual: true,
         recommendedRole: 'pm',
-        description: 'Schedule and send kickoff meeting invite',
-        estimatedMinutes: 15,
-        nextSteps: ['end_onboarded_client'],
+        description: 'Final review and deployment to production',
+        estimatedMinutes: 120,
+        nextSteps: ['send_delivery_package'],
+      },
+
+      // 11. Auto-Send Delivery Package [Automated]
+      {
+        key: 'send_delivery_package',
+        title: 'Auto-Send Delivery Package',
+        type: 'task',
+        lane: 'AutomationCRM',
+        participant: 'crm_system',
+        isManual: false,
+        automationAction: 'share_onboarding_docs', // Reusing similar action
+        description: 'System sends final delivery package to client',
+        estimatedMinutes: 0,
+        nextSteps: ['client_feedback'],
+      },
+
+      // 12. Client Feedback Collection [User Task]
+      {
+        key: 'client_feedback',
+        title: 'Client Feedback Collection',
+        type: 'task',
+        lane: 'Client',
+        participant: 'client',
+        isManual: true,
+        description: 'Client provides feedback on the delivery',
+        estimatedMinutes: 1440, // 1 day
+        nextSteps: ['close_ticket'],
+      },
+
+      // 13. Ticket Auto-Closed (End Event)
+      {
+        key: 'close_ticket',
+        title: 'Ticket Auto-Closed',
+        type: 'end_event',
+        lane: 'AutomationCRM',
+        participant: 'crm_system',
+        description: 'Process completed and ticket closed',
       },
     ],
     messages: [
       {
-        key: 'msg_lead_submission',
-        fromStep: 'submit_contact_form',
-        toStep: 'receive_lead_submission',
-        label: 'Lead Submission',
-        dataTransfer: ['leadName', 'leadEmail', 'leadCompany', 'leadPhone', 'leadMessage'],
+        key: 'msg_project_request',
+        fromStep: 'client_submit_request',
+        toStep: 'crm_record_request',
+        label: 'Project Request Data',
+        dataTransfer: ['projectName', 'projectDescription', 'budget', 'timeline'],
       },
       {
-        key: 'msg_discovery_invite',
-        fromStep: 'schedule_discovery_call',
-        toStep: 'attend_discovery_call',
-        label: 'Discovery Call Invite',
-        dataTransfer: ['discoveryCallScheduledAt'],
+        key: 'msg_request_review',
+        fromStep: 'crm_record_request',
+        toStep: 'pm_review_request',
+        label: 'New Request Notification',
+        dataTransfer: ['leadId', 'requestDetails'],
       },
       {
-        key: 'msg_proposal',
-        fromStep: 'send_proposal_to_client',
-        toStep: 'review_proposal_client',
-        label: 'Proposal',
-        dataTransfer: ['proposalTitle', 'proposalAmount'],
-      },
-      {
-        key: 'msg_revision_request',
-        fromStep: 'request_revision_client',
-        toStep: 'prepare_proposal_draft',
-        label: 'Revision Request',
-        dataTransfer: ['revisionNotes'],
-      },
-      {
-        key: 'msg_signed_contract',
-        fromStep: 'sign_contract_client',
-        toStep: 'receive_signed_contract',
-        label: 'Signed Contract',
-        dataTransfer: ['contractSignedAt', 'contractUrl'],
-      },
-      {
-        key: 'msg_project_summary',
-        fromStep: 'generate_project_summary',
+        key: 'msg_approval_notification',
+        fromStep: 'approval_gateway',
         toStep: 'create_project_workspace',
-        label: 'Project Summary',
-        dataTransfer: ['projectName', 'srsUrl', 'requirements'],
+        label: 'Project Approved',
+        dataTransfer: ['approvalStatus', 'approvedBy'],
+      },
+      {
+        key: 'msg_dev_assignment',
+        fromStep: 'assign_developer',
+        toStep: 'ai_requirement_clarification',
+        label: 'Developer Assigned',
+        dataTransfer: ['developerId', 'assignmentDate'],
+      },
+      {
+        key: 'msg_clarification',
+        fromStep: 'ai_requirement_clarification',
+        toStep: 'development_subprocess',
+        label: 'Requirements Clarified',
+        dataTransfer: ['clarifiedRequirements', 'aiSuggestions'],
+      },
+      {
+        key: 'msg_deployment_ready',
+        fromStep: 'final_review_deployment',
+        toStep: 'send_delivery_package',
+        label: 'Ready for Delivery',
+        dataTransfer: ['deploymentUrl', 'releaseNotes'],
+      },
+      {
+        key: 'msg_delivery',
+        fromStep: 'send_delivery_package',
+        toStep: 'client_feedback',
+        label: 'Delivery Package',
+        dataTransfer: ['packageUrl', 'credentials'],
+      },
+      {
+        key: 'msg_feedback',
+        fromStep: 'client_feedback',
+        toStep: 'close_ticket',
+        label: 'Client Feedback',
+        dataTransfer: ['feedbackRating', 'feedbackComments'],
       },
     ],
   };
@@ -880,6 +681,7 @@ export function getLaneLabel(lane: ProcessLane): string {
     BusinessDevelopment: 'Business Development',
     AutomationCRM: 'Automation & CRM',
     ProjectManagement: 'Project Management',
+    Development: 'Development & QA',
   };
   return labels[lane];
 }
@@ -892,6 +694,7 @@ export function getParticipantLabel(participant: ProcessParticipant): string {
     ai_assistant: 'AI Assistant',
     crm_system: 'CRM System',
     project_manager: 'Project Manager',
+    developer: 'Developer',
   };
   return labels[participant];
 }
