@@ -1566,6 +1566,14 @@
   font-size: 1rem;
   color: var(--int-text-muted);
   transition: color var(--int-transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdownItemIcon svg {
+  width: 1rem;
+  height: 1rem;
 }
 
 .dropdownItem:hover .dropdownItemIcon {
@@ -1764,6 +1772,14 @@
 .alertIcon {
   font-size: 1.25rem;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.alertIcon svg {
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .alertInfo .alertIcon {
@@ -2262,6 +2278,14 @@
   color: var(--int-warning);
   flex-shrink: 0;
   animation: pulse 2s infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.alertBannerIcon svg {
+  width: 100%;
+  height: 100%;
 }
 
 @keyframes pulse {
@@ -2815,6 +2839,13 @@
   font-size: 3rem;
   margin-bottom: var(--int-space-md);
   opacity: 0.5;
+  display: flex;
+  justify-content: center;
+}
+
+.emptyStateIcon svg {
+  width: 48px;
+  height: 48px;
 }
 
 .emptyStateTitle {
@@ -2866,6 +2897,11 @@
   font-size: var(--int-text-sm);
   font-weight: 600;
   flex-shrink: 0;
+}
+
+.leadAvatar svg {
+  width: 18px;
+  height: 18px;
 }
 
 .leadContent {
