@@ -14,6 +14,13 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      // Canonicalize domain: redirect www to non-www
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.megicode.com' }],
+        destination: 'https://megicode.com/:path*',
+        permanent: true,
+      },
       {
         source: '/project',
         destination: '/projects',
@@ -28,10 +35,10 @@ const nextConfig = {
         source: '/megicode/:path*',
         destination: '/:path*',
         permanent: true,
-      }
+      },
     ];
   },
-  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+  webpack: (config, { isServer }) => {
     if (!isServer) {
       config.devtool = 'source-map';
     }
