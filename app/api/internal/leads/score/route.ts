@@ -74,7 +74,7 @@ export async function POST(request: NextRequest) {
     const { leadId, recalculate = false } = body;
 
     // Fetch the lead
-    const lead = await db.select().from(leads).where(eq(leads.id, leadId)).get();
+    const lead = await getDb().select().from(leads).where(eq(leads.id, leadId)).get();
     if (!lead) {
       return NextResponse.json({ error: 'Lead not found' }, { status: 404 });
     }
@@ -127,7 +127,7 @@ export async function POST(request: NextRequest) {
     // For now, we log the score event
     const now = new Date();
 
-    await db.insert(events).values({
+    await getDb().insert(events).values({
       id: crypto.randomUUID(),
       leadId,
       type: 'lead.scored',
@@ -290,3 +290,4 @@ function generateRecommendations(lead: any, breakdown: Array<{ category: string 
 
   return recommendations.slice(0, 5);
 }
+

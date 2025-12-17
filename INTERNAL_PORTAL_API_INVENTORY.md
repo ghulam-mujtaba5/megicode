@@ -3,9 +3,10 @@
 **Database:** Remote Turso DB (`libsql://megicode-internal-megicode.aws-eu-west-1.turso.io`)
 
 ## 📊 Summary
-- **Total API Endpoints:** 15
+- **Total API Endpoints:** 43 (28 new endpoints added!)
 - **Total Pages:** 40+
 - **Database:** Remote Turso (Libsql)
+- **Last Updated:** December 17, 2025
 
 ---
 
@@ -146,6 +147,165 @@ Located in: `app/api/internal/admin/`
 **Description:** Update user information  
 **Auth:** Admin required  
 **Body:** User update data  
+
+---
+
+### Projects APIs (NEW)
+Located in: `app/api/internal/projects/`
+
+#### 16. GET `/api/internal/projects`
+**File:** [app/api/internal/projects/route.ts](app/api/internal/projects/route.ts)  
+**Description:** Get all projects with optional filtering  
+**Auth:** Required  
+**Query Params:** `status` (optional)  
+
+#### 17. POST `/api/internal/projects`
+**File:** [app/api/internal/projects/route.ts](app/api/internal/projects/route.ts)  
+**Description:** Create new project  
+**Auth:** Required  
+**Body:**
+```json
+{
+  "name": "string",
+  "description": "string",
+  "clientId": "uuid",
+  "status": "new|in_progress|completed",
+  "budget": "number",
+  "startDate": "date",
+  "endDate": "date"
+}
+```
+
+#### 18. GET `/api/internal/projects/[id]`
+**File:** [app/api/internal/projects/[id]/route.ts](app/api/internal/projects/[id]/route.ts)  
+**Description:** Get specific project by ID  
+**Auth:** Required  
+
+#### 19. PATCH `/api/internal/projects/[id]`
+**File:** [app/api/internal/projects/[id]/route.ts](app/api/internal/projects/[id]/route.ts)  
+**Description:** Update existing project  
+**Auth:** Required  
+
+#### 20. DELETE `/api/internal/projects/[id]`
+**File:** [app/api/internal/projects/[id]/route.ts](app/api/internal/projects/[id]/route.ts)  
+**Description:** Delete project  
+**Auth:** Required  
+
+---
+
+### Tasks APIs (NEW)
+Located in: `app/api/internal/tasks/`
+
+#### 21. GET `/api/internal/tasks`
+**File:** [app/api/internal/tasks/route.ts](app/api/internal/tasks/route.ts)  
+**Description:** Get all tasks with filtering  
+**Auth:** Required  
+**Query Params:** `status`, `projectId`, `assigneeId` (all optional)  
+
+#### 22. POST `/api/internal/tasks`
+**File:** [app/api/internal/tasks/route.ts](app/api/internal/tasks/route.ts)  
+**Description:** Create new task  
+**Auth:** Required  
+**Body:**
+```json
+{
+  "title": "string",
+  "description": "string",
+  "projectId": "uuid",
+  "assigneeId": "uuid",
+  "status": "todo|in_progress|done",
+  "priority": "low|medium|high",
+  "dueDate": "date"
+}
+```
+
+#### 23. GET `/api/internal/tasks/[id]`
+#### 24. PATCH `/api/internal/tasks/[id]`
+#### 25. DELETE `/api/internal/tasks/[id]`
+**File:** [app/api/internal/tasks/[id]/route.ts](app/api/internal/tasks/[id]/route.ts)  
+**Description:** Get, update, or delete specific task  
+**Auth:** Required  
+
+---
+
+### Leads APIs (EXPANDED)
+Located in: `app/api/internal/leads/`
+
+#### 26. GET `/api/internal/leads`
+**File:** [app/api/internal/leads/route.ts](app/api/internal/leads/route.ts)  
+**Description:** Get all leads  
+**Auth:** Required  
+
+#### 27. POST `/api/internal/leads`
+**File:** [app/api/internal/leads/route.ts](app/api/internal/leads/route.ts)  
+**Description:** Create new lead  
+**Auth:** Required  
+
+#### 28. GET `/api/internal/leads/[id]`
+#### 29. PATCH `/api/internal/leads/[id]`
+#### 30. DELETE `/api/internal/leads/[id]`
+**File:** [app/api/internal/leads/[id]/route.ts](app/api/internal/leads/[id]/route.ts)  
+**Description:** Get, update, or delete specific lead  
+**Auth:** Required  
+
+---
+
+### Proposals APIs (NEW)
+Located in: `app/api/internal/proposals/`
+
+#### 31. GET `/api/internal/proposals`
+#### 32. POST `/api/internal/proposals`
+**File:** [app/api/internal/proposals/route.ts](app/api/internal/proposals/route.ts)  
+**Description:** List or create proposals  
+**Auth:** Required  
+
+#### 33. GET `/api/internal/proposals/[id]`
+#### 34. PATCH `/api/internal/proposals/[id]`
+#### 35. DELETE `/api/internal/proposals/[id]`
+**File:** [app/api/internal/proposals/[id]/route.ts](app/api/internal/proposals/[id]/route.ts)  
+**Description:** Manage specific proposal  
+**Auth:** Required  
+
+---
+
+### Clients APIs (NEW)
+Located in: `app/api/internal/clients/`
+
+#### 36. GET `/api/internal/clients`
+#### 37. POST `/api/internal/clients`
+**File:** [app/api/internal/clients/route.ts](app/api/internal/clients/route.ts)  
+**Description:** List or create clients  
+**Auth:** Required  
+
+#### 38. GET `/api/internal/clients/[id]`
+#### 39. PATCH `/api/internal/clients/[id]`
+#### 40. DELETE `/api/internal/clients/[id]`
+**File:** [app/api/internal/clients/[id]/route.ts](app/api/internal/clients/[id]/route.ts)  
+**Description:** Manage specific client  
+**Auth:** Required  
+
+---
+
+### Bugs APIs (NEW)
+Located in: `app/api/internal/bugs/`
+
+#### 41. GET `/api/internal/bugs`
+#### 42. POST `/api/internal/bugs`
+**File:** [app/api/internal/bugs/route.ts](app/api/internal/bugs/route.ts)  
+**Description:** List or report bugs  
+**Auth:** Required  
+
+---
+
+### Reports & Analytics (NEW)
+Located in: `app/api/internal/reports/`
+
+#### 43. GET `/api/internal/reports`
+**File:** [app/api/internal/reports/route.ts](app/api/internal/reports/route.ts)  
+**Description:** Get dashboard analytics and comprehensive reports  
+**Auth:** Required  
+**Query Params:** `type` (dashboard|projects|performance)  
+**Returns:** Aggregated statistics, metrics, and insights  
 
 ---
 
