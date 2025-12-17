@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 import { eq } from 'drizzle-orm';
-import { db } from '@/lib/db';
+import { getDb } from '@/lib/db';
 import { tasks } from '@/lib/db/schema';
 import { z } from 'zod';
 import { logAuditEvent } from '@/lib/audit';
@@ -19,6 +19,7 @@ export async function updateTaskTitle(taskId: string, title: string) {
   }
 
   try {
+    const db = getDb();
     const oldTask = await db.select().from(tasks).where(eq(tasks.id, parsed.data.taskId)).get();
 
     await db

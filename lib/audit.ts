@@ -1,7 +1,7 @@
 import { randomUUID } from 'crypto';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/auth';
-import { db } from '@/lib/db';
+import { getDb } from '@/lib/db';
 import { auditEvents } from '@/lib/db/schema';
 
 export async function logAuditEvent(
@@ -18,6 +18,7 @@ export async function logAuditEvent(
       return;
     }
 
+    const db = getDb();
     await db.insert(auditEvents).values({
       id: randomUUID(),
       actorUserId,

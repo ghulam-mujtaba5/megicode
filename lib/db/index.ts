@@ -46,8 +46,4 @@ export async function withTransaction<T>(
   const db = getDb();
   return db.transaction(fn);
 }
-
-// Export db as a named export for convenience
-export const db = getDb();
-
 export { schema };
