@@ -63,7 +63,7 @@ export async function GET(request: NextRequest) {
     const completedWithDuration = allInstances
       .filter(i => i.status === 'completed' && i.startedAt && i.endedAt)
       .map(i => ({
-        duration: new Date(i.endedAt!).getTime() - new Date(i.startedAt!).getTime(),
+        duration: (i.endedAt as any as Date).getTime() - (i.startedAt as any as Date).getTime(),
       }));
 
     const avgCompletionTime = completedWithDuration.length > 0
@@ -98,7 +98,7 @@ export async function GET(request: NextRequest) {
         existing.completed++;
         if (si.startedAt && si.completedAt) {
           existing.totalDuration += 
-            new Date(si.completedAt).getTime() - new Date(si.startedAt).getTime();
+            (si.completedAt as any as Date).getTime() - (si.startedAt as any as Date).getTime();
         }
       }
       if (si.status === 'failed') {
@@ -154,7 +154,7 @@ export async function GET(request: NextRequest) {
         existing.completed++;
         if (si.startedAt && si.completedAt) {
           existing.duration += 
-            new Date(si.completedAt).getTime() - new Date(si.startedAt).getTime();
+            (si.completedAt as any as Date).getTime() - (si.startedAt as any as Date).getTime();
         }
       }
       laneStats.set(lane, existing);
@@ -222,13 +222,13 @@ export async function GET(request: NextRequest) {
     const dailyTrend = new Map<string, { started: number; completed: number }>();
     allInstances.forEach(inst => {
       if (inst.startedAt) {
-        const dateKey = new Date(inst.startedAt).toISOString().split('T')[0];
+        const dateKey = (inst.startedAt as any as Date).toISOString().split('T')[0];
         const existing = dailyTrend.get(dateKey) || { started: 0, completed: 0 };
         existing.started++;
         dailyTrend.set(dateKey, existing);
       }
       if (inst.status === 'completed' && inst.endedAt) {
-        const dateKey = new Date(inst.endedAt).toISOString().split('T')[0];
+        const dateKey = (inst.endedAt as any as Date).toISOString().split('T')[0];
         const existing = dailyTrend.get(dateKey) || { started: 0, completed: 0 };
         existing.completed++;
         dailyTrend.set(dateKey, existing);
