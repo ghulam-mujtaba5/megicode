@@ -13,6 +13,7 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "ts-node scripts/db-migrate.ts",
     "db:seed": "ts-node scripts/db-seed.ts",
+    "db:seed:users": "ts-node scripts/db-seed-minimal.ts",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:debug": "playwright test --debug",
