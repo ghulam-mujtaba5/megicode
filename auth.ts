@@ -79,9 +79,27 @@ export const authOptions: NextAuthOptions = {
         const now = new Date();
         const role = getRoleForEmail(email);
 
-        await db
-          .insert(users)
-          .values({
+        // Check if user already exists
+        const existingUser = await db
+          .select()
+          .from(users)
+          .where(eq(users.email, email))
+          .limit(1);
+
+        if (existingUser.length > 0) {
+          // Update existing user
+          await db
+            .update(users)
+            .set({
+              name: user.name ?? null,
+              image: user.image ?? null,
+              role,
+              updatedAt: now,
+            })
+            .where(eq(users.email, email));
+        } else {
+          // Insert new user
+          await db.insert(users).values({
             id: crypto.randomUUID(),
             email,
             name: user.name ?? null,
@@ -89,16 +107,8 @@ export const authOptions: NextAuthOptions = {
             role,
             createdAt: now,
             updatedAt: now,
-          })
-          .onConflictDoUpdate({
-            target: users.email,
-            set: {
-              name: user.name ?? null,
-              image: user.image ?? null,
-              role,
-              updatedAt: now,
-            },
           });
+        }
 
         return true;
       } catch (error) {
