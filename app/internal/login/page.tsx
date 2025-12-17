@@ -2,13 +2,13 @@
 
 import { signIn } from 'next-auth/react';
 import { useSearchParams } from 'next/navigation';
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { LOGO_MAIN_LIGHT, LOGO_MAIN_DARK } from '@/lib/logo';
 import styles from './login.module.css';
 
-export default function InternalLoginPage() {
+function InternalLoginContent() {
   const searchParams = useSearchParams();
   const error = searchParams.get('error');
   const [devEmail, setDevEmail] = useState('');
@@ -157,6 +157,14 @@ export default function InternalLoginPage() {
         </div>
       </motion.div>
     </div>
+  );
+}
+
+export default function InternalLoginPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <InternalLoginContent />
+    </Suspense>
   );
 }
 
