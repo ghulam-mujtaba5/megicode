@@ -1,10 +1,11 @@
 import type { NextAuthOptions } from 'next-auth';
-import GoogleProvider from 'next-auth/providers/google';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import GoogleProvider from 'next-auth/providers/google';
+
 import { eq } from 'drizzle-orm';
 
 import { getDb } from '@/lib/db';
-import { users, type UserRole } from '@/lib/db/schema';
+import { type UserRole, users } from '@/lib/db/schema';
 
 function parseCsv(value?: string | null): string[] {
   return (value ?? '')
@@ -73,32 +74,40 @@ export const authOptions: NextAuthOptions = {
       if (!email) return false;
       if (!isEmailAllowed(email)) return false;
 
-      const db = getDb();
-      const now = new Date();
-      const role = getRoleForEmail(email);
+      try {
+        const db = getDb();
+        const now = new Date();
+        const role = getRoleForEmail(email);
 
-      await db
-        .insert(users)
-        .values({
-          id: crypto.randomUUID(),
-          email,
-          name: user.name ?? null,
-          image: user.image ?? null,
-          role,
-          createdAt: now,
-          updatedAt: now,
-        })
-        .onConflictDoUpdate({
-          target: users.email,
-          set: {
+        await db
+          .insert(users)
+          .values({
+            id: crypto.randomUUID(),
+            email,
             name: user.name ?? null,
             image: user.image ?? null,
             role,
+            createdAt: now,
             updatedAt: now,
-          },
-        });
+          })
+          .onConflictDoUpdate({
+            target: users.email,
+            set: {
+              name: user.name ?? null,
+              image: user.image ?? null,
+              role,
+              updatedAt: now,
+            },
+          });
 
-      return true;
+        return true;
+      } catch (error) {
+        console.error('Database error during sign-in:', error);
+        // Re-throw with more context
+        throw new Error(
+          `Failed to save user: ${error instanceof Error ? error.message : String(error)}`
+        );
+      }
     },
     async jwt({ token }) {
       const email = typeof token.email === 'string' ? token.email.toLowerCase() : null;
@@ -110,7 +119,7 @@ export const authOptions: NextAuthOptions = {
       if (row) {
         token.uid = row.id;
         token.role = row.role;
-        // @ts-ignore
+        // @ts-expect-error - status field compatibility
         token.status = row.status;
       }
 
@@ -120,7 +129,7 @@ export const authOptions: NextAuthOptions = {
       if (session.user) {
         session.user.id = typeof token.uid === 'string' ? token.uid : undefined;
         session.user.role = typeof token.role === 'string' ? (token.role as UserRole) : 'viewer';
-        // @ts-ignore
+        // @ts-expect-error - status field compatibility
         session.user.status = typeof token.status === 'string' ? token.status : 'pending';
       }
       return session;
