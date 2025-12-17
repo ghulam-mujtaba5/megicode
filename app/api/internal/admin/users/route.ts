@@ -22,7 +22,7 @@ export async function PUT(req: Request) {
       .update(users)
       .set({
         role,
-        updatedAt: new Date(),
+        updatedAt: Date.now() as any,
       })
       .where(eq(users.id, userId));
 
