@@ -49,7 +49,7 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? '',
     }),
     // Dev-only credentials provider for testing without Google OAuth
-    ...(process.env.NODE_ENV === 'development' && process.env.DEV_LOGIN_ENABLED === 'true'
+    ...(process.env.DEV_LOGIN_ENABLED === 'true'
       ? [
           CredentialsProvider({
             id: 'dev-login',
