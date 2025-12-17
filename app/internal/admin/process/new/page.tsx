@@ -113,7 +113,7 @@ export default async function NewProcessPage() {
               style={{ fontFamily: 'monospace', fontSize: '0.9rem' }}
             ></textarea>
             <p className={s.textMuted} style={{ fontSize: '0.8rem', marginTop: '0.25rem' }}>
-              Must be valid JSON containing a "steps" array.
+              Must be valid JSON containing a &quot;steps&quot; array.
             </p>
           </div>
 

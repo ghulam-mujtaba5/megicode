@@ -12,7 +12,6 @@ export default function OnboardingPage() {
   const [department, setDepartment] = useState('');
   const [loading, setLoading] = useState(false);
   
-  // @ts-ignore
   const status = session?.user?.status;
 
   if (status === 'active') {

@@ -39,6 +39,9 @@ export const users = sqliteTable(
     role: text('role', { enum: ['admin', 'pm', 'dev', 'qa', 'viewer'] })
       .notNull()
       .default('viewer'),
+    status: text('status', { enum: ['active', 'pending', 'disabled'] })
+      .notNull()
+      .default('pending'),
     createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
     updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull(),
   },

@@ -18,8 +18,15 @@ interface Stage {
   color: string;
 }
 
+interface PipelineItem {
+  id: string;
+  totalAmount?: number;
+  estimatedBudget?: number;
+  [key: string]: any;
+}
+
 interface PipelineData {
-  [key: string]: any[];
+  [key: string]: PipelineItem[];
 }
 
 interface ProcessDefinition {
@@ -63,7 +70,6 @@ export default function AcquisitionPipelineClient({
 }: AcquisitionPipelineClientProps) {
   const [viewMode, setViewMode] = useState<'pipeline' | 'funnel'>('pipeline');
   const [selectedStage, setSelectedStage] = useState<string | null>(null);
-  const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
 
   // Calculate totals for each stage
   const stageTotals = useMemo(() => {
@@ -72,7 +78,7 @@ export default function AcquisitionPipelineClient({
       const items = data[stage.key] || [];
       totals[stage.key] = {
         count: items.length,
-        value: items.reduce((sum: number, item: any) => sum + (item.totalAmount || item.estimatedBudget || 0), 0) / 100,
+        value: items.reduce((sum: number, item: PipelineItem) => sum + (item.totalAmount || item.estimatedBudget || 0), 0) / 100,
       };
     });
     return totals;
@@ -93,18 +99,6 @@ export default function AcquisitionPipelineClient({
     });
     return rates;
   }, [stages, stageTotals]);
-
-  const toggleItemExpand = (id: string) => {
-    setExpandedItems(prev => {
-      const next = new Set(prev);
-      if (next.has(id)) {
-        next.delete(id);
-      } else {
-        next.add(id);
-      }
-      return next;
-    });
-  };
 
   return (
     <div className={styles.pipelineContainer}>
@@ -141,7 +135,7 @@ export default function AcquisitionPipelineClient({
               <div
                 key={stage.key}
                 className={`${styles.stageColumn} ${isSelected ? styles.selected : ''}`}
-                style={{ '--stage-color': colors.border } as any}
+                style={{ '--stage-color': colors.border } as React.CSSProperties}
               >
                 {/* Stage Header */}
                 <div
@@ -170,7 +164,7 @@ export default function AcquisitionPipelineClient({
                       <span style={{ opacity: 0.5 }}>No items</span>
                     </div>
                   ) : (
-                    items.slice(0, 5).map((item: any) => (
+                    items.slice(0, 5).map((item: PipelineItem) => (
                       <Link
                         key={item.id}
                         href={getItemLink(stage.key, item)}
@@ -276,7 +270,7 @@ export default function AcquisitionPipelineClient({
   );
 }
 
-function getItemLink(stageKey: string, item: any): string {
+function getItemLink(stageKey: string, item: PipelineItem): string {
   switch (stageKey) {
     case 'new_leads':
     case 'qualified':

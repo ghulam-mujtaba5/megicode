@@ -22,11 +22,25 @@ export async function requireRole(allowed: UserRole[]) {
   return session;
 }
 
+export class ApiError extends Error {
+  statusCode: number;
+  constructor(message: string, statusCode: number) {
+    super(message);
+    this.statusCode = statusCode;
+  }
+}
+
+export async function requireInternalApiSession() {
+  const session = await getServerSession(authOptions);
+  if (!session?.user) {
+    throw new ApiError('Unauthorized', 401);
+  }
+  return session;
+}
+
 export async function requireActiveUser() {
   const session = await requireInternalSession();
-  // @ts-ignore
   const status = session.user.status;
-  // @ts-ignore
   const role = session.user.role;
 
   // Admins always bypass pending status

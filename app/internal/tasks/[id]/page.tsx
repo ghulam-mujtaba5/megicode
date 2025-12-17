@@ -152,7 +152,7 @@ export default async function TaskDetailPage({ params }: { params: Promise<{ id:
     }).where(eq(tasks.id, id));
 
     if (oldTask) {
-      const changes: Record<string, any> = {};
+      const changes: Record<string, unknown> = {};
       if (oldTask.status !== status) changes.status = { from: oldTask.status, to: status };
       if (oldTask.assignedToUserId !== assignedToUserId) changes.assignedToUserId = { from: oldTask.assignedToUserId, to: assignedToUserId };
       if (oldTask.sprintNumber !== sprintNumber) changes.sprintNumber = { from: oldTask.sprintNumber, to: sprintNumber };

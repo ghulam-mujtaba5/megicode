@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
 import { eq } from 'drizzle-orm';
-import { requireInternalSession } from '@/lib/internal/auth';
+import { requireInternalApiSession, ApiError } from '@/lib/internal/auth';
 import { getDb } from '@/lib/db';
 import { users } from '@/lib/db/schema';
 
 export async function PUT(req: Request) {
   try {
-    const session = await requireInternalSession();
+    const session = await requireInternalApiSession();
     if (session.user.role !== 'admin') {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
     }
@@ -27,7 +27,10 @@ export async function PUT(req: Request) {
       .where(eq(users.id, userId));
 
     return NextResponse.json({ success: true });
-  } catch (error) {
+  } catch (error: any) {
+    if (error instanceof ApiError) {
+      return NextResponse.json({ error: error.message }, { status: error.statusCode });
+    }
     console.error('Update user error:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }

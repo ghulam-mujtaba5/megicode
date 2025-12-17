@@ -13,12 +13,17 @@
  * 7. Project Setup → Assign Team → Kickoff Meeting
  */
 import Link from 'next/link';
-import { desc, eq, and, or, sql, isNull } from 'drizzle-orm';
+import { desc, eq, and, or, sql, isNull, InferSelectModel } from 'drizzle-orm';
 
 import s from '../styles.module.css';
 import { requireRole } from '@/lib/internal/auth';
 import { getDb } from '@/lib/db';
 import { leads, proposals, projects, processInstances, clients, events, tasks } from '@/lib/db/schema';
+
+type Lead = InferSelectModel<typeof leads>;
+type Proposal = InferSelectModel<typeof proposals>;
+type Project = InferSelectModel<typeof projects>;
+type ProcessInstance = InferSelectModel<typeof processInstances>;
 import { getActiveBusinessProcessDefinition } from '@/lib/workflow/processEngine';
 import { formatDateTime } from '@/lib/internal/ui';
 import AcquisitionPipelineClient from './AcquisitionPipelineClient';
@@ -369,10 +374,10 @@ export default async function AcquisitionPage() {
 
 // Helper functions
 function calculatePipelineData(
-  leads: any[],
-  proposals: any[],
-  projects: any[],
-  instances: any[]
+  leads: Lead[],
+  proposals: Proposal[],
+  projects: Project[],
+  instances: ProcessInstance[]
 ) {
   return {
     new_leads: leads.filter(l => l.status === 'new'),
@@ -390,9 +395,9 @@ function calculatePipelineData(
 }
 
 function getUrgentItems(
-  leads: any[],
-  proposals: any[],
-  instances: any[],
+  leads: Lead[],
+  proposals: Proposal[],
+  instances: ProcessInstance[],
   definition: any
 ) {
   const items: any[] = [];

@@ -8,6 +8,7 @@
  * - Step-by-step execution logs
  */
 import { requireRole } from '@/lib/internal/auth';
+import Link from 'next/link';
 import { getActiveBusinessProcessDefinition } from '@/lib/workflow/processEngine';
 import ProcessShowcaseClient from './ProcessShowcaseClient';
 import s from '../../styles.module.css';
@@ -109,9 +110,9 @@ export default async function ProcessShowcasePage() {
       <div className={s.pageHeader}>
         <div>
           <nav className={s.breadcrumb}>
-            <a href="/internal" className={s.breadcrumbLink}>Dashboard</a>
+            <Link href="/internal" className={s.breadcrumbLink}>Dashboard</Link>
             <span className={s.breadcrumbSeparator}>/</span>
-            <a href="/internal/process" className={s.breadcrumbLink}>Processes</a>
+            <Link href="/internal/process" className={s.breadcrumbLink}>Processes</Link>
             <span className={s.breadcrumbSeparator}>/</span>
             <span>Workflow Showcase</span>
           </nav>

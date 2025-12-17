@@ -119,7 +119,6 @@ export const authOptions: NextAuthOptions = {
       if (row) {
         token.uid = row.id;
         token.role = row.role;
-        // @ts-expect-error - status field compatibility
         token.status = row.status;
       }
 
@@ -129,7 +128,6 @@ export const authOptions: NextAuthOptions = {
       if (session.user) {
         session.user.id = typeof token.uid === 'string' ? token.uid : undefined;
         session.user.role = typeof token.role === 'string' ? (token.role as UserRole) : 'viewer';
-        // @ts-expect-error - status field compatibility
         session.user.status = typeof token.status === 'string' ? token.status : 'pending';
       }
       return session;
