@@ -13,33 +13,59 @@ import { useState, useEffect } from 'react';
 import styles from './ProcessAnalytics.module.css';
 
 interface AnalyticsData {
-  period: string;
-  summary: {
-    totalInstances: number;
-    completed: number;
+  dateRange: {
+    start: string;
+    end: string;
+  };
+  processDefinition: {
+    key: string;
+    name: string;
+    version: number;
+  };
+  overview: {
+    total: number;
     running: number;
-    failed: number;
-    cancelled: number;
+    completed: number;
+    canceled: number;
     completionRate: number;
-    failureRate: number;
-    avgDurationHours: number;
-    healthScore: number;
+    avgCompletionTimeMs: number;
+    avgCompletionTimeFormatted: string;
   };
-  conversion: {
-    leadToProposal: number;
-    proposalToProject: number;
-    overallConversion: number;
-    leads: number;
-    proposals: number;
-    projects: number;
-  };
+  stepAnalytics: Array<{
+    stepKey: string;
+    title: string;
+    lane: string;
+    isManual?: boolean;
+    automationAction?: string;
+    metrics: {
+      total: number;
+      completed: number;
+      errors: number;
+      successRate: number;
+      avgDurationMs: number;
+      avgDurationFormatted: string;
+    };
+  }>;
+  laneAnalytics: Array<{
+    lane: string;
+    total: number;
+    completed: number;
+    avgDurationMs: number;
+  }>;
+  automationAnalytics: Array<{
+    actionType: string;
+    total: number;
+    success: number;
+    failed: number;
+    successRate: number;
+  }>;
   bottlenecks: Array<{
     stepKey: string;
-    count: number;
-    stuckCount: number;
-    avgDurationMinutes: number;
+    title: string;
+    lane: string;
+    waitingCount: number;
   }>;
-  dailyStats: Array<{
+  trend: Array<{
     date: string;
     started: number;
     completed: number;
@@ -127,8 +153,13 @@ export default function ProcessAnalyticsDashboard({
     );
   }
 
-  const { summary, conversion, bottlenecks, dailyStats } = data;
-  const maxDaily = Math.max(...dailyStats.map(d => Math.max(d.started, d.completed)), 1);
+  const { overview, stepAnalytics, bottlenecks, trend, automationAnalytics } = data;
+  const maxDaily = trend.length > 0 
+    ? Math.max(...trend.map(d => Math.max(d.started, d.completed)), 1)
+    : 1;
+
+  // Calculate health score based on completion rate and errors
+  const healthScore = Math.round(overview.completionRate * 0.7 + (100 - (stepAnalytics.reduce((sum, s) => sum + s.metrics.errors, 0) / Math.max(overview.total, 1) * 100)) * 0.3);
 
   // Health score color
   const getHealthColor = (score: number) => {
@@ -174,29 +205,29 @@ export default function ProcessAnalyticsDashboard({
             <path
               d="M 10 55 A 50 50 0 0 1 110 55"
               fill="none"
-              stroke={getHealthColor(summary.healthScore)}
+              stroke={getHealthColor(healthScore)}
               strokeWidth="10"
               strokeLinecap="round"
-              strokeDasharray={`${summary.healthScore * 1.57} 157`}
+              strokeDasharray={`${healthScore * 1.57} 157`}
             />
           </svg>
           <div className={styles.healthValue}>
-            <span className={styles.healthNumber}>{summary.healthScore}</span>
+            <span className={styles.healthNumber}>{healthScore}</span>
             <span className={styles.healthLabel}>Health Score</span>
           </div>
         </div>
         <div className={styles.healthMeta}>
           <div className={styles.healthItem}>
             <span className={styles.itemLabel}>Completion Rate</span>
-            <span className={styles.itemValue}>{summary.completionRate}%</span>
+            <span className={styles.itemValue}>{overview.completionRate}%</span>
           </div>
           <div className={styles.healthItem}>
             <span className={styles.itemLabel}>Avg Duration</span>
-            <span className={styles.itemValue}>{summary.avgDurationHours}h</span>
+            <span className={styles.itemValue}>{overview.avgCompletionTimeFormatted}</span>
           </div>
           <div className={styles.healthItem}>
             <span className={styles.itemLabel}>Active Now</span>
-            <span className={styles.itemValue}>{summary.running}</span>
+            <span className={styles.itemValue}>{overview.running}</span>
           </div>
         </div>
       </div>
@@ -208,7 +239,7 @@ export default function ProcessAnalyticsDashboard({
             <span style={{ color: '#2563eb' }}>{Icons.activity}</span>
           </div>
           <div className={styles.statContent}>
-            <span className={styles.statValue}>{summary.totalInstances}</span>
+            <span className={styles.statValue}>{overview.total}</span>
             <span className={styles.statLabel}>Total Instances</span>
           </div>
         </div>
@@ -217,7 +248,7 @@ export default function ProcessAnalyticsDashboard({
             <span style={{ color: '#16a34a' }}>{Icons.check}</span>
           </div>
           <div className={styles.statContent}>
-            <span className={styles.statValue}>{summary.completed}</span>
+            <span className={styles.statValue}>{overview.completed}</span>
             <span className={styles.statLabel}>Completed</span>
           </div>
         </div>
@@ -226,7 +257,7 @@ export default function ProcessAnalyticsDashboard({
             <span style={{ color: '#d97706' }}>{Icons.clock}</span>
           </div>
           <div className={styles.statContent}>
-            <span className={styles.statValue}>{summary.running}</span>
+            <span className={styles.statValue}>{overview.running}</span>
             <span className={styles.statLabel}>Running</span>
           </div>
         </div>
@@ -235,57 +266,49 @@ export default function ProcessAnalyticsDashboard({
             <span style={{ color: '#dc2626' }}>{Icons.alert}</span>
           </div>
           <div className={styles.statContent}>
-            <span className={styles.statValue}>{summary.failed}</span>
-            <span className={styles.statLabel}>Failed</span>
+            <span className={styles.statValue}>{overview.canceled}</span>
+            <span className={styles.statLabel}>Canceled</span>
           </div>
         </div>
       </div>
 
-      {/* Conversion Funnel */}
+      {/* Step Analytics */}
+      {stepAnalytics.length > 0 && (
       <div className={styles.section}>
         <h3 className={styles.sectionTitle}>
           <span className={styles.icon}>{Icons.target}</span>
-          Conversion Funnel
+          Step Performance
         </h3>
-        <div className={styles.funnel}>
-          <div className={styles.funnelStage} style={{ width: '100%' }}>
-            <div className={styles.funnelBar} style={{ background: 'linear-gradient(90deg, #3b82f6, #60a5fa)' }}>
-              <span className={styles.funnelCount}>{conversion.leads}</span>
+        <div className={styles.bottleneckList}>
+          {stepAnalytics.slice(0, 8).map((step, i) => (
+            <div key={step.stepKey} className={styles.bottleneckItem}>
+              <div className={styles.bottleneckRank}>{i + 1}</div>
+              <div className={styles.bottleneckContent}>
+                <span className={styles.bottleneckName}>{step.title}</span>
+                <div className={styles.bottleneckMeta}>
+                  <span className={styles.durationBadge}>
+                    {step.metrics.total} total | {step.metrics.completed} completed
+                  </span>
+                  <span className={styles.durationBadge}>
+                    {step.metrics.avgDurationFormatted}
+                  </span>
+                </div>
+              </div>
             </div>
-            <span className={styles.funnelLabel}>Leads</span>
-          </div>
-          <div className={styles.funnelArrow}>
-            <span className={styles.conversionRate}>{conversion.leadToProposal}%</span>
-          </div>
-          <div className={styles.funnelStage} style={{ width: `${Math.max(30, conversion.leadToProposal)}%` }}>
-            <div className={styles.funnelBar} style={{ background: 'linear-gradient(90deg, #8b5cf6, #a78bfa)' }}>
-              <span className={styles.funnelCount}>{conversion.proposals}</span>
-            </div>
-            <span className={styles.funnelLabel}>Proposals</span>
-          </div>
-          <div className={styles.funnelArrow}>
-            <span className={styles.conversionRate}>{conversion.proposalToProject}%</span>
-          </div>
-          <div className={styles.funnelStage} style={{ width: `${Math.max(20, conversion.overallConversion)}%` }}>
-            <div className={styles.funnelBar} style={{ background: 'linear-gradient(90deg, #10b981, #34d399)' }}>
-              <span className={styles.funnelCount}>{conversion.projects}</span>
-            </div>
-            <span className={styles.funnelLabel}>Projects</span>
-          </div>
-        </div>
-        <div className={styles.overallConversion}>
-          Overall Conversion: <strong>{conversion.overallConversion}%</strong>
+          ))}
         </div>
       </div>
+      )}
 
       {/* Daily Trends */}
+      {trend.length > 0 && (
       <div className={styles.section}>
         <h3 className={styles.sectionTitle}>
           <span className={styles.icon}>{Icons.trending}</span>
-          7-Day Trend
+          Daily Trend
         </h3>
         <div className={styles.chart}>
-          {dailyStats.map((day, i) => (
+          {trend.map((day, i) => (
             <div key={day.date} className={styles.chartDay}>
               <div className={styles.chartBars}>
                 <div 
@@ -322,6 +345,7 @@ export default function ProcessAnalyticsDashboard({
           </span>
         </div>
       </div>
+      )}
 
       {/* Bottlenecks */}
       {bottlenecks.length > 0 && (
@@ -336,16 +360,14 @@ export default function ProcessAnalyticsDashboard({
                 <div className={styles.bottleneckRank}>{i + 1}</div>
                 <div className={styles.bottleneckContent}>
                   <span className={styles.bottleneckName}>
-                    {bottleneck.stepKey.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}
+                    {bottleneck.title}
                   </span>
                   <div className={styles.bottleneckMeta}>
-                    {bottleneck.stuckCount > 0 && (
-                      <span className={styles.stuckBadge}>
-                        {bottleneck.stuckCount} stuck
-                      </span>
-                    )}
+                    <span className={styles.stuckBadge}>
+                      {bottleneck.waitingCount} waiting
+                    </span>
                     <span className={styles.durationBadge}>
-                      ~{bottleneck.avgDurationMinutes} min avg
+                      Lane: {bottleneck.lane}
                     </span>
                   </div>
                 </div>

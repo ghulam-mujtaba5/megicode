@@ -79,3 +79,11 @@ coverage/
 **/public/sw.js
 **/public/workbox-*.js
 **/public/swe-worker-*.js
+
+# Testing artifacts
+playwright-report/
+test-results/
+**/trace/
+**/trace/**
+*.zip
+*.webm

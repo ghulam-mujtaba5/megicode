@@ -99,6 +99,7 @@ function InternalLoginContent() {
         <div className={styles.footer}>
           <p className={styles.copyright}>&copy; {new Date().getFullYear()} Megicode. All rights reserved.</p>
           
+          {process.env.NEXT_PUBLIC_DEV_LOGIN_ENABLED === 'true' && (
           <div className={styles.devTools}>
             <button 
               onClick={() => setIsDevLoginVisible(!isDevLoginVisible)}
@@ -154,6 +155,7 @@ function InternalLoginContent() {
               </div>
             )}
           </div>
+          )}
         </div>
       </motion.div>
     </div>

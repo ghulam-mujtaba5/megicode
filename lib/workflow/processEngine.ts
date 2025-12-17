@@ -47,6 +47,7 @@ export async function getActiveBusinessProcessDefinition(): Promise<{
   definition: BusinessProcessDefinition;
 }> {
   const db = getDb();
+  const defaultDef = getDefaultBusinessProcessDefinition();
 
   const existing = await db
     .select()
@@ -61,14 +62,26 @@ export async function getActiveBusinessProcessDefinition(): Promise<{
     .get();
 
   if (existing) {
+    const storedDef = existing.json as unknown as BusinessProcessDefinition | null;
+    // Ensure the definition has required properties, falling back to default if missing
+    const definition: BusinessProcessDefinition = {
+      key: storedDef?.key ?? defaultDef.key,
+      version: storedDef?.version ?? defaultDef.version,
+      name: storedDef?.name ?? defaultDef.name,
+      description: storedDef?.description ?? defaultDef.description,
+      steps: storedDef?.steps ?? defaultDef.steps,
+      messages: storedDef?.messages ?? defaultDef.messages,
+      lanes: storedDef?.lanes ?? defaultDef.lanes,
+      participants: storedDef?.participants ?? defaultDef.participants,
+      createdAt: storedDef?.createdAt ?? defaultDef.createdAt,
+    };
     return {
       id: existing.id,
-      definition: existing.json as unknown as BusinessProcessDefinition,
+      definition,
     };
   }
 
   // Create default if not exists
-  const defaultDef = getDefaultBusinessProcessDefinition();
   const id = randomUUID();
   const now = new Date();
 
