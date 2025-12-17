@@ -40,8 +40,26 @@ const LANE_CONFIG: Record<string, { displayName: string; description: string; ic
 export default async function ProcessShowcasePage() {
   await requireRole(['admin', 'pm']);
 
-  // Get the active business process definition
-  const { definition } = await getActiveBusinessProcessDefinition();
+  let definition;
+  try {
+    // Get the active business process definition
+    const result = await getActiveBusinessProcessDefinition();
+    definition = result.definition;
+  } catch (error) {
+    console.error('Error loading process definition:', error);
+    return (
+      <main className={s.page}>
+        <div className={s.pageHeader}>
+           <h1 className={s.pageTitle}>Workflow Showcase</h1>
+        </div>
+        <div className={s.card}>
+          <div className={s.cardBody}>
+            <p>Failed to load process definition. Please contact support.</p>
+          </div>
+        </div>
+      </main>
+    );
+  }
 
   // Transform steps for the visualization
   const steps = definition.steps.map(step => ({

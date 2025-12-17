@@ -10,6 +10,7 @@
  */
 
 import { eq, and, desc } from 'drizzle-orm';
+import { randomUUID } from 'crypto';
 import { getDb } from '@/lib/db';
 import {
   processDefinitions,
@@ -68,7 +69,7 @@ export async function getActiveBusinessProcessDefinition(): Promise<{
 
   // Create default if not exists
   const defaultDef = getDefaultBusinessProcessDefinition();
-  const id = crypto.randomUUID();
+  const id = randomUUID();
   const now = new Date();
 
   await db.insert(processDefinitions).values({

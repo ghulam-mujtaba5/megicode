@@ -42,21 +42,44 @@ export default async function ProcessPage({
   const db = getDb();
   const params = await searchParams;
 
-  const { id: defId, definition } = await getActiveBusinessProcessDefinition();
+  let defId, definition, allInstances;
 
-  // Fetch all process instances with related data
-  const allInstances = await db
-    .select({
-      instance: processInstances,
-      project: projects,
-      lead: leads,
-    })
-    .from(processInstances)
-    .leftJoin(projects, eq(processInstances.projectId, projects.id))
-    .leftJoin(leads, eq(projects.leadId, leads.id))
-    .where(eq(processInstances.processDefinitionId, defId))
-    .orderBy(desc(processInstances.startedAt))
-    .all();
+  try {
+    const result = await getActiveBusinessProcessDefinition();
+    defId = result.id;
+    definition = result.definition;
+
+    // Fetch all process instances with related data
+    allInstances = await db
+      .select({
+        instance: processInstances,
+        project: projects,
+        lead: leads,
+      })
+      .from(processInstances)
+      .leftJoin(projects, eq(processInstances.projectId, projects.id))
+      .leftJoin(leads, eq(projects.leadId, leads.id))
+      .where(eq(processInstances.processDefinitionId, defId))
+      .orderBy(desc(processInstances.startedAt))
+      .all();
+  } catch (error) {
+    console.error('Error loading process data:', error);
+    return (
+      <main className={s.page}>
+        <div className={s.pageHeader}>
+           <h1 className={s.pageTitle}>Business Processes</h1>
+        </div>
+        <div className={s.card}>
+          <div className={s.cardBody}>
+            <p>Failed to load process data. Please contact support.</p>
+            <pre style={{marginTop: '1rem', fontSize: '0.8rem', color: 'red'}}>{String(error)}</pre>
+          </div>
+        </div>
+      </main>
+    );
+  }
+
+  // Filter by status if provided
 
   // Filter by status if provided
   const statusFilter = params.status;

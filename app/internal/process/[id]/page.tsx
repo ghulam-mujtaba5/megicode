@@ -93,7 +93,30 @@ export default async function ProcessDetailPage({
     .all();
 
   // Get process definition
-  const { definition } = await getActiveBusinessProcessDefinition();
+  let definition;
+  try {
+    const result = await getActiveBusinessProcessDefinition();
+    definition = result.definition;
+  } catch (error) {
+    console.error('Error loading process definition:', error);
+    return (
+      <main className={s.page}>
+        <div className={s.pageHeader}>
+          <Link href="/internal/process" className={s.backLink}>
+            <span className={s.icon}>{Icons.back}</span>
+            Back to Processes
+          </Link>
+        </div>
+        <div className={s.card}>
+          <div className={s.cardBody}>
+            <h2 style={{ color: 'var(--int-error)' }}>Failed to load process definition</h2>
+            <p>The process definition could not be loaded. Please contact support.</p>
+          </div>
+        </div>
+      </main>
+    );
+  }
+
   const currentStep = definition.steps.find(s => s.key === instance.currentStepKey);
 
   // Calculate progress

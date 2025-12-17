@@ -70,23 +70,23 @@ export default function ProcessAnalyticsDashboard({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    async function fetchAnalytics() {
-      setLoading(true);
-      setError(null);
-      
-      try {
-        const response = await fetch(`/api/internal/process/analytics?period=${period}`);
-        if (!response.ok) throw new Error('Failed to fetch analytics');
-        const result = await response.json();
-        setData(result);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to load analytics');
-      } finally {
-        setLoading(false);
-      }
+  const fetchAnalytics = async () => {
+    setLoading(true);
+    setError(null);
+    
+    try {
+      const response = await fetch(`/api/internal/process/analytics?period=${period}`);
+      if (!response.ok) throw new Error('Failed to fetch analytics');
+      const result = await response.json();
+      setData(result);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to load analytics');
+    } finally {
+      setLoading(false);
     }
+  };
 
+  useEffect(() => {
     fetchAnalytics();
   }, [period]);
 
@@ -104,9 +104,24 @@ export default function ProcessAnalyticsDashboard({
   if (error || !data) {
     return (
       <div className={styles.container}>
-        <div className={styles.error}>
-          <span className={styles.icon}>{Icons.alert}</span>
-          <span>{error || 'No data available'}</span>
+        <div className={styles.error} style={{ flexDirection: 'column', gap: '1rem', padding: '2rem', textAlign: 'center' }}>
+          <span className={styles.icon} style={{ width: 48, height: 48, color: 'var(--int-error)' }}>{Icons.alert}</span>
+          <h3 style={{ margin: 0 }}>Failed to load analytics</h3>
+          <p style={{ color: 'var(--int-text-muted)', margin: 0 }}>{error || 'No data available'}</p>
+          <button 
+            onClick={fetchAnalytics}
+            style={{
+              padding: '0.5rem 1rem',
+              background: 'var(--int-primary)',
+              color: 'white',
+              border: 'none',
+              borderRadius: '0.375rem',
+              cursor: 'pointer',
+              marginTop: '0.5rem'
+            }}
+          >
+            Try Again
+          </button>
         </div>
       </div>
     );

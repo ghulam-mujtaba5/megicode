@@ -64,17 +64,6 @@ export default function InternalSidebar({
   const navItems: NavItem[] = [
     { label: 'Dashboard', href: '/internal', icon: Icons.dashboard },
     { 
-      label: 'Sales', 
-      icon: Icons.leads, 
-      roles: ['admin', 'pm'],
-      children: [
-        { label: 'Acquisition', href: '/internal/acquisition', icon: Icons.chart },
-        { label: 'Leads', href: '/internal/leads', icon: Icons.leads },
-        { label: 'Proposals', href: '/internal/proposals', icon: Icons.invoice },
-        { label: 'Clients', href: '/internal/clients', icon: Icons.clients },
-      ]
-    },
-    { 
       label: 'Projects', 
       icon: Icons.projects,
       children: [
@@ -84,15 +73,6 @@ export default function InternalSidebar({
         { label: 'Workflow Showcase', href: '/internal/process/showcase', icon: Icons.chart, roles: ['admin', 'pm'] },
         { label: 'Tasks', href: '/internal/tasks', icon: Icons.tasks },
         { label: 'Resources', href: '/internal/resources', icon: Icons.users },
-      ]
-    },
-    { 
-      label: 'Financial', 
-      icon: Icons.invoice, 
-      roles: ['admin', 'pm'],
-      children: [
-        { label: 'Invoices', href: '/internal/invoices', icon: Icons.invoice },
-        { label: 'Reports', href: '/internal/reports', icon: Icons.reports },
       ]
     },
     { 

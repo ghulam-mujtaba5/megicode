@@ -157,12 +157,7 @@ export default async function InternalDashboardPage() {
             <p className={s.pageSubtitle}>{todayStr}</p>
           </div>
           <div className={s.headerActions}>
-            {['admin', 'pm'].includes(userRole) && (
-              <Link href="/internal/leads" className={s.btnPrimary}>
-                <span className={s.btnIcon}>{Icons.plus}</span>
-                New Lead
-              </Link>
-            )}
+            {/* Actions removed */}
           </div>
         </div>
       </div>
@@ -186,23 +181,6 @@ export default async function InternalDashboardPage() {
       {/* KPI Cards Grid */}
       <section className={s.kpiSection}>
         <div className={s.kpiGrid}>
-          <Link href="/internal/leads" className={`${s.kpiCard} ${s.kpiCardPrimary}`}>
-            <div className={s.kpiIcon}>{Icons.leads}</div>
-            <div className={s.kpiContent}>
-              <span className={s.kpiValue}>{leadStats?.total ?? 0}</span>
-              <span className={s.kpiLabel}>Total Leads</span>
-            </div>
-            <div className={s.kpiMeta}>
-              <span className={s.kpiMetaItem}>
-                <span className={s.kpiMetaValue}>{leadStats?.new ?? 0}</span> new
-              </span>
-              <span className={s.kpiMetaItem}>
-                <span className={s.kpiMetaValue}>{leadStats?.approved ?? 0}</span> approved
-              </span>
-            </div>
-            <div className={s.kpiArrow}>{Icons.arrowRight}</div>
-          </Link>
-
           <Link href="/internal/projects" className={`${s.kpiCard} ${s.kpiCardSuccess}`}>
             <div className={s.kpiIcon}>{Icons.projects}</div>
             <div className={s.kpiContent}>
@@ -250,27 +228,6 @@ export default async function InternalDashboardPage() {
             </div>
             <div className={s.kpiArrow}>{Icons.arrowRight}</div>
           </Link>
-
-          {['admin', 'pm'].includes(userRole) && (
-            <Link href="/internal/invoices" className={`${s.kpiCard} ${s.kpiCardDanger}`}>
-              <div className={s.kpiIcon}>{Icons.invoices}</div>
-              <div className={s.kpiContent}>
-                <span className={s.kpiValue}>{invoiceStats?.pending ?? 0}</span>
-                <span className={s.kpiLabel}>Pending Invoices</span>
-              </div>
-              <div className={s.kpiMeta}>
-                <span className={s.kpiMetaItem}>
-                  <span className={s.kpiMetaValue}>{invoiceStats?.paid ?? 0}</span> paid
-                </span>
-                {(invoiceStats?.overdue ?? 0) > 0 && (
-                  <span className={`${s.kpiMetaItem} ${s.kpiMetaDanger}`}>
-                    <span className={s.kpiMetaValue}>{invoiceStats?.overdue}</span> overdue
-                  </span>
-                )}
-              </div>
-              <div className={s.kpiArrow}>{Icons.arrowRight}</div>
-            </Link>
-          )}
 
           <Link href="/internal/admin/process" className={`${s.kpiCard} ${s.kpiCardPurple}`}>
             <div className={s.kpiIcon}>{Icons.workflow}</div>
@@ -340,49 +297,6 @@ export default async function InternalDashboardPage() {
             )}
           </div>
         </section>
-
-        {/* Recent Leads (PM/Admin) */}
-        {['admin', 'pm'].includes(userRole) && (
-          <section className={s.card}>
-            <div className={s.cardHeader}>
-              <div className={s.cardHeaderLeft}>
-                <div className={s.cardIcon}>{Icons.leads}</div>
-                <h2 className={s.cardTitle}>Recent Leads</h2>
-              </div>
-              <Link href="/internal/leads" className={s.cardHeaderLink}>
-                View All {Icons.arrowRight}
-              </Link>
-            </div>
-            <div className={s.cardBody}>
-              {recentLeads.length > 0 ? (
-                <div className={s.leadList}>
-                  {recentLeads.map((l) => (
-                    <Link key={l.id} href={`/internal/leads/${l.id}`} className={s.leadItem}>
-                      <div className={s.leadAvatar}>
-                        {l.name.charAt(0).toUpperCase()}
-                      </div>
-                      <div className={s.leadContent}>
-                        <span className={s.leadName}>{l.name}</span>
-                        <span className={s.leadCompany}>{l.company || 'No company'}</span>
-                      </div>
-                      <span className={`${s.badge} ${getStatusBadge(l.status)}`}>
-                        {l.status.replace('_', ' ')}
-                      </span>
-                    </Link>
-                  ))}
-                </div>
-              ) : (
-                <div className={s.emptyState}>
-                  <div className={s.emptyStateIcon}>{Icons.leads}</div>
-                  <p className={s.emptyStateText}>No leads yet</p>
-                  <Link href="/internal/leads" className={s.btnPrimary}>
-                    Add First Lead
-                  </Link>
-                </div>
-              )}
-            </div>
-          </section>
-        )}
 
         {/* Projects Needing Attention */}
         {['admin', 'pm'].includes(userRole) && attentionProjects.length > 0 && (
@@ -493,19 +407,9 @@ export default async function InternalDashboardPage() {
             <div className={s.quickActionsGrid}>
               {['admin', 'pm'].includes(userRole) && (
                 <>
-                  <Link href="/internal/leads" className={s.quickActionItem}>
-                    <div className={`${s.quickActionIcon} ${s.quickActionIconPrimary}`}>{Icons.leads}</div>
-                    <span>Leads</span>
-                  </Link>
                   <Link href="/internal/clients" className={s.quickActionItem}>
                     <div className={`${s.quickActionIcon} ${s.quickActionIconSuccess}`}>{Icons.clients}</div>
                     <span>Clients</span>
-                  </Link>
-                  <Link href="/internal/proposals" className={s.quickActionItem}>
-                    <div className={`${s.quickActionIcon} ${s.quickActionIconWarning}`}>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10,9 9,9 8,9"/></svg>
-                    </div>
-                    <span>Proposals</span>
                   </Link>
                 </>
               )}
@@ -517,12 +421,6 @@ export default async function InternalDashboardPage() {
                 <div className={`${s.quickActionIcon} ${s.quickActionIconPurple}`}>{Icons.projects}</div>
                 <span>Projects</span>
               </Link>
-              <Link href="/internal/reports" className={s.quickActionItem}>
-                <div className={`${s.quickActionIcon} ${s.quickActionIconDanger}`}>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-                </div>
-                <span>Reports</span>
-              </Link>
               {userRole === 'admin' && (
                 <>
                   <Link href="/internal/admin/users" className={s.quickActionItem}>
@@ -530,10 +428,6 @@ export default async function InternalDashboardPage() {
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                     </div>
                     <span>Users</span>
-                  </Link>
-                  <Link href="/internal/invoices" className={s.quickActionItem}>
-                    <div className={`${s.quickActionIcon} ${s.quickActionIconSuccess}`}>{Icons.invoices}</div>
-                    <span>Invoices</span>
                   </Link>
                 </>
               )}
