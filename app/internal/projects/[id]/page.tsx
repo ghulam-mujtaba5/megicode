@@ -246,13 +246,21 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
     .limit(20)
     .all();
 
-  const definitionRow = instance
-    ? await db.select().from(processDefinitions).where(eq(processDefinitions.id, instance.processDefinitionId)).get()
-    : null;
+  let definitionRow = null;
+  let definitionJson = null;
+  
+  try {
+    definitionRow = instance
+      ? await db.select().from(processDefinitions).where(eq(processDefinitions.id, instance.processDefinitionId)).get()
+      : null;
 
-  const definitionJson = definitionRow
-    ? (definitionRow.json as { steps: Array<{ key: string; title: string }> })
-    : null;
+    definitionJson = definitionRow
+      ? (definitionRow.json as { steps: Array<{ key: string; title: string }> })
+      : null;
+  } catch (error) {
+    console.error('Error loading process definition for project:', error);
+    // Continue without definition
+  }
 
   const milestonesRows = await db.select().from(milestones).where(eq(milestones.projectId, project.id)).orderBy(milestones.dueAt).all();
   

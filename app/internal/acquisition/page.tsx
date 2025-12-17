@@ -65,7 +65,15 @@ export default async function AcquisitionPage() {
   const db = getDb();
 
   // Get process definition for workflow context
-  const { definition } = await getActiveBusinessProcessDefinition();
+  let definition;
+  try {
+    const result = await getActiveBusinessProcessDefinition();
+    definition = result.definition;
+  } catch (error) {
+    console.error('Error loading process definition in acquisition:', error);
+    // Continue without definition - acquisition can still show lead/project data
+    definition = { key: 'fallback', name: 'Client Acquisition', version: 1, lanes: [], steps: [] };
+  }
 
   // Fetch all leads with related data
   const allLeads = await db.select().from(leads).where(isNull(leads.deletedAt)).orderBy(desc(leads.createdAt)).all();

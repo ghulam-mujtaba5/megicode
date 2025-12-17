@@ -1,0 +1,248 @@
+{
+  "Total": 30,
+  "Details": [
+    {
+      "Error": "No connection could be made because the target machine actively refused it. (localhost:3000)",
+      "Path": "/api/internal/process",
+      "StatusCode": null,
+      "Test": "Get all processes",
+      "Method": "GET",
+      "Status": "FAILED"
+    },
+    {
+      "Error": "No connection could be made because the target machine actively refused it. (localhost:3000)",
+      "Path": "/api/internal/process",
+      "StatusCode": null,
+      "Test": "Create new process",
+      "Method": "POST",
+      "Status": "FAILED"
+    },
+    {
+      "Error": "No connection could be made because the target machine actively refused it. (localhost:3000)",
+      "Path": "/api/internal/process/test-id",
+      "StatusCode": null,
+      "Test": "Get process by ID",
+      "Method": "GET",
+      "Status": "FAILED"
+    },
+    {
+      "Error": "No connection could be made because the target machine actively refused it. (localhost:3000)",
+      "Path": "/api/internal/process/test-id",
+      "StatusCode": null,
+      "Test": "Update process",
+      "Method": "PATCH",
+      "Status": "FAILED"
+    },
+    {
+      "Error": "No connection could be made because the target machine actively refused it. (localhost:3000)",
+      "Path": "/api/internal/process/test-id",
+      "StatusCode": null,
+      "Test": "Delete process",
+      "Method": "DELETE",
+      "Status": "FAILED"
+    },
+    {
+      "Error": "No connection could be made because the target machine actively refused it. (localhost:3000)",
+      "Path": "/api/internal/process/test-id/step",
+      "StatusCode": null,
+      "Test": "Get process steps",
+      "Method": "GET",
+      "Status": "FAILED"
+    },
+    {
+      "Error": "No connection could be made because the target machine actively refused it. (localhost:3000)",
+      "Path": "/api/internal/process/test-id/step",
+      "StatusCode": null,
+      "Test": "Create process step",
+      "Method": "POST",
+      "Status": "FAILED"
+    },
+    {
+      "Error": "No connection could be made because the target machine actively refused it. (localhost:3000)",
+      "Path": "/api/internal/process/test-id/execute",
+      "StatusCode": null,
+      "Test": "Execute process",
+      "Method": "POST",
+      "Status": "FAILED"
+    },
+    {
+      "Error": "No connection could be made because the target machine actively refused it. (localhost:3000)",
+      "Path": "/api/internal/process/test-id/execute",
+      "StatusCode": null,
+      "Test": "Get execution status",
+      "Method": "GET",
+      "Status": "FAILED"
+    },
+    {
+      "Error": "No connection could be made because the target machine actively refused it. (localhost:3000)",
+      "Path": "/api/internal/process/analytics",
+      "StatusCode": null,
+      "Test": "Get process analytics",
+      "Method": "GET",
+      "Status": "FAILED"
+    },
+    {
+      "Error": "No connection could be made because the target machine actively refused it. (localhost:3000)",
+      "Path": "/api/internal/onboarding",
+      "StatusCode": null,
+      "Test": "Create onboarding",
+      "Method": "POST",
+      "Status": "FAILED"
+    },
+    {
+      "Error": "No connection could be made because the target machine actively refused it. (localhost:3000)",
+      "Path": "/api/internal/onboarding/automate",
+      "StatusCode": null,
+      "Test": "Automate onboarding",
+      "Method": "POST",
+      "Status": "FAILED"
+    },
+    {
+      "Error": "No connection could be made because the target machine actively refused it. (localhost:3000)",
+      "Path": "/api/internal/leads/score",
+      "StatusCode": null,
+      "Test": "Score lead",
+      "Method": "POST",
+      "Status": "FAILED"
+    },
+    {
+      "Error": "No connection could be made because the target machine actively refused it. (localhost:3000)",
+      "Path": "/api/internal/leads/score",
+      "StatusCode": null,
+      "Test": "Get lead scores",
+      "Method": "GET",
+      "Status": "FAILED"
+    },
+    {
+      "Error": "No connection could be made because the target machine actively refused it. (localhost:3000)",
+      "Path": "/api/internal/admin/users",
+      "StatusCode": null,
+      "Test": "Update user",
+      "Method": "PUT",
+      "Status": "FAILED"
+    },
+    {
+      "Error": "No connection could be made because the target machine actively refused it. (localhost:3000)",
+      "Path": "/internal",
+      "StatusCode": null,
+      "Test": "Page: /internal",
+      "Method": "GET",
+      "Status": "FAILED"
+    },
+    {
+      "Error": "No connection could be made because the target machine actively refused it. (localhost:3000)",
+      "Path": "/internal/login",
+      "StatusCode": null,
+      "Test": "Page: /internal/login",
+      "Method": "GET",
+      "Status": "FAILED"
+    },
+    {
+      "Error": "No connection could be made because the target machine actively refused it. (localhost:3000)",
+      "Path": "/internal/onboarding",
+      "StatusCode": null,
+      "Test": "Page: /internal/onboarding",
+      "Method": "GET",
+      "Status": "FAILED"
+    },
+    {
+      "Error": "No connection could be made because the target machine actively refused it. (localhost:3000)",
+      "Path": "/internal/process",
+      "StatusCode": null,
+      "Test": "Page: /internal/process",
+      "Method": "GET",
+      "Status": "FAILED"
+    },
+    {
+      "Error": "No connection could be made because the target machine actively refused it. (localhost:3000)",
+      "Path": "/internal/process/showcase",
+      "StatusCode": null,
+      "Test": "Page: /internal/process/showcase",
+      "Method": "GET",
+      "Status": "FAILED"
+    },
+    {
+      "Error": "No connection could be made because the target machine actively refused it. (localhost:3000)",
+      "Path": "/internal/leads",
+      "StatusCode": null,
+      "Test": "Page: /internal/leads",
+      "Method": "GET",
+      "Status": "FAILED"
+    },
+    {
+      "Error": "No connection could be made because the target machine actively refused it. (localhost:3000)",
+      "Path": "/internal/projects",
+      "StatusCode": null,
+      "Test": "Page: /internal/projects",
+      "Method": "GET",
+      "Status": "FAILED"
+    },
+    {
+      "Error": "No connection could be made because the target machine actively refused it. (localhost:3000)",
+      "Path": "/internal/resources",
+      "StatusCode": null,
+      "Test": "Page: /internal/resources",
+      "Method": "GET",
+      "Status": "FAILED"
+    },
+    {
+      "Error": "No connection could be made because the target machine actively refused it. (localhost:3000)",
+      "Path": "/internal/templates",
+      "StatusCode": null,
+      "Test": "Page: /internal/templates",
+      "Method": "GET",
+      "Status": "FAILED"
+    },
+    {
+      "Error": "No connection could be made because the target machine actively refused it. (localhost:3000)",
+      "Path": "/internal/team",
+      "StatusCode": null,
+      "Test": "Page: /internal/team",
+      "Method": "GET",
+      "Status": "FAILED"
+    },
+    {
+      "Error": "No connection could be made because the target machine actively refused it. (localhost:3000)",
+      "Path": "/internal/proposals",
+      "StatusCode": null,
+      "Test": "Page: /internal/proposals",
+      "Method": "GET",
+      "Status": "FAILED"
+    },
+    {
+      "Error": "No connection could be made because the target machine actively refused it. (localhost:3000)",
+      "Path": "/internal/suggestions",
+      "StatusCode": null,
+      "Test": "Page: /internal/suggestions",
+      "Method": "GET",
+      "Status": "FAILED"
+    },
+    {
+      "Error": "No connection could be made because the target machine actively refused it. (localhost:3000)",
+      "Path": "/internal/tasks",
+      "StatusCode": null,
+      "Test": "Page: /internal/tasks",
+      "Method": "GET",
+      "Status": "FAILED"
+    },
+    {
+      "Error": "No connection could be made because the target machine actively refused it. (localhost:3000)",
+      "Path": "/internal/instances",
+      "StatusCode": null,
+      "Test": "Page: /internal/instances",
+      "Method": "GET",
+      "Status": "FAILED"
+    },
+    {
+      "Error": "No connection could be made because the target machine actively refused it. (localhost:3000)",
+      "Path": "/internal/setup-guide",
+      "StatusCode": null,
+      "Test": "Page: /internal/setup-guide",
+      "Method": "GET",
+      "Status": "FAILED"
+    }
+  ],
+  "Skipped": 0,
+  "Failed": 30,
+  "Passed": 0
+}
