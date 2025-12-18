@@ -1,0 +1,75 @@
+"use client";
+
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+
+export default function IntegrationsPanel() {
+  const [clickUpConnected, setClickUpConnected] = useState(false);
+  const [githubConnected, setGithubConnected] = useState(true);
+  const [vercelConnected, setVercelConnected] = useState(true);
+
+  const handleConnect = (service: string) => {
+    // Simulate connection delay
+    setTimeout(() => {
+      if (service === 'clickup') setClickUpConnected(true);
+    }, 1000);
+  };
+
+  return (
+    <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+      <h2 className="text-xl font-bold mb-4">Active Integrations</h2>
+      <div className="space-y-4">
+        
+        {/* ClickUp */}
+        <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center text-white font-bold">CU</div>
+            <div>
+              <h3 className="font-semibold">ClickUp</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400">Task sync & List automation</p>
+            </div>
+          </div>
+          <button 
+            onClick={() => handleConnect('clickup')}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+              clickUpConnected 
+                ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' 
+                : 'bg-blue-600 text-white hover:bg-blue-700'
+            }`}
+          >
+            {clickUpConnected ? 'Connected ✅' : 'Connect Account'}
+          </button>
+        </div>
+
+        {/* GitHub */}
+        <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-gray-900 dark:bg-black rounded-lg flex items-center justify-center text-white font-bold">GH</div>
+            <div>
+              <h3 className="font-semibold">GitHub</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400">Repo provisioning & CI/CD</p>
+            </div>
+          </div>
+          <div className="px-4 py-2 rounded-lg text-sm font-medium bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">
+            Connected ✅
+          </div>
+        </div>
+
+        {/* Vercel */}
+        <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-black rounded-lg flex items-center justify-center text-white font-bold">▲</div>
+            <div>
+              <h3 className="font-semibold">Vercel</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400">Deployment webhooks</p>
+            </div>
+          </div>
+          <div className="px-4 py-2 rounded-lg text-sm font-medium bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">
+            Connected ✅
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+}

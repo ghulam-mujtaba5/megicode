@@ -349,6 +349,8 @@ export async function executeStep(
   return { success: true, nextStepKey };
 }
 
+import { sendEmail } from '@/lib/email';
+
 // =====================
 // AUTOMATION ACTIONS
 // =====================
@@ -430,7 +432,7 @@ async function executeAutomationAction(
     }
 
     case 'send_followup_email': {
-      // Log email sending (actual email integration would go here)
+      // Log email sending
       await db.insert(events).values({
         id: crypto.randomUUID(),
         leadId: instance.leadId || null,
@@ -442,6 +444,19 @@ async function executeAutomationAction(
         },
         createdAt: now,
       });
+
+      // Send actual email
+      if (instance.processData.leadEmail) {
+        try {
+          await sendEmail({
+            to: instance.processData.leadEmail,
+            subject: 'Follow up regarding your project',
+            text: instance.processData.generatedEmailContent || 'Checking in on your project request.',
+          });
+        } catch (error) {
+          console.error('Failed to send follow-up email:', error);
+        }
+      }
       break;
     }
 
@@ -458,6 +473,19 @@ async function executeAutomationAction(
       break;
     }
 
+
+      // Send actual email
+      if (instance.processData.leadEmail) {
+        try {
+          await sendEmail({
+            to: instance.processData.leadEmail,
+            subject: 'Welcome to Megicode!',
+            text: 'Welcome aboard! We are excited to start working with you.',
+          });
+        } catch (error) {
+          console.error('Failed to send welcome email:', error);
+        }
+      }
     case 'send_welcome_email': {
       // Log welcome email
       await db.insert(events).values({

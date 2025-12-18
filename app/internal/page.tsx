@@ -362,7 +362,7 @@ export default async function InternalDashboardPage() {
             <div className={s.kpiArrow}>{Icons.arrowRight}</div>
           </Link>
 
-          <Link href="/internal/admin/process" className={`${s.kpiCard} ${s.kpiCardPurple}`}>
+          <Link href="/internal/process" className={`${s.kpiCard} ${s.kpiCardPurple}`}>
             <div className={s.kpiIcon}>{Icons.workflow}</div>
             <div className={s.kpiContent}>
               <span className={s.kpiValue}>{instanceStats?.running ?? 0}</span>
@@ -543,6 +543,12 @@ export default async function InternalDashboardPage() {
                   <Link href="/internal/clients" className={s.quickActionItem}>
                     <div className={`${s.quickActionIcon} ${s.quickActionIconSuccess}`}>{Icons.clients}</div>
                     <span>Clients</span>
+                  </Link>
+                  <Link href="/internal/process/analytics" className={s.quickActionItem}>
+                    <div className={`${s.quickActionIcon} ${s.quickActionIconPurple}`}>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                    </div>
+                    <span>Analytics</span>
                   </Link>
                 </>
               )}
