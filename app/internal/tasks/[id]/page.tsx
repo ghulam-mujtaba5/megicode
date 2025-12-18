@@ -207,6 +207,7 @@ export default async function TaskDetailPage({ params }: { params: Promise<{ id:
       title,
       isCompleted: false,
       sortOrder: existing.length,
+      createdAt: new Date(),
     });
 
     await logAuditEvent('TASK_CHECKLIST_ADDED', `task:${taskId}`, { title });
@@ -250,11 +251,12 @@ export default async function TaskDetailPage({ params }: { params: Promise<{ id:
       id: crypto.randomUUID(),
       taskId,
       projectId: inst?.projectId ?? null,
-      userId: session.user.id ?? null,
-      minutes,
+      userId: session.user.id ?? '',
+      durationMinutes: minutes,
       description,
       date: date ?? new Date(),
       createdAt: new Date(),
+      updatedAt: new Date(),
     });
 
     await logAuditEvent('TASK_TIME_LOGGED', `task:${taskId}`, { minutes, description });
@@ -287,7 +289,7 @@ export default async function TaskDetailPage({ params }: { params: Promise<{ id:
     redirect(`/internal/tasks/${taskId}`);
   }
 
-  const totalMinutes = timeEntriesList.reduce((sum, t) => sum + t.entry.minutes, 0);
+  const totalMinutes = timeEntriesList.reduce((sum, t) => sum + t.entry.durationMinutes, 0);
   const hours = Math.floor(totalMinutes / 60);
   const mins = totalMinutes % 60;
   const checkedCount = checklists.filter(c => c.isCompleted).length;
@@ -606,7 +608,7 @@ export default async function TaskDetailPage({ params }: { params: Promise<{ id:
                         {timeEntriesList.map(({ entry, userName }) => (
                           <tr key={entry.id}>
                             <td>{formatDateTime(entry.date)}</td>
-                            <td>{Math.floor(entry.minutes / 60)}h {entry.minutes % 60}m</td>
+                            <td>{Math.floor(entry.durationMinutes / 60)}h {entry.durationMinutes % 60}m</td>
                             <td>{userName || '—'}</td>
                           </tr>
                         ))}

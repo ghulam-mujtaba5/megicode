@@ -5,7 +5,7 @@ import { desc, sql, and, notInArray, inArray } from 'drizzle-orm';
 import s from '../styles.module.css';
 import { requireRole } from '@/lib/internal/auth';
 import { getDb } from '@/lib/db';
-import { leads, events, estimations } from '@/lib/db/schema';
+import { leads, events } from '@/lib/db/schema';
 import { leadStatusColor, type BadgeColor, formatDateTime } from '@/lib/internal/ui';
 
 // Icons
@@ -81,14 +81,16 @@ export default async function LeadsPage() {
 
   const rows = await db.select().from(leads).orderBy(desc(leads.createdAt)).all();
 
-  // Resource Availability Check: Leads ready for scoping (new/in_review without estimations)
-  const leadsWithEstimations = await db.select({ leadId: estimations.leadId }).from(estimations).all();
-  const estimatedLeadIds = new Set(leadsWithEstimations.map(e => e.leadId));
-  
-  const leadsReadyForScoping = rows.filter(lead => 
-    (lead.status === 'new' || lead.status === 'in_review') && 
-    !estimatedLeadIds.has(lead.id)
-  ).slice(0, 5);
+  // Quick view: leads that appear ready for scoping (no estimated hours set)
+  const leadsReadyForScoping = rows.filter((r) => {
+    // some leads may store estimatedHours or estimated_hours; defensively check both
+    // treat missing or zero as ready for scoping
+    // @ts-ignore
+    const est = (r as any).estimatedHours ?? (r as any).estimated_hours ?? 0;
+    return !est || est === 0;
+  });
+
+
 
   return (
     <main className={s.page}>
@@ -135,53 +137,6 @@ export default async function LeadsPage() {
           </div>
         </div>
       </section>
-
-      {/* Ready for Scoping Quick View */}
-      {leadsReadyForScoping.length > 0 && (
-        <section className={s.card} style={{ marginBottom: '1.5rem' }}>
-          <div className={s.cardHeader}>
-            <div className={s.cardHeaderLeft}>
-              <div className={`${s.cardIcon} ${s.cardIconWarning}`}>{Icons.clipboard}</div>
-              <h2 className={s.cardTitle}>Ready for Scoping</h2>
-              <span className={s.badge}>{leadsReadyForScoping.length}</span>
-            </div>
-            <span className={s.textMuted} style={{ fontSize: '0.75rem' }}>Leads without estimations</span>
-          </div>
-          <div className={s.cardBody} style={{ padding: 0 }}>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              {leadsReadyForScoping.map((lead) => (
-                <Link 
-                  key={lead.id} 
-                  href={`/internal/leads/${lead.id}`}
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    padding: '0.75rem 1rem',
-                    borderBottom: '1px solid var(--int-border, #e5e7eb)',
-                    textDecoration: 'none',
-                    color: 'inherit',
-                    transition: 'background 0.15s ease',
-                  }}
-                >
-                  <div>
-                    <div style={{ fontWeight: 500 }}>{lead.name}</div>
-                    <div className={s.textMuted} style={{ fontSize: '0.75rem' }}>
-                      {lead.company || 'No company'} • {lead.service || 'No service specified'}
-                    </div>
-                  </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <span className={getBadgeClass(leadStatusColor(lead.status))}>
-                      {lead.status.replace('_', ' ')}
-                    </span>
-                    <span style={{ color: 'var(--int-primary)' }}>{Icons.arrowRight}</span>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* Main Content */}
       <div className={s.dashboardGrid}>

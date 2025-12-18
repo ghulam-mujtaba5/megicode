@@ -11,9 +11,9 @@ const Icons = {
 interface Project {
   id: string;
   name: string;
-  totalHours: number;
+  totalTasks: number;
+  completedTasks: number;
   totalInvoiced: number;
-  profit: number;
 }
 
 interface ReportsClientProps {
@@ -35,7 +35,7 @@ export default function ReportsClient({ projects }: ReportsClientProps) {
               <line x1="6" y1="20" x2="6" y2="16"></line>
             </svg>
           </span>
-          Project Profitability
+          Project Statistics
         </h2>
         {projects.length > 10 && (
           <button 
@@ -61,22 +61,25 @@ export default function ReportsClient({ projects }: ReportsClientProps) {
             <thead>
               <tr>
                 <th>Project</th>
-                <th style={{ textAlign: 'right' }}>Hours</th>
-                <th style={{ textAlign: 'right' }}>Invoiced</th>
-                <th style={{ textAlign: 'right' }}>Est. Profit</th>
+                <th style={{ textAlign: 'right' }}>Total Tasks</th>
+                <th style={{ textAlign: 'right' }}>Completed</th>
+                <th style={{ textAlign: 'right' }}>Progress</th>
               </tr>
             </thead>
             <tbody>
-              {displayProjects.map((p) => (
-                <tr key={p.id}>
-                  <td><Link href={`/internal/projects/${p.id}`} className={s.link}>{p.name}</Link></td>
-                  <td style={{ textAlign: 'right' }}>{p.totalHours.toFixed(1)}</td>
-                  <td style={{ textAlign: 'right' }}>${(p.totalInvoiced / 100).toLocaleString()}</td>
-                  <td style={{ textAlign: 'right', color: p.profit >= 0 ? 'var(--int-success)' : 'var(--int-error)' }}>
-                    ${(p.profit / 100).toLocaleString()}
-                  </td>
-                </tr>
-              ))}
+              {displayProjects.map((p) => {
+                const progress = p.totalTasks > 0 ? Math.round((p.completedTasks / p.totalTasks) * 100) : 0;
+                return (
+                  <tr key={p.id}>
+                    <td><Link href={`/internal/projects/${p.id}`} className={s.link}>{p.name}</Link></td>
+                    <td style={{ textAlign: 'right' }}>{p.totalTasks}</td>
+                    <td style={{ textAlign: 'right' }}>{p.completedTasks}</td>
+                    <td style={{ textAlign: 'right', color: progress >= 80 ? 'var(--int-success)' : progress >= 50 ? 'var(--int-warning)' : 'var(--int-secondary)' }}>
+                      {progress}%
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>

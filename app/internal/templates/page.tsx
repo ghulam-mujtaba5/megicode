@@ -79,7 +79,7 @@ export default async function TemplatesPage() {
     const techStackRaw = String(formData.get('techStack') ?? '').trim();
     const techStackJson = techStackRaw ? techStackRaw.split(',').map(s => s.trim()).filter(Boolean) : null;
     const tasksRaw = String(formData.get('defaultTasks') ?? '').trim();
-    const tasksJson = tasksRaw ? tasksRaw.split('\n').map(s => s.trim()).filter(Boolean).map(t => ({ title: t })) : null;
+    const tasksJson = tasksRaw ? JSON.stringify(tasksRaw.split('\n').map(s => s.trim()).filter(Boolean).map(t => ({ title: t }))) : null;
 
     if (!name) return;
 
@@ -90,7 +90,7 @@ export default async function TemplatesPage() {
       description: description || null,
       category,
       estimatedHours,
-      techStackJson,
+      techStackJson: techStackJson as any,
       tasksJson,
       isActive: true,
       createdByUserId: session.user.id ?? null,

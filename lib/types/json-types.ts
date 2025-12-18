@@ -47,8 +47,6 @@ export type BusinessProcessDefinitionJson = {
 export type ProcessDefinitionJson = LegacyProcessDefinition | BusinessProcessDefinitionJson;
 
 export type AuditPayload = Record<string, any>;
-export type IntegrationConfig = Record<string, any>;
-export type RetroItems = string[];
 
 export type ChecklistItem = { 
   label: string; 
@@ -56,37 +54,3 @@ export type ChecklistItem = {
 };
 export type ChecklistItems = ChecklistItem[];
 
-export type EstimationBreakdownItem = { 
-  feature: string; 
-  hours: number; 
-  cost: number;
-};
-export type EstimationBreakdown = EstimationBreakdownItem[];
-
-export type MeetingAttendees = string[]; // User IDs
-
-export type MeetingActionItem = { 
-  description: string; 
-  assigneeId?: string; 
-  dueAt?: string;
-};
-export type MeetingActionItems = MeetingActionItem[];
-
-export type MeetingDecisions = string[];
-
-export type TemplateTask = { 
-  title: string; 
-  description?: string; 
-  priority?: string;
-};
-
-export type TemplateMilestone = { 
-  title: string; 
-  description?: string; 
-  offsetDays: number;
-};
-
-export type TemplateChecklist = { 
-  title: string; 
-  items: string[];
-};

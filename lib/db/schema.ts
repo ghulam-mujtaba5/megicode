@@ -4,16 +4,7 @@ import type {
   RequirementsList,
   ProcessDefinitionJson,
   AuditPayload,
-  IntegrationConfig,
-  RetroItems,
   ChecklistItems,
-  EstimationBreakdown,
-  MeetingAttendees,
-  MeetingActionItems,
-  MeetingDecisions,
-  TemplateTask,
-  TemplateMilestone,
-  TemplateChecklist,
 } from '../types/json-types';
 
 export type UserRole = 'admin' | 'pm' | 'dev' | 'qa' | 'viewer';
@@ -421,6 +412,36 @@ export const milestones = sqliteTable(
   })
 );
 
+// Bugs / QA (Part of project delivery)
+export type BugSeverity = 'low' | 'medium' | 'high' | 'critical';
+export type BugStatus = 'open' | 'in_progress' | 'resolved' | 'closed' | 'wont_fix';
+
+export const bugs = sqliteTable(
+  'bugs',
+  {
+    id: text('id').primaryKey(),
+    projectId: text('project_id')
+      .notNull()
+      .references(() => projects.id),
+    taskId: text('task_id').references(() => tasks.id),
+    title: text('title').notNull(),
+    description: text('description'),
+    stepsToReproduce: text('steps_to_reproduce'),
+    environment: text('environment'),
+    severity: text('severity', { enum: ['low', 'medium', 'high', 'critical'] }).notNull().default('medium'),
+    status: text('status', { enum: ['open', 'in_progress', 'resolved', 'closed', 'wont_fix'] }).notNull().default('open'),
+    reportedByUserId: text('reported_by_user_id').references(() => users.id),
+    assignedToUserId: text('assigned_to_user_id').references(() => users.id),
+    resolvedAt: integer('resolved_at', { mode: 'timestamp_ms' }),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+    updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    projectIdx: index('bugs_project_idx').on(table.projectId),
+    statusIdx: index('bugs_status_idx').on(table.status),
+  })
+);
+
 // Project Risks
 export const projectRisks = sqliteTable(
   'project_risks',
@@ -512,11 +533,11 @@ export const projectTemplates = sqliteTable(
     category: text('category', { 
       enum: ['web_app', 'mobile_app', 'api', 'e_commerce', 'cms', 'custom'] 
     }).notNull(),
-    tasksJson: text('tasks_json').$type<TemplateTask[]>(), // JSON array of default tasks
-    milestonesJson: text('milestones_json').$type<TemplateMilestone[]>(), // JSON array of default milestones
+    tasksJson: text('tasks_json'), // JSON array of default tasks
+    milestonesJson: text('milestones_json'), // JSON array of default milestones
     estimatedHours: integer('estimated_hours'),
     techStackJson: text('tech_stack_json').$type<TechStack>(), // JSON array
-    checklistsJson: text('checklists_json').$type<TemplateChecklist[]>(), // Default QA checklists
+    checklistsJson: text('checklists_json').$type<ChecklistItems>(), // Default QA checklists
     isActive: integer('is_active', { mode: 'boolean' }).notNull().default(true),
     createdByUserId: text('created_by_user_id').references(() => users.id),
     createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
@@ -698,5 +719,626 @@ export const onboardingChecklists = sqliteTable(
     instanceIdx: index('onboarding_checklists_instance_idx').on(table.processInstanceId),
     projectIdx: index('onboarding_checklists_project_idx').on(table.projectId),
     statusIdx: index('onboarding_checklists_status_idx').on(table.status),
+  })
+);
+
+// ==================== MISSING TABLES FOR BUILD FIX ====================
+
+// Lead Scoring Rules
+export const leadScoringRules = sqliteTable(
+  'lead_scoring_rules',
+  {
+    id: text('id').primaryKey(),
+    category: text('category').notNull(),
+    name: text('name').notNull(),
+    points: integer('points').notNull().default(0),
+    condition: text('condition'),
+    isActive: integer('is_active', { mode: 'boolean' }).notNull().default(true),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+    updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    categoryIdx: index('lead_scoring_rules_category_idx').on(table.category),
+  })
+);
+
+// Lead Tags
+export const leadTags = sqliteTable(
+  'lead_tags',
+  {
+    id: text('id').primaryKey(),
+    leadId: text('lead_id')
+      .notNull()
+      .references(() => leads.id),
+    tag: text('tag').notNull(),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    leadIdx: index('lead_tags_lead_idx').on(table.leadId),
+  })
+);
+
+// Estimations
+export const estimations = sqliteTable(
+  'estimations',
+  {
+    id: text('id').primaryKey(),
+    leadId: text('lead_id').references(() => leads.id),
+    projectId: text('project_id').references(() => projects.id),
+    title: text('title').notNull(),
+    description: text('description'),
+    estimatedHours: integer('estimated_hours'),
+    estimatedCost: integer('estimated_cost'), // cents
+    complexity: text('complexity', { enum: ['simple', 'moderate', 'complex', 'very_complex'] }),
+    assumptions: text('assumptions'),
+    createdByUserId: text('created_by_user_id').references(() => users.id),
+    status: text('status', { enum: ['draft', 'pending', 'approved', 'rejected'] }).notNull().default('draft'),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+    updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    leadIdx: index('estimations_lead_idx').on(table.leadId),
+    projectIdx: index('estimations_project_idx').on(table.projectId),
+  })
+);
+
+// Stakeholders
+export const stakeholders = sqliteTable(
+  'stakeholders',
+  {
+    id: text('id').primaryKey(),
+    leadId: text('lead_id').references(() => leads.id),
+    projectId: text('project_id').references(() => projects.id),
+    clientId: text('client_id').references(() => clients.id),
+    name: text('name').notNull(),
+    email: text('email'),
+    phone: text('phone'),
+    role: text('role'),
+    influence: text('influence', { enum: ['low', 'medium', 'high'] }),
+    notes: text('notes'),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+    updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    leadIdx: index('stakeholders_lead_idx').on(table.leadId),
+    projectIdx: index('stakeholders_project_idx').on(table.projectId),
+    clientIdx: index('stakeholders_client_idx').on(table.clientId),
+  })
+);
+
+// Risk Assessments
+export const riskAssessments = sqliteTable(
+  'risk_assessments',
+  {
+    id: text('id').primaryKey(),
+    leadId: text('lead_id').references(() => leads.id),
+    projectId: text('project_id').references(() => projects.id),
+    title: text('title').notNull(),
+    description: text('description'),
+    category: text('category'),
+    likelihood: text('likelihood', { enum: ['low', 'medium', 'high'] }),
+    impact: text('impact', { enum: ['low', 'medium', 'high'] }),
+    mitigationStrategy: text('mitigation_strategy'),
+    status: text('status', { enum: ['open', 'mitigated', 'closed'] }).notNull().default('open'),
+    ownerUserId: text('owner_user_id').references(() => users.id),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+    updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    leadIdx: index('risk_assessments_lead_idx').on(table.leadId),
+    projectIdx: index('risk_assessments_project_idx').on(table.projectId),
+  })
+);
+
+// Feasibility Checks
+export const feasibilityChecks = sqliteTable(
+  'feasibility_checks',
+  {
+    id: text('id').primaryKey(),
+    leadId: text('lead_id')
+      .notNull()
+      .references(() => leads.id),
+    category: text('category').notNull(),
+    question: text('question').notNull(),
+    answer: text('answer'),
+    score: integer('score'),
+    notes: text('notes'),
+    assessedByUserId: text('assessed_by_user_id').references(() => users.id),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    leadIdx: index('feasibility_checks_lead_idx').on(table.leadId),
+  })
+);
+
+// Client Contacts
+export const clientContacts = sqliteTable(
+  'client_contacts',
+  {
+    id: text('id').primaryKey(),
+    clientId: text('client_id')
+      .notNull()
+      .references(() => clients.id),
+    name: text('name').notNull(),
+    email: text('email'),
+    phone: text('phone'),
+    role: text('role'),
+    isPrimary: integer('is_primary', { mode: 'boolean' }).default(false),
+    notes: text('notes'),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+    updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    clientIdx: index('client_contacts_client_idx').on(table.clientId),
+  })
+);
+
+// Invoices
+export type InvoiceStatus = 'draft' | 'pending' | 'sent' | 'paid' | 'overdue' | 'canceled';
+
+export const invoices = sqliteTable(
+  'invoices',
+  {
+    id: text('id').primaryKey(),
+    projectId: text('project_id').references(() => projects.id),
+    clientId: text('client_id').references(() => clients.id),
+    invoiceNumber: text('invoice_number').notNull(),
+    title: text('title'),
+    subtotal: integer('subtotal').notNull(), // cents
+    taxAmount: integer('tax_amount').default(0),
+    totalAmount: integer('total_amount').notNull(), // cents
+    currency: text('currency').notNull().default('USD'),
+    status: text('status', {
+      enum: ['draft', 'pending', 'sent', 'paid', 'overdue', 'canceled'],
+    }).notNull().default('draft'),
+    issuedAt: integer('issued_at', { mode: 'timestamp_ms' }),
+    dueAt: integer('due_at', { mode: 'timestamp_ms' }),
+    paidAt: integer('paid_at', { mode: 'timestamp_ms' }),
+    notes: text('notes'),
+    createdByUserId: text('created_by_user_id').references(() => users.id),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+    updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    projectIdx: index('invoices_project_idx').on(table.projectId),
+    clientIdx: index('invoices_client_idx').on(table.clientId),
+    statusIdx: index('invoices_status_idx').on(table.status),
+  })
+);
+
+// Invoice Items
+export const invoiceItems = sqliteTable(
+  'invoice_items',
+  {
+    id: text('id').primaryKey(),
+    invoiceId: text('invoice_id')
+      .notNull()
+      .references(() => invoices.id),
+    description: text('description').notNull(),
+    quantity: integer('quantity').notNull().default(1),
+    unitPrice: integer('unit_price').notNull(), // cents
+    amount: integer('amount').notNull(), // cents
+    sortOrder: integer('sort_order').default(0),
+  },
+  (table) => ({
+    invoiceIdx: index('invoice_items_invoice_idx').on(table.invoiceId),
+  })
+);
+
+// Payments
+export const payments = sqliteTable(
+  'payments',
+  {
+    id: text('id').primaryKey(),
+    invoiceId: text('invoice_id').references(() => invoices.id),
+    projectId: text('project_id').references(() => projects.id),
+    clientId: text('client_id').references(() => clients.id),
+    amount: integer('amount').notNull(), // cents
+    currency: text('currency').notNull().default('USD'),
+    method: text('method', { enum: ['bank_transfer', 'credit_card', 'paypal', 'crypto', 'check', 'other'] }),
+    status: text('status', { enum: ['pending', 'completed', 'failed', 'refunded'] }).notNull().default('pending'),
+    reference: text('reference'),
+    notes: text('notes'),
+    paidAt: integer('paid_at', { mode: 'timestamp_ms' }),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    invoiceIdx: index('payments_invoice_idx').on(table.invoiceId),
+    projectIdx: index('payments_project_idx').on(table.projectId),
+    clientIdx: index('payments_client_idx').on(table.clientId),
+  })
+);
+
+// Time Entries
+export const timeEntries = sqliteTable(
+  'time_entries',
+  {
+    id: text('id').primaryKey(),
+    taskId: text('task_id').references(() => tasks.id),
+    projectId: text('project_id').references(() => projects.id),
+    userId: text('user_id')
+      .notNull()
+      .references(() => users.id),
+    description: text('description'),
+    durationMinutes: integer('duration_minutes').notNull(),
+    billable: integer('billable', { mode: 'boolean' }).default(true),
+    hourlyRate: integer('hourly_rate'), // cents per hour
+    date: integer('date', { mode: 'timestamp_ms' }).notNull(),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+    updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    taskIdx: index('time_entries_task_idx').on(table.taskId),
+    projectIdx: index('time_entries_project_idx').on(table.projectId),
+    userIdx: index('time_entries_user_idx').on(table.userId),
+    dateIdx: index('time_entries_date_idx').on(table.date),
+  })
+);
+
+// Task Checklists
+export const taskChecklists = sqliteTable(
+  'task_checklists',
+  {
+    id: text('id').primaryKey(),
+    taskId: text('task_id')
+      .notNull()
+      .references(() => tasks.id),
+    title: text('title').notNull(),
+    isCompleted: integer('is_completed', { mode: 'boolean' }).notNull().default(false),
+    sortOrder: integer('sort_order').default(0),
+    completedAt: integer('completed_at', { mode: 'timestamp_ms' }),
+    completedByUserId: text('completed_by_user_id').references(() => users.id),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    taskIdx: index('task_checklists_task_idx').on(table.taskId),
+  })
+);
+
+// QA Signoffs
+export const qaSignoffs = sqliteTable(
+  'qa_signoffs',
+  {
+    id: text('id').primaryKey(),
+    projectId: text('project_id')
+      .notNull()
+      .references(() => projects.id),
+    milestoneId: text('milestone_id').references(() => milestones.id),
+    type: text('type', { enum: ['feature', 'sprint', 'release', 'final'] }).notNull(),
+    status: text('status', { enum: ['pending', 'approved', 'rejected', 'conditional'] }).notNull().default('pending'),
+    notes: text('notes'),
+    signedByUserId: text('signed_by_user_id').references(() => users.id),
+    signedAt: integer('signed_at', { mode: 'timestamp_ms' }),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    projectIdx: index('qa_signoffs_project_idx').on(table.projectId),
+    statusIdx: index('qa_signoffs_status_idx').on(table.status),
+  })
+);
+
+// Retrospectives
+export const retrospectives = sqliteTable(
+  'retrospectives',
+  {
+    id: text('id').primaryKey(),
+    projectId: text('project_id')
+      .notNull()
+      .references(() => projects.id),
+    sprintNumber: integer('sprint_number'),
+    title: text('title').notNull(),
+    wentWell: text('went_well'),
+    improvements: text('improvements'),
+    actionItems: text('action_items'),
+    conductedByUserId: text('conducted_by_user_id').references(() => users.id),
+    conductedAt: integer('conducted_at', { mode: 'timestamp_ms' }),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    projectIdx: index('retrospectives_project_idx').on(table.projectId),
+  })
+);
+
+// NPS Surveys
+export const npsSurveys = sqliteTable(
+  'nps_surveys',
+  {
+    id: text('id').primaryKey(),
+    projectId: text('project_id').references(() => projects.id),
+    clientId: text('client_id').references(() => clients.id),
+    score: integer('score').notNull(), // 0-10
+    feedback: text('feedback'),
+    respondentName: text('respondent_name'),
+    respondentEmail: text('respondent_email'),
+    sentAt: integer('sent_at', { mode: 'timestamp_ms' }),
+    respondedAt: integer('responded_at', { mode: 'timestamp_ms' }),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    projectIdx: index('nps_surveys_project_idx').on(table.projectId),
+    clientIdx: index('nps_surveys_client_idx').on(table.clientId),
+  })
+);
+
+// Feedback Items
+export const feedbackItems = sqliteTable(
+  'feedback_items',
+  {
+    id: text('id').primaryKey(),
+    projectId: text('project_id').references(() => projects.id),
+    clientId: text('client_id').references(() => clients.id),
+    category: text('category', { enum: ['feature_request', 'bug', 'improvement', 'compliment', 'complaint', 'general'] }).notNull().default('general'),
+    content: text('content').notNull(),
+    priority: text('priority', { enum: ['low', 'medium', 'high'] }),
+    status: text('status', { enum: ['new', 'reviewed', 'addressed', 'dismissed'] }).notNull().default('new'),
+    submittedByName: text('submitted_by_name'),
+    submittedByEmail: text('submitted_by_email'),
+    reviewedByUserId: text('reviewed_by_user_id').references(() => users.id),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+    updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    projectIdx: index('feedback_items_project_idx').on(table.projectId),
+    clientIdx: index('feedback_items_client_idx').on(table.clientId),
+    statusIdx: index('feedback_items_status_idx').on(table.status),
+  })
+);
+
+// Environment Configs
+export const environmentConfigs = sqliteTable(
+  'environment_configs',
+  {
+    id: text('id').primaryKey(),
+    projectId: text('project_id')
+      .notNull()
+      .references(() => projects.id),
+    name: text('name').notNull(), // development, staging, production
+    url: text('url'),
+    description: text('description'),
+    credentials: text('credentials'), // encrypted or reference
+    lastDeployedAt: integer('last_deployed_at', { mode: 'timestamp_ms' }),
+    lastDeployedByUserId: text('last_deployed_by_user_id').references(() => users.id),
+    isActive: integer('is_active', { mode: 'boolean' }).notNull().default(true),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+    updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    projectIdx: index('environment_configs_project_idx').on(table.projectId),
+  })
+);
+
+// Meeting Notes
+export const meetingNotes = sqliteTable(
+  'meeting_notes',
+  {
+    id: text('id').primaryKey(),
+    projectId: text('project_id').references(() => projects.id),
+    leadId: text('lead_id').references(() => leads.id),
+    clientId: text('client_id').references(() => clients.id),
+    title: text('title').notNull(),
+    agenda: text('agenda'),
+    notes: text('notes'),
+    actionItems: text('action_items'),
+    attendees: text('attendees'),
+    meetingDate: integer('meeting_date', { mode: 'timestamp_ms' }),
+    duration: integer('duration'), // minutes
+    recordedByUserId: text('recorded_by_user_id').references(() => users.id),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    projectIdx: index('meeting_notes_project_idx').on(table.projectId),
+    leadIdx: index('meeting_notes_lead_idx').on(table.leadId),
+    clientIdx: index('meeting_notes_client_idx').on(table.clientId),
+  })
+);
+
+// Support Tickets
+export type SupportTicketStatus = 'open' | 'in_progress' | 'waiting_client' | 'resolved' | 'closed';
+
+export const supportTickets = sqliteTable(
+  'support_tickets',
+  {
+    id: text('id').primaryKey(),
+    projectId: text('project_id').references(() => projects.id),
+    clientId: text('client_id').references(() => clients.id),
+    ticketNumber: text('ticket_number').notNull(),
+    title: text('title').notNull(),
+    description: text('description'),
+    priority: text('priority', { enum: ['low', 'medium', 'high', 'critical'] }).notNull().default('medium'),
+    category: text('category'),
+    status: text('status', {
+      enum: ['open', 'in_progress', 'waiting_client', 'resolved', 'closed'],
+    }).notNull().default('open'),
+    assignedToUserId: text('assigned_to_user_id').references(() => users.id),
+    reportedByName: text('reported_by_name'),
+    reportedByEmail: text('reported_by_email'),
+    resolvedAt: integer('resolved_at', { mode: 'timestamp_ms' }),
+    closedAt: integer('closed_at', { mode: 'timestamp_ms' }),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+    updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    projectIdx: index('support_tickets_project_idx').on(table.projectId),
+    clientIdx: index('support_tickets_client_idx').on(table.clientId),
+    statusIdx: index('support_tickets_status_idx').on(table.status),
+  })
+);
+
+// API Endpoints
+export const apiEndpoints = sqliteTable(
+  'api_endpoints',
+  {
+    id: text('id').primaryKey(),
+    projectId: text('project_id')
+      .notNull()
+      .references(() => projects.id),
+    method: text('method', { enum: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'] }).notNull(),
+    path: text('path').notNull(),
+    description: text('description'),
+    requestSchema: text('request_schema'),
+    responseSchema: text('response_schema'),
+    authentication: text('authentication'),
+    rateLimit: text('rate_limit'),
+    version: text('version'),
+    isDeprecated: integer('is_deprecated', { mode: 'boolean' }).default(false),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+    updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    projectIdx: index('api_endpoints_project_idx').on(table.projectId),
+  })
+);
+
+// Case Studies
+export const caseStudies = sqliteTable(
+  'case_studies',
+  {
+    id: text('id').primaryKey(),
+    projectId: text('project_id').references(() => projects.id),
+    clientId: text('client_id').references(() => clients.id),
+    title: text('title').notNull(),
+    summary: text('summary'),
+    challenge: text('challenge'),
+    solution: text('solution'),
+    results: text('results'),
+    testimonial: text('testimonial'),
+    testimonialAuthor: text('testimonial_author'),
+    isPublished: integer('is_published', { mode: 'boolean' }).default(false),
+    publishedAt: integer('published_at', { mode: 'timestamp_ms' }),
+    createdByUserId: text('created_by_user_id').references(() => users.id),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+    updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    projectIdx: index('case_studies_project_idx').on(table.projectId),
+    clientIdx: index('case_studies_client_idx').on(table.clientId),
+  })
+);
+
+// Accessibility Audits
+export const accessibilityAudits = sqliteTable(
+  'accessibility_audits',
+  {
+    id: text('id').primaryKey(),
+    projectId: text('project_id')
+      .notNull()
+      .references(() => projects.id),
+    url: text('url').notNull(),
+    standard: text('standard', { enum: ['WCAG_2_0', 'WCAG_2_1', 'WCAG_2_2', 'Section_508'] }).notNull().default('WCAG_2_1'),
+    level: text('level', { enum: ['A', 'AA', 'AAA'] }).notNull().default('AA'),
+    issuesFound: integer('issues_found'),
+    criticalIssues: integer('critical_issues'),
+    passRate: integer('pass_rate'), // percentage
+    report: text('report'),
+    auditedByUserId: text('audited_by_user_id').references(() => users.id),
+    auditedAt: integer('audited_at', { mode: 'timestamp_ms' }),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    projectIdx: index('accessibility_audits_project_idx').on(table.projectId),
+  })
+);
+
+// Mobile Checks
+export const mobileChecks = sqliteTable(
+  'mobile_checks',
+  {
+    id: text('id').primaryKey(),
+    projectId: text('project_id')
+      .notNull()
+      .references(() => projects.id),
+    device: text('device').notNull(),
+    platform: text('platform', { enum: ['ios', 'android', 'web_mobile'] }).notNull(),
+    osVersion: text('os_version'),
+    browserOrApp: text('browser_or_app'),
+    screenSize: text('screen_size'),
+    status: text('status', { enum: ['pass', 'fail', 'partial'] }).notNull(),
+    notes: text('notes'),
+    issues: text('issues'),
+    checkedByUserId: text('checked_by_user_id').references(() => users.id),
+    checkedAt: integer('checked_at', { mode: 'timestamp_ms' }),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    projectIdx: index('mobile_checks_project_idx').on(table.projectId),
+  })
+);
+
+// Process Suggestions
+export const processSuggestions = sqliteTable(
+  'process_suggestions',
+  {
+    id: text('id').primaryKey(),
+    processInstanceId: text('process_instance_id').references(() => processInstances.id),
+    projectId: text('project_id').references(() => projects.id),
+    title: text('title').notNull(),
+    description: text('description'),
+    category: text('category', { enum: ['efficiency', 'quality', 'cost', 'communication', 'tooling', 'workflow', 'documentation', 'other'] }).notNull().default('other'),
+    priority: text('priority', { enum: ['low', 'medium', 'high'] }).notNull().default('medium'),
+    status: text('status', { enum: ['submitted', 'under_review', 'approved', 'implemented', 'rejected'] }).notNull().default('submitted'),
+    impact: text('impact'),
+    reviewNotes: text('review_notes'),
+    submittedByUserId: text('submitted_by_user_id').references(() => users.id),
+    reviewedByUserId: text('reviewed_by_user_id').references(() => users.id),
+    implementedAt: integer('implemented_at', { mode: 'timestamp_ms' }),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+    updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    instanceIdx: index('process_suggestions_instance_idx').on(table.processInstanceId),
+    projectIdx: index('process_suggestions_project_idx').on(table.projectId),
+    statusIdx: index('process_suggestions_status_idx').on(table.status),
+  })
+);
+
+// Integrations
+export const integrations = sqliteTable(
+  'integrations',
+  {
+    id: text('id').primaryKey(),
+    name: text('name').notNull(),
+    type: text('type', { enum: ['crm', 'calendar', 'email', 'storage', 'payment', 'analytics', 'chat', 'other'] }).notNull(),
+    provider: text('provider').notNull(), // e.g., 'google', 'slack', 'stripe'
+    config: text('config'), // JSON encrypted
+    status: text('status', { enum: ['active', 'inactive', 'error'] }).notNull().default('active'),
+    lastSyncAt: integer('last_sync_at', { mode: 'timestamp_ms' }),
+    errorMessage: text('error_message'),
+    createdByUserId: text('created_by_user_id').references(() => users.id),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+    updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    typeIdx: index('integrations_type_idx').on(table.type),
+    statusIdx: index('integrations_status_idx').on(table.status),
+  })
+);
+
+// Meetings (for calendar integration)
+export const meetings = sqliteTable(
+  'meetings',
+  {
+    id: text('id').primaryKey(),
+    projectId: text('project_id').references(() => projects.id),
+    leadId: text('lead_id').references(() => leads.id),
+    clientId: text('client_id').references(() => clients.id),
+    title: text('title').notNull(),
+    description: text('description'),
+    meetingType: text('meeting_type', { enum: ['discovery', 'kickoff', 'sprint_planning', 'standup', 'review', 'retrospective', 'client_call', 'internal', 'other'] }),
+    location: text('location'),
+    meetingUrl: text('meeting_url'),
+    startAt: integer('start_at', { mode: 'timestamp_ms' }).notNull(),
+    endAt: integer('end_at', { mode: 'timestamp_ms' }),
+    attendees: text('attendees'), // JSON array
+    organizerUserId: text('organizer_user_id').references(() => users.id),
+    calendarEventId: text('calendar_event_id'),
+    status: text('status', { enum: ['scheduled', 'completed', 'canceled', 'rescheduled'] }).notNull().default('scheduled'),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+    updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    projectIdx: index('meetings_project_idx').on(table.projectId),
+    leadIdx: index('meetings_lead_idx').on(table.leadId),
+    clientIdx: index('meetings_client_idx').on(table.clientId),
+    startIdx: index('meetings_start_idx').on(table.startAt),
   })
 );

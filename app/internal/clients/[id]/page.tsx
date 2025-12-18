@@ -5,11 +5,10 @@ import { eq, desc } from 'drizzle-orm';
 import styles from '../../styles.module.css';
 import { requireRole } from '@/lib/internal/auth';
 import { getDb } from '@/lib/db';
-import { clients, clientContacts, projects, proposals, invoices, meetings, events } from '@/lib/db/schema';
+import { clients, projects, proposals, events, clientContacts, invoices } from '@/lib/db/schema';
 import { formatDateTime } from '@/lib/internal/ui';
 import {
   safeValidateFormData,
-  createClientContactFormSchema,
   updateClientFormSchema,
 } from '@/lib/validations';
 
@@ -67,34 +66,8 @@ export default async function ClientDetailPage({ params }: { params: Promise<{ i
   const client = await db.select().from(clients).where(eq(clients.id, id)).get();
   if (!client) notFound();
 
-  const contacts = await db.select().from(clientContacts).where(eq(clientContacts.clientId, id)).all();
   const clientProjects = await db.select().from(projects).where(eq(projects.leadId, id)).orderBy(desc(projects.createdAt)).all();
   const clientProposals = await db.select().from(proposals).where(eq(proposals.clientId, id)).orderBy(desc(proposals.createdAt)).all();
-  const clientInvoices = await db.select().from(invoices).where(eq(invoices.clientId, id)).orderBy(desc(invoices.createdAt)).all();
-  const clientMeetings = await db.select().from(meetings).where(eq(meetings.clientId, id)).orderBy(desc(meetings.scheduledAt)).limit(10).all();
-
-  async function addContact(formData: FormData) {
-    'use server';
-    await requireRole(['admin', 'pm']);
-    const db = getDb();
-
-    const result = safeValidateFormData(createClientContactFormSchema, formData);
-    if (!result.success) return;
-    const { clientId, name, email, phone, role, isPrimary } = result.data;
-
-    await db.insert(clientContacts).values({
-      id: crypto.randomUUID(),
-      clientId,
-      name,
-      email,
-      phone,
-      role,
-      isPrimary,
-      createdAt: new Date(),
-    });
-
-    redirect(`/internal/clients/${clientId}`);
-  }
 
   async function updateClient(formData: FormData) {
     'use server';
@@ -119,8 +92,7 @@ export default async function ClientDetailPage({ params }: { params: Promise<{ i
     redirect(`/internal/clients/${id}`);
   }
 
-  const totalInvoiced = clientInvoices.reduce((sum, inv) => sum + inv.totalAmount, 0);
-  const totalPaid = clientInvoices.reduce((sum, inv) => sum + inv.paidAmount, 0);
+
 
   return (
     <main className={styles.page}>
@@ -193,140 +165,12 @@ export default async function ClientDetailPage({ params }: { params: Promise<{ i
               </div>
             </section>
 
-            {/* Contacts */}
-            <section className={styles.card}>
-              <div className={styles.cardHeader}>
-                <h2 className={styles.cardTitle}>Contacts</h2>
-              </div>
-              <div className={styles.cardBody} style={{ padding: 0 }}>
-                {contacts.length > 0 ? (
-                  <div className={styles.tableWrapper} style={{ border: 'none', borderRadius: 0 }}>
-                    <table className={styles.table}>
-                      <thead>
-                        <tr>
-                          <th>Name</th>
-                          <th>Role</th>
-                          <th>Email</th>
-                          <th>Phone</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {contacts.map((c) => (
-                          <tr key={c.id}>
-                            <td>
-                              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                {c.name}
-                                {c.isPrimary && <span className={styles.badge} style={{ fontSize: '0.7rem', padding: '2px 6px' }}>Primary</span>}
-                              </div>
-                            </td>
-                            <td>{c.role || '—'}</td>
-                            <td>{c.email || '—'}</td>
-                            <td>{c.phone || '—'}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                ) : (
-                  <div style={{ padding: '24px', textAlign: 'center', color: 'var(--int-text-muted)' }}>
-                    No contacts yet.
-                  </div>
-                )}
-                
-                <div style={{ padding: '24px', borderTop: '1px solid var(--int-border)' }}>
-                  <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '16px' }}>Add Contact</h3>
-                  <form action={addContact} className={styles.form}>
-                    <input type="hidden" name="clientId" value={client.id} />
-                    <div className={styles.grid2}>
-                      <div>
-                        <label className={styles.formLabel}>Name *</label>
-                        <input className={styles.input} name="name" required placeholder="John Doe" />
-                      </div>
-                      <div>
-                        <label className={styles.formLabel}>Email</label>
-                        <input className={styles.input} name="email" type="email" placeholder="john@example.com" />
-                      </div>
-                      <div>
-                        <label className={styles.formLabel}>Phone</label>
-                        <input className={styles.input} name="phone" placeholder="+1 555..." />
-                      </div>
-                      <div>
-                        <label className={styles.formLabel}>Role</label>
-                        <input className={styles.input} name="role" placeholder="CEO, PO, Finance..." />
-                      </div>
-                    </div>
-                    <div style={{ marginTop: '12px' }}>
-                      <label className={styles.checkboxLabel}>
-                        <input type="checkbox" name="isPrimary" />
-                        <span>Primary Contact</span>
-                      </label>
-                    </div>
-                    <button className={`${styles.btn} ${styles.btnSecondary}`} type="submit" style={{ marginTop: '16px' }}>
-                      {Icons.plus} Add Contact
-                    </button>
-                  </form>
-                </div>
-              </div>
-            </section>
 
-            {/* Recent Meetings */}
-            {clientMeetings.length > 0 && (
-              <section className={styles.card}>
-                <div className={styles.cardHeader}>
-                  <h2 className={styles.cardTitle}>Recent Meetings</h2>
-                </div>
-                <div className={styles.cardBody} style={{ padding: 0 }}>
-                  <div className={styles.tableWrapper} style={{ border: 'none', borderRadius: 0 }}>
-                    <table className={styles.table}>
-                      <thead>
-                        <tr>
-                          <th>Title</th>
-                          <th>Scheduled</th>
-                          <th>Duration</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {clientMeetings.map((m) => (
-                          <tr key={m.id}>
-                            <td>{m.title}</td>
-                            <td>{formatDateTime(m.scheduledAt)}</td>
-                            <td>{m.durationMinutes ? `${m.durationMinutes} min` : '—'}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </section>
-            )}
           </div>
 
           {/* Right Column */}
           <div className={styles.form}>
             
-            {/* Financial Summary */}
-            <section className={styles.card}>
-              <div className={styles.cardHeader}>
-                <h2 className={styles.cardTitle}>Financial Summary</h2>
-              </div>
-              <div className={styles.cardBody}>
-                <div style={{ marginBottom: '16px' }}>
-                  <div className={styles.textMuted} style={{ fontSize: '0.9rem' }}>Total Invoiced</div>
-                  <div style={{ fontSize: '1.5rem', fontWeight: 700 }}>${(totalInvoiced / 100).toFixed(2)}</div>
-                </div>
-                <div style={{ marginBottom: '16px' }}>
-                  <div className={styles.textMuted} style={{ fontSize: '0.9rem' }}>Total Paid</div>
-                  <div style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--int-success)' }}>${(totalPaid / 100).toFixed(2)}</div>
-                </div>
-                <div style={{ paddingTop: '16px', borderTop: '1px solid var(--int-border)' }}>
-                  <div className={styles.textMuted} style={{ fontSize: '0.9rem' }}>Outstanding</div>
-                  <div style={{ fontSize: '1.5rem', fontWeight: 700, color: (totalInvoiced - totalPaid) > 0 ? 'var(--int-error)' : 'var(--int-text)' }}>
-                    ${((totalInvoiced - totalPaid) / 100).toFixed(2)}
-                  </div>
-                </div>
-              </div>
-            </section>
-
             {/* Stats */}
             <section className={styles.card}>
               <div className={styles.cardHeader}>
@@ -341,10 +185,6 @@ export default async function ClientDetailPage({ params }: { params: Promise<{ i
                   <div>
                     <div className={styles.textMuted} style={{ fontSize: '0.8rem' }}>Proposals</div>
                     <div style={{ fontSize: '1.2rem', fontWeight: 600 }}>{clientProposals.length}</div>
-                  </div>
-                  <div>
-                    <div className={styles.textMuted} style={{ fontSize: '0.8rem' }}>Invoices</div>
-                    <div style={{ fontSize: '1.2rem', fontWeight: 600 }}>{clientInvoices.length}</div>
                   </div>
                 </div>
               </div>

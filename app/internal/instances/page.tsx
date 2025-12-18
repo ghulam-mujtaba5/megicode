@@ -100,7 +100,7 @@ export default async function InstancesPage() {
   // Calculate aggregate metrics
   const runningCount = instanceRows.filter(r => r.instanceStatus === 'running').length;
   const completedCount = instanceRows.filter(r => r.instanceStatus === 'completed').length;
-  const pausedCount = instanceRows.filter(r => r.instanceStatus === 'paused').length;
+  const canceledCount = instanceRows.filter(r => r.instanceStatus === 'canceled').length;
   const totalOverdue = Array.from(statsByInstance.values()).reduce((sum, s) => sum + s.overdue, 0);
   const totalBlocked = Array.from(statsByInstance.values()).reduce((sum, s) => sum + s.blocked, 0);
 
@@ -159,8 +159,8 @@ export default async function InstancesPage() {
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
             <span style={{ width: '20px', height: '20px', color: 'var(--int-warning)' }}>{Icons.pause}</span>
           </div>
-          <div style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--int-warning)' }}>{pausedCount}</div>
-          <div style={{ fontSize: '0.75rem', color: 'var(--int-text-muted)' }}>Paused</div>
+          <div style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--int-warning)' }}>{canceledCount}</div>
+          <div style={{ fontSize: '0.75rem', color: 'var(--int-text-muted)' }}>Canceled</div>
         </div>
 
         <div className={s.card} style={{ padding: '1.25rem', textAlign: 'center', borderTop: '3px solid var(--int-info)' }}>

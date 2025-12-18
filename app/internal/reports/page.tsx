@@ -4,9 +4,10 @@ import { eq, sql, gte, lte, and, desc } from 'drizzle-orm';
 import styles from '../styles.module.css';
 import { requireRole } from '@/lib/internal/auth';
 import { getDb } from '@/lib/db';
-import { leads, projects, tasks, invoices, payments, timeEntries, users, events } from '@/lib/db/schema';
+import { leads, projects, tasks, users, events, processInstances, milestones, invoices } from '@/lib/db/schema';
 import { formatDateTime } from '@/lib/internal/ui';
 import ReportsClient from './ReportsClient';
+import ProcessAnalyticsClient from './ProcessAnalyticsClient';
 
 // Icons
 const Icons = {
@@ -112,55 +113,178 @@ export default async function ReportsPage() {
   const doneTasks = await db.select({ count: sql<number>`count(*)` }).from(tasks).where(eq(tasks.status, 'done')).get();
   const blockedTasks = await db.select({ count: sql<number>`count(*)` }).from(tasks).where(eq(tasks.status, 'blocked')).get();
 
-  // Financial metrics
-  const invoiceStats = await db.select({
-    total: sql<number>`COALESCE(SUM(${invoices.totalAmount}), 0)`,
-    paid: sql<number>`COALESCE(SUM(${invoices.paidAmount}), 0)`,
-  }).from(invoices).get();
+  // Process Instance Metrics (BPMN Workflow)
+  const allInstances = await db.select().from(processInstances).all();
+  const runningInstances = allInstances.filter(i => i.status === 'running').length;
+  const completedInstances = allInstances.filter(i => i.status === 'completed');
+  const canceledInstances = allInstances.filter(i => i.status === 'canceled').length;
+  
+  // Calculate average cycle time for completed instances
+  const completedWithDuration = completedInstances.filter(i => i.startedAt && i.endedAt);
+  const avgCycleTime = completedWithDuration.length > 0
+    ? Math.round(completedWithDuration.reduce((sum, i) => {
+        const start = new Date(i.startedAt!);
+        const end = new Date(i.endedAt!);
+        return sum + Math.round((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
+      }, 0) / completedWithDuration.length)
+    : 0;
 
-  const payments90d = await db.select({
-    total: sql<number>`COALESCE(SUM(${payments.amount}), 0)`,
-  }).from(payments).where(gte(payments.paidAt, ninetyDaysAgo)).get();
+  // Throughput: completed instances in the last 30 days
+  const completedLast30 = completedInstances.filter(i => {
+    if (!i.endedAt) return false;
+    const endDate = new Date(i.endedAt);
+    return endDate >= thirtyDaysAgo;
+  }).length;
 
-  // Time tracking
-  const totalTime = await db.select({
-    minutes: sql<number>`COALESCE(SUM(${timeEntries.minutes}), 0)`,
-  }).from(timeEntries).get();
+  // Milestone metrics
+  const allMilestones = await db.select().from(milestones).all();
+  const completedMilestones = allMilestones.filter(m => m.completedAt !== null).length;
+  const overdueMilestones = allMilestones.filter(m => {
+    if (m.completedAt) return false;
+    if (!m.dueAt) return false;
+    return new Date(m.dueAt) < now;
+  }).length;
+  const onTimeMilestones = allMilestones.filter(m => {
+    if (!m.completedAt) return false;
+    if (!m.dueAt || !m.completedAt) return false;
+    return new Date(m.completedAt) <= new Date(m.dueAt);
+  }).length;
 
-  const time30d = await db.select({
-    minutes: sql<number>`COALESCE(SUM(${timeEntries.minutes}), 0)`,
-  }).from(timeEntries).where(gte(timeEntries.date, thirtyDaysAgo)).get();
+  // Task statistics by status
+  const todoTasks = await db.select({ count: sql<number>`count(*)` }).from(tasks).where(eq(tasks.status, 'todo')).get();
+  const inProgressTasks = await db.select({ count: sql<number>`count(*)` }).from(tasks).where(eq(tasks.status, 'in_progress')).get();
+  const completedTasks30d = await db.select({ count: sql<number>`count(*)` }).from(tasks)
+    .where(and(eq(tasks.status, 'done'), gte(tasks.updatedAt, thirtyDaysAgo))).get();
+  const overdueTasks = await db.select({ count: sql<number>`count(*)` }).from(tasks)
+    .where(and(sql`${tasks.status} != 'done'`, sql`${tasks.dueAt} < datetime('now')`)).get();
 
-  // Project Profitability (Budget vs Actuals)
+  // Lead statistics by status
+  const newLeadsStatus = await db.select({ count: sql<number>`count(*)` }).from(leads).where(eq(leads.status, 'new')).get();
+  const inReviewLeads = await db.select({ count: sql<number>`count(*)` }).from(leads).where(eq(leads.status, 'in_review')).get();
+  const approvedLeads = await db.select({ count: sql<number>`count(*)` }).from(leads).where(eq(leads.status, 'approved')).get();
+
+  // Project statuses
+  const blockedProjects = await db.select({ count: sql<number>`count(*)` }).from(projects).where(eq(projects.status, 'blocked')).get();
+  const inQaProjects = await db.select({ count: sql<number>`count(*)` }).from(projects).where(eq(projects.status, 'in_qa')).get();
+  const deliveredProjects = await db.select({ count: sql<number>`count(*)` }).from(projects).where(eq(projects.status, 'closed')).get();
+
+  // Project Statistics
   const allProjects = await db.select().from(projects).all();
-  const projectStats = await Promise.all(allProjects.map(async (p) => {
-    const entries = await db.select().from(timeEntries).where(eq(timeEntries.projectId, p.id)).all();
-    const totalMinutes = entries.reduce((sum, e) => sum + e.minutes, 0);
-    const totalHours = totalMinutes / 60;
-    const estimatedCost = totalHours * 100; // $100/hr internal cost assumption
-    
-    const projectInvoices = await db.select().from(invoices).where(eq(invoices.projectId, p.id)).all();
-    const totalInvoiced = projectInvoices.reduce((sum, i) => sum + (i.totalAmount ?? 0), 0); // in cents
+  const projectStatsProfit = await Promise.all(allProjects.map(async (p) => {
+    const projectTasks = await db.select().from(tasks).where(eq(tasks.projectId, p.id)).all();
+    const completedTasks = projectTasks.filter(t => t.status === 'done').length;
+    const totalProjectTasks = projectTasks.length;
     
     return {
       ...p,
-      totalHours,
-      estimatedCost: estimatedCost * 100, // convert to cents
-      totalInvoiced,
-      profit: totalInvoiced - (estimatedCost * 100)
+      totalTasks: totalProjectTasks,
+      completedTasks,
+      totalInvoiced: 0,
     };
   }));
 
-  // Top contributors by time
+  // Recently completed process instances for the table
+  const recentCompletedInstances = completedInstances
+    .filter(i => i.endedAt)
+    .sort((a, b) => new Date(b.endedAt!).getTime() - new Date(a.endedAt!).getTime())
+    .slice(0, 5)
+    .map(instance => {
+      const project = allProjects.find(p => p.id === instance.projectId);
+      const cycleTime = instance.startedAt && instance.endedAt
+        ? Math.round((new Date(instance.endedAt).getTime() - new Date(instance.startedAt).getTime()) / (1000 * 60 * 60 * 24))
+        : 0;
+      return {
+        id: instance.id,
+        projectName: project?.name || 'Unknown Project',
+        cycleTime,
+        startedAt: instance.startedAt ? new Date(instance.startedAt) : new Date(),
+        endedAt: instance.endedAt ? new Date(instance.endedAt) : null,
+      };
+    });
+
+  // Calculate rates before using them
+  const conversionRate = totalLeads?.count ? Math.round(((convertedLeads?.count ?? 0) / totalLeads.count) * 100) : 0;
+  const taskCompletionRate = totalTasks?.count ? Math.round(((doneTasks?.count ?? 0) / totalTasks.count) * 100) : 0;
+
+  // Calculate on-time delivery rate
+  const onTimeDeliveryRate = allMilestones.length > 0
+    ? Math.round((onTimeMilestones / Math.max(completedMilestones, 1)) * 100)
+    : 100;
+
+  // Calculate overdue items total
+  const totalOverdueItems = (overdueTasks?.count ?? 0) + overdueMilestones;
+
+  // Prepare process analytics data
+  const processAnalyticsData = {
+    kpis: {
+      leadConversionRate: conversionRate,
+      taskCompletionRate,
+      onTimeDeliveryRate,
+      avgCycleTime,
+      throughput: completedLast30,
+      activeProjects: inProgressProjects?.count ?? 0,
+      runningInstances,
+      overdueItems: totalOverdueItems,
+    },
+    leadStats: {
+      total: totalLeads?.count ?? 0,
+      new: newLeadsStatus?.count ?? 0,
+      inReview: inReviewLeads?.count ?? 0,
+      approved: approvedLeads?.count ?? 0,
+      converted: convertedLeads?.count ?? 0,
+      rejected: rejectedLeads?.count ?? 0,
+      last30Days: newLeads30d?.count ?? 0,
+    },
+    projectStats: {
+      total: totalProjects?.count ?? 0,
+      active: inProgressProjects?.count ?? 0,
+      blocked: blockedProjects?.count ?? 0,
+      delivered: deliveredProjects?.count ?? 0,
+      inQa: inQaProjects?.count ?? 0,
+    },
+    taskStats: {
+      total: totalTasks?.count ?? 0,
+      todo: todoTasks?.count ?? 0,
+      inProgress: inProgressTasks?.count ?? 0,
+      blocked: blockedTasks?.count ?? 0,
+      done: doneTasks?.count ?? 0,
+      overdue: overdueTasks?.count ?? 0,
+      completedLast30: completedTasks30d?.count ?? 0,
+    },
+    instanceStats: {
+      total: allInstances.length,
+      running: runningInstances,
+      completed: completedInstances.length,
+      canceled: canceledInstances,
+      avgDuration: avgCycleTime,
+    },
+    milestoneStats: {
+      total: allMilestones.length,
+      completed: completedMilestones,
+      onTime: onTimeMilestones,
+      overdue: overdueMilestones,
+    },
+    tasksByStatus: [
+      { status: 'todo', count: todoTasks?.count ?? 0 },
+      { status: 'in_progress', count: inProgressTasks?.count ?? 0 },
+      { status: 'blocked', count: blockedTasks?.count ?? 0 },
+      { status: 'done', count: doneTasks?.count ?? 0 },
+    ],
+    leadConversionData: [], // Would need monthly aggregation
+    recentCompletedInstances,
+  };
+
+  // Top contributors by task completion
   const topContributors = await db.select({
-    userId: timeEntries.userId,
+    userId: tasks.assignedToUserId,
     userName: users.name,
-    totalMinutes: sql<number>`SUM(${timeEntries.minutes})`,
+    completedTasks: sql<number>`COUNT(CASE WHEN ${tasks.status} = 'done' THEN 1 END)`,
   })
-  .from(timeEntries)
-  .leftJoin(users, eq(timeEntries.userId, users.id))
-  .groupBy(timeEntries.userId, users.name)
-  .orderBy(desc(sql`SUM(${timeEntries.minutes})`))
+  .from(tasks)
+  .leftJoin(users, eq(tasks.assignedToUserId, users.id))
+  .where(sql`${tasks.assignedToUserId} IS NOT NULL`)
+  .groupBy(tasks.assignedToUserId, users.name)
+  .orderBy(desc(sql`COUNT(CASE WHEN ${tasks.status} = 'done' THEN 1 END)`))
   .limit(5)
   .all();
 
@@ -175,8 +299,10 @@ export default async function ReportsPage() {
   .limit(20)
   .all();
 
-  const conversionRate = totalLeads?.count ? Math.round(((convertedLeads?.count ?? 0) / totalLeads.count) * 100) : 0;
-  const taskCompletionRate = totalTasks?.count ? Math.round(((doneTasks?.count ?? 0) / totalTasks.count) * 100) : 0;
+  // Invoice stats - calculate from actual invoices table
+  const paidInvoices = await db.select({ sum: sql<number>`COALESCE(SUM(total_amount), 0)` }).from(invoices).where(eq(invoices.status, 'paid')).get();
+  const allInvoicesTotal = await db.select({ sum: sql<number>`COALESCE(SUM(total_amount), 0)` }).from(invoices).get();
+  const invoiceStats = { paid: paidInvoices?.sum ?? 0, total: allInvoicesTotal?.sum ?? 0 };
   const outstandingInvoices = (invoiceStats?.total ?? 0) - (invoiceStats?.paid ?? 0);
 
   const formatTime = (mins: number) => {
@@ -227,6 +353,17 @@ export default async function ReportsPage() {
           </div>
         </div>
       </div>
+
+      {/* BPMN Process Analytics - Full Width Section */}
+      <section className={styles.card}>
+        <div className={styles.cardHeader}>
+          <h2 className={styles.cardTitle}>Process Analytics (BPMN Workflow)</h2>
+          <span className={styles.cardIcon}>{Icons.barChart}</span>
+        </div>
+        <div className={styles.cardBody} style={{ padding: '1.5rem' }}>
+          <ProcessAnalyticsClient data={processAnalyticsData} />
+        </div>
+      </section>
 
       <div className={styles.twoColumnGrid}>
         {/* Lead Pipeline */}
@@ -283,64 +420,30 @@ export default async function ReportsPage() {
           </div>
         </section>
 
-        {/* Time Tracking */}
-        <section className={styles.card}>
-          <div className={styles.cardHeader}>
-            <h2 className={styles.cardTitle}>Time Tracking</h2>
-            <span className={styles.cardIcon}>{Icons.time}</span>
-          </div>
-          <div className={styles.tableWrapper}>
-            <table className={styles.table}>
-              <tbody>
-                <tr><td className={styles.cellMain}>Total Time Logged</td><td className={styles.cellValue}>{formatTime(totalTime?.minutes ?? 0)}</td></tr>
-                <tr><td className={styles.cellMain}>Last 30 Days</td><td className={styles.cellValue}>{formatTime(time30d?.minutes ?? 0)}</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        {/* Financials */}
-        <section className={styles.card}>
-          <div className={styles.cardHeader}>
-            <h2 className={styles.cardTitle}>Financial Summary</h2>
-            <span className={styles.cardIcon}>{Icons.money}</span>
-          </div>
-          <div className={styles.tableWrapper}>
-            <table className={styles.table}>
-              <tbody>
-                <tr><td className={styles.cellMain}>Total Invoiced</td><td className={styles.cellValue}>${((invoiceStats?.total ?? 0) / 100).toLocaleString()}</td></tr>
-                <tr><td className={styles.cellMain}>Total Paid</td><td className={styles.cellValue}>${((invoiceStats?.paid ?? 0) / 100).toLocaleString()}</td></tr>
-                <tr><td className={styles.cellMain}>Outstanding</td><td className={styles.cellValue}>${(outstandingInvoices / 100).toLocaleString()}</td></tr>
-                <tr><td className={styles.cellMain}>Revenue (90 days)</td><td className={styles.cellValue}>${((payments90d?.total ?? 0) / 100).toLocaleString()}</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
         {/* Project Profitability */}
-        <ReportsClient projects={projectStats} />
+        <ReportsClient projects={projectStatsProfit} />
 
-        {/* Top Contributors */}
+        {/* Top Task Completers */}
         <section className={styles.card}>
           <div className={styles.cardHeader}>
-            <h2 className={styles.cardTitle}>Top Contributors</h2>
+            <h2 className={styles.cardTitle}>Top Task Completers</h2>
             <span className={styles.cardIcon}>{Icons.users}</span>
           </div>
           {topContributors.length === 0 ? (
             <div className={styles.emptyState}>
-              <p>No time entries yet</p>
+              <p>No completed tasks yet</p>
             </div>
           ) : (
             <div className={styles.tableWrapper}>
               <table className={styles.table}>
                 <thead>
-                  <tr><th>USER</th><th>TIME LOGGED</th></tr>
+                  <tr><th>USER</th><th>COMPLETED TASKS</th></tr>
                 </thead>
                 <tbody>
                   {topContributors.map((c, i) => (
                     <tr key={c.userId ?? i}>
                       <td className={styles.cellMain}>{c.userName || 'Unknown'}</td>
-                      <td className={styles.cellValue}>{formatTime(c.totalMinutes)}</td>
+                      <td className={styles.cellValue}>{c.completedTasks ?? 0}</td>
                     </tr>
                   ))}
                 </tbody>

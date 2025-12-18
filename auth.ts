@@ -50,7 +50,7 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? '',
     }),
     // Dev-only credentials provider for testing without Google OAuth
-    ...(process.env.DEV_LOGIN_ENABLED === 'true'
+    ...(process.env.NEXT_PUBLIC_DEV_LOGIN_ENABLED === 'true'
       ? [
           CredentialsProvider({
             id: 'dev-login',
@@ -77,8 +77,6 @@ export const authOptions: NextAuthOptions = {
       try {
         const db = getDb();
         const now = new Date();
-        const role = getRoleForEmail(email);
-
         // Check if user already exists
         const existingUser = await db
           .select()
@@ -86,14 +84,28 @@ export const authOptions: NextAuthOptions = {
           .where(eq(users.email, email))
           .limit(1);
 
+        // Determine role to set:
+        // - If user already exists: preserve their stored role (don't overwrite)
+        // - If user is listed in INTERNAL_ADMIN_EMAILS: promote to admin
+        // - Otherwise for new users use configured fallback mapping
+        let roleToSet: UserRole;
+        const adminEmails = parseCsv(process.env.INTERNAL_ADMIN_EMAILS);
         if (existingUser.length > 0) {
-          // Update existing user
+          roleToSet = (existingUser[0].role as UserRole) ?? ((process.env.INTERNAL_DEFAULT_ROLE ?? 'viewer') as UserRole);
+          // Allow explicit admin promotion via env
+          if (adminEmails.includes(email)) roleToSet = 'admin';
+        } else {
+          roleToSet = getRoleForEmail(email);
+        }
+
+        if (existingUser.length > 0) {
+          // Update existing user but do NOT overwrite role unless admin promoted
           await db
             .update(users)
             .set({
               name: user.name ?? null,
               image: user.image ?? null,
-              role,
+              role: roleToSet,
               updatedAt: now,
             })
             .where(eq(users.email, email));
@@ -104,7 +116,7 @@ export const authOptions: NextAuthOptions = {
             email,
             name: user.name ?? null,
             image: user.image ?? null,
-            role,
+            role: roleToSet,
             createdAt: now,
             updatedAt: now,
           });

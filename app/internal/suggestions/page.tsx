@@ -64,7 +64,7 @@ export default async function ProcessSuggestionsPage() {
 
     const title = String(formData.get('title') ?? '').trim();
     const description = String(formData.get('description') ?? '').trim();
-    const category = String(formData.get('category') ?? 'other').trim() as 'workflow' | 'tooling' | 'communication' | 'documentation' | 'quality' | 'other';
+    const category = String(formData.get('category') ?? 'other').trim() as 'efficiency' | 'quality' | 'cost' | 'communication' | 'tooling' | 'workflow' | 'documentation' | 'other';
     const priority = String(formData.get('priority') ?? 'medium').trim() as 'low' | 'medium' | 'high';
 
     if (!title || !description) return;
