@@ -21,6 +21,7 @@ import {
 import { getActiveBusinessProcessDefinition } from '@/lib/workflow/processEngine';
 import { formatDateTime } from '@/lib/internal/ui';
 import ProcessDetailClient from './ProcessDetailClient';
+import ProcessDiagramViewer from './ProcessDiagramViewer';
 
 // Icons
 const Icons = {
@@ -351,6 +352,21 @@ export default async function ProcessDetailPage({
             outputData: sh.outputData ? (typeof sh.outputData === 'string' ? JSON.parse(sh.outputData) : sh.outputData) : null,
           }))}
           userRole={session.user.role || 'viewer'}
+        />
+      </div>
+
+      {/* Full Process Diagram */}
+      <div style={{ marginTop: 'var(--int-space-6)' }}>
+        <ProcessDiagramViewer
+          instanceStatus={instance.status}
+          currentStepKey={instance.currentStepKey || undefined}
+          completedSteps={completedStepKeys}
+          definition={{
+            key: definition.key,
+            name: definition.name,
+            steps: definition.steps,
+            lanes: definition.lanes,
+          }}
         />
       </div>
 

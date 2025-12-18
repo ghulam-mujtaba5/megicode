@@ -1,0 +1,176 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 700">
+  <defs>
+    <style>
+      .lane-header { fill: #f3f4f6; }
+      .lane-border { stroke: #d1d5db; stroke-width: 1; fill: none; }
+      .lane-label { font-family: system-ui, -apple-system, sans-serif; font-size: 14px; font-weight: 600; fill: #1f2937; }
+      .step-rect { fill: #fff; stroke: #d1d5db; stroke-width: 2; rx: 8; }
+      .step-rect-auto { fill: #fef3c7; stroke: #f59e0b; stroke-width: 2; rx: 8; }
+      .step-label { font-family: system-ui, -apple-system, sans-serif; font-size: 11px; fill: #374151; text-anchor: middle; }
+      .step-label-small { font-family: system-ui, -apple-system, sans-serif; font-size: 9px; fill: #6b7280; text-anchor: middle; }
+      .connector { stroke: #9ca3af; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .gateway { fill: #fff; stroke: #6366f1; stroke-width: 2; }
+      .start-event { fill: #dcfce7; stroke: #22c55e; stroke-width: 2; }
+      .end-event { fill: #fee2e2; stroke: #ef4444; stroke-width: 3; }
+      .auto-badge { fill: #f59e0b; font-size: 8px; font-family: system-ui; font-weight: bold; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#9ca3af"/>
+    </marker>
+  </defs>
+  
+  <!-- Lane Headers -->
+  <rect x="0" y="0" width="1400" height="140" class="lane-header"/>
+  <rect x="0" y="0" width="1400" height="140" class="lane-border"/>
+  <text x="70" y="75" class="lane-label">Client</text>
+  
+  <rect x="0" y="140" width="1400" height="140" fill="#f9fafb"/>
+  <rect x="0" y="140" width="1400" height="140" class="lane-border"/>
+  <text x="70" y="215" class="lane-label">Project Mgmt</text>
+  
+  <rect x="0" y="280" width="1400" height="140" class="lane-header"/>
+  <rect x="0" y="280" width="1400" height="140" class="lane-border"/>
+  <text x="70" y="355" class="lane-label">Automation</text>
+  
+  <rect x="0" y="420" width="1400" height="140" fill="#f9fafb"/>
+  <rect x="0" y="420" width="1400" height="140" class="lane-border"/>
+  <text x="70" y="495" class="lane-label">Development</text>
+  
+  <rect x="0" y="560" width="1400" height="140" class="lane-header"/>
+  <rect x="0" y="560" width="1400" height="140" class="lane-border"/>
+  <text x="70" y="635" class="lane-label">Biz Dev</text>
+  
+  <!-- Lane Separator -->
+  <rect x="140" y="0" width="3" height="700" fill="#6366f1"/>
+  
+  <!-- 1. Start Event (Client) -->
+  <circle cx="200" cy="70" r="25" class="start-event"/>
+  <text x="200" y="75" class="step-label">▶</text>
+  <text x="200" y="110" class="step-label-small">Submit Request</text>
+  
+  <!-- Connector 1->2 -->
+  <path d="M 225 70 L 270 70 L 270 340 L 320 340" class="connector"/>
+  
+  <!-- 2. CRM Records (Automation) -->
+  <rect x="320" y="310" width="100" height="60" class="step-rect-auto"/>
+  <text x="370" y="338" class="step-label">CRM Records</text>
+  <text x="370" y="352" class="step-label-small">Request</text>
+  <circle cx="410" cy="315" r="8" fill="#f59e0b"/>
+  <text x="410" y="318" fill="#fff" style="font-size:7px;text-anchor:middle;">⚡</text>
+  
+  <!-- Connector 2->3 -->
+  <path d="M 420 340 L 440 340 L 440 210 L 460 210" class="connector"/>
+  
+  <!-- 3. PM Reviews (PM) -->
+  <rect x="460" y="180" width="100" height="60" class="step-rect"/>
+  <text x="510" y="208" class="step-label">PM Reviews</text>
+  <text x="510" y="222" class="step-label-small">Request</text>
+  
+  <!-- Connector 3->4 -->
+  <path d="M 560 210 L 600 210" class="connector"/>
+  
+  <!-- 4. Approval Gateway (PM) -->
+  <polygon points="640,175 680,210 640,245 600,210" class="gateway"/>
+  <text x="640" y="215" class="step-label">?</text>
+  
+  <!-- Connector 4->5 (Approved) -->
+  <path d="M 680 210 L 700 210 L 700 340 L 720 340" class="connector"/>
+  <text x="695" y="260" class="step-label-small" style="fill:#22c55e">✓</text>
+  
+  <!-- Connector 4->End (Rejected) -->
+  <path d="M 640 175 L 640 70 L 1300 70" class="connector" style="stroke:#ef4444;stroke-dasharray:5,3"/>
+  <text x="660" y="115" class="step-label-small" style="fill:#ef4444">✗ Reject</text>
+  
+  <!-- 5. Create Workspace (Automation) -->
+  <rect x="720" y="310" width="100" height="60" class="step-rect-auto"/>
+  <text x="770" y="335" class="step-label">Create</text>
+  <text x="770" y="349" class="step-label-small">Workspace</text>
+  <circle cx="810" cy="315" r="8" fill="#f59e0b"/>
+  <text x="810" y="318" fill="#fff" style="font-size:7px;text-anchor:middle;">⚡</text>
+  
+  <!-- Connector 5->6 -->
+  <path d="M 820 340 L 840 340 L 840 210 L 860 210" class="connector"/>
+  
+  <!-- 6. Assign Developer (PM) -->
+  <rect x="860" y="180" width="100" height="60" class="step-rect"/>
+  <text x="910" y="205" class="step-label">Assign</text>
+  <text x="910" y="219" class="step-label-small">Developer</text>
+  
+  <!-- Connector 6->7 -->
+  <path d="M 960 210 L 980 210 L 980 340 L 1000 340" class="connector"/>
+  
+  <!-- 7. AI Clarification (Automation) -->
+  <rect x="1000" y="310" width="100" height="60" class="step-rect-auto"/>
+  <text x="1050" y="335" class="step-label">AI Clarify</text>
+  <text x="1050" y="349" class="step-label-small">Requirements</text>
+  <circle cx="1090" cy="315" r="8" fill="#f59e0b"/>
+  <text x="1090" y="318" fill="#fff" style="font-size:7px;text-anchor:middle;">⚡</text>
+  
+  <!-- Connector 7->8 -->
+  <path d="M 1100 340 L 1120 340 L 1120 490 L 200 490" class="connector"/>
+  
+  <!-- 8. Development (Dev) -->
+  <rect x="200" y="460" width="120" height="60" class="step-rect"/>
+  <text x="260" y="485" class="step-label">Development</text>
+  <text x="260" y="499" class="step-label-small">& QA Sprint</text>
+  
+  <!-- Connector 8->9 -->
+  <path d="M 320 490 L 360 490 L 360 340 L 400 340" class="connector"/>
+  
+  <!-- 9. Weekly Email (Automation) - reposition -->
+  <rect x="400" y="460" width="100" height="60" class="step-rect-auto"/>
+  <text x="450" y="485" class="step-label">Weekly</text>
+  <text x="450" y="499" class="step-label-small">Status Email</text>
+  <circle cx="490" cy="465" r="8" fill="#f59e0b"/>
+  <text x="490" y="468" fill="#fff" style="font-size:7px;text-anchor:middle;">⚡</text>
+  
+  <!-- Connector 9->10 -->
+  <path d="M 500 490 L 530 490 L 530 630 L 560 630" class="connector"/>
+  
+  <!-- 10. Final Review (PM) - in BizDev lane for space -->
+  <rect x="560" y="600" width="100" height="60" class="step-rect"/>
+  <text x="610" y="625" class="step-label">Final Review</text>
+  <text x="610" y="639" class="step-label-small">& Deploy</text>
+  
+  <!-- Connector 10->11 -->
+  <path d="M 660 630 L 680 630 L 680 490 L 700 490" class="connector"/>
+  
+  <!-- 11. Delivery Package (Automation) - reposition -->
+  <rect x="700" y="460" width="100" height="60" class="step-rect-auto"/>
+  <text x="750" y="485" class="step-label">Send</text>
+  <text x="750" y="499" class="step-label-small">Delivery Pkg</text>
+  <circle cx="790" cy="465" r="8" fill="#f59e0b"/>
+  <text x="790" y="468" fill="#fff" style="font-size:7px;text-anchor:middle;">⚡</text>
+  
+  <!-- Connector 11->12 -->
+  <path d="M 800 490 L 830 490 L 830 70 L 860 70" class="connector"/>
+  
+  <!-- 12. Client Feedback (Client) -->
+  <rect x="860" y="40" width="100" height="60" class="step-rect"/>
+  <text x="910" y="65" class="step-label">Client</text>
+  <text x="910" y="79" class="step-label-small">Feedback</text>
+  
+  <!-- Connector 12->End -->
+  <path d="M 960 70 L 1280 70" class="connector"/>
+  
+  <!-- 13. End Event -->
+  <circle cx="1320" cy="70" r="25" class="end-event"/>
+  <text x="1320" y="75" class="step-label">■</text>
+  <text x="1320" y="110" class="step-label-small">Ticket Closed</text>
+  
+  <!-- Legend -->
+  <rect x="1200" y="580" width="180" height="110" rx="8" fill="#fff" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="1290" y="600" style="font-size:11px;font-weight:bold;text-anchor:middle;font-family:system-ui">Legend</text>
+  
+  <circle cx="1220" cy="620" r="8" class="start-event"/>
+  <text x="1235" y="624" style="font-size:10px;font-family:system-ui">Start Event</text>
+  
+  <circle cx="1220" cy="640" r="8" class="end-event" style="stroke-width:2"/>
+  <text x="1235" y="644" style="font-size:10px;font-family:system-ui">End Event</text>
+  
+  <rect x="1212" y="655" width="16" height="12" class="step-rect"/>
+  <text x="1235" y="664" style="font-size:10px;font-family:system-ui">Manual Task</text>
+  
+  <rect x="1212" y="675" width="16" height="12" class="step-rect-auto"/>
+  <text x="1235" y="684" style="font-size:10px;font-family:system-ui">Automated</text>
+</svg>
