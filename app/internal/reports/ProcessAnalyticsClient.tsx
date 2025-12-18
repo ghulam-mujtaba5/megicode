@@ -41,7 +41,7 @@ interface ProcessAnalyticsData {
     active: number;
     blocked: number;
     delivered: number;
-    onHold: number;
+    inQa: number;
   };
   taskStats: {
     total: number;
@@ -56,7 +56,7 @@ interface ProcessAnalyticsData {
     total: number;
     running: number;
     completed: number;
-    paused: number;
+    canceled: number;
     avgDuration: number;
   };
   milestoneStats: {
@@ -110,10 +110,10 @@ export default function ProcessAnalyticsClient({ data }: ProcessAnalyticsClientP
       suggestion: 'Prioritize overdue tasks and milestones',
     },
     { 
-      stage: 'Paused Instances', 
-      count: data.instanceStats.paused, 
-      severity: data.instanceStats.paused > 2 ? 'critical' : data.instanceStats.paused > 0 ? 'warning' : 'ok',
-      suggestion: 'Review paused workflows and resume or close',
+      stage: 'Canceled Instances', 
+      count: data.instanceStats.canceled, 
+      severity: data.instanceStats.canceled > 2 ? 'critical' : data.instanceStats.canceled > 0 ? 'warning' : 'ok',
+      suggestion: 'Review canceled workflows and address root causes',
     },
     { 
       stage: 'Pending Leads', 

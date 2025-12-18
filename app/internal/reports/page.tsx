@@ -167,7 +167,6 @@ export default async function ReportsPage() {
   const blockedProjects = await db.select({ count: sql<number>`count(*)` }).from(projects).where(eq(projects.status, 'blocked')).get();
   const inQaProjects = await db.select({ count: sql<number>`count(*)` }).from(projects).where(eq(projects.status, 'in_qa')).get();
   const deliveredProjects = await db.select({ count: sql<number>`count(*)` }).from(projects).where(eq(projects.status, 'closed')).get();
-
   // Project Statistics
   const allProjects = await db.select().from(projects).all();
   const projectStatsProfit = await Promise.all(allProjects.map(async (p) => {
