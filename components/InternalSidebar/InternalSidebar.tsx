@@ -38,6 +38,24 @@ type NavItem = {
   children?: NavItem[];
 };
 
+function isAllowedForRole(item: NavItem, role: string): boolean {
+  if (!item.roles || item.roles.length === 0) return true;
+  return item.roles.includes(role);
+}
+
+function filterNavTree(items: NavItem[], role: string): NavItem[] {
+  return items
+    .map((item) => {
+      if (!isAllowedForRole(item, role)) return null;
+      if (!item.children) return item;
+      const filteredChildren = item.children.filter((child) => isAllowedForRole(child, role));
+      // Hide parent sections that end up with no visible children
+      if (filteredChildren.length === 0) return null;
+      return { ...item, children: filteredChildren };
+    })
+    .filter(Boolean) as NavItem[];
+}
+
 export default function InternalSidebar({
   email,
   role,
@@ -97,10 +115,7 @@ export default function InternalSidebar({
     },
   ];
 
-  const filteredItems = navItems.filter((item) => {
-    if (!item.roles) return true;
-    return item.roles.includes(role);
-  });
+  const filteredItems = filterNavTree(navItems, role);
 
   return (
     <>

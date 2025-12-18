@@ -209,15 +209,6 @@ export default function InternalNavClient({
           )}
           {isAdmin && (
             <Link 
-              href="/internal/admin/users" 
-              className={`${styles.link} ${isActive('/internal/admin/users') ? styles.linkActive : ''}`}
-            >
-              <Icons.users />
-              Users
-            </Link>
-          )}
-          {isAdmin && (
-            <Link 
               href="/internal/admin/process" 
               className={`${styles.link} ${isActive('/internal/admin/process') ? styles.linkActive : ''}`}
             >

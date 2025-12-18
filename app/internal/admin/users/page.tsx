@@ -1,24 +1,44 @@
-import { redirect } from 'next/navigation';
 import { desc } from 'drizzle-orm';
-import { requireInternalSession } from '@/lib/internal/auth';
+
+import s from '../../styles.module.css';
+import { requireRole } from '@/lib/internal/auth';
 import { getDb } from '@/lib/db';
 import { users } from '@/lib/db/schema';
-import UsersTable from './UsersTable';
+import UsersAdminClient from './users-client';
 
 export default async function AdminUsersPage() {
-  const session = await requireInternalSession();
-  
-  if (session.user.role !== 'admin') {
-    redirect('/internal');
-  }
-
+  await requireRole(['admin']);
   const db = getDb();
-  const allUsers = await db.select().from(users).orderBy(desc(users.createdAt)).all();
+
+  const list = await db
+    .select({
+      id: users.id,
+      email: users.email,
+      name: users.name,
+      image: users.image,
+      role: users.role,
+      status: users.status,
+      createdAt: users.createdAt,
+      updatedAt: users.updatedAt,
+    })
+    .from(users)
+    .orderBy(desc(users.createdAt))
+    .all();
 
   return (
-    <div style={{ padding: '2rem' }}>
-      <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1.5rem' }}>User Management</h1>
-      <UsersTable users={allUsers as any} />
-    </div>
+    <main className={s.page}>
+      <div className={s.container}>
+        <div className={s.pageHeader}>
+          <div>
+            <h1 className={s.pageTitle}>Users</h1>
+            <p className={s.pageSubtitle}>
+              Manage roles and approvals (status) for internal access
+            </p>
+          </div>
+        </div>
+
+        <UsersAdminClient initialUsers={list} />
+      </div>
+    </main>
   );
 }

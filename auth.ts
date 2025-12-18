@@ -27,6 +27,20 @@ function isEmailAllowed(email: string): boolean {
   return allowedDomains.includes(domain);
 }
 
+function isDevLoginAllowed(email: string): boolean {
+  // In production, dev-login must be backed by an allowlist to avoid accidental exposure.
+  const isProd = process.env.NODE_ENV === 'production';
+  const allowedEmails = parseCsv(process.env.INTERNAL_ALLOWED_EMAILS);
+  const allowedDomains = parseCsv(process.env.INTERNAL_ALLOWED_DOMAINS);
+
+  if (isProd && allowedEmails.length === 0 && allowedDomains.length === 0) return false;
+  return isEmailAllowed(email);
+}
+
+function isValidRole(role: unknown): role is UserRole {
+  return role === 'admin' || role === 'pm' || role === 'dev' || role === 'qa' || role === 'viewer';
+}
+
 function getRoleForEmail(email: string): UserRole {
   const adminEmails = parseCsv(process.env.INTERNAL_ADMIN_EMAILS);
   if (adminEmails.includes(email.toLowerCase())) return 'admin';
@@ -57,22 +71,29 @@ export const authOptions: NextAuthOptions = {
             name: 'Dev Login',
             credentials: {
               email: { label: 'Email', type: 'email' },
+              role: { label: 'Role', type: 'text' },
             },
             async authorize(credentials) {
               if (!credentials?.email) return null;
               const email = credentials.email.toLowerCase();
-              if (!isEmailAllowed(email)) return null;
-              return { id: email, email, name: email.split('@')[0] };
+              if (!isDevLoginAllowed(email)) return null;
+              const roleHint = isValidRole(credentials.role) ? credentials.role : undefined;
+              return { id: email, email, name: email.split('@')[0], role: roleHint } as any;
             },
           }),
         ]
       : []),
   ],
   callbacks: {
-    async signIn({ user }) {
+    async signIn({ user, account }) {
       const email = user.email?.toLowerCase();
       if (!email) return false;
-      if (!isEmailAllowed(email)) return false;
+
+      if (account?.provider === 'dev-login') {
+        if (!isDevLoginAllowed(email)) return false;
+      } else {
+        if (!isEmailAllowed(email)) return false;
+      }
 
       try {
         const db = getDb();
@@ -85,18 +106,30 @@ export const authOptions: NextAuthOptions = {
           .limit(1);
 
         // Determine role to set:
-        // - If user already exists: preserve their stored role (don't overwrite)
-        // - If user is listed in INTERNAL_ADMIN_EMAILS: promote to admin
+        // - If dev-login provides a role hint: prefer it (with admin safeguards)
+        // - Else if user already exists: preserve their stored role (don't overwrite)
+        // - Else if user is listed in INTERNAL_ADMIN_EMAILS: promote to admin
         // - Otherwise for new users use configured fallback mapping
         let roleToSet: UserRole;
         const adminEmails = parseCsv(process.env.INTERNAL_ADMIN_EMAILS);
-        if (existingUser.length > 0) {
+
+        const roleHint = (user as any)?.role;
+        if (account?.provider === 'dev-login' && isValidRole(roleHint)) {
+          if (roleHint === 'admin') {
+            roleToSet = adminEmails.includes(email) ? 'admin' : 'viewer';
+          } else {
+            roleToSet = roleHint;
+          }
+        } else if (existingUser.length > 0) {
           roleToSet = (existingUser[0].role as UserRole) ?? ((process.env.INTERNAL_DEFAULT_ROLE ?? 'viewer') as UserRole);
           // Allow explicit admin promotion via env
           if (adminEmails.includes(email)) roleToSet = 'admin';
         } else {
           roleToSet = getRoleForEmail(email);
         }
+
+        // Dev-login should not get stuck behind onboarding/approval.
+        const statusToSet = account?.provider === 'dev-login' ? 'active' : (existingUser[0]?.status ?? 'pending');
 
         if (existingUser.length > 0) {
           // Update existing user but do NOT overwrite role unless admin promoted
@@ -106,6 +139,7 @@ export const authOptions: NextAuthOptions = {
               name: user.name ?? null,
               image: user.image ?? null,
               role: roleToSet,
+              status: statusToSet as any,
               updatedAt: now,
             })
             .where(eq(users.email, email));
@@ -117,6 +151,7 @@ export const authOptions: NextAuthOptions = {
             name: user.name ?? null,
             image: user.image ?? null,
             role: roleToSet,
+            status: (account?.provider === 'dev-login' ? 'active' : 'pending') as any,
             createdAt: now,
             updatedAt: now,
           });

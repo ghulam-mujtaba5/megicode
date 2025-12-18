@@ -120,32 +120,39 @@ function InternalLoginContent() {
                 </p>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginBottom: '12px' }}>
                   <button 
-                    onClick={() => signIn('dev-login', { email: 'admin@megicode.com', callbackUrl: '/internal' })}
+                    onClick={() => signIn('dev-login', { email: 'admin@megicode.com', role: 'admin', callbackUrl: '/internal' })}
                     className={styles.devButton}
                     disabled={loading}
                   >
                     👤 Admin
                   </button>
                   <button 
-                    onClick={() => signIn('dev-login', { email: 'pm@megicode.com', callbackUrl: '/internal' })}
+                    onClick={() => signIn('dev-login', { email: 'pm@megicode.com', role: 'pm', callbackUrl: '/internal' })}
                     className={styles.devButton}
                     disabled={loading}
                   >
                     📋 PM
                   </button>
                   <button 
-                    onClick={() => signIn('dev-login', { email: 'dev@megicode.com', callbackUrl: '/internal' })}
+                    onClick={() => signIn('dev-login', { email: 'dev@megicode.com', role: 'dev', callbackUrl: '/internal' })}
                     className={styles.devButton}
                     disabled={loading}
                   >
                     💻 Dev
                   </button>
                   <button 
-                    onClick={() => signIn('dev-login', { email: 'qa@megicode.com', callbackUrl: '/internal' })}
+                    onClick={() => signIn('dev-login', { email: 'qa@megicode.com', role: 'qa', callbackUrl: '/internal' })}
                     className={styles.devButton}
                     disabled={loading}
                   >
                     🧪 QA
+                  </button>
+                  <button 
+                    onClick={() => signIn('dev-login', { email: 'viewer@megicode.com', role: 'viewer', callbackUrl: '/internal' })}
+                    className={styles.devButton}
+                    disabled={loading}
+                  >
+                    👁️ Viewer
                   </button>
                 </div>
                 <div style={{ borderTop: '1px solid var(--int-border)', paddingTop: '12px' }}>

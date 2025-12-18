@@ -35,14 +35,7 @@ It is designed for:
 - Move work forward through a clear process (handoffs from PM → Dev → QA → Delivery)
 - Reduce manual/duplicate work using integrations + templates
 
-### Monitoring & control goals (must-have)
-- Each process instance is trackable with a clear status + timeline
-- Status colors are consistent (UI badges + filters later if needed)
-- Full execution/event logs (who did what, when, and why)
-- “Work forwarding” is explicit (task assignment + ownership transitions)
-- Role-based access control (users only see what they should)
-- Process structures are changeable (versioned process definitions)
-
+https://www.megicode.com/internal/admin/users
 ### Practical business outcomes
 - Faster onboarding (less setup work per project)
 - Consistent project tracking and client updates
