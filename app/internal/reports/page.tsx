@@ -6,6 +6,7 @@ import { requireRole } from '@/lib/internal/auth';
 import { getDb } from '@/lib/db';
 import { leads, projects, tasks, invoices, payments, timeEntries, users, events } from '@/lib/db/schema';
 import { formatDateTime } from '@/lib/internal/ui';
+import ReportsClient from './ReportsClient';
 
 // Icons
 const Icons = {
@@ -317,40 +318,7 @@ export default async function ReportsPage() {
         </section>
 
         {/* Project Profitability */}
-        <section className={styles.card} style={{ gridColumn: '1 / -1' }}>
-          <div className={styles.cardHeader}>
-            <h2 className={styles.cardTitle}>
-              <span style={{ marginRight: '8px', color: 'var(--int-secondary)' }}>{Icons.barChart}</span>
-              Project Profitability
-            </h2>
-          </div>
-          <div className={styles.cardBody} style={{ padding: 0 }}>
-            <div className={styles.tableWrapper} style={{ border: 'none', borderRadius: 0 }}>
-              <table className={styles.table}>
-                <thead>
-                  <tr>
-                    <th>Project</th>
-                    <th style={{ textAlign: 'right' }}>Hours</th>
-                    <th style={{ textAlign: 'right' }}>Invoiced</th>
-                    <th style={{ textAlign: 'right' }}>Est. Profit</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {projectStats.map((p) => (
-                    <tr key={p.id}>
-                      <td><Link href={`/internal/projects/${p.id}`} className={styles.link}>{p.name}</Link></td>
-                      <td style={{ textAlign: 'right' }}>{p.totalHours.toFixed(1)}</td>
-                      <td style={{ textAlign: 'right' }}>${(p.totalInvoiced / 100).toLocaleString()}</td>
-                      <td style={{ textAlign: 'right', color: p.profit >= 0 ? 'var(--int-success)' : 'var(--int-error)' }}>
-                        ${(p.profit / 100).toLocaleString()}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </section>
+        <ReportsClient projects={projectStats} />
 
         {/* Top Contributors */}
         <section className={styles.card}>

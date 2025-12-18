@@ -5,6 +5,7 @@ import { requireInternalSession } from '@/lib/internal/auth';
 import { getDb } from '@/lib/db';
 import { users, tasks, projects } from '@/lib/db/schema';
 import s from '../styles.module.css';
+import ResourcesClient from './ResourcesClient';
 
 // Icons
 const Icons = {
@@ -328,187 +329,33 @@ export default async function ResourceAllocationPage() {
         </div>
       </section>
 
-      {/* Resource Grid */}
-      <section className={s.card}>
-        <div className={s.cardHeader}>
-          <h2 className={s.cardTitle}>Team Workload</h2>
-        </div>
-        <div className={s.cardBody} style={{ padding: 0 }}>
-          <table className={s.table}>
-            <thead>
-              <tr>
-                <th>Team Member</th>
-                <th>Role</th>
-                <th>Active Tasks</th>
-                <th>Projects</th>
-                <th>Workload</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {sortedUsers.map((user) => {
-                const tStats = taskStatsMap.get(user.id);
-                const pStats = projectStatsMap.get(user.id);
-                const workload = getWorkloadLevel(tStats?.total ?? 0);
-                const roleBadge = getRoleBadge(user.role);
-
-                return (
-                  <tr key={user.id}>
-                    <td>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                        <div style={{ 
-                          width: '32px', 
-                          height: '32px', 
-                          borderRadius: '50%', 
-                          background: 'var(--int-bg-alt, #f3f4f6)', 
-                          display: 'flex', 
-                          alignItems: 'center', 
-                          justifyContent: 'center',
-                          fontWeight: 600,
-                          fontSize: '0.75rem',
-                        }}>
-                          {(user.name || user.email).substring(0, 2).toUpperCase()}
-                        </div>
-                        <div>
-                          <div style={{ fontWeight: 500 }}>{user.name || user.email.split('@')[0]}</div>
-                          <div className={s.textMuted} style={{ fontSize: '0.75rem' }}>{user.email}</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <span
-                        className={s.badge}
-                        style={{ background: roleBadge.bg, color: roleBadge.color }}
-                      >
-                        {user.role || 'viewer'}
-                      </span>
-                    </td>
-                    <td>
-                      <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                        <strong>{tStats?.total ?? 0}</strong>
-                        <span className={s.textMuted} style={{ fontSize: '0.75rem' }}>
-                          ({tStats?.inProgress ?? 0} in progress, {tStats?.blocked ?? 0} blocked)
-                        </span>
-                      </div>
-                    </td>
-                    <td>
-                      <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                        <span style={{ width: '14px', height: '14px', opacity: 0.6 }}>{Icons.folder}</span>
-                        <span>{pStats?.active ?? 0}</span>
-                      </div>
-                    </td>
-                    <td>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <div
-                          style={{
-                            width: '80px',
-                            height: '8px',
-                            background: '#e5e7eb',
-                            borderRadius: '4px',
-                            overflow: 'hidden',
-                          }}
-                        >
-                          <div
-                            style={{
-                              width: `${Math.min(((tStats?.total ?? 0) / WORKLOAD_THRESHOLD_CRITICAL) * 100, 100)}%`,
-                              height: '100%',
-                              background: workload.color,
-                              transition: 'width 0.3s ease',
-                            }}
-                          />
-                        </div>
-                        <span
-                          className={s.badge}
-                          style={{ background: workload.color, color: '#fff', fontSize: '0.625rem' }}
-                        >
-                          {workload.label}
-                        </span>
-                      </div>
-                    </td>
-                    <td>
-                      <Link href={`/internal/tasks?assignee=${user.id}`} className={s.btnSmall}>
-                        View Tasks
-                      </Link>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      {/* Detailed Task Lists per User */}
+      {/* Team Workload - Collapsible */}
       <section style={{ marginTop: '1.5rem' }}>
-        <h2 style={{ marginBottom: '1rem' }}>Active Tasks by Team Member</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '1rem' }}>
-          {sortedUsers.map((user) => {
+        <h2 style={{ marginBottom: '1rem' }}>Team Workload & Tasks</h2>
+        <ResourcesClient
+          users={sortedUsers.map((user) => {
+            const tStats = taskStatsMap.get(user.id);
+            const pStats = projectStatsMap.get(user.id);
+            const workload = getWorkloadLevel(tStats?.total ?? 0);
+            const roleBadge = getRoleBadge(user.role);
             const userTasks = tasksByUser.get(user.id) || [];
-            if (userTasks.length === 0) return null;
-            const workload = getWorkloadLevel(userTasks.length);
 
-            return (
-              <div key={user.id} className={s.card}>
-                <div className={s.cardHeader} style={{ borderLeftWidth: '4px', borderLeftStyle: 'solid', borderLeftColor: workload.color }}>
-                  <h3 className={s.cardTitle} style={{ fontSize: '0.9rem' }}>
-                    {user.name || user.email.split('@')[0]}
-                    <span className={s.badge} style={{ marginLeft: '0.5rem', background: workload.color, color: '#fff', fontSize: '0.625rem' }}>
-                      {userTasks.length}
-                    </span>
-                  </h3>
-                </div>
-                <div className={s.cardBody} style={{ padding: 0 }}>
-                  <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
-                    {userTasks.slice(0, 5).map((task) => (
-                      <li
-                        key={task.id}
-                        style={{
-                          padding: '0.5rem 1rem',
-                          borderBottom: '1px solid var(--border-color, #e5e7eb)',
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                          alignItems: 'center',
-                          gap: '0.5rem',
-                        }}
-                      >
-                        <Link
-                          href={`/internal/tasks/${task.id}`}
-                          style={{
-                            flex: 1,
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis',
-                            whiteSpace: 'nowrap',
-                            color: 'inherit',
-                            textDecoration: 'none',
-                            fontSize: '0.875rem',
-                          }}
-                        >
-                          {task.title}
-                        </Link>
-                        <span
-                          className={s.badge}
-                          style={{
-                            background: getStatusColor(task.status),
-                            color: '#fff',
-                            fontSize: '0.625rem',
-                            flexShrink: 0,
-                          }}
-                        >
-                          {task.status.replace(/_/g, ' ')}
-                        </span>
-                      </li>
-                    ))}
-                    {userTasks.length > 5 && (
-                      <li style={{ padding: '0.5rem 1rem', color: 'var(--text-muted)', fontSize: '0.75rem' }}>
-                        +{userTasks.length - 5} more task{userTasks.length - 5 !== 1 ? 's' : ''}
-                      </li>
-                    )}
-                  </ul>
-                </div>
-              </div>
-            );
+            return {
+              ...user,
+              taskStats: {
+                total: tStats?.total ?? 0,
+                inProgress: tStats?.inProgress ?? 0,
+                blocked: tStats?.blocked ?? 0,
+              },
+              tasks: userTasks,
+              projectCount: pStats?.active ?? 0,
+              workloadLevel: workload.label,
+              workloadColor: workload.color,
+              roleBg: roleBadge.bg,
+              roleColor: roleBadge.color,
+            };
           })}
-        </div>
+        />
       </section>
     </main>
   );

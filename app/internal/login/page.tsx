@@ -99,59 +99,71 @@ function InternalLoginContent() {
         <div className={styles.footer}>
           <p className={styles.copyright}>&copy; {new Date().getFullYear()} Megicode. All rights reserved.</p>
           
+          {/* Quick Login - Always visible, controlled by NEXT_PUBLIC_DEV_LOGIN_ENABLED */}
           {process.env.NEXT_PUBLIC_DEV_LOGIN_ENABLED === 'true' && (
           <div className={styles.devTools}>
             <button 
               onClick={() => setIsDevLoginVisible(!isDevLoginVisible)}
               className={styles.devToggle}
+              style={{ 
+                background: isDevLoginVisible ? 'var(--int-primary)' : 'transparent',
+                color: isDevLoginVisible ? 'white' : 'var(--int-text-muted)',
+              }}
             >
-              Quick Login
+              {isDevLoginVisible ? '✕ Close Quick Login' : '⚡ Quick Login'}
             </button>
             
             {isDevLoginVisible && (
               <div className={styles.devLoginContainer}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginBottom: '16px' }}>
+                <p style={{ fontSize: '0.75rem', color: 'var(--int-text-muted)', marginBottom: '0.75rem', textAlign: 'center' }}>
+                  Quick access for authorized team members
+                </p>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginBottom: '12px' }}>
                   <button 
                     onClick={() => signIn('dev-login', { email: 'admin@megicode.com', callbackUrl: '/internal' })}
                     className={styles.devButton}
-                    style={{ backgroundColor: '#333' }}
+                    disabled={loading}
                   >
-                    Admin
+                    👤 Admin
                   </button>
                   <button 
                     onClick={() => signIn('dev-login', { email: 'pm@megicode.com', callbackUrl: '/internal' })}
                     className={styles.devButton}
-                    style={{ backgroundColor: '#333' }}
+                    disabled={loading}
                   >
-                    PM
+                    📋 PM
                   </button>
                   <button 
                     onClick={() => signIn('dev-login', { email: 'dev@megicode.com', callbackUrl: '/internal' })}
                     className={styles.devButton}
-                    style={{ backgroundColor: '#333' }}
+                    disabled={loading}
                   >
-                    Dev
+                    💻 Dev
                   </button>
                   <button 
                     onClick={() => signIn('dev-login', { email: 'qa@megicode.com', callbackUrl: '/internal' })}
                     className={styles.devButton}
-                    style={{ backgroundColor: '#333' }}
+                    disabled={loading}
                   >
-                    QA
+                    🧪 QA
                   </button>
                 </div>
-                <form onSubmit={handleDevLogin} className={styles.devForm}>
-                  <input
-                    type="email"
-                    placeholder="your@email.com"
-                    value={devEmail}
-                    onChange={(e) => setDevEmail(e.target.value)}
-                    className={styles.devInput}
-                  />
-                  <button type="submit" className={styles.devButton} disabled={loading}>
-                    {loading ? '...' : 'Login'}
-                  </button>
-                </form>
+                <div style={{ borderTop: '1px solid var(--int-border)', paddingTop: '12px' }}>
+                  <p style={{ fontSize: '0.75rem', color: 'var(--int-text-muted)', marginBottom: '8px' }}>Custom email:</p>
+                  <form onSubmit={handleDevLogin} className={styles.devForm}>
+                    <input
+                      type="email"
+                      placeholder="your@email.com"
+                      value={devEmail}
+                      onChange={(e) => setDevEmail(e.target.value)}
+                      className={styles.devInput}
+                      disabled={loading}
+                    />
+                    <button type="submit" className={styles.devButton} disabled={loading || !devEmail}>
+                      {loading ? '⏳' : '→'}
+                    </button>
+                  </form>
+                </div>
               </div>
             )}
           </div>
