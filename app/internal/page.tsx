@@ -3,7 +3,7 @@ import { desc, eq, sql, and, lte, gte, isNotNull } from 'drizzle-orm';
 
 import { requireActiveUser } from '@/lib/internal/auth';
 import { getDb } from '@/lib/db';
-import { leads, projects, tasks, processInstances, invoices, clients, milestones } from '@/lib/db/schema';
+import { leads, projects, tasks, processInstances, invoices, clients, milestones, users, timeEntries } from '@/lib/db/schema';
 import s from './styles.module.css';
 import DashboardClient, { type DashboardData, type UpcomingDeadline } from './DashboardClient';
 
@@ -35,13 +35,14 @@ export default async function InternalDashboardPage() {
   const todayStr = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
   // KPIs
-  const [leadStats, projectStats, taskStats, instanceStats, clientStats, invoiceStats] = await Promise.all([
+  const [leadStats, projectStats, taskStats, instanceStats, clientStats, invoiceStats, userStats, timeStats] = await Promise.all([
     db.select({
       total: sql<number>`count(*)`,
       new: sql<number>`sum(case when status = 'new' then 1 else 0 end)`,
       inReview: sql<number>`sum(case when status = 'in_review' then 1 else 0 end)`,
       approved: sql<number>`sum(case when status = 'approved' then 1 else 0 end)`,
       converted: sql<number>`sum(case when status = 'converted' then 1 else 0 end)`,
+      totalBudget: sql<number>`sum(estimated_budget)`,
     }).from(leads).get(),
     db.select({
       total: sql<number>`count(*)`,
@@ -57,6 +58,7 @@ export default async function InternalDashboardPage() {
       done: sql<number>`sum(case when status = 'done' then 1 else 0 end)`,
       overdue: sql<number>`sum(case when status not in ('done', 'canceled') and due_at < ${now.getTime()} then 1 else 0 end)`,
       dueSoon: sql<number>`sum(case when status not in ('done', 'canceled') and due_at >= ${now.getTime()} and due_at <= ${in48h.getTime()} then 1 else 0 end)`,
+      completedLast30Days: sql<number>`sum(case when status = 'done' and completed_at >= ${now.getTime() - 30 * 24 * 60 * 60 * 1000} then 1 else 0 end)`,
     }).from(tasks).where(userId ? eq(tasks.assignedToUserId, userId) : sql`1=1`).get(),
     db.select({
       running: sql<number>`sum(case when status = 'running' then 1 else 0 end)`,
@@ -68,7 +70,14 @@ export default async function InternalDashboardPage() {
       pending: sql<number>`sum(case when status in ('draft', 'sent') then 1 else 0 end)`,
       paid: sql<number>`sum(case when status = 'paid' then 1 else 0 end)`,
       overdue: sql<number>`sum(case when status = 'overdue' then 1 else 0 end)`,
+      totalBilled: sql<number>`sum(total_amount)`,
     }).from(invoices).get(),
+    db.select({
+      totalCapacity: sql<number>`sum(capacity)`,
+    }).from(users).where(eq(users.status, 'active')).get(),
+    db.select({
+      totalDuration: sql<number>`sum(duration_minutes)`,
+    }).from(timeEntries).where(gte(timeEntries.date, new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000).getTime())).get(),
   ]);
 
   // My tasks
@@ -184,6 +193,19 @@ export default async function InternalDashboardPage() {
   const taskDone = (taskStats?.done ?? 0);
   const completionRate = taskTotal > 0 ? Math.round((taskDone / taskTotal) * 100) : 0;
 
+  // Calculate Utilization Rate
+  const totalCapacityHours = (userStats?.totalCapacity ?? 0); // Weekly capacity
+  const totalWorkedHours = (timeStats?.totalDuration ?? 0) / 60; // Last 7 days
+  const utilizationRate = totalCapacityHours > 0 ? Math.round((totalWorkedHours / totalCapacityHours) * 100) : 0;
+
+  // Calculate Project Velocity (Tasks completed in last 30 days)
+  const projectVelocity = taskStats?.completedLast30Days ?? 0;
+
+  // Calculate Budget Burn
+  const totalBudget = (leadStats?.totalBudget ?? 0);
+  const totalBilled = (invoiceStats?.totalBilled ?? 0);
+  const budgetBurn = totalBudget > 0 ? Math.round((totalBilled / totalBudget) * 100) : 0;
+
   // Generate trend data (simulated for demo - would use actual historical data)
   const generateTrend = (base: number): number[] => {
     return Array.from({ length: 7 }, (_, i) => 
@@ -206,6 +228,9 @@ export default async function InternalDashboardPage() {
       overdueTasks: taskStats?.overdue ?? 0,
       blockedTasks: taskStats?.blocked ?? 0,
       overdueInvoices: invoiceStats?.overdue ?? 0,
+      utilizationRate,
+      projectVelocity,
+      budgetBurn,
     },
     trends: {
       projectsTrend: generateTrend(projectStats?.active ?? 5),

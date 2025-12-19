@@ -38,6 +38,10 @@ import {
   MEGICODE_BUSINESS_PROCESS_KEY,
   getDefaultBusinessProcessDefinition,
 } from './businessProcess';
+
+// Import new workflow engine modules
+import { triggerStepEnteredAutomation, triggerStepCompletedAutomation, triggerGatewayAutomation } from './automationRules';
+import { calculateStepSLAStatus, triggerSLAEscalation } from './slaMonitoring';
 // =====================
 // PROCESS DEFINITION MANAGEMENT
 // =====================
@@ -257,6 +261,7 @@ export async function executeStep(
     outputData?: Record<string, any>;
     gatewayDecision?: string;
     notes?: string;
+    skipAutomation?: boolean;
   }
 ): Promise<{ success: boolean; nextStepKey?: string; error?: string }> {
   const db = getDb();
@@ -289,6 +294,23 @@ export async function executeStep(
     }
   }
 
+  // Trigger step completion automation rules (if not skipped)
+  if (!params.skipAutomation) {
+    try {
+      await triggerStepCompletedAutomation(
+        instanceId,
+        stepKey,
+        step.title,
+        step.lane,
+        instance.processData,
+        params.completedByUserId
+      );
+    } catch (error) {
+      console.error('Step completed automation failed:', error);
+      // Don't fail the step for automation errors
+    }
+  }
+
   // Log step completion
   await logProcessEvent({
     processInstanceId: instanceId,
@@ -300,6 +322,22 @@ export async function executeStep(
 
   // Determine next step
   const processData = { ...instance.processData, ...params.outputData };
+  
+  // If this is a gateway, trigger gateway automation
+  if (step.type === 'gateway' && params.gatewayDecision && !params.skipAutomation) {
+    try {
+      await triggerGatewayAutomation(
+        instanceId,
+        stepKey,
+        params.gatewayDecision,
+        processData,
+        params.completedByUserId
+      );
+    } catch (error) {
+      console.error('Gateway automation failed:', error);
+    }
+  }
+  
   const nextSteps = getNextSteps(definition, stepKey, processData);
   
   if (nextSteps.length === 0) {
@@ -339,10 +377,29 @@ export async function executeStep(
     data: { previousStep: stepKey },
   });
 
+  // Trigger step entered automation and auto-assignment
+  // Note: Full automation/assignment requires step instance IDs and lane info
+  // which would be available in a production implementation with full step tracking
+  if (!params.skipAutomation && nextStep) {
+    try {
+      // Trigger step entered automation rules
+      await triggerStepEnteredAutomation(
+        instanceId,
+        nextStepKey,
+        nextStep.title,
+        nextStep.lane,
+        processData
+      );
+    } catch (error) {
+      console.error('Step automation failed:', error);
+    }
+  }
+
   // If next step is automated, execute it immediately
   if (nextStep && nextStep.automationAction && !nextStep.isManual) {
     return executeStep(instanceId, nextStepKey, {
       outputData: processData,
+      skipAutomation: params.skipAutomation,
     });
   }
 

@@ -1,0 +1,28 @@
+.title {
+  color: #1a1a1a;
+}
+
+.subtitle {
+  color: #4a4a4a;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+}
+
+.cardTitle {
+  color: #111827;
+}
+
+.cardDescription {
+  color: #4b5563;
+}
+
+.cardLink {
+  color: #2563eb;
+}
+
+.cardLink:hover {
+  color: #1d4ed8;
+}

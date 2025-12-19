@@ -46,8 +46,11 @@ export default async function LeadsPage() {
     const phone = String(formData.get('phone') ?? '').trim() || null;
     const service = String(formData.get('service') ?? '').trim() || null;
     const message = String(formData.get('message') ?? '').trim() || null;
+    const estimatedBudget = Number(formData.get('estimatedBudget'));
+    const priority = String(formData.get('priority') ?? 'medium');
+    const targetDateStr = String(formData.get('targetDate') ?? '');
 
-    if (!name) return;
+    if (!name || !estimatedBudget || !targetDateStr || !priority) return;
 
     const now = new Date();
     const leadId = crypto.randomUUID();
@@ -61,6 +64,9 @@ export default async function LeadsPage() {
       phone,
       service,
       message,
+      estimatedBudget, // cents
+      priority: priority as any,
+      targetDate: new Date(targetDateStr),
       source: 'internal_manual',
       status: 'new',
       createdAt: now,
@@ -248,6 +254,35 @@ export default async function LeadsPage() {
                   Service Interest
                 </label>
                 <input className={s.input} name="service" placeholder="Web Development" />
+              </div>
+
+              <div className={s.formGroup}>
+                <label className={s.label}>
+                  <span className={s.labelIcon}>{Icons.clipboard}</span>
+                  Estimated Budget (Cents) *
+                </label>
+                <input className={s.input} name="estimatedBudget" type="number" placeholder="500000" required />
+              </div>
+
+              <div className={s.formGroup}>
+                <label className={s.label}>
+                  <span className={s.labelIcon}>{Icons.clipboard}</span>
+                  Priority *
+                </label>
+                <select className={s.select} name="priority" required defaultValue="medium">
+                  <option value="low">Low</option>
+                  <option value="medium">Medium</option>
+                  <option value="high">High</option>
+                  <option value="critical">Critical</option>
+                </select>
+              </div>
+
+              <div className={s.formGroup}>
+                <label className={s.label}>
+                  <span className={s.labelIcon}>{Icons.clipboard}</span>
+                  Target Date *
+                </label>
+                <input className={s.input} name="targetDate" type="date" required />
               </div>
               
               <div className={s.formGroup}>

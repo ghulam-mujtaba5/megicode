@@ -6,6 +6,7 @@ import { getDb } from '@/lib/db';
 import { users, tasks, projects } from '@/lib/db/schema';
 import s from '../styles.module.css';
 import ResourcesClient from './ResourcesClient';
+import ResourceSuggester from './ResourceSuggester';
 
 // Icons
 const Icons = {
@@ -25,15 +26,21 @@ export default async function ResourceAllocationPage() {
   const db = getDb();
 
   // Fetch all users
-  const usersList = await db
+  const usersListRaw = await db
     .select({
       id: users.id,
       email: users.email,
       name: users.name,
       role: users.role,
+      skills: users.skills,
     })
     .from(users)
     .all();
+
+  const usersList = usersListRaw.map(u => ({
+    ...u,
+    skills: typeof u.skills === 'string' ? JSON.parse(u.skills) : (Array.isArray(u.skills) ? u.skills : [])
+  }));
 
   // Fetch active tasks grouped by user
   const taskStats = await db
@@ -59,6 +66,12 @@ export default async function ResourceAllocationPage() {
   taskStats.forEach((stat) => {
     if (stat.userId) taskStatsMap.set(stat.userId, stat);
   });
+
+  // Prepare data for suggester
+  const usersForSuggester = usersList.map(u => ({
+    ...u,
+    workload: taskStatsMap.get(u.id)?.total || 0
+  }));
 
   // Fetch projects with owners
   const projectStats = await db
@@ -357,6 +370,8 @@ export default async function ResourceAllocationPage() {
           })}
         />
       </section>
+
+      <ResourceSuggester users={usersForSuggester} />
     </main>
   );
 }

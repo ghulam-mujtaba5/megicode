@@ -17,7 +17,7 @@ Scope: ONLY internal portal + business process automation under `/internal`. Exc
 
 | Module | Route | Status |
 |--------|-------|--------|
-| Dashboard | `/internal` | ✅ KPIs, queues, alerts |
+| Dashboard | `/internal` | ✅ KPIs (Utilization, Velocity, Burn), queues, alerts |
 | Leads | `/internal/leads` | ✅ List, create |
 | Lead Detail | `/internal/leads/[id]` | ✅ Notes, tags, status |
 | Clients | `/internal/clients` | ✅ List, create |

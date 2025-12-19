@@ -30,6 +30,8 @@ export const users = sqliteTable(
     role: text('role', { enum: ['admin', 'pm', 'dev', 'qa', 'viewer'] })
       .notNull()
       .default('viewer'),
+    skills: text('skills').$type<string[]>(), // JSON array of skills
+    capacity: integer('capacity').default(40), // hours per week
     status: text('status', { enum: ['active', 'pending', 'disabled'] })
       .notNull()
       .default('pending'),
@@ -67,6 +69,8 @@ export const leads = sqliteTable(
     // Estimation fields
     estimatedHours: integer('estimated_hours'),
     estimatedBudget: integer('estimated_budget'), // cents
+    priority: text('priority', { enum: ['low', 'medium', 'high', 'critical'] }).default('medium'),
+    targetDate: integer('target_date', { mode: 'timestamp_ms' }),
     complexity: text('complexity', { enum: ['simple', 'moderate', 'complex', 'very_complex'] }),
     // Competitor/Context fields
     competitorNotes: text('competitor_notes'),
@@ -402,6 +406,7 @@ export const milestones = sqliteTable(
       .references(() => projects.id),
     title: text('title').notNull(),
     description: text('description'),
+    status: text('status', { enum: ['pending', 'completed', 'canceled'] }).notNull().default('pending'),
     dueAt: integer('due_at', { mode: 'timestamp_ms' }),
     completedAt: integer('completed_at', { mode: 'timestamp_ms' }),
     sortOrder: integer('sort_order').notNull().default(0),

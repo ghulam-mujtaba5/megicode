@@ -14,8 +14,11 @@ function requireEnv(name: string): string {
 export function getTursoClient(): Client {
   if (_client) return _client;
 
+  const url = requireEnv('TURSO_DATABASE_URL');
+  console.log('Connecting to database at:', url);
+  
   _client = createClient({
-    url: requireEnv('TURSO_DATABASE_URL'),
+    url,
     authToken: process.env.TURSO_AUTH_TOKEN,
   });
 

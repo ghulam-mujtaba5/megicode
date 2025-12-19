@@ -5,6 +5,9 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import s from './styles.module.css';
 
+// Import process widgets
+import { SLAStatusWidget, WorkloadWidget, BottleneckAlertWidget, AutomationWidget } from '@/components/ProcessWidgets/ProcessWidgets';
+
 // Types for dashboard data - Uses string IDs to match database schema
 export interface TaskSummary {
   id: string;
@@ -63,6 +66,9 @@ export interface DashboardData {
     overdueTasks: number;
     blockedTasks: number;
     overdueInvoices: number;
+    utilizationRate: number;
+    projectVelocity: number;
+    budgetBurn: number;
   };
   trends: {
     projectsTrend: number[];
@@ -102,6 +108,9 @@ const Icons = {
   refresh: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>,
   user: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>,
   dollar: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>,
+  chart: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>,
+  speed: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M16.2 7.8l-2 6.3-6.4 2.1 2-6.3z"/></svg>,
+  flame: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.1.2-2.2.6-3.3.3.9.6 1.635 1.9 2.8z"/></svg>,
 };
 
 // Sparkline component for trend visualization
@@ -435,6 +444,63 @@ export default function DashboardClient({ data, userName, userRole }: DashboardC
                 </div>
                 <Link href="/internal/clients" className={s.kpiCardLink}>
                   View Clients {Icons.arrowRight}
+                </Link>
+              </motion.div>
+
+              {/* New KPIs */}
+              <motion.div 
+                className={s.kpiCardEnhanced}
+                whileHover={{ scale: 1.02 }}
+                transition={{ type: 'spring', stiffness: 300 }}
+              >
+                <div className={s.kpiCardHeader}>
+                  <div className={`${s.kpiIconEnhanced} ${s.kpiIconTasks}`}>{Icons.speed}</div>
+                  <ProgressRing value={data.kpis.utilizationRate} size={48} strokeWidth={5} color="var(--int-primary)" />
+                </div>
+                <div className={s.kpiValueLarge}>{data.kpis.utilizationRate}%</div>
+                <div className={s.kpiLabelEnhanced}>Utilization Rate</div>
+                <div className={s.kpiMeta}>
+                  <span>Resource efficiency</span>
+                </div>
+                <Link href="/internal/resources" className={s.kpiCardLink}>
+                  View Resources {Icons.arrowRight}
+                </Link>
+              </motion.div>
+
+              <motion.div 
+                className={s.kpiCardEnhanced}
+                whileHover={{ scale: 1.02 }}
+                transition={{ type: 'spring', stiffness: 300 }}
+              >
+                <div className={s.kpiCardHeader}>
+                  <div className={`${s.kpiIconEnhanced} ${s.kpiIconProjects}`}>{Icons.chart}</div>
+                </div>
+                <div className={s.kpiValueLarge}>{data.kpis.projectVelocity}</div>
+                <div className={s.kpiLabelEnhanced}>Project Velocity</div>
+                <div className={s.kpiMeta}>
+                  <span>Tasks/30 days</span>
+                </div>
+                <Link href="/internal/projects" className={s.kpiCardLink}>
+                  View Details {Icons.arrowRight}
+                </Link>
+              </motion.div>
+
+              <motion.div 
+                className={s.kpiCardEnhanced}
+                whileHover={{ scale: 1.02 }}
+                transition={{ type: 'spring', stiffness: 300 }}
+              >
+                <div className={s.kpiCardHeader}>
+                  <div className={`${s.kpiIconEnhanced} ${s.kpiIconWorkflow}`}>{Icons.flame}</div>
+                  <ProgressRing value={data.kpis.budgetBurn} size={48} strokeWidth={5} color="var(--int-error)" />
+                </div>
+                <div className={s.kpiValueLarge}>{data.kpis.budgetBurn}%</div>
+                <div className={s.kpiLabelEnhanced}>Budget Burn</div>
+                <div className={s.kpiMeta}>
+                  <span>Total budget used</span>
+                </div>
+                <Link href="/internal/finance" className={s.kpiCardLink}>
+                  View Finance {Icons.arrowRight}
                 </Link>
               </motion.div>
             </div>
@@ -827,6 +893,22 @@ export default function DashboardClient({ data, userName, userRole }: DashboardC
                       </motion.div>
                     ))}
                   </div>
+                </div>
+              </div>
+            )}
+
+            {/* Process Workflow Widgets (for PM/Admin) */}
+            {['admin', 'pm'].includes(userRole) && (
+              <div style={{ marginTop: 'var(--int-space-6)' }}>
+                <h3 style={{ marginBottom: 'var(--int-space-4)' }}>
+                  <span className={s.dashboardCardIcon}>{Icons.workflow}</span>
+                  Process Management
+                </h3>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem' }}>
+                  <SLAStatusWidget />
+                  <WorkloadWidget />
+                  <BottleneckAlertWidget />
+                  <AutomationWidget />
                 </div>
               </div>
             )}

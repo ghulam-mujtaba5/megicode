@@ -1,22 +1,34 @@
 # Megicode Internal Portal - Comprehensive User Guide
 
 ## 📘 Introduction
-Welcome to the Megicode Internal Portal (MIP), a Silicon Valley-standard Operating System for our software delivery lifecycle. This platform orchestrates the entire journey from client inception to final product delivery, integrating best-in-class tools like ClickUp, GitHub, and Vercel into a unified "Single Pane of Glass."
+Welcome to the Megicode Internal Portal (MIP), a Silicon Valley-standard Operating System designed specifically for **Software Development Delivery & Project Management**. This platform orchestrates the entire journey from client inception to final product delivery, integrating best-in-class tools like ClickUp, GitHub, and Vercel into a unified "Single Pane of Glass."
 
 **Target Audience:** Evaluators, Professors, Project Managers, Developers, and Clients.
 
 ---
 
 ## 🧭 Ethical & Professional Standards
-At Megicode, we adhere to strict international standards for software delivery:
-1.  **Data Privacy (GDPR/CCPA):** Client data is strictly segregated. Access is role-based (RBAC).
-2.  **Transparency:** Clients have real-time visibility into project status, reducing "black box" anxiety.
-3.  **Accountability:** Every action (deployment, approval, transaction) is logged in an immutable audit trail.
-4.  **Inclusive Design:** The portal is designed to be accessible (WCAG 2.1) and culturally neutral.
+At Megicode, we adhere to strict international standards for software delivery, ensuring trust and compliance:
+
+1.  **Data Privacy & Security (GDPR/CCPA):** 
+    *   Client data is strictly segregated using tenant IDs.
+    *   Access is governed by strict Role-Based Access Control (RBAC).
+    *   All sensitive data (API keys, PII) is encrypted at rest and in transit.
+2.  **Transparency & Trust:** 
+    *   Clients have real-time visibility into project status, reducing "black box" anxiety.
+    *   No hidden costs; all time-logs and resource usage are transparently available.
+3.  **Accountability & Auditability:** 
+    *   Every action (deployment, approval, transaction, task movement) is logged in an immutable audit trail.
+    *   "Who did what, when" is always answerable.
+4.  **Inclusive Design:** 
+    *   The portal is designed to be accessible (WCAG 2.1) and culturally neutral.
+    *   Dark/Light mode support for user preference and eye strain reduction.
 
 ---
 
-## 👥 Role-Based Workflows
+## 🔄 Software Delivery Workflow (The "Megicode Way")
+
+Our workflow is designed for speed, quality, and transparency.
 
 ### 1. 👑 Administrator / Agency Owner
 **Goal:** High-level oversight and system health.
@@ -59,6 +71,32 @@ At Megicode, we adhere to strict international standards for software delivery:
 
 ---
 
+## 📊 Process Visualization
+
+```mermaid
+graph TD
+    A[Lead Intake] -->|Convert| B[Project Initialization]
+    B -->|Auto-Provision| C{Setup}
+    C -->|API| D[ClickUp List]
+    C -->|API| E[GitHub Repo]
+    C -->|API| F[Slack Channel]
+    
+    subgraph Development Cycle
+    G[Task Assigned] --> H[In Progress]
+    H -->|Git Push| I[Code Review]
+    I -->|Merge| J[QA / Staging]
+    J -->|Approve| K[Production Deploy]
+    end
+    
+    D <-->|Sync| G
+    E <-->|Webhooks| H
+    
+    K --> L[Client Notification]
+    L --> M[Invoice Generation]
+```
+
+---
+
 ## 🚀 Feature Showcase (For Evaluators)
 
 ### ⚡ Instant Monitoring
@@ -81,11 +119,13 @@ We don't just "manage" tasks; we automate their flow:
 ---
 
 ## 📖 How to Explore This Portal
-1.  **Visit `/internal/showcase`:** A guided tour of the architecture.
-2.  **Login as Admin:** Use the Quick Login (⚡) to see the full feature set.
-3.  **Check `/internal/process`:** See the live BPMN visualization of our workflow.
-4.  **View `/internal/instances`:** See running project instances and their real-time state.
+1.  **Visit `/internal/explore`:** A guided tour of the architecture and capabilities.
+2.  **Visit `/internal/showcase`:** See live demos of the monitoring and workflow engines.
+3.  **Login as Admin:** Use the Quick Login (⚡) to see the full feature set.
+4.  **Check `/internal/process`:** See the live BPMN visualization of our workflow.
+5.  **View `/internal/instances`:** See running project instances and their real-time state.
 
 ---
 
 *Built with Next.js 15, React 19, and TypeScript. Deployed on Vercel.*
+

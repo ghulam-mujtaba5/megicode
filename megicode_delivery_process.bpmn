@@ -1,698 +1,297 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_Megicode_Complete" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Megicode Internal Portal" exporterVersion="2.0">
-  <bpmn:collaboration id="Collaboration_Megicode">
-    <bpmn:participant id="Participant_Portal" name="Megicode Complete Software Delivery &amp; Management Workflow" processRef="Process_Complete" />
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_Megicode_Advanced" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Megicode Portal" exporterVersion="3.0">
+  <bpmn:collaboration id="Collaboration_Advanced">
+    <bpmn:participant id="Participant_System" name="Megicode Intelligent Delivery OS" processRef="Process_Advanced" />
   </bpmn:collaboration>
   
-  <bpmn:process id="Process_Complete" isExecutable="false">
+  <bpmn:process id="Process_Advanced" isExecutable="true">
     <bpmn:documentation>
-      COMPLETE IMPLEMENTED WORKFLOW - Megicode Internal Portal
-      
-      Tech Stack: Next.js 15, React 19, TypeScript, Drizzle ORM, Turso DB
-      Auth: Auth.js (Google OAuth), Role-Based Access (Admin, PM, Dev, QA, Viewer)
-      
-      Scope: Client Request/SRS → Project Execution → Delivery → Maintenance
-      Excludes: Marketing, Lead Generation, Client Acquisition
-      
-      Implemented Pages Referenced:
-      - /internal/leads, /internal/leads/[id], /internal/leads/board
-      - /internal/projects, /internal/projects/[id], /internal/projects/[id]/gantt
-      - /internal/tasks, /internal/tasks/[id], /internal/tasks/all
-      - /internal/instances, /internal/instances/[id]
-      - /internal/proposals, /internal/invoices, /internal/bugs
-      - /internal/clients, /internal/team, /internal/resources
-      - /internal/reports, /internal/search
+      SILICON VALLEY STANDARD WORKFLOW
+      Integrations: ClickUp, GitHub, Vercel, Resend, Stripe
+      Automation Level: High
     </bpmn:documentation>
     
-    <bpmn:laneSet id="LaneSet_Complete">
-      <bpmn:lane id="Lane_Client" name="Client">
-        <bpmn:flowNodeRef>StartEvent_ClientRequest</bpmn:flowNodeRef>
+    <bpmn:laneSet id="LaneSet_Advanced">
+      <bpmn:lane id="Lane_Client" name="Client / Stakeholder">
+        <bpmn:flowNodeRef>StartEvent_Request</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>UserTask_ClientApproval</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>UserTask_PayInvoice</bpmn:flowNodeRef>
       </bpmn:lane>
       
-      <bpmn:lane id="Lane_System" name="Automated System">
-        <bpmn:flowNodeRef>ServiceTask_CaptureRequest</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>ServiceTask_CreateProjectInstance</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>ServiceTask_LinkClient</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>ServiceTask_TrackMetrics</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>ServiceTask_SendDeliveryEmail</bpmn:flowNodeRef>
+      <bpmn:lane id="Lane_Automation" name="Automation Engine (Portal/API)">
+        <bpmn:flowNodeRef>ServiceTask_AIAnalysis</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ServiceTask_ProvisionResources</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ServiceTask_SyncClickUp</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ServiceTask_CICDTrigger</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ServiceTask_NotifyStakeholders</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ServiceTask_GenerateInvoice</bpmn:flowNodeRef>
       </bpmn:lane>
       
       <bpmn:lane id="Lane_PM" name="Project Manager">
-        <bpmn:flowNodeRef>UserTask_ReviewRequirements</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>UserTask_CreateProposal</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Gateway_ApprovalDecision</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>UserTask_SelectTechStack</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>UserTask_DefineMilestones</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>UserTask_PlanGantt</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>UserTask_CheckResources</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>UserTask_CreateTasks</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>UserTask_MonitorProgress</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>UserTask_FinalDelivery</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>EndEvent_Rejected</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>EndEvent_Delivered</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>UserTask_ApproveScope</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>UserTask_MonitorDelivery</bpmn:flowNodeRef>
       </bpmn:lane>
       
-      <bpmn:lane id="Lane_DevQA" name="Development &amp; QA Team">
-        <bpmn:flowNodeRef>SubProcess_DevQACycle</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>UserTask_BugFix</bpmn:flowNodeRef>
+      <bpmn:lane id="Lane_Dev" name="Engineering Team">
+        <bpmn:flowNodeRef>UserTask_Development</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>UserTask_CodeReview</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
 
-    <!-- PHASE 1: REQUEST INTAKE & ANALYSIS -->
-    
-    <bpmn:startEvent id="StartEvent_ClientRequest" name="Client Submits Request/SRS">
-      <bpmn:documentation>
-        Entry Point: Website /contact form or Email or Manual Entry
-        Data: Name, Email, Company, Requirements, Attachments
-      </bpmn:documentation>
-      <bpmn:outgoing>Flow_01</bpmn:outgoing>
+    <!-- INCEPTION -->
+    <bpmn:startEvent id="StartEvent_Request" name="New Project Request">
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
     </bpmn:startEvent>
 
-    <bpmn:serviceTask id="ServiceTask_CaptureRequest" name="Auto-Capture Lead Record">
-      <bpmn:documentation>
-        System Action: INSERT into 'leads' table
-        Status: 'new'
-        Route: /internal/leads
-        Fields: name, email, company, phone, service, message, source
-      </bpmn:documentation>
-      <bpmn:incoming>Flow_01</bpmn:incoming>
-      <bpmn:outgoing>Flow_02</bpmn:outgoing>
+    <bpmn:serviceTask id="ServiceTask_AIAnalysis" name="AI Requirement Analysis &amp; Tagging">
+      <bpmn:documentation>Auto-categorize project type, estimate complexity</bpmn:documentation>
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
     </bpmn:serviceTask>
 
-    <bpmn:userTask id="UserTask_ReviewRequirements" name="Review &amp; Analyze Requirements">
-      <bpmn:documentation>
-        Role: PM
-        Route: /internal/leads/[id]
-        Actions:
-        - Upload SRS document
-        - Define Functional Requirements
-        - Define Non-functional Requirements
-        - Estimate Budget (hours × rate)
-        - Estimate Timeline
-        - NDA Management (status, expiry, document link)
-        - Competitor Analysis notes
-        Status: new → in_review
-      </bpmn:documentation>
-      <bpmn:incoming>Flow_02</bpmn:incoming>
-      <bpmn:outgoing>Flow_03</bpmn:outgoing>
+    <bpmn:userTask id="UserTask_ApproveScope" name="Review &amp; Approve Scope">
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+      <bpmn:outgoing>Flow_3</bpmn:outgoing>
     </bpmn:userTask>
 
-    <bpmn:userTask id="UserTask_CreateProposal" name="Generate Proposal (Optional)">
+    <!-- PROVISIONING -->
+    <bpmn:serviceTask id="ServiceTask_ProvisionResources" name="Auto-Provision Resources">
       <bpmn:documentation>
-        Role: PM
-        Route: /internal/proposals
-        Actions:
-        - Create formal proposal document
-        - Define scope, timeline, budget, terms
-        - Send to client for approval
-        Status: draft → sent → under_review
+        1. Create GitHub Repo
+        2. Create ClickUp List
+        3. Setup Vercel Project
+        4. Create Discord Channel
       </bpmn:documentation>
-      <bpmn:incoming>Flow_03</bpmn:incoming>
-      <bpmn:outgoing>Flow_04</bpmn:outgoing>
+      <bpmn:incoming>Flow_3</bpmn:incoming>
+      <bpmn:outgoing>Flow_4</bpmn:outgoing>
+    </bpmn:serviceTask>
+
+    <!-- EXECUTION LOOP -->
+    <bpmn:serviceTask id="ServiceTask_SyncClickUp" name="Sync Tasks to ClickUp">
+      <bpmn:incoming>Flow_4</bpmn:incoming>
+      <bpmn:incoming>Flow_LoopBack</bpmn:incoming>
+      <bpmn:outgoing>Flow_5</bpmn:outgoing>
+    </bpmn:serviceTask>
+
+    <bpmn:userTask id="UserTask_Development" name="Development (Git Push)">
+      <bpmn:incoming>Flow_5</bpmn:incoming>
+      <bpmn:outgoing>Flow_6</bpmn:outgoing>
     </bpmn:userTask>
 
-    <bpmn:exclusiveGateway id="Gateway_ApprovalDecision" name="Approved for Project?">
-      <bpmn:documentation>
-        Decision Criteria:
-        - Budget alignment
-        - Technical feasibility
-        - Resource availability
-        - Strategic fit
-      </bpmn:documentation>
-      <bpmn:incoming>Flow_04</bpmn:incoming>
-      <bpmn:outgoing>Flow_Approve</bpmn:outgoing>
-      <bpmn:outgoing>Flow_Reject</bpmn:outgoing>
+    <bpmn:serviceTask id="ServiceTask_CICDTrigger" name="CI/CD Pipeline (Vercel)">
+      <bpmn:documentation>Auto-build, Test, Deploy Preview</bpmn:documentation>
+      <bpmn:incoming>Flow_6</bpmn:incoming>
+      <bpmn:outgoing>Flow_7</bpmn:outgoing>
+    </bpmn:serviceTask>
+
+    <bpmn:userTask id="UserTask_CodeReview" name="Code Review &amp; QA">
+      <bpmn:incoming>Flow_7</bpmn:incoming>
+      <bpmn:outgoing>Flow_8</bpmn:outgoing>
+    </bpmn:userTask>
+
+    <bpmn:exclusiveGateway id="Gateway_QA" name="Passed QA?">
+      <bpmn:incoming>Flow_8</bpmn:incoming>
+      <bpmn:outgoing>Flow_Passed</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Failed</bpmn:outgoing>
     </bpmn:exclusiveGateway>
 
-    <bpmn:endEvent id="EndEvent_Rejected" name="Request Closed/Rejected">
-      <bpmn:documentation>
-        Lead Status: rejected or closed
-        No further action
-      </bpmn:documentation>
-      <bpmn:incoming>Flow_Reject</bpmn:incoming>
-    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_Failed" sourceRef="Gateway_QA" targetRef="ServiceTask_SyncClickUp">
+      <bpmn:documentation>Reopen Task</bpmn:documentation>
+    </bpmn:sequenceFlow>
 
-    <!-- PHASE 2: PROJECT INITIALIZATION -->
-
-    <bpmn:serviceTask id="ServiceTask_CreateProjectInstance" name="Initialize Project &amp; Process Instance">
-      <bpmn:documentation>
-        System Actions:
-        1. Convert Lead → Project (INSERT into 'projects')
-        2. Create Process Instance (INSERT into 'process_instances')
-        3. Copy data from Lead
-        Trigger: "Convert to Project" button
-        Tables: projects, process_instances
-        Status: project.status = 'new', instance.status = 'running'
-      </bpmn:documentation>
-      <bpmn:incoming>Flow_Approve</bpmn:incoming>
-      <bpmn:outgoing>Flow_05</bpmn:outgoing>
-    </bpmn:serviceTask>
-
-    <bpmn:serviceTask id="ServiceTask_LinkClient" name="Link/Create Client Record">
-      <bpmn:documentation>
-        System: Find or CREATE client record
-        Table: clients
-        Link: project.clientId → clients.id
-      </bpmn:documentation>
-      <bpmn:incoming>Flow_05</bpmn:incoming>
-      <bpmn:outgoing>Flow_06</bpmn:outgoing>
-    </bpmn:serviceTask>
-
-    <bpmn:userTask id="UserTask_SelectTechStack" name="Select Tech Stack">
-      <bpmn:documentation>
-        Role: PM
-        Route: /internal/projects/[id]
-        Action: Choose technologies (languages, frameworks, databases)
-        Field: project.techStack (array)
-      </bpmn:documentation>
-      <bpmn:incoming>Flow_06</bpmn:incoming>
-      <bpmn:outgoing>Flow_07</bpmn:outgoing>
+    <!-- DELIVERY -->
+    <bpmn:userTask id="UserTask_MonitorDelivery" name="Final Release Approval">
+      <bpmn:incoming>Flow_Passed</bpmn:incoming>
+      <bpmn:outgoing>Flow_9</bpmn:outgoing>
     </bpmn:userTask>
 
-    <bpmn:userTask id="UserTask_DefineMilestones" name="Define Project Milestones">
-      <bpmn:documentation>
-        Role: PM
-        Route: /internal/projects/[id]
-        Actions:
-        - Create milestone records
-        - Set target dates
-        - Define deliverables per milestone
-        Table: milestones
-      </bpmn:documentation>
-      <bpmn:incoming>Flow_07</bpmn:incoming>
-      <bpmn:outgoing>Flow_08</bpmn:outgoing>
-    </bpmn:userTask>
-
-    <bpmn:userTask id="UserTask_PlanGantt" name="Plan Timeline (Gantt)">
-      <bpmn:documentation>
-        Role: PM
-        Route: /internal/projects/[id]/gantt
-        Action: Visualize project timeline, dependencies
-        Updates: project.startDate, project.dueDate
-      </bpmn:documentation>
-      <bpmn:incoming>Flow_08</bpmn:incoming>
-      <bpmn:outgoing>Flow_09</bpmn:outgoing>
-    </bpmn:userTask>
-
-    <bpmn:userTask id="UserTask_CheckResources" name="Check Team Capacity">
-      <bpmn:documentation>
-        Role: PM
-        Route: /internal/resources
-        Action: Review team workload, utilization
-        Decision: Confirm sufficient capacity for project
-      </bpmn:documentation>
-      <bpmn:incoming>Flow_09</bpmn:incoming>
+    <bpmn:serviceTask id="ServiceTask_NotifyStakeholders" name="Notify Client (Resend)">
+      <bpmn:incoming>Flow_9</bpmn:incoming>
       <bpmn:outgoing>Flow_10</bpmn:outgoing>
-    </bpmn:userTask>
+    </bpmn:serviceTask>
 
-    <bpmn:userTask id="UserTask_CreateTasks" name="Break Down into Tasks &amp; Assign">
-      <bpmn:documentation>
-        Role: PM
-        Route: /internal/projects/[id]
-        Actions:
-        - Create tasks manually OR apply Template
-        - Assign to Dev/QA users
-        - Set priorities (low, medium, high, urgent)
-        - Set due dates
-        - Set estimated hours
-        Table: tasks
-        Status: tasks created with status='todo'
-      </bpmn:documentation>
+    <bpmn:userTask id="UserTask_ClientApproval" name="Client UAT Sign-off">
       <bpmn:incoming>Flow_10</bpmn:incoming>
       <bpmn:outgoing>Flow_11</bpmn:outgoing>
     </bpmn:userTask>
 
-    <!-- PHASE 3: EXECUTION (SUBPROCESS) -->
-
-    <bpmn:subProcess id="SubProcess_DevQACycle" name="Development &amp; QA Execution">
-      <bpmn:documentation>
-        Iterative Task Execution Loop
-        Monitoring: /internal/instances, /internal/tasks
-      </bpmn:documentation>
+    <bpmn:serviceTask id="ServiceTask_GenerateInvoice" name="Generate Invoice (Stripe)">
       <bpmn:incoming>Flow_11</bpmn:incoming>
       <bpmn:outgoing>Flow_12</bpmn:outgoing>
-      <bpmn:multiInstanceLoopCharacteristics isSequential="false" />
+    </bpmn:serviceTask>
 
-      <bpmn:startEvent id="SubStart" name="Task Ready" />
-
-      <bpmn:userTask id="SubTask_PickTask" name="Developer Picks Task">
-        <bpmn:documentation>
-          Role: Dev
-          Route: /internal/tasks (My Tasks)
-          Action: Select task from 'todo' list
-        </bpmn:documentation>
-        <bpmn:incoming>SubFlow_01</bpmn:incoming>
-        <bpmn:outgoing>SubFlow_02</bpmn:outgoing>
-      </bpmn:userTask>
-
-      <bpmn:userTask id="SubTask_Implement" name="Implement Feature/Fix">
-        <bpmn:documentation>
-          Role: Dev
-          Route: /internal/tasks/[id]
-          Status: todo → in_progress
-          Action: Code, test locally
-        </bpmn:documentation>
-        <bpmn:incoming>SubFlow_02</bpmn:incoming>
-        <bpmn:incoming>SubFlow_Rework</bpmn:incoming>
-        <bpmn:outgoing>SubFlow_03</bpmn:outgoing>
-      </bpmn:userTask>
-
-      <bpmn:userTask id="SubTask_MarkDone" name="Mark Complete &amp; Request Review">
-        <bpmn:documentation>
-          Role: Dev
-          Status: in_progress → done
-          Action: Submit for QA review
-        </bpmn:documentation>
-        <bpmn:incoming>SubFlow_03</bpmn:incoming>
-        <bpmn:outgoing>SubFlow_04</bpmn:outgoing>
-      </bpmn:userTask>
-
-      <bpmn:userTask id="SubTask_QAReview" name="QA Review &amp; Testing">
-        <bpmn:documentation>
-          Role: QA / Senior Dev
-          Route: /internal/tasks/[id]
-          Actions:
-          - Test functionality
-          - Verify requirements
-          - Log bugs if found (/internal/bugs)
-        </bpmn:documentation>
-        <bpmn:incoming>SubFlow_04</bpmn:incoming>
-        <bpmn:outgoing>SubFlow_05</bpmn:outgoing>
-      </bpmn:userTask>
-
-      <bpmn:exclusiveGateway id="SubGateway_QA" name="QA Passed?">
-        <bpmn:incoming>SubFlow_05</bpmn:incoming>
-        <bpmn:outgoing>SubFlow_Pass</bpmn:outgoing>
-        <bpmn:outgoing>SubFlow_Fail</bpmn:outgoing>
-      </bpmn:exclusiveGateway>
-
-      <bpmn:endEvent id="SubEnd" name="Task Verified &amp; Complete">
-        <bpmn:documentation>
-          Final Task Status: verified/done
-        </bpmn:documentation>
-        <bpmn:incoming>SubFlow_Pass</bpmn:incoming>
-      </bpmn:endEvent>
-
-      <bpmn:sequenceFlow id="SubFlow_01" sourceRef="SubStart" targetRef="SubTask_PickTask" />
-      <bpmn:sequenceFlow id="SubFlow_02" sourceRef="SubTask_PickTask" targetRef="SubTask_Implement" />
-      <bpmn:sequenceFlow id="SubFlow_03" sourceRef="SubTask_Implement" targetRef="SubTask_MarkDone" />
-      <bpmn:sequenceFlow id="SubFlow_04" sourceRef="SubTask_MarkDone" targetRef="SubTask_QAReview" />
-      <bpmn:sequenceFlow id="SubFlow_05" sourceRef="SubTask_QAReview" targetRef="SubGateway_QA" />
-      <bpmn:sequenceFlow id="SubFlow_Pass" sourceRef="SubGateway_QA" targetRef="SubEnd">
-        <bpmn:documentation>All checks passed</bpmn:documentation>
-      </bpmn:sequenceFlow>
-      <bpmn:sequenceFlow id="SubFlow_Fail" sourceRef="SubGateway_QA" targetRef="SubTask_Implement">
-        <bpmn:documentation>Bug found - reassign for rework</bpmn:documentation>
-      </bpmn:sequenceFlow>
-      <bpmn:sequenceFlow id="SubFlow_Rework" sourceRef="SubFlow_Fail" targetRef="SubTask_Implement" />
-    </bpmn:subProcess>
-
-    <!-- PHASE 4: MONITORING & PROGRESS TRACKING -->
-
-    <bpmn:userTask id="UserTask_MonitorProgress" name="Monitor Instance &amp; Track Progress">
-      <bpmn:documentation>
-        Role: PM
-        Routes:
-        - /internal/instances (all instances)
-        - /internal/instances/[id] (specific instance)
-        - /internal/projects/[id] (project dashboard)
-        
-        View:
-        - Current step of process
-        - Task completion %
-        - Overdue tasks (red alerts)
-        - Blocked tasks
-        - Milestone progress
-        
-        Actions:
-        - Update project status (in_progress, in_qa, blocked)
-        - Reassign tasks if needed
-      </bpmn:documentation>
+    <bpmn:userTask id="UserTask_PayInvoice" name="Payment Processing">
       <bpmn:incoming>Flow_12</bpmn:incoming>
-      <bpmn:outgoing>Flow_13</bpmn:outgoing>
+      <bpmn:outgoing>Flow_End</bpmn:outgoing>
     </bpmn:userTask>
 
-    <bpmn:serviceTask id="ServiceTask_TrackMetrics" name="Update Real-Time Metrics">
-      <bpmn:documentation>
-        System: Auto-calculate KPIs
-        Route: /internal (Dashboard)
-        Metrics:
-        - Total/open/overdue tasks
-        - % complete per project
-        - Instance status (running/completed)
-        - Team utilization
-      </bpmn:documentation>
-      <bpmn:incoming>Flow_13</bpmn:incoming>
-      <bpmn:outgoing>Flow_14</bpmn:outgoing>
-    </bpmn:serviceTask>
-
-    <!-- PHASE 5: DELIVERY & HANDOVER -->
-
-    <bpmn:userTask id="UserTask_FinalDelivery" name="Final Review &amp; Deployment">
-      <bpmn:documentation>
-        Role: PM
-        Route: /internal/projects/[id]
-        Actions:
-        - Verify all milestones met
-        - Confirm all tasks 'done'
-        - Deploy to production
-        - Update Project Status: 'delivered'
-        - Update Process Instance: 'completed'
-        - Create Invoice (/internal/invoices)
-      </bpmn:documentation>
-      <bpmn:incoming>Flow_14</bpmn:incoming>
-      <bpmn:outgoing>Flow_15</bpmn:outgoing>
-    </bpmn:userTask>
-
-    <bpmn:serviceTask id="ServiceTask_SendDeliveryEmail" name="Send Delivery Notification">
-      <bpmn:documentation>
-        System: Email via Zoho SMTP
-        Recipients: Client + Team
-        Content: Project summary, delivery package, feedback request
-        (Infrastructure ready, template pending)
-      </bpmn:documentation>
-      <bpmn:incoming>Flow_15</bpmn:incoming>
-      <bpmn:outgoing>Flow_16</bpmn:outgoing>
-    </bpmn:serviceTask>
-
-    <bpmn:endEvent id="EndEvent_Delivered" name="Project Live &amp; Delivered">
-      <bpmn:documentation>
-        Final States:
-        - Project: delivered
-        - Process Instance: completed
-        - Invoice: sent
-        Next: Maintenance, Bug Fixes (optional loop)
-      </bpmn:documentation>
-      <bpmn:incoming>Flow_16</bpmn:incoming>
+    <bpmn:endEvent id="EndEvent_Complete" name="Project Delivered &amp; Paid">
+      <bpmn:incoming>Flow_End</bpmn:incoming>
     </bpmn:endEvent>
 
-    <!-- OPTIONAL: POST-DELIVERY BUG FIXES -->
-
-    <bpmn:userTask id="UserTask_BugFix" name="Post-Delivery Bug Fixes">
-      <bpmn:documentation>
-        Role: Dev
-        Route: /internal/bugs
-        Trigger: Client reports issues
-        Actions:
-        - Log bug (priority: low, medium, high, critical)
-        - Assign to developer
-        - Fix and redeploy
-        Status: reported → in_progress → resolved → closed
-        (Optional feedback loop, not shown in main flow)
-      </bpmn:documentation>
-    </bpmn:userTask>
-
-    <!-- MAIN PROCESS FLOWS -->
-    
-    <bpmn:sequenceFlow id="Flow_01" sourceRef="StartEvent_ClientRequest" targetRef="ServiceTask_CaptureRequest" />
-    <bpmn:sequenceFlow id="Flow_02" sourceRef="ServiceTask_CaptureRequest" targetRef="UserTask_ReviewRequirements" />
-    <bpmn:sequenceFlow id="Flow_03" sourceRef="UserTask_ReviewRequirements" targetRef="UserTask_CreateProposal" />
-    <bpmn:sequenceFlow id="Flow_04" sourceRef="UserTask_CreateProposal" targetRef="Gateway_ApprovalDecision" />
-    <bpmn:sequenceFlow id="Flow_Reject" sourceRef="Gateway_ApprovalDecision" targetRef="EndEvent_Rejected" />
-    <bpmn:sequenceFlow id="Flow_Approve" sourceRef="Gateway_ApprovalDecision" targetRef="ServiceTask_CreateProjectInstance" />
-    <bpmn:sequenceFlow id="Flow_05" sourceRef="ServiceTask_CreateProjectInstance" targetRef="ServiceTask_LinkClient" />
-    <bpmn:sequenceFlow id="Flow_06" sourceRef="ServiceTask_LinkClient" targetRef="UserTask_SelectTechStack" />
-    <bpmn:sequenceFlow id="Flow_07" sourceRef="UserTask_SelectTechStack" targetRef="UserTask_DefineMilestones" />
-    <bpmn:sequenceFlow id="Flow_08" sourceRef="UserTask_DefineMilestones" targetRef="UserTask_PlanGantt" />
-    <bpmn:sequenceFlow id="Flow_09" sourceRef="UserTask_PlanGantt" targetRef="UserTask_CheckResources" />
-    <bpmn:sequenceFlow id="Flow_10" sourceRef="UserTask_CheckResources" targetRef="UserTask_CreateTasks" />
-    <bpmn:sequenceFlow id="Flow_11" sourceRef="UserTask_CreateTasks" targetRef="SubProcess_DevQACycle" />
-    <bpmn:sequenceFlow id="Flow_12" sourceRef="SubProcess_DevQACycle" targetRef="UserTask_MonitorProgress" />
-    <bpmn:sequenceFlow id="Flow_13" sourceRef="UserTask_MonitorProgress" targetRef="ServiceTask_TrackMetrics" />
-    <bpmn:sequenceFlow id="Flow_14" sourceRef="ServiceTask_TrackMetrics" targetRef="UserTask_FinalDelivery" />
-    <bpmn:sequenceFlow id="Flow_15" sourceRef="UserTask_FinalDelivery" targetRef="ServiceTask_SendDeliveryEmail" />
-    <bpmn:sequenceFlow id="Flow_16" sourceRef="ServiceTask_SendDeliveryEmail" targetRef="EndEvent_Delivered" />
+    <!-- CONNECTIONS -->
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="StartEvent_Request" targetRef="ServiceTask_AIAnalysis" />
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="ServiceTask_AIAnalysis" targetRef="UserTask_ApproveScope" />
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="UserTask_ApproveScope" targetRef="ServiceTask_ProvisionResources" />
+    <bpmn:sequenceFlow id="Flow_4" sourceRef="ServiceTask_ProvisionResources" targetRef="ServiceTask_SyncClickUp" />
+    <bpmn:sequenceFlow id="Flow_5" sourceRef="ServiceTask_SyncClickUp" targetRef="UserTask_Development" />
+    <bpmn:sequenceFlow id="Flow_6" sourceRef="UserTask_Development" targetRef="ServiceTask_CICDTrigger" />
+    <bpmn:sequenceFlow id="Flow_7" sourceRef="ServiceTask_CICDTrigger" targetRef="UserTask_CodeReview" />
+    <bpmn:sequenceFlow id="Flow_8" sourceRef="UserTask_CodeReview" targetRef="Gateway_QA" />
+    <bpmn:sequenceFlow id="Flow_Passed" sourceRef="Gateway_QA" targetRef="UserTask_MonitorDelivery" />
+    <bpmn:sequenceFlow id="Flow_9" sourceRef="UserTask_MonitorDelivery" targetRef="ServiceTask_NotifyStakeholders" />
+    <bpmn:sequenceFlow id="Flow_10" sourceRef="ServiceTask_NotifyStakeholders" targetRef="UserTask_ClientApproval" />
+    <bpmn:sequenceFlow id="Flow_11" sourceRef="UserTask_ClientApproval" targetRef="ServiceTask_GenerateInvoice" />
+    <bpmn:sequenceFlow id="Flow_12" sourceRef="ServiceTask_GenerateInvoice" targetRef="UserTask_PayInvoice" />
+    <bpmn:sequenceFlow id="Flow_End" sourceRef="UserTask_PayInvoice" targetRef="EndEvent_Complete" />
+    <bpmn:sequenceFlow id="Flow_LoopBack" sourceRef="Gateway_QA" targetRef="ServiceTask_SyncClickUp" />
 
   </bpmn:process>
-
-  <!-- VISUAL DIAGRAM (BPMN DI) -->
   
-  <bpmndi:BPMNDiagram id="Diagram_Complete">
-    <bpmndi:BPMNPlane id="Plane_Complete" bpmnElement="Collaboration_Megicode">
-      
-      <bpmndi:BPMNShape id="Participant_Portal_di" bpmnElement="Participant_Portal" isHorizontal="true">
-        <dc:Bounds x="120" y="60" width="3200" height="800" />
+  <bpmndi:BPMNDiagram id="Diagram_Advanced">
+    <bpmndi:BPMNPlane id="Plane_Advanced" bpmnElement="Collaboration_Advanced">
+      <bpmndi:BPMNShape id="Participant_System_di" bpmnElement="Participant_System" isHorizontal="true">
+        <dc:Bounds x="100" y="50" width="2000" height="800" />
       </bpmndi:BPMNShape>
-
+      
       <!-- Lanes -->
       <bpmndi:BPMNShape id="Lane_Client_di" bpmnElement="Lane_Client" isHorizontal="true">
-        <dc:Bounds x="150" y="60" width="3170" height="120" />
+        <dc:Bounds x="130" y="50" width="1970" height="150" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Lane_System_di" bpmnElement="Lane_System" isHorizontal="true">
-        <dc:Bounds x="150" y="180" width="3170" height="180" />
+      <bpmndi:BPMNShape id="Lane_Automation_di" bpmnElement="Lane_Automation" isHorizontal="true">
+        <dc:Bounds x="130" y="200" width="1970" height="200" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Lane_PM_di" bpmnElement="Lane_PM" isHorizontal="true">
-        <dc:Bounds x="150" y="360" width="3170" height="280" />
+        <dc:Bounds x="130" y="400" width="1970" height="200" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Lane_DevQA_di" bpmnElement="Lane_DevQA" isHorizontal="true">
-        <dc:Bounds x="150" y="640" width="3170" height="220" />
-      </bpmndi:BPMNShape>
-
-      <!-- Phase 1: Request Intake -->
-      <bpmndi:BPMNShape id="StartEvent_ClientRequest_di" bpmnElement="StartEvent_ClientRequest">
-        <dc:Bounds x="200" y="102" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="176" y="145" width="84" height="27" />
-        </bpmndi:BPMNLabel>
+      <bpmndi:BPMNShape id="Lane_Dev_di" bpmnElement="Lane_Dev" isHorizontal="true">
+        <dc:Bounds x="130" y="600" width="1970" height="200" />
       </bpmndi:BPMNShape>
 
-      <bpmndi:BPMNShape id="ServiceTask_CaptureRequest_di" bpmnElement="ServiceTask_CaptureRequest">
-        <dc:Bounds x="280" y="220" width="100" height="80" />
+      <!-- Nodes -->
+      <bpmndi:BPMNShape id="StartEvent_Request_di" bpmnElement="StartEvent_Request">
+        <dc:Bounds x="180" y="100" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_AIAnalysis_di" bpmnElement="ServiceTask_AIAnalysis">
+        <dc:Bounds x="250" y="260" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_ApproveScope_di" bpmnElement="UserTask_ApproveScope">
+        <dc:Bounds x="400" y="460" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_ProvisionResources_di" bpmnElement="ServiceTask_ProvisionResources">
+        <dc:Bounds x="550" y="260" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_SyncClickUp_di" bpmnElement="ServiceTask_SyncClickUp">
+        <dc:Bounds x="700" y="260" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_Development_di" bpmnElement="UserTask_Development">
+        <dc:Bounds x="700" y="660" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_CICDTrigger_di" bpmnElement="ServiceTask_CICDTrigger">
+        <dc:Bounds x="850" y="260" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_CodeReview_di" bpmnElement="UserTask_CodeReview">
+        <dc:Bounds x="850" y="660" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_QA_di" bpmnElement="Gateway_QA" isMarkerVisible="true">
+        <dc:Bounds x="1000" y="675" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_MonitorDelivery_di" bpmnElement="UserTask_MonitorDelivery">
+        <dc:Bounds x="1100" y="460" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_NotifyStakeholders_di" bpmnElement="ServiceTask_NotifyStakeholders">
+        <dc:Bounds x="1250" y="260" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_ClientApproval_di" bpmnElement="UserTask_ClientApproval">
+        <dc:Bounds x="1250" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_GenerateInvoice_di" bpmnElement="ServiceTask_GenerateInvoice">
+        <dc:Bounds x="1400" y="260" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_PayInvoice_di" bpmnElement="UserTask_PayInvoice">
+        <dc:Bounds x="1400" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_Complete_di" bpmnElement="EndEvent_Complete">
+        <dc:Bounds x="1550" y="102" width="36" height="36" />
       </bpmndi:BPMNShape>
 
-      <bpmndi:BPMNShape id="UserTask_ReviewRequirements_di" bpmnElement="UserTask_ReviewRequirements">
-        <dc:Bounds x="420" y="400" width="100" height="80" />
-      </bpmndi:BPMNShape>
-
-      <bpmndi:BPMNShape id="UserTask_CreateProposal_di" bpmnElement="UserTask_CreateProposal">
-        <dc:Bounds x="560" y="400" width="100" height="80" />
-      </bpmndi:BPMNShape>
-
-      <bpmndi:BPMNShape id="Gateway_ApprovalDecision_di" bpmnElement="Gateway_ApprovalDecision" isMarkerVisible="true">
-        <dc:Bounds x="700" y="415" width="50" height="50" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="698" y="472" width="54" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-
-      <bpmndi:BPMNShape id="EndEvent_Rejected_di" bpmnElement="EndEvent_Rejected">
-        <dc:Bounds x="707" y="372" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="682" y="348" width="86" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-
-      <!-- Phase 2: Project Init -->
-      <bpmndi:BPMNShape id="ServiceTask_CreateProjectInstance_di" bpmnElement="ServiceTask_CreateProjectInstance">
-        <dc:Bounds x="800" y="220" width="100" height="80" />
-      </bpmndi:BPMNShape>
-
-      <bpmndi:BPMNShape id="ServiceTask_LinkClient_di" bpmnElement="ServiceTask_LinkClient">
-        <dc:Bounds x="940" y="220" width="100" height="80" />
-      </bpmndi:BPMNShape>
-
-      <bpmndi:BPMNShape id="UserTask_SelectTechStack_di" bpmnElement="UserTask_SelectTechStack">
-        <dc:Bounds x="1080" y="400" width="100" height="80" />
-      </bpmndi:BPMNShape>
-
-      <bpmndi:BPMNShape id="UserTask_DefineMilestones_di" bpmnElement="UserTask_DefineMilestones">
-        <dc:Bounds x="1220" y="400" width="100" height="80" />
-      </bpmndi:BPMNShape>
-
-      <bpmndi:BPMNShape id="UserTask_PlanGantt_di" bpmnElement="UserTask_PlanGantt">
-        <dc:Bounds x="1360" y="400" width="100" height="80" />
-      </bpmndi:BPMNShape>
-
-      <bpmndi:BPMNShape id="UserTask_CheckResources_di" bpmnElement="UserTask_CheckResources">
-        <dc:Bounds x="1500" y="400" width="100" height="80" />
-      </bpmndi:BPMNShape>
-
-      <bpmndi:BPMNShape id="UserTask_CreateTasks_di" bpmnElement="UserTask_CreateTasks">
-        <dc:Bounds x="1640" y="400" width="100" height="80" />
-      </bpmndi:BPMNShape>
-
-      <!-- Phase 3: Execution Subprocess -->
-      <bpmndi:BPMNShape id="SubProcess_DevQACycle_di" bpmnElement="SubProcess_DevQACycle" isExpanded="true">
-        <dc:Bounds x="1800" y="660" width="700" height="180" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="SubStart_di" bpmnElement="SubStart">
-        <dc:Bounds x="1820" y="732" width="36" height="36" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="SubTask_PickTask_di" bpmnElement="SubTask_PickTask">
-        <dc:Bounds x="1880" y="710" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="SubTask_Implement_di" bpmnElement="SubTask_Implement">
-        <dc:Bounds x="2010" y="710" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="SubTask_MarkDone_di" bpmnElement="SubTask_MarkDone">
-        <dc:Bounds x="2140" y="710" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="SubTask_QAReview_di" bpmnElement="SubTask_QAReview">
-        <dc:Bounds x="2270" y="710" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="SubGateway_QA_di" bpmnElement="SubGateway_QA" isMarkerVisible="true">
-        <dc:Bounds x="2400" y="725" width="50" height="50" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="2392" y="782" width="66" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="SubEnd_di" bpmnElement="SubEnd">
-        <dc:Bounds x="2462" y="732" width="36" height="36" />
-      </bpmndi:BPMNShape>
-
-      <bpmndi:BPMNEdge id="SubFlow_01_di" bpmnElement="SubFlow_01">
-        <di:waypoint x="1856" y="750" />
-        <di:waypoint x="1880" y="750" />
+      <!-- Edges -->
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="216" y="118" />
+        <di:waypoint x="233" y="118" />
+        <di:waypoint x="233" y="300" />
+        <di:waypoint x="250" y="300" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SubFlow_02_di" bpmnElement="SubFlow_02">
-        <di:waypoint x="1980" y="750" />
-        <di:waypoint x="2010" y="750" />
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <di:waypoint x="350" y="300" />
+        <di:waypoint x="375" y="300" />
+        <di:waypoint x="375" y="500" />
+        <di:waypoint x="400" y="500" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SubFlow_03_di" bpmnElement="SubFlow_03">
-        <di:waypoint x="2110" y="750" />
-        <di:waypoint x="2140" y="750" />
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <di:waypoint x="500" y="500" />
+        <di:waypoint x="525" y="500" />
+        <di:waypoint x="525" y="300" />
+        <di:waypoint x="550" y="300" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SubFlow_04_di" bpmnElement="SubFlow_04">
-        <di:waypoint x="2240" y="750" />
-        <di:waypoint x="2270" y="750" />
+      <bpmndi:BPMNEdge id="Flow_4_di" bpmnElement="Flow_4">
+        <di:waypoint x="650" y="300" />
+        <di:waypoint x="700" y="300" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SubFlow_05_di" bpmnElement="SubFlow_05">
-        <di:waypoint x="2370" y="750" />
-        <di:waypoint x="2400" y="750" />
+      <bpmndi:BPMNEdge id="Flow_5_di" bpmnElement="Flow_5">
+        <di:waypoint x="750" y="340" />
+        <di:waypoint x="750" y="660" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SubFlow_Pass_di" bpmnElement="SubFlow_Pass">
-        <di:waypoint x="2450" y="750" />
-        <di:waypoint x="2462" y="750" />
+      <bpmndi:BPMNEdge id="Flow_6_di" bpmnElement="Flow_6">
+        <di:waypoint x="800" y="700" />
+        <di:waypoint x="825" y="700" />
+        <di:waypoint x="825" y="300" />
+        <di:waypoint x="850" y="300" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SubFlow_Fail_di" bpmnElement="SubFlow_Fail">
-        <di:waypoint x="2425" y="725" />
-        <di:waypoint x="2425" y="680" />
-        <di:waypoint x="2060" y="680" />
-        <di:waypoint x="2060" y="710" />
+      <bpmndi:BPMNEdge id="Flow_7_di" bpmnElement="Flow_7">
+        <di:waypoint x="900" y="340" />
+        <di:waypoint x="900" y="660" />
       </bpmndi:BPMNEdge>
-
-      <!-- Phase 4: Monitoring -->
-      <bpmndi:BPMNShape id="UserTask_MonitorProgress_di" bpmnElement="UserTask_MonitorProgress">
-        <dc:Bounds x="2580" y="400" width="100" height="80" />
-      </bpmndi:BPMNShape>
-
-      <bpmndi:BPMNShape id="ServiceTask_TrackMetrics_di" bpmnElement="ServiceTask_TrackMetrics">
-        <dc:Bounds x="2720" y="220" width="100" height="80" />
-      </bpmndi:BPMNShape>
-
-      <!-- Phase 5: Delivery -->
-      <bpmndi:BPMNShape id="UserTask_FinalDelivery_di" bpmnElement="UserTask_FinalDelivery">
-        <dc:Bounds x="2860" y="400" width="100" height="80" />
-      </bpmndi:BPMNShape>
-
-      <bpmndi:BPMNShape id="ServiceTask_SendDeliveryEmail_di" bpmnElement="ServiceTask_SendDeliveryEmail">
-        <dc:Bounds x="3000" y="220" width="100" height="80" />
-      </bpmndi:BPMNShape>
-
-      <bpmndi:BPMNShape id="EndEvent_Delivered_di" bpmnElement="EndEvent_Delivered">
-        <dc:Bounds x="3162" y="422" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="3146" y="465" width="68" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-
-      <!-- Bug Fix (Optional, not in main flow) -->
-      <bpmndi:BPMNShape id="UserTask_BugFix_di" bpmnElement="UserTask_BugFix">
-        <dc:Bounds x="2860" y="710" width="100" height="80" />
-      </bpmndi:BPMNShape>
-
-      <!-- Main Flow Edges -->
-      <bpmndi:BPMNEdge id="Flow_01_di" bpmnElement="Flow_01">
-        <di:waypoint x="236" y="120" />
-        <di:waypoint x="258" y="120" />
-        <di:waypoint x="258" y="260" />
-        <di:waypoint x="280" y="260" />
+      <bpmndi:BPMNEdge id="Flow_8_di" bpmnElement="Flow_8">
+        <di:waypoint x="950" y="700" />
+        <di:waypoint x="1000" y="700" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_02_di" bpmnElement="Flow_02">
-        <di:waypoint x="380" y="260" />
-        <di:waypoint x="400" y="260" />
-        <di:waypoint x="400" y="440" />
-        <di:waypoint x="420" y="440" />
+      <bpmndi:BPMNEdge id="Flow_Passed_di" bpmnElement="Flow_Passed">
+        <di:waypoint x="1050" y="700" />
+        <di:waypoint x="1075" y="700" />
+        <di:waypoint x="1075" y="500" />
+        <di:waypoint x="1100" y="500" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_03_di" bpmnElement="Flow_03">
-        <di:waypoint x="520" y="440" />
-        <di:waypoint x="560" y="440" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_04_di" bpmnElement="Flow_04">
-        <di:waypoint x="660" y="440" />
-        <di:waypoint x="700" y="440" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_Reject_di" bpmnElement="Flow_Reject">
-        <di:waypoint x="725" y="415" />
-        <di:waypoint x="725" y="408" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_Approve_di" bpmnElement="Flow_Approve">
-        <di:waypoint x="750" y="440" />
-        <di:waypoint x="775" y="440" />
-        <di:waypoint x="775" y="260" />
-        <di:waypoint x="800" y="260" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_05_di" bpmnElement="Flow_05">
-        <di:waypoint x="900" y="260" />
-        <di:waypoint x="940" y="260" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_06_di" bpmnElement="Flow_06">
-        <di:waypoint x="1040" y="260" />
-        <di:waypoint x="1060" y="260" />
-        <di:waypoint x="1060" y="440" />
-        <di:waypoint x="1080" y="440" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_07_di" bpmnElement="Flow_07">
-        <di:waypoint x="1180" y="440" />
-        <di:waypoint x="1220" y="440" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_08_di" bpmnElement="Flow_08">
-        <di:waypoint x="1320" y="440" />
-        <di:waypoint x="1360" y="440" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_09_di" bpmnElement="Flow_09">
-        <di:waypoint x="1460" y="440" />
-        <di:waypoint x="1500" y="440" />
+      <bpmndi:BPMNEdge id="Flow_9_di" bpmnElement="Flow_9">
+        <di:waypoint x="1200" y="500" />
+        <di:waypoint x="1225" y="500" />
+        <di:waypoint x="1225" y="300" />
+        <di:waypoint x="1250" y="300" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_10_di" bpmnElement="Flow_10">
-        <di:waypoint x="1600" y="440" />
-        <di:waypoint x="1640" y="440" />
+        <di:waypoint x="1300" y="260" />
+        <di:waypoint x="1300" y="160" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_11_di" bpmnElement="Flow_11">
-        <di:waypoint x="1740" y="440" />
-        <di:waypoint x="1770" y="440" />
-        <di:waypoint x="1770" y="750" />
-        <di:waypoint x="1800" y="750" />
+        <di:waypoint x="1350" y="120" />
+        <di:waypoint x="1375" y="120" />
+        <di:waypoint x="1375" y="300" />
+        <di:waypoint x="1400" y="300" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_12_di" bpmnElement="Flow_12">
-        <di:waypoint x="2500" y="750" />
-        <di:waypoint x="2540" y="750" />
-        <di:waypoint x="2540" y="440" />
-        <di:waypoint x="2580" y="440" />
+        <di:waypoint x="1450" y="260" />
+        <di:waypoint x="1450" y="160" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_13_di" bpmnElement="Flow_13">
-        <di:waypoint x="2680" y="440" />
-        <di:waypoint x="2700" y="440" />
-        <di:waypoint x="2700" y="260" />
-        <di:waypoint x="2720" y="260" />
+      <bpmndi:BPMNEdge id="Flow_End_di" bpmnElement="Flow_End">
+        <di:waypoint x="1500" y="120" />
+        <di:waypoint x="1550" y="120" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_14_di" bpmnElement="Flow_14">
-        <di:waypoint x="2820" y="260" />
-        <di:waypoint x="2840" y="260" />
-        <di:waypoint x="2840" y="440" />
-        <di:waypoint x="2860" y="440" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_15_di" bpmnElement="Flow_15">
-        <di:waypoint x="2960" y="440" />
-        <di:waypoint x="2980" y="440" />
-        <di:waypoint x="2980" y="260" />
-        <di:waypoint x="3000" y="260" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_16_di" bpmnElement="Flow_16">
-        <di:waypoint x="3100" y="260" />
-        <di:waypoint x="3131" y="260" />
-        <di:waypoint x="3131" y="440" />
-        <di:waypoint x="3162" y="440" />
+      <bpmndi:BPMNEdge id="Flow_LoopBack_di" bpmnElement="Flow_LoopBack">
+        <di:waypoint x="1025" y="725" />
+        <di:waypoint x="1025" y="780" />
+        <di:waypoint x="680" y="780" />
+        <di:waypoint x="680" y="300" />
+        <di:waypoint x="700" y="300" />
       </bpmndi:BPMNEdge>
 
     </bpmndi:BPMNPlane>

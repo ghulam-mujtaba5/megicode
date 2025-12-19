@@ -1,0 +1,80 @@
+.dashboardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.statCard {
+  padding: 1.5rem;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.statLabel {
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.statValue {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.statTrend {
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.trendUp {
+  color: #10b981;
+}
+
+.trendDown {
+  color: #ef4444;
+}
+
+.activityFeed {
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.feedTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.feedList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.feedItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.feedItem:last-child {
+  border-bottom: none;
+}
+
+.statusBadge {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.statusGreen { background-color: #10b981; box-shadow: 0 0 10px #10b981; }
+.statusAmber { background-color: #f59e0b; box-shadow: 0 0 10px #f59e0b; }
+.statusRed { background-color: #ef4444; box-shadow: 0 0 10px #ef4444; }
