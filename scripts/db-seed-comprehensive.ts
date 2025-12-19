@@ -41,7 +41,7 @@ function randomDate(daysAgo: number, daysAhead: number = 0): Date {
   return new Date(now + offset);
 }
 
-function randomFromArray<T>(arr: T[]): T {
+function randomFromArray<T>(arr: readonly T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
