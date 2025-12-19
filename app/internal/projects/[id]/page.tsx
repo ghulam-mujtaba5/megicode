@@ -1012,7 +1012,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
             </section>
 
             {/* Process Visualization */}
-            {definitionJson && instance && (
+            {definitionJson && Array.isArray(definitionJson.steps) && definitionJson.steps.length > 0 && instance && (
               <section className={styles.card}>
                 <div className={styles.cardHeader}>
                   <h2 className={styles.cardTitle}>Process Flow</h2>
