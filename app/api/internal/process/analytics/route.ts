@@ -6,15 +6,15 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
-import { eq, and, gte, lte, sql, count, avg } from 'drizzle-orm';
+import { eq, and, gte } from 'drizzle-orm';
 
 import { authOptions } from '@/auth';
 import { getDb } from '@/lib/db';
 import { 
   processInstances, 
-  events, 
   businessProcessStepInstances,
-  businessProcessAutomations 
+  businessProcessAutomations,
+  users
 } from '@/lib/db/schema';
 import { getActiveBusinessProcessDefinition } from '@/lib/workflow/processEngine';
 
@@ -63,7 +63,7 @@ export async function GET(request: NextRequest) {
     const completedWithDuration = allInstances
       .filter(i => i.status === 'completed' && i.startedAt && i.endedAt)
       .map(i => ({
-        duration: (i.endedAt as any as Date).getTime() - (i.startedAt as any as Date).getTime(),
+        duration: new Date(i.endedAt!).getTime() - new Date(i.startedAt!).getTime(),
       }));
 
     const avgCompletionTime = completedWithDuration.length > 0
@@ -98,7 +98,7 @@ export async function GET(request: NextRequest) {
         existing.completed++;
         if (si.startedAt && si.completedAt) {
           existing.totalDuration += 
-            (si.completedAt as any as Date).getTime() - (si.startedAt as any as Date).getTime();
+            new Date(si.completedAt).getTime() - new Date(si.startedAt).getTime();
         }
       }
       if (si.status === 'failed') {
@@ -154,7 +154,7 @@ export async function GET(request: NextRequest) {
         existing.completed++;
         if (si.startedAt && si.completedAt) {
           existing.duration += 
-            (si.completedAt as any as Date).getTime() - (si.startedAt as any as Date).getTime();
+            new Date(si.completedAt).getTime() - new Date(si.startedAt).getTime();
         }
       }
       laneStats.set(lane, existing);
@@ -193,7 +193,6 @@ export async function GET(request: NextRequest) {
 
     // Current bottlenecks (steps where instances are waiting)
     const waitingByStep = new Map<string, number>();
-    runningInstances; // Already have this count
     
     const runningInstList = allInstances.filter(i => i.status === 'running');
     runningInstList.forEach(inst => {
@@ -222,13 +221,13 @@ export async function GET(request: NextRequest) {
     const dailyTrend = new Map<string, { started: number; completed: number }>();
     allInstances.forEach(inst => {
       if (inst.startedAt) {
-        const dateKey = (inst.startedAt as any as Date).toISOString().split('T')[0];
+        const dateKey = new Date(inst.startedAt).toISOString().split('T')[0];
         const existing = dailyTrend.get(dateKey) || { started: 0, completed: 0 };
         existing.started++;
         dailyTrend.set(dateKey, existing);
       }
       if (inst.status === 'completed' && inst.endedAt) {
-        const dateKey = (inst.endedAt as any as Date).toISOString().split('T')[0];
+        const dateKey = new Date(inst.endedAt).toISOString().split('T')[0];
         const existing = dailyTrend.get(dateKey) || { started: 0, completed: 0 };
         existing.completed++;
         dailyTrend.set(dateKey, existing);
@@ -242,6 +241,44 @@ export async function GET(request: NextRequest) {
         started: counts.started,
         completed: counts.completed,
       }));
+
+    // Team Analytics
+    const teamStats = new Map<string, { 
+      userId: string;
+      name: string;
+      completedSteps: number;
+      totalDuration: number;
+    }>();
+
+    // Get all users for name mapping
+    const allUsers = await db.select().from(users).all();
+    const userMap = new Map(allUsers.map(u => [u.id, u]));
+
+    stepInstances.forEach(si => {
+      if (si.status === 'completed' && si.completedByUserId) {
+        const userId = si.completedByUserId;
+        const existing = teamStats.get(userId) || {
+          userId,
+          name: userMap.get(userId)?.name || 'Unknown User',
+          completedSteps: 0,
+          totalDuration: 0
+        };
+
+        existing.completedSteps++;
+        if (si.startedAt && si.completedAt) {
+          existing.totalDuration += new Date(si.completedAt).getTime() - new Date(si.startedAt).getTime();
+        }
+        teamStats.set(userId, existing);
+      }
+    });
+
+    const teamAnalytics = Array.from(teamStats.values()).map(stat => ({
+      userId: stat.userId,
+      name: stat.name,
+      completedSteps: stat.completedSteps,
+      avgStepDurationMs: stat.completedSteps > 0 ? Math.round(stat.totalDuration / stat.completedSteps) : 0,
+      avgStepDurationFormatted: formatDuration(stat.completedSteps > 0 ? Math.round(stat.totalDuration / stat.completedSteps) : 0)
+    })).sort((a, b) => b.completedSteps - a.completedSteps);
 
     return NextResponse.json({
       dateRange: {
@@ -269,6 +306,7 @@ export async function GET(request: NextRequest) {
       automationAnalytics,
       bottlenecks,
       trend,
+      teamAnalytics,
     });
   } catch (error) {
     console.error('Error fetching analytics:', error);

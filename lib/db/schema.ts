@@ -1347,3 +1347,82 @@ export const meetings = sqliteTable(
     startIdx: index('meetings_start_idx').on(table.startAt),
   })
 );
+
+// User Availability (Vacation, Sick Leave, etc.)
+export const userAvailability = sqliteTable(
+  'user_availability',
+  {
+    id: text('id').primaryKey(),
+    userId: text('user_id')
+      .notNull()
+      .references(() => users.id),
+    type: text('type', { enum: ['vacation', 'sick_leave', 'public_holiday', 'other'] }).notNull(),
+    startDate: integer('start_date', { mode: 'timestamp_ms' }).notNull(),
+    endDate: integer('end_date', { mode: 'timestamp_ms' }).notNull(),
+    reason: text('reason'),
+    status: text('status', { enum: ['pending', 'approved', 'rejected'] }).notNull().default('pending'),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    userIdx: index('user_availability_user_idx').on(table.userId),
+    dateIdx: index('user_availability_date_idx').on(table.startDate, table.endDate),
+  })
+);
+
+// ==================== SYSTEM SETTINGS ====================
+
+// System Settings (Global configuration for admin control)
+export type SettingCategory = 'automation' | 'notifications' | 'workflows' | 'integrations' | 'general';
+
+export const systemSettings = sqliteTable(
+  'system_settings',
+  {
+    id: text('id').primaryKey(),
+    key: text('key').notNull(),
+    value: text('value'), // JSON or simple value
+    category: text('category', { 
+      enum: ['automation', 'notifications', 'workflows', 'integrations', 'general'] 
+    }).notNull().default('general'),
+    label: text('label').notNull(),
+    description: text('description'),
+    type: text('type', { 
+      enum: ['boolean', 'string', 'number', 'json', 'select'] 
+    }).notNull().default('string'),
+    options: text('options'), // JSON array for select type
+    isAdvanced: integer('is_advanced', { mode: 'boolean' }).notNull().default(false),
+    updatedByUserId: text('updated_by_user_id').references(() => users.id),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+    updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    keyUnique: uniqueIndex('system_settings_key_unique').on(table.key),
+    categoryIdx: index('system_settings_category_idx').on(table.category),
+  })
+);
+
+// Automation Rules (Stored configuration for custom automation rules)
+export const automationRulesConfig = sqliteTable(
+  'automation_rules_config',
+  {
+    id: text('id').primaryKey(),
+    name: text('name').notNull(),
+    description: text('description'),
+    enabled: integer('enabled', { mode: 'boolean' }).notNull().default(true),
+    trigger: text('trigger').notNull(), // step.entered, step.completed, etc.
+    triggerStepKeys: text('trigger_step_keys'), // JSON array
+    triggerLanes: text('trigger_lanes'), // JSON array
+    conditions: text('conditions'), // JSON array
+    action: text('action').notNull(), // send_email, create_task, etc.
+    actionConfig: text('action_config').notNull(), // JSON
+    priority: integer('priority').default(10),
+    isSystem: integer('is_system', { mode: 'boolean' }).notNull().default(false), // Built-in vs custom
+    createdByUserId: text('created_by_user_id').references(() => users.id),
+    updatedByUserId: text('updated_by_user_id').references(() => users.id),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+    updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    enabledIdx: index('automation_rules_enabled_idx').on(table.enabled),
+    triggerIdx: index('automation_rules_trigger_idx').on(table.trigger),
+  })
+);

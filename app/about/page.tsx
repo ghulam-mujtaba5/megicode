@@ -21,19 +21,19 @@ interface FooterProps {
 }
 
 // Dynamic imports for non-critical components with proper typing
-const AboutIntro = dynamic<{}>(
+const AboutIntro = dynamic<Record<string, never>>(
   () => import("../../components/AboutIntro/AboutIntro").then(mod => mod.default), {
   loading: () => <LoadingAnimation size="medium" />
 });
-const CoreValues = dynamic<{}>(
+const CoreValues = dynamic<Record<string, never>>(
   () => import("../../components/CoreValues/CoreValues").then(mod => mod.default), {
   loading: () => <LoadingAnimation size="medium" />
 });
-const AboutFounder = dynamic<{}>(
+const AboutFounder = dynamic<Record<string, never>>(
   () => import("../../components/AboutFounder/AboutFounder").then(mod => mod.default), {
   loading: () => <LoadingAnimation size="medium" />
 });
-const AboutStats = dynamic<{}>(
+const AboutStats = dynamic<Record<string, never>>(
   () => import("../../components/AboutStats/AboutStats").then(mod => mod.default), {
   loading: () => <LoadingAnimation size="medium" />
 });

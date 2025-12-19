@@ -77,7 +77,7 @@ export default async function InternalDashboardPage() {
     }).from(users).where(eq(users.status, 'active')).get(),
     db.select({
       totalDuration: sql<number>`sum(duration_minutes)`,
-    }).from(timeEntries).where(gte(timeEntries.date, new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000).getTime())).get(),
+    }).from(timeEntries).where(gte(timeEntries.date, new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000))).get(),
   ]);
 
   // My tasks
@@ -565,9 +565,19 @@ export default async function InternalDashboardPage() {
             <div className={s.quickActionsGrid}>
               {['admin', 'pm'].includes(userRole) && (
                 <>
+                  <Link href="/internal/leads/pipeline" className={s.quickActionItem}>
+                    <div className={`${s.quickActionIcon} ${s.quickActionIconSuccess}`}>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                    </div>
+                    <span>Pipeline</span>
+                  </Link>
                   <Link href="/internal/clients" className={s.quickActionItem}>
                     <div className={`${s.quickActionIcon} ${s.quickActionIconSuccess}`}>{Icons.clients}</div>
                     <span>Clients</span>
+                  </Link>
+                  <Link href="/internal/proposals" className={s.quickActionItem}>
+                    <div className={`${s.quickActionIcon} ${s.quickActionIconInfo}`}>{Icons.invoices}</div>
+                    <span>Proposals</span>
                   </Link>
                   <Link href="/internal/process/analytics" className={s.quickActionItem}>
                     <div className={`${s.quickActionIcon} ${s.quickActionIconPurple}`}>

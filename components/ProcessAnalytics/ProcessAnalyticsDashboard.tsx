@@ -70,6 +70,13 @@ interface AnalyticsData {
     started: number;
     completed: number;
   }>;
+  teamAnalytics: Array<{
+    userId: string;
+    name: string;
+    completedSteps: number;
+    avgStepDurationMs: number;
+    avgStepDurationFormatted: string;
+  }>;
 }
 
 interface ProcessAnalyticsDashboardProps {
@@ -153,7 +160,7 @@ export default function ProcessAnalyticsDashboard({
     );
   }
 
-  const { overview, stepAnalytics, bottlenecks, trend, automationAnalytics } = data;
+  const { overview, stepAnalytics, bottlenecks, trend, automationAnalytics, teamAnalytics } = data;
   const maxDaily = trend.length > 0 
     ? Math.max(...trend.map(d => Math.max(d.started, d.completed)), 1)
     : 1;
@@ -345,6 +352,34 @@ export default function ProcessAnalyticsDashboard({
           </span>
         </div>
       </div>
+      )}
+
+      {/* Team Performance */}
+      {teamAnalytics && teamAnalytics.length > 0 && (
+        <div className={styles.section}>
+          <h3 className={styles.sectionTitle}>
+            <span className={styles.icon}>{Icons.users}</span>
+            Team Performance
+          </h3>
+          <div className={styles.bottleneckList}>
+            {teamAnalytics.map((member, i) => (
+              <div key={member.userId} className={styles.bottleneckItem}>
+                <div className={styles.bottleneckRank}>{i + 1}</div>
+                <div className={styles.bottleneckContent}>
+                  <span className={styles.bottleneckName}>{member.name}</span>
+                  <div className={styles.bottleneckMeta}>
+                    <span className={styles.durationBadge} style={{ background: '#dbeafe', color: '#1e40af' }}>
+                      {member.completedSteps} steps completed
+                    </span>
+                    <span className={styles.durationBadge}>
+                      Avg: {member.avgStepDurationFormatted}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       )}
 
       {/* Bottlenecks */}

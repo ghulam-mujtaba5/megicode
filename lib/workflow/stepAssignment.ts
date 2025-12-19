@@ -634,7 +634,7 @@ export async function manuallyAssignStep(
     type: 'step.manually_assigned',
     actorUserId: assignedByUserId,
     payloadJson: {
-      assignedToUserId,
+      assignedToUserId: assignToUserId,
       notes,
     },
     createdAt: now,

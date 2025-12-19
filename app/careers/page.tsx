@@ -21,32 +21,32 @@ interface FooterProps {
 }
 
 // Dynamic imports for non-critical components with proper typing
-const CareersHero = dynamic<{}>(
+const CareersHero = dynamic<Record<string, never>>(
   () => import("../../components/CareersHero/CareersHero").then(mod => mod.default), {
   loading: () => <LoadingAnimation size="medium" />
 });
 
-const WhyWorkWithUs = dynamic<{}>(
+const WhyWorkWithUs = dynamic<Record<string, never>>(
   () => import("../../components/WhyWorkWithUs/WhyWorkWithUs").then(mod => mod.default), {
   loading: () => <LoadingAnimation size="medium" />
 });
 
-const OpenPositions = dynamic<{}>(
+const OpenPositions = dynamic<Record<string, never>>(
   () => import("../../components/OpenPositions/OpenPositions").then(mod => mod.default), {
   loading: () => <LoadingAnimation size="medium" />
 });
 
-const CompanyCulture = dynamic<{}>(
+const CompanyCulture = dynamic<Record<string, never>>(
   () => import("../../components/CompanyCulture/CompanyCulture").then(mod => mod.default), {
   loading: () => <LoadingAnimation size="medium" />
 });
 
-const CareersBenefits = dynamic<{}>(
+const CareersBenefits = dynamic<Record<string, never>>(
   () => import("../../components/CareersBenefits/CareersBenefits").then(mod => mod.default), {
   loading: () => <LoadingAnimation size="medium" />
 });
 
-const CareersApplication = dynamic<{}>(
+const CareersApplication = dynamic<Record<string, never>>(
   () => import("../../components/CareersApplication/CareersApplication").then(mod => mod.default), {
   loading: () => <LoadingAnimation size="medium" />
 });

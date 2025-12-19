@@ -8,12 +8,15 @@
  * - Slack/Discord webhook notifications
  * - Conditional logic based on process data
  * - Scheduled actions and reminders
+ * 
+ * All automation respects system settings from the admin panel.
  */
 
 import { eq, and } from 'drizzle-orm';
 import { getDb } from '@/lib/db';
-import { events, tasks, users, leads, projects } from '@/lib/db/schema';
+import { events, tasks, users, leads, projects, automationRulesConfig } from '@/lib/db/schema';
 import { sendEmail } from '@/lib/email';
+import { isAutomationEnabled, getEnabledAutomationRules, SETTING_KEYS, getBooleanSetting } from '@/lib/settings';
 import type { ProcessDataContext, ProcessLane, BusinessProcessStep } from './businessProcess';
 
 // =====================
@@ -654,6 +657,7 @@ async function executeReminderAction(
 
 /**
  * Execute all matching automation rules for a given context
+ * Respects system settings for enabling/disabling automation
  */
 export async function executeAutomationRules(
   context: AutomationExecutionContext,
@@ -661,28 +665,87 @@ export async function executeAutomationRules(
 ): Promise<AutomationExecutionResult[]> {
   const db = getDb();
   const now = new Date();
-  const matchingRules = findMatchingRules(context, customRules);
   const results: AutomationExecutionResult[] = [];
+
+  // Check if global automation is enabled
+  const globalEnabled = await isAutomationEnabled();
+  if (!globalEnabled) {
+    // Log that automation was skipped
+    await db.insert(events).values({
+      id: crypto.randomUUID(),
+      instanceId: context.processInstanceId,
+      type: 'automation.skipped',
+      payloadJson: {
+        reason: 'Global automation is disabled',
+        trigger: context.triggerType,
+        stepKey: context.stepKey,
+      },
+      createdAt: now,
+    });
+    return results;
+  }
+
+  // Get rules - either from custom rules, database, or defaults
+  let rulesToUse: AutomationRule[];
+  if (customRules) {
+    rulesToUse = customRules;
+  } else {
+    // Try to get rules from database first
+    const dbRules = await getEnabledAutomationRules();
+    if (dbRules.length > 0) {
+      rulesToUse = dbRules.map(r => ({
+        ...r,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      })) as AutomationRule[];
+    } else {
+      // Fall back to default rules
+      rulesToUse = DEFAULT_AUTOMATION_RULES;
+    }
+  }
+
+  const matchingRules = findMatchingRules(context, rulesToUse);
 
   for (const rule of matchingRules) {
     let result: { success: boolean; details?: Record<string, any>; error?: string };
 
     try {
+      // Check specific automation type settings before executing
       switch (rule.action) {
         case 'send_email':
-          result = await executeEmailAction(rule.actionConfig as EmailActionConfig, context);
+          if (!(await isAutomationEnabled('email'))) {
+            result = { success: false, error: 'Email automation is disabled' };
+          } else {
+            result = await executeEmailAction(rule.actionConfig as EmailActionConfig, context);
+          }
           break;
         case 'create_task':
-          result = await executeTaskAction(rule.actionConfig as TaskActionConfig, context);
+          if (!(await isAutomationEnabled('tasks'))) {
+            result = { success: false, error: 'Task automation is disabled' };
+          } else {
+            result = await executeTaskAction(rule.actionConfig as TaskActionConfig, context);
+          }
           break;
         case 'send_webhook':
-          result = await executeWebhookAction(rule.actionConfig as WebhookActionConfig, context);
+          if (!(await isAutomationEnabled('webhooks'))) {
+            result = { success: false, error: 'Webhook automation is disabled' };
+          } else {
+            result = await executeWebhookAction(rule.actionConfig as WebhookActionConfig, context);
+          }
           break;
         case 'send_notification':
-          result = await executeNotificationAction(rule.actionConfig as NotificationActionConfig, context);
+          if (!(await isAutomationEnabled('email'))) {
+            result = { success: false, error: 'Notification automation is disabled' };
+          } else {
+            result = await executeNotificationAction(rule.actionConfig as NotificationActionConfig, context);
+          }
           break;
         case 'schedule_reminder':
-          result = await executeReminderAction(rule.actionConfig as ReminderActionConfig, context);
+          if (!(await isAutomationEnabled('reminders'))) {
+            result = { success: false, error: 'Reminder automation is disabled' };
+          } else {
+            result = await executeReminderAction(rule.actionConfig as ReminderActionConfig, context);
+          }
           break;
         default:
           result = { success: false, error: `Unknown action type: ${rule.action}` };

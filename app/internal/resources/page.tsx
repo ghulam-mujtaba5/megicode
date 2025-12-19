@@ -3,7 +3,7 @@ import { eq, sql, and, isNotNull, desc, gte } from 'drizzle-orm';
 
 import { requireInternalSession } from '@/lib/internal/auth';
 import { getDb } from '@/lib/db';
-import { users, tasks, projects } from '@/lib/db/schema';
+import { users, tasks, projects, userAvailability } from '@/lib/db/schema';
 import s from '../styles.module.css';
 import ResourcesClient from './ResourcesClient';
 import ResourceSuggester from './ResourceSuggester';
@@ -61,6 +61,21 @@ export default async function ResourceAllocationPage() {
     .groupBy(tasks.assignedToUserId)
     .all();
 
+  // Fetch user availability (future leaves)
+  const now = new Date();
+  const availabilityList = await db
+    .select()
+    .from(userAvailability)
+    .where(gte(userAvailability.endDate, now))
+    .all();
+
+  const availabilityMap = new Map<string, typeof availabilityList>();
+  availabilityList.forEach(a => {
+    const list = availabilityMap.get(a.userId) || [];
+    list.push(a);
+    availabilityMap.set(a.userId, list);
+  });
+
   // Create a map of user task stats
   const taskStatsMap = new Map<string, typeof taskStats[0]>();
   taskStats.forEach((stat) => {
@@ -70,7 +85,8 @@ export default async function ResourceAllocationPage() {
   // Prepare data for suggester
   const usersForSuggester = usersList.map(u => ({
     ...u,
-    workload: taskStatsMap.get(u.id)?.total || 0
+    workload: taskStatsMap.get(u.id)?.total || 0,
+    availability: availabilityMap.get(u.id) || []
   }));
 
   // Fetch projects with owners

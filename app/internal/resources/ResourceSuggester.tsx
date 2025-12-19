@@ -10,6 +10,7 @@ interface User {
   role: string;
   skills: string[] | null;
   workload: number; // active tasks
+  availability?: Array<{ startDate: Date; endDate: Date; type: string }>;
 }
 
 interface ResourceSuggesterProps {
@@ -27,6 +28,8 @@ export default function ResourceSuggester({ users }: ResourceSuggesterProps) {
     }
 
     const skills = requiredSkills.toLowerCase().split(',').map(s => s.trim()).filter(Boolean);
+    const twoWeeksFromNow = new Date();
+    twoWeeksFromNow.setDate(twoWeeksFromNow.getDate() + 14);
     
     const scoredUsers = users.map(user => {
       let score = 0;
@@ -42,12 +45,21 @@ export default function ResourceSuggester({ users }: ResourceSuggesterProps) {
       // Role bonus (devs are preferred for dev tasks)
       if (user.role === 'dev') score += 5;
 
-      return { ...user, score, matchedSkills };
+      // Availability Check (Conflict Detection)
+      const upcomingLeave = user.availability?.find(a => 
+        new Date(a.startDate) < twoWeeksFromNow && new Date(a.endDate) > new Date()
+      );
+
+      if (upcomingLeave) {
+        score -= 20; // Heavy penalty for upcoming leave
+      }
+
+      return { ...user, score, matchedSkills, upcomingLeave };
     });
 
     // Sort by score descending
     const sorted = scoredUsers
-      .filter(u => u.score > 0)
+      .filter(u => u.score > -50) // Filter out completely unavailable
       .sort((a, b) => b.score - a.score)
       .slice(0, 3);
 
@@ -98,6 +110,11 @@ export default function ResourceSuggester({ users }: ResourceSuggesterProps) {
                     <div style={{ fontWeight: 600 }}>{user.name || user.email}</div>
                     <div style={{ fontSize: '0.8rem', color: 'var(--int-text-muted)' }}>
                       {user.role} • {user.workload} active tasks
+                      {(user as any).upcomingLeave && (
+                        <span style={{ color: 'var(--int-error)', marginLeft: '8px', fontWeight: 600 }}>
+                          ⚠️ On Leave Soon
+                        </span>
+                      )}
                     </div>
                   </div>
                 </div>
