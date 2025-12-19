@@ -44,6 +44,7 @@
   /* Semantic Colors */
   --int-success: #10b981;
   --int-success-hover: #059669;
+  --int-success-dark: #059669;
   --int-success-light: rgba(16, 185, 129, 0.1);
   --int-success-medium: rgba(16, 185, 129, 0.2);
   --int-success-gradient: linear-gradient(135deg, #10b981 0%, #34d399 100%);

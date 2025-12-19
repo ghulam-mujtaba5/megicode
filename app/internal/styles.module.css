@@ -776,31 +776,88 @@
   box-shadow: 0 0 0 4px var(--int-primary-light);
 }
 
+/* Toggle Switch - Modern Implementation */
 .toggle {
-  position: relative;
-  width: 48px;
-  height: 26px;
-  background: var(--int-border);
-  border-radius: var(--int-radius-full);
+  display: flex;
+  align-items: center;
+  gap: var(--int-space-2);
+  background: none;
+  border: none;
   cursor: pointer;
-  transition: background var(--int-transition) var(--int-ease-out);
+  padding: 0;
+  transition: all var(--int-transition);
+  position: relative;
 }
 
-.toggle::after {
-  content: '';
+.toggle:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.toggle:focus-visible {
+  outline: none;
+}
+
+.toggle:focus-visible .toggleTrack {
+  box-shadow: 0 0 0 3px var(--int-primary-light);
+  outline: 2px solid var(--int-primary);
+  outline-offset: 2px;
+}
+
+.toggleTrack {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  background: var(--int-border);
+  border-radius: 12px;
+  transition: all var(--int-transition);
+  flex-shrink: 0;
+}
+
+.toggle:hover:not(:disabled) .toggleTrack {
+  background: var(--int-text-muted);
+}
+
+.toggleOn .toggleTrack {
+  background: var(--int-success);
+}
+
+.toggle:hover:not(:disabled).toggleOn .toggleTrack {
+  background: var(--int-success-dark);
+}
+
+.toggleThumb {
   position: absolute;
-  top: 3px;
-  left: 3px;
+  top: 2px;
+  left: 2px;
   width: 20px;
   height: 20px;
   background: white;
-  border-radius: var(--int-radius-full);
-  box-shadow: var(--int-shadow-sm);
-  transition: transform var(--int-transition) var(--int-ease-out);
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: transform var(--int-transition);
 }
 
+.toggleOn .toggleThumb {
+  transform: translateX(20px);
+}
+
+.toggleLabel {
+  font-size: var(--int-text-sm);
+  font-weight: var(--int-font-medium);
+  color: var(--int-text-muted);
+  min-width: 60px;
+  user-select: none;
+}
+
+.toggleOn .toggleLabel {
+  color: var(--int-success);
+  font-weight: var(--int-font-semibold);
+}
+
+/* Legacy support - redirect to new toggle styles */
 .toggleActive {
-  background: var(--int-primary);
+  composes: toggleOn;
 }
 
 .toggleActive::after {
@@ -3851,57 +3908,6 @@
 .settingControl {
   flex-shrink: 0;
   margin-left: var(--int-space-4);
-}
-
-/* Toggle Switch */
-.toggle {
-  display: flex;
-  align-items: center;
-  gap: var(--int-space-2);
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-}
-
-.toggleTrack {
-  position: relative;
-  width: 44px;
-  height: 24px;
-  background: var(--int-border);
-  border-radius: 12px;
-  transition: background var(--int-transition);
-}
-
-.toggleOn .toggleTrack {
-  background: var(--int-success);
-}
-
-.toggleThumb {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 20px;
-  height: 20px;
-  background: white;
-  border-radius: 50%;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  transition: transform var(--int-transition);
-}
-
-.toggleOn .toggleThumb {
-  transform: translateX(20px);
-}
-
-.toggleLabel {
-  font-size: var(--int-text-sm);
-  font-weight: var(--int-font-medium);
-  color: var(--int-text-muted);
-  min-width: 60px;
-}
-
-.toggleOn .toggleLabel {
-  color: var(--int-success);
 }
 
 /* Checkbox Label */
