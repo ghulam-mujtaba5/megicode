@@ -618,6 +618,105 @@ async function seed() {
   ]);
   console.log('  ✓ Created business process artifacts');
 
+  // 13. Create sample notifications for users
+  console.log('Creating sample notifications...');
+  const notificationTypes = ['task_assigned', 'project_created', 'task_due_soon', 'sla_warning', 'system'];
+  const notificationPriorities = ['low', 'normal', 'high', 'urgent'];
+  
+  const sampleNotifications = [
+    {
+      id: generateId(),
+      userId: users[0].id, // admin
+      type: 'project_created',
+      title: 'New Project Created',
+      message: 'Project "ACME Corp Website Redesign" has been created and assigned to your team.',
+      priority: 'normal',
+      entityType: 'project',
+      entityId: projects[0].id,
+      link: `/internal/projects/${projects[0].id}`,
+      actorUserId: users[1].id,
+      isRead: false,
+      isDismissed: false,
+      createdAt: new Date(Date.now() - 1 * 60 * 60 * 1000), // 1 hour ago
+    },
+    {
+      id: generateId(),
+      userId: users[0].id, // admin
+      type: 'task_due_soon',
+      title: 'Task Due Soon',
+      message: '"Complete wireframes" is due in 2 days. Please review and prioritize.',
+      priority: 'high',
+      entityType: 'task',
+      entityId: tasks[0].id,
+      link: `/internal/tasks/${tasks[0].id}`,
+      isRead: false,
+      isDismissed: false,
+      createdAt: new Date(Date.now() - 30 * 60 * 1000), // 30 mins ago
+    },
+    {
+      id: generateId(),
+      userId: users[0].id, // admin
+      type: 'sla_warning',
+      title: 'SLA Warning',
+      message: 'The "Development" step in project "ACME Corp Website Redesign" is approaching its SLA deadline.',
+      priority: 'urgent',
+      entityType: 'project',
+      entityId: projects[0].id,
+      link: `/internal/projects/${projects[0].id}`,
+      isRead: false,
+      isDismissed: false,
+      createdAt: new Date(Date.now() - 15 * 60 * 1000), // 15 mins ago
+    },
+    {
+      id: generateId(),
+      userId: users[0].id, // admin
+      type: 'system',
+      title: 'Welcome to Megicode Internal Portal',
+      message: 'Your account has been set up. Start by exploring the dashboard and reviewing your assigned tasks.',
+      priority: 'low',
+      isRead: true,
+      isDismissed: false,
+      createdAt: new Date(Date.now() - 24 * 60 * 60 * 1000), // 1 day ago
+    },
+    {
+      id: generateId(),
+      userId: users[1].id, // PM
+      type: 'task_assigned',
+      title: 'New Task Assigned',
+      message: 'You have been assigned to "Define project scope" in ACME Corp Website Redesign.',
+      priority: 'normal',
+      entityType: 'task',
+      entityId: tasks[1].id,
+      link: `/internal/tasks/${tasks[1].id}`,
+      actorUserId: users[0].id,
+      isRead: false,
+      isDismissed: false,
+      createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000), // 2 hours ago
+    },
+    {
+      id: generateId(),
+      userId: users[2].id, // Dev
+      type: 'task_assigned',
+      title: 'Development Task Assigned',
+      message: 'You have been assigned to implement the landing page for ACME Corp project.',
+      priority: 'high',
+      entityType: 'project',
+      entityId: projects[0].id,
+      link: `/internal/projects/${projects[0].id}`,
+      actorUserId: users[1].id,
+      isRead: false,
+      isDismissed: false,
+      createdAt: new Date(Date.now() - 45 * 60 * 1000), // 45 mins ago
+    },
+  ];
+  
+  try {
+    await db.insert(schema.notifications).values(sampleNotifications);
+    console.log('  ✓ Created sample notifications');
+  } catch (e) {
+    console.warn('  ⚠️ Could not create notifications:', getErrorMessage(e));
+  }
+
   console.log('\n✅ Database seeding completed successfully!\n');
   console.log('Sample accounts created:');
   console.log('  - admin@megicode.com (admin)');

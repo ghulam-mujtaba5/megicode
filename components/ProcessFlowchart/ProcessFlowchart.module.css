@@ -4,11 +4,14 @@
   position: relative;
   width: 100%;
   height: 100%;
-  min-height: 600px;
+  min-height: 700px;
+  max-height: 85vh;
   background: var(--int-surface);
   border-radius: 16px;
   border: 1px solid var(--int-border);
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Toolbar */
@@ -86,10 +89,31 @@
 
 /* Canvas */
 .canvas {
+  flex: 1;
   width: 100%;
-  height: 100%;
-  overflow: hidden;
+  overflow: auto;
   padding-top: 80px;
+  padding-bottom: 60px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--int-border) transparent;
+}
+
+.canvas::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.canvas::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.canvas::-webkit-scrollbar-thumb {
+  background: var(--int-border);
+  border-radius: 4px;
+}
+
+.canvas::-webkit-scrollbar-thumb:hover {
+  background: var(--int-text-muted);
 }
 
 .svg {
@@ -190,7 +214,8 @@
 /* Responsive */
 @media (max-width: 768px) {
   .container {
-    height: 400px;
+    min-height: 500px;
+    max-height: 70vh;
   }
 
   .toolbar {
@@ -204,5 +229,11 @@
 
   .minimap {
     display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    min-height: 750px;
   }
 }

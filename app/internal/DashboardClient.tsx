@@ -421,7 +421,7 @@ export default function DashboardClient({ data, userName, userRole }: DashboardC
                 <div className={s.kpiMeta}>
                   <span>{data.kpis.completedWorkflows} completed</span>
                 </div>
-                <Link href="/internal/admin/process" className={s.kpiCardLink}>
+                <Link href="/internal/process" className={s.kpiCardLink}>
                   View Workflow {Icons.arrowRight}
                 </Link>
               </motion.div>
@@ -765,7 +765,7 @@ export default function DashboardClient({ data, userName, userRole }: DashboardC
             <div className={s.workflowOverview}>
               <div className={s.workflowHeader}>
                 <h3>BPMN Workflow Pipeline</h3>
-                <Link href="/internal/admin/process" className={s.btnText}>
+                <Link href="/internal/process" className={s.btnText}>
                   Manage Workflows {Icons.arrowRight}
                 </Link>
               </div>

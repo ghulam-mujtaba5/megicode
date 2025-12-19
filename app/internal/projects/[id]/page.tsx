@@ -17,6 +17,16 @@ import {
   milestones,
   projectNotes,
   attachments,
+  qaSignoffs,
+  retrospectives,
+  npsSurveys,
+  environmentConfigs,
+  meetingNotes,
+  supportTickets,
+  apiEndpoints,
+  caseStudies,
+  accessibilityAudits,
+  mobileChecks,
 } from '@/lib/db/schema';
 import { taskStatusColor, type BadgeColor, formatDateTime, projectStatusColor } from '@/lib/internal/ui';
 import {
@@ -26,6 +36,9 @@ import {
   updateProjectFormSchema,
   updateTaskAssignmentFormSchema,
   createMilestoneSchema,
+  createQaSignoffFormSchema,
+  createRetrospectiveFormSchema,
+  createNpsSurveyFormSchema,
   safeValidateFormData,
 } from '@/lib/validations';
 

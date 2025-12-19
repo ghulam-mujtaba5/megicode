@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth/next';
+import { authOptions } from '@/auth';
 import { getDb } from '@/lib/db';
-import { projects } from '@/lib/db/schema';
+import { projects, users } from '@/lib/db/schema';
 import { eq, desc } from 'drizzle-orm';
+import { createNotification, NotificationTemplates } from '@/lib/notifications';
 
 // GET /api/internal/projects - Get all projects
 export async function GET(request: NextRequest) {
@@ -34,9 +37,10 @@ export async function GET(request: NextRequest) {
 // POST /api/internal/projects - Create new project
 export async function POST(request: NextRequest) {
   try {
+    const session = await getServerSession(authOptions);
     const body = await request.json();
     
-    const { name, description, clientId, leadId, status, priority, startAt, dueAt } = body;
+    const { name, description, clientId, leadId, status, priority, startAt, dueAt, ownerUserId } = body;
     
     if (!name) {
       return NextResponse.json(
@@ -46,13 +50,15 @@ export async function POST(request: NextRequest) {
     }
 
     const { nanoid } = await import('nanoid');
+    const projectId = nanoid();
     
     const newProject = await getDb().insert(projects).values({
-      id: nanoid(),
+      id: projectId,
       name,
       description,
       clientId,
       leadId,
+      ownerUserId,
       status: status || 'new',
       priority: priority || 'medium',
       startAt: startAt ? new Date(startAt).getTime() : null,
@@ -60,6 +66,51 @@ export async function POST(request: NextRequest) {
       createdAt: new Date().getTime(),
       updatedAt: new Date().getTime()
     } as any).returning();
+    
+    // Send notification to project owner if different from creator
+    if (ownerUserId && ownerUserId !== session?.user?.id) {
+      try {
+        const template = NotificationTemplates.projectCreated(name);
+        await createNotification({
+          userId: ownerUserId,
+          type: template.type as any,
+          title: template.title!,
+          message: template.message,
+          priority: template.priority as any,
+          entityType: 'project',
+          entityId: projectId,
+          link: `/internal/projects/${projectId}`,
+          actorUserId: session?.user?.id,
+        });
+      } catch (notifyError) {
+        console.error('Failed to send project creation notification:', notifyError);
+      }
+    }
+
+    // Also notify all admins about new project
+    try {
+      const db = getDb();
+      const admins = await db.select({ id: users.id }).from(users).where(eq(users.role, 'admin')).all();
+      
+      for (const admin of admins) {
+        if (admin.id !== session?.user?.id) {
+          const template = NotificationTemplates.projectCreated(name);
+          await createNotification({
+            userId: admin.id,
+            type: template.type as any,
+            title: template.title!,
+            message: template.message,
+            priority: template.priority as any,
+            entityType: 'project',
+            entityId: projectId,
+            link: `/internal/projects/${projectId}`,
+            actorUserId: session?.user?.id,
+          });
+        }
+      }
+    } catch (notifyError) {
+      console.error('Failed to send admin notifications:', notifyError);
+    }
     
     return NextResponse.json({
       success: true,

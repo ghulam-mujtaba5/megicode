@@ -1139,7 +1139,7 @@ export default function AuditLogClient({
                           )}
                           {instance && (
                             <Link
-                              href={`/internal/admin/process/${instance.id}`}
+                              href={`/internal/process/${instance.id}`}
                               className="entityLink"
                             >
                               Instance {instance.id.slice(0, 8)}

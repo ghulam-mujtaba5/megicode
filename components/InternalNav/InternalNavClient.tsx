@@ -209,8 +209,8 @@ export default function InternalNavClient({
           )}
           {isAdmin && (
             <Link 
-              href="/internal/admin/process" 
-              className={`${styles.link} ${isActive('/internal/admin/process') ? styles.linkActive : ''}`}
+              href="/internal/process" 
+              className={`${styles.link} ${isActive('/internal/process') ? styles.linkActive : ''}`}
             >
               <Icons.process />
               Process

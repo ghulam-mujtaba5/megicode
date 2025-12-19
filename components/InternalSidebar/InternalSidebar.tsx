@@ -112,6 +112,15 @@ export default function InternalSidebar({
         { label: 'Resources', href: '/internal/resources', icon: Icons.users },
       ]
     },
+    {
+      label: 'Financial',
+      icon: Icons.invoice,
+      roles: ['admin', 'pm'],
+      children: [
+        { label: 'Invoices', href: '/internal/invoices', icon: Icons.invoice },
+        { label: 'Reports', href: '/internal/reports', icon: Icons.reports },
+      ],
+    },
     { 
       label: 'Tools', 
       icon: Icons.tools,
@@ -120,6 +129,7 @@ export default function InternalSidebar({
         { label: 'Bug Tracking', href: '/internal/bugs', icon: Icons.tasks },
         { label: 'Suggestions', href: '/internal/suggestions', icon: Icons.tasks },
         { label: 'Team', href: '/internal/team', icon: Icons.users },
+        { label: 'Integrations', href: '/internal/integrations', icon: Icons.settings },
       ]
     },
     { 
@@ -130,6 +140,7 @@ export default function InternalSidebar({
         { label: 'Users', href: '/internal/admin/users', icon: Icons.users },
         { label: 'Audit Logs', href: '/internal/admin/audit', icon: Icons.reports },
         { label: 'Integrations', href: '/internal/admin/integrations', icon: Icons.settings },
+        { label: 'Settings', href: '/internal/admin/settings', icon: Icons.settings },
       ]
     },
   ];
