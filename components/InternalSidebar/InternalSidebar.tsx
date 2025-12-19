@@ -8,6 +8,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { LOGO_NAVBAR_LIGHT, LOGO_NAVBAR_DARK } from '@/lib/logo';
 import { useTheme } from '@/context/ThemeContext';
+import NotificationCenter from '@/components/NotificationCenter/NotificationCenter';
 import styles from './InternalSidebar.module.css';
 
 const Icons = {
@@ -223,6 +224,7 @@ export default function InternalSidebar({
         </nav>
 
         <div className={styles.footer}>
+          <NotificationCenter collapsed={collapsed} />
           <div className={styles.user}>
             <div className={styles.avatar}>
               {email.charAt(0).toUpperCase()}

@@ -1369,6 +1369,115 @@ export const userAvailability = sqliteTable(
   })
 );
 
+// ==================== NOTIFICATIONS ====================
+
+export type NotificationType = 
+  | 'task_assigned'
+  | 'task_completed'
+  | 'task_updated'
+  | 'task_due_soon'
+  | 'task_overdue'
+  | 'project_created'
+  | 'project_updated'
+  | 'project_status_changed'
+  | 'lead_assigned'
+  | 'lead_converted'
+  | 'lead_status_changed'
+  | 'mention'
+  | 'comment'
+  | 'sla_warning'
+  | 'sla_breach'
+  | 'process_step_completed'
+  | 'process_completed'
+  | 'approval_required'
+  | 'approval_completed'
+  | 'system'
+  | 'custom';
+
+export type NotificationPriority = 'low' | 'normal' | 'high' | 'urgent';
+
+export const notifications = sqliteTable(
+  'notifications',
+  {
+    id: text('id').primaryKey(),
+    userId: text('user_id')
+      .notNull()
+      .references(() => users.id),
+    type: text('type').notNull().$type<NotificationType>(),
+    title: text('title').notNull(),
+    message: text('message'),
+    priority: text('priority', { enum: ['low', 'normal', 'high', 'urgent'] })
+      .notNull()
+      .default('normal'),
+    // Link to related entity
+    entityType: text('entity_type'), // task, project, lead, process, etc.
+    entityId: text('entity_id'),
+    link: text('link'), // URL to navigate to
+    // Actor who triggered the notification
+    actorUserId: text('actor_user_id').references(() => users.id),
+    // Status
+    isRead: integer('is_read', { mode: 'boolean' }).notNull().default(false),
+    readAt: integer('read_at', { mode: 'timestamp_ms' }),
+    isDismissed: integer('is_dismissed', { mode: 'boolean' }).notNull().default(false),
+    dismissedAt: integer('dismissed_at', { mode: 'timestamp_ms' }),
+    // Expiration
+    expiresAt: integer('expires_at', { mode: 'timestamp_ms' }),
+    // Action buttons (JSON array of { label, url, style })
+    actions: text('actions'), // JSON
+    // Metadata
+    metadata: text('metadata'), // JSON for additional data
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    userIdx: index('notifications_user_idx').on(table.userId),
+    userReadIdx: index('notifications_user_read_idx').on(table.userId, table.isRead),
+    typeIdx: index('notifications_type_idx').on(table.type),
+    createdIdx: index('notifications_created_idx').on(table.createdAt),
+    entityIdx: index('notifications_entity_idx').on(table.entityType, table.entityId),
+  })
+);
+
+export type Notification = typeof notifications.$inferSelect;
+export type NewNotification = typeof notifications.$inferInsert;
+
+// User notification preferences
+export const userNotificationPreferences = sqliteTable(
+  'user_notification_preferences',
+  {
+    id: text('id').primaryKey(),
+    userId: text('user_id')
+      .notNull()
+      .references(() => users.id),
+    // Enable/disable by type
+    taskAssigned: integer('task_assigned', { mode: 'boolean' }).notNull().default(true),
+    taskCompleted: integer('task_completed', { mode: 'boolean' }).notNull().default(true),
+    taskUpdated: integer('task_updated', { mode: 'boolean' }).notNull().default(true),
+    taskDueSoon: integer('task_due_soon', { mode: 'boolean' }).notNull().default(true),
+    taskOverdue: integer('task_overdue', { mode: 'boolean' }).notNull().default(true),
+    projectUpdates: integer('project_updates', { mode: 'boolean' }).notNull().default(true),
+    leadUpdates: integer('lead_updates', { mode: 'boolean' }).notNull().default(true),
+    mentions: integer('mentions', { mode: 'boolean' }).notNull().default(true),
+    comments: integer('comments', { mode: 'boolean' }).notNull().default(true),
+    slaAlerts: integer('sla_alerts', { mode: 'boolean' }).notNull().default(true),
+    approvalRequests: integer('approval_requests', { mode: 'boolean' }).notNull().default(true),
+    systemAlerts: integer('system_alerts', { mode: 'boolean' }).notNull().default(true),
+    // Delivery preferences
+    inAppEnabled: integer('in_app_enabled', { mode: 'boolean' }).notNull().default(true),
+    emailEnabled: integer('email_enabled', { mode: 'boolean' }).notNull().default(true),
+    emailDigest: text('email_digest', { enum: ['instant', 'hourly', 'daily', 'weekly', 'off'] })
+      .notNull()
+      .default('instant'),
+    // Quiet hours (JSON: { start: "22:00", end: "08:00", timezone: "UTC" })
+    quietHours: text('quiet_hours'), // JSON
+    updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    userUnique: uniqueIndex('user_notification_prefs_user_unique').on(table.userId),
+  })
+);
+
+export type UserNotificationPreferences = typeof userNotificationPreferences.$inferSelect;
+
 // ==================== SYSTEM SETTINGS ====================
 
 // System Settings (Global configuration for admin control)

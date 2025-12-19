@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth/next';
+import { authOptions } from '@/auth';
 import { getDb } from '@/lib/db';
-import { tasks } from '@/lib/db/schema';
+import { tasks, projects } from '@/lib/db/schema';
 import { eq, desc, and } from 'drizzle-orm';
+import { notifyTaskAssigned } from '@/lib/notifications';
 
 // GET /api/internal/tasks - Get all tasks
 export async function GET(request: NextRequest) {
@@ -48,6 +51,7 @@ export async function GET(request: NextRequest) {
 // POST /api/internal/tasks - Create new task
 export async function POST(request: NextRequest) {
   try {
+    const session = await getServerSession(authOptions);
     const body = await request.json();
     
     const { title, description, instanceId, key, projectId, assignedToUserId, status, priority, dueAt } = body;
@@ -60,9 +64,10 @@ export async function POST(request: NextRequest) {
     }
 
     const { nanoid } = await import('nanoid');
+    const taskId = nanoid();
     
     const newTask = await getDb().insert(tasks).values({
-      id: nanoid(),
+      id: taskId,
       title,
       description,
       instanceId,
@@ -75,6 +80,31 @@ export async function POST(request: NextRequest) {
       createdAt: new Date().getTime(),
       updatedAt: new Date().getTime()
     } as any).returning();
+    
+    // Send notification if task is assigned
+    if (assignedToUserId && assignedToUserId !== session?.user?.id) {
+      try {
+        let projectName: string | undefined;
+        if (projectId) {
+          const project = await getDb().select({ name: projects.name })
+            .from(projects)
+            .where(eq(projects.id, projectId))
+            .limit(1);
+          projectName = project[0]?.name;
+        }
+        
+        await notifyTaskAssigned(
+          assignedToUserId,
+          taskId,
+          title,
+          projectName,
+          session?.user?.id
+        );
+      } catch (notifyError) {
+        console.error('Failed to send task assignment notification:', notifyError);
+        // Don't fail the request if notification fails
+      }
+    }
     
     return NextResponse.json({
       success: true,
