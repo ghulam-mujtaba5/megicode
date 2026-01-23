@@ -1535,3 +1535,403 @@ export const automationRulesConfig = sqliteTable(
     triggerIdx: index('automation_rules_trigger_idx').on(table.trigger),
   })
 );
+
+// ==================== MEGICODE FINANCIAL MANAGEMENT ====================
+// Company Founders & Ownership Management
+
+export type FounderStatus = 'active' | 'inactive';
+
+export const founders = sqliteTable(
+  'founders',
+  {
+    id: text('id').primaryKey(),
+    name: text('name').notNull(),
+    email: text('email'),
+    phone: text('phone'),
+    userId: text('user_id').references(() => users.id), // Link to portal user
+    profitSharePercentage: integer('profit_share_percentage').notNull().default(50), // e.g., 50 = 50%
+    status: text('status', { enum: ['active', 'inactive'] }).notNull().default('active'),
+    joinedAt: integer('joined_at', { mode: 'timestamp_ms' }).notNull(),
+    notes: text('notes'),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+    updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    userIdx: index('founders_user_idx').on(table.userId),
+    statusIdx: index('founders_status_idx').on(table.status),
+  })
+);
+
+// Company Accounts (Central Company Account + Founder Personal Accounts)
+export type CompanyAccountType = 'company_central' | 'founder_personal' | 'operations' | 'savings';
+export type AccountStatus = 'active' | 'inactive' | 'frozen';
+
+export const companyAccounts = sqliteTable(
+  'company_accounts',
+  {
+    id: text('id').primaryKey(),
+    name: text('name').notNull(),
+    accountType: text('account_type', { 
+      enum: ['company_central', 'founder_personal', 'operations', 'savings'] 
+    }).notNull(),
+    founderId: text('founder_id').references(() => founders.id), // Only for founder_personal accounts
+    bankName: text('bank_name'),
+    accountNumber: text('account_number'), // Last 4 digits for display
+    walletProvider: text('wallet_provider'), // JazzCash, EasyPaisa, etc.
+    currency: text('currency').notNull().default('PKR'),
+    currentBalance: integer('current_balance').notNull().default(0), // In smallest currency unit (paisa)
+    status: text('status', { enum: ['active', 'inactive', 'frozen'] }).notNull().default('active'),
+    isPrimary: integer('is_primary', { mode: 'boolean' }).notNull().default(false),
+    notes: text('notes'),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+    updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    typeIdx: index('company_accounts_type_idx').on(table.accountType),
+    founderIdx: index('company_accounts_founder_idx').on(table.founderId),
+    statusIdx: index('company_accounts_status_idx').on(table.status),
+  })
+);
+
+// Founder Contributions (Capital contributions by founders)
+export type ContributionType = 'initial_investment' | 'additional_capital' | 'loan_to_company' | 'expense_reimbursement';
+export type ContributionStatus = 'pending' | 'confirmed' | 'returned';
+
+export const founderContributions = sqliteTable(
+  'founder_contributions',
+  {
+    id: text('id').primaryKey(),
+    founderId: text('founder_id').notNull().references(() => founders.id),
+    amount: integer('amount').notNull(), // In smallest currency unit
+    currency: text('currency').notNull().default('PKR'),
+    contributionType: text('contribution_type', { 
+      enum: ['initial_investment', 'additional_capital', 'loan_to_company', 'expense_reimbursement'] 
+    }).notNull(),
+    purpose: text('purpose'), // e.g., "Domain purchase", "Server hosting"
+    toAccountId: text('to_account_id').references(() => companyAccounts.id),
+    status: text('status', { enum: ['pending', 'confirmed', 'returned'] }).notNull().default('confirmed'),
+    contributedAt: integer('contributed_at', { mode: 'timestamp_ms' }).notNull(),
+    notes: text('notes'),
+    receiptUrl: text('receipt_url'),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+    updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    founderIdx: index('founder_contributions_founder_idx').on(table.founderId),
+    typeIdx: index('founder_contributions_type_idx').on(table.contributionType),
+    dateIdx: index('founder_contributions_date_idx').on(table.contributedAt),
+  })
+);
+
+// Company Financial Settings (Profit retention, distribution rules)
+export const financialSettings = sqliteTable(
+  'financial_settings',
+  {
+    id: text('id').primaryKey(),
+    settingKey: text('setting_key').notNull(),
+    settingValue: text('setting_value').notNull(),
+    description: text('description'),
+    effectiveFrom: integer('effective_from', { mode: 'timestamp_ms' }).notNull(),
+    effectiveTo: integer('effective_to', { mode: 'timestamp_ms' }), // Null = still active
+    createdByUserId: text('created_by_user_id').references(() => users.id),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    keyIdx: index('financial_settings_key_idx').on(table.settingKey),
+    effectiveIdx: index('financial_settings_effective_idx').on(table.effectiveFrom),
+  })
+);
+
+// Project Financial Records (Revenue from projects)
+export type ProjectRevenueStatus = 'expected' | 'invoiced' | 'partial' | 'received' | 'disputed';
+
+export const projectFinancials = sqliteTable(
+  'project_financials',
+  {
+    id: text('id').primaryKey(),
+    projectId: text('project_id').notNull().references(() => projects.id),
+    totalContractValue: integer('total_contract_value').notNull().default(0), // Agreed project value
+    currency: text('currency').notNull().default('PKR'),
+    amountReceived: integer('amount_received').notNull().default(0), // Total received so far
+    amountPending: integer('amount_pending').notNull().default(0), // Still to receive
+    totalExpenses: integer('total_expenses').notNull().default(0), // Project-specific expenses
+    netProfit: integer('net_profit').notNull().default(0), // Revenue - Expenses
+    companyRetention: integer('company_retention').notNull().default(0), // Amount kept in company (10%)
+    distributableProfit: integer('distributable_profit').notNull().default(0), // For founders
+    retentionPercentage: integer('retention_percentage').notNull().default(10), // Company retention %
+    status: text('status', { 
+      enum: ['expected', 'invoiced', 'partial', 'received', 'disputed'] 
+    }).notNull().default('expected'),
+    notes: text('notes'),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+    updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    projectIdx: uniqueIndex('project_financials_project_unique').on(table.projectId),
+    statusIdx: index('project_financials_status_idx').on(table.status),
+  })
+);
+
+// Expenses (Company-wide and project-specific)
+export type ExpenseCategory = 
+  | 'domain' 
+  | 'hosting' 
+  | 'software_subscription' 
+  | 'hardware' 
+  | 'marketing' 
+  | 'legal' 
+  | 'office' 
+  | 'travel'
+  | 'utilities'
+  | 'contractor'
+  | 'product_development'
+  | 'project_cost'
+  | 'misc';
+
+export type ExpenseStatus = 'pending' | 'approved' | 'paid' | 'rejected' | 'reimbursed';
+
+export const expenses = sqliteTable(
+  'expenses',
+  {
+    id: text('id').primaryKey(),
+    title: text('title').notNull(),
+    description: text('description'),
+    amount: integer('amount').notNull(), // In smallest currency unit
+    currency: text('currency').notNull().default('PKR'),
+    category: text('category', { 
+      enum: ['domain', 'hosting', 'software_subscription', 'hardware', 'marketing', 
+             'legal', 'office', 'travel', 'utilities', 'contractor', 
+             'product_development', 'project_cost', 'misc'] 
+    }).notNull(),
+    // Link to project if project-specific expense
+    projectId: text('project_id').references(() => projects.id),
+    // Link to internal product if product development
+    productName: text('product_name'), // e.g., "App Name"
+    // Who paid (if from pocket, track for reimbursement)
+    paidByFounderId: text('paid_by_founder_id').references(() => founders.id),
+    paidFromAccountId: text('paid_from_account_id').references(() => companyAccounts.id),
+    // Recurring expense tracking
+    isRecurring: integer('is_recurring', { mode: 'boolean' }).notNull().default(false),
+    recurringInterval: text('recurring_interval', { enum: ['monthly', 'quarterly', 'yearly'] }),
+    nextDueAt: integer('next_due_at', { mode: 'timestamp_ms' }),
+    // Status & approval
+    status: text('status', { 
+      enum: ['pending', 'approved', 'paid', 'rejected', 'reimbursed'] 
+    }).notNull().default('paid'),
+    approvedByUserId: text('approved_by_user_id').references(() => users.id),
+    // Receipt/proof
+    receiptUrl: text('receipt_url'),
+    vendor: text('vendor'), // Who was paid
+    // Dates
+    expenseDate: integer('expense_date', { mode: 'timestamp_ms' }).notNull(),
+    createdByUserId: text('created_by_user_id').references(() => users.id),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+    updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    categoryIdx: index('expenses_category_idx').on(table.category),
+    projectIdx: index('expenses_project_idx').on(table.projectId),
+    statusIdx: index('expenses_status_idx').on(table.status),
+    dateIdx: index('expenses_date_idx').on(table.expenseDate),
+    founderIdx: index('expenses_founder_idx').on(table.paidByFounderId),
+  })
+);
+
+// Fund Transfers (Between accounts, profit distributions, etc.)
+export type TransferType = 
+  | 'profit_distribution' 
+  | 'company_allocation' 
+  | 'expense_payment' 
+  | 'founder_withdrawal'
+  | 'founder_contribution'
+  | 'inter_account'
+  | 'reimbursement';
+
+export type TransferStatus = 'pending' | 'completed' | 'failed' | 'reversed';
+
+export const fundTransfers = sqliteTable(
+  'fund_transfers',
+  {
+    id: text('id').primaryKey(),
+    transferType: text('transfer_type', { 
+      enum: ['profit_distribution', 'company_allocation', 'expense_payment', 
+             'founder_withdrawal', 'founder_contribution', 'inter_account', 'reimbursement'] 
+    }).notNull(),
+    fromAccountId: text('from_account_id').references(() => companyAccounts.id),
+    toAccountId: text('to_account_id').references(() => companyAccounts.id),
+    founderId: text('founder_id').references(() => founders.id), // If founder-related
+    projectId: text('project_id').references(() => projects.id), // If project-related
+    amount: integer('amount').notNull(),
+    currency: text('currency').notNull().default('PKR'),
+    description: text('description'),
+    reference: text('reference'), // Transaction reference/ID
+    status: text('status', { 
+      enum: ['pending', 'completed', 'failed', 'reversed'] 
+    }).notNull().default('completed'),
+    transferredAt: integer('transferred_at', { mode: 'timestamp_ms' }).notNull(),
+    createdByUserId: text('created_by_user_id').references(() => users.id),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    typeIdx: index('fund_transfers_type_idx').on(table.transferType),
+    fromIdx: index('fund_transfers_from_idx').on(table.fromAccountId),
+    toIdx: index('fund_transfers_to_idx').on(table.toAccountId),
+    founderIdx: index('fund_transfers_founder_idx').on(table.founderId),
+    projectIdx: index('fund_transfers_project_idx').on(table.projectId),
+    dateIdx: index('fund_transfers_date_idx').on(table.transferredAt),
+  })
+);
+
+// Profit Distribution Records (Track each distribution to founders)
+export type DistributionStatus = 'calculated' | 'pending_approval' | 'approved' | 'distributed' | 'cancelled';
+
+export const profitDistributions = sqliteTable(
+  'profit_distributions',
+  {
+    id: text('id').primaryKey(),
+    projectId: text('project_id').references(() => projects.id), // If from specific project
+    period: text('period'), // e.g., "2026-01", "Q1-2026" for periodic distributions
+    totalProfit: integer('total_profit').notNull(), // Total profit to distribute
+    companyRetention: integer('company_retention').notNull(), // Amount retained
+    distributedAmount: integer('distributed_amount').notNull(), // Amount distributed to founders
+    currency: text('currency').notNull().default('PKR'),
+    status: text('status', { 
+      enum: ['calculated', 'pending_approval', 'approved', 'distributed', 'cancelled'] 
+    }).notNull().default('calculated'),
+    calculatedAt: integer('calculated_at', { mode: 'timestamp_ms' }).notNull(),
+    distributedAt: integer('distributed_at', { mode: 'timestamp_ms' }),
+    notes: text('notes'),
+    createdByUserId: text('created_by_user_id').references(() => users.id),
+    approvedByUserId: text('approved_by_user_id').references(() => users.id),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+    updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    projectIdx: index('profit_distributions_project_idx').on(table.projectId),
+    statusIdx: index('profit_distributions_status_idx').on(table.status),
+    periodIdx: index('profit_distributions_period_idx').on(table.period),
+  })
+);
+
+// Individual Founder Distribution Items (How much each founder gets)
+export const founderDistributionItems = sqliteTable(
+  'founder_distribution_items',
+  {
+    id: text('id').primaryKey(),
+    distributionId: text('distribution_id').notNull().references(() => profitDistributions.id),
+    founderId: text('founder_id').notNull().references(() => founders.id),
+    sharePercentage: integer('share_percentage').notNull(), // Percentage at time of distribution
+    grossAmount: integer('gross_amount').notNull(), // Before any deductions
+    deductions: integer('deductions').notNull().default(0), // Loan repayments, advances, etc.
+    netAmount: integer('net_amount').notNull(), // Amount actually transferred
+    toAccountId: text('to_account_id').references(() => companyAccounts.id),
+    transferId: text('transfer_id').references(() => fundTransfers.id),
+    status: text('status', { enum: ['pending', 'transferred', 'hold'] }).notNull().default('pending'),
+    notes: text('notes'),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    distributionIdx: index('founder_dist_items_distribution_idx').on(table.distributionId),
+    founderIdx: index('founder_dist_items_founder_idx').on(table.founderId),
+  })
+);
+
+// Financial Transactions Log (Comprehensive audit trail)
+export type TransactionType = 
+  | 'income' 
+  | 'expense' 
+  | 'transfer' 
+  | 'contribution' 
+  | 'distribution' 
+  | 'adjustment';
+
+export const financialTransactions = sqliteTable(
+  'financial_transactions',
+  {
+    id: text('id').primaryKey(),
+    transactionType: text('transaction_type', { 
+      enum: ['income', 'expense', 'transfer', 'contribution', 'distribution', 'adjustment'] 
+    }).notNull(),
+    accountId: text('account_id').notNull().references(() => companyAccounts.id),
+    amount: integer('amount').notNull(), // Positive for credit, negative for debit
+    balanceAfter: integer('balance_after').notNull(), // Account balance after this transaction
+    currency: text('currency').notNull().default('PKR'),
+    description: text('description').notNull(),
+    // References to related records
+    projectId: text('project_id').references(() => projects.id),
+    expenseId: text('expense_id').references(() => expenses.id),
+    transferId: text('transfer_id').references(() => fundTransfers.id),
+    contributionId: text('contribution_id').references(() => founderContributions.id),
+    distributionId: text('distribution_id').references(() => profitDistributions.id),
+    invoiceId: text('invoice_id').references(() => invoices.id),
+    paymentId: text('payment_id').references(() => payments.id),
+    // Metadata
+    reference: text('reference'),
+    transactionDate: integer('transaction_date', { mode: 'timestamp_ms' }).notNull(),
+    createdByUserId: text('created_by_user_id').references(() => users.id),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    typeIdx: index('financial_transactions_type_idx').on(table.transactionType),
+    accountIdx: index('financial_transactions_account_idx').on(table.accountId),
+    dateIdx: index('financial_transactions_date_idx').on(table.transactionDate),
+    projectIdx: index('financial_transactions_project_idx').on(table.projectId),
+  })
+);
+
+// Recurring Subscriptions (Domain, hosting, software subscriptions)
+export type SubscriptionStatus = 'active' | 'paused' | 'cancelled' | 'expired';
+
+export const subscriptions = sqliteTable(
+  'subscriptions',
+  {
+    id: text('id').primaryKey(),
+    name: text('name').notNull(),
+    provider: text('provider').notNull(), // e.g., "Namecheap", "Vercel", "GitHub"
+    description: text('description'),
+    amount: integer('amount').notNull(),
+    currency: text('currency').notNull().default('PKR'),
+    billingCycle: text('billing_cycle', { 
+      enum: ['monthly', 'quarterly', 'yearly', 'one_time'] 
+    }).notNull(),
+    category: text('category', { 
+      enum: ['domain', 'hosting', 'software_subscription', 'hardware', 'marketing', 
+             'legal', 'office', 'travel', 'utilities', 'contractor', 
+             'product_development', 'project_cost', 'misc'] 
+    }).notNull(),
+    startDate: integer('start_date', { mode: 'timestamp_ms' }).notNull(),
+    nextBillingDate: integer('next_billing_date', { mode: 'timestamp_ms' }),
+    endDate: integer('end_date', { mode: 'timestamp_ms' }),
+    autoRenew: integer('auto_renew', { mode: 'boolean' }).notNull().default(true),
+    status: text('status', { 
+      enum: ['active', 'paused', 'cancelled', 'expired'] 
+    }).notNull().default('active'),
+    loginUrl: text('login_url'),
+    accountEmail: text('account_email'),
+    notes: text('notes'),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+    updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    statusIdx: index('subscriptions_status_idx').on(table.status),
+    nextBillingIdx: index('subscriptions_next_billing_idx').on(table.nextBillingDate),
+    categoryIdx: index('subscriptions_category_idx').on(table.category),
+  })
+);
+
+// Type exports for TypeScript
+export type Founder = typeof founders.$inferSelect;
+export type NewFounder = typeof founders.$inferInsert;
+export type CompanyAccount = typeof companyAccounts.$inferSelect;
+export type NewCompanyAccount = typeof companyAccounts.$inferInsert;
+export type FounderContribution = typeof founderContributions.$inferSelect;
+export type NewFounderContribution = typeof founderContributions.$inferInsert;
+export type FinancialSetting = typeof financialSettings.$inferSelect;
+export type ProjectFinancial = typeof projectFinancials.$inferSelect;
+export type Expense = typeof expenses.$inferSelect;
+export type NewExpense = typeof expenses.$inferInsert;
+export type FundTransfer = typeof fundTransfers.$inferSelect;
+export type ProfitDistribution = typeof profitDistributions.$inferSelect;
+export type FounderDistributionItem = typeof founderDistributionItems.$inferSelect;
+export type FinancialTransaction = typeof financialTransactions.$inferSelect;
+export type Subscription = typeof subscriptions.$inferSelect;
