@@ -8,18 +8,19 @@ let _db: ReturnType<typeof drizzle<typeof schema>> | null = null;
 function requireEnv(name: string): string {
   const value = process.env[name];
   if (!value) throw new Error(`Missing environment variable: ${name}`);
-  return value;
+  return value.trim();
 }
 
 export function getTursoClient(): Client {
   if (_client) return _client;
 
   const url = requireEnv('TURSO_DATABASE_URL');
+  const authToken = process.env.TURSO_AUTH_TOKEN?.trim();
   console.log('Connecting to database at:', url);
   
   _client = createClient({
     url,
-    authToken: process.env.TURSO_AUTH_TOKEN,
+    authToken,
   });
 
   return _client;
