@@ -6,11 +6,11 @@ This document serves as a guide for evaluators to understand the advanced capabi
 ## 🌟 Key Features to Explore
 
 ### 1. The "Single Pane of Glass" Dashboard
-*   **Location:** `/internal/dashboard` (or `/internal/monitoring`)
+*   **Location:** `/internal/dashboard`
 *   **What to look for:**
     *   **Real-time Status:** See how project health is visualized with instant "Green/Red" indicators.
     *   **Unified Metrics:** Revenue, Uptime, and Team Velocity in one view.
-    *   **Live Activity Feed:** Watch as tasks move across the board in real-time.
+    *   **Activity Feed:** Watch as tasks move across the board in real-time.
 
 ### 2. Automated Workflow Engine
 *   **Location:** `/internal/process` & `/internal/tasks`

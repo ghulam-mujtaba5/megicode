@@ -20,12 +20,6 @@ export default function ExplorePage() {
       linkText: "View Showcase →"
     },
     {
-      title: "Live Monitoring",
-      description: "Watch the pulse of the organization with real-time metrics on system health, project velocity, and team performance.",
-      link: "/internal/monitoring",
-      linkText: "Open Dashboard →"
-    },
-    {
       title: "Process Visualization",
       description: "Understand the 'Megicode Way' of software delivery through our interactive BPMN diagrams and workflow steps.",
       link: "/internal/process",

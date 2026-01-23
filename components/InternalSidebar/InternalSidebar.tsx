@@ -139,7 +139,6 @@ export default function InternalSidebar({
         { label: 'Bug Tracking', href: '/internal/bugs', icon: Icons.tasks },
         { label: 'Suggestions', href: '/internal/suggestions', icon: Icons.tasks },
         { label: 'Team', href: '/internal/team', icon: Icons.users },
-        { label: 'Integrations', href: '/internal/integrations', icon: Icons.settings },
       ]
     },
     { 
@@ -149,7 +148,6 @@ export default function InternalSidebar({
       children: [
         { label: 'Users', href: '/internal/admin/users', icon: Icons.users },
         { label: 'Audit Logs', href: '/internal/admin/audit', icon: Icons.reports },
-        { label: 'Integrations', href: '/internal/admin/integrations', icon: Icons.settings },
         { label: 'Settings', href: '/internal/admin/settings', icon: Icons.settings },
       ]
     },
