@@ -17,6 +17,7 @@ coverage/
 .env.production
 .env.production.local
 .env*.local
+set-vercel-env.ps1
 
 # Logs
 *.log
