@@ -3,28 +3,25 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../../styles.module.css';
 
-interface Account {
-  id: string;
-  name: string;
-}
-
 interface Subscription {
   id: string;
   name: string;
-  provider: string | null;
+  provider: string;
+  description: string | null;
   category: string;
   amount: number;
   currency: string;
   billingCycle: string;
-  nextBillingDate: number;
-  lastBillingDate: number | null;
-  paidFromAccountId: string | null;
-  accountName: string | null;
+  startDate: Date | string;
+  nextBillingDate: Date | string | null;
+  endDate: Date | string | null;
   autoRenew: boolean;
-  reminderDays: number;
-  status: string;
+  status: 'active' | 'paused' | 'cancelled' | 'expired';
+  loginUrl: string | null;
+  accountEmail: string | null;
   notes: string | null;
-  createdAt: number;
+  createdAt: Date | string;
+  updatedAt: Date | string;
 }
 
 interface Summary {
@@ -37,22 +34,30 @@ interface Summary {
 const CATEGORIES = [
   'domain',
   'hosting',
-  'software',
-  'saas',
-  'cloud_services',
+  'software_subscription',
+  'hardware',
   'marketing',
-  'other',
+  'legal',
+  'office',
+  'travel',
+  'utilities',
+  'contractor',
+  'product_development',
+  'project_cost',
+  'misc',
 ];
 
 const BILLING_CYCLES = [
   { value: 'monthly', label: 'Monthly' },
   { value: 'quarterly', label: 'Quarterly' },
   { value: 'yearly', label: 'Yearly' },
+  { value: 'one_time', label: 'One Time' },
 ];
+
+const DEFAULT_REMINDER_DAYS = 7;
 
 export default function SubscriptionsPage() {
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
-  const [accounts, setAccounts] = useState<Account[]>([]);
   const [summary, setSummary] = useState<Summary | null>(null);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
@@ -61,14 +66,16 @@ export default function SubscriptionsPage() {
   const [formData, setFormData] = useState({
     name: '',
     provider: '',
+    description: '',
     category: 'domain',
     amount: '',
     currency: 'PKR',
     billingCycle: 'yearly',
+    startDate: '',
     nextBillingDate: '',
-    paidFromAccountId: '',
     autoRenew: true,
-    reminderDays: '7',
+    loginUrl: '',
+    accountEmail: '',
     notes: '',
   });
 
@@ -78,17 +85,11 @@ export default function SubscriptionsPage() {
 
   const fetchData = async () => {
     try {
-      const [subsRes, accountsRes] = await Promise.all([
-        fetch('/api/internal/finance/subscriptions'),
-        fetch('/api/internal/finance/accounts'),
-      ]);
-
+      const subsRes = await fetch('/api/internal/finance/subscriptions');
       const subsData = await subsRes.json();
-      const accountsData = await accountsRes.json();
 
       setSubscriptions(subsData.subscriptions || []);
       setSummary(subsData.summary || null);
-      setAccounts(accountsData.accounts || []);
     } catch (error) {
       console.error('Failed to fetch data:', error);
     } finally {
@@ -104,17 +105,26 @@ export default function SubscriptionsPage() {
     }).format(amount / 100);
   };
 
-  const formatDate = (timestamp: number) => {
-    return new Date(timestamp).toLocaleDateString('en-PK', {
+  const formatDate = (timestamp: Date | string | null) => {
+    if (!timestamp) return '-';
+    const date = timestamp instanceof Date ? timestamp : new Date(timestamp);
+    return date.toLocaleDateString('en-PK', {
       year: 'numeric',
       month: 'short',
       day: 'numeric',
     });
   };
 
-  const getDaysUntilDue = (nextBillingDate: number) => {
+  const getTimestamp = (date: Date | string | null): number => {
+    if (!date) return 0;
+    return date instanceof Date ? date.getTime() : new Date(date).getTime();
+  };
+
+  const getDaysUntilDue = (nextBillingDate: Date | string | null) => {
+    if (!nextBillingDate) return Infinity;
     const now = Date.now();
-    const diff = nextBillingDate - now;
+    const due = getTimestamp(nextBillingDate);
+    const diff = due - now;
     return Math.ceil(diff / (1000 * 60 * 60 * 24));
   };
 
@@ -135,6 +145,36 @@ export default function SubscriptionsPage() {
         </span>
       );
     }
+
+    if (sub.status === 'paused') {
+      return (
+        <span style={{
+          padding: '4px 8px',
+          borderRadius: '4px',
+          fontSize: '12px',
+          fontWeight: 500,
+          backgroundColor: '#6b728020',
+          color: '#6b7280',
+        }}>
+          Paused
+        </span>
+      );
+    }
+
+    if (sub.status === 'expired') {
+      return (
+        <span style={{
+          padding: '4px 8px',
+          borderRadius: '4px',
+          fontSize: '12px',
+          fontWeight: 500,
+          backgroundColor: '#9ca3af20',
+          color: '#9ca3af',
+        }}>
+          Expired
+        </span>
+      );
+    }
     
     if (daysUntil < 0) {
       return (
@@ -151,7 +191,7 @@ export default function SubscriptionsPage() {
       );
     }
     
-    if (daysUntil <= sub.reminderDays) {
+    if (daysUntil <= DEFAULT_REMINDER_DAYS) {
       return (
         <span style={{
           padding: '4px 8px',
@@ -193,15 +233,17 @@ export default function SubscriptionsPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: formData.name,
-          provider: formData.provider || null,
+          provider: formData.provider,
+          description: formData.description || null,
           category: formData.category,
           amount: Math.round(parseFloat(formData.amount) * 100),
           currency: formData.currency,
           billingCycle: formData.billingCycle,
-          nextBillingDate: new Date(formData.nextBillingDate).getTime(),
-          paidFromAccountId: formData.paidFromAccountId || null,
+          startDate: formData.startDate ? new Date(formData.startDate).toISOString() : new Date().toISOString(),
+          nextBillingDate: formData.nextBillingDate ? new Date(formData.nextBillingDate).toISOString() : null,
           autoRenew: formData.autoRenew,
-          reminderDays: parseInt(formData.reminderDays),
+          loginUrl: formData.loginUrl || null,
+          accountEmail: formData.accountEmail || null,
           notes: formData.notes || null,
           status: 'active',
         }),
@@ -215,27 +257,6 @@ export default function SubscriptionsPage() {
       }
     } catch (error) {
       console.error('Failed to save subscription:', error);
-    }
-  };
-
-  const handleProcessPayment = async (sub: Subscription) => {
-    if (!confirm(`Process payment of ${formatCurrency(sub.amount)} for ${sub.name}?`)) return;
-    
-    try {
-      const response = await fetch(`/api/internal/finance/subscriptions/${sub.id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          action: 'process_payment',
-          paidFromAccountId: sub.paidFromAccountId,
-        }),
-      });
-
-      if (response.ok) {
-        fetchData();
-      }
-    } catch (error) {
-      console.error('Failed to process payment:', error);
     }
   };
 
@@ -259,31 +280,44 @@ export default function SubscriptionsPage() {
     setFormData({
       name: '',
       provider: '',
+      description: '',
       category: 'domain',
       amount: '',
       currency: 'PKR',
       billingCycle: 'yearly',
+      startDate: '',
       nextBillingDate: '',
-      paidFromAccountId: '',
       autoRenew: true,
-      reminderDays: '7',
+      loginUrl: '',
+      accountEmail: '',
       notes: '',
     });
   };
 
   const openEditModal = (sub: Subscription) => {
     setEditingSub(sub);
+    const startDateStr = sub.startDate instanceof Date 
+      ? sub.startDate.toISOString().split('T')[0]
+      : new Date(sub.startDate).toISOString().split('T')[0];
+    const nextBillingStr = sub.nextBillingDate 
+      ? (sub.nextBillingDate instanceof Date 
+          ? sub.nextBillingDate.toISOString().split('T')[0]
+          : new Date(sub.nextBillingDate).toISOString().split('T')[0])
+      : '';
+    
     setFormData({
       name: sub.name,
       provider: sub.provider || '',
+      description: sub.description || '',
       category: sub.category,
       amount: (sub.amount / 100).toString(),
       currency: sub.currency,
       billingCycle: sub.billingCycle,
-      nextBillingDate: new Date(sub.nextBillingDate).toISOString().split('T')[0],
-      paidFromAccountId: sub.paidFromAccountId || '',
+      startDate: startDateStr,
+      nextBillingDate: nextBillingStr,
       autoRenew: sub.autoRenew,
-      reminderDays: sub.reminderDays.toString(),
+      loginUrl: sub.loginUrl || '',
+      accountEmail: sub.accountEmail || '',
       notes: sub.notes || '',
     });
     setShowModal(true);
@@ -292,13 +326,13 @@ export default function SubscriptionsPage() {
   // Separate upcoming and regular subscriptions
   const upcomingSubs = subscriptions.filter(s => 
     s.status === 'active' && getDaysUntilDue(s.nextBillingDate) <= 30
-  ).sort((a, b) => a.nextBillingDate - b.nextBillingDate);
+  ).sort((a, b) => getTimestamp(a.nextBillingDate) - getTimestamp(b.nextBillingDate));
   
   const regularSubs = subscriptions.filter(s => 
     s.status === 'active' && getDaysUntilDue(s.nextBillingDate) > 30
   );
   
-  const cancelledSubs = subscriptions.filter(s => s.status === 'cancelled');
+  const cancelledSubs = subscriptions.filter(s => s.status === 'cancelled' || s.status === 'paused' || s.status === 'expired');
 
   if (loading) {
     return (
@@ -378,7 +412,7 @@ export default function SubscriptionsPage() {
                   <td>
                     <div style={{ fontWeight: 600 }}>{sub.name}</div>
                     <div style={{ fontSize: '12px', opacity: 0.6, textTransform: 'capitalize' }}>
-                      {sub.category.replace('_', ' ')}
+                      {sub.category.replace(/_/g, ' ')}
                     </div>
                   </td>
                   <td>{sub.provider || '-'}</td>
@@ -390,13 +424,6 @@ export default function SubscriptionsPage() {
                   <td>{getStatusBadge(sub)}</td>
                   <td>
                     <div style={{ display: 'flex', gap: '0.5rem' }}>
-                      <button
-                        className={styles.primaryButton}
-                        onClick={() => handleProcessPayment(sub)}
-                        style={{ padding: '4px 8px', fontSize: '12px' }}
-                      >
-                        Pay Now
-                      </button>
                       <button
                         className={styles.secondaryButton}
                         onClick={() => openEditModal(sub)}
@@ -435,7 +462,6 @@ export default function SubscriptionsPage() {
                 <th>Amount</th>
                 <th>Cycle</th>
                 <th>Next Due</th>
-                <th>Account</th>
                 <th>Status</th>
                 <th>Actions</th>
               </tr>
@@ -449,14 +475,13 @@ export default function SubscriptionsPage() {
                       <div style={{ fontSize: '12px', opacity: 0.6 }}>{sub.provider}</div>
                     )}
                   </td>
-                  <td style={{ textTransform: 'capitalize' }}>{sub.category.replace('_', ' ')}</td>
+                  <td style={{ textTransform: 'capitalize' }}>{sub.category.replace(/_/g, ' ')}</td>
                   <td style={{ fontWeight: 600 }}>{formatCurrency(sub.amount)}</td>
-                  <td style={{ textTransform: 'capitalize' }}>{sub.billingCycle}</td>
+                  <td style={{ textTransform: 'capitalize' }}>{sub.billingCycle.replace(/_/g, ' ')}</td>
                   <td>{formatDate(sub.nextBillingDate)}</td>
-                  <td>{sub.accountName || '-'}</td>
                   <td>{getStatusBadge(sub)}</td>
                   <td>
-                    {sub.status !== 'cancelled' && (
+                    {sub.status === 'active' && (
                       <div style={{ display: 'flex', gap: '0.5rem' }}>
                         <button
                           className={styles.secondaryButton}
@@ -560,38 +585,56 @@ export default function SubscriptionsPage() {
                 </div>
                 
                 <div className={styles.formGroup}>
-                  <label className={styles.label}>Next Due Date *</label>
+                  <label className={styles.label}>Start Date *</label>
                   <input
                     type="date"
                     className={styles.input}
-                    value={formData.nextBillingDate}
-                    onChange={(e) => setFormData({ ...formData, nextBillingDate: e.target.value })}
+                    value={formData.startDate}
+                    onChange={(e) => setFormData({ ...formData, startDate: e.target.value })}
                     required
                   />
                 </div>
                 
                 <div className={styles.formGroup}>
-                  <label className={styles.label}>Pay from Account</label>
-                  <select
-                    className={styles.select}
-                    value={formData.paidFromAccountId}
-                    onChange={(e) => setFormData({ ...formData, paidFromAccountId: e.target.value })}
-                  >
-                    <option value="">Select account...</option>
-                    {accounts.map(a => (
-                      <option key={a.id} value={a.id}>{a.name}</option>
-                    ))}
-                  </select>
+                  <label className={styles.label}>Next Due Date</label>
+                  <input
+                    type="date"
+                    className={styles.input}
+                    value={formData.nextBillingDate}
+                    onChange={(e) => setFormData({ ...formData, nextBillingDate: e.target.value })}
+                  />
                 </div>
                 
                 <div className={styles.formGroup}>
-                  <label className={styles.label}>Reminder Days</label>
+                  <label className={styles.label}>Login URL</label>
                   <input
-                    type="number"
+                    type="url"
                     className={styles.input}
-                    value={formData.reminderDays}
-                    onChange={(e) => setFormData({ ...formData, reminderDays: e.target.value })}
-                    placeholder="7"
+                    value={formData.loginUrl}
+                    onChange={(e) => setFormData({ ...formData, loginUrl: e.target.value })}
+                    placeholder="https://..."
+                  />
+                </div>
+                
+                <div className={styles.formGroup}>
+                  <label className={styles.label}>Account Email</label>
+                  <input
+                    type="email"
+                    className={styles.input}
+                    value={formData.accountEmail}
+                    onChange={(e) => setFormData({ ...formData, accountEmail: e.target.value })}
+                    placeholder="account@example.com"
+                  />
+                </div>
+                
+                <div className={styles.formGroup} style={{ gridColumn: '1 / -1' }}>
+                  <label className={styles.label}>Description</label>
+                  <input
+                    type="text"
+                    className={styles.input}
+                    value={formData.description}
+                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                    placeholder="Brief description..."
                   />
                 </div>
                 

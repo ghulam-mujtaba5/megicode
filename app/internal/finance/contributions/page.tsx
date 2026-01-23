@@ -6,7 +6,7 @@ import styles from '../../styles.module.css';
 interface Founder {
   id: string;
   name: string;
-  totalContributed: number;
+  totalContributions: number;
 }
 
 interface Account {
@@ -18,15 +18,16 @@ interface Contribution {
   id: string;
   founderId: string;
   founderName: string;
-  type: string;
+  contributionType: string;
   amount: number;
   currency: string;
-  description: string;
-  depositedToAccountId: string | null;
+  purpose: string;
+  toAccountId: string | null;
   accountName: string | null;
-  contributionDate: number;
+  contributedAt: string; // Date object from API
   notes: string | null;
-  createdAt: number;
+  status: string;
+  createdAt: string;
 }
 
 interface FounderSummary {
@@ -37,10 +38,10 @@ interface FounderSummary {
 }
 
 const CONTRIBUTION_TYPES = [
-  { value: 'capital', label: 'Capital Investment' },
-  { value: 'expense_reimbursement', label: 'Expense Reimbursement (to company)' },
-  { value: 'loan', label: 'Loan to Company' },
-  { value: 'other', label: 'Other' },
+  { value: 'initial_investment', label: 'Initial Investment' },
+  { value: 'additional_capital', label: 'Additional Capital' },
+  { value: 'loan_to_company', label: 'Loan to Company' },
+  { value: 'expense_reimbursement', label: 'Expense Reimbursement' },
 ];
 
 export default function ContributionsPage() {
@@ -53,12 +54,12 @@ export default function ContributionsPage() {
   
   const [formData, setFormData] = useState({
     founderId: '',
-    type: 'capital',
+    contributionType: 'initial_investment',
     amount: '',
     currency: 'PKR',
-    description: '',
-    depositedToAccountId: '',
-    contributionDate: new Date().toISOString().split('T')[0],
+    purpose: '',
+    toAccountId: '',
+    contributedAt: new Date().toISOString().split('T')[0],
     notes: '',
   });
 
@@ -97,8 +98,9 @@ export default function ContributionsPage() {
     }).format(amount / 100);
   };
 
-  const formatDate = (timestamp: number) => {
-    return new Date(timestamp).toLocaleDateString('en-PK', {
+  const formatDate = (dateStr: string | number) => {
+    const date = typeof dateStr === 'number' ? new Date(dateStr) : new Date(dateStr);
+    return date.toLocaleDateString('en-PK', {
       year: 'numeric',
       month: 'short',
       day: 'numeric',
@@ -114,12 +116,12 @@ export default function ContributionsPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           founderId: formData.founderId,
-          type: formData.type,
+          contributionType: formData.contributionType,
           amount: Math.round(parseFloat(formData.amount) * 100),
           currency: formData.currency,
-          description: formData.description,
-          depositedToAccountId: formData.depositedToAccountId || null,
-          contributionDate: new Date(formData.contributionDate).getTime(),
+          purpose: formData.purpose,
+          toAccountId: formData.toAccountId || null,
+          contributedAt: formData.contributedAt,
           notes: formData.notes || null,
         }),
       });
@@ -128,12 +130,12 @@ export default function ContributionsPage() {
         setShowModal(false);
         setFormData({
           founderId: '',
-          type: 'capital',
+          contributionType: 'initial_investment',
           amount: '',
           currency: 'PKR',
-          description: '',
-          depositedToAccountId: '',
-          contributionDate: new Date().toISOString().split('T')[0],
+          purpose: '',
+          toAccountId: '',
+          contributedAt: new Date().toISOString().split('T')[0],
           notes: '',
         });
         fetchData();
@@ -243,32 +245,44 @@ export default function ContributionsPage() {
                 <th>Date</th>
                 <th>Founder</th>
                 <th>Type</th>
-                <th>Description</th>
+                <th>Purpose</th>
                 <th>Amount</th>
                 <th>Deposited To</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody>
               {contributions.map((contrib) => (
                 <tr key={contrib.id}>
-                  <td>{formatDate(contrib.contributionDate)}</td>
+                  <td>{formatDate(contrib.contributedAt)}</td>
                   <td style={{ fontWeight: 600 }}>{contrib.founderName}</td>
                   <td>
                     <span style={{
                       padding: '4px 8px',
                       borderRadius: '4px',
                       fontSize: '12px',
-                      backgroundColor: contrib.type === 'capital' ? '#3b82f620' : '#10b98120',
-                      color: contrib.type === 'capital' ? '#3b82f6' : '#10b981',
+                      backgroundColor: contrib.contributionType === 'initial_investment' ? '#3b82f620' : '#10b98120',
+                      color: contrib.contributionType === 'initial_investment' ? '#3b82f6' : '#10b981',
                     }}>
-                      {CONTRIBUTION_TYPES.find(t => t.value === contrib.type)?.label || contrib.type}
+                      {CONTRIBUTION_TYPES.find(t => t.value === contrib.contributionType)?.label || contrib.contributionType}
                     </span>
                   </td>
-                  <td>{contrib.description}</td>
+                  <td>{contrib.purpose || '-'}</td>
                   <td style={{ fontWeight: 600, color: '#10b981' }}>
                     +{formatCurrency(contrib.amount)}
                   </td>
                   <td>{contrib.accountName || '-'}</td>
+                  <td>
+                    <span style={{
+                      padding: '4px 8px',
+                      borderRadius: '4px',
+                      fontSize: '12px',
+                      backgroundColor: contrib.status === 'confirmed' ? '#10b98120' : '#f59e0b20',
+                      color: contrib.status === 'confirmed' ? '#10b981' : '#f59e0b',
+                    }}>
+                      {contrib.status}
+                    </span>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -326,8 +340,8 @@ export default function ContributionsPage() {
                   <label className={styles.label}>Type *</label>
                   <select
                     className={styles.select}
-                    value={formData.type}
-                    onChange={(e) => setFormData({ ...formData, type: e.target.value })}
+                    value={formData.contributionType}
+                    onChange={(e) => setFormData({ ...formData, contributionType: e.target.value })}
                     required
                   >
                     {CONTRIBUTION_TYPES.map(t => (
@@ -354,19 +368,19 @@ export default function ContributionsPage() {
                   <input
                     type="date"
                     className={styles.input}
-                    value={formData.contributionDate}
-                    onChange={(e) => setFormData({ ...formData, contributionDate: e.target.value })}
+                    value={formData.contributedAt}
+                    onChange={(e) => setFormData({ ...formData, contributedAt: e.target.value })}
                     required
                   />
                 </div>
                 
                 <div className={styles.formGroup} style={{ gridColumn: '1 / -1' }}>
-                  <label className={styles.label}>Description *</label>
+                  <label className={styles.label}>Purpose *</label>
                   <input
                     type="text"
                     className={styles.input}
-                    value={formData.description}
-                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                    value={formData.purpose}
+                    onChange={(e) => setFormData({ ...formData, purpose: e.target.value })}
                     placeholder="e.g., Initial domain purchase contribution"
                     required
                   />
@@ -376,8 +390,8 @@ export default function ContributionsPage() {
                   <label className={styles.label}>Deposited To Account</label>
                   <select
                     className={styles.select}
-                    value={formData.depositedToAccountId}
-                    onChange={(e) => setFormData({ ...formData, depositedToAccountId: e.target.value })}
+                    value={formData.toAccountId}
+                    onChange={(e) => setFormData({ ...formData, toAccountId: e.target.value })}
                   >
                     <option value="">Not deposited yet</option>
                     {accounts.map(a => (

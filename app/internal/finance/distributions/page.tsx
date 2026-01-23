@@ -22,28 +22,27 @@ interface DistributionItem {
   founderId: string;
   founderName: string;
   sharePercentage: number;
-  amount: number;
-  paidToAccountId: string | null;
+  grossAmount: number;
+  deductions: number;
+  netAmount: number;
+  toAccountId: string | null;
   accountName: string | null;
-  status: string;
-  paidAt: number | null;
+  status: 'pending' | 'transferred' | 'hold';
 }
 
 interface Distribution {
   id: string;
   projectId: string | null;
-  periodStart: number | null;
-  periodEnd: number | null;
-  grossProfit: number;
-  totalExpenses: number;
-  netProfit: number;
-  retentionPercentage: number;
-  retainedAmount: number;
-  distributableAmount: number;
-  sourceAccountId: string | null;
-  status: string;
+  period: string | null;
+  totalProfit: number;
+  companyRetention: number;
+  distributedAmount: number;
+  currency: string;
+  status: 'calculated' | 'pending_approval' | 'approved' | 'distributed' | 'cancelled';
+  calculatedAt: string;
+  distributedAt: string | null;
   notes: string | null;
-  createdAt: number;
+  createdAt: string;
   items: DistributionItem[];
 }
 
@@ -63,10 +62,9 @@ export default function DistributionsPage() {
   
   // Form state for new distribution
   const [formData, setFormData] = useState({
-    grossProfit: '',
-    totalExpenses: '',
+    totalProfit: '',
+    period: '',
     projectId: '',
-    sourceAccountId: '',
     notes: '',
   });
 
@@ -107,8 +105,10 @@ export default function DistributionsPage() {
     }).format(amount / 100);
   };
 
-  const formatDate = (timestamp: number) => {
-    return new Date(timestamp).toLocaleDateString('en-PK', {
+  const formatDate = (dateStr: string | number | null) => {
+    if (!dateStr) return '-';
+    const date = typeof dateStr === 'number' ? new Date(dateStr) : new Date(dateStr);
+    return date.toLocaleDateString('en-PK', {
       year: 'numeric',
       month: 'short',
       day: 'numeric',
@@ -123,17 +123,16 @@ export default function DistributionsPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          grossProfit: Math.round(parseFloat(formData.grossProfit) * 100),
-          totalExpenses: Math.round(parseFloat(formData.totalExpenses || '0') * 100),
+          totalProfit: Math.round(parseFloat(formData.totalProfit) * 100),
+          period: formData.period || null,
           projectId: formData.projectId || null,
-          sourceAccountId: formData.sourceAccountId || null,
           notes: formData.notes || null,
         }),
       });
 
       if (response.ok) {
         setShowModal(false);
-        setFormData({ grossProfit: '', totalExpenses: '', projectId: '', sourceAccountId: '', notes: '' });
+        setFormData({ totalProfit: '', period: '', projectId: '', notes: '' });
         fetchData();
       }
     } catch (error) {
@@ -141,7 +140,7 @@ export default function DistributionsPage() {
     }
   };
 
-  const handlePayFounder = async (distributionId: string, founderId: string, accountId: string) => {
+  const handlePayFounder = async (distributionId: string, founderId: string, toAccountId: string, sourceAccountId?: string) => {
     try {
       const response = await fetch(`/api/internal/finance/distributions/${distributionId}`, {
         method: 'PUT',
@@ -149,7 +148,8 @@ export default function DistributionsPage() {
         body: JSON.stringify({
           action: 'pay_founder',
           founderId,
-          paidToAccountId: accountId,
+          toAccountId,
+          sourceAccountId: sourceAccountId || null,
         }),
       });
 
@@ -179,17 +179,15 @@ export default function DistributionsPage() {
 
   // Calculate preview
   const calculatePreview = () => {
-    const gross = parseFloat(formData.grossProfit || '0') * 100;
-    const expenses = parseFloat(formData.totalExpenses || '0') * 100;
-    const net = gross - expenses;
+    const total = parseFloat(formData.totalProfit || '0') * 100;
     const retention = settings?.companyRetentionPercentage || 10;
-    const retained = Math.round((net * retention) / 100);
-    const distributable = net - retained;
+    const retained = Math.round((total * retention) / 100);
+    const distributable = total - retained;
     
     return {
-      netProfit: net,
-      retainedAmount: retained,
-      distributableAmount: distributable,
+      totalProfit: total,
+      companyRetention: retained,
+      distributedAmount: distributable,
       founderShares: founders.map(f => ({
         name: f.name,
         percentage: f.profitSharePercentage,
@@ -203,10 +201,24 @@ export default function DistributionsPage() {
   const getStatusBadge = (status: string) => {
     const colors: Record<string, string> = {
       pending: '#f59e0b',
-      partial: '#3b82f6',
-      completed: '#10b981',
+      calculated: '#f59e0b',
+      pending_approval: '#f59e0b',
+      approved: '#3b82f6',
+      distributed: '#10b981',
+      transferred: '#10b981',
       cancelled: '#ef4444',
-      paid: '#10b981',
+      hold: '#6b7280',
+    };
+    
+    const labels: Record<string, string> = {
+      pending: 'Pending',
+      calculated: 'Calculated',
+      pending_approval: 'Pending Approval',
+      approved: 'Approved',
+      distributed: 'Distributed',
+      transferred: 'Transferred',
+      cancelled: 'Cancelled',
+      hold: 'On Hold',
     };
     
     return (
@@ -215,10 +227,10 @@ export default function DistributionsPage() {
         borderRadius: '4px',
         fontSize: '12px',
         fontWeight: 500,
-        backgroundColor: `${colors[status]}20`,
-        color: colors[status],
+        backgroundColor: `${colors[status] || '#6b7280'}20`,
+        color: colors[status] || '#6b7280',
       }}>
-        {status.charAt(0).toUpperCase() + status.slice(1)}
+        {labels[status] || status}
       </span>
     );
   };
@@ -253,7 +265,7 @@ export default function DistributionsPage() {
         <div className={styles.statCard}>
           <div className={styles.statLabel}>Company Retention</div>
           <div className={styles.statValue}>{settings?.companyRetentionPercentage || 10}%</div>
-          <div className={styles.statChange}>of net profit</div>
+          <div className={styles.statChange}>of total profit</div>
         </div>
         {founders.map(founder => (
           <div key={founder.id} className={styles.statCard}>
@@ -297,17 +309,19 @@ export default function DistributionsPage() {
                 }}>
                   <div>
                     <div style={{ fontWeight: 600, marginBottom: '4px' }}>
-                      {formatDate(dist.createdAt)}
-                      {dist.projectId && <span style={{ opacity: 0.6 }}> • Project: {dist.projectId}</span>}
+                      {formatDate(dist.calculatedAt)}
+                      {dist.period && <span style={{ opacity: 0.6 }}> • Period: {dist.period}</span>}
+                      {dist.projectId && <span style={{ opacity: 0.6 }}> • Project</span>}
                     </div>
                     <div style={{ fontSize: '14px', opacity: 0.7 }}>
-                      Gross: {formatCurrency(dist.grossProfit)} → Net: {formatCurrency(dist.netProfit)} → 
-                      Distributable: {formatCurrency(dist.distributableAmount)}
+                      Total: {formatCurrency(dist.totalProfit)} → 
+                      Retained: {formatCurrency(dist.companyRetention)} → 
+                      Distributed: {formatCurrency(dist.distributedAmount)}
                     </div>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                     {getStatusBadge(dist.status)}
-                    {dist.status === 'pending' && (
+                    {dist.status === 'calculated' && (
                       <button
                         className={styles.secondaryButton}
                         onClick={(e) => {
@@ -336,20 +350,16 @@ export default function DistributionsPage() {
                       marginBottom: '1rem',
                     }}>
                       <div>
-                        <div style={{ fontSize: '12px', opacity: 0.6 }}>Gross Profit</div>
-                        <div style={{ fontWeight: 600 }}>{formatCurrency(dist.grossProfit)}</div>
+                        <div style={{ fontSize: '12px', opacity: 0.6 }}>Total Profit</div>
+                        <div style={{ fontWeight: 600 }}>{formatCurrency(dist.totalProfit)}</div>
                       </div>
                       <div>
-                        <div style={{ fontSize: '12px', opacity: 0.6 }}>Expenses</div>
-                        <div style={{ fontWeight: 600, color: '#ef4444' }}>-{formatCurrency(dist.totalExpenses)}</div>
+                        <div style={{ fontSize: '12px', opacity: 0.6 }}>Company Retention</div>
+                        <div style={{ fontWeight: 600, color: '#3b82f6' }}>{formatCurrency(dist.companyRetention)}</div>
                       </div>
                       <div>
-                        <div style={{ fontSize: '12px', opacity: 0.6 }}>Company Retention ({dist.retentionPercentage}%)</div>
-                        <div style={{ fontWeight: 600, color: '#3b82f6' }}>{formatCurrency(dist.retainedAmount)}</div>
-                      </div>
-                      <div>
-                        <div style={{ fontSize: '12px', opacity: 0.6 }}>Distributable</div>
-                        <div style={{ fontWeight: 600, color: '#10b981' }}>{formatCurrency(dist.distributableAmount)}</div>
+                        <div style={{ fontSize: '12px', opacity: 0.6 }}>Distributed Amount</div>
+                        <div style={{ fontWeight: 600, color: '#10b981' }}>{formatCurrency(dist.distributedAmount)}</div>
                       </div>
                     </div>
                     
@@ -359,7 +369,9 @@ export default function DistributionsPage() {
                         <tr>
                           <th>Founder</th>
                           <th>Share %</th>
-                          <th>Amount</th>
+                          <th>Gross Amount</th>
+                          <th>Deductions</th>
+                          <th>Net Amount</th>
                           <th>Status</th>
                           <th>Action</th>
                         </tr>
@@ -369,7 +381,11 @@ export default function DistributionsPage() {
                           <tr key={item.id}>
                             <td>{item.founderName}</td>
                             <td>{item.sharePercentage}%</td>
-                            <td>{formatCurrency(item.amount)}</td>
+                            <td>{formatCurrency(item.grossAmount)}</td>
+                            <td style={{ color: item.deductions > 0 ? '#ef4444' : undefined }}>
+                              {item.deductions > 0 ? `-${formatCurrency(item.deductions)}` : '-'}
+                            </td>
+                            <td style={{ fontWeight: 600 }}>{formatCurrency(item.netAmount)}</td>
                             <td>{getStatusBadge(item.status)}</td>
                             <td>
                               {item.status === 'pending' ? (
@@ -387,9 +403,9 @@ export default function DistributionsPage() {
                                     fontSize: '12px',
                                   }}
                                 >
-                                  <option value="">Pay to account...</option>
+                                  <option value="">Transfer to...</option>
                                   {accounts
-                                    .filter(a => a.founderId === item.founderId || a.accountType === 'company_central')
+                                    .filter(a => a.founderId === item.founderId || a.accountType === 'founder_personal')
                                     .map(a => (
                                       <option key={a.id} value={a.id}>{a.name}</option>
                                     ))
@@ -397,7 +413,7 @@ export default function DistributionsPage() {
                                 </select>
                               ) : (
                                 <span style={{ fontSize: '12px', opacity: 0.6 }}>
-                                  Paid to {item.accountName} on {item.paidAt ? formatDate(item.paidAt) : '-'}
+                                  {item.accountName ? `Paid to ${item.accountName}` : 'Transferred'}
                                 </span>
                               )}
                             </td>
@@ -431,42 +447,30 @@ export default function DistributionsPage() {
             <form onSubmit={handleCreateDistribution}>
               <div className={styles.formGrid}>
                 <div className={styles.formGroup}>
-                  <label className={styles.label}>Gross Profit (PKR) *</label>
+                  <label className={styles.label}>Total Profit (PKR) *</label>
                   <input
                     type="number"
                     className={styles.input}
-                    value={formData.grossProfit}
-                    onChange={(e) => setFormData({ ...formData, grossProfit: e.target.value })}
+                    value={formData.totalProfit}
+                    onChange={(e) => setFormData({ ...formData, totalProfit: e.target.value })}
                     placeholder="e.g., 50000"
                     step="0.01"
                     required
                   />
+                  <p style={{ fontSize: '12px', opacity: 0.6, marginTop: '4px' }}>
+                    Enter the total profit to be distributed (after expenses)
+                  </p>
                 </div>
                 
                 <div className={styles.formGroup}>
-                  <label className={styles.label}>Total Expenses (PKR)</label>
+                  <label className={styles.label}>Period (optional)</label>
                   <input
-                    type="number"
+                    type="text"
                     className={styles.input}
-                    value={formData.totalExpenses}
-                    onChange={(e) => setFormData({ ...formData, totalExpenses: e.target.value })}
-                    placeholder="e.g., 5000"
-                    step="0.01"
+                    value={formData.period}
+                    onChange={(e) => setFormData({ ...formData, period: e.target.value })}
+                    placeholder="e.g., 2026-01 or Q1-2026"
                   />
-                </div>
-                
-                <div className={styles.formGroup}>
-                  <label className={styles.label}>Source Account</label>
-                  <select
-                    className={styles.select}
-                    value={formData.sourceAccountId}
-                    onChange={(e) => setFormData({ ...formData, sourceAccountId: e.target.value })}
-                  >
-                    <option value="">Select account...</option>
-                    {accounts.map(a => (
-                      <option key={a.id} value={a.id}>{a.name}</option>
-                    ))}
-                  </select>
                 </div>
                 
                 <div className={styles.formGroup} style={{ gridColumn: '1 / -1' }}>
@@ -482,7 +486,7 @@ export default function DistributionsPage() {
               </div>
               
               {/* Preview */}
-              {parseFloat(formData.grossProfit || '0') > 0 && (
+              {parseFloat(formData.totalProfit || '0') > 0 && (
                 <div style={{ 
                   marginTop: '1rem', 
                   padding: '1rem', 
@@ -492,16 +496,16 @@ export default function DistributionsPage() {
                   <h4 style={{ marginBottom: '0.5rem' }}>Distribution Preview</h4>
                   <div style={{ fontSize: '14px' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
-                      <span>Net Profit:</span>
-                      <strong>{formatCurrency(preview.netProfit)}</strong>
+                      <span>Total Profit:</span>
+                      <strong>{formatCurrency(preview.totalProfit)}</strong>
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
                       <span>Company Retention ({settings?.companyRetentionPercentage || 10}%):</span>
-                      <strong style={{ color: '#3b82f6' }}>{formatCurrency(preview.retainedAmount)}</strong>
+                      <strong style={{ color: '#3b82f6' }}>{formatCurrency(preview.companyRetention)}</strong>
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                      <span>Distributable:</span>
-                      <strong style={{ color: '#10b981' }}>{formatCurrency(preview.distributableAmount)}</strong>
+                      <span>Distributable to Founders:</span>
+                      <strong style={{ color: '#10b981' }}>{formatCurrency(preview.distributedAmount)}</strong>
                     </div>
                     <hr style={{ opacity: 0.2, marginBottom: '8px' }} />
                     {preview.founderShares.map((share, i) => (

@@ -11,7 +11,7 @@ interface Founder {
   phone: string | null;
   profitSharePercentage: number;
   status: 'active' | 'inactive';
-  joinedAt: number;
+  joinedAt: Date | string | number;
   notes: string | null;
   totalContributions?: number;
   totalDistributions?: number;
@@ -52,9 +52,10 @@ function formatMoney(amountInSmallestUnit: number, currency: string = 'PKR') {
   return `${currency} ${amount.toFixed(0)}`;
 }
 
-function formatDate(timestamp: number | null) {
+function formatDate(timestamp: Date | string | number | null) {
   if (!timestamp) return '-';
-  return new Date(timestamp).toLocaleDateString('en-PK', {
+  const date = timestamp instanceof Date ? timestamp : new Date(timestamp);
+  return date.toLocaleDateString('en-PK', {
     day: 'numeric',
     month: 'short',
     year: 'numeric',

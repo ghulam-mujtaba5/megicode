@@ -12,18 +12,19 @@ interface Expense {
   currency: string;
   category: string;
   projectId: string | null;
-  projectName?: string;
   productName: string | null;
   paidByFounderId: string | null;
-  paidByFounderName?: string;
+  payerName: string | null;
   paidFromAccountId: string | null;
-  paidFromAccountName?: string;
+  accountName: string | null;
   isRecurring: boolean;
   recurringInterval: string | null;
+  nextDueAt: Date | string | null;
   status: string;
   receiptUrl: string | null;
   vendor: string | null;
-  expenseDate: number;
+  expenseDate: Date | string;
+  createdAt: Date | string;
 }
 
 interface Founder {
@@ -104,9 +105,10 @@ function formatMoney(amountInSmallestUnit: number, currency: string = 'PKR') {
   return `${currency} ${amount.toFixed(0)}`;
 }
 
-function formatDate(timestamp: number | null) {
+function formatDate(timestamp: Date | string | number | null) {
   if (!timestamp) return '-';
-  return new Date(timestamp).toLocaleDateString('en-PK', {
+  const date = timestamp instanceof Date ? timestamp : new Date(timestamp);
+  return date.toLocaleDateString('en-PK', {
     day: 'numeric',
     month: 'short',
     year: 'numeric',
@@ -620,14 +622,14 @@ export default function ExpensesPage() {
                         {expense.vendor && (
                           <div style={{ fontSize: 'var(--int-text-xs)', color: 'var(--int-text-muted)' }}>{expense.vendor}</div>
                         )}
-                        {expense.projectName && (
+                        {expense.productName && (
                           <span className={s.badge} style={{ marginTop: 'var(--int-space-1)', fontSize: 'var(--int-text-xs)' }}>
-                            {expense.projectName}
+                            {expense.productName}
                           </span>
                         )}
                       </td>
                       <td>
-                        <span className={s.badge}>{expense.category.replace('_', ' ')}</span>
+                        <span className={s.badge}>{expense.category.replace(/_/g, ' ')}</span>
                         {expense.isRecurring && (
                           <span className={`${s.badge}`} style={{ marginLeft: 'var(--int-space-1)', fontSize: 'var(--int-text-xs)', background: 'var(--int-info-light)', color: 'var(--int-info)' }}>
                             {expense.recurringInterval}
@@ -638,11 +640,11 @@ export default function ExpensesPage() {
                         -{formatMoney(expense.amount, expense.currency)}
                       </td>
                       <td>
-                        {expense.paidFromAccountName ? (
-                          <span style={{ fontSize: 'var(--int-text-sm)' }}>{expense.paidFromAccountName}</span>
-                        ) : expense.paidByFounderName ? (
+                        {expense.accountName ? (
+                          <span style={{ fontSize: 'var(--int-text-sm)' }}>{expense.accountName}</span>
+                        ) : expense.payerName ? (
                           <div>
-                            <span style={{ fontSize: 'var(--int-text-sm)', color: 'var(--int-warning)' }}>{expense.paidByFounderName}&apos;s pocket</span>
+                            <span style={{ fontSize: 'var(--int-text-sm)', color: 'var(--int-warning)' }}>{expense.payerName}&apos;s pocket</span>
                             <div style={{ fontSize: 'var(--int-text-xs)', color: 'var(--int-warning)' }}>Needs reimbursement</div>
                           </div>
                         ) : (

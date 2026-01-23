@@ -71,6 +71,28 @@ export async function POST(request: Request) {
     const db = getDb();
     const body = await request.json();
     
+    // Validate profit share percentage
+    if (body.profitSharePercentage !== undefined) {
+      if (body.profitSharePercentage < 0 || body.profitSharePercentage > 100) {
+        return NextResponse.json({ 
+          error: 'Profit share percentage must be between 0 and 100' 
+        }, { status: 400 });
+      }
+      
+      // Check total doesn't exceed 100%
+      const existingFounders = await db
+        .select({ total: sql<number>`COALESCE(SUM(${founders.profitSharePercentage}), 0)` })
+        .from(founders)
+        .where(eq(founders.status, 'active'));
+      
+      const currentTotal = existingFounders[0]?.total || 0;
+      if (currentTotal + body.profitSharePercentage > 100) {
+        return NextResponse.json({ 
+          error: `Total profit share cannot exceed 100%. Current total is ${currentTotal}%, only ${100 - currentTotal}% remaining.` 
+        }, { status: 400 });
+      }
+    }
+    
     const now = new Date();
     const newFounder = {
       id: nanoid(),
@@ -79,7 +101,7 @@ export async function POST(request: Request) {
       phone: body.phone || null,
       profitSharePercentage: body.profitSharePercentage || 50,
       status: 'active' as const,
-      joinedAt: now,
+      joinedAt: body.joinedAt ? new Date(body.joinedAt) : now,
       notes: body.notes || null,
       createdAt: now,
       updatedAt: now,
