@@ -32,6 +32,9 @@ const Icons = {
   star: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>,
   calendar: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>,
   book: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>,
+  finance: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>,
+  wallet: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg>,
+  subscription: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>,
 };
 
 type NavItem = {
@@ -114,9 +117,16 @@ export default function InternalSidebar({
     },
     {
       label: 'Financial',
-      icon: Icons.invoice,
-      roles: ['admin', 'pm'],
+      icon: Icons.finance,
+      roles: ['admin'],
       children: [
+        { label: 'Overview', href: '/internal/finance', icon: Icons.chart },
+        { label: 'Founders', href: '/internal/finance/founders', icon: Icons.users },
+        { label: 'Accounts', href: '/internal/finance/accounts', icon: Icons.wallet },
+        { label: 'Contributions', href: '/internal/finance/contributions', icon: Icons.invoice },
+        { label: 'Distributions', href: '/internal/finance/distributions', icon: Icons.chart },
+        { label: 'Expenses', href: '/internal/finance/expenses', icon: Icons.invoice },
+        { label: 'Subscriptions', href: '/internal/finance/subscriptions', icon: Icons.subscription },
         { label: 'Invoices', href: '/internal/invoices', icon: Icons.invoice },
         { label: 'Reports', href: '/internal/reports', icon: Icons.reports },
       ],
