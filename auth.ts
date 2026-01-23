@@ -79,6 +79,7 @@ export const authOptions: NextAuthOptions = {
         const now = new Date();
         const role = getRoleForEmail(email);
 
+        // Insert or update user
         await db
           .insert(users)
           .values({
@@ -87,6 +88,9 @@ export const authOptions: NextAuthOptions = {
             name: user.name ?? null,
             image: user.image ?? null,
             role,
+            skills: null,
+            capacity: 40,
+            status: 'pending',
             createdAt: now,
             updatedAt: now,
           })
