@@ -159,36 +159,32 @@ export default function FoundersPage() {
         </div>
 
         {/* Share Distribution Overview */}
-        <section className={s.grid3} style={{ marginBottom: 'var(--int-space-6)' }}>
+        <section className={`${s.grid3} ${s.mbLg}`}>
           <div className={s.card}>
-            <div className={s.cardBody} style={{ textAlign: 'center', padding: 'var(--int-space-5)' }}>
-              <div style={{ fontSize: 'var(--int-text-3xl)', fontWeight: 700 }}>{founders.length}</div>
-              <div style={{ color: 'var(--int-text-muted)', fontSize: 'var(--int-text-sm)' }}>Active Founders</div>
+            <div className={`${s.cardBody} ${s.cardBodyCenter}`}>
+              <div className={s.textLg}>{founders.length}</div>
+              <div className={`${s.textSm} ${s.textMuted}`}>Active Founders</div>
             </div>
           </div>
           <div className={s.card}>
-            <div className={s.cardBody} style={{ textAlign: 'center', padding: 'var(--int-space-5)' }}>
-              <div style={{ 
-                fontSize: 'var(--int-text-3xl)', 
-                fontWeight: 700,
-                color: totalSharePercentage === 100 ? 'var(--int-success)' : 'var(--int-warning)'
-              }}>
+            <div className={`${s.cardBody} ${s.cardBodyCenter}`}>
+              <div className={`${s.textLg} ${totalSharePercentage === 100 ? s.textSuccess : s.textWarning}`}>
                 {totalSharePercentage}%
               </div>
-              <div style={{ color: 'var(--int-text-muted)', fontSize: 'var(--int-text-sm)' }}>Total Shares Allocated</div>
+              <div className={`${s.textSm} ${s.textMuted}`}>Total Shares Allocated</div>
               {totalSharePercentage !== 100 && (
-                <div style={{ fontSize: 'var(--int-text-xs)', color: 'var(--int-warning)', marginTop: 'var(--int-space-1)' }}>
+                <div className={`${s.textXs} ${s.textWarning} ${s.mtMd}`}>
                   Should equal 100%
                 </div>
               )}
             </div>
           </div>
           <div className={s.card}>
-            <div className={s.cardBody} style={{ textAlign: 'center', padding: 'var(--int-space-5)' }}>
-              <div style={{ fontSize: 'var(--int-text-3xl)', fontWeight: 700 }}>
+            <div className={`${s.cardBody} ${s.cardBodyCenter}`}>
+              <div className={s.textLg}>
                 {formatMoney(founders.reduce((acc, f) => acc + (f.totalContributions || 0), 0))}
               </div>
-              <div style={{ color: 'var(--int-text-muted)', fontSize: 'var(--int-text-sm)' }}>Total Contributions</div>
+              <div className={`${s.textSm} ${s.textMuted}`}>Total Contributions</div>
             </div>
           </div>
         </section>
@@ -196,7 +192,7 @@ export default function FoundersPage() {
         {/* Form Modal */}
         {showForm && (
           <div className={s.modal} onClick={() => setShowForm(false)}>
-            <div className={s.modalContent} onClick={(e) => e.stopPropagation()} style={{ maxWidth: '500px' }}>
+            <div className={`${s.modalContent} ${s.modalContentMd}`} onClick={(e) => e.stopPropagation()}>
               <div className={s.modalHeader}>
                 <h2>{editingFounder ? 'Edit Founder' : 'Add New Founder'}</h2>
                 <button onClick={() => setShowForm(false)} className={s.modalClose}>&times;</button>
@@ -212,6 +208,7 @@ export default function FoundersPage() {
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder="e.g., Ghulam Mujtaba"
                       required
+                      aria-label="Founder full name"
                     />
                   </div>
                   <div className={s.formGroup}>
@@ -222,6 +219,7 @@ export default function FoundersPage() {
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="founder@megicode.com"
+                      aria-label="Founder email address"
                     />
                   </div>
                   <div className={s.formGroup}>
@@ -232,22 +230,25 @@ export default function FoundersPage() {
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       placeholder="+92 300 1234567"
+                      aria-label="Founder phone number"
                     />
                   </div>
                   <div className={s.formGroup}>
                     <label className={s.label}>Profit Share Percentage *</label>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--int-space-3)' }}>
+                    <div className={`${s.rangeContainer}`}>
                       <input
                         type="range"
                         min="0"
                         max="100"
                         value={formData.profitSharePercentage}
                         onChange={(e) => setFormData({ ...formData, profitSharePercentage: parseInt(e.target.value) })}
+                        className={s.flexRow}
                         style={{ flex: 1 }}
+                        aria-label="Founder profit share percentage"
                       />
-                      <span style={{ fontWeight: 600, minWidth: '50px' }}>{formData.profitSharePercentage}%</span>
+                      <span className={s.rangeValue}>{formData.profitSharePercentage}%</span>
                     </div>
-                    <p style={{ fontSize: 'var(--int-text-xs)', color: 'var(--int-text-muted)', marginTop: 'var(--int-space-1)' }}>
+                    <p className={s.formDescription}>
                       Percentage of distributable profit this founder receives
                     </p>
                   </div>
@@ -259,6 +260,7 @@ export default function FoundersPage() {
                       onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                       placeholder="Any additional notes about this founder..."
                       rows={3}
+                      aria-label="Additional notes about founder"
                     />
                   </div>
                 </div>
@@ -280,13 +282,13 @@ export default function FoundersPage() {
           <div className={s.cardHeader}>
             <h2 className={s.cardTitle}>All Founders</h2>
           </div>
-          <div className={s.cardBody} style={{ padding: 0 }}>
+          <div className={`${s.cardBody} ${s.cardBodyNoPad}`}>
             {loading ? (
-              <div style={{ padding: 'var(--int-space-8)', textAlign: 'center', color: 'var(--int-text-muted)' }}>
+              <div className={s.loadingText}>
                 Loading founders...
               </div>
             ) : founders.length === 0 ? (
-              <div style={{ padding: 'var(--int-space-8)', textAlign: 'center', color: 'var(--int-text-muted)' }}>
+              <div className={s.emptyState}>
                 <p>No founders added yet.</p>
                 <button 
                   onClick={() => setShowForm(true)}
@@ -313,46 +315,31 @@ export default function FoundersPage() {
                   {founders.map((founder) => (
                     <tr key={founder.id}>
                       <td>
-                        <div style={{ fontWeight: 600, fontSize: 'var(--int-text-base)' }}>{founder.name}</div>
+                        <div className={`${s.textBase} ${s.textCenter}`}>{founder.name}</div>
                         <span className={`${s.badge} ${founder.status === 'active' ? s.badgeSuccess : s.badgeWarning}`}>
                           {founder.status}
                         </span>
                       </td>
                       <td>
-                        {founder.email && <div style={{ fontSize: 'var(--int-text-sm)' }}>{founder.email}</div>}
-                        {founder.phone && <div style={{ fontSize: 'var(--int-text-xs)', color: 'var(--int-text-muted)' }}>{founder.phone}</div>}
-                        {!founder.email && !founder.phone && <span style={{ color: 'var(--int-text-muted)' }}>-</span>}
+                        {founder.email && <div className={s.textSm}>{founder.email}</div>}
+                        {founder.phone && <div className={`${s.textXs} ${s.textMuted}`}>{founder.phone}</div>}
+                        {!founder.email && !founder.phone && <span className={s.textMuted}>-</span>}
                       </td>
                       <td>
-                        <div style={{ 
-                          display: 'flex', 
-                          alignItems: 'center', 
-                          gap: 'var(--int-space-2)' 
-                        }}>
-                          <div style={{ 
-                            width: '60px', 
-                            height: '8px', 
-                            background: 'var(--int-border)', 
-                            borderRadius: '4px',
-                            overflow: 'hidden'
-                          }}>
-                            <div style={{ 
-                              width: `${founder.profitSharePercentage}%`, 
-                              height: '100%', 
-                              background: 'var(--int-primary)',
-                              borderRadius: '4px'
-                            }} />
+                        <div className={`${s.flexCenter} ${s.gapXs}`}>
+                          <div className={s.progressBar}>
+                            <div className={s.progressFill} style={{ width: `${founder.profitSharePercentage}%` }} />
                           </div>
-                          <span style={{ fontWeight: 600 }}>{founder.profitSharePercentage}%</span>
+                          <span className={`${s.rangeValue}`}>{founder.profitSharePercentage}%</span>
                         </div>
                       </td>
-                      <td style={{ color: 'var(--int-success)', fontWeight: 600 }}>
+                      <td className={s.textSuccess}>
                         {formatMoney(founder.totalContributions || 0)}
                       </td>
-                      <td style={{ fontWeight: 600 }}>
+                      <td className={s.rangeValue}>
                         {formatMoney(founder.totalDistributions || 0)}
                       </td>
-                      <td style={{ color: 'var(--int-text-muted)', fontSize: 'var(--int-text-sm)' }}>
+                      <td className={`${s.textMuted} ${s.textSm}`}>
                         {formatDate(founder.joinedAt)}
                       </td>
                       <td>
@@ -360,6 +347,7 @@ export default function FoundersPage() {
                           onClick={() => startEdit(founder)}
                           className={`${s.btn} ${s.btnGhost}`}
                           title="Edit"
+                          aria-label={`Edit ${founder.name}`}
                         >
                           {Icons.edit}
                         </button>
@@ -373,10 +361,10 @@ export default function FoundersPage() {
         </div>
 
         {/* Info Card */}
-        <div className={s.card} style={{ marginTop: 'var(--int-space-6)' }}>
+        <div className={`${s.card} ${s.mtLg}`}>
           <div className={s.cardBody}>
-            <h3 style={{ marginBottom: 'var(--int-space-3)' }}>How Profit Sharing Works</h3>
-            <div style={{ fontSize: 'var(--int-text-sm)', color: 'var(--int-text-muted)', lineHeight: 1.6 }}>
+            <h3 className={s.mbMd}>How Profit Sharing Works</h3>
+            <div className={`${s.textSm} ${s.textMuted} ${s.lineHeight}`}>
               <p><strong>1. Project Revenue</strong> - When a project is completed and payment is received.</p>
               <p><strong>2. Expense Deduction</strong> - Project-specific expenses are deducted from revenue.</p>
               <p><strong>3. Company Retention</strong> - 10% (configurable) is retained in the company account for operations.</p>

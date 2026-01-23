@@ -5094,3 +5094,204 @@
   width: 100%;
   height: 100%;
 }
+/* ========== INLINE STYLE REPLACEMENTS ========== */
+
+/* Typography - Large Display */
+.textLg {
+  font-size: var(--int-text-3xl);
+  font-weight: 700;
+}
+
+.textBase {
+  font-size: var(--int-text-base);
+  font-weight: 600;
+}
+
+.textSm {
+  font-size: var(--int-text-sm);
+}
+
+.textXs {
+  font-size: var(--int-text-xs);
+}
+
+.textMuted {
+  color: var(--int-text-muted);
+}
+
+.textPrimary {
+  color: var(--int-primary);
+}
+
+.textSuccess {
+  color: var(--int-success);
+  font-weight: 600;
+}
+
+.textWarning {
+  color: var(--int-warning);
+}
+
+/* Text Alignment */
+.textCenter {
+  text-align: center;
+}
+
+/* Layout Utilities */
+.flexRow {
+  display: flex;
+  flex-direction: row;
+}
+
+.flexCenter {
+  display: flex;
+  align-items: center;
+}
+
+.flexBetween {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.gapXs {
+  gap: var(--int-space-2);
+}
+
+.gapSm {
+  gap: var(--int-space-3);
+}
+
+.gapMd {
+  gap: var(--int-space-4);
+}
+
+/* Padding Utilities */
+.padXs {
+  padding: var(--int-space-1);
+}
+
+.padSm {
+  padding: var(--int-space-3);
+}
+
+.padMd {
+  padding: var(--int-space-5);
+}
+
+.padLg {
+  padding: var(--int-space-6);
+}
+
+.padXl {
+  padding: var(--int-space-8);
+}
+
+.padNone {
+  padding: 0;
+}
+
+/* Margin Utilities */
+.mbXs {
+  margin-bottom: var(--int-space-1);
+}
+
+.mbSm {
+  margin-bottom: var(--int-space-3);
+}
+
+.mbMd {
+  margin-bottom: var(--int-space-5);
+}
+
+.mbLg {
+  margin-bottom: var(--int-space-6);
+}
+
+.mtMd {
+  margin-top: var(--int-space-4);
+}
+
+.mtLg {
+  margin-top: var(--int-space-6);
+}
+
+/* Card specific utilities */
+.cardBodyCenter {
+  text-align: center;
+  padding: var(--int-space-5);
+}
+
+.cardBodyNoPad {
+  padding: 0;
+}
+
+.cardBodyLarge {
+  padding: var(--int-space-8);
+}
+
+/* Progress bar */
+.progressBar {
+  width: 60px;
+  height: 8px;
+  background: var(--int-border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--int-primary);
+  border-radius: 4px;
+}
+
+/* Range input container */
+.rangeContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--int-space-3);
+}
+
+.rangeValue {
+  font-weight: 600;
+  min-width: 50px;
+}
+
+/* Form description text */
+.formDescription {
+  font-size: var(--int-text-xs);
+  color: var(--int-text-muted);
+  margin-top: var(--int-space-1);
+  line-height: 1.6;
+}
+
+/* Modal specific */
+.modalContentMd {
+  max-width: 500px;
+}
+
+.modalContentLg {
+  max-width: 550px;
+}
+
+.loadingText {
+  padding: var(--int-space-8);
+  text-align: center;
+  color: var(--int-text-muted);
+}
+
+.emptyState {
+  padding: var(--int-space-8);
+  text-align: center;
+  color: var(--int-text-muted);
+}
+
+.lineHeight {
+  line-height: 1.6;
+}
+
+.flexNoWrap {
+  display: flex;
+  align-items: center;
+  gap: var(--int-space-2);
+}

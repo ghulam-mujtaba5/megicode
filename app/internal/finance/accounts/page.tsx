@@ -221,29 +221,29 @@ export default function AccountsPage() {
         </div>
 
         {/* Balance Overview */}
-        <section className={s.grid3} style={{ marginBottom: 'var(--int-space-6)' }}>
+        <section className={`${s.grid3} ${s.mbLg}`}>
           <div className={s.card}>
-            <div className={s.cardBody} style={{ textAlign: 'center', padding: 'var(--int-space-5)' }}>
-              <div style={{ color: 'var(--int-primary)', fontSize: 'var(--int-text-2xl)', fontWeight: 700 }}>
+            <div className={`${s.cardBody} ${s.cardBodyCenter}`}>
+              <div className={`${s.textLg} ${s.textPrimary}`}>
                 {formatMoney(totalCompanyBalance)}
               </div>
-              <div style={{ color: 'var(--int-text-muted)', fontSize: 'var(--int-text-sm)' }}>Company Balance</div>
+              <div className={`${s.textSm} ${s.textMuted}`}>Company Balance</div>
             </div>
           </div>
           <div className={s.card}>
-            <div className={s.cardBody} style={{ textAlign: 'center', padding: 'var(--int-space-5)' }}>
-              <div style={{ color: 'var(--int-success)', fontSize: 'var(--int-text-2xl)', fontWeight: 700 }}>
+            <div className={`${s.cardBody} ${s.cardBodyCenter}`}>
+              <div className={`${s.textLg} ${s.textSuccess}`}>
                 {formatMoney(totalFounderBalance)}
               </div>
-              <div style={{ color: 'var(--int-text-muted)', fontSize: 'var(--int-text-sm)' }}>Founder Accounts Total</div>
+              <div className={`${s.textSm} ${s.textMuted}`}>Founder Accounts Total</div>
             </div>
           </div>
           <div className={s.card}>
-            <div className={s.cardBody} style={{ textAlign: 'center', padding: 'var(--int-space-5)' }}>
-              <div style={{ fontSize: 'var(--int-text-2xl)', fontWeight: 700 }}>
+            <div className={`${s.cardBody} ${s.cardBodyCenter}`}>
+              <div className={s.textLg}>
                 {formatMoney(totalAllBalance)}
               </div>
-              <div style={{ color: 'var(--int-text-muted)', fontSize: 'var(--int-text-sm)' }}>Total All Accounts</div>
+              <div className={`${s.textSm} ${s.textMuted}`}>Total All Accounts</div>
             </div>
           </div>
         </section>
@@ -251,7 +251,7 @@ export default function AccountsPage() {
         {/* Form Modal */}
         {showForm && (
           <div className={s.modal} onClick={() => setShowForm(false)}>
-            <div className={s.modalContent} onClick={(e) => e.stopPropagation()} style={{ maxWidth: '550px' }}>
+            <div className={`${s.modalContent} ${s.modalContentLg}`} onClick={(e) => e.stopPropagation()}>
               <div className={s.modalHeader}>
                 <h2>{editingAccount ? 'Edit Account' : 'Add New Account'}</h2>
                 <button onClick={() => setShowForm(false)} className={s.modalClose}>&times;</button>
@@ -267,6 +267,7 @@ export default function AccountsPage() {
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder="e.g., Megicode Main Account"
                       required
+                      aria-label="Account name"
                     />
                   </div>
                   
@@ -278,6 +279,7 @@ export default function AccountsPage() {
                         value={formData.accountType}
                         onChange={(e) => setFormData({ ...formData, accountType: e.target.value as Account['accountType'] })}
                         required
+                        aria-label="Account type"
                       >
                         <option value="company_central">Company Central</option>
                         <option value="founder_personal">Founder Personal</option>
@@ -292,6 +294,7 @@ export default function AccountsPage() {
                         className={s.select}
                         value={formData.currency}
                         onChange={(e) => setFormData({ ...formData, currency: e.target.value })}
+                        aria-label="Currency"
                       >
                         <option value="PKR">PKR (Pakistani Rupee)</option>
                         <option value="USD">USD (US Dollar)</option>
@@ -309,6 +312,7 @@ export default function AccountsPage() {
                         value={formData.founderId}
                         onChange={(e) => setFormData({ ...formData, founderId: e.target.value })}
                         required
+                        aria-label="Select founder"
                       >
                         <option value="">Select Founder</option>
                         {founders.map((f) => (
@@ -327,6 +331,7 @@ export default function AccountsPage() {
                         value={formData.bankName}
                         onChange={(e) => setFormData({ ...formData, bankName: e.target.value })}
                         placeholder="e.g., Meezan Bank"
+                        aria-label="Bank name"
                       />
                     </div>
                     <div className={s.formGroup}>
@@ -338,6 +343,7 @@ export default function AccountsPage() {
                         onChange={(e) => setFormData({ ...formData, accountNumber: e.target.value })}
                         placeholder="e.g., 1234"
                         maxLength={4}
+                        aria-label="Account number last 4 digits"
                       />
                     </div>
                   </div>
@@ -348,6 +354,7 @@ export default function AccountsPage() {
                       className={s.select}
                       value={formData.walletProvider}
                       onChange={(e) => setFormData({ ...formData, walletProvider: e.target.value })}
+                      aria-label="Wallet provider"
                     >
                       <option value="">Not a wallet</option>
                       <option value="JazzCash">JazzCash</option>
@@ -360,8 +367,8 @@ export default function AccountsPage() {
 
                   <div className={s.formGroup}>
                     <label className={s.label}>Current Balance</label>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--int-space-2)' }}>
-                      <span style={{ color: 'var(--int-text-muted)' }}>{formData.currency}</span>
+                    <div className={s.flexNoWrap}>
+                      <span className={s.textMuted}>{formData.currency}</span>
                       <input
                         type="number"
                         className={s.input}
@@ -369,19 +376,21 @@ export default function AccountsPage() {
                         onChange={(e) => setFormData({ ...formData, currentBalance: parseFloat(e.target.value) || 0 })}
                         placeholder="0"
                         step="0.01"
+                        aria-label="Current account balance"
                       />
                     </div>
-                    <p style={{ fontSize: 'var(--int-text-xs)', color: 'var(--int-text-muted)', marginTop: 'var(--int-space-1)' }}>
+                    <p className={s.formDescription}>
                       Enter the current balance in this account
                     </p>
                   </div>
 
                   <div className={s.formGroup}>
-                    <label style={{ display: 'flex', alignItems: 'center', gap: 'var(--int-space-2)', cursor: 'pointer' }}>
+                    <label className={`${s.flexCenter} ${s.gapSm}`} style={{ cursor: 'pointer' }}>
                       <input
                         type="checkbox"
                         checked={formData.isPrimary}
                         onChange={(e) => setFormData({ ...formData, isPrimary: e.target.checked })}
+                        aria-label="Set as primary account"
                       />
                       <span className={s.label} style={{ margin: 0 }}>Primary Account</span>
                     </label>
@@ -395,6 +404,7 @@ export default function AccountsPage() {
                       onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                       placeholder="Any additional notes..."
                       rows={2}
+                      aria-label="Account notes"
                     />
                   </div>
                 </div>
@@ -412,15 +422,15 @@ export default function AccountsPage() {
         )}
 
         {/* Company Central Accounts */}
-        <div className={s.card} style={{ marginBottom: 'var(--int-space-6)' }}>
+        <div className={`${s.card} ${s.mbLg}`}>
           <div className={s.cardHeader}>
             <h2 className={s.cardTitle}>Company Central Accounts</h2>
           </div>
-          <div className={s.cardBody} style={{ padding: 0 }}>
+          <div className={`${s.cardBody} ${s.cardBodyNoPad}`}>
             {loading ? (
-              <div style={{ padding: 'var(--int-space-8)', textAlign: 'center', color: 'var(--int-text-muted)' }}>Loading...</div>
+              <div className={s.loadingText}>Loading...</div>
             ) : companyAccounts.length === 0 ? (
-              <div style={{ padding: 'var(--int-space-6)', textAlign: 'center', color: 'var(--int-text-muted)' }}>
+              <div className={`${s.emptyState}`}>
                 <p>No company central accounts added yet.</p>
                 <button 
                   onClick={() => { setShowForm(true); resetForm(); }}
@@ -445,7 +455,7 @@ export default function AccountsPage() {
                   {companyAccounts.map((account) => (
                     <tr key={account.id}>
                       <td>
-                        <div style={{ fontWeight: 600 }}>{account.name}</div>
+                        <div className={s.rangeValue}>{account.name}</div>
                         {account.isPrimary && (
                           <span className={`${s.badge} ${s.badgeSuccess}`} style={{ fontSize: 'var(--int-text-xs)' }}>Primary</span>
                         )}

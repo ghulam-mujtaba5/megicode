@@ -1919,6 +1919,169 @@ export const subscriptions = sqliteTable(
   })
 );
 
+// ==================== EXPENSE TAGS ====================
+export const expenseTags = sqliteTable(
+  'expense_tags',
+  {
+    id: text('id').primaryKey(),
+    name: text('name').notNull(),
+    color: text('color').notNull().default('#6366f1'), // Hex color for UI
+    description: text('description'),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    nameIdx: uniqueIndex('expense_tags_name_unique').on(table.name),
+  })
+);
+
+// Expense to Tag mapping (many-to-many)
+export const expenseTagMappings = sqliteTable(
+  'expense_tag_mappings',
+  {
+    id: text('id').primaryKey(),
+    expenseId: text('expense_id').notNull().references(() => expenses.id, { onDelete: 'cascade' }),
+    tagId: text('tag_id').notNull().references(() => expenseTags.id, { onDelete: 'cascade' }),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    expenseIdx: index('expense_tag_mappings_expense_idx').on(table.expenseId),
+    tagIdx: index('expense_tag_mappings_tag_idx').on(table.tagId),
+    uniqueMapping: uniqueIndex('expense_tag_mappings_unique').on(table.expenseId, table.tagId),
+  })
+);
+
+// ==================== BUDGET CATEGORIES ====================
+export type BudgetPeriodType = 'monthly' | 'quarterly' | 'yearly';
+export type BudgetStatus = 'active' | 'draft' | 'closed';
+
+export const budgets = sqliteTable(
+  'budgets',
+  {
+    id: text('id').primaryKey(),
+    name: text('name').notNull(),
+    periodType: text('period_type', { enum: ['monthly', 'quarterly', 'yearly'] }).notNull(),
+    periodStart: integer('period_start', { mode: 'timestamp_ms' }).notNull(),
+    periodEnd: integer('period_end', { mode: 'timestamp_ms' }).notNull(),
+    totalBudget: integer('total_budget').notNull().default(0), // In smallest currency unit
+    currency: text('currency').notNull().default('PKR'),
+    status: text('status', { enum: ['active', 'draft', 'closed'] }).notNull().default('active'),
+    notes: text('notes'),
+    createdByUserId: text('created_by_user_id').references(() => users.id),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+    updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    periodIdx: index('budgets_period_idx').on(table.periodStart, table.periodEnd),
+    statusIdx: index('budgets_status_idx').on(table.status),
+  })
+);
+
+export const budgetCategories = sqliteTable(
+  'budget_categories',
+  {
+    id: text('id').primaryKey(),
+    budgetId: text('budget_id').notNull().references(() => budgets.id, { onDelete: 'cascade' }),
+    category: text('category', { 
+      enum: ['domain', 'hosting', 'software_subscription', 'hardware', 'marketing', 
+             'legal', 'office', 'travel', 'utilities', 'contractor', 
+             'product_development', 'project_cost', 'misc'] 
+    }).notNull(),
+    allocatedAmount: integer('allocated_amount').notNull().default(0), // Budgeted amount
+    spentAmount: integer('spent_amount').notNull().default(0), // Actual spent (auto-calculated)
+    alertThreshold: integer('alert_threshold').default(80), // Percentage to trigger alert
+    notes: text('notes'),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+    updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    budgetIdx: index('budget_categories_budget_idx').on(table.budgetId),
+    categoryIdx: index('budget_categories_category_idx').on(table.category),
+    uniqueBudgetCategory: uniqueIndex('budget_categories_unique').on(table.budgetId, table.category),
+  })
+);
+
+// ==================== FOUNDER EQUITY HISTORY ====================
+export type EquityChangeType = 'initial' | 'dilution' | 'transfer' | 'buyback' | 'vesting' | 'adjustment';
+
+export const founderEquityHistory = sqliteTable(
+  'founder_equity_history',
+  {
+    id: text('id').primaryKey(),
+    founderId: text('founder_id').notNull().references(() => founders.id),
+    previousPercentage: integer('previous_percentage').notNull(),
+    newPercentage: integer('new_percentage').notNull(),
+    changeType: text('change_type', { 
+      enum: ['initial', 'dilution', 'transfer', 'buyback', 'vesting', 'adjustment'] 
+    }).notNull(),
+    reason: text('reason'), // Explanation for the change
+    effectiveDate: integer('effective_date', { mode: 'timestamp_ms' }).notNull(),
+    approvedByUserId: text('approved_by_user_id').references(() => users.id),
+    documentUrl: text('document_url'), // Link to agreement/document
+    notes: text('notes'),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    founderIdx: index('founder_equity_history_founder_idx').on(table.founderId),
+    dateIdx: index('founder_equity_history_date_idx').on(table.effectiveDate),
+  })
+);
+
+// ==================== FOUNDER VESTING SCHEDULES ====================
+export type VestingStatus = 'pending' | 'active' | 'completed' | 'cancelled';
+
+export const founderVestingSchedules = sqliteTable(
+  'founder_vesting_schedules',
+  {
+    id: text('id').primaryKey(),
+    founderId: text('founder_id').notNull().references(() => founders.id),
+    totalEquity: integer('total_equity').notNull(), // Total percentage to vest
+    vestedEquity: integer('vested_equity').notNull().default(0), // Already vested
+    vestingStartDate: integer('vesting_start_date', { mode: 'timestamp_ms' }).notNull(),
+    vestingEndDate: integer('vesting_end_date', { mode: 'timestamp_ms' }).notNull(),
+    cliffMonths: integer('cliff_months').notNull().default(12), // Months before vesting starts
+    cliffDate: integer('cliff_date', { mode: 'timestamp_ms' }),
+    vestingPeriodMonths: integer('vesting_period_months').notNull().default(48), // Total vesting period
+    vestingIntervalMonths: integer('vesting_interval_months').notNull().default(1), // How often vesting occurs
+    status: text('status', { enum: ['pending', 'active', 'completed', 'cancelled'] }).notNull().default('pending'),
+    notes: text('notes'),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+    updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    founderIdx: index('founder_vesting_founder_idx').on(table.founderId),
+    statusIdx: index('founder_vesting_status_idx').on(table.status),
+  })
+);
+
+// ==================== FOUNDER DRAWS/ADVANCES ====================
+export type DrawStatus = 'pending' | 'approved' | 'paid' | 'repaid' | 'cancelled';
+
+export const founderDraws = sqliteTable(
+  'founder_draws',
+  {
+    id: text('id').primaryKey(),
+    founderId: text('founder_id').notNull().references(() => founders.id),
+    amount: integer('amount').notNull(),
+    currency: text('currency').notNull().default('PKR'),
+    purpose: text('purpose'),
+    status: text('status', { enum: ['pending', 'approved', 'paid', 'repaid', 'cancelled'] }).notNull().default('pending'),
+    requestedAt: integer('requested_at', { mode: 'timestamp_ms' }).notNull(),
+    approvedAt: integer('approved_at', { mode: 'timestamp_ms' }),
+    paidAt: integer('paid_at', { mode: 'timestamp_ms' }),
+    repaidAt: integer('repaid_at', { mode: 'timestamp_ms' }),
+    repaidAmount: integer('repaid_amount').default(0),
+    fromAccountId: text('from_account_id').references(() => companyAccounts.id),
+    approvedByUserId: text('approved_by_user_id').references(() => users.id),
+    notes: text('notes'),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' }).notNull(),
+    updatedAt: integer('updated_at', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (table) => ({
+    founderIdx: index('founder_draws_founder_idx').on(table.founderId),
+    statusIdx: index('founder_draws_status_idx').on(table.status),
+  })
+);
+
 // Type exports for TypeScript
 export type Founder = typeof founders.$inferSelect;
 export type NewFounder = typeof founders.$inferInsert;
@@ -1935,3 +2098,11 @@ export type ProfitDistribution = typeof profitDistributions.$inferSelect;
 export type FounderDistributionItem = typeof founderDistributionItems.$inferSelect;
 export type FinancialTransaction = typeof financialTransactions.$inferSelect;
 export type Subscription = typeof subscriptions.$inferSelect;
+export type ExpenseTag = typeof expenseTags.$inferSelect;
+export type NewExpenseTag = typeof expenseTags.$inferInsert;
+export type Budget = typeof budgets.$inferSelect;
+export type NewBudget = typeof budgets.$inferInsert;
+export type BudgetCategory = typeof budgetCategories.$inferSelect;
+export type FounderEquityHistory = typeof founderEquityHistory.$inferSelect;
+export type FounderVestingSchedule = typeof founderVestingSchedules.$inferSelect;
+export type FounderDraw = typeof founderDraws.$inferSelect;
