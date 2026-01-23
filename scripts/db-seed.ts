@@ -78,6 +78,9 @@ async function seed() {
   await safeDelete(schema.projects, 'projects');
   await safeDelete(schema.leads, 'leads');
   await safeDelete(schema.clients, 'clients');
+  await safeDelete(schema.founderContributions, 'founderContributions');
+  await safeDelete(schema.companyAccounts, 'companyAccounts');
+  await safeDelete(schema.founders, 'founders');
   await safeDelete(schema.users, 'users');
   
   try {
@@ -128,7 +131,152 @@ async function seed() {
   await db.insert(schema.users).values(users);
   console.log(`  ✓ Created ${users.length} users`);
 
-  // 2. Create sample clients
+  // 2. Create founders and financial data
+  console.log('Creating founders and financial accounts...');
+  const founders = [
+    {
+      id: generateId(),
+      name: 'Ghulam Mujtaba',
+      email: 'ghulam@megicode.com',
+      phone: '+92-300-1234567',
+      userId: users[0].id,
+      profitSharePercentage: 50,
+      status: 'active' as const,
+      joinedAt: new Date('2024-01-15'),
+      notes: 'Co-founder & CTO - Leads technical architecture and development',
+      createdAt: now,
+      updatedAt: now,
+    },
+    {
+      id: generateId(),
+      name: 'Azan Wahla',
+      email: 'azan@megicode.com',
+      phone: '+92-300-7654321',
+      userId: users[1].id,
+      profitSharePercentage: 50,
+      status: 'active' as const,
+      joinedAt: new Date('2024-01-15'),
+      notes: 'Co-founder & CEO - Manages business operations and client relations',
+      createdAt: now,
+      updatedAt: now,
+    },
+  ];
+  await db.insert(schema.founders).values(founders);
+  console.log(`  ✓ Created ${founders.length} founders`);
+
+  // Create company accounts
+  const companyAccounts = [
+    {
+      id: generateId(),
+      name: 'Megicode Central Account',
+      accountType: 'company_central' as const,
+      currency: 'PKR',
+      currentBalance: 50000000, // 500,000 PKR
+      status: 'active' as const,
+      isPrimary: true,
+      bankName: 'HBL',
+      accountNumber: '**** 2891',
+      notes: 'Main company operational account',
+      createdAt: now,
+      updatedAt: now,
+    },
+    {
+      id: generateId(),
+      name: `${founders[0].name} Personal Account`,
+      accountType: 'founder_personal' as const,
+      founderId: founders[0].id,
+      currency: 'PKR',
+      currentBalance: 25000000, // 250,000 PKR
+      status: 'active' as const,
+      isPrimary: true,
+      bankName: 'UBL',
+      walletProvider: 'JazzCash',
+      notes: 'Personal earnings distribution account',
+      createdAt: now,
+      updatedAt: now,
+    },
+    {
+      id: generateId(),
+      name: `${founders[1].name} Personal Account`,
+      accountType: 'founder_personal' as const,
+      founderId: founders[1].id,
+      currency: 'PKR',
+      currentBalance: 25000000, // 250,000 PKR
+      status: 'active' as const,
+      isPrimary: true,
+      bankName: 'MCB',
+      walletProvider: 'EasyPaisa',
+      notes: 'Personal earnings distribution account',
+      createdAt: now,
+      updatedAt: now,
+    },
+  ];
+  await db.insert(schema.companyAccounts).values(companyAccounts);
+  console.log(`  ✓ Created ${companyAccounts.length} company accounts`);
+
+  // Create founder contributions
+  const contributions = [
+    {
+      id: generateId(),
+      founderId: founders[0].id,
+      amount: 5000000, // 50,000 PKR
+      currency: 'PKR',
+      contributionType: 'initial_investment' as const,
+      purpose: 'Domain purchase, hosting setup, and initial infrastructure',
+      toAccountId: companyAccounts[0].id,
+      status: 'confirmed' as const,
+      contributedAt: new Date('2024-01-15'),
+      notes: 'Initial capital contribution for company setup',
+      createdAt: now,
+      updatedAt: now,
+    },
+    {
+      id: generateId(),
+      founderId: founders[1].id,
+      amount: 5000000, // 50,000 PKR
+      currency: 'PKR',
+      contributionType: 'initial_investment' as const,
+      purpose: 'Legal registration, business development tools, and marketing',
+      toAccountId: companyAccounts[0].id,
+      status: 'confirmed' as const,
+      contributedAt: new Date('2024-01-15'),
+      notes: 'Initial capital contribution for company setup',
+      createdAt: now,
+      updatedAt: now,
+    },
+    {
+      id: generateId(),
+      founderId: founders[0].id,
+      amount: 2500000, // 25,000 PKR
+      currency: 'PKR',
+      contributionType: 'additional_capital' as const,
+      purpose: 'Software licenses and development tools',
+      toAccountId: companyAccounts[0].id,
+      status: 'confirmed' as const,
+      contributedAt: new Date('2024-03-20'),
+      notes: 'Additional contribution for tools and software subscriptions',
+      createdAt: now,
+      updatedAt: now,
+    },
+    {
+      id: generateId(),
+      founderId: founders[1].id,
+      amount: 3000000, // 30,000 PKR
+      currency: 'PKR',
+      contributionType: 'additional_capital' as const,
+      purpose: 'Marketing and client acquisition',
+      toAccountId: companyAccounts[0].id,
+      status: 'confirmed' as const,
+      contributedAt: new Date('2024-03-20'),
+      notes: 'Additional funding for growth and business development',
+      createdAt: now,
+      updatedAt: now,
+    },
+  ];
+  await db.insert(schema.founderContributions).values(contributions);
+  console.log(`  ✓ Created ${contributions.length} founder contributions`);
+
+  // 2a. Create sample clients
   console.log('Creating clients...');
   const clients = [
     {
