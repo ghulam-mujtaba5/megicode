@@ -3,6 +3,9 @@ import { expenseTags, expenseTagMappings, expenses } from '@/lib/db/schema';
 import { desc, sql, inArray } from 'drizzle-orm';
 import ExpenseTagsClient from './ExpenseTagsClient';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export const metadata = {
   title: 'Expense Tags | Internal Portal',
   description: 'Manage and organize expense tags for better categorization',

@@ -3,6 +3,9 @@ import { founders, founderEquityHistory, founderVestingSchedules, founderDraws, 
 import { eq, desc, sql } from 'drizzle-orm';
 import EquityTrackingClient from './EquityTrackingClient';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export const metadata = {
   title: 'Equity Tracking | Internal Portal',
   description: 'Track founder equity, vesting schedules, and ownership history',

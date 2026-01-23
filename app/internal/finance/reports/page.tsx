@@ -17,6 +17,9 @@ import {
 } from '@/lib/db/schema';
 import FinancialReportsClient from './FinancialReportsClient';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default async function FinancialReportsPage() {
   await requireRole(['admin', 'pm']);
   const db = getDb();
@@ -64,11 +67,11 @@ export default async function FinancialReportsPage() {
   for (let i = 11; i >= 0; i--) {
     const monthStart = new Date(now.getFullYear(), now.getMonth() - i, 1);
     const monthEnd = new Date(now.getFullYear(), now.getMonth() - i + 1, 0);
-    const monthExpenses = allExpenses.filter(exp => {
+    const monthExp = allExpenses.filter(exp => {
       const expDate = new Date(exp.expenseDate);
       return expDate >= monthStart && expDate <= monthEnd;
     });
-    const total = monthExpenses.reduce((sum, exp) => sum + exp.amount, 0);
+    const total = monthExp.reduce((sum, exp) => sum + exp.amount, 0);
     monthlyExpenses.push({
       month: monthStart.toLocaleDateString('en-US', { month: 'short', year: '2-digit' }),
       amount: total,
