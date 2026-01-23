@@ -30,11 +30,11 @@ $env_vars = @{
     'INTERNAL_ALLOWED_DOMAINS' = 'megicode.com'
     'GOOGLE_CLIENT_ID' = 'your_google_client_id_here'
     'GOOGLE_CLIENT_SECRET' = 'your_google_client_secret_here'
-    'TURSO_DATABASE_URL' = 'libsql://megicode-internal-megicode.aws-eu-west-1.turso.io'
-    'TURSO_AUTH_TOKEN' = 'eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NjkxMzQxNTksImlkIjoiYzcwNjc0OTctOWMyZi00Y2FjLWFiZjctYzM2Mjg4MDFlNjliIiwicmlkIjoiNTAzNjQ4ZGItOGUxMi00NWQyLWE3NWUtOGE5MWM3MDlkMmRkIn0.OVcoF8Yw_BjmfkPHTvDY_hY4tTdA77NpSvZC10ngIjwNYXz_kfzceZ3GNPIbHahUjaDfuZLc2HHV-bNJL1OhAA'
+    'TURSO_DATABASE_URL' = 'your_turso_database_url_here'
+    'TURSO_AUTH_TOKEN' = 'your_turso_auth_token_here'
     'NEXT_PUBLIC_SITE_URL' = 'https://megicode.com'
     'NEXT_PUBLIC_GA_MEASUREMENT_ID' = 'G-LXPDFC5P0R'
-    'ZOHO_USER' = 'contact@megicode.com'
+    'ZOHO_USER' = 'your_zoho_user_here'
     'ZOHO_PASS' = 'your_zoho_password_here'
 }
 
