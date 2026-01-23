@@ -322,8 +322,8 @@ export async function getUnreadCount(userId: string): Promise<number> {
       )
     ))
     .limit(1);
-  const resultRows = countResult;
-  const result = resultRows[0];
+  
+  return result[0]?.count ?? 0;
 }
 
 /**

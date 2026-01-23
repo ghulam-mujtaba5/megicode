@@ -53,7 +53,7 @@ export async function getActiveBusinessProcessDefinition(): Promise<{
   const db = getDb();
   const defaultDef = getDefaultBusinessProcessDefinition();
 
-  const existing = await db
+  const existingRows = await db
     .select()
     .from(processDefinitions)
     .where(
@@ -65,6 +65,7 @@ export async function getActiveBusinessProcessDefinition(): Promise<{
     .orderBy(desc(processDefinitions.version))
     .limit(1);
   const existing = existingRows[0];
+  if (existing) {
     const storedDef = existing.json as unknown as BusinessProcessDefinition | null;
     // Ensure the definition has required properties, falling back to default if missing
     const definition: BusinessProcessDefinition = {

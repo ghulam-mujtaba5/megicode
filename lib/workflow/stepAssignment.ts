@@ -270,12 +270,13 @@ export async function getTeamMemberProfiles(
     const availabilityScore = 100 - workloadScore;
 
     // Get last assignment
-    const lastAssignment = await db
+    const lastAssignmentRows = await db
       .select()
       .from(businessProcessStepInstances)
       .where(eq(businessProcessStepInstances.assignedToUserId, user.id))
       .orderBy(desc(businessProcessStepInstances.createdAt))
       .limit(1);
+    const lastAssignment = lastAssignmentRows[0];
 
     // Derive skills from role (could be enhanced with actual skill tracking)
     const skillsByRole: Record<string, string[]> = {
