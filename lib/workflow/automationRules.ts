@@ -430,7 +430,8 @@ async function executeEmailAction(
 
   // Resolve recipient
   if (config.to === 'assignee' && context.assignedUserId) {
-    const user = await db.select().from(users).where(eq(users.id, context.assignedUserId)).get();
+    const userRows = await db.select().from(users).where(eq(users.id, context.assignedUserId)).limit(1);
+    const user = userRows[0];
     toEmail = user?.email;
   } else if (['pm', 'admin', 'dev'].includes(config.to)) {
     const roleUsers = await db.select().from(users).where(eq(users.role, config.to as any)).limit(5).all();
@@ -438,9 +439,11 @@ async function executeEmailAction(
   } else if (config.to === 'client' && context.processData.leadEmail) {
     toEmail = context.processData.leadEmail;
   } else if (config.to === 'project_owner' && context.processData.projectId) {
-    const project = await db.select().from(projects).where(eq(projects.id, context.processData.projectId)).get();
+    const projectRows = await db.select().from(projects).where(eq(projects.id, context.processData.projectId)).limit(1);
+    const project = projectRows[0];
     if (project?.ownerUserId) {
-      const owner = await db.select().from(users).where(eq(users.id, project.ownerUserId)).get();
+      const ownerRows = await db.select().from(users).where(eq(users.id, project.ownerUserId)).limit(1);
+      const owner = ownerRows[0];
       toEmail = owner?.email;
     }
   } else if (config.to.includes('@')) {
@@ -481,7 +484,8 @@ async function executeTaskAction(
     const roleUsers = await db.select().from(users).where(eq(users.role, config.assignTo as any)).limit(1).all();
     assigneeId = roleUsers[0]?.id || null;
   } else if (config.assignTo === 'project_owner' && context.processData.projectId) {
-    const project = await db.select().from(projects).where(eq(projects.id, context.processData.projectId)).get();
+    const projectRows = await db.select().from(projects).where(eq(projects.id, context.processData.projectId)).limit(1);
+    const project = projectRows[0];
     assigneeId = project?.ownerUserId || null;
   }
 

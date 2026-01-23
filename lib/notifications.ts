@@ -321,9 +321,9 @@ export async function getUnreadCount(userId: string): Promise<number> {
         lt(sql`${Date.now()}`, notifications.expiresAt)
       )
     ))
-    .get();
-
-  return result?.count ?? 0;
+    .limit(1);
+  const resultRows = countResult;
+  const result = resultRows[0];
 }
 
 /**
@@ -455,11 +455,12 @@ export async function getUserNotificationPreferences(
 ): Promise<typeof userNotificationPreferences.$inferSelect | null> {
   const db = getDb();
 
-  const prefs = await db
+  const prefRows = await db
     .select()
     .from(userNotificationPreferences)
     .where(eq(userNotificationPreferences.userId, userId))
-    .get();
+    .limit(1);
+  const prefs = prefRows[0];
 
   return prefs || null;
 }

@@ -171,7 +171,8 @@ export const authOptions: NextAuthOptions = {
       if (!email) return token;
 
       const db = getDb();
-      const row = await db.select().from(users).where(eq(users.email, email)).get();
+      const rows = await db.select().from(users).where(eq(users.email, email)).limit(1);
+      const row = rows[0];
 
       if (row) {
         token.uid = row.id;

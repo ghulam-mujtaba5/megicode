@@ -74,7 +74,8 @@ export async function POST(request: NextRequest) {
     const { leadId, recalculate = false } = body;
 
     // Fetch the lead
-    const lead = await getDb().select().from(leads).where(eq(leads.id, leadId)).get();
+    const leadRows = await getDb().select().from(leads).where(eq(leads.id, leadId)).limit(1);
+    const lead = leadRows[0];
     if (!lead) {
       return NextResponse.json({ error: 'Lead not found' }, { status: 404 });
     }

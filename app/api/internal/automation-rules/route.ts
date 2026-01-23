@@ -89,11 +89,12 @@ export async function PATCH(request: NextRequest) {
     const db = getDb();
     const now = new Date();
     
-    const existing = await db
+    const existingRows = await db
       .select()
       .from(automationRulesConfig)
       .where(eq(automationRulesConfig.id, id))
-      .get();
+      .limit(1);
+    const existing = existingRows[0];
     
     if (!existing) {
       return NextResponse.json(
@@ -148,11 +149,12 @@ export async function DELETE(request: NextRequest) {
     const db = getDb();
     
     // Check if it's a system rule
-    const rule = await db
+    const ruleRows = await db
       .select()
       .from(automationRulesConfig)
       .where(eq(automationRulesConfig.id, id))
-      .get();
+      .limit(1);
+    const rule = ruleRows[0];
     
     if (!rule) {
       return NextResponse.json(

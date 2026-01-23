@@ -43,11 +43,12 @@ export async function PATCH(request: NextRequest) {
     const now = new Date();
     
     // Check if setting exists
-    const existing = await db
+    const existingRows = await db
       .select()
       .from(systemSettings)
       .where(eq(systemSettings.key, key))
-      .get();
+      .limit(1);
+    const existing = existingRows[0];
     
     if (!existing) {
       return NextResponse.json(

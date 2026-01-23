@@ -37,11 +37,12 @@ export async function POST(
     const { stepKey, action, data, notes } = body;
 
     // Validate process instance exists
-    const instance = await db
+    const instanceRows = await db
       .select()
       .from(processInstances)
       .where(eq(processInstances.id, instanceId))
-      .get();
+      .limit(1);
+    const instance = instanceRows[0];
 
     if (!instance) {
       return NextResponse.json({ error: 'Process instance not found' }, { status: 404 });
@@ -177,11 +178,12 @@ export async function POST(
     }
 
     // Get updated instance
-    const updatedInstance = await db
+    const updatedInstanceRows = await db
       .select()
       .from(processInstances)
       .where(eq(processInstances.id, instanceId))
-      .get();
+      .limit(1);
+    const updatedInstance = updatedInstanceRows[0];
 
     const newStep = updatedInstance?.currentStepKey
       ? getStepByKey(definition, updatedInstance.currentStepKey)
@@ -228,11 +230,12 @@ export async function GET(
   const db = getDb();
 
   try {
-    const instance = await db
+    const instanceRows = await db
       .select()
       .from(processInstances)
       .where(eq(processInstances.id, instanceId))
-      .get();
+      .limit(1);
+    const instance = instanceRows[0];
 
     if (!instance) {
       return NextResponse.json({ error: 'Process instance not found' }, { status: 404 });

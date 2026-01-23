@@ -47,11 +47,12 @@ const CACHE_TTL = 60000; // 1 minute
  */
 export async function getSetting(key: SettingKey): Promise<string | null> {
   const db = getDb();
-  const setting = await db
+  const settingRows = await db
     .select()
     .from(systemSettings)
     .where(eq(systemSettings.key, key))
-    .get();
+    .limit(1);
+  const setting = settingRows[0];
   
   return setting?.value ?? null;
 }

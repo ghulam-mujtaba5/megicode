@@ -20,7 +20,8 @@ export async function updateTaskTitle(taskId: string, title: string) {
 
   try {
     const db = getDb();
-    const oldTask = await db.select().from(tasks).where(eq(tasks.id, parsed.data.taskId)).get();
+    const oldTaskRows = await db.select().from(tasks).where(eq(tasks.id, parsed.data.taskId)).limit(1);
+    const oldTask = oldTaskRows[0];
 
     await db
       .update(tasks)

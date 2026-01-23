@@ -38,12 +38,13 @@ export function getDefaultProcessJson(): ProcessDefinitionJson {
 export async function ensureActiveDefaultProcessDefinition() {
   const db = getDb();
 
-  const active = await db
+  const activeRows = await db
     .select()
     .from(processDefinitions)
     .where(and(eq(processDefinitions.key, DEFAULT_PROCESS_KEY), eq(processDefinitions.isActive, true)))
     .orderBy(desc(processDefinitions.version))
-    .get();
+    .limit(1);
+  const active = activeRows[0];
 
   if (active) {
     return {

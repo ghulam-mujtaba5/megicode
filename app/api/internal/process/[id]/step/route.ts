@@ -31,11 +31,12 @@ export async function GET(
   const db = getDb();
 
   try {
-    const instance = await db
+    const instanceRows = await db
       .select()
       .from(processInstances)
       .where(eq(processInstances.id, id))
-      .get();
+      .limit(1);
+    const instance = instanceRows[0];
 
     if (!instance) {
       return NextResponse.json({ error: 'Process instance not found' }, { status: 404 });
@@ -140,11 +141,12 @@ export async function POST(
     const body = await request.json();
     const { stepKey, outputData, notes, gatewayDecision, skipValidation } = body;
 
-    const instance = await db
+    const instanceRows = await db
       .select()
       .from(processInstances)
       .where(eq(processInstances.id, id))
-      .get();
+      .limit(1);
+    const instance = instanceRows[0];
 
     if (!instance) {
       return NextResponse.json({ error: 'Process instance not found' }, { status: 404 });

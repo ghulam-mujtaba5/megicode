@@ -275,8 +275,7 @@ export async function getTeamMemberProfiles(
       .from(businessProcessStepInstances)
       .where(eq(businessProcessStepInstances.assignedToUserId, user.id))
       .orderBy(desc(businessProcessStepInstances.createdAt))
-      .limit(1)
-      .get();
+      .limit(1);
 
     // Derive skills from role (could be enhanced with actual skill tracking)
     const skillsByRole: Record<string, string[]> = {
@@ -447,7 +446,8 @@ export async function findBestAssignee(
   }
 
   if (applicableRule.strategy === 'project_owner' && projectOwnerId) {
-    const owner = await db.select().from(users).where(eq(users.id, projectOwnerId)).get();
+    const ownerRows = await db.select().from(users).where(eq(users.id, projectOwnerId)).limit(1);
+    const owner = ownerRows[0];
     if (owner) {
       return {
         success: true,
@@ -460,7 +460,8 @@ export async function findBestAssignee(
   }
 
   if (applicableRule.strategy === 'sticky' && previousAssigneeId) {
-    const prevAssignee = await db.select().from(users).where(eq(users.id, previousAssigneeId)).get();
+    const prevAssigneeRows = await db.select().from(users).where(eq(users.id, previousAssigneeId)).limit(1);
+    const prevAssignee = prevAssigneeRows[0];
     if (prevAssignee && prevAssignee.status === 'active') {
       return {
         success: true,
@@ -610,7 +611,8 @@ export async function manuallyAssignStep(
   const db = getDb();
   const now = new Date();
 
-  const user = await db.select().from(users).where(eq(users.id, assignToUserId)).get();
+  const userRows = await db.select().from(users).where(eq(users.id, assignToUserId)).limit(1);
+  const user = userRows[0];
 
   if (!user) {
     return {
@@ -663,15 +665,17 @@ export async function reassignStep(
   const now = new Date();
 
   // Get current assignment
-  const stepInstance = await db
+  const stepInstanceRows = await db
     .select()
     .from(businessProcessStepInstances)
     .where(eq(businessProcessStepInstances.id, stepInstanceId))
-    .get();
+    .limit(1);
+  const stepInstance = stepInstanceRows[0];
 
   const previousAssigneeId = stepInstance?.assignedToUserId;
 
-  const user = await db.select().from(users).where(eq(users.id, newAssigneeId)).get();
+  const userRows = await db.select().from(users).where(eq(users.id, newAssigneeId)).limit(1);
+  const user = userRows[0];
 
   if (!user) {
     return {

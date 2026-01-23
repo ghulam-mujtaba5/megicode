@@ -176,11 +176,12 @@ export async function getProcessSLASummary(
   const db = getDb();
   
   // Get process instance
-  const instance = await db
+  const instanceRows = await db
     .select()
     .from(processInstances)
     .where(eq(processInstances.id, processInstanceId))
-    .get();
+    .limit(1);
+  const instance = instanceRows[0];
 
   if (!instance) return null;
 
@@ -450,7 +451,7 @@ export async function runSLACheckJob(): Promise<{
     // Check if we need to escalate
     if (slaStatus.status === 'breached') {
       // Check if we already escalated this step
-      const existingEscalation = await db
+      const existingEscalationRows = await db
         .select()
         .from(events)
         .where(
@@ -460,7 +461,8 @@ export async function runSLACheckJob(): Promise<{
             sql`json_extract(payload_json, '$.stepKey') = ${stepInstance.stepKey}`
           )
         )
-        .get();
+        .limit(1);
+      const existingEscalation = existingEscalationRows[0];
 
       if (!existingEscalation) {
         await triggerSLAEscalation(processInstance.id, stepInstance.stepKey, slaStatus);

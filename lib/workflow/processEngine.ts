@@ -63,9 +63,8 @@ export async function getActiveBusinessProcessDefinition(): Promise<{
       )
     )
     .orderBy(desc(processDefinitions.version))
-    .get();
-
-  if (existing) {
+    .limit(1);
+  const existing = existingRows[0];
     const storedDef = existing.json as unknown as BusinessProcessDefinition | null;
     // Ensure the definition has required properties, falling back to default if missing
     const definition: BusinessProcessDefinition = {
@@ -190,11 +189,12 @@ export async function getProcessInstance(
 ): Promise<BusinessProcessInstance | null> {
   const db = getDb();
   
-  const instance = await db
+  const instanceRows = await db
     .select()
     .from(processInstances)
     .where(eq(processInstances.id, instanceId))
-    .get();
+    .limit(1);
+  const instance = instanceRows[0];
 
   if (!instance) return null;
 
@@ -572,11 +572,12 @@ async function executeAutomationAction(
     case 'create_project_workspace': {
       // Create the project if not exists
       if (!instance.projectId && instance.leadId) {
-        const lead = await db
+        const leadRows = await db
           .select()
           .from(leads)
           .where(eq(leads.id, instance.leadId))
-          .get();
+          .limit(1);
+        const lead = leadRows[0];
 
         if (lead) {
           const projectId = crypto.randomUUID();
@@ -701,11 +702,12 @@ export async function startProcessFromLead(
 ): Promise<BusinessProcessInstance> {
   const db = getDb();
   
-  const lead = await db
+  const leadRows = await db
     .select()
     .from(leads)
     .where(eq(leads.id, leadId))
-    .get();
+    .limit(1);
+  const lead = leadRows[0];
 
   if (!lead) {
     throw new Error('Lead not found');
@@ -735,11 +737,12 @@ export async function advanceProcessOnProposalAccepted(
 ): Promise<void> {
   const db = getDb();
   
-  const proposal = await db
+  const proposalRows = await db
     .select()
     .from(proposals)
     .where(eq(proposals.id, proposalId))
-    .get();
+    .limit(1);
+  const proposal = proposalRows[0];
 
   if (!proposal || !proposal.leadId) return;
 

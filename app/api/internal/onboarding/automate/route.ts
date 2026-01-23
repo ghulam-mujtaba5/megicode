@@ -54,14 +54,16 @@ export async function POST(request: NextRequest) {
         let recipient: { name: string; email: string } | null = null;
 
         if (clientId) {
-          const client = await db.select().from(clients).where(eq(clients.id, clientId)).get();
+          const clientRows = await db.select().from(clients).where(eq(clients.id, clientId)).limit(1);
+          const client = clientRows[0];
           if (client && client.billingEmail) {
             recipient = { name: client.name, email: client.billingEmail };
           }
         }
 
         if (!recipient && leadId) {
-          const lead = await db.select().from(leads).where(eq(leads.id, leadId)).get();
+          const leadRows = await db.select().from(leads).where(eq(leads.id, leadId)).limit(1);
+          const lead = leadRows[0];
           if (lead && lead.email) {
             recipient = { name: lead.name, email: lead.email };
           }
@@ -119,10 +121,12 @@ export async function POST(request: NextRequest) {
         // Get recipient email
         let recipientEmail = null;
         if (clientId) {
-          const client = await db.select().from(clients).where(eq(clients.id, clientId)).get();
+          const clientRows = await db.select().from(clients).where(eq(clients.id, clientId)).limit(1);
+          const client = clientRows[0];
           recipientEmail = client?.billingEmail;
         } else if (leadId) {
-          const lead = await db.select().from(leads).where(eq(leads.id, leadId)).get();
+          const leadRows = await db.select().from(leads).where(eq(leads.id, leadId)).limit(1);
+          const lead = leadRows[0];
           recipientEmail = lead?.email;
         }
 
@@ -162,10 +166,12 @@ export async function POST(request: NextRequest) {
         let leadData = null;
 
         if (projectId) {
-          projectData = await db.select().from(projects).where(eq(projects.id, projectId)).get();
+          const projectDataRows = await db.select().from(projects).where(eq(projects.id, projectId)).limit(1);
+          projectData = projectDataRows[0];
         }
         if (leadId) {
-          leadData = await db.select().from(leads).where(eq(leads.id, leadId)).get();
+          const leadDataRows = await db.select().from(leads).where(eq(leads.id, leadId)).limit(1);
+          leadData = leadDataRows[0];
         }
 
         const summary = {
@@ -199,12 +205,15 @@ export async function POST(request: NextRequest) {
 
       case 'create_project_workspace': {
         // Create project from lead if not exists
-        let project = projectId 
-          ? await db.select().from(projects).where(eq(projects.id, projectId)).get()
-          : null;
+        let project = null;
+        if (projectId) {
+          const projectRows = await db.select().from(projects).where(eq(projects.id, projectId)).limit(1);
+          project = projectRows[0];
+        }
 
         if (!project && leadId) {
-          const lead = await db.select().from(leads).where(eq(leads.id, leadId)).get();
+          const leadRows = await db.select().from(leads).where(eq(leads.id, leadId)).limit(1);
+          const lead = leadRows[0];
           if (lead) {
             const newProjectId = crypto.randomUUID();
             await db.insert(projects).values({
@@ -228,7 +237,8 @@ export async function POST(request: NextRequest) {
                 .where(eq(processInstances.id, processInstanceId));
             }
 
-            project = await db.select().from(projects).where(eq(projects.id, newProjectId)).get();
+            project = await db.select().from(projects).where(eq(projects.id, newProjectId)).limit(1);
+            project = project[0];
           }
         }
 
@@ -330,7 +340,8 @@ export async function POST(request: NextRequest) {
           );
         }
 
-        const lead = await db.select().from(leads).where(eq(leads.id, leadId)).get();
+        const leadRows = await db.select().from(leads).where(eq(leads.id, leadId)).limit(1);
+        const lead = leadRows[0];
         if (!lead || !lead.email) {
           return NextResponse.json(
             { error: 'Lead email not found' },

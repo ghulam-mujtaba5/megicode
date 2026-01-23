@@ -32,28 +32,32 @@ export async function GET(
   const db = getDb();
 
   try {
-    const instance = await db
+    const instanceRows = await db
       .select()
       .from(processInstances)
       .where(eq(processInstances.id, id))
-      .get();
+      .limit(1);
+    const instance = instanceRows[0];
 
     if (!instance) {
       return NextResponse.json({ error: 'Process instance not found' }, { status: 404 });
     }
 
     // Get related entities
-    const project = instance.projectId
-      ? await db.select().from(projects).where(eq(projects.id, instance.projectId)).get()
-      : null;
+    const projectRows = instance.projectId
+      ? await db.select().from(projects).where(eq(projects.id, instance.projectId)).limit(1)
+      : [];
+    const project = projectRows[0] || null;
 
-    const lead = project?.leadId
-      ? await db.select().from(leads).where(eq(leads.id, project.leadId)).get()
-      : null;
+    const leadRows = project?.leadId
+      ? await db.select().from(leads).where(eq(leads.id, project.leadId)).limit(1)
+      : [];
+    const lead = leadRows[0] || null;
 
-    const client = project?.clientId
-      ? await db.select().from(clients).where(eq(clients.id, project.clientId)).get()
-      : null;
+    const clientRows = project?.clientId
+      ? await db.select().from(clients).where(eq(clients.id, project.clientId)).limit(1)
+      : [];
+    const client = clientRows[0] || null;
 
     // Get process definition
     const { definition } = await getActiveBusinessProcessDefinition();
@@ -168,11 +172,12 @@ export async function PATCH(
     const body = await request.json();
     const { action, stepKey, outputData, notes, gatewayDecision } = body;
 
-    const instance = await db
+    const instanceRows = await db
       .select()
       .from(processInstances)
       .where(eq(processInstances.id, id))
-      .get();
+      .limit(1);
+    const instance = instanceRows[0];
 
     if (!instance) {
       return NextResponse.json({ error: 'Process instance not found' }, { status: 404 });

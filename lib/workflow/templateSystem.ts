@@ -368,12 +368,13 @@ export async function getProcessTemplates(
 export async function getTemplateByKey(key: string): Promise<ProcessTemplate | null> {
   const db = getDb();
 
-  const def = await db
+  const defs = await db
     .select()
     .from(processDefinitions)
     .where(eq(processDefinitions.key, key))
     .orderBy(desc(processDefinitions.version))
-    .get();
+    .limit(1);
+  const def = defs[0];
 
   if (!def) return null;
 
@@ -552,12 +553,13 @@ export async function updateTemplateMetadata(
   const db = getDb();
   const now = new Date();
 
-  const existing = await db
+  const existingRows = await db
     .select()
     .from(processDefinitions)
     .where(eq(processDefinitions.key, key))
     .orderBy(desc(processDefinitions.version))
-    .get();
+    .limit(1);
+  const existing = existingRows[0];
 
   if (!existing) return null;
 
@@ -595,12 +597,13 @@ export async function createTemplateVersion(
   const now = new Date();
 
   // Get current version
-  const existing = await db
+  const existingRows = await db
     .select()
     .from(processDefinitions)
     .where(eq(processDefinitions.key, key))
     .orderBy(desc(processDefinitions.version))
-    .get();
+    .limit(1);
+  const existing = existingRows[0];
 
   if (!existing) return null;
 
@@ -694,11 +697,12 @@ export async function ensureDefaultTemplates(): Promise<void> {
   const db = getDb();
 
   for (const templateMeta of DEFAULT_TEMPLATES) {
-    const existing = await db
+    const existingRows = await db
       .select()
       .from(processDefinitions)
       .where(eq(processDefinitions.key, templateMeta.key))
-      .get();
+      .limit(1);
+    const existing = existingRows[0];
 
     if (!existing && templateMeta.key !== MEGICODE_BUSINESS_PROCESS_KEY) {
       // Create the template
