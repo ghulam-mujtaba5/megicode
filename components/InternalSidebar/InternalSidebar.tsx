@@ -88,9 +88,6 @@ export default function InternalSidebar({
 
   const navItems: NavItem[] = [
     { label: 'Dashboard', href: '/internal', icon: Icons.dashboard },
-    { label: 'Explore', href: '/internal/explore', icon: Icons.star },
-    { label: 'Showcase', href: '/internal/showcase', icon: Icons.star },
-    { label: 'User Guide', href: '/internal/guide', icon: Icons.book },
     {
       label: 'CRM',
       icon: Icons.leads,
@@ -108,10 +105,7 @@ export default function InternalSidebar({
       children: [
         { label: 'All Projects', href: '/internal/projects', icon: Icons.projects },
         { label: 'Processes', href: '/internal/process', icon: Icons.process, roles: ['admin', 'pm'] },
-        { label: 'Analytics', href: '/internal/process/analytics', icon: Icons.reports, roles: ['admin', 'pm'] },
-        { label: 'Workflow Showcase', href: '/internal/process/showcase', icon: Icons.chart, roles: ['admin', 'pm'] },
         { label: 'Tasks', href: '/internal/tasks', icon: Icons.tasks },
-        { label: 'Calendar', href: '/internal/calendar', icon: Icons.calendar },
         { label: 'Resources', href: '/internal/resources', icon: Icons.users },
       ]
     },
@@ -120,15 +114,7 @@ export default function InternalSidebar({
       icon: Icons.finance,
       roles: ['admin'],
       children: [
-        { label: 'Overview', href: '/internal/finance', icon: Icons.chart },
-        { label: 'Founders', href: '/internal/finance/founders', icon: Icons.users },
-        { label: 'Accounts', href: '/internal/finance/accounts', icon: Icons.wallet },
-        { label: 'Contributions', href: '/internal/finance/contributions', icon: Icons.invoice },
-        { label: 'Distributions', href: '/internal/finance/distributions', icon: Icons.chart },
-        { label: 'Expenses', href: '/internal/finance/expenses', icon: Icons.invoice },
-        { label: 'Subscriptions', href: '/internal/finance/subscriptions', icon: Icons.subscription },
         { label: 'Invoices', href: '/internal/invoices', icon: Icons.invoice },
-        { label: 'Reports', href: '/internal/reports', icon: Icons.reports },
       ],
     },
     { 
@@ -136,8 +122,6 @@ export default function InternalSidebar({
       icon: Icons.tools,
       children: [
         { label: 'Templates', href: '/internal/templates', icon: Icons.projects },
-        { label: 'Bug Tracking', href: '/internal/bugs', icon: Icons.tasks },
-        { label: 'Suggestions', href: '/internal/suggestions', icon: Icons.tasks },
         { label: 'Team', href: '/internal/team', icon: Icons.users },
       ]
     },
@@ -147,8 +131,6 @@ export default function InternalSidebar({
       roles: ['admin'],
       children: [
         { label: 'Users', href: '/internal/admin/users', icon: Icons.users },
-        { label: 'Audit Logs', href: '/internal/admin/audit', icon: Icons.reports },
-        { label: 'Settings', href: '/internal/admin/settings', icon: Icons.settings },
       ]
     },
   ];
