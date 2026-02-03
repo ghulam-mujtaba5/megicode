@@ -49,12 +49,12 @@ interface DistributionPreview {
   notes: string;
 }
 
-function formatMoney(amountInSmallestUnit: number, currency: string = 'PKR') {
-  const amount = (amountInSmallestUnit || 0) / 100;
+function formatMoney(amount: number, currency: string = 'PKR') {
+  const value = amount || 0;
   if (currency === 'PKR') {
-    return `Rs. ${amount.toLocaleString('en-PK', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
+    return `Rs. ${value.toLocaleString('en-PK', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
   }
-  return new Intl.NumberFormat('en-US', { style: 'currency', currency, maximumFractionDigits: 0 }).format(amount);
+  return new Intl.NumberFormat('en-US', { style: 'currency', currency, maximumFractionDigits: 0 }).format(value);
 }
 
 export function ProfitDistributionCalculator({
