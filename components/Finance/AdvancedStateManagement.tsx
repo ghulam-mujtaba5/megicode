@@ -4,7 +4,7 @@
  */
 'use client';
 
-import { useState, useCallback, useReducer, createContext, useContext } from 'react';
+import React, { useState, useCallback, useReducer, createContext, useContext } from 'react';
 
 // Reducer for complex state management
 type FinancialAction =

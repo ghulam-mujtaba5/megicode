@@ -196,7 +196,7 @@ export function StatCard({ title, value, change, icon, variant = 'primary', tren
   );
 }
 
-interface DataTableColumn<T> {
+export interface DataTableColumn<T> {
   key: keyof T;
   label: string;
   width?: string;
@@ -233,7 +233,7 @@ export function DataTable<T extends { id?: string | number }>({
   const [selected, setSelected] = useState<Set<string | number>>(new Set());
 
   const handleSelectAll = (checked: boolean) => {
-    const newSelected = checked ? new Set(data.map((d, i) => d.id || i)) : new Set();
+    const newSelected = checked ? new Set(data.map((d, i) => d.id || i) as (string | number)[]) : new Set<string | number>();
     setSelected(newSelected);
     onSelect?.(Array.from(newSelected).map((id) => data.find((d, i) => (d.id || i) === id)!));
   };

@@ -131,20 +131,6 @@ export default function FinancialDashboardV2({ initialData }: FinancialDashboard
     }
   }, [notification]);
 
-  // Setup Keyboard Shortcuts
-  const shortcuts = [
-    FINANCIAL_DASHBOARD_SHORTCUTS.newExpense(() => openModal('expense')),
-    FINANCIAL_DASHBOARD_SHORTCUTS.newFounder(() => openModal('founder')),
-    FINANCIAL_DASHBOARD_SHORTCUTS.search(() => {
-      const searchInput = document.querySelector('[data-search-input]') as HTMLInputElement;
-      searchInput?.focus();
-    }),
-    FINANCIAL_DASHBOARD_SHORTCUTS.help(() => setShowKeyboardHelp(true)),
-    FINANCIAL_DASHBOARD_SHORTCUTS.refresh(refreshData),
-  ];
-
-  useKeyboardShortcuts({ shortcuts, enabled: true });
-
   // Utility Functions
   const showNotification = (type: 'success' | 'error' | 'warning' | 'info', message: string, title?: string) => {
     setNotification({ type, message, title });
@@ -186,6 +172,20 @@ export default function FinancialDashboardV2({ initialData }: FinancialDashboard
     }
   }, []);
 
+  // Setup Keyboard Shortcuts
+  const shortcuts = [
+    FINANCIAL_DASHBOARD_SHORTCUTS.newExpense(() => openModal('expense')),
+    FINANCIAL_DASHBOARD_SHORTCUTS.newFounder(() => openModal('founder')),
+    FINANCIAL_DASHBOARD_SHORTCUTS.search(() => {
+      const searchInput = document.querySelector('[data-search-input]') as HTMLInputElement;
+      searchInput?.focus();
+    }),
+    FINANCIAL_DASHBOARD_SHORTCUTS.help(() => setShowKeyboardHelp(true)),
+    FINANCIAL_DASHBOARD_SHORTCUTS.refresh(refreshData),
+  ];
+
+  useKeyboardShortcuts({ shortcuts, enabled: true });
+
   // CRUD Operations
   const handleCreateFounder = async (data: any) => {
     try {
@@ -210,7 +210,8 @@ export default function FinancialDashboardV2({ initialData }: FinancialDashboard
   };
 
   const handleDeleteFounder = async (id: string) => {
-    if (!confirm('Are you sure? This action cannot be undone.')) return;
+    const confirmed = await confirm({ title: 'Delete Founder', message: 'Are you sure? This action cannot be undone.' });
+    if (!confirmed) return;
 
     try {
       const res = await fetch(`/api/internal/finance/founders/${id}`, { method: 'DELETE' });
@@ -468,43 +469,6 @@ export default function FinancialDashboardV2({ initialData }: FinancialDashboard
               },
             ]}
             data={founders}
-          />
-        )}
-      </div>
-    </div>
-  );
-              {
-                key: 'name',
-                label: 'Name',
-                render: (_, row) => <div style={{ fontWeight: 600 }}>{row.name}</div>,
-              },
-              {
-                key: 'profitSharePercentage',
-                label: 'Share',
-                render: (val) => <span className={s.badge}>{val}%</span>,
-              },
-              {
-                key: 'totalContributions',
-                label: 'Contributions',
-                render: (val) => <div style={{ color: 'var(--int-success)', fontWeight: 600 }}>{formatCurrency(val || 0)}</div>,
-              },
-              {
-                key: 'status',
-                label: 'Status',
-                render: (val) => <span className={`${s.badge} ${val === 'active' ? s.badgeSuccess : s.badgeWarning}`}>{val}</span>,
-              },
-            ]}
-            data={founders}
-            rowActions={(row) => (
-              <div style={{ display: 'flex', gap: 'var(--int-space-2)' }}>
-                <button onClick={() => openModal('founder', row)} className={`${s.btn} ${s.btnGhost} ${s.btnIcon}`}>
-                  ✏️
-                </button>
-                <button onClick={() => handleDeleteFounder(row.id)} className={`${s.btn} ${s.btnGhost} ${s.btnIcon}`} style={{ color: 'var(--int-error)' }}>
-                  🗑️
-                </button>
-              </div>
-            )}
           />
         )}
       </div>
