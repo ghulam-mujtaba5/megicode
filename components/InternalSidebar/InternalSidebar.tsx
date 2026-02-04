@@ -114,7 +114,16 @@ export default function InternalSidebar({
       icon: Icons.finance,
       roles: ['admin'],
       children: [
+        { label: 'Finance Dashboard', href: '/internal/finance', icon: Icons.dashboard },
         { label: 'Invoices', href: '/internal/invoices', icon: Icons.invoice },
+        { label: 'Expenses', href: '/internal/finance/expenses', icon: Icons.wallet },
+        { label: 'Accounts', href: '/internal/finance/accounts', icon: Icons.chart },
+        { label: 'Budgets', href: '/internal/finance/budgets', icon: Icons.reports },
+        { label: 'Subscriptions', href: '/internal/finance/subscriptions', icon: Icons.subscription },
+        { label: 'Founders', href: '/internal/finance/founders', icon: Icons.star },
+        { label: 'Equity', href: '/internal/finance/equity', icon: Icons.finance },
+        { label: 'Forecasting', href: '/internal/finance/forecasting', icon: Icons.chart },
+        { label: 'Reports', href: '/internal/finance/reports', icon: Icons.reports },
       ],
     },
     { 
