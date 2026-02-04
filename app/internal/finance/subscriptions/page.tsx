@@ -102,7 +102,7 @@ export default function SubscriptionsPage() {
       style: 'currency',
       currency,
       minimumFractionDigits: 0,
-    }).format(amount / 100);
+    }).format(amount);
   };
 
   const formatDate = (timestamp: Date | string | null) => {
@@ -310,7 +310,7 @@ export default function SubscriptionsPage() {
       provider: sub.provider || '',
       description: sub.description || '',
       category: sub.category,
-      amount: (sub.amount / 100).toString(),
+      amount: sub.amount.toString(),
       currency: sub.currency,
       billingCycle: sub.billingCycle,
       startDate: startDateStr,

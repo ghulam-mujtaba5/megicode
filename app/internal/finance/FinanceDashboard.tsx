@@ -237,11 +237,11 @@ const Icons = {
 };
 
 // Utility Functions
-function formatMoney(amountInSmallestUnit: number, currency: string = 'PKR') {
-  const amount = (amountInSmallestUnit || 0) / 100;
+function formatMoney(amount: number, currency: string = 'PKR') {
+  const value = amount || 0;
   
   if (currency === 'PKR') {
-    return `Rs. ${amount.toLocaleString('en-PK', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
+    return `Rs. ${value.toLocaleString('en-PK', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
   }
   
   try {
@@ -249,9 +249,9 @@ function formatMoney(amountInSmallestUnit: number, currency: string = 'PKR') {
       style: 'currency',
       currency,
       maximumFractionDigits: 0,
-    }).format(amount);
+    }).format(value);
   } catch {
-    return `${currency} ${amount.toFixed(0)}`;
+    return `${currency} ${value.toFixed(0)}`;
   }
 }
 

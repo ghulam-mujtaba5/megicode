@@ -95,7 +95,7 @@ export default function ContributionsPage() {
       style: 'currency',
       currency: 'PKR',
       minimumFractionDigits: 0,
-    }).format(amount / 100);
+    }).format(amount);
   };
 
   const formatDate = (dateStr: string | number) => {

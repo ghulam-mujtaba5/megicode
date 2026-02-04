@@ -102,7 +102,7 @@ export default function DistributionsPage() {
       style: 'currency',
       currency: 'PKR',
       minimumFractionDigits: 0,
-    }).format(amount / 100);
+    }).format(amount);
   };
 
   const formatDate = (dateStr: string | number | null) => {
