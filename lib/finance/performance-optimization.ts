@@ -22,7 +22,7 @@ export interface CacheEntry<T> {
 export class CacheManager<T = any> {
   private cache: Map<string, CacheEntry<T>> = new Map();
   private options: Required<CacheOptions>;
-  private cleanupInterval: NodeJS.Timer | null = null;
+  private cleanupInterval: ReturnType<typeof setInterval> | null = null;
 
   constructor(options: CacheOptions = {}) {
     this.options = {
@@ -247,7 +247,7 @@ export function memoizeAsync<TArgs extends any[], TResult>(
  * Batch calculation processor
  */
 export class BatchCalculationProcessor {
-  private queue: Array<{ id: string; data: any; callback: (result: any) => void }> = [];
+  private pendingItems: Array<{ id: string; data: any; callback: (result: any) => void }> = [];
   private processing = false;
   private batchSize = 100;
   private batchDelay = 50; // ms
@@ -257,7 +257,7 @@ export class BatchCalculationProcessor {
    */
   public queue<T>(data: T, callback: (result: T) => void): string {
     const id = Math.random().toString(36).substr(2, 9);
-    this.queue.push({ id, data, callback });
+    this.pendingItems.push({ id, data, callback });
 
     if (!this.processing) {
       this.processBatch();
@@ -272,8 +272,8 @@ export class BatchCalculationProcessor {
   private async processBatch(): Promise<void> {
     this.processing = true;
 
-    while (this.queue.length > 0) {
-      const batch = this.queue.splice(0, this.batchSize);
+    while (this.pendingItems.length > 0) {
+      const batch = this.pendingItems.splice(0, this.batchSize);
 
       // Process batch
       for (const item of batch) {
@@ -285,7 +285,7 @@ export class BatchCalculationProcessor {
       }
 
       // Delay before next batch
-      if (this.queue.length > 0) {
+      if (this.pendingItems.length > 0) {
         await new Promise((resolve) => setTimeout(resolve, this.batchDelay));
       }
     }
@@ -297,14 +297,14 @@ export class BatchCalculationProcessor {
    * Get queue size
    */
   public getQueueSize(): number {
-    return this.queue.length;
+    return this.pendingItems.length;
   }
 
   /**
    * Clear queue
    */
   public clear(): void {
-    this.queue = [];
+    this.pendingItems = [];
   }
 }
 

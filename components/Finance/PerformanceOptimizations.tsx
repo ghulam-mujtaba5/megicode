@@ -11,7 +11,7 @@ export function useDebounce<T extends (...args: any[]) => any>(
   callback: T,
   delay: number
 ): (...args: Parameters<T>) => void {
-  const timeoutRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   return useCallback(
     (...args: Parameters<T>) => {
@@ -28,7 +28,7 @@ export function useThrottle<T extends (...args: any[]) => any>(
   delay: number
 ): (...args: Parameters<T>) => void {
   const lastRunRef = useRef<number>(0);
-  const timeoutRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   return useCallback(
     (...args: Parameters<T>) => {
@@ -172,7 +172,7 @@ export function VirtualScroll({
 
 // Request animation frame debouncer
 export function useRafDebounce<T extends (...args: any[]) => any>(callback: T): T {
-  const rafIdRef = useRef<number>();
+  const rafIdRef = useRef<number | undefined>(undefined);
   const callbackRef = useRef(callback);
 
   useEffect(() => {
@@ -190,8 +190,8 @@ export function useRafDebounce<T extends (...args: any[]) => any>(callback: T): 
 
 // Memoization for expensive computations
 export function useMemoDeep<T>(factory: () => T, deps: any[]): T {
-  const valueRef = useRef<T>();
-  const depsRef = useRef<any[]>();
+  const valueRef = useRef<T | undefined>(undefined);
+  const depsRef = useRef<any[] | undefined>(undefined);
 
   const hasDepsChanged = !depsRef.current || deps.length !== depsRef.current.length 
     || deps.some((dep, i) => dep !== depsRef.current![i]);

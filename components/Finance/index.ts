@@ -4,8 +4,8 @@
  */
 
 // Core Analytics & Insights
-export { SmartInsightsPanel, CompactInsightCard } from './SmartInsights';
-export { FinancialAnalytics, QuickStats } from './FinancialAnalytics';
+export { SmartInsights } from './SmartInsights';
+export { FinancialMetrics, CashFlowProjection } from './FinancialAnalytics';
 
 // Founder Management
 export { FounderBalanceWidget, FounderBalanceSummary } from './FounderBalanceWidget';
@@ -18,7 +18,7 @@ export { ProjectRevenueTracker, ProjectRevenueSummaryCard } from './ProjectReven
 export { ExpenseBreakdownChart, ExpenseMiniChart } from './ExpenseBreakdownChart';
 
 // Bulk Operations
-export { BulkActionsToolbar, SelectionInfo } from './BulkActions';
+export { BulkActions, useBulkSelection, BulkCheckbox } from './BulkActions';
 
 // UI Components & Forms
 export * from './EmptyStates';

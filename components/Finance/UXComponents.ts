@@ -33,7 +33,7 @@ export {
 } from './SkeletonLoaders';
 
 // Confirmation Dialogs
-export { ConfirmDialog, useConfirm, type ConfirmDialogProps } from './ConfirmDialog';
+export { ConfirmDialog, useConfirm } from './ConfirmDialog';
 
 // Keyboard Shortcuts
 export {
@@ -48,8 +48,6 @@ export {
   FilterRow,
   AdvancedFilter,
   useFuzzySearch,
-  fuzzyMatch,
-  fuzzySearch,
 } from './SearchAndFilter';
 
 // Bulk Actions
@@ -119,8 +117,6 @@ export {
   useUndoRedo,
   CommandPalette,
   useCommandPalette,
-  type Command,
-  type CommandCategory,
 } from './UndoRedoAndCommands';
 
 // Real-time & Visualization
@@ -130,10 +126,6 @@ export {
   AdvancedNotification,
   useNotificationCenter,
   ADVANCED_ANIMATION_STYLES,
-  type RealtimeSubscriber,
-  type TimeSeriesData,
-  type TimeSeriesStats,
-  type NotificationType,
 } from './RealtimeAndVisualization';
 
 // ============================================================================
@@ -146,14 +138,11 @@ export {
   ThemeContext,
   useThemeContext,
   useResponsive,
-  ErrorBoundary,
   useSuspenseData,
   useTabManager,
   useModalStack,
   useFormState,
   useAsync,
-  type FinancialState,
-  type ThemeContextType,
 } from './AdvancedStateManagement';
 
 // ============================================================================

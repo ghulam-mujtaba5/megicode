@@ -178,15 +178,12 @@ export class AuditTrailService {
       let query = db
         .select()
         .from(auditTrails)
-        // @ts-ignore
+        // @ts-ignore - Dynamic query building
         .where(and(
           sql`${auditTrails.timestamp} >= ${startDate}`,
-          sql`${auditTrails.timestamp} <= ${endDate}`
+          sql`${auditTrails.timestamp} <= ${endDate}`,
+          entityType ? eq(auditTrails.entityType, entityType) : undefined
         ));
-
-      if (entityType) {
-        query = query.where(eq(auditTrails.entityType, entityType));
-      }
 
       const trail = await query.orderBy(asc(auditTrails.timestamp));
 

@@ -55,12 +55,15 @@ export class RealTimeAnalyticsEngine {
           currentAssets: sql<number>`COALESCE(SUM(CASE WHEN gl.account_code LIKE '1%' THEN (jel.debit - jel.credit) ELSE 0 END), 0)`,
           currentLiabilities: sql<number>`COALESCE(SUM(CASE WHEN gl.account_code LIKE '2%' THEN (jel.credit - jel.debit) ELSE 0 END), 0)`,
         })
+        // @ts-ignore - Drizzle alias feature
         .from(journalEntryLines.as('jel'))
         .innerJoin(
+          // @ts-ignore - Drizzle alias feature
           journalEntries.as('je'),
           eq(journalEntryLines.journalEntryId, journalEntries.id)
         )
         .innerJoin(
+          // @ts-ignore - Drizzle alias feature
           generalLedgerAccounts.as('gl'),
           eq(journalEntryLines.accountId, generalLedgerAccounts.id)
         )

@@ -110,7 +110,8 @@ export function SmartInsights({
       return acc;
     }, {} as Record<string, number>);
 
-    const topCategory = Object.entries(categoryExpenses).sort(([, a], [, b]) => b - a)[0];
+    const sortedCategories = Object.entries(categoryExpenses).sort(([, a], [, b]) => (b as number) - (a as number));
+    const topCategory = sortedCategories[0] as [string, number] | undefined;
     if (topCategory && topCategory[1] > monthlyBurn * 0.4) {
       alerts.push({
         id: 'high-category',

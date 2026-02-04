@@ -6,12 +6,6 @@
 // Phase 1: Foundation UX
 export {
   SmartInsights,
-  LowCashAlert,
-  HighBurnRateAlert,
-  LongRunwayAlert,
-  UpcomingBillsAlert,
-  ProfitabilityAlert,
-  CategorySpendingAlert,
 } from './SmartInsights';
 
 export {
@@ -19,8 +13,7 @@ export {
   NoAccountsEmpty,
   NoExpensesEmpty,
   NoSubscriptionsEmpty,
-  NoDataEmpty,
-  EmptyStateCommon,
+  EmptyState,
 } from './EmptyStates';
 
 export {
@@ -28,7 +21,6 @@ export {
   SkeletonStatCard,
   SkeletonTable,
   SkeletonOverview,
-  SkeletonRow,
 } from './SkeletonLoaders';
 
 export {
@@ -40,17 +32,14 @@ export {
 } from './FormValidation';
 
 export {
-  KeyboardShortcuts,
   KeyboardCheatSheet,
   useKeyboardShortcuts,
-  SHORTCUT_KEYS,
+  FINANCIAL_DASHBOARD_SHORTCUTS,
 } from './KeyboardShortcuts';
 
 export {
   ConfirmDialog,
   useConfirm,
-  type ConfirmOptions,
-  type ConfirmResult,
 } from './ConfirmDialog';
 
 export {
@@ -58,14 +47,12 @@ export {
   AdvancedFilter,
   FilterRow,
   useFuzzySearch,
-  useSearchAndFilter,
 } from './SearchAndFilter';
 
 export {
   BulkActions,
   BulkCheckbox,
   useBulkSelection,
-  type BulkActionItem,
 } from './BulkActions';
 
 export {
@@ -74,7 +61,6 @@ export {
   AccessibleButton,
   GuidedTour,
   A11Y,
-  useAccessibility,
 } from './Accessibility';
 
 // Phase 2: Advanced Velocity & Interactions
@@ -112,8 +98,6 @@ export {
   useUndoRedo,
   CommandPalette,
   useCommandPalette,
-  type Command,
-  type CommandCategory,
 } from './UndoRedoAndCommands';
 
 export {
@@ -122,10 +106,6 @@ export {
   AdvancedNotification,
   useNotificationCenter,
   ADVANCED_ANIMATION_STYLES,
-  type RealtimeSubscriber,
-  type TimeSeriesData,
-  type TimeSeriesStats,
-  type NotificationType,
 } from './RealtimeAndVisualization';
 
 // Phase 3: State Management & Advanced Patterns
@@ -134,35 +114,12 @@ export {
   ThemeContext,
   useThemeContext,
   useResponsive,
-  ErrorBoundary,
   useSuspenseData,
   useTabManager,
   useModalStack,
   useFormState,
   useAsync,
-  type FinancialState,
-  type ThemeContextType,
 } from './AdvancedStateManagement';
-
-// Type definitions
-export type {
-  SmartInsightsProps,
-  EmptyStateProps,
-  SkeletonProps,
-  FormFieldProps,
-  SearchBoxProps,
-  ConfirmDialogProps,
-  BulkActionsProps,
-  TooltipProps,
-  AnimatedNumberProps,
-  SlideInProps,
-  StaggerChildrenProps,
-  ContextMenuProps,
-  PopoverProps,
-  DraggableListProps,
-  CommandPaletteProps,
-  AdvancedNotificationProps,
-};
 
 // Aggregated configuration
 export const DASHBOARD_UX_CONFIG = {

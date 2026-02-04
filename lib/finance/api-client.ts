@@ -163,6 +163,7 @@ export class FinancialApiClient {
     method: string,
     options: RequestOptions
   ): Promise<{ data: T; status: number; headers: Headers }> {
+    const timeout = options.timeout || this.config.timeout;
     const requestInit: RequestInit = {
       method,
       headers: {
@@ -171,7 +172,6 @@ export class FinancialApiClient {
         ...(this.config.apiKey && { Authorization: `Bearer ${this.config.apiKey}` }),
         ...options.headers,
       },
-      timeout: options.timeout || this.config.timeout,
     };
 
     if (options.body && method !== 'GET') {

@@ -45,7 +45,7 @@ interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 export const TextInput = ({ label, error, hint, ...props }: TextInputProps) => (
-  <FormField label={label} required={props.required} error={error} hint={hint}>
+  <FormField name={props.name || ''} label={label} required={props.required} error={error} hint={hint}>
     <input className={s.input} {...props} />
   </FormField>
 );
@@ -58,7 +58,7 @@ interface SelectInputProps extends React.SelectHTMLAttributes<HTMLSelectElement>
 }
 
 export const SelectInput = ({ label, error, hint, options = [], children, ...props }: SelectInputProps) => (
-  <FormField label={label} required={props.required} error={error} hint={hint}>
+  <FormField name={props.name || ''} label={label} required={props.required} error={error} hint={hint}>
     <select className={s.select} {...props}>
       <option value="">Select an option...</option>
       {options.map(opt => (
@@ -76,7 +76,7 @@ interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement
 }
 
 export const TextAreaInput = ({ label, error, hint, ...props }: TextAreaProps) => (
-  <FormField label={label} required={props.required} error={error} hint={hint}>
+  <FormField name={props.name || ''} label={label} required={props.required} error={error} hint={hint}>
     <textarea className={s.textarea} {...props} />
   </FormField>
 );
@@ -88,7 +88,7 @@ interface NumberInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 export const NumberInput = ({ label, error, hint, ...props }: NumberInputProps) => (
-  <FormField label={label} required={props.required} error={error} hint={hint}>
+  <FormField name={props.name || ''} label={label} required={props.required} error={error} hint={hint}>
     <input type="number" className={s.input} {...props} />
   </FormField>
 );
@@ -100,7 +100,7 @@ interface DateInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 export const DateInput = ({ label, error, hint, ...props }: DateInputProps) => (
-  <FormField label={label} required={props.required} error={error} hint={hint}>
+  <FormField name={props.name || ''} label={label} required={props.required} error={error} hint={hint}>
     <input type="date" className={s.input} {...props} />
   </FormField>
 );
@@ -120,10 +120,11 @@ interface RangeSliderProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   showValue?: boolean;
   suffix?: string;
+  error?: ValidationError;
 }
 
-export const RangeSlider = ({ label, showValue = true, suffix = '', ...props }: RangeSliderProps) => (
-  <FormField label={label} required={props.required}>
+export const RangeSlider = ({ label, showValue = true, suffix = '', error, ...props }: RangeSliderProps) => (
+  <FormField name={props.name || ''} label={label} required={props.required} error={error}>
     <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--int-space-4)' }}>
       <input type="range" className={s.sliderInput} style={{ flex: 1, accentColor: 'var(--int-primary)' }} {...props} />
       {showValue && (
