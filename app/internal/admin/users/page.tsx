@@ -18,6 +18,8 @@ export default async function AdminUsersPage() {
       image: users.image,
       role: users.role,
       status: users.status,
+      skills: users.skills,
+      capacity: users.capacity,
       createdAt: users.createdAt,
       updatedAt: users.updatedAt,
     })
