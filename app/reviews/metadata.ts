@@ -23,4 +23,7 @@ export const metadata: Metadata = {
     description: "What our clients say about Megicode—If You Can Imagine It, We Can Build It.",
     images: ['/meta/reviews-og.png'],
   },
+  alternates: {
+    canonical: 'https://megicode.com/reviews',
+  },
 };

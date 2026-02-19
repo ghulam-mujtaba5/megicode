@@ -23,4 +23,7 @@ export const metadata: Metadata = {
     description: "Explore our comprehensive software development services—If You Can Imagine It, We Can Build It.",
     images: ['/meta/services-og.png'],
   },
+  alternates: {
+    canonical: 'https://megicode.com/services',
+  },
 };

@@ -4,6 +4,7 @@ import { useCalendlyModal } from "../../../components/CalendlyModal";
 import { useTheme } from "../../../context/ThemeContext";
 import { useInViewAnimation } from "../../../hooks/useInViewAnimation";
 import servicesData from "../servicesData";
+import ServiceSchema from "@/components/SEO/ServiceSchema";
 import { ServiceFAQs } from "../ServiceDetailSections";
 import { FaPencilRuler, FaPalette, FaUserCheck, FaRegObjectGroup, FaUsers, FaRocket, FaLifeRing } from "react-icons/fa";
 import { SiFigma, SiAdobe, SiSketch, SiInvision } from "react-icons/si";
@@ -385,6 +386,7 @@ export default function UIUXProductDesignDetailPage() {
         </section>
       </main>
   {calendlyModal}
+  <ServiceSchema service={{ title: service.title!, description: service.description!, slug: 'ui-ux-product-design', features: service.features }} />
   <Footer />
     </div>
   );

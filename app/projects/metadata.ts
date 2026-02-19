@@ -23,4 +23,7 @@ export const metadata: Metadata = {
     description: "Explore our portfolio of successful projects—If You Can Imagine It, We Can Build It.",
     images: ['/meta/projects-og.png'],
   },
+  alternates: {
+    canonical: 'https://megicode.com/projects',
+  },
 };

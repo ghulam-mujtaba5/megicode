@@ -4,6 +4,7 @@ interface Service {
   title: string;
   description: string;
   slug: string;
+  features?: string[];
 }
 
 interface ServiceSchemaProps {
@@ -24,6 +25,23 @@ const ServiceSchema: React.FC<ServiceSchemaProps> = ({ service }) => {
       name: 'Megicode',
       url: 'https://megicode.com',
     },
+    areaServed: {
+      '@type': 'Place',
+      name: 'Worldwide',
+    },
+    ...(service.features && service.features.length > 0 && {
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: `${service.title} Features`,
+        itemListElement: service.features.map((feature) => ({
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: feature,
+          },
+        })),
+      },
+    }),
   };
 
   return (

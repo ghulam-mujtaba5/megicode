@@ -10,6 +10,7 @@ import { useCalendlyModal } from "../../../components/CalendlyModal";
 import { useTheme } from "../../../context/ThemeContext";
 import { useInViewAnimation } from "../../../hooks/useInViewAnimation";
 import servicesData from "../servicesData";
+import ServiceSchema from "@/components/SEO/ServiceSchema";
 import { OurProcess, EngagementModels, MethodologyAndCommunication, ServiceFAQs } from "../ServiceDetailSections";
 import { SiPython, SiTableau, SiMysql, SiApachespark } from "react-icons/si";
 import { 
@@ -421,6 +422,7 @@ export default function DataAnalyticsDetailPage() {
         </section>
       </main>
   {calendlyModalElement}
+  <ServiceSchema service={{ title: service.title!, description: service.description!, slug: 'data-analytics-bi', features: service.features }} />
   <Footer />
     </div>
   );

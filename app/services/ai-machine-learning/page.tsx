@@ -10,6 +10,7 @@ import { useCalendlyModal } from "../../../components/CalendlyModal";
 import { useTheme } from "../../../context/ThemeContext";
 import { useInViewAnimation } from "../../../hooks/useInViewAnimation";
 import servicesData from "../servicesData";
+import ServiceSchema from "@/components/SEO/ServiceSchema";
 import { OurProcess, EngagementModels, MethodologyAndCommunication, ServiceFAQs } from "../ServiceDetailSections";
 import { SiPython, SiTensorflow, SiPytorch, SiScikitlearn, SiAmazon, SiGooglecloud } from "react-icons/si";
 import { FaRobot, FaLanguage, FaEye, FaCogs, FaSearch, FaDatabase, FaRocket, FaLifeRing } from "react-icons/fa";
@@ -411,6 +412,7 @@ export default function AIMachineLearningDetailPage() {
         </section>
       </main>
   {calendlyModalElement}
+  <ServiceSchema service={{ title: service.title!, description: service.description!, slug: 'ai-machine-learning', features: service.features }} />
   <Footer />
     </div>
   );

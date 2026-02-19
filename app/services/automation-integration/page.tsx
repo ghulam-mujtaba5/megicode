@@ -10,6 +10,7 @@ import { useCalendlyModal } from "../../../components/CalendlyModal";
 import { useTheme } from "../../../context/ThemeContext";
 import { useInViewAnimation } from "../../../hooks/useInViewAnimation";
 import servicesData from "../servicesData";
+import ServiceSchema from "@/components/SEO/ServiceSchema";
 import { OurProcess, EngagementModels, MethodologyAndCommunication, ServiceFAQs } from "../ServiceDetailSections";
 import { FaSync, FaCogs, FaSearch, FaDatabase, FaRocket, FaLifeRing, FaTools, FaLink, FaCheckCircle, FaChalkboardTeacher, FaPython, FaNodeJs } from "react-icons/fa";
 import { SiZapier, SiMake, SiSelenium, SiPostman } from "react-icons/si";
@@ -382,6 +383,7 @@ export default function AutomationIntegrationPage() {
         </section>
       </main>
   {calendlyModalElement}
+  <ServiceSchema service={{ title: service.title!, description: service.description!, slug: 'automation-integration', features: service.features }} />
   <Footer />
     </div>
   );

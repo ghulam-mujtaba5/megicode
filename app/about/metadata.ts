@@ -21,5 +21,8 @@ export const metadata: Metadata = {
     title: 'About Us | Megicode',
     description: "Learn about Megicode's journey in setting the ideal standard of quality and innovation in business and technology. If You Can Imagine It, We Can Build It.",
     images: ['/meta/about-og.png'],
-  }
+  },
+  alternates: {
+    canonical: 'https://megicode.com/about',
+  },
 }

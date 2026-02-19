@@ -10,6 +10,7 @@ import { useCalendlyModal } from "../../../components/CalendlyModal";
 import { useTheme } from "../../../context/ThemeContext";
 import { useInViewAnimation } from "../../../hooks/useInViewAnimation";
 import servicesData from "../servicesData";
+import ServiceSchema from "@/components/SEO/ServiceSchema";
 import { OurProcess, EngagementModels, MethodologyAndCommunication, ServiceFAQs } from "../ServiceDetailSections";
 import { 
   SiAmazon,
@@ -426,6 +427,7 @@ export default function CloudDevOpsPage() {
         </section>
       </main>
   {calendlyModalElement}
+  <ServiceSchema service={{ title: service.title!, description: service.description!, slug: 'cloud-devops-services', features: service.features }} />
   <Footer />
     </div>
   );

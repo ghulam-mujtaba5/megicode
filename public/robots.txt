@@ -1,10 +1,12 @@
 # *
 User-agent: *
 Allow: /
+Disallow: /internal/
+Disallow: /megicode/
+Disallow: /api/
 
 # Host
 Host: https://megicode.com
 
 # Sitemaps
 Sitemap: https://megicode.com/sitemap.xml
-Sitemap: https://megicode.com/server-sitemap.xml

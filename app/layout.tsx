@@ -77,6 +77,9 @@ export const metadata = {
     images: ["/meta/twitter-card.png"],
     creator: "@megicode",
   },
+  alternates: {
+    canonical: 'https://megicode.com',
+  },
   robots: {
     index: true,
     follow: true,
@@ -120,10 +123,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     "@type": "WebSite",
     "name": "Megicode",
     "url": "https://megicode.com",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://megicode.com/search?q={search_term_string}",
-      "query-input": "required name=search_term_string"
+    "description": "Expert software development services including web, mobile, desktop applications, AI solutions, and data science.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Megicode"
     }
   };
 

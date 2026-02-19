@@ -10,6 +10,7 @@ import { useCalendlyModal } from "../../../components/CalendlyModal";
 import { useTheme } from "../../../context/ThemeContext";
 import { useInViewAnimation } from "../../../hooks/useInViewAnimation";
 import servicesData from "../servicesData";
+import ServiceSchema from "@/components/SEO/ServiceSchema";
 import { OurProcess, EngagementModels, MethodologyAndCommunication, ServiceFAQs } from "../ServiceDetailSections";
 import { SiReact, SiFlutter, SiSwift, SiKotlin, SiFirebase, SiApple, SiAndroid } from "react-icons/si";
 import { FaMobileAlt, FaCode, FaPaintBrush, FaRocket, FaLifeRing, FaAppStoreIos, FaGooglePlay, FaCogs, FaUserFriends, FaMobile, FaShieldAlt, FaSearch, FaPencilAlt, FaTools, FaCloudUploadAlt, FaChartLine } from "react-icons/fa";
@@ -399,6 +400,7 @@ export default function MobileAppSolutionsPage() {
         </section>
       </main>
   {calendlyModalElement}
+  <ServiceSchema service={{ title: service!.title, description: service!.description, slug: 'mobile-app-solutions', features: service!.features }} />
   <Footer />
     </div>
   );
