@@ -144,16 +144,7 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
         aria-label="Megicode quantum animation with orbiting service icons"
         role="img"
       >
-        {/* SVG Definitions */}
-        <defs>
-          <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#4573df" />
-            <stop offset="100%" stopColor="#2d4fa2" />
-          </linearGradient>
-          <filter id="quantumBlur" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="1.5" />
-          </filter>
-        </defs>
+        {/* Removed quantumGlow radialGradient and quantumBlur filter for minimal look */}
 
         {/* Quantum particles */}
         {quantumParticles.map((particle, i) => (
@@ -251,53 +242,16 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
         })}
 
         {/* Central M node - proper M shape */}
-        <motion.circle
-          cx={0}
-          cy={0}
-          r={ORBIT_RADIUS * 0.35}
-          fill="none"
-          stroke={themeValue === 'dark' ? 'rgba(69,115,223,0.15)' : 'rgba(69,115,223,0.1)'}
-          strokeWidth={1.5}
-          initial={{ r: 0, opacity: 0 }}
-          animate={{ r: ORBIT_RADIUS * 0.35, opacity: 1 }}
-          transition={{ duration: 1.2, ease: 'easeOut', delay: 0.3 }}
-        />
-        <motion.circle
-          cx={0}
-          cy={0}
-          r={ORBIT_RADIUS * 0.35}
-          fill="none"
-          stroke={themeValue === 'dark' ? 'rgba(69,115,223,0.2)' : 'rgba(69,115,223,0.15)'}
-          strokeWidth={1}
-          initial={{ scale: 1, opacity: 0.3 }}
-          animate={{ scale: [1, 1.6, 1], opacity: [0.3, 0, 0.3] }}
-          transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-        />
         <motion.path
           d="M-90 60 L-60 -60 L0 60 L60 -60 L90 60"
           stroke="url(#blueGrad)"
           strokeWidth="12"
           strokeLinecap="round"
           strokeLinejoin="round"
-          fill="none"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 1 }}
-          transition={{ duration: 2, delay: 0.5, ease: easeInOut }}
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 2.5, repeat: Infinity, repeatType: 'reverse', ease: easeInOut }}
           filter={(hoveredIcon || focusedIcon) ? 'url(#glow)' : undefined}
-        />
-        {/* M logo breathing glow */}
-        <motion.path
-          d="M-90 60 L-60 -60 L0 60 L60 -60 L90 60"
-          stroke="url(#blueGrad)"
-          strokeWidth="20"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          fill="none"
-          opacity={0.15}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: [0, 0.15, 0] }}
-          transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', delay: 2.5 }}
-          style={{ filter: 'blur(8px)' }}
         />        {/* Orbiting SVG icons with floating effect */}
         {ORBIT_ICONS.map((item, i) => {          const angle = orbitAngle + (i * (2 * Math.PI) / ORBIT_ICONS.length);
           // Floating effect with reduced amplitude for smoother movement
@@ -307,7 +261,7 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
           const isActive = hoveredIcon === item.id || focusedIcon === item.id;
           const iconSrc = themeValue === 'dark' && item.darkSrc ? item.darkSrc : item.src;
           return (
-            <motion.g key={item.id} tabIndex={0}
+            <g key={item.id} tabIndex={0}
               aria-label={item.label}
               role="button"
               onMouseEnter={() => setHoveredIcon(item.id)}
@@ -315,9 +269,6 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
               onFocus={() => setFocusedIcon(item.id)}
               onBlur={() => setFocusedIcon(null)}
               style={{ cursor: 'pointer', outline: 'none' }}
-              initial={{ opacity: 0, scale: 0.3 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 1.2 + i * 0.12, ease: [0.16, 1, 0.3, 1] }}
             >
               <motion.g
                 animate={{
@@ -367,7 +318,7 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
                   </motion.g>
                 )}
               </AnimatePresence>
-            </motion.g>
+            </g>
           );
         })}
         {/* SVG Filters */}
