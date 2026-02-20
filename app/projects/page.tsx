@@ -8,6 +8,7 @@ import ProjectHero from '../../components/Projects/ProjectHero';
 import { useTheme } from "../../context/ThemeContext";
 import ThemeToggleIcon from "../../components/Icon/sbicon";
 import { useCallback } from "react";
+import { SITE_SOCIAL, getCopyrightText } from '@/lib/constants';
 
 export default function ProjectsPage() {
   const { theme, toggleTheme } = useTheme();
@@ -17,23 +18,8 @@ export default function ProjectsPage() {
     toggleTheme();
   }, [toggleTheme]);
 
-  // Define paths for social media links and contact info
-  const linkedinUrl = "https://www.linkedin.com/company/megicode";
-  const instagramUrl = "https://www.instagram.com/megicode/";
-  const githubUrl = "https://github.com/megicodes";
-  const copyrightText = "Copyright 2025 Megicode. All Rights Reserved.";
-  const contactEmail = "contact@megicode.com";
-
-  const sections = [
-    { id: 'home', label: 'Home', href: '/' },
-    { id: 'about', label: 'About', href: '/about' },
-    { id: 'services', label: 'Services', href: '/services' },
-    { id: 'projects', label: 'Projects', href: '/projects' },
-    { id: 'article', label: 'Article', href: '/article' },
-    { id: 'contact', label: 'Contact', href: '/contact' },
-    { id: 'reviews', label: 'Reviews', href: '/reviews' },
-    { id: 'careers', label: 'Careers', href: '/careers' },
-  ];  return (
+  const { linkedinUrl, instagramUrl, githubUrl } = SITE_SOCIAL;
+  const copyrightText = getCopyrightText();  return (
     <div style={{ backgroundColor: theme === "dark" ? "#1d2127" : "#ffffff", overflowX: "hidden", position: "relative" }}>
       <div style={{ 
         position: "fixed", 
@@ -46,7 +32,7 @@ export default function ProjectsPage() {
       }}>
         {/* Background container */}
       </div>
-      <main className="relative z-10 min-h-screen" aria-label="Projects Main Content">
+      <main id="main-content" className="relative z-10 min-h-screen" aria-label="Projects Main Content">
         {/* Theme Toggle Icon - consistent with services page */}
                 <div id="theme-toggle" role="button" tabIndex={0} onClick={onDarkModeButtonContainerClick} style={{ margin: '0 0 0 1.5rem', cursor: 'pointer', alignSelf: 'flex-start', paddingTop: '1.5rem' }}>
           <ThemeToggleIcon />

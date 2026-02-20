@@ -14,7 +14,7 @@ export default function PrivacyPolicyPage() {
     <div className={themeClass} style={{ minHeight: "100vh", width: "100vw", position: "relative", zIndex: 0, boxSizing: "border-box", transition: "background 0.3s" }}>
       <NewNavBar />
       <NavBarMobile />
-      <main className={styles.privacyMain}>
+      <main id="main-content" className={styles.privacyMain}>
         <section className={styles.section} aria-labelledby="privacy-policy-title">
           <h1 id="privacy-policy-title" className={styles.heading}>Privacy Policy</h1>
           <p className={styles.date}><em>Last updated: June 27, 2025</em></p>

@@ -192,6 +192,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <GoogleAnalytics />
       </head>
       <body>
+        <a href="#main-content" className="skip-to-main">Skip to main content</a>
         <Providers>
           <ClientLayout>
             {children}

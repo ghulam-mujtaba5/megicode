@@ -6,6 +6,24 @@
 /* Import modern animations */
 @import './animations.css';
 
+/* Skip to main content link (accessibility) */
+.skip-to-main {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 10000;
+  padding: 12px 24px;
+  background: var(--md-primary, #4573df);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 0 0 8px 8px;
+  text-decoration: none;
+  transition: top 0.2s;
+}
+.skip-to-main:focus {
+  top: 0;
+}
+
 /* Universal box-sizing and reset */
 html,
 body {
@@ -29,6 +47,9 @@ body {
   --md-on-background: #23272f;
   --md-on-surface: #23272f;
   --md-on-error: #fff;
+  /* Page-level dark/light background */
+  --page-bg: #ffffff;
+  --page-bg-dark: #1d2127;
   /* Elevation shadows */
   --md-elevation-1: 0 1px 3px rgba(60,60,60,0.12), 0 1px 2px rgba(60,60,60,0.24);
   --md-elevation-2: 0 3px 6px rgba(60,60,60,0.16), 0 3px 6px rgba(60,60,60,0.23);

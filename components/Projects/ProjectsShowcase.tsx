@@ -1,3 +1,4 @@
+"use client";
 import React from 'react';
 import styles from './ProjectsShowcaseCommon.module.css';
 import darkStyles from './ProjectsShowcaseDark.module.css';

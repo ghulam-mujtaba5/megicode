@@ -7,9 +7,9 @@ import lightStyles from './FooterLight.module.css'; // Import light mode styles
 import darkStyles from './FooterDark.module.css'; // Import dark mode styles
 
 const Footer = ({
-  copyrightText = "Copyright 2025 Megicode. All Rights Reserved.",
+  copyrightText = `Copyright ${new Date().getFullYear()} Megicode. All Rights Reserved.`,
   linkedinUrl = "https://www.linkedin.com/company/megicode",
-  instagramUrl = "https://www.instagram.com/ghulamujtabaofficial/",
+  instagramUrl = "https://www.instagram.com/megicode/",
   githubUrl = "https://github.com/megicodes"
 }) => {
   const { theme } = useTheme();

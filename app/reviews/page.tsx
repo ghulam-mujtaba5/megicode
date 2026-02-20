@@ -7,6 +7,7 @@ import NavBarMobile from "../../components/NavBar_Mobile/NavBar-mobile";
 import Footer from "../../components/Footer/Footer";
 import ThemeToggleIcon from "../../components/Icon/sbicon";
 import LoadingAnimation from "@/components/LoadingAnimation/LoadingAnimation";
+import { SITE_SOCIAL, getCopyrightText } from '@/lib/constants';
 
 // Dynamic imports for optimized loading
 const ReviewsHero = dynamic(() => import("../../components/Reviews/ReviewsHero/ReviewsHero"), {
@@ -18,20 +19,11 @@ const ReviewsGrid = dynamic(() => import("../../components/Reviews/ReviewsGrid/R
 
 export default function ReviewsPage() {
     const { theme } = useTheme();
-
-    const sections = [
-        { id: 'home', label: 'Home', href: '/' },
-        { id: 'about', label: 'About', href: '/about' },
-        { id: 'services', label: 'Services', href: '/services' },
-        { id: 'projects', label: 'Projects', href: '/projects' },
-        { id: 'article', label: 'Article', href: '/article' },
-        { id: 'contact', label: 'Contact', href: '/contact' },
-        { id: 'reviews', label: 'Reviews', href: '/reviews' },
-        { id: 'careers', label: 'Careers', href: '/careers' },
-    ];
+    const { linkedinUrl, instagramUrl, githubUrl } = SITE_SOCIAL;
+    const copyrightText = getCopyrightText();
 
     return (
-      <div style={{ backgroundColor: theme === "dark" ? "#1d2127" : "#ffffff", minHeight: "100vh", overflowX: "hidden" }}>
+      <div style={{ backgroundColor: theme === "dark" ? "var(--page-bg-dark, #1d2127)" : "var(--page-bg, #ffffff)", minHeight: "100vh", overflowX: "hidden" }}>
       {/* Theme Toggle Icon */}
       <div id="theme-toggle" role="button" tabIndex={0}>
         <ThemeToggleIcon />
@@ -47,7 +39,7 @@ export default function ReviewsPage() {
         <NavBarMobile />
       </nav>   
 
-        <main className="relative" aria-label="Reviews Main Content">
+        <main id="main-content" className="relative" aria-label="Reviews Main Content">
             <h1 style={{position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden'}}>Reviews & Testimonials</h1>
             <Suspense fallback={<LoadingAnimation size="medium" />}>
                 <ReviewsHero />
@@ -56,10 +48,10 @@ export default function ReviewsPage() {
         </main>
 
             <Footer 
-                linkedinUrl="https://www.linkedin.com/company/megicode"
-                instagramUrl="https://www.instagram.com/megicode"
-                githubUrl="https://github.com/megicodes"
-                copyrightText="© 2025 Megicode. All rights reserved."
+                linkedinUrl={linkedinUrl}
+                instagramUrl={instagramUrl}
+                githubUrl={githubUrl}
+                copyrightText={copyrightText}
             />
         </div>
     );

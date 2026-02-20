@@ -1,18 +1,31 @@
 "use client";
 import React, { useCallback } from "react";
+import dynamic from "next/dynamic";
 import { useTheme } from "../context/ThemeContext";
 import NewNavBar from "../components/NavBar_Desktop_Company/NewNavBar";
 import NavBarMobile from "../components/NavBar_Mobile/NavBar-mobile";
 import WelcomeFrame from "../components/welcomeCompany/welcome";
-import AboutMeSection from "../components/AboutMeCompany/AboutMeSectionLight";
-import ServicesFrame from "../components/About-page-Services/ServicesFrame";
-import ContactSection from "../components/Contact/ConatctUs";
 import Footer from "../components/Footer/Footer";
 import ThemeToggleIcon from "../components/Icon/sbicon";
 import MegicodeHeroAnimationAdvancedClient from "./megicode/MegicodeHeroAnimationAdvancedClient";
 import ParticleBackgroundClient from "./megicode/ParticleBackgroundClient";
-import Tagline from "../components/Tagline/Tagline";
-import TechStack from "../components/TechStack/TechStack";
+import LoadingAnimation from "@/components/LoadingAnimation/LoadingAnimation";
+import { SITE_SOCIAL, getCopyrightText, CONTACT_EMAIL } from "@/lib/constants";
+
+// Below-the-fold components loaded lazily
+const AboutMeSection = dynamic(() => import("../components/AboutMeCompany/AboutMeSectionLight"), {
+  loading: () => <LoadingAnimation size="medium" />
+});
+const Tagline = dynamic(() => import("../components/Tagline/Tagline"));
+const ServicesFrame = dynamic(() => import("../components/About-page-Services/ServicesFrame"), {
+  loading: () => <LoadingAnimation size="medium" />
+});
+const TechStack = dynamic(() => import("../components/TechStack/TechStack"), {
+  loading: () => <LoadingAnimation size="medium" />
+});
+const ContactSection = dynamic(() => import("../components/Contact/ConatctUs"), {
+  loading: () => <LoadingAnimation size="medium" />
+});
 
 export default function HomePageClient() {
   const { theme, toggleTheme } = useTheme();
@@ -21,12 +34,9 @@ export default function HomePageClient() {
     toggleTheme && toggleTheme();
   }, [toggleTheme]);
 
-  // Social/contact info
-  const linkedinUrl = "https://www.linkedin.com/company/megicode";
-  const instagramUrl = "https://www.instagram.com/megicode/";
-  const githubUrl = "https://github.com/megicodes";
-  const copyrightText = "Copyright 2025 Megicode. All Rights Reserved.";
-  const contactEmail = "contact@megicode.com";
+  const { linkedinUrl, instagramUrl, githubUrl } = SITE_SOCIAL;
+  const copyrightText = getCopyrightText();
+  const contactEmail = CONTACT_EMAIL;
 
 
   return (
@@ -47,7 +57,7 @@ export default function HomePageClient() {
         >
           <ThemeToggleIcon />
         </div>
-        <main className="main-content">
+        <main id="main-content" className="main-content">
           <NewNavBar />
           <NavBarMobile />
           {/* Welcome Frame + Advanced Hero Animation */}

@@ -11,7 +11,7 @@ import { useTheme } from "../../../context/ThemeContext";
 import { useInViewAnimation } from "../../../hooks/useInViewAnimation";
 import servicesData from "../servicesData";
 import ServiceSchema from "@/components/SEO/ServiceSchema";
-import { OurProcess, EngagementModels, MethodologyAndCommunication, ServiceFAQs } from "../ServiceDetailSections";
+import { ServiceFAQs } from "../ServiceDetailSections";
 import { FaSync, FaCogs, FaSearch, FaDatabase, FaRocket, FaLifeRing, FaTools, FaLink, FaCheckCircle, FaChalkboardTeacher, FaPython, FaNodeJs } from "react-icons/fa";
 import { SiZapier, SiMake, SiSelenium, SiPostman } from "react-icons/si";
 
@@ -144,7 +144,6 @@ export default function AutomationIntegrationPage() {
         className={commonStyles.mainContent}
         aria-label="Automation & Integration Service Detail"
         style={{ 
-          paddingTop: '88px',
           maxWidth: '1440px',
           margin: '0 auto',
           padding: '88px 24px 64px'
@@ -210,7 +209,7 @@ export default function AutomationIntegrationPage() {
         <section className={`${commonStyles.overviewSection} ${themeStyles.overviewSection}`} data-animate="slide-left">
           <div className={commonStyles.overviewTextBlock}>
             <h2 className={`${commonStyles.overviewTitle} ${themeStyles.overviewTitle}`}>Overview</h2>
-            <p className={`${commonStyles.overviewDesc} ${themeStyles.overviewDesc}`}>{service.description}</p>
+            <p className={`${commonStyles.overviewDesc} ${themeStyles.overviewDesc}`}>We help businesses eliminate manual bottlenecks by designing intelligent workflows and connecting disparate systems through robust API integrations, RPA, and custom middleware. Our solutions reduce operational costs, minimize human error, and free your team to focus on strategic work.</p>
           </div>
           <div className={commonStyles.overviewImageBlock}>
             <img src="/devlopment-icon.svg" alt="Automation Service Overview" className={`${commonStyles.overviewImage} ${themeStyles.overviewImage}`} data-animate="fade-in" />
@@ -360,7 +359,7 @@ export default function AutomationIntegrationPage() {
         {/* Section divider */}
         <div className={`${commonStyles.sectionDivider} ${themeStyles.sectionDivider}`} />
         <div className={commonStyles.faqSection}>
-          <ServiceFAQs faqs={faqs} />
+          <ServiceFAQs faqs={faqs} theme={theme} />
         </div>
 
         {/* CTA - Full-width colored strip */}
@@ -379,7 +378,8 @@ export default function AutomationIntegrationPage() {
             <FaCogs className={commonStyles.ctaBtnIcon} title="Automation Consultant" />
             Start Your Automation Project
           </button>
-          <div className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}>Ready to automate your business? Let's talk about your vision.</div>
+          <div className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}>Ready to automate your business? Let&apos;s talk about your vision.</div>
+          <a href="/contact" className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`} style={{ display: 'inline-block', marginTop: 8, textDecoration: 'underline', fontSize: '0.95rem' }}>Or send us a message</a>
         </section>
       </main>
   {calendlyModalElement}

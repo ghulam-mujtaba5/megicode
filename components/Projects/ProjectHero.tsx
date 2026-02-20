@@ -1,3 +1,4 @@
+"use client";
 import React from 'react';
 import styles from './ProjectHeroCommon.module.css';
 import darkStyles from './ProjectHeroDark.module.css';

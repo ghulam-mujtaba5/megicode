@@ -10,6 +10,7 @@ import Footer from "../../components/Footer/Footer";
 import ThemeToggleIcon from "../../components/Icon/sbicon";
 import LoadingAnimation from "@/components/LoadingAnimation/LoadingAnimation";
 import servicesData from "./servicesData";
+import { SITE_SOCIAL, getCopyrightText } from '@/lib/constants';
 
 // Dynamic imports for optimized loading
 const ServicesHero = dynamic(() => import("../../components/Services/Hero/ServicesHero"), {
@@ -22,24 +23,11 @@ const ServiceCard = dynamic(() => import("../../components/Services/Card/Service
 export default function ServicesPage() {
   const { theme } = useTheme();
 
-  const linkedinUrl = "https://www.linkedin.com/company/megicode";
-  const instagramUrl = "https://www.instagram.com/megicode/";
-  const githubUrl = "https://github.com/megicodes";
-  const copyrightText = "Copyright 2025 Megicode. All Rights Reserved.";
-
-  const sections = [
-    { id: 'home', label: 'Home', href: '/' },
-    { id: 'about', label: 'About', href: '/about' },
-    { id: 'services', label: 'Services', href: '/services' },
-    { id: 'projects', label: 'Projects', href: '/projects' },
-    { id: 'article', label: 'Article', href: '/article' },
-    { id: 'contact', label: 'Contact', href: '/contact' },
-    { id: 'reviews', label: 'Reviews', href: '/reviews' },
-    { id: 'careers', label: 'Careers', href: '/careers' },
-  ];
+  const { linkedinUrl, instagramUrl, githubUrl } = SITE_SOCIAL;
+  const copyrightText = getCopyrightText();
 
   return (
-    <div style={{ backgroundColor: theme === "dark" ? "#1d2127" : "#ffffff", minHeight: "100vh", overflowX: "hidden" }}>
+    <div style={{ backgroundColor: theme === "dark" ? "var(--page-bg-dark, #1d2127)" : "var(--page-bg, #ffffff)", minHeight: "100vh", overflowX: "hidden" }}>
       {/* Theme Toggle Icon */}
       <div id="theme-toggle" role="button" tabIndex={0}>
         <ThemeToggleIcon />
@@ -55,7 +43,7 @@ export default function ServicesPage() {
         <NavBarMobile />
       </nav>
 
-      <main aria-label="Services Main Content">
+      <main id="main-content" aria-label="Services Main Content">
         <h1 style={{position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden'}}>Our Services</h1>
         <Suspense fallback={<LoadingAnimation size="medium" />}>
           <ServicesHero />

@@ -13,6 +13,7 @@ import { FiChevronRight } from 'react-icons/fi';
 import NewNavBar from "../../components/NavBar_Desktop_Company/NewNavBar";
 import NavBarMobile from "../../components/NavBar_Mobile/NavBar-mobile";
 import ThemeToggleIcon from "../../components/Icon/sbicon";
+import { SITE_SOCIAL, getCopyrightText } from '@/lib/constants';
 
 // Component interfaces
 interface FooterProps {
@@ -99,23 +100,8 @@ export default function ContactPage() {
   const titleRef = useRef<HTMLHeadingElement | null>(null);
   const accentRef = useRef<HTMLDivElement | null>(null);
 
-  // Navigation sections for consistent navigation
-  const sections = [
-    { id: 'home', label: 'Home', href: '/' },
-    { id: 'about', label: 'About', href: '/about' },
-    { id: 'services', label: 'Services', href: '/services' },
-    { id: 'projects', label: 'Projects', href: '/projects' },
-    { id: 'article', label: 'Article', href: '/article' },
-    { id: 'contact', label: 'Contact', href: '/contact' },
-    { id: 'reviews', label: 'Reviews', href: '/reviews' },
-    { id: 'careers', label: 'Careers', href: '/careers' },
-  ];
-
-  // Social/contact info
-  const linkedinUrl = "https://www.linkedin.com/company/megicode";
-  const instagramUrl = "https://www.instagram.com/megicode/";
-  const githubUrl = "https://github.com/megicodes";
-  const copyrightText = "Copyright 2025 Megicode. All Rights Reserved.";
+  const { linkedinUrl, instagramUrl, githubUrl } = SITE_SOCIAL;
+  const copyrightText = getCopyrightText();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -292,7 +278,7 @@ export default function ContactPage() {
   return (
     <div 
       style={{ 
-        backgroundColor: theme === "dark" ? "#181c22" : "#ffffff", 
+        backgroundColor: theme === "dark" ? "var(--page-bg-dark, #1d2127)" : "var(--page-bg, #ffffff)", 
         minHeight: "100vh", 
         overflowX: "hidden" 
       }}
@@ -329,7 +315,7 @@ export default function ContactPage() {
       </header>
 
       {/* Main Content */}
-      <main className={`${styles.container}`} data-theme={theme}>
+      <main id="main-content" className={`${styles.container}`} data-theme={theme}>
         <div className={styles.backgroundGradient}></div>
         <Suspense fallback={<LoadingAnimation size="medium" />}>
           <ParticleBackground />

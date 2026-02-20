@@ -83,7 +83,7 @@ const ContactSection = ({
           setEmailInput('');
           setMessage('');
         } else {
-          setError(result.message || 'Failed to send message. Please try again later.');
+          setError(result.error || 'Failed to send message. Please try again later.');
         }
       } catch (err) {
         setError('Failed to send message. Please try again later.');

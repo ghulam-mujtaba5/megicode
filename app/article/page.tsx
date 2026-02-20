@@ -7,10 +7,20 @@ import Footer from "../../components/Footer/Footer";
 import ThemeToggleIcon from "../../components/Icon/sbicon";
 import { useTheme } from "../../context/ThemeContext";
 import LoadingAnimation from "@/components/LoadingAnimation/LoadingAnimation";
+import { SITE_SOCIAL, getCopyrightText } from '@/lib/constants';
+
+interface Article {
+  _id?: string;
+  id?: string;
+  title: string;
+  createdAt: string;
+  populatedAuthors?: { name: string }[];
+  content?: { root?: { children?: { children?: { text: string }[] }[] } };
+}
 
 const ArticlePage = () => {
   const { theme, toggleTheme } = useTheme();
-  const [articles, setArticles] = useState([]);
+  const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
   const [isClient, setIsClient] = useState(false);
 
@@ -18,21 +28,15 @@ const ArticlePage = () => {
     setIsClient(true);
   }, []);
   
-  // Navigation sections for consistent navigation
-  const sections = [
-    { id: 'home', label: 'Home', href: '/' },
-    { id: 'about', label: 'About', href: '/about' },
-    { id: 'services', label: 'Services', href: '/services' },
-    { id: 'projects', label: 'Projects', href: '/projects' },
-    { id: 'article', label: 'Article', href: '/article' },
-    { id: 'contact', label: 'Contact', href: '/contact' },
-    { id: 'reviews', label: 'Reviews', href: '/reviews' },
-    { id: 'careers', label: 'Careers', href: '/careers' },
-  ];
+  const { linkedinUrl, instagramUrl, githubUrl } = SITE_SOCIAL;
+  const copyrightText = getCopyrightText();
 
   useEffect(() => {
     fetch("/api/posts")
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
       .then((data) => {
         setArticles(data?.docs || []);
         setLoading(false);
@@ -66,6 +70,7 @@ const ArticlePage = () => {
         <NavBarMobile />
       </nav>
       <main
+        id="main-content"
         style={{
           flex: '1 0 auto',
           maxWidth: 900,
@@ -174,10 +179,10 @@ const ArticlePage = () => {
       </main>
       <div style={{ flexShrink: 0, width: '100%' }}>
         <Footer
-          linkedinUrl="https://www.linkedin.com/company/megicode"
-          instagramUrl="https://www.instagram.com/megicode/"
-          githubUrl="https://github.com/megicodes"
-          copyrightText="Copyright 2025 Megicode. All Rights Reserved."
+          linkedinUrl={linkedinUrl}
+          instagramUrl={instagramUrl}
+          githubUrl={githubUrl}
+          copyrightText={copyrightText}
         />
       </div>
     </div>

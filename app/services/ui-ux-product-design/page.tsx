@@ -201,7 +201,7 @@ export default function UIUXProductDesignDetailPage() {
         <section className={`${commonStyles.overviewSection} ${themeStyles.overviewSection}`} data-animate="slide-left">
           <div className={commonStyles.overviewTextBlock}>
             <h2 className={`${commonStyles.overviewTitle} ${themeStyles.overviewTitle}`}>Overview</h2>
-            <p className={`${commonStyles.overviewDesc} ${themeStyles.overviewDesc}`}>{service.description}</p>
+            <p className={`${commonStyles.overviewDesc} ${themeStyles.overviewDesc}`}>We combine user research, data-driven personas, and iterative prototyping to craft interfaces that delight users and drive conversions. Our design systems ensure brand consistency across platforms while usability testing validates every decision before development begins.</p>
           </div>
           <div className={commonStyles.overviewImageBlock}>
             <img src="/Ui&Ux-icon.svg" alt="UI/UX Service Overview" className={`${commonStyles.overviewImage} ${themeStyles.overviewImage}`} data-animate="fade-in" />
@@ -363,7 +363,7 @@ export default function UIUXProductDesignDetailPage() {
         {/* Section divider */}
         <div className={`${commonStyles.sectionDivider} ${themeStyles.sectionDivider}`} />
         <div className={commonStyles.faqSection}>
-          <ServiceFAQs faqs={faqs} />
+          <ServiceFAQs faqs={faqs} theme={theme} />
         </div>
 
         {/* CTA - Full-width colored strip */}
@@ -382,7 +382,8 @@ export default function UIUXProductDesignDetailPage() {
             <FaPalette className={commonStyles.ctaBtnIcon} title="Design Consultant" />
             Start Your Design Project
           </button>
-          <div className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}>Ready to elevate your product? Let's talk about your vision.</div>
+          <div className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}>Ready to elevate your product? Let&apos;s talk about your vision.</div>
+          <a href="/contact" className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`} style={{ display: 'inline-block', marginTop: 8, textDecoration: 'underline', fontSize: '0.95rem' }}>Or send us a message</a>
         </section>
       </main>
   {calendlyModal}

@@ -3,14 +3,14 @@
 import React, { useEffect, useState, useRef } from 'react';
 
 import { useTheme } from '../context/ThemeContext';
-import { motion, Variants, easeInOut, easeOut } from 'framer-motion';
-import Image from 'next/image';
+import { motion, Variants, easeInOut } from 'framer-motion';
 import Link from 'next/link';
 import styles from '../styles/404.module.css';
 import NewNavBar from '../components/NavBar_Desktop_Company/NewNavBar';
 import NavBarMobile from '../components/NavBar_Mobile/NavBar-mobile';
 import Footer from '../components/Footer/Footer';
 import ThemeToggleIcon from '../components/Icon/sbicon';
+import { SITE_SOCIAL, getCopyrightText } from '@/lib/constants';
 
 // Animation variants
 const containerVariants: Variants = {
@@ -53,19 +53,8 @@ const glitchVariants: Variants = {
 
 
 export default function NotFound() {
-  // Social/contact info (reuse from other pages)
-  const linkedinUrl = "https://www.linkedin.com/company/megicode";
-  const instagramUrl = "https://www.instagram.com/megicode/";
-  const githubUrl = "https://github.com/megicodes";
-  const copyrightText = "Copyright 2025 Megicode. All Rights Reserved.";
-  const sections = [
-    { id: "home-section", label: "Home" },
-    { id: "about-section", label: "About" },
-    { id: "services-section", label: "Services" },
-    { id: "project-section", label: "Projects" },
-    { id: "reviews-section", label: "Reviews" },
-    { id: "contact-section", label: "Contact" },
-  ];
+  const { linkedinUrl, instagramUrl, githubUrl } = SITE_SOCIAL;
+  const copyrightText = getCopyrightText();
   const { theme } = useTheme();
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isMobile, setIsMobile] = useState(false);
@@ -174,16 +163,12 @@ export default function NotFound() {
   return (
     <div 
       style={{ 
-        backgroundColor: theme === "dark" ? "#1d2127" : "#ffffff", 
+        backgroundColor: theme === "dark" ? "var(--page-bg-dark, #1d2127)" : "var(--page-bg, #ffffff)", 
         minHeight: "100vh", 
         overflowX: "hidden",
         perspective: "1000px"
       }}
     >
-      {/* Noindex for 404 pages - prevents search engine indexing */}
-      <head>
-        <meta name="robots" content="noindex, nofollow" />
-      </head>
       {/* Desktop NavBar - Always on Top */}
       <nav id="desktop-navbar" aria-label="Main Navigation" className={styles.desktopNavbar}>
         <NewNavBar />

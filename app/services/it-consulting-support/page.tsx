@@ -11,7 +11,7 @@ import { useTheme } from "../../../context/ThemeContext";
 import { useInViewAnimation } from "../../../hooks/useInViewAnimation";
 import servicesData from "../servicesData";
 import ServiceSchema from "@/components/SEO/ServiceSchema";
-import { OurProcess, EngagementModels, MethodologyAndCommunication, ServiceFAQs } from "../ServiceDetailSections";
+import { ServiceFAQs } from "../ServiceDetailSections";
 import { 
   SiJira, 
   SiGooglechrome, 
@@ -159,7 +159,6 @@ export default function ITConsultingSupportPage() {
         className={commonStyles.mainContent}
         aria-label="IT Consulting & Support Service Detail"
         style={{ 
-          paddingTop: '88px',
           maxWidth: '1440px',
           margin: '0 auto',
           padding: '88px 24px 64px'
@@ -225,7 +224,7 @@ export default function ITConsultingSupportPage() {
         <section className={`${commonStyles.overviewSection} ${themeStyles.overviewSection}`} data-animate="slide-left">
           <div className={commonStyles.overviewTextBlock}>
             <h2 className={`${commonStyles.overviewTitle} ${themeStyles.overviewTitle}`}>Overview</h2>
-            <p className={`${commonStyles.overviewDesc} ${themeStyles.overviewDesc}`}>{service.description}</p>
+            <p className={`${commonStyles.overviewDesc} ${themeStyles.overviewDesc}`}>Our IT consultants partner with you to align technology with business goals. We provide strategic roadmapping, infrastructure assessments, security audits, compliance guidance (GDPR, ISO 27001, HIPAA), and ongoing managed support to keep your systems secure and efficient.</p>
           </div>
           <div className={commonStyles.overviewImageBlock}>
             <img src="/it-consulting-support-icon.svg" alt="IT Service Overview" className={`${commonStyles.overviewImage} ${themeStyles.overviewImage}`} data-animate="fade-in" />
@@ -239,12 +238,12 @@ export default function ITConsultingSupportPage() {
           <h2 className={`${commonStyles.whyTitle} ${themeStyles.whyTitle}`}>Why It Matters</h2>
           <div className={commonStyles.whyStatsRow}>
             <div className={`${commonStyles.whyStatCard} ${themeStyles.whyStatCard}`}>
-              <span data-animate="countup" data-value="78">78%</span>
-              <div className={`${commonStyles.whyStatDesc} ${themeStyles.whyStatDesc}`}>of businesses believe AI will impact their industry (PwC)</div>
+              <span data-animate="countup" data-value="60">60%</span>
+              <div className={`${commonStyles.whyStatDesc} ${themeStyles.whyStatDesc}`}>of businesses experience costly downtime without proactive IT support (Gartner)</div>
             </div>
             <div className={`${commonStyles.whyStatCard} ${themeStyles.whyStatCard}`}>
-              <span data-animate="countup" data-value="2">2x</span>
-              <div className={`${commonStyles.whyStatDesc} ${themeStyles.whyStatDesc}`}>revenue growth for AI adoption leaders</div>
+              <span data-animate="countup" data-value="43">43%</span>
+              <div className={`${commonStyles.whyStatDesc} ${themeStyles.whyStatDesc}`}>reduction in downtime with managed IT services</div>
             </div>
           </div>
         </section>
@@ -402,7 +401,7 @@ export default function ITConsultingSupportPage() {
         {/* Section divider */}
         <div className={`${commonStyles.sectionDivider} ${themeStyles.sectionDivider}`} />
         <div className={commonStyles.faqSection}>
-          <ServiceFAQs faqs={faqs} />
+          <ServiceFAQs faqs={faqs} theme={theme} />
         </div>
 
         {/* CTA - Full-width colored strip */}
@@ -421,7 +420,8 @@ export default function ITConsultingSupportPage() {
             <FaUserCog className={commonStyles.ctaBtnIcon} title="IT Consultant" />
             Start Your IT Project
           </button>
-          <div className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}>Ready for secure, reliable IT? Let's talk about your vision.</div>
+          <div className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}>Ready for secure, reliable IT? Let&apos;s talk about your vision.</div>
+          <a href="/contact" className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`} style={{ display: 'inline-block', marginTop: 8, textDecoration: 'underline', fontSize: '0.95rem' }}>Or send us a message</a>
         </section>
       </main>
   {calendlyModalElement}

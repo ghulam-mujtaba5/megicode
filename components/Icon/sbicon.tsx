@@ -16,8 +16,8 @@ const ThemeToggleIcon = () => {
   const iconRef = useRef<HTMLDivElement | null>(null);
 
   const handleIconClick = useCallback(() => {
-    window.location.href = '/'; // Go to Megicode home page
-  }, []);
+    router.push('/');
+  }, [router]);
 
   const iconClass = useMemo(() => {
     return `${styles['theme-toggle-icon']} ${theme === 'light' ? styles.light : styles.dark} ${animate ? styles.animate : ''}`;
@@ -68,7 +68,7 @@ const ThemeToggleIcon = () => {
       className={iconClass}
       onClick={handleIconClick}
       role="button"
-      aria-label="Toggle Theme and Navigate to Megicode"
+      aria-label="Go to Megicode Home"
       tabIndex={0}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {

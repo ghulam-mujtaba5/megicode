@@ -11,7 +11,7 @@ import { useTheme } from "../../../context/ThemeContext";
 import { useInViewAnimation } from "../../../hooks/useInViewAnimation";
 import servicesData from "../servicesData";
 import ServiceSchema from "@/components/SEO/ServiceSchema";
-import { OurProcess, EngagementModels, MethodologyAndCommunication, ServiceFAQs } from "../ServiceDetailSections";
+import { ServiceFAQs } from "../ServiceDetailSections";
 import { 
   SiAmazon,
   SiDocker, 
@@ -37,7 +37,7 @@ import NavBarMobile from "../../../components/NavBar_Mobile/NavBar-mobile";
 import NewNavBar from "../../../components/NavBar_Desktop_Company/NewNavBar";
 // Clone the service object and override the techs array to remove 'AI' and 'Azure', and add other relevant technologies
 const service = {
-  ...servicesData.find(s => s.slug === "cloud-devops"),
+  ...servicesData.find(s => s.slug === "cloud-devops-services"),
   title: "Cloud & DevOps Services",
   description: "Cloud migration, CI/CD, and infrastructure automation for scalable, secure, and efficient operations.",
   techs: [
@@ -169,7 +169,6 @@ export default function CloudDevOpsPage() {
         className={commonStyles.mainContent}
         aria-label="Cloud & DevOps Service Detail"
         style={{ 
-          paddingTop: '88px',
           maxWidth: '1440px',
           margin: '0 auto',
           padding: '88px 24px 64px'
@@ -234,7 +233,7 @@ export default function CloudDevOpsPage() {
         <section className={`${commonStyles.overviewSection} ${themeStyles.overviewSection}`} data-animate="slide-left">
           <div className={commonStyles.overviewTextBlock}>
             <h2 className={`${commonStyles.overviewTitle} ${themeStyles.overviewTitle}`}>Overview</h2>
-            <p className={`${commonStyles.overviewDesc} ${themeStyles.overviewDesc}`}>{service.description}</p>
+            <p className={`${commonStyles.overviewDesc} ${themeStyles.overviewDesc}`}>We architect and manage cloud infrastructure on AWS, Azure, and GCP while implementing CI/CD pipelines, infrastructure as code, and automated monitoring. Our DevOps practices enable faster releases, reduced downtime, and lower operational costs for teams of any size.</p>
           </div>
           <div className={commonStyles.overviewImageBlock}>
             <img
@@ -404,7 +403,7 @@ export default function CloudDevOpsPage() {
         {/* Section divider */}
         <div className={`${commonStyles.sectionDivider} ${themeStyles.sectionDivider}`} />
         <div className={commonStyles.faqSection}>
-          <ServiceFAQs faqs={faqs} />
+          <ServiceFAQs faqs={faqs} theme={theme} />
         </div>
 
         {/* CTA - Full-width colored strip */}
@@ -423,7 +422,8 @@ export default function CloudDevOpsPage() {
             <FaCloud className={commonStyles.ctaBtnIcon} title="Cloud Consultant" />
             Start Your Cloud Project
           </button>
-          <div className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}>Ready to modernize your infrastructure? Let's talk about your vision.</div>
+          <div className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}>Ready to modernize your infrastructure? Let&apos;s talk about your vision.</div>
+          <a href="/contact" className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`} style={{ display: 'inline-block', marginTop: 8, textDecoration: 'underline', fontSize: '0.95rem' }}>Or send us a message</a>
         </section>
       </main>
   {calendlyModalElement}

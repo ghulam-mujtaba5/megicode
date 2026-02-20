@@ -11,7 +11,7 @@ import { useTheme } from "../../../context/ThemeContext";
 import { useInViewAnimation } from "../../../hooks/useInViewAnimation";
 import servicesData from "../servicesData";
 import ServiceSchema from "@/components/SEO/ServiceSchema";
-import { OurProcess, EngagementModels, MethodologyAndCommunication, ServiceFAQs } from "../ServiceDetailSections";
+import { ServiceFAQs } from "../ServiceDetailSections";
 import { SiReact, SiNextdotjs, SiNodedotjs, SiSpringboot, SiAmazon, SiDocker } from "react-icons/si";
 import { 
   FaCode,
@@ -158,7 +158,6 @@ export default function WebDevelopmentDetailPage() {
         className={commonStyles.mainContent}
         aria-label="Custom Web Development Service Detail"
         style={{ 
-          paddingTop: '88px',
           maxWidth: '1440px',
           margin: '0 auto',
           padding: '88px 24px 64px'
@@ -224,7 +223,7 @@ export default function WebDevelopmentDetailPage() {
         <section className={`${commonStyles.overviewSection} ${themeStyles.overviewSection}`} data-animate="slide-left">
           <div className={commonStyles.overviewTextBlock}>
             <h2 className={`${commonStyles.overviewTitle} ${themeStyles.overviewTitle}`}>Overview</h2>
-            <p className={`${commonStyles.overviewDesc} ${themeStyles.overviewDesc}`}>{service.description}</p>
+            <p className={`${commonStyles.overviewDesc} ${themeStyles.overviewDesc}`}>We build high-performance web applications using modern frameworks like React, Next.js, and Node.js. From enterprise portals to e-commerce platforms, our full-stack team delivers SEO-optimized, accessible, and scalable solutions with security baked in from day one.</p>
           </div>
           <div className={commonStyles.overviewImageBlock}>
             <img
@@ -401,7 +400,7 @@ export default function WebDevelopmentDetailPage() {
         {/* Section divider */}
         <div className={`${commonStyles.sectionDivider} ${themeStyles.sectionDivider}`} />
         <div className={commonStyles.faqSection}>
-          <ServiceFAQs faqs={faqs} />
+          <ServiceFAQs faqs={faqs} theme={theme} />
         </div>
 
         {/* CTA - Full-width colored strip */}
@@ -420,7 +419,8 @@ export default function WebDevelopmentDetailPage() {
             <FaCode className={commonStyles.ctaBtnIcon} title="Web Development Consultant" />
             Start Your Web Project
           </button>
-          <div className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}>Ready to build your next web app? Let's talk about your vision.</div>
+          <div className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}>Ready to build your next web app? Let&apos;s talk about your vision.</div>
+          <a href="/contact" className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`} style={{ display: 'inline-block', marginTop: 8, textDecoration: 'underline', fontSize: '0.95rem' }}>Or send us a message</a>
         </section>
       </main>
   {calendlyModalElement}

@@ -11,7 +11,7 @@ import { useTheme } from "../../../context/ThemeContext";
 import { useInViewAnimation } from "../../../hooks/useInViewAnimation";
 import servicesData from "../servicesData";
 import ServiceSchema from "@/components/SEO/ServiceSchema";
-import { OurProcess, EngagementModels, MethodologyAndCommunication, ServiceFAQs } from "../ServiceDetailSections";
+import { ServiceFAQs } from "../ServiceDetailSections";
 import { SiPython, SiTensorflow, SiPytorch, SiScikitlearn, SiAmazon, SiGooglecloud } from "react-icons/si";
 import { FaRobot, FaLanguage, FaEye, FaCogs, FaSearch, FaDatabase, FaRocket, FaLifeRing } from "react-icons/fa";
 
@@ -144,7 +144,6 @@ export default function AIMachineLearningDetailPage() {
         className={commonStyles.mainContent}
         aria-label="AI & Machine Learning Service Detail"
         style={{ 
-          paddingTop: '88px',
           maxWidth: '1440px',
           margin: '0 auto',
           padding: '88px 24px 64px'
@@ -210,7 +209,7 @@ export default function AIMachineLearningDetailPage() {
         <section className={`${commonStyles.overviewSection} ${themeStyles.overviewSection}`} data-animate="slide-left">
           <div className={commonStyles.overviewTextBlock}>
             <h2 className={`${commonStyles.overviewTitle} ${themeStyles.overviewTitle}`}>Overview</h2>
-            <p className={`${commonStyles.overviewDesc} ${themeStyles.overviewDesc}`}>{service.description}</p>
+            <p className={`${commonStyles.overviewDesc} ${themeStyles.overviewDesc}`}>From predictive analytics to natural language processing, we design and deploy custom AI models tailored to your industry. Our end-to-end approach covers data strategy, model training, integration with your existing systems, and ongoing optimization to deliver measurable ROI.</p>
           </div>
           <div className={commonStyles.overviewImageBlock}>
             <img src="/ds&ai-icon.svg" alt="AI Service Overview" className={`${commonStyles.overviewImage} ${themeStyles.overviewImage}`} data-animate="fade-in" />
@@ -389,7 +388,7 @@ export default function AIMachineLearningDetailPage() {
         {/* Section divider */}
         <div className={`${commonStyles.sectionDivider} ${themeStyles.sectionDivider}`} />
         <div className={commonStyles.faqSection}>
-          <ServiceFAQs faqs={faqs} />
+          <ServiceFAQs faqs={faqs} theme={theme} />
         </div>
 
         {/* CTA - Full-width colored strip */}
@@ -408,7 +407,8 @@ export default function AIMachineLearningDetailPage() {
             <FaRobot className={commonStyles.ctaBtnIcon} title="AI Consultant" />
             Talk to AI Consultant
           </button>
-          <div className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}>Ready to unlock the power of AI? Let's talk about your vision.</div>
+          <div className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}>Ready to unlock the power of AI? Let&apos;s talk about your vision.</div>
+          <a href="/contact" className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`} style={{ display: 'inline-block', marginTop: 8, textDecoration: 'underline', fontSize: '0.95rem' }}>Or send us a message</a>
         </section>
       </main>
   {calendlyModalElement}

@@ -1,3 +1,4 @@
+"use client";
 import styles from './ServiceDetail.module.css';
 import Image from 'next/image';
 import { useCalendlyModal } from '../CalendlyModal';

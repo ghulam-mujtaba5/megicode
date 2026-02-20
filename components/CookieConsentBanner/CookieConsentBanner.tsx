@@ -23,6 +23,7 @@ const CookieConsentBanner: React.FC = () => {
   const acceptCookies = () => {
     try {
       localStorage.setItem('cookie_consent', 'true');
+      window.dispatchEvent(new Event('cookie_consent_change'));
     } catch (e) {}
     setVisible(false);
   };
@@ -30,6 +31,7 @@ const CookieConsentBanner: React.FC = () => {
   const declineCookies = () => {
     try {
       localStorage.setItem('cookie_consent', 'declined');
+      window.dispatchEvent(new Event('cookie_consent_change'));
     } catch (e) {}
     setVisible(false);
   };
@@ -45,8 +47,6 @@ const CookieConsentBanner: React.FC = () => {
         <a
           href="/privacy-policy"
           className={`${commonStyles.link} ${frameStyles.link}`}
-          target="_blank"
-          rel="noopener noreferrer"
         >
           Learn more
         </a>.

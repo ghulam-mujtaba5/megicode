@@ -11,21 +11,13 @@ import { useTheme } from "../../../context/ThemeContext";
 import { useInViewAnimation } from "../../../hooks/useInViewAnimation";
 import servicesData from "../servicesData";
 import ServiceSchema from "@/components/SEO/ServiceSchema";
-import { OurProcess, EngagementModels, MethodologyAndCommunication, ServiceFAQs } from "../ServiceDetailSections";
+import { ServiceFAQs } from "../ServiceDetailSections";
 import { SiReact, SiFlutter, SiSwift, SiKotlin, SiFirebase, SiApple, SiAndroid } from "react-icons/si";
 import { FaMobileAlt, FaCode, FaPaintBrush, FaRocket, FaLifeRing, FaAppStoreIos, FaGooglePlay, FaCogs, FaUserFriends, FaMobile, FaShieldAlt, FaSearch, FaPencilAlt, FaTools, FaCloudUploadAlt, FaChartLine } from "react-icons/fa";
 
 import NavBarMobile from "../../../components/NavBar_Mobile/NavBar-mobile";
 import NewNavBar from "../../../components/NavBar_Desktop_Company/NewNavBar";
 const service = servicesData.find(s => s.slug === "mobile-app-solutions");
-
-const keyFeatures = [
-  { icon: <FaMobileAlt color="#4573df" size={36} title="Cross-Platform Development" />, label: "Cross-Platform Expertise" },
-  { icon: <FaRocket color="#4573df" size={36} title="Agile Development" />, label: "Agile & Rapid Delivery" },
-  { icon: <FaShieldAlt color="#4573df" size={36} title="App Security" />, label: "Enterprise-Grade Security" },
-  { icon: <FaAppStoreIos color="#4573df" size={36} title="App Store Optimization" />, label: "App Store Optimization" },
-  { icon: <FaLifeRing color="#4573df" size={36} title="Ongoing Support" />, label: "Ongoing Analytics & Support" }
-];
 
 const processSteps = [
   { 
@@ -47,17 +39,12 @@ const processSteps = [
     title: "App Store Launch",
     description: "Launch on stores",
     icon: <FaCloudUploadAlt color="#4573df" size={36} title="Deployment" />
+  },
+  {
+    title: "Maintenance & Support",
+    description: "Ongoing updates & monitoring",
+    icon: <FaLifeRing color="#4573df" size={36} title="Maintenance & Support" />
   }
-];
-
-const techStack = [
-  { name: "react native", icon: SiReact, color: "#61DAFB" },
-  { name: "flutter", icon: SiFlutter, color: "#02569B" },
-  { name: "swift", icon: SiSwift, color: "#FA7343" },
-  { name: "kotlin", icon: SiKotlin, color: "#7F52FF" },
-  { name: "firebase", icon: SiFirebase, color: "#FFCA28" },
-  { name: "ios", icon: SiApple, color: "#000000" },
-  { name: "android", icon: SiAndroid, color: "#3DDC84" }
 ];
 
 // Import additional icons we'll need
@@ -145,9 +132,8 @@ export default function MobileAppSolutionsPage() {
       <main
         id="main-content"
         className={commonStyles.mainContent}
-        aria-label="AI & Machine Learning Service Detail"
+        aria-label="Mobile App Solutions Service Detail"
         style={{ 
-          paddingTop: '88px',
           maxWidth: '1440px',
           margin: '0 auto',
           padding: '88px 24px 64px'
@@ -213,7 +199,7 @@ export default function MobileAppSolutionsPage() {
         <section className={`${commonStyles.overviewSection} ${themeStyles.overviewSection}`} data-animate="slide-left">
           <div className={commonStyles.overviewTextBlock}>
             <h2 className={`${commonStyles.overviewTitle} ${themeStyles.overviewTitle}`}>Overview</h2>
-            <p className={`${commonStyles.overviewDesc} ${themeStyles.overviewDesc}`}>{service.description}</p>
+            <p className={`${commonStyles.overviewDesc} ${themeStyles.overviewDesc}`}>We design and develop native and cross-platform mobile apps using React Native, Flutter, Swift, and Kotlin. From concept to App Store launch and beyond, our team delivers high-performance apps with intuitive UX, robust security, and ongoing analytics-driven optimization.</p>
           </div>
           <div className={commonStyles.overviewImageBlock}>
             <img src="/mobile app icon.svg" alt="Mobile App Development Overview" className={`${commonStyles.overviewImage} ${themeStyles.overviewImage}`} data-animate="fade-in" />
@@ -377,7 +363,7 @@ export default function MobileAppSolutionsPage() {
         {/* Section divider */}
         <div className={`${commonStyles.sectionDivider} ${themeStyles.sectionDivider}`} />
         <div className={commonStyles.faqSection}>
-          <ServiceFAQs faqs={faqs} />
+          <ServiceFAQs faqs={faqs} theme={theme} />
         </div>
 
         {/* CTA - Full-width colored strip */}
@@ -396,7 +382,8 @@ export default function MobileAppSolutionsPage() {
             <FaMobileAlt className={commonStyles.ctaBtnIcon} title="Mobile App Expert" />
             Start Your Mobile Project
           </button>
-          <div className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}>Ready to unlock the power of AI? Let's talk about your vision.</div>
+          <div className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}>Ready to build your next mobile app? Let&apos;s talk about your vision.</div>
+          <a href="/contact" className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`} style={{ display: 'inline-block', marginTop: 8, textDecoration: 'underline', fontSize: '0.95rem' }}>Or send us a message</a>
         </section>
       </main>
   {calendlyModalElement}

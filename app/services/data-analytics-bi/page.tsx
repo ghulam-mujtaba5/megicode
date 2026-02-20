@@ -11,7 +11,7 @@ import { useTheme } from "../../../context/ThemeContext";
 import { useInViewAnimation } from "../../../hooks/useInViewAnimation";
 import servicesData from "../servicesData";
 import ServiceSchema from "@/components/SEO/ServiceSchema";
-import { OurProcess, EngagementModels, MethodologyAndCommunication, ServiceFAQs } from "../ServiceDetailSections";
+import { ServiceFAQs } from "../ServiceDetailSections";
 import { SiPython, SiTableau, SiMysql, SiApachespark } from "react-icons/si";
 import { 
   FaSearch, 
@@ -122,6 +122,7 @@ const features = [
   { icon: <FaChartPie color="#4573df" size={36} title="Tableau Visualization" />, label: "Tableau Visualization" },
   { icon: <FaCalculator color="#4573df" size={36} title="Predictive Analytics" />, label: "Predictive Analytics" },
   { icon: <FaWarehouse color="#4573df" size={36} title="Data Warehousing" />, label: "Data Warehousing" },
+  { icon: <FaChartBar color="#4573df" size={36} title="BI Dashboards & Reporting" />, label: "BI Dashboards & Reporting" },
 ];
 
 const testimonial = {
@@ -155,9 +156,8 @@ export default function DataAnalyticsDetailPage() {
       <main
         id="main-content"
         className={commonStyles.mainContent}
-        aria-label="AI & Machine Learning Service Detail"
+        aria-label="Data Analytics & BI Service Detail"
         style={{ 
-          paddingTop: '88px',
           maxWidth: '1440px',
           margin: '0 auto',
           padding: '88px 24px 64px'
@@ -223,7 +223,7 @@ export default function DataAnalyticsDetailPage() {
         <section className={`${commonStyles.overviewSection} ${themeStyles.overviewSection}`} data-animate="slide-left">
           <div className={commonStyles.overviewTextBlock}>
             <h2 className={`${commonStyles.overviewTitle} ${themeStyles.overviewTitle}`}>Overview</h2>
-            <p className={`${commonStyles.overviewDesc} ${themeStyles.overviewDesc}`}>{service.description}</p>
+            <p className={`${commonStyles.overviewDesc} ${themeStyles.overviewDesc}`}>We build end-to-end data pipelines, interactive dashboards, and predictive models that turn raw data into strategic advantage. From data warehousing to real-time BI reporting with tools like Power BI and Tableau, we empower your team to make confident, data-driven decisions.</p>
           </div>
           <div className={commonStyles.overviewImageBlock}>
             <img 
@@ -399,7 +399,7 @@ export default function DataAnalyticsDetailPage() {
         {/* Section divider */}
         <div className={`${commonStyles.sectionDivider} ${themeStyles.sectionDivider}`} />
         <div className={commonStyles.faqSection}>
-          <ServiceFAQs faqs={faqs} />
+          <ServiceFAQs faqs={faqs} theme={theme} />
         </div>
 
         {/* CTA - Full-width colored strip */}
@@ -418,7 +418,8 @@ export default function DataAnalyticsDetailPage() {
             <FaChartLine className={commonStyles.ctaBtnIcon} title="Analytics Consultant" />
             Talk to Analytics Consultant
           </button>
-          <div className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}>Ready to unlock your data? Let's talk about your vision.</div>
+          <div className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}>Ready to unlock your data? Let&apos;s talk about your vision.</div>
+          <a href="/contact" className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`} style={{ display: 'inline-block', marginTop: 8, textDecoration: 'underline', fontSize: '0.95rem' }}>Or send us a message</a>
         </section>
       </main>
   {calendlyModalElement}
