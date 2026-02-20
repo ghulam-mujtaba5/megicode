@@ -8,9 +8,10 @@ export const metadata: Metadata = {
     title: 'Projects & Products | Megicode',
     description: "Real projects, real products, real impact. See what Megicode builds — clinic platforms, university portals, and more.",
     url: 'https://megicode.com/projects',
+    siteName: 'Megicode',
     images: [
       {
-        url: '/meta/projects-og.png',
+        url: '/api/og?title=Projects%20%26%20Products&subtitle=Real%20Platforms%20We%20Built%20%26%20Shipped',
         width: 1200,
         height: 630,
         alt: 'Megicode Projects – Real Platforms We Built & Shipped',
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Projects & Products | Megicode',
     description: "Real projects, real products, real impact. See what Megicode builds.",
-    images: ['/meta/projects-og.png'],
+    images: ['/api/og?title=Projects%20%26%20Products&subtitle=Real%20Platforms%20We%20Built%20%26%20Shipped'],
   },
   alternates: {
     canonical: 'https://megicode.com/projects',

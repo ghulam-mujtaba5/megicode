@@ -25,8 +25,38 @@ const config = {
         allow: '/',
         disallow: ['/internal/', '/megicode/', '/api/'],
       },
+      // Explicitly allow AI search crawlers for GEO visibility
+      { userAgent: 'GPTBot', allow: '/' },
+      { userAgent: 'ChatGPT-User', allow: '/' },
+      { userAgent: 'Google-Extended', allow: '/' },
+      { userAgent: 'PerplexityBot', allow: '/' },
+      { userAgent: 'Anthropic-ai', allow: '/' },
+      { userAgent: 'ClaudeBot', allow: '/' },
+      { userAgent: 'Bytespider', allow: '/' },
+      { userAgent: 'CCBot', allow: '/' },
+      { userAgent: 'Amazonbot', allow: '/' },
     ],
     additionalSitemaps: [],
+  },
+  additionalPaths: async (config) => {
+    // Add dynamic project detail pages to the sitemap
+    const projectSlugs = [
+      'aesthetics-clinic-platform',
+      'campusaxis-university-portal',
+      'fintech-uiux-revamp',
+      'desktop-pos-javafx',
+      'mobile-expense-tracker',
+      'ai-hr-attrition-predictor',
+      'predictive-pricing-nyc-taxi',
+      'market-trends-dashboard',
+    ];
+
+    return projectSlugs.map((slug) => ({
+      loc: `/projects/${slug}`,
+      changefreq: 'monthly',
+      priority: 0.7,
+      lastmod: new Date().toISOString(),
+    }));
   },
   transform: async (config, path) => {
     // Skip internal/error/loading paths that might slip through

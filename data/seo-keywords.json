@@ -1,0 +1,214 @@
+{
+  "lastUpdated": "2026-02-20",
+  "site": "https://megicode.com",
+  "clusters": [
+    {
+      "pillar": "Custom Software Development",
+      "targetPage": "/services/custom-web-development",
+      "keywords": [
+        { "keyword": "custom software development company", "intent": "commercial", "priority": "high" },
+        { "keyword": "software development services", "intent": "commercial", "priority": "high" },
+        { "keyword": "bespoke software development", "intent": "commercial", "priority": "medium" },
+        { "keyword": "custom web application development", "intent": "commercial", "priority": "high" },
+        { "keyword": "hire software development team", "intent": "transactional", "priority": "high" },
+        { "keyword": "full stack development company", "intent": "commercial", "priority": "high" },
+        { "keyword": "next.js development company", "intent": "commercial", "priority": "medium" },
+        { "keyword": "react development agency", "intent": "commercial", "priority": "medium" },
+        { "keyword": "node.js development services", "intent": "commercial", "priority": "medium" },
+        { "keyword": "typescript development company", "intent": "commercial", "priority": "medium" },
+        { "keyword": "outsource software development", "intent": "transactional", "priority": "high" },
+        { "keyword": "software company lahore pakistan", "intent": "commercial", "priority": "high" }
+      ]
+    },
+    {
+      "pillar": "AI & Machine Learning",
+      "targetPage": "/services/ai-machine-learning",
+      "keywords": [
+        { "keyword": "ai development company", "intent": "commercial", "priority": "high" },
+        { "keyword": "machine learning solutions", "intent": "commercial", "priority": "high" },
+        { "keyword": "custom ai model development", "intent": "commercial", "priority": "high" },
+        { "keyword": "artificial intelligence consulting", "intent": "commercial", "priority": "medium" },
+        { "keyword": "nlp development services", "intent": "commercial", "priority": "medium" },
+        { "keyword": "computer vision solutions", "intent": "commercial", "priority": "medium" },
+        { "keyword": "ai automation services", "intent": "commercial", "priority": "high" },
+        { "keyword": "tensorflow pytorch development", "intent": "informational", "priority": "low" },
+        { "keyword": "predictive analytics solutions", "intent": "commercial", "priority": "medium" },
+        { "keyword": "ai solutions for business", "intent": "commercial", "priority": "high" }
+      ]
+    },
+    {
+      "pillar": "Mobile App Development",
+      "targetPage": "/services/mobile-app-solutions",
+      "keywords": [
+        { "keyword": "mobile app development company", "intent": "commercial", "priority": "high" },
+        { "keyword": "react native development", "intent": "commercial", "priority": "high" },
+        { "keyword": "cross platform app development", "intent": "commercial", "priority": "high" },
+        { "keyword": "ios android app development", "intent": "commercial", "priority": "medium" },
+        { "keyword": "mobile app development services", "intent": "commercial", "priority": "high" },
+        { "keyword": "fintech app development", "intent": "commercial", "priority": "medium" },
+        { "keyword": "startup mobile app development", "intent": "commercial", "priority": "medium" }
+      ]
+    },
+    {
+      "pillar": "UI/UX & Product Design",
+      "targetPage": "/services/ui-ux-product-design",
+      "keywords": [
+        { "keyword": "ui ux design services", "intent": "commercial", "priority": "high" },
+        { "keyword": "product design agency", "intent": "commercial", "priority": "high" },
+        { "keyword": "ux research and design", "intent": "commercial", "priority": "medium" },
+        { "keyword": "figma design services", "intent": "commercial", "priority": "medium" },
+        { "keyword": "design system creation", "intent": "commercial", "priority": "medium" },
+        { "keyword": "saas ui design", "intent": "commercial", "priority": "medium" },
+        { "keyword": "mobile app ux design", "intent": "commercial", "priority": "medium" }
+      ]
+    },
+    {
+      "pillar": "Cloud & DevOps",
+      "targetPage": "/services/cloud-devops-services",
+      "keywords": [
+        { "keyword": "cloud devops services", "intent": "commercial", "priority": "high" },
+        { "keyword": "aws cloud consulting", "intent": "commercial", "priority": "medium" },
+        { "keyword": "ci cd pipeline setup", "intent": "commercial", "priority": "medium" },
+        { "keyword": "cloud migration services", "intent": "commercial", "priority": "medium" },
+        { "keyword": "vercel deployment services", "intent": "commercial", "priority": "low" },
+        { "keyword": "infrastructure as code", "intent": "informational", "priority": "low" }
+      ]
+    },
+    {
+      "pillar": "Data Analytics & BI",
+      "targetPage": "/services/data-analytics-bi",
+      "keywords": [
+        { "keyword": "data analytics services", "intent": "commercial", "priority": "high" },
+        { "keyword": "business intelligence solutions", "intent": "commercial", "priority": "high" },
+        { "keyword": "data visualization dashboard", "intent": "commercial", "priority": "medium" },
+        { "keyword": "predictive analytics consulting", "intent": "commercial", "priority": "medium" },
+        { "keyword": "data engineering services", "intent": "commercial", "priority": "medium" }
+      ]
+    },
+    {
+      "pillar": "IT Consulting",
+      "targetPage": "/services/it-consulting-support",
+      "keywords": [
+        { "keyword": "it consulting services", "intent": "commercial", "priority": "high" },
+        { "keyword": "technology consulting firm", "intent": "commercial", "priority": "medium" },
+        { "keyword": "digital transformation consulting", "intent": "commercial", "priority": "high" },
+        { "keyword": "it strategy consulting", "intent": "commercial", "priority": "medium" },
+        { "keyword": "startup tech consulting", "intent": "commercial", "priority": "medium" }
+      ]
+    },
+    {
+      "pillar": "Automation & Integration",
+      "targetPage": "/services/automation-integration",
+      "keywords": [
+        { "keyword": "business automation services", "intent": "commercial", "priority": "high" },
+        { "keyword": "api integration services", "intent": "commercial", "priority": "medium" },
+        { "keyword": "workflow automation", "intent": "commercial", "priority": "medium" },
+        { "keyword": "system integration company", "intent": "commercial", "priority": "medium" },
+        { "keyword": "rpa development services", "intent": "commercial", "priority": "low" }
+      ]
+    },
+    {
+      "pillar": "Brand & Company",
+      "targetPage": "/about",
+      "keywords": [
+        { "keyword": "megicode", "intent": "navigational", "priority": "critical" },
+        { "keyword": "megicode software company", "intent": "navigational", "priority": "critical" },
+        { "keyword": "megicode reviews", "intent": "navigational", "priority": "high" },
+        { "keyword": "software company pakistan", "intent": "commercial", "priority": "high" },
+        { "keyword": "best software company lahore", "intent": "commercial", "priority": "high" },
+        { "keyword": "tech startup pakistan", "intent": "informational", "priority": "medium" }
+      ]
+    },
+    {
+      "pillar": "Case Studies & Portfolio",
+      "targetPage": "/projects",
+      "keywords": [
+        { "keyword": "software development case studies", "intent": "informational", "priority": "high" },
+        { "keyword": "web development portfolio", "intent": "informational", "priority": "high" },
+        { "keyword": "clinic management system", "intent": "commercial", "priority": "medium" },
+        { "keyword": "university portal development", "intent": "commercial", "priority": "medium" },
+        { "keyword": "full stack project examples", "intent": "informational", "priority": "medium" }
+      ]
+    },
+    {
+      "pillar": "AI-Query Style (GEO Targets)",
+      "targetPage": "/",
+      "keywords": [
+        { "keyword": "who builds custom web applications", "intent": "informational", "priority": "high" },
+        { "keyword": "best company for ai development", "intent": "commercial", "priority": "high" },
+        { "keyword": "which company can build my saas product", "intent": "commercial", "priority": "high" },
+        { "keyword": "software development company that uses next.js", "intent": "commercial", "priority": "medium" },
+        { "keyword": "how to find a good software development partner", "intent": "informational", "priority": "medium" },
+        { "keyword": "custom software vs off the shelf", "intent": "informational", "priority": "low" },
+        { "keyword": "how much does custom software development cost", "intent": "informational", "priority": "high" },
+        { "keyword": "what is the best tech stack for saas", "intent": "informational", "priority": "medium" }
+      ]
+    }
+  ],
+  "topicMap": {
+    "pillars": [
+      {
+        "name": "Custom Software Development",
+        "url": "/services/custom-web-development",
+        "spokes": ["/projects/aesthetics-clinic-platform", "/projects/campusaxis-university-portal", "/article"]
+      },
+      {
+        "name": "AI & Machine Learning",
+        "url": "/services/ai-machine-learning",
+        "spokes": ["/projects/ai-hr-attrition-predictor", "/projects/predictive-pricing-nyc-taxi", "/article"]
+      },
+      {
+        "name": "UI/UX Design",
+        "url": "/services/ui-ux-product-design",
+        "spokes": ["/projects/fintech-uiux-revamp", "/article"]
+      },
+      {
+        "name": "Data Analytics",
+        "url": "/services/data-analytics-bi",
+        "spokes": ["/projects/market-trends-dashboard", "/article"]
+      },
+      {
+        "name": "Mobile Development",
+        "url": "/services/mobile-app-solutions",
+        "spokes": ["/projects/mobile-expense-tracker", "/article"]
+      }
+    ],
+    "hubPage": "/services",
+    "authorityPage": "/about",
+    "trustPage": "/reviews",
+    "conversionPage": "/contact"
+  },
+  "internalLinkingPlan": {
+    "rules": [
+      "Every service page links to 2-3 relevant project case studies",
+      "Every project page links back to its parent service pillar",
+      "Every article links to the most relevant service page",
+      "Reviews page links to individual project pages",
+      "About page links to services hub and key projects",
+      "Contact page links to services and reviews for trust signals",
+      "Homepage links to all pillar pages"
+    ],
+    "hubSpoke": {
+      "/services": [
+        "/services/custom-web-development",
+        "/services/ai-machine-learning",
+        "/services/mobile-app-solutions",
+        "/services/ui-ux-product-design",
+        "/services/cloud-devops-services",
+        "/services/data-analytics-bi",
+        "/services/automation-integration",
+        "/services/it-consulting-support"
+      ],
+      "/projects": [
+        "/projects/aesthetics-clinic-platform",
+        "/projects/campusaxis-university-portal",
+        "/projects/fintech-uiux-revamp",
+        "/projects/desktop-pos-javafx",
+        "/projects/mobile-expense-tracker",
+        "/projects/ai-hr-attrition-predictor",
+        "/projects/predictive-pricing-nyc-taxi",
+        "/projects/market-trends-dashboard"
+      ]
+    }
+  }
+}

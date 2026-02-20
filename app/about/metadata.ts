@@ -7,9 +7,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'About Us | Megicode',
     description: "Learn about Megicode's journey in setting the ideal standard of quality and innovation in business and technology. If You Can Imagine It, We Can Build It.",
+    url: 'https://megicode.com/about',
+    siteName: 'Megicode',
     images: [
       {
-        url: '/meta/about-og.png',
+        url: '/api/og?title=About%20Us&subtitle=Setting%20the%20ideal%20standard%20of%20quality%20and%20innovation',
         width: 1200,
         height: 630,
         alt: 'About Megicode – If You Can Imagine It, We Can Build It',
@@ -20,7 +22,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'About Us | Megicode',
     description: "Learn about Megicode's journey in setting the ideal standard of quality and innovation in business and technology. If You Can Imagine It, We Can Build It.",
-    images: ['/meta/about-og.png'],
+    images: ['/api/og?title=About%20Us&subtitle=Setting%20the%20ideal%20standard%20of%20quality%20and%20innovation'],
   },
   alternates: {
     canonical: 'https://megicode.com/about',

@@ -81,6 +81,26 @@ const nextConfig = {
           },
         ],
       },
+      {
+        // Cache dynamic OG images for 7 days
+        source: '/api/og',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=86400, s-maxage=604800, stale-while-revalidate=86400',
+          },
+        ],
+      },
+      {
+        // Cache static meta assets for 1 year (immutable)
+        source: '/meta/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
     ];
   },
   async redirects() {

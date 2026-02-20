@@ -6,6 +6,21 @@ export const SITE_NAME = 'Megicode';
 export const DEFAULT_OG_IMAGE = '/meta/og-image.png';
 export const SERVICES_OG_IMAGE = '/meta/services-og.png';
 
+/** Complete list of official social & professional profiles for sameAs */
+export const SOCIAL_PROFILES = [
+  'https://www.linkedin.com/company/megicode',
+  'https://github.com/megicodes',
+  'https://x.com/megi_code',
+  'https://www.facebook.com/profile.php?id=61576949862372',
+  'https://dev.to/megicode',
+  'https://medium.com/@megicode',
+  'https://www.figma.com/@megicode',
+  'https://www.indiehackers.com/megicode',
+  'https://www.instagram.com/megicode/',
+  'https://wellfound.com/u/megi-code',
+  'https://calendly.com/megicode',
+] as const;
+
 // ─── Canonical URL helper ────────────────────────────────────
 /** Always returns https://megicode.com/path (no www, no trailing slash) */
 export function canonicalUrl(path: string): string {
@@ -35,6 +50,7 @@ export function createPageMetadata(opts: {
       title: `${opts.title} | ${SITE_NAME}`,
       description: opts.description,
       url,
+      siteName: SITE_NAME,
       images: [{ url: ogImage, width: 1200, height: 630, alt: opts.ogImageAlt || opts.title }],
     },
     twitter: {
@@ -115,6 +131,75 @@ export function faqJsonLd(
   };
 }
 
+/** Review / Testimonial structured data for Reviews page */
+export function reviewJsonLd(
+  reviews: Array<{
+    author: string;
+    reviewBody: string;
+    ratingValue: number;
+  }>
+): Record<string, unknown> {
+  const avgRating =
+    reviews.reduce((sum, r) => sum + r.ratingValue, 0) / reviews.length;
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: SITE_NAME,
+    url: SITE_URL,
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: avgRating.toFixed(1),
+      reviewCount: reviews.length,
+      bestRating: '5',
+      worstRating: '1',
+    },
+    review: reviews.map((r) => ({
+      '@type': 'Review',
+      author: { '@type': 'Person', name: r.author },
+      reviewBody: r.reviewBody,
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: r.ratingValue,
+        bestRating: '5',
+      },
+    })),
+  };
+}
+
+/** Case study / project structured data */
+export function caseStudyJsonLd(opts: {
+  title: string;
+  description: string;
+  path: string;
+  image?: string;
+  techStack?: string[];
+  testimonial?: string;
+}): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    name: opts.title,
+    description: opts.description,
+    url: canonicalUrl(opts.path),
+    creator: {
+      '@type': 'Organization',
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+    ...(opts.image && { image: opts.image }),
+    ...(opts.techStack && {
+      keywords: opts.techStack.join(', '),
+    }),
+    ...(opts.testimonial && {
+      review: {
+        '@type': 'Review',
+        reviewBody: opts.testimonial,
+      },
+    }),
+  };
+}
+
 /** Local business / professional service schema */
 export function professionalServiceJsonLd(): Record<string, unknown> {
   return {
@@ -139,10 +224,19 @@ export function professionalServiceJsonLd(): Record<string, unknown> {
       opens: '09:00',
       closes: '18:00',
     },
-    sameAs: [
-      'https://www.linkedin.com/company/megicode',
-      'https://www.instagram.com/megicode/',
-      'https://github.com/megicodes',
+    knowsAbout: [
+      'Custom Software Development',
+      'Artificial Intelligence',
+      'Machine Learning',
+      'Web Application Development',
+      'Mobile App Development',
+      'UI/UX Design',
+      'Cloud & DevOps',
+      'Data Analytics',
+      'Business Intelligence',
+      'IT Consulting',
+      'Digital Transformation',
     ],
+    sameAs: [...SOCIAL_PROFILES],
   };
 }

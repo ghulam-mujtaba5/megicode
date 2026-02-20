@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import ClientLayout from "./ClientLayout";
 import GoogleAnalytics from "@/components/GoogleAnalytics/GoogleAnalytics";
 import { PWA_ICON, LOGO_MAIN_LIGHT, LOGO_MAIN_DARK } from "@/lib/logo";
-import { professionalServiceJsonLd, SITE_URL } from "@/lib/metadata";
+import { professionalServiceJsonLd, SITE_URL, SOCIAL_PROFILES } from "@/lib/metadata";
 
 if (process.env.NODE_ENV !== 'production' && typeof window !== 'undefined') {
   require('../utils/axe-a11y');
@@ -119,11 +119,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       "contactType": "customer support",
       "availableLanguage": ["English", "Urdu"]
     }],
-    "sameAs": [
-      "https://www.linkedin.com/company/megicode",
-      "https://www.instagram.com/megicode/",
-      "https://github.com/megicodes"
-    ]
+    "knowsAbout": [
+      "Custom Software Development",
+      "Artificial Intelligence",
+      "Machine Learning",
+      "Web Application Development",
+      "Mobile App Development",
+      "React",
+      "Next.js",
+      "Node.js",
+      "TypeScript",
+      "UI/UX Design",
+      "Cloud Computing",
+      "DevOps",
+      "Data Analytics",
+      "Business Intelligence"
+    ],
+    "sameAs": [...SOCIAL_PROFILES]
   };
 
   const websiteJsonLd = {

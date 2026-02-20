@@ -8,9 +8,10 @@ export const metadata: Metadata = {
     title: 'Contact | Megicode',
     description: "Contact Megicode—If You Can Imagine It, We Can Build It.",
     url: 'https://megicode.com/contact',
+    siteName: 'Megicode',
     images: [
       {
-        url: '/meta/contact-og.png',
+        url: '/api/og?title=Contact%20Us&subtitle=If%20You%20Can%20Imagine%20It%2C%20We%20Can%20Build%20It',
         width: 1200,
         height: 630,
         alt: 'Contact Megicode – If You Can Imagine It, We Can Build It',
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Contact | Megicode',
     description: "Contact Megicode—If You Can Imagine It, We Can Build It.",
-    images: ['/meta/contact-og.png'],
+    images: ['/api/og?title=Contact%20Us&subtitle=If%20You%20Can%20Imagine%20It%2C%20We%20Can%20Build%20It'],
   },
   alternates: {
     canonical: 'https://megicode.com/contact',

@@ -8,6 +8,7 @@ export const metadata: Metadata = {
     title: 'Services | Megicode',
     description: "Explore our comprehensive software development services—If You Can Imagine It, We Can Build It.",
     url: 'https://megicode.com/services',
+    siteName: 'Megicode',
     images: [
       {
         url: '/meta/services-og.png',

@@ -7,7 +7,6 @@ import darkStyles from './welcomeDark.module.css';
 import commonStyles from './welcomeCommon.module.css';
 
 const welcomeChars = 'Welcome to'.split('');
-const megicodeChars = 'Megicode'.split('');
 const serviceWords = 'Elevate your Business with our Services.'.split(' ');
 
 const charStagger = {
@@ -24,24 +23,6 @@ const charVariant = {
     y: 0,
     filter: 'blur(0px)',
     transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] as const },
-  },
-};
-
-const megicodeStagger = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.05, delayChildren: 0.9 },
-  },
-};
-
-const megicodeCharVariant = {
-  hidden: { opacity: 0, y: 18, scale: 0.85, filter: 'blur(10px)' },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    filter: 'blur(0px)',
-    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
   },
 };
 
@@ -96,23 +77,15 @@ const Frame = () => {
             ))}
           </motion.span>
           {' '}
-          {/* "Megicode" - bigger stagger with scale + shimmer */}
+          {/* "Megicode" - word-level animation so background-clip:text works correctly */}
           <motion.span
             className={`${commonStyles.softBuilt} ${themeStyles.softBuilt}`}
-            variants={megicodeStagger}
-            initial="hidden"
-            animate="visible"
+            initial={{ opacity: 0, y: 18, scale: 0.85, filter: 'blur(10px)' }}
+            animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
+            transition={{ duration: 0.5, delay: 0.9, ease: [0.16, 1, 0.3, 1] as const }}
             style={{ display: 'inline-block' }}
           >
-            {megicodeChars.map((char, i) => (
-              <motion.span
-                key={i}
-                variants={megicodeCharVariant}
-                style={{ display: 'inline-block' }}
-              >
-                {char}
-              </motion.span>
-            ))}
+            Megicode
             {/* Shimmer sweep overlay */}
             <motion.span
               className={commonStyles.shimmer}

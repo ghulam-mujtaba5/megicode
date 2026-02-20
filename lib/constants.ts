@@ -5,6 +5,11 @@ export const SITE_SOCIAL = {
   linkedinUrl: 'https://www.linkedin.com/company/megicode',
   instagramUrl: 'https://www.instagram.com/megicode/',
   githubUrl: 'https://github.com/megicodes',
+  twitterUrl: 'https://x.com/megi_code',
+  facebookUrl: 'https://www.facebook.com/profile.php?id=61576949862372',
+  mediumUrl: 'https://medium.com/@megicode',
+  devtoUrl: 'https://dev.to/megicode',
+  calendlyUrl: 'https://calendly.com/megicode',
 } as const;
 
 export const CONTACT_EMAIL = 'contact@megicode.com';
