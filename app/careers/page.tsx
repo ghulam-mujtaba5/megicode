@@ -65,9 +65,7 @@ export default function CareersPage() {
 
   return (
     <>
-      <div className={[
-        styles.careersPage,
-        theme === 'dark' ? darkStyles.darkTheme : lightStyles.lightTheme,
+      <div className={`${styles.careersPage} ${theme === 'dark' ? darkStyles.darkTheme : lightStyles.lightTheme}`}>
         {/* Theme Toggle Icon */}
         <div
           id="theme-toggle"
