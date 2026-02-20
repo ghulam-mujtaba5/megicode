@@ -22,6 +22,7 @@ const nextConfig = {
   async headers() {
     return [
       {
+        // Global security & SEO headers for all pages
         source: '/(.*)',
         headers: [
           {
@@ -36,6 +37,48 @@ const nextConfig = {
             key: 'Referrer-Policy',
             value: 'strict-origin-when-cross-origin',
           },
+          {
+            key: 'X-DNS-Prefetch-Control',
+            value: 'on',
+          },
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=63072000; includeSubDomains; preload',
+          },
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=()',
+          },
+        ],
+      },
+      {
+        // Prevent indexing of internal pages at the HTTP header level
+        source: '/internal/:path*',
+        headers: [
+          {
+            key: 'X-Robots-Tag',
+            value: 'noindex, nofollow',
+          },
+        ],
+      },
+      {
+        // Prevent indexing of megicode internal pages
+        source: '/megicode/:path*',
+        headers: [
+          {
+            key: 'X-Robots-Tag',
+            value: 'noindex, nofollow',
+          },
+        ],
+      },
+      {
+        // Prevent indexing of API routes
+        source: '/api/:path*',
+        headers: [
+          {
+            key: 'X-Robots-Tag',
+            value: 'noindex, nofollow',
+          },
         ],
       },
     ];
@@ -46,6 +89,22 @@ const nextConfig = {
       {
         source: '/:path+/',
         destination: '/:path+',
+        permanent: true,
+      },
+      // Common www subdomain mistypes & old URL patterns
+      {
+        source: '/home',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/index',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/index.html',
+        destination: '/',
         permanent: true,
       },
     ];

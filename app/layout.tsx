@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import ClientLayout from "./ClientLayout";
 import GoogleAnalytics from "@/components/GoogleAnalytics/GoogleAnalytics";
 import { PWA_ICON, LOGO_MAIN_LIGHT, LOGO_MAIN_DARK } from "@/lib/logo";
+import { professionalServiceJsonLd, SITE_URL } from "@/lib/metadata";
 
 if (process.env.NODE_ENV !== 'production' && typeof window !== 'undefined') {
   require('../utils/axe-a11y');
@@ -99,8 +100,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     "@type": "Organization",
     "name": "Megicode",
     "url": "https://megicode.com",
-  "logo": `https://megicode.com${PWA_ICON}`,
+    "logo": `https://megicode.com${PWA_ICON}`,
     "email": "contact@megicode.com",
+    "foundingDate": "2024",
+    "numberOfEmployees": {
+      "@type": "QuantitativeValue",
+      "minValue": 2,
+      "maxValue": 10
+    },
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Lahore",
@@ -109,7 +116,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     "contactPoint": [{
       "@type": "ContactPoint",
       "email": "contact@megicode.com",
-      "contactType": "customer support"
+      "contactType": "customer support",
+      "availableLanguage": ["English", "Urdu"]
     }],
     "sameAs": [
       "https://www.linkedin.com/company/megicode",
@@ -127,8 +135,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     "publisher": {
       "@type": "Organization",
       "name": "Megicode"
+    },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://megicode.com/services?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
     }
   };
+
+  const professionalService = professionalServiceJsonLd();
 
   const navJsonLd = {
     "@context": "https://schema.org",
@@ -169,6 +187,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalService) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(navJsonLd) }} />
         <GoogleAnalytics />
       </head>

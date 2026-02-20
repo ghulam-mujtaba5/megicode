@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { serviceJsonLd, breadcrumbJsonLd } from '@/lib/metadata';
 
 export const metadata: Metadata = {
   title: 'Automation & Integration',
@@ -22,5 +23,22 @@ export const metadata: Metadata = {
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return children;
+  const breadcrumb = breadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Services', path: '/services' },
+    { name: 'Automation & Integration', path: '/services/automation-integration' },
+  ]);
+  const service = serviceJsonLd({
+    name: 'Automation & Integration',
+    description: 'Workflow automation, API integration, ETL pipelines, and robotic process automation.',
+    path: '/services/automation-integration',
+    category: 'Business Automation',
+  });
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(service) }} />
+      {children}
+    </>
+  );
 }

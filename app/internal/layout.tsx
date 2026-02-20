@@ -1,9 +1,21 @@
 import { getServerSession } from 'next-auth/next';
+import type { Metadata } from 'next';
 
 import { authOptions } from '@/auth';
 import InternalSidebar from '@/components/InternalSidebar/InternalSidebar';
 import InternalProviders from './providers';
 import './internal-globals.css';
+
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+    follow: false,
+    googleBot: {
+      index: false,
+      follow: false,
+    },
+  },
+};
 
 export default async function InternalLayout({
   children,

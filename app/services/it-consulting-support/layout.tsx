@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { serviceJsonLd, breadcrumbJsonLd } from '@/lib/metadata';
 
 export const metadata: Metadata = {
   title: 'IT Consulting & Support',
@@ -22,5 +23,22 @@ export const metadata: Metadata = {
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return children;
+  const breadcrumb = breadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Services', path: '/services' },
+    { name: 'IT Consulting & Support', path: '/services/it-consulting-support' },
+  ]);
+  const service = serviceJsonLd({
+    name: 'IT Consulting & Support',
+    description: 'Expert IT strategy, security audits, compliance consulting, and ongoing technical support.',
+    path: '/services/it-consulting-support',
+    category: 'IT Services',
+  });
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(service) }} />
+      {children}
+    </>
+  );
 }

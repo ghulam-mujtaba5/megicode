@@ -2,12 +2,6 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 
-// Add noindex meta for SEO
-if (typeof window === 'undefined') {
-  const meta = { name: 'robots', content: 'noindex' };
-  // For Next.js App Router, use the Head export if available
-  // Otherwise, this is a placeholder for frameworks that support custom head tags
-}
 import { useTheme } from '../context/ThemeContext';
 import { motion, Variants, easeInOut, easeOut } from 'framer-motion';
 import Image from 'next/image';
@@ -186,6 +180,10 @@ export default function NotFound() {
         perspective: "1000px"
       }}
     >
+      {/* Noindex for 404 pages - prevents search engine indexing */}
+      <head>
+        <meta name="robots" content="noindex, nofollow" />
+      </head>
       {/* Desktop NavBar - Always on Top */}
       <nav id="desktop-navbar" aria-label="Main Navigation" className={styles.desktopNavbar}>
         <NewNavBar />

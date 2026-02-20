@@ -7,8 +7,16 @@ const config = {
   sitemapSize: 7000,
   exclude: [
     '/internal/*',
+    '/internal',
     '/megicode/*',
+    '/megicode',
     '/api/*',
+    '/api',
+    '/error',
+    '/loading',
+    '/not-found',
+    '/404',
+    '/500',
   ],
   robotsTxtOptions: {
     policies: [
@@ -21,7 +29,21 @@ const config = {
     additionalSitemaps: [],
   },
   transform: async (config, path) => {
-    // Custom priority based on page type
+    // Skip internal/error/loading paths that might slip through
+    if (
+      path.startsWith('/internal') ||
+      path.startsWith('/megicode') ||
+      path.startsWith('/api') ||
+      path.includes('/error') ||
+      path.includes('/loading') ||
+      path === '/not-found' ||
+      path === '/404' ||
+      path === '/500'
+    ) {
+      return null;
+    }
+
+    // Custom priority and changefreq based on page type
     let priority = 0.7;
     let changefreq = 'weekly';
 
