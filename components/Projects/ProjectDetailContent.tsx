@@ -15,7 +15,7 @@ interface Artifact {
 interface ProjectDetail {
   slug: string;
   title: string;
-  category: 'uiux' | 'mobile' | 'desktop' | 'ai' | 'data-engineering';
+  category: 'uiux' | 'mobile' | 'desktop' | 'ai' | 'data-engineering' | 'web';
   description: string;
   problem: string;
   challenge?: string;
@@ -29,6 +29,7 @@ interface ProjectDetail {
   nextSteps?: string;
   techStack: string[];
   github?: string;
+  liveUrl?: string;
   screenshots?: string[];
   metrics?: Record<string, string>;
   testimonial?: string;
@@ -162,6 +163,14 @@ export default function ProjectDetailContent({ project }: { project: ProjectDeta
           <a href={project.github} target="_blank" rel="noopener noreferrer" className={styles.githubLink}>
             <svg width="22" height="22" viewBox="0 0 20 20" fill="none" style={{verticalAlign:'middle',marginRight:6}} aria-hidden="true"><circle cx="10" cy="10" r="9" stroke="#23272f" strokeWidth="2"/><path d="M7 10l2 2 4-4" stroke="#4573df" strokeWidth="2" fill="none"/></svg>
             View on GitHub
+          </a>
+        </div>
+      )}
+      {project.liveUrl && (
+        <div className={styles.section}>
+          <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className={styles.githubLink}>
+            <svg width="22" height="22" viewBox="0 0 20 20" fill="none" style={{verticalAlign:'middle',marginRight:6}} aria-hidden="true"><circle cx="10" cy="10" r="9" stroke="#4573df" strokeWidth="2"/><path d="M6 10h8M13 7l3 3-3 3" stroke="#22c55e" strokeWidth="2" fill="none"/></svg>
+            Visit Live Site
           </a>
         </div>
       )}

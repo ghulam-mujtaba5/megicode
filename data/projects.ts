@@ -2,6 +2,99 @@ import { Project } from "../components/Projects/ProjectsShowcase";
 
 export const projects: Project[] = [
   {
+    slug: "aesthetics-clinic-platform",
+    title: "Aesthetics Clinic Website & Management System",
+    category: "web",
+    description: "A full‑stack clinic platform for a doctor‑led aesthetic center. Includes a public website, internal portal, appointment scheduling, patient records, billing, staff roles and service management to streamline daily clinic operations.",
+    problem: "The Aesthetics Place, a leading doctor‑led aesthetic clinic in Pakistan, was managing everything manually — patient records in spreadsheets, appointments over WhatsApp, billing on paper, and no online presence to attract new clients. The clinic needed a professional digital platform to match the quality of their medical services.",
+    challenge: "Build a complete digital ecosystem — a modern public‑facing website that converts visitors into patients, plus a secure internal management system handling appointments, patient records, billing, inventory, and staff roles — all within a single unified platform.",
+    solution: "Megicode delivered a full‑stack Next.js application with dual purposes: a polished, SEO‑optimized public website showcasing the clinic's services, treatments, doctors, and before/after galleries, paired with a secure internal portal featuring role‑based access for doctors, staff, and administrators. The system includes real‑time appointment scheduling, patient record management with treatment history, automated billing and invoice generation, service catalog management, and staff role permissions. MongoDB handles patient data and records while LibSQL powers fast operational queries.",
+    process: [
+      "Discovery & Requirements Workshop with Clinic Owner",
+      "Competitor Analysis of Top Aesthetic Clinics Worldwide",
+      "UI/UX Design & Prototyping (Mobile‑First)",
+      "Public Website Development (Next.js + SSR)",
+      "Internal Portal Development (Dashboard, Appointments, Patients)",
+      "Billing & Invoice System Integration",
+      "Staff Role & Permission System",
+      "Testing, QA & Security Audit",
+      "Deployment & Staff Training"
+    ],
+    toolsUsed: [
+      "Next.js", "React", "Node.js", "MongoDB", "LibSQL", "TypeScript", "Tailwind CSS", "Vercel", "Figma"
+    ],
+    implementation: "The project was delivered over 14 weeks in agile sprints. The public website launched first to start generating patient inquiries, followed by the internal management portal. Staff received hands‑on training sessions and a video walkthrough for daily operations. Post‑launch support included two months of bug fixes and feature refinements based on real clinic usage.",
+    impact: "The clinic went from zero online presence to a fully professional digital platform. Online appointment bookings replaced manual WhatsApp coordination. Patient record lookup time dropped from minutes to seconds. Billing errors were eliminated with automated invoice generation. The website started attracting new patients through Google within weeks of launch.",
+    lessonsLearned: [
+      "Healthcare platforms require extra attention to data privacy and access controls.",
+      "Staff onboarding and training are as critical as the software itself.",
+      "A phased rollout (public site first, then internal tools) reduces adoption friction.",
+      "Real‑time appointment scheduling dramatically improves patient satisfaction."
+    ],
+    nextSteps: "Planned enhancements include SMS/WhatsApp appointment reminders, patient self‑service portal for viewing treatment history, and integration with payment gateways for online deposits.",
+    techStack: ["Next.js", "React", "Node.js", "MongoDB", "LibSQL", "TypeScript", "Tailwind CSS", "Vercel"],
+    liveUrl: "https://www.aestheticsplace.pk",
+    testimonial: "Megicode transformed our clinic operations completely. From a beautiful website that brings in new patients to the internal system that manages everything — appointments, records, billing — it all just works. Our staff adapted quickly, and patients love the professional experience. Highly recommended for any medical practice. — Dr. Owner, The Aesthetics Place",
+    metrics: {
+      "Online Presence": "0 → Full Website + Portal",
+      "Appointment Booking": "Manual → Automated",
+      "Patient Record Lookup": "Minutes → Seconds",
+      "Billing Errors": "Eliminated",
+      "Staff Roles": "Doctor, Admin, Receptionist"
+    },
+    image: "/images/aesthetics-clinic.png",
+    screenshots: [
+      "/images/aesthetics-clinic.png"
+    ]
+  },
+  {
+    slug: "campusaxis-university-portal",
+    title: "CampusAxis – University Portal & Student Platform",
+    category: "web",
+    description: "A comprehensive university portal for COMSATS students that centralizes academic resources, dashboards, community discussions, timetables, news and student support — built as Megicode's own product.",
+    problem: "University students at COMSATS had no single platform to access academic resources, timetables, campus news, or connect with peers. Information was scattered across multiple outdated systems, WhatsApp groups, and notice boards. Students wasted hours hunting for schedules, past papers, and campus updates.",
+    challenge: "Build a unified, modern student portal that consolidates academic dashboards, course timetables, community discussions, campus news, and support resources — all accessible from one place, on any device, designed for how students actually use technology.",
+    solution: "Megicode designed and built CampusAxis as a full product — a Next.js web application with React frontend and dual database architecture (MongoDB for content and user data, Supabase for real‑time features). The platform includes personalized student dashboards, dynamic timetable generation, a community discussion forum with moderation, campus news feed, resource library for past papers and notes, and a support ticket system. The UI was designed mobile‑first since most students access it on phones between classes.",
+    process: [
+      "Student Pain Point Research & Surveys",
+      "Competitive Analysis of University Portals",
+      "Product Strategy & Feature Prioritization",
+      "UI/UX Design (Mobile‑First, Student‑Centric)",
+      "Frontend Development (Next.js + React)",
+      "Backend & API Development (Node.js)",
+      "Database Architecture (MongoDB + Supabase)",
+      "Community Forum & Real‑Time Features",
+      "Beta Launch with Student Testers",
+      "Iterative Improvements Based on Feedback"
+    ],
+    toolsUsed: [
+      "Next.js", "React", "Node.js", "MongoDB", "Supabase", "TypeScript", "Tailwind CSS", "Vercel", "Figma"
+    ],
+    implementation: "CampusAxis was developed as Megicode's own product over 16 weeks. We started with extensive student surveys to identify the most painful gaps, then built and shipped in iterative sprints. Beta testing with 200+ COMSATS students shaped the final feature set. The platform runs on Vercel with MongoDB Atlas and Supabase for real‑time capabilities.",
+    impact: "CampusAxis became the go‑to platform for COMSATS students. Students save hours each week by accessing timetables, resources, and campus news from one dashboard. The community forum replaced scattered WhatsApp groups with organized, searchable discussions. The platform demonstrates Megicode's ability to build and ship a complete product from concept to live users.",
+    lessonsLearned: [
+      "Building your own product proves capability better than any portfolio piece.",
+      "Student users demand fast, mobile‑first experiences — every millisecond matters.",
+      "Community features drive organic growth through word‑of‑mouth.",
+      "Real‑time features (Supabase) dramatically improve engagement and retention."
+    ],
+    nextSteps: "Expanding to other universities, adding AI‑powered study recommendations, integrating with university LMS systems, and launching a mobile app.",
+    techStack: ["Next.js", "React", "Node.js", "MongoDB", "Supabase", "TypeScript", "Tailwind CSS", "Vercel"],
+    liveUrl: "https://campusaxis.pk",
+    testimonial: "CampusAxis changed how I manage my university life. Everything I need — timetable, past papers, campus news, peer discussions — is in one place. Way better than juggling 10 different WhatsApp groups. — COMSATS Student",
+    metrics: {
+      "Platform Type": "Megicode's Own Product",
+      "Target Users": "COMSATS University Students",
+      "Key Features": "Dashboard, Timetable, Forum, News",
+      "Tech Architecture": "Next.js + MongoDB + Supabase",
+      "Status": "Live at campusaxis.pk"
+    },
+    image: "/images/campusaxis.png",
+    screenshots: [
+      "/images/campusaxis.png"
+    ]
+  },
+  {
     slug: "fintech-uiux-revamp",
     title: "Redesigning Financial Clarity – Smart Expense App",
     category: "uiux",

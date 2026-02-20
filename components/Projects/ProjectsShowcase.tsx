@@ -15,7 +15,7 @@ export interface Artifact {
 export interface Project {
   slug: string;
   title: string;
-  category: 'uiux' | 'mobile' | 'desktop' | 'ai' | 'data-engineering';
+  category: 'uiux' | 'mobile' | 'desktop' | 'ai' | 'data-engineering' | 'web';
   description: string;
   problem: string;
   challenge?: string;
@@ -29,6 +29,7 @@ export interface Project {
   nextSteps?: string;
   techStack: string[];
   github?: string;
+  liveUrl?: string;
   screenshots?: string[];
   metrics?: Record<string, string>;
   testimonial?: string;
@@ -45,6 +46,7 @@ const ProjectsShowcase = () => {
     { key: 'uiux', label: 'UI/UX' },
     { key: 'mobile', label: 'Mobile' },
     { key: 'desktop', label: 'Desktop' },
+    { key: 'web', label: 'Web' },
     { key: 'ai', label: 'AI' },
     { key: 'data-engineering', label: 'Data Engineering' }
   ];
@@ -78,6 +80,10 @@ const ProjectsShowcase = () => {
                   height={300}
                   className={styles.projectImage}
                 />
+                <div className={styles.cardBadges}>
+                  {project.liveUrl && <span className={styles.liveBadge}>🟢 Live</span>}
+                  {project.slug === 'campusaxis-university-portal' && <span className={styles.productBadge}>Our Product</span>}
+                </div>
               </div>
               <div className={styles.projectContent}>
                 <h3 className={`${styles.projectTitle} ${themeStyles.projectTitle}`}>{project.title}</h3>
@@ -87,7 +93,10 @@ const ProjectsShowcase = () => {
                     <span key={index} className={`${styles.techTag} ${themeStyles.techTag}`}>{tech}</span>
                   ))}
                 </div>
-                <span className={`${styles.detailLink} ${themeStyles.detailLink}`}>View Details →</span>
+                <div className={styles.cardFooter}>
+                  <span className={`${styles.detailLink} ${themeStyles.detailLink}`}>View Details →</span>
+                  {project.liveUrl && <span className={styles.liveUrlText}>{project.liveUrl.replace('https://', '').replace('http://', '')}</span>}
+                </div>
               </div>
             </div>
           </Link>

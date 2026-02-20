@@ -13,14 +13,14 @@ const ProjectHero = () => {
     <section className={`${styles.heroSection} ${themeStyles.heroSection}`}>
       <div className={styles.heroContent}>
         <h1 className={`${styles.title} ${themeStyles.title}`}>
-          Our Projects & Products
+          Real Projects. Real Products. Real Impact.
         </h1>
         <p className={`${styles.subtitle} ${themeStyles.subtitle}`}>
-          Transforming Ideas into Digital Reality
+          From clinic management systems to university portals — see what we build and ship.
         </p>
         <p className={`${styles.description} ${themeStyles.description}`}>
-          Explore our portfolio of innovative solutions across web, mobile, 
-          desktop applications, AI implementations, and data science projects.
+          We don&#39;t just write code — we build complete platforms that solve real problems 
+          for real businesses and users. Explore our client projects and our own products below.
         </p>
       </div>
       <div className={styles.heroPattern}></div>
