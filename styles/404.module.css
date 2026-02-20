@@ -420,3 +420,17 @@
   --primary-color: #1565c0;
   --secondary-color: #1976d2;
 }
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .glitchText::before,
+  .glitchText::after {
+    animation: none;
+  }
+  .particle {
+    display: none;
+  }
+  .wrapper {
+    transition: none;
+  }
+}

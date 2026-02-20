@@ -44,7 +44,7 @@ const Footer = dynamic<FooterProps>(
 });
 
 export default function AboutPage() {
-  const { theme } = useTheme();
+  const { theme, toggleTheme } = useTheme();
 
   const { linkedinUrl, instagramUrl, githubUrl } = SITE_SOCIAL;
   const copyrightText = getCopyrightText();
@@ -63,6 +63,8 @@ export default function AboutPage() {
         role="button" 
         tabIndex={0} 
         aria-label="Toggle theme"
+        onClick={toggleTheme}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleTheme(); } }}
       >
         <ThemeToggleIcon />
       </div>
@@ -73,7 +75,6 @@ export default function AboutPage() {
         <nav 
           id="desktop-navbar" 
           aria-label="Main Navigation"
-          className="hidden md:block"
         >
           <NewNavBar />
         </nav>
@@ -82,7 +83,6 @@ export default function AboutPage() {
         <nav 
           id="mobile-navbar" 
           aria-label="Mobile Navigation"
-          className="block md:hidden"
         >
           <NavBarMobile />
         </nav>

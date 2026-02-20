@@ -95,7 +95,7 @@ function FAQAccordion() {
 }
 
 export default function ContactPage() {
-  const { theme } = useTheme();
+  const { theme, toggleTheme } = useTheme();
   const heroRef = useRef<HTMLElement | null>(null);
   const titleRef = useRef<HTMLHeadingElement | null>(null);
   const accentRef = useRef<HTMLDivElement | null>(null);
@@ -289,6 +289,8 @@ export default function ContactPage() {
         role="button" 
         tabIndex={0} 
         aria-label="Toggle theme"
+        onClick={toggleTheme}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleTheme(); } }}
       >
         <ThemeToggleIcon />
       </div>

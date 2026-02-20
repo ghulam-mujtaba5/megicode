@@ -38,9 +38,27 @@
 .softBuilt {
   font-weight: bold;
   color: #4573df;
-  display: inline-block; /* Allows for smooth scaling effect */
-  transition: transform 0.4s ease, color 0.4s ease; /* Smooth transition for scaling and color */
-  transform-origin: center; /* Scale from the center */
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s ease, color 0.4s ease;
+  transform-origin: center;
+}
+
+/* Shimmer sweep effect */
+.shimmer {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.35) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
 }
 
 /* Media query for tablets */

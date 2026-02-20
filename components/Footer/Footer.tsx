@@ -88,45 +88,54 @@ const Footer = ({
           </svg>
           Portal
         </motion.a>
-        <motion.img
+        <motion.a
+          href={linkedinUrl}
+          target="_blank"
+          rel="noopener noreferrer"
           className={commonStyles.linkedinIcon}
-          alt="LinkedIn"
-          src={theme === 'dark' ? "/LinkedinDark.svg" : "/linkedin-icon.svg"}
-          onClick={() => openLink(linkedinUrl)}
-          onKeyDown={e => handleKeyDown(e, linkedinUrl)}
-          tabIndex={0}
-          role="button"
           aria-label="LinkedIn"
           variants={iconVariants}
           whileHover={{ scale: 1.15, transition: { duration: 0.2 } }}
           whileTap={{ scale: 0.95 }}
-        />
-        <motion.img
+        >
+          <img
+            alt=""
+            src={theme === 'dark' ? "/LinkedinDark.svg" : "/linkedin-icon.svg"}
+            style={{ width: '100%', height: '100%' }}
+          />
+        </motion.a>
+        <motion.a
+          href={instagramUrl}
+          target="_blank"
+          rel="noopener noreferrer"
           className={commonStyles.instagramIcon}
-          alt="Instagram"
-          src={theme === 'dark' ? "/InstagramDark.svg" : "/Instagram-icon.svg"}
-          onClick={() => openLink(instagramUrl)}
-          onKeyDown={e => handleKeyDown(e, instagramUrl)}
-          tabIndex={0}
-          role="button"
           aria-label="Instagram"
           variants={iconVariants}
           whileHover={{ scale: 1.15, transition: { duration: 0.2 } }}
           whileTap={{ scale: 0.95 }}
-        />
-        <motion.img
+        >
+          <img
+            alt=""
+            src={theme === 'dark' ? "/InstagramDark.svg" : "/Instagram-icon.svg"}
+            style={{ width: '100%', height: '100%' }}
+          />
+        </motion.a>
+        <motion.a
+          href={githubUrl}
+          target="_blank"
+          rel="noopener noreferrer"
           className={commonStyles.githubIcon}
-          alt="GitHub"
-          src={theme === 'dark' ? "/GithubDark.svg" : "/github_icon.svg"}
-          onClick={() => openLink(githubUrl)}
-          onKeyDown={e => handleKeyDown(e, githubUrl)}
-          tabIndex={0}
-          role="button"
           aria-label="GitHub"
           variants={iconVariants}
           whileHover={{ scale: 1.15, transition: { duration: 0.2 } }}
           whileTap={{ scale: 0.95 }}
-        />
+        >
+          <img
+            alt=""
+            src={theme === 'dark' ? "/GithubDark.svg" : "/github_icon.svg"}
+            style={{ width: '100%', height: '100%' }}
+          />
+        </motion.a>
       </div>
     </motion.footer>
   );

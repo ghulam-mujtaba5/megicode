@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { LOGO_MAIN_LIGHT } from "@/lib/logo";
+import { LOGO_MAIN_LIGHT, LOGO_MAIN_DARK } from "@/lib/logo";
 
 export default function Error({
   error,
@@ -17,6 +17,14 @@ export default function Error({
     console.error("[App Error]", error);
   }, [error]);
 
+  // Detect dark mode preference (error boundary may not have ThemeContext)
+  const [isDark, setIsDark] = useState(false);
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setIsDark(window.matchMedia('(prefers-color-scheme: dark)').matches);
+    }
+  }, []);
+
   return (
     <div
       style={{
@@ -27,12 +35,13 @@ export default function Error({
         minHeight: "100vh",
         padding: "2rem",
         textAlign: "center",
-        backgroundColor: "var(--bg-primary, #fff)",
+        backgroundColor: isDark ? "#1d2127" : "var(--bg-primary, #fff)",
+        color: isDark ? "#fff" : "var(--text-primary, #333)",
       }}
     >
       <Link href="/" style={{ marginBottom: "2rem" }}>
         <Image
-          src={LOGO_MAIN_LIGHT}
+          src={isDark ? LOGO_MAIN_DARK : LOGO_MAIN_LIGHT}
           alt="Megicode"
           height={40}
           width={150}
@@ -43,7 +52,7 @@ export default function Error({
         style={{
           fontSize: "1.5rem",
           marginBottom: "1rem",
-          color: "var(--text-primary, #333)",
+          color: isDark ? "#f1f5f9" : "var(--text-primary, #333)",
         }}
       >
         Something went wrong!
@@ -51,7 +60,7 @@ export default function Error({
       <p
         style={{
           marginBottom: "1.5rem",
-          color: "var(--text-secondary, #666)",
+          color: isDark ? "#94a3b8" : "var(--text-secondary, #666)",
           maxWidth: "400px",
         }}
       >
@@ -61,7 +70,7 @@ export default function Error({
         <p
           style={{
             fontSize: "0.75rem",
-            color: "var(--text-muted, #999)",
+            color: isDark ? "#64748b" : "var(--text-muted, #999)",
             marginBottom: "1rem",
           }}
         >
@@ -88,8 +97,8 @@ export default function Error({
           style={{
             padding: "0.75rem 1.5rem",
             background: "transparent",
-            color: "var(--text-primary, #333)",
-            border: "1px solid var(--border, #ddd)",
+            color: isDark ? "#f1f5f9" : "var(--text-primary, #333)",
+            border: isDark ? "1px solid #334155" : "1px solid var(--border, #ddd)",
             borderRadius: "6px",
             textDecoration: "none",
             fontWeight: 500,

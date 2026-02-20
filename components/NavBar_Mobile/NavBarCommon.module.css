@@ -1,3 +1,14 @@
+/* Backdrop overlay for click-outside-to-close */
+.menuOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  background: transparent;
+}
+
 /* Toggle switch container for improved position and spacing */
 .themeToggleContainer {
   display: flex;
@@ -45,7 +56,7 @@
     z-index: 4; /* Ensure the button is above the menu list */
     background-color: transparent; /* Background color of the button */
     border: none; /* Remove default border */
-    outline: no
+    outline: none;
   }
   
   /* Styles for the hamburger icon lines */

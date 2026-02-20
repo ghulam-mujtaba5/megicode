@@ -67,6 +67,17 @@ const NavBar = () => {
             </div>
             <AnimatePresence>
                 {isMenuOpen && (
+                    <>
+                    {/* Backdrop overlay - click outside to close */}
+                    <motion.div
+                        className={commonStyles.menuOverlay}
+                        onClick={() => setIsMenuOpen(false)}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        aria-hidden="true"
+                    />
                     <motion.div
                         id="menu-list"
                         className={`${commonStyles.menuContainer} ${themeStyles.menuContainer} ${commonStyles.open}`}
@@ -85,8 +96,9 @@ const NavBar = () => {
                                         onClick={() => handleNavigate(section.href)}
                                         role="menuitem"
                                         tabIndex={0}
-                                        onKeyPress={(e) => {
-                                            if (e.key === 'Enter') {
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'Enter' || e.key === ' ') {
+                                                e.preventDefault();
                                                 handleNavigate(section.href);
                                             }
                                         }}
@@ -149,6 +161,7 @@ const NavBar = () => {
                             </motion.button>
                         </div>
                     </motion.div>
+                    </>
                 )}
             </AnimatePresence>
         </nav>

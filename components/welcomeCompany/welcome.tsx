@@ -1,94 +1,147 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useTheme } from '../../context/ThemeContext';
 import { motion } from 'framer-motion';
-import styles from './welcomeLight.module.css'; // Import the light mode CSS file
-import darkStyles from './welcomeDark.module.css'; // Import the dark mode CSS file
-import commonStyles from './welcomeCommon.module.css'; // Import the common CSS file
-import { fadeInUp } from '../../utils/animations';
+import styles from './welcomeLight.module.css';
+import darkStyles from './welcomeDark.module.css';
+import commonStyles from './welcomeCommon.module.css';
+
+const welcomeChars = 'Welcome to'.split('');
+const megicodeChars = 'Megicode'.split('');
+const serviceWords = 'Elevate your Business with our Services.'.split(' ');
+
+const charStagger = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.04, delayChildren: 0.2 },
+  },
+};
+
+const charVariant = {
+  hidden: { opacity: 0, y: 12, filter: 'blur(8px)' },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] },
+  },
+};
+
+const megicodeStagger = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.05, delayChildren: 0.9 },
+  },
+};
+
+const megicodeCharVariant = {
+  hidden: { opacity: 0, y: 18, scale: 0.85, filter: 'blur(10px)' },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    filter: 'blur(0px)',
+    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
+  },
+};
+
+const wordStagger = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.08, delayChildren: 1.8 },
+  },
+};
+
+const wordVariant = {
+  hidden: { opacity: 0, y: 16, filter: 'blur(6px)' },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: { duration: 0.45, ease: [0.25, 0.1, 0.25, 1] },
+  },
+};
 
 const Frame = () => {
-  const { theme } = useTheme(); // Destructure theme from the context
-  const [welcomeText, setWelcomeText] = useState('');
-  const [megicodeText, setMegicodeText] = useState('');
-  const [serviceText, setServiceText] = useState('');
-
-  const welcomeTextToDisplay = 'Welcome to ';
-  const megicodeTextToDisplay = ' Megicode';
-  const serviceTextToDisplay = 'Elevate your Business with our Services.';
-
-  useEffect(() => {
-    const animateText = async () => {
-      try {
-        // Animate welcome text
-        for (let i = 0; i <= welcomeTextToDisplay.length; i++) {
-          setWelcomeText(welcomeTextToDisplay.slice(0, i));
-          await new Promise(resolve => setTimeout(resolve, 40)); // Adjusted for smoother typing effect
-        }
-
-        // Pause before adding 'Megicode'
-        await new Promise(resolve => setTimeout(resolve, 500));
-
-        // Animate 'Megicode'
-        for (let i = 0; i <= megicodeTextToDisplay.length; i++) {
-          setMegicodeText(megicodeTextToDisplay.slice(0, i));
-          await new Promise(resolve => setTimeout(resolve, 40)); // Adjusted for smoother typing effect
-        }
-
-        // Pause before showing service text
-        await new Promise(resolve => setTimeout(resolve, 1000));
-
-        // Animate service text
-        setServiceText('');
-        for (let i = 0; i <= serviceTextToDisplay.length; i++) {
-          setServiceText(serviceTextToDisplay.slice(0, i));
-          await new Promise(resolve => setTimeout(resolve, 50)); // Adjusted for smoother typing effect
-        }
-      } catch (error) {
-        console.error('Error in animation:', error);
-      }
-    };
-
-    animateText();
-  }, []);
+  const { theme } = useTheme();
+  const themeStyles = theme === 'dark' ? darkStyles : styles;
 
   return (
     <section
       className={`${commonStyles.container} ${theme === 'dark' ? darkStyles.darkContainer : styles.container}`}
       aria-label="Welcome to Megicode"
     >
-      <div
-        className={`${commonStyles.textContainer} ${theme === 'dark' ? darkStyles.textContainer : styles.textContainer}`}
+      <motion.div
+        className={`${commonStyles.textContainer} ${themeStyles.textContainer}`}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
       >
-        <motion.h1
-          className={`${commonStyles.text} ${theme === 'dark' ? darkStyles.text : styles.text}`}
-          variants={fadeInUp}
-          initial="hidden"
-          animate="visible"
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-        >
-          {welcomeText}
+        <h1 className={`${commonStyles.text} ${themeStyles.text}`}>
+          {/* "Welcome to" - character stagger with blur reveal */}
           <motion.span
-            className={styles.softBuilt}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: 'easeOut', delay: (welcomeText.length * 40) / 1000 + 0.5 }}
+            variants={charStagger}
+            initial="hidden"
+            animate="visible"
+            style={{ display: 'inline-block' }}
           >
-            {megicodeText}
+            {welcomeChars.map((char, i) => (
+              <motion.span
+                key={i}
+                variants={charVariant}
+                style={{ display: 'inline-block', whiteSpace: char === ' ' ? 'pre' : undefined }}
+              >
+                {char === ' ' ? '\u00A0' : char}
+              </motion.span>
+            ))}
           </motion.span>
-        </motion.h1>
+          {' '}
+          {/* "Megicode" - bigger stagger with scale + shimmer */}
+          <motion.span
+            className={`${commonStyles.softBuilt} ${themeStyles.softBuilt}`}
+            variants={megicodeStagger}
+            initial="hidden"
+            animate="visible"
+            style={{ display: 'inline-block' }}
+          >
+            {megicodeChars.map((char, i) => (
+              <motion.span
+                key={i}
+                variants={megicodeCharVariant}
+                style={{ display: 'inline-block' }}
+              >
+                {char}
+              </motion.span>
+            ))}
+            {/* Shimmer sweep overlay */}
+            <motion.span
+              className={commonStyles.shimmer}
+              initial={{ left: '-100%' }}
+              animate={{ left: '200%' }}
+              transition={{ duration: 1.2, delay: 1.8, ease: 'easeInOut' }}
+              aria-hidden="true"
+            />
+          </motion.span>
+        </h1>
+
+        {/* Subtitle - word-by-word blur reveal */}
         <motion.p
-          className={`${commonStyles.paragraph} ${theme === 'dark' ? darkStyles.paragraph : styles.paragraph}`}
-          variants={fadeInUp}
+          className={`${commonStyles.paragraph} ${themeStyles.paragraph}`}
+          variants={wordStagger}
           initial="hidden"
           animate="visible"
-          transition={{ duration: 0.8, ease: 'easeOut', delay: (welcomeText.length * 40 + 500 + megicodeText.length * 40) / 1000 + 1 }}
         >
-          {serviceText}
+          {serviceWords.map((word, i) => (
+            <motion.span
+              key={i}
+              variants={wordVariant}
+              style={{ display: 'inline-block', marginRight: '0.3em' }}
+            >
+              {word}
+            </motion.span>
+          ))}
         </motion.p>
-      </div>
-      {/* Hero SVG Animation - Responsive, only on desktop/tablet */}
-     
+      </motion.div>
     </section>
   );
 };

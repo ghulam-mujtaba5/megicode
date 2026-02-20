@@ -4,8 +4,8 @@ import { useTheme } from "../../context/ThemeContext";
 import dynamic from 'next/dynamic';
 import LoadingAnimation from '@/components/LoadingAnimation/LoadingAnimation';
 import styles from '../../components/CareersCommon.module.css';
-import '../../components/CareersLight.module.css';
-import '../../components/CareersDark.module.css';
+import lightStyles from '../../components/CareersLight.module.css';
+import darkStyles from '../../components/CareersDark.module.css';
 
 // Static imports for critical components
 import NewNavBar from "../../components/NavBar_Desktop_Company/NewNavBar";
@@ -67,9 +67,7 @@ export default function CareersPage() {
     <>
       <div className={[
         styles.careersPage,
-        theme === 'dark' ? 'darkTheme' : 'lightTheme',
-      ].join(' ')}>
-
+        theme === 'dark' ? darkStyles.darkTheme : lightStyles.lightTheme,
         {/* Theme Toggle Icon */}
         <div
           id="theme-toggle"

@@ -54,6 +54,7 @@ export default function HomePageClient() {
           tabIndex={0}
           aria-label="Toggle theme"
           onClick={onDarkModeButtonContainerClick}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onDarkModeButtonContainerClick(); } }}
         >
           <ThemeToggleIcon />
         </div>

@@ -55,7 +55,7 @@ const glitchVariants: Variants = {
 export default function NotFound() {
   const { linkedinUrl, instagramUrl, githubUrl } = SITE_SOCIAL;
   const copyrightText = getCopyrightText();
-  const { theme } = useTheme();
+  const { theme, toggleTheme } = useTheme();
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isMobile, setIsMobile] = useState(false);
   const [touchStart, setTouchStart] = useState<{x: number, y: number} | null>(null);
@@ -178,7 +178,10 @@ export default function NotFound() {
         <NavBarMobile />
       </nav>
       {/* Theme Toggle Icon - Offset for nav height */}
-      <div id="theme-toggle" role="button" tabIndex={0} style={{ position: 'absolute', top: 80, right: 32 }}>
+      <div id="theme-toggle" role="button" tabIndex={0} aria-label="Toggle theme" style={{ position: 'absolute', top: 80, right: 32 }}
+        onClick={toggleTheme}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleTheme(); } }}
+      >
         <ThemeToggleIcon />
       </div>
 

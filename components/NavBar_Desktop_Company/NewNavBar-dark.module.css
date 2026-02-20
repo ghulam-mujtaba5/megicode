@@ -19,6 +19,12 @@
   color: #ffffff; /* Brighter on hover */
 }
 
+.navLink:focus-visible {
+  outline: 2px solid #4573df;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
 .navLink::after {
     content: '';
     position: absolute;

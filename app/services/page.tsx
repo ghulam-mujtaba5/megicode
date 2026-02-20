@@ -21,7 +21,7 @@ const ServiceCard = dynamic(() => import("../../components/Services/Card/Service
 });
 
 export default function ServicesPage() {
-  const { theme } = useTheme();
+  const { theme, toggleTheme } = useTheme();
 
   const { linkedinUrl, instagramUrl, githubUrl } = SITE_SOCIAL;
   const copyrightText = getCopyrightText();
@@ -29,7 +29,10 @@ export default function ServicesPage() {
   return (
     <div style={{ backgroundColor: theme === "dark" ? "var(--page-bg-dark, #1d2127)" : "var(--page-bg, #ffffff)", minHeight: "100vh", overflowX: "hidden" }}>
       {/* Theme Toggle Icon */}
-      <div id="theme-toggle" role="button" tabIndex={0}>
+      <div id="theme-toggle" role="button" tabIndex={0} aria-label="Toggle theme"
+        onClick={toggleTheme}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleTheme(); } }}
+      >
         <ThemeToggleIcon />
       </div>
 
