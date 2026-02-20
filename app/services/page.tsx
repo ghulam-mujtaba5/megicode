@@ -77,20 +77,28 @@ export default function ServicesPage() {
       </main>
       <style jsx>{`
         .services-grid {
-          padding: 3rem 1.5rem;
-          max-width: 1400px;
+          padding: 4rem 2rem 5rem;
+          max-width: 1320px;
           margin: 0 auto;
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-          gap: 2.5rem;
+          grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+          gap: 1.75rem;
           position: relative;
         }
         
-        @media (max-width: 768px) {
+        @media (max-width: 860px) {
+          .services-grid {
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+            padding: 2.5rem 1.25rem 3rem;
+          }
+        }
+
+        @media (max-width: 640px) {
           .services-grid {
             grid-template-columns: 1fr;
-            gap: 2rem;
-            padding: 2rem 1rem;
+            gap: 1.25rem;
+            padding: 2rem 1rem 2.5rem;
           }
         }
       `}</style>

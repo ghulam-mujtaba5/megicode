@@ -1,49 +1,73 @@
+/* ── Dark Theme: Service Card ── */
+
 .card {
-  background: linear-gradient(155deg, rgba(20, 24, 35, 0.95), rgba(30, 37, 52, 0.9));
-  border: 1px solid rgba(123, 160, 255, 0.12);
+  background: rgba(22, 27, 40, 0.75);
+  border: 1px solid rgba(123, 160, 255, 0.08);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.2),
+    0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
 .card:hover {
   border-color: rgba(123, 160, 255, 0.2);
-  background: linear-gradient(155deg, rgba(22, 28, 40, 0.95), rgba(33, 41, 58, 0.92));
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(123, 160, 255, 0.08);
 }
 
 .iconWrapper {
-  background: rgba(123, 160, 255, 0.12);
-  border: 1px solid rgba(123, 160, 255, 0.18);
-}
-
-.title {
-  color: #9bb7ff;
-}
-
-.description {
-  color: rgba(226, 236, 255, 0.86);
-}
-
-.feature {
-  color: rgba(226, 236, 255, 0.82);
-}
-
-.featureDot {
-  background: #9bb7ff;
-  box-shadow: 0 0 6px rgba(123, 160, 255, 0.35);
-}
-
-.techBadge {
-  background: rgba(123, 160, 255, 0.12);
-  color: rgba(226, 236, 255, 0.9);
-  border: 1px solid rgba(123, 160, 255, 0.25);
-}
-
-.ctaRow {
-  color: rgba(226, 236, 255, 0.88);
-}
-
-.card:hover .ctaRow {
-  color: #ffffff;
+  background: linear-gradient(135deg, rgba(123, 160, 255, 0.1), rgba(123, 160, 255, 0.16));
+  border: 1px solid rgba(123, 160, 255, 0.14);
+  box-shadow: 0 2px 10px rgba(123, 160, 255, 0.06);
 }
 
 .card:hover .iconWrapper {
-  background: rgba(123, 160, 255, 0.16);
+  background: linear-gradient(135deg, rgba(123, 160, 255, 0.15), rgba(123, 160, 255, 0.22));
+  box-shadow: 0 4px 18px rgba(123, 160, 255, 0.12);
+}
+
+.title {
+  color: #c4d6ff;
+}
+
+.description {
+  color: rgba(200, 215, 245, 0.72);
+}
+
+.divider {
+  background: linear-gradient(90deg, rgba(123, 160, 255, 0.18), rgba(123, 160, 255, 0.03));
+}
+
+.featuresContainer {
+  border-top: none;
+}
+
+.feature {
+  color: rgba(200, 215, 245, 0.78);
+}
+
+.featureIcon {
+  background: rgba(123, 160, 255, 0.12);
+  color: #7ba0ff;
+}
+
+.techBadge {
+  background: rgba(123, 160, 255, 0.08);
+  color: rgba(200, 215, 245, 0.85);
+  border: 1px solid rgba(123, 160, 255, 0.14);
+}
+
+.techBadge:hover {
+  background: rgba(123, 160, 255, 0.14);
+  box-shadow: 0 2px 8px rgba(123, 160, 255, 0.08);
+}
+
+.ctaRow {
+  color: #9bb7ff;
+  background: rgba(123, 160, 255, 0.08);
+}
+
+.card:hover .ctaRow {
+  background: rgba(123, 160, 255, 0.14);
+  color: #ffffff;
 }
