@@ -20,10 +20,6 @@
     transition: opacity 0.3s ease;
 }
 
-.card:hover {
-    transform: translateY(-0.35rem);
-}
-
 .card:hover::before {
     opacity: 1;
 }
