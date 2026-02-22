@@ -11,6 +11,7 @@ import ThemeToggleIcon from "../../components/Icon/sbicon";
 import LoadingAnimation from "@/components/LoadingAnimation/LoadingAnimation";
 import servicesData from "./servicesData";
 import { SITE_SOCIAL, getCopyrightText } from '@/lib/constants';
+import Breadcrumbs from '@/components/SEO/Breadcrumbs';
 
 // Dynamic imports for optimized loading
 const ServicesHero = dynamic(() => import("../../components/Services/Hero/ServicesHero"), {
@@ -47,7 +48,13 @@ export default function ServicesPage() {
       </nav>
 
       <main id="main-content" aria-label="Services Main Content">
-        <h1 style={{position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden'}}>Our Services</h1>
+        <h1 style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden' }}>Our Services</h1>
+
+        {/* Breadcrumbs for Navigation & SEO */}
+        <div style={{ maxWidth: '1320px', margin: '20px auto 0', padding: '0 2rem' }}>
+          <Breadcrumbs theme={theme as 'light' | 'dark'} />
+        </div>
+
         <Suspense fallback={<LoadingAnimation size="medium" />}>
           <ServicesHero />
         </Suspense>

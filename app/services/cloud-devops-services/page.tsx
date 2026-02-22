@@ -11,21 +11,22 @@ import { useTheme } from "../../../context/ThemeContext";
 import { useInViewAnimation } from "../../../hooks/useInViewAnimation";
 import servicesData from "../servicesData";
 import ServiceSchema from "@/components/SEO/ServiceSchema";
+import Breadcrumbs from "@/components/SEO/Breadcrumbs";
 import { ServiceFAQs } from "../ServiceDetailSections";
-import { 
+import {
   SiAmazon,
-  SiDocker, 
-  SiKubernetes, 
-  SiTerraform, 
-  SiGithubactions, 
-  SiJenkins, 
-  SiGooglecloud 
+  SiDocker,
+  SiKubernetes,
+  SiTerraform,
+  SiGithubactions,
+  SiJenkins,
+  SiGooglecloud
 } from "react-icons/si";
-import { 
-  FaCloud, 
-  FaCodeBranch, 
-  FaServer, 
-  FaShieldAlt, 
+import {
+  FaCloud,
+  FaCodeBranch,
+  FaServer,
+  FaShieldAlt,
   FaChartLine,
   FaSearch,
   FaCogs,
@@ -168,7 +169,7 @@ export default function CloudDevOpsPage() {
         id="main-content"
         className={commonStyles.mainContent}
         aria-label="Cloud & DevOps Service Detail"
-        style={{ 
+        style={{
           maxWidth: '1440px',
           margin: '0 auto',
           padding: '88px 24px 64px'
@@ -177,55 +178,59 @@ export default function CloudDevOpsPage() {
         {/* Soft background shapes for extra depth */}
         <div className={commonStyles.bgShapeLeft} aria-hidden="true" />
         <div className={commonStyles.bgShapeRight} aria-hidden="true" />
+
+        {/* Breadcrumbs for Navigation & SEO */}
+        <Breadcrumbs theme={theme as 'light' | 'dark'} />
+
         {/* Hero Section - Full-width gradient, Lottie/SVG, CTA */}
         <section
-            className={`${commonStyles.heroSection} ${themeStyles.heroSection} service-hero-gradient`}
-            data-animate="fade-in"
-            aria-labelledby="hero-title"
-          >
-            <div className={`${commonStyles.heroOverlay} ${themeStyles.heroOverlay}`} aria-hidden="true" />
-            <div 
-              className={`${commonStyles.heroBlurCircle} ${themeStyles.heroBlurCircle}`}
-              aria-hidden="true"
-            />
-            <div className={commonStyles.heroContent}>
-              <div className={commonStyles.heroTextBlock}>
-                <h1 id="hero-title" className={`${commonStyles.heroTitle} ${themeStyles.heroTitle}`}>
-                  <span className={commonStyles.gradientText}>{service.title}</span>
-                </h1>
-                <p className={`${commonStyles.heroDesc} ${themeStyles.heroDesc}`} data-animate="typewriter">
-                  {service.description}
-                </p>
-                <div className={commonStyles.heroCTAWrapper}>
-                  <button
-                    type="button"
-                    className={commonStyles.ctaBtn}
-                    data-animate="cta-bounce"
-                    aria-label="Get Started with Cloud & DevOps Services"
-                    onClick={openCalendly}
-                  >
-                    Get Started
-                    <span className={commonStyles.ctaBtnArrow} aria-hidden="true">→</span>
-                  </button>
-                </div>
+          className={`${commonStyles.heroSection} ${themeStyles.heroSection} service-hero-gradient`}
+          data-animate="fade-in"
+          aria-labelledby="hero-title"
+        >
+          <div className={`${commonStyles.heroOverlay} ${themeStyles.heroOverlay}`} aria-hidden="true" />
+          <div
+            className={`${commonStyles.heroBlurCircle} ${themeStyles.heroBlurCircle}`}
+            aria-hidden="true"
+          />
+          <div className={commonStyles.heroContent}>
+            <div className={commonStyles.heroTextBlock}>
+              <h1 id="hero-title" className={`${commonStyles.heroTitle} ${themeStyles.heroTitle}`}>
+                <span className={commonStyles.gradientText}>{service.title}</span>
+              </h1>
+              <p className={`${commonStyles.heroDesc} ${themeStyles.heroDesc}`} data-animate="typewriter">
+                {service.description}
+              </p>
+              <div className={commonStyles.heroCTAWrapper}>
+                <button
+                  type="button"
+                  className={commonStyles.ctaBtn}
+                  data-animate="cta-bounce"
+                  aria-label="Get Started with Cloud & DevOps Services"
+                  onClick={openCalendly}
+                >
+                  Get Started
+                  <span className={commonStyles.ctaBtnArrow} aria-hidden="true">→</span>
+                </button>
               </div>
-              <div className={commonStyles.heroImageBlock} aria-hidden="true">
-                <div className={commonStyles.heroImageCard} data-animate="float">
-                  <img
-                    src="/meta/rm.svg"
-                    alt="Cloud & DevOps RM Illustration"
-                    style={{ width: 180, maxWidth: '100%', borderRadius: 32, boxShadow: '0 8px 32px #4ea8ff33', background: isDark ? 'rgba(36,41,54,0.98)' : '#fff', padding: 18, border: `2px solid ${palette.cardInnerBorder}` }}
-                  />
-                  <div className={commonStyles.heroImageDot} />
-                  <div className={commonStyles.heroImageSparkles}>
-                    {[...Array(3)].map((_, i) => (
-                      <div key={i} className={commonStyles.sparkle} style={{ animationDelay: `${i * 0.2}s` }} />
-                    ))}
-                  </div>
+            </div>
+            <div className={commonStyles.heroImageBlock} aria-hidden="true">
+              <div className={commonStyles.heroImageCard} data-animate="float">
+                <img
+                  src="/meta/rm.svg"
+                  alt="Cloud & DevOps RM Illustration"
+                  style={{ width: 180, maxWidth: '100%', borderRadius: 32, boxShadow: '0 8px 32px #4ea8ff33', background: isDark ? 'rgba(36,41,54,0.98)' : '#fff', padding: 18, border: `2px solid ${palette.cardInnerBorder}` }}
+                />
+                <div className={commonStyles.heroImageDot} />
+                <div className={commonStyles.heroImageSparkles}>
+                  {[...Array(3)].map((_, i) => (
+                    <div key={i} className={commonStyles.sparkle} style={{ animationDelay: `${i * 0.2}s` }} />
+                  ))}
                 </div>
               </div>
             </div>
-          </section>
+          </div>
+        </section>
 
         {/* Service Overview - Side-by-side layout */}
         {/* Section divider */}
@@ -317,9 +322,9 @@ export default function CloudDevOpsPage() {
                   default: return null;
                 }
               };
-              
+
               const techIcon = getTechIcon(t);
-              
+
               return (
                 <span key={i} className={`${commonStyles.techCard} ${themeStyles.techCard}`} data-animate="scale-on-hover">
                   {techIcon ? (
@@ -350,8 +355,8 @@ export default function CloudDevOpsPage() {
           </div>
           <div className={commonStyles.howGrid}>
             {engagementModels.map((model, index) => (
-              <div 
-                key={model.title} 
+              <div
+                key={model.title}
                 className={`${commonStyles.howCard} ${themeStyles.howCard}`}
                 style={{
                   borderColor: model.isPopular ? model.color : undefined,
@@ -426,9 +431,9 @@ export default function CloudDevOpsPage() {
           <a href="/contact" className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`} style={{ display: 'inline-block', marginTop: 8, textDecoration: 'underline', fontSize: '0.95rem' }}>Or send us a message</a>
         </section>
       </main>
-  {calendlyModalElement}
-  <ServiceSchema service={{ title: service.title!, description: service.description!, slug: 'cloud-devops-services', features: service.features }} />
-  <Footer />
+      {calendlyModalElement}
+      <ServiceSchema service={{ title: service.title!, description: service.description!, slug: 'cloud-devops-services', features: service.features }} />
+      <Footer />
     </div>
   );
 }

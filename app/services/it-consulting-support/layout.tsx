@@ -2,19 +2,19 @@ import type { Metadata } from 'next';
 import { serviceJsonLd, breadcrumbJsonLd } from '@/lib/metadata';
 
 export const metadata: Metadata = {
-  title: 'IT Consulting & Support',
-  description: 'Expert IT strategy, security audits, compliance consulting, and ongoing technical support. Megicode helps you achieve your technology goals with roadmapping, infrastructure guidance, and maintenance services.',
-  keywords: ['IT Consulting', 'IT Support', 'IT Strategy', 'Security Audits', 'Compliance', 'Technology Roadmapping', 'IT Infrastructure'],
+  title: 'IT Consulting & Technical Support | CTO-as-a-Service for Startups',
+  description: 'Get expert IT leadership without the full-time cost. Megicode provides technology strategy, security audits, compliance consulting, infrastructure guidance & 24/7 technical support — your fractional CTO partner.',
+  keywords: ['IT consulting services Pakistan', 'CTO as a service', 'fractional CTO for startups', 'IT strategy consulting', 'security audit services', 'compliance consulting', 'technology roadmapping', 'IT infrastructure consulting', 'managed IT support', 'IT outsourcing Pakistan'],
   openGraph: {
-    title: 'IT Consulting & Support | Megicode',
-    description: 'Expert guidance, security, and ongoing support to help you achieve your technology goals.',
+    title: 'IT Consulting & CTO-as-a-Service for Startups | Megicode',
+    description: 'Get expert IT leadership without the full-time cost. Strategy, security audits & 24/7 technical support.',
     url: 'https://megicode.com/services/it-consulting-support',
     images: [{ url: '/meta/services-og.png', width: 1200, height: 630, alt: 'IT Consulting & Support | Megicode' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'IT Consulting & Support | Megicode',
-    description: 'Expert guidance, security, and ongoing support to help you achieve your technology goals.',
+    title: 'IT Consulting & CTO-as-a-Service for Startups | Megicode',
+    description: 'Get expert IT leadership without the full-time cost. Strategy, security audits & 24/7 technical support.',
     images: ['/meta/services-og.png'],
   },
   alternates: {

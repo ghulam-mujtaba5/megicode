@@ -2,19 +2,19 @@ import type { Metadata } from 'next';
 import { serviceJsonLd, breadcrumbJsonLd } from '@/lib/metadata';
 
 export const metadata: Metadata = {
-  title: 'Cloud & DevOps Services',
-  description: 'Cloud migration, CI/CD pipelines, infrastructure automation, and container orchestration. Megicode delivers scalable, secure cloud solutions using AWS, Azure, Docker, Kubernetes, and Terraform.',
-  keywords: ['Cloud Services', 'DevOps', 'Cloud Migration', 'CI/CD', 'Infrastructure as Code', 'AWS', 'Azure', 'Docker', 'Kubernetes', 'Terraform'],
+  title: 'Cloud Migration & DevOps Services | AWS, Azure & Kubernetes Experts',
+  description: 'Migrate to the cloud with zero downtime. Megicode delivers end-to-end cloud migration, CI/CD pipeline automation, Kubernetes orchestration & infrastructure-as-code using AWS, Azure, Docker & Terraform.',
+  keywords: ['cloud migration services Pakistan', 'DevOps consulting agency', 'AWS migration services', 'Azure cloud services', 'CI/CD pipeline setup', 'Kubernetes consulting', 'Docker containerization', 'infrastructure as code Terraform', 'cloud cost optimization', 'DevOps automation'],
   openGraph: {
-    title: 'Cloud & DevOps Services | Megicode',
-    description: 'Cloud migration, CI/CD, and infrastructure automation for scalable, secure, and efficient operations.',
+    title: 'Cloud Migration & DevOps Experts | AWS, Azure, Kubernetes | Megicode',
+    description: 'Migrate to the cloud with zero downtime. End-to-end CI/CD, Kubernetes & infrastructure automation.',
     url: 'https://megicode.com/services/cloud-devops-services',
     images: [{ url: '/meta/services-og.png', width: 1200, height: 630, alt: 'Cloud & DevOps Services | Megicode' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Cloud & DevOps Services | Megicode',
-    description: 'Cloud migration, CI/CD, and infrastructure automation for scalable, secure, and efficient operations.',
+    title: 'Cloud Migration & DevOps Experts | AWS, Azure, Kubernetes | Megicode',
+    description: 'Migrate to the cloud with zero downtime. End-to-end CI/CD, Kubernetes & infrastructure automation.',
     images: ['/meta/services-og.png'],
   },
   alternates: {

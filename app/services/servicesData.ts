@@ -12,11 +12,11 @@ const servicesData = [
       "AI-Powered Automation"
     ],
     techs: ["TensorFlow", "PyTorch", "OpenAI", "Scikit-learn", "Azure AI"],
-    keywords: ["AI solutions", "Machine Learning", "Artificial Intelligence", "Custom AI models", "AI automation"],
+    keywords: ["AI development agency Pakistan", "custom AI solutions for startups", "machine learning consulting", "generative AI consulting", "hire AI developers", "NLP development", "computer vision solutions"],
     openGraph: {
       title: "AI & Machine Learning Solutions | Megicode",
       description: "Custom AI models, automation, and intelligent systems to drive innovation and efficiency for your business.",
-  url: "https://megicode.com/services/ai-machine-learning",
+      url: "https://megicode.com/services/ai-machine-learning",
       images: [
         {
           url: "https://megicode.com/images/og-ai.jpg",
@@ -30,9 +30,9 @@ const servicesData = [
       card: "summary_large_image",
       title: "AI & Machine Learning Solutions | Megicode",
       description: "Custom AI models, automation, and intelligent systems to drive innovation and efficiency for your business.",
-  images: ["https://megicode.com/images/twitter-ai.jpg"],
+      images: ["https://megicode.com/images/twitter-ai.jpg"],
     },
-  canonical: "https://megicode.com/services/ai-machine-learning",
+    canonical: "https://megicode.com/services/ai-machine-learning",
   },
   {
     icon: "/ds&ai-icon.svg",
@@ -47,11 +47,11 @@ const servicesData = [
       "Data Visualization"
     ],
     techs: ["Python", "Power BI", "Tableau", "SQL", "Spark"],
-    keywords: ["Data Analytics", "Business Intelligence", "Big Data", "Data Visualization", "Predictive Analytics"],
+    keywords: ["data analytics services Pakistan", "business intelligence consulting", "Power BI dashboard development", "Tableau consulting", "predictive analytics solutions"],
     openGraph: {
       title: "Data Analytics & Business Intelligence | Megicode",
       description: "Transform data into actionable insights with analytics, dashboards, and business intelligence solutions.",
-  url: "https://megicode.com/services/data-analytics-bi",
+      url: "https://megicode.com/services/data-analytics-bi",
       images: [
         {
           url: "https://megicode.com/images/og-data.jpg",
@@ -65,9 +65,9 @@ const servicesData = [
       card: "summary_large_image",
       title: "Data Analytics & Business Intelligence | Megicode",
       description: "Transform data into actionable insights with analytics, dashboards, and business intelligence solutions.",
-  images: ["https://megicode.com/images/twitter-data.jpg"],
+      images: ["https://megicode.com/images/twitter-data.jpg"],
     },
-  canonical: "https://megicode.com/services/data-analytics-bi",
+    canonical: "https://megicode.com/services/data-analytics-bi",
   },
   {
     icon: "/web app icon.svg",
@@ -132,11 +132,11 @@ const servicesData = [
       "Performance Optimization"
     ],
     techs: ["React", "Next.js", "Node.js", "TypeScript", "GraphQL"],
-    keywords: ["Web Development", "Custom Web Applications", "Full-Stack Development", "E-commerce", "CMS"],
+    keywords: ["custom web development company", "hire web developers Pakistan", "Next.js development agency", "React web application", "SaaS platform development"],
     openGraph: {
       title: "Custom Web Development | Megicode",
       description: "Robust, scalable, and secure web applications tailored to your business goals and user needs.",
-  url: "https://megicode.com/services/custom-web-development",
+      url: "https://megicode.com/services/custom-web-development",
       images: [
         {
           url: "https://megicode.com/images/og-web.jpg",
@@ -150,7 +150,7 @@ const servicesData = [
       card: "summary_large_image",
       title: "Custom Web Development | Megicode",
       description: "Robust, scalable, and secure web applications tailored to your business goals and user needs.",
-  images: ["https://megicode.com/images/twitter-web.jpg"],
+      images: ["https://megicode.com/images/twitter-web.jpg"],
     },
     canonical: "https://megicode.com/services/custom-web-development"
   },
@@ -167,11 +167,11 @@ const servicesData = [
       "Ongoing Support"
     ],
     techs: ["React Native", "Flutter", "Swift", "Kotlin", "Firebase"],
-    keywords: ["Mobile App Development", "iOS Development", "Android Development", "Cross-Platform Apps", "Mobile UI/UX"],
+    keywords: ["mobile app development Pakistan", "hire mobile app developers", "iOS app development", "React Native agency", "Flutter app development"],
     openGraph: {
       title: "Mobile App Solutions | Megicode",
       description: "Native and cross-platform mobile apps for iOS and Android, designed for performance and engagement.",
-  url: "https://megicode.com/services/mobile-app-solutions",
+      url: "https://megicode.com/services/mobile-app-solutions",
       images: [
         {
           url: "https://megicode.com/images/og-mobile.jpg",
@@ -185,9 +185,9 @@ const servicesData = [
       card: "summary_large_image",
       title: "Mobile App Solutions | Megicode",
       description: "Native and cross-platform mobile apps for iOS and Android, designed for performance and engagement.",
-  images: ["https://megicode.com/images/twitter-mobile.jpg"],
+      images: ["https://megicode.com/images/twitter-mobile.jpg"],
     },
-  canonical: "https://megicode.com/services/mobile-app-solutions",
+    canonical: "https://megicode.com/services/mobile-app-solutions",
   },
   {
     icon: "/meta/rm.svg",
@@ -202,11 +202,11 @@ const servicesData = [
       "Monitoring & Security"
     ],
     techs: ["AWS", "Azure", "Docker", "Kubernetes", "Terraform"],
-    keywords: ["Cloud Services", "DevOps", "Cloud Migration", "CI/CD", "Infrastructure as Code"],
+    keywords: ["cloud migration services Pakistan", "DevOps consulting agency", "AWS migration", "Kubernetes consulting", "CI/CD pipeline setup"],
     openGraph: {
       title: "Cloud & DevOps Services | Megicode",
       description: "Cloud migration, CI/CD, and infrastructure automation for scalable, secure, and efficient operations.",
-  url: "https://megicode.com/services/cloud-devops-services",
+      url: "https://megicode.com/services/cloud-devops-services",
       images: [
         {
           url: "https://megicode.com/images/og-cloud.jpg",
@@ -220,9 +220,9 @@ const servicesData = [
       card: "summary_large_image",
       title: "Cloud & DevOps Services | Megicode",
       description: "Cloud migration, CI/CD, and infrastructure automation for scalable, secure, and efficient operations.",
-  images: ["https://megicode.com/images/twitter-cloud.jpg"],
+      images: ["https://megicode.com/images/twitter-cloud.jpg"],
     },
-  canonical: "https://megicode.com/services/cloud-devops-services",
+    canonical: "https://megicode.com/services/cloud-devops-services",
   },
   {
     icon: "/data scrapping icon.svg",
@@ -237,11 +237,11 @@ const servicesData = [
       "Custom Scripting"
     ],
     techs: ["Python", "Zapier", "Make", "Node.js", "Selenium"],
-    keywords: ["Automation", "Integration", "Business Process Automation", "API Integration", "RPA"],
+    keywords: ["business process automation services", "API integration company", "workflow automation consulting", "RPA development", "Zapier automation experts"],
     openGraph: {
       title: "Automation & Integration | Megicode",
       description: "Workflow automation, data integration, and process optimization to streamline your business.",
-  url: "https://megicode.com/services/automation-integration",
+      url: "https://megicode.com/services/automation-integration",
       images: [
         {
           url: "https://megicode.com/images/og-automation.jpg",
@@ -255,9 +255,9 @@ const servicesData = [
       card: "summary_large_image",
       title: "Automation & Integration | Megicode",
       description: "Workflow automation, data integration, and process optimization to streamline your business.",
-  images: ["https://megicode.com/images/twitter-automation.jpg"],
+      images: ["https://megicode.com/images/twitter-automation.jpg"],
     },
-  canonical: "https://megicode.com/services/automation-integration",
+    canonical: "https://megicode.com/services/automation-integration",
   },
   {
     icon: "/Ui&Ux-icon.svg",
@@ -272,11 +272,11 @@ const servicesData = [
       "Brand Identity Design"
     ],
     techs: ["Figma", "Adobe XD", "Sketch", "InVision", "Zeplin"],
-    keywords: ["UI UX Design", "Product Design", "User Research", "Wireframing", "Usability Testing"],
+    keywords: ["UI UX design agency Pakistan", "product design services", "Figma design agency", "UX research and strategy", "conversion-focused design"],
     openGraph: {
       title: "UI/UX & Product Design | Megicode",
       description: "User-centered design for engaging, intuitive, and accessible digital products.",
-  url: "https://megicode.com/services/ui-ux-product-design",
+      url: "https://megicode.com/services/ui-ux-product-design",
       images: [
         {
           url: "https://megicode.com/images/og-uiux.jpg",
@@ -290,9 +290,9 @@ const servicesData = [
       card: "summary_large_image",
       title: "UI/UX & Product Design | Megicode",
       description: "User-centered design for engaging, intuitive, and accessible digital products.",
-  images: ["https://megicode.com/images/twitter-uiux.jpg"],
+      images: ["https://megicode.com/images/twitter-uiux.jpg"],
     },
-  canonical: "https://megicode.com/services/ui-ux-product-design",
+    canonical: "https://megicode.com/services/ui-ux-product-design",
   },
   {
     icon: "/it-consulting-support-icon.svg",
@@ -307,11 +307,11 @@ const servicesData = [
       "Training & Documentation"
     ],
     techs: ["ITIL", "ISO 27001", "Microsoft 365", "Google Workspace", "Jira"],
-    keywords: ["IT Consulting", "IT Support", "IT Strategy", "Security Audits", "Compliance"],
+    keywords: ["IT consulting services Pakistan", "CTO as a service", "fractional CTO for startups", "security audit services", "managed IT support"],
     openGraph: {
       title: "IT Consulting & Support | Megicode",
       description: "Expert guidance, security, and ongoing support to help you achieve your technology goals.",
-  url: "https://megicode.com/services/it-consulting-support",
+      url: "https://megicode.com/services/it-consulting-support",
       images: [
         {
           url: "https://megicode.com/images/og-it.jpg",
@@ -325,9 +325,9 @@ const servicesData = [
       card: "summary_large_image",
       title: "IT Consulting & Support | Megicode",
       description: "Expert guidance, security, and ongoing support to help you achieve your technology goals.",
-  images: ["https://megicode.com/images/twitter-it.jpg"],
+      images: ["https://megicode.com/images/twitter-it.jpg"],
     },
-  canonical: "https://megicode.com/services/it-consulting-support",
+    canonical: "https://megicode.com/services/it-consulting-support",
   }
 ];
 

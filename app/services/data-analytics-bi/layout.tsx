@@ -2,19 +2,19 @@ import type { Metadata } from 'next';
 import { serviceJsonLd, breadcrumbJsonLd } from '@/lib/metadata';
 
 export const metadata: Metadata = {
-  title: 'Data Analytics & Business Intelligence',
-  description: 'Transform raw data into actionable insights with custom dashboards, predictive analytics, and BI solutions. Megicode delivers data warehousing, visualization, and big data analytics using Power BI, Tableau, and Python.',
-  keywords: ['Data Analytics', 'Business Intelligence', 'Big Data', 'Data Visualization', 'Predictive Analytics', 'Power BI', 'Tableau', 'Data Warehousing'],
+  title: 'Data Analytics & Business Intelligence Services | Power BI & Tableau Experts',
+  description: 'Make data-driven decisions that grow revenue. Megicode builds custom BI dashboards, predictive analytics models & data warehouses using Power BI, Tableau, Python & SQL — turning raw data into competitive advantage.',
+  keywords: ['data analytics services Pakistan', 'business intelligence consulting', 'Power BI dashboard development', 'Tableau consulting services', 'predictive analytics solutions', 'data warehousing services', 'big data analytics company', 'custom BI dashboards', 'data visualization services', 'SQL analytics'],
   openGraph: {
-    title: 'Data Analytics & Business Intelligence | Megicode',
-    description: 'Transform data into actionable insights with analytics, dashboards, and business intelligence solutions.',
+    title: 'Data Analytics & BI Experts | Power BI, Tableau & Python | Megicode',
+    description: 'Make data-driven decisions that grow revenue. Custom dashboards, predictive analytics & data warehousing solutions.',
     url: 'https://megicode.com/services/data-analytics-bi',
     images: [{ url: '/meta/services-og.png', width: 1200, height: 630, alt: 'Data Analytics & BI | Megicode' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Data Analytics & Business Intelligence | Megicode',
-    description: 'Transform data into actionable insights with analytics, dashboards, and business intelligence solutions.',
+    title: 'Data Analytics & BI Experts | Power BI, Tableau & Python | Megicode',
+    description: 'Make data-driven decisions that grow revenue. Custom dashboards, predictive analytics & data warehousing solutions.',
     images: ['/meta/services-og.png'],
   },
   alternates: {

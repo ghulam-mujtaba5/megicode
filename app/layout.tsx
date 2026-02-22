@@ -21,11 +21,11 @@ export const viewport = {
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://megicode.com'),
   title: {
-    default: "Megicode - Modern Software Solutions",
+    default: "Megicode — Software Development Agency | AI, Web & Mobile Solutions",
     template: "%s | Megicode"
   },
-  description: "Welcome to Megicode, specializing in Desktop, Web, and Mobile applications, data science, and AI solutions. Partner with us to turn your project ideas into reality.",
-  keywords: ["software development", "web development", "mobile apps", "desktop applications", "AI solutions", "data science"],
+  description: "Megicode is a next-generation software development agency in Lahore, Pakistan. We build custom AI models, scalable web & mobile applications, cloud solutions, and data analytics platforms for startups and enterprises worldwide.",
+  keywords: ["software development agency Pakistan", "custom AI development", "web application development", "mobile app development company", "cloud migration services", "data analytics consulting", "hire software developers Pakistan", "startup software agency", "Next.js development", "React development agency", "full-stack development services", "generative AI consulting"],
   authors: [{ name: "Ghulam Mujtaba" }],
   creator: "Ghulam Mujtaba",
   publisher: "Megicode",
@@ -36,9 +36,9 @@ export const metadata = {
   },
   icons: {
     icon: [
-  // Theme-aware favicons (both map to PWA icon)
-  { url: LOGO_MAIN_LIGHT, media: "(prefers-color-scheme: light)", type: "image/svg+xml" },
-  { url: LOGO_MAIN_DARK, media: "(prefers-color-scheme: dark)", type: "image/svg+xml" },
+      // Theme-aware favicons (both map to PWA icon)
+      { url: LOGO_MAIN_LIGHT, media: "(prefers-color-scheme: light)", type: "image/svg+xml" },
+      { url: LOGO_MAIN_DARK, media: "(prefers-color-scheme: dark)", type: "image/svg+xml" },
       // Canonical svg + fallbacks
       { url: "/favicon.svg", type: "image/svg+xml" },
       { url: "/meta/favicon-16x16.png", sizes: "16x16", type: "image/png" },
@@ -59,8 +59,8 @@ export const metadata = {
     locale: "en_US",
     url: "https://megicode.com",
     siteName: "Megicode",
-    title: "Megicode - Modern Software Solutions",
-    description: "Expert software development services including web, mobile, desktop applications, AI solutions, and data science.",
+    title: "Megicode — Software Development Agency | AI, Web & Mobile Solutions",
+    description: "Next-generation software agency in Pakistan. Custom AI, scalable web & mobile apps, cloud solutions & data analytics for startups and enterprises.",
     images: [
       {
         url: "/meta/og-image.png",
@@ -70,11 +70,11 @@ export const metadata = {
       },
     ],
   },
-  
+
   twitter: {
     card: "summary_large_image",
-    title: "Megicode - Modern Software Solutions",
-    description: "Expert software development services including web, mobile, desktop applications, AI solutions, and data science.",
+    title: "Megicode — Software Development Agency | AI, Web & Mobile",
+    description: "Next-generation software agency in Pakistan. Custom AI, scalable web & mobile apps, cloud solutions & data analytics.",
     images: ["/meta/twitter-card.png"],
     creator: "@megicode",
   },
@@ -123,6 +123,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       "Custom Software Development",
       "Artificial Intelligence",
       "Machine Learning",
+      "Generative AI",
+      "LLM Development",
       "Web Application Development",
       "Mobile App Development",
       "React",
@@ -131,9 +133,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       "TypeScript",
       "UI/UX Design",
       "Cloud Computing",
+      "AWS",
       "DevOps",
+      "CI/CD",
+      "Kubernetes",
       "Data Analytics",
-      "Business Intelligence"
+      "Business Intelligence",
+      "Power BI",
+      "SaaS Development",
+      "MVP Development",
+      "Startup Software Solutions"
     ],
     "sameAs": [...SOCIAL_PROFILES]
   };
@@ -143,7 +152,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     "@type": "WebSite",
     "name": "Megicode",
     "url": "https://megicode.com",
-    "description": "Expert software development services including web, mobile, desktop applications, AI solutions, and data science.",
+    "description": "Next-generation software development agency in Lahore, Pakistan. Custom AI, scalable web & mobile apps, cloud solutions & data analytics for startups and enterprises worldwide.",
     "publisher": {
       "@type": "Organization",
       "name": "Megicode"

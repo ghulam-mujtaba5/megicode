@@ -11,6 +11,7 @@ import { useTheme } from "../../../context/ThemeContext";
 import { useInViewAnimation } from "../../../hooks/useInViewAnimation";
 import servicesData from "../servicesData";
 import ServiceSchema from "@/components/SEO/ServiceSchema";
+import Breadcrumbs from "@/components/SEO/Breadcrumbs";
 import { ServiceFAQs } from "../ServiceDetailSections";
 import { SiReact, SiFlutter, SiSwift, SiKotlin, SiFirebase, SiApple, SiAndroid } from "react-icons/si";
 import { FaMobileAlt, FaCode, FaPaintBrush, FaRocket, FaLifeRing, FaAppStoreIos, FaGooglePlay, FaCogs, FaUserFriends, FaMobile, FaShieldAlt, FaSearch, FaPencilAlt, FaTools, FaCloudUploadAlt, FaChartLine } from "react-icons/fa";
@@ -20,7 +21,7 @@ import NewNavBar from "../../../components/NavBar_Desktop_Company/NewNavBar";
 const service = servicesData.find(s => s.slug === "mobile-app-solutions");
 
 const processSteps = [
-  { 
+  {
     title: "Discovery & Planning",
     description: "App vision & requirements",
     icon: <FaSearch color="#4573df" size={36} title="Discovery & Planning" />
@@ -133,7 +134,7 @@ export default function MobileAppSolutionsPage() {
         id="main-content"
         className={commonStyles.mainContent}
         aria-label="Mobile App Solutions Service Detail"
-        style={{ 
+        style={{
           maxWidth: '1440px',
           margin: '0 auto',
           padding: '88px 24px 64px'
@@ -142,56 +143,60 @@ export default function MobileAppSolutionsPage() {
         {/* Soft background shapes for extra depth */}
         <div className={commonStyles.bgShapeLeft} aria-hidden="true" />
         <div className={commonStyles.bgShapeRight} aria-hidden="true" />
+
+        {/* Breadcrumbs for Navigation & SEO */}
+        <Breadcrumbs theme={theme as 'light' | 'dark'} />
+
         {/* Hero Section - Full-width gradient, Lottie/SVG, CTA */}
         <section
-            className={`${commonStyles.heroSection} ${themeStyles.heroSection} service-hero-gradient`}
-            data-animate="fade-in"
-            aria-labelledby="hero-title"
-          >
-            <div className={`${commonStyles.heroOverlay} ${themeStyles.heroOverlay}`} aria-hidden="true" />
-            <div 
-              className={`${commonStyles.heroBlurCircle} ${themeStyles.heroBlurCircle}`}
-              aria-hidden="true"
-            />
-            <div className={commonStyles.heroContent}>
-              <div className={commonStyles.heroTextBlock}>
-                <h1 id="hero-title" className={`${commonStyles.heroTitle} ${themeStyles.heroTitle}`}>
-                  <span className={commonStyles.gradientText}>{service.title}</span>
-                </h1>
-                <p className={`${commonStyles.heroDesc} ${themeStyles.heroDesc}`} data-animate="typewriter">
-                  {service.description}
-                </p>
-                <div className={commonStyles.heroCTAWrapper}>
-                  <button
-                    type="button"
-                    className={commonStyles.ctaBtn}
-                    data-animate="cta-bounce"
-                    aria-label="Get Started with Mobile App Services"
-                    onClick={openCalendly}
-                  >
-                    Get Started
-                    <span className={commonStyles.ctaBtnArrow} aria-hidden="true">→</span>
-                  </button>
-                </div>
+          className={`${commonStyles.heroSection} ${themeStyles.heroSection} service-hero-gradient`}
+          data-animate="fade-in"
+          aria-labelledby="hero-title"
+        >
+          <div className={`${commonStyles.heroOverlay} ${themeStyles.heroOverlay}`} aria-hidden="true" />
+          <div
+            className={`${commonStyles.heroBlurCircle} ${themeStyles.heroBlurCircle}`}
+            aria-hidden="true"
+          />
+          <div className={commonStyles.heroContent}>
+            <div className={commonStyles.heroTextBlock}>
+              <h1 id="hero-title" className={`${commonStyles.heroTitle} ${themeStyles.heroTitle}`}>
+                <span className={commonStyles.gradientText}>{service.title}</span>
+              </h1>
+              <p className={`${commonStyles.heroDesc} ${themeStyles.heroDesc}`} data-animate="typewriter">
+                {service.description}
+              </p>
+              <div className={commonStyles.heroCTAWrapper}>
+                <button
+                  type="button"
+                  className={commonStyles.ctaBtn}
+                  data-animate="cta-bounce"
+                  aria-label="Get Started with Mobile App Services"
+                  onClick={openCalendly}
+                >
+                  Get Started
+                  <span className={commonStyles.ctaBtnArrow} aria-hidden="true">→</span>
+                </button>
               </div>
-              <div className={commonStyles.heroImageBlock} aria-hidden="true">
-                <div className={commonStyles.heroImageCard} data-animate="float">
-                  <img
-                    src="/mobile app icon.svg"
-                    alt=""
-                    className={commonStyles.heroImage}
-                    loading="eager"
-                  />
-                  <div className={commonStyles.heroImageDot} />
-                  <div className={commonStyles.heroImageSparkles}>
-                    {[...Array(3)].map((_, i) => (
-                      <div key={i} className={commonStyles.sparkle} style={{ animationDelay: `${i * 0.2}s` }} />
-                    ))}
-                  </div>
+            </div>
+            <div className={commonStyles.heroImageBlock} aria-hidden="true">
+              <div className={commonStyles.heroImageCard} data-animate="float">
+                <img
+                  src="/mobile app icon.svg"
+                  alt=""
+                  className={commonStyles.heroImage}
+                  loading="eager"
+                />
+                <div className={commonStyles.heroImageDot} />
+                <div className={commonStyles.heroImageSparkles}>
+                  {[...Array(3)].map((_, i) => (
+                    <div key={i} className={commonStyles.sparkle} style={{ animationDelay: `${i * 0.2}s` }} />
+                  ))}
                 </div>
               </div>
             </div>
-          </section>
+          </div>
+        </section>
 
         {/* Service Overview - Side-by-side layout */}
         {/* Section divider */}
@@ -282,11 +287,10 @@ export default function MobileAppSolutionsPage() {
                     <Icon size={40} style={{ marginRight: 12 }} title={t} color={color} />
                   ) : (
                     <img
-                      src={`/meta/${
-                        t.toLowerCase().replace(/\s/g, '') === 'azureai' || t.toLowerCase().replace(/\s/g, '') === 'azure' || t.toLowerCase().replace(/\s/g, '') === 'microsoftazure'
+                      src={`/meta/${t.toLowerCase().replace(/\s/g, '') === 'azureai' || t.toLowerCase().replace(/\s/g, '') === 'azure' || t.toLowerCase().replace(/\s/g, '') === 'microsoftazure'
                           ? 'AzureAI.png'
                           : `${t.replace(/\s/g, '')}.png`
-                      }`}
+                        }`}
                       alt={t}
                       style={{ width: 40, height: 40, marginRight: 12 }}
                     />
@@ -310,8 +314,8 @@ export default function MobileAppSolutionsPage() {
           </div>
           <div className={commonStyles.howGrid}>
             {engagementModels.map((model, index) => (
-              <div 
-                key={model.title} 
+              <div
+                key={model.title}
                 className={`${commonStyles.howCard} ${themeStyles.howCard}`}
                 style={{
                   borderColor: model.isPopular ? model.color : undefined,
@@ -386,9 +390,9 @@ export default function MobileAppSolutionsPage() {
           <a href="/contact" className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`} style={{ display: 'inline-block', marginTop: 8, textDecoration: 'underline', fontSize: '0.95rem' }}>Or send us a message</a>
         </section>
       </main>
-  {calendlyModalElement}
-  <ServiceSchema service={{ title: service!.title, description: service!.description, slug: 'mobile-app-solutions', features: service!.features }} />
-  <Footer />
+      {calendlyModalElement}
+      <ServiceSchema service={{ title: service!.title, description: service!.description, slug: 'mobile-app-solutions', features: service!.features }} />
+      <Footer />
     </div>
   );
 }

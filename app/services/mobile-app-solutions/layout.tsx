@@ -2,19 +2,19 @@ import type { Metadata } from 'next';
 import { serviceJsonLd, breadcrumbJsonLd } from '@/lib/metadata';
 
 export const metadata: Metadata = {
-  title: 'Mobile App Solutions',
-  description: 'Native and cross-platform mobile apps for iOS and Android. Megicode builds high-performance mobile applications using React Native, Flutter, Swift, and Kotlin — designed for engagement and scalability.',
-  keywords: ['Mobile App Development', 'iOS Development', 'Android Development', 'Cross-Platform Apps', 'React Native', 'Flutter', 'Mobile UI/UX'],
+  title: 'Mobile App Development Services | Hire iOS & Android App Developers',
+  description: 'Launch your mobile app in weeks, not months. Megicode builds high-performance native and cross-platform mobile apps for iOS & Android using React Native, Flutter, Swift & Kotlin — from MVP to scale.',
+  keywords: ['mobile app development Pakistan', 'hire mobile app developers', 'iOS app development services', 'Android app development company', 'React Native development agency', 'Flutter app development', 'cross-platform mobile apps', 'startup MVP app development', 'mobile UI UX design', 'app store optimization'],
   openGraph: {
-    title: 'Mobile App Solutions | Megicode',
-    description: 'Native and cross-platform mobile apps for iOS and Android, designed for performance and engagement.',
+    title: 'Hire Top Mobile App Developers | iOS & Android | Megicode',
+    description: 'Launch your mobile app in weeks, not months. Native & cross-platform apps for iOS & Android — from MVP to scale.',
     url: 'https://megicode.com/services/mobile-app-solutions',
     images: [{ url: '/meta/services-og.png', width: 1200, height: 630, alt: 'Mobile App Solutions | Megicode' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Mobile App Solutions | Megicode',
-    description: 'Native and cross-platform mobile apps for iOS and Android, designed for performance and engagement.',
+    title: 'Hire Top Mobile App Developers | iOS & Android | Megicode',
+    description: 'Launch your mobile app in weeks, not months. Native & cross-platform apps for iOS & Android — from MVP to scale.',
     images: ['/meta/services-og.png'],
   },
   alternates: {

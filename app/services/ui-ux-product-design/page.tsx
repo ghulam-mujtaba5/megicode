@@ -5,6 +5,7 @@ import { useTheme } from "../../../context/ThemeContext";
 import { useInViewAnimation } from "../../../hooks/useInViewAnimation";
 import servicesData from "../servicesData";
 import ServiceSchema from "@/components/SEO/ServiceSchema";
+import Breadcrumbs from "@/components/SEO/Breadcrumbs";
 import { ServiceFAQs } from "../ServiceDetailSections";
 import { FaPencilRuler, FaPalette, FaUserCheck, FaRegObjectGroup, FaUsers, FaRocket, FaLifeRing } from "react-icons/fa";
 import { SiFigma, SiAdobe, SiSketch, SiInvision } from "react-icons/si";
@@ -139,61 +140,65 @@ export default function UIUXProductDesignDetailPage() {
         id="main-content"
         className={commonStyles.mainContent}
         aria-label="UI/UX Product Design Service Detail"
-        
+
       >
         {/* Soft background shapes for extra depth */}
         <div className={commonStyles.bgShapeLeft} aria-hidden="true" />
         <div className={commonStyles.bgShapeRight} aria-hidden="true" />
+
+        {/* Breadcrumbs for Navigation & SEO */}
+        <Breadcrumbs theme={theme as 'light' | 'dark'} />
+
         {/* Hero Section - Full-width gradient, Lottie/SVG, CTA */}
         <section
-            className={`${commonStyles.heroSection} ${themeStyles.heroSection} service-hero-gradient`}
-            data-animate="fade-in"
-            aria-labelledby="hero-title"
-          >
-            <div className={`${commonStyles.heroOverlay} ${themeStyles.heroOverlay}`} aria-hidden="true" />
-            <div 
-              className={`${commonStyles.heroBlurCircle} ${themeStyles.heroBlurCircle}`}
-              aria-hidden="true"
-            />
-            <div className={commonStyles.heroContent}>
-              <div className={commonStyles.heroTextBlock}>
-                <h1 id="hero-title" className={`${commonStyles.heroTitle} ${themeStyles.heroTitle}`}>
-                  <span className={commonStyles.gradientText}>{service.title}</span>
-                </h1>
-                <p className={`${commonStyles.heroDesc} ${themeStyles.heroDesc}`} data-animate="typewriter">
-                  {service.description}
-                </p>
-                <div className={commonStyles.heroCTAWrapper}>
-                  <button
-                    type="button"
-                    className={commonStyles.ctaBtn}
-                    data-animate="cta-bounce"
-                    aria-label="Get Started with UI/UX Design Services"
-                    onClick={openCalendly}
-                  >
-                    Get Started
-                    <span className={commonStyles.ctaBtnArrow} aria-hidden="true">→</span>
-                  </button>
-                </div>
+          className={`${commonStyles.heroSection} ${themeStyles.heroSection} service-hero-gradient`}
+          data-animate="fade-in"
+          aria-labelledby="hero-title"
+        >
+          <div className={`${commonStyles.heroOverlay} ${themeStyles.heroOverlay}`} aria-hidden="true" />
+          <div
+            className={`${commonStyles.heroBlurCircle} ${themeStyles.heroBlurCircle}`}
+            aria-hidden="true"
+          />
+          <div className={commonStyles.heroContent}>
+            <div className={commonStyles.heroTextBlock}>
+              <h1 id="hero-title" className={`${commonStyles.heroTitle} ${themeStyles.heroTitle}`}>
+                <span className={commonStyles.gradientText}>{service.title}</span>
+              </h1>
+              <p className={`${commonStyles.heroDesc} ${themeStyles.heroDesc}`} data-animate="typewriter">
+                {service.description}
+              </p>
+              <div className={commonStyles.heroCTAWrapper}>
+                <button
+                  type="button"
+                  className={commonStyles.ctaBtn}
+                  data-animate="cta-bounce"
+                  aria-label="Get Started with UI/UX Design Services"
+                  onClick={openCalendly}
+                >
+                  Get Started
+                  <span className={commonStyles.ctaBtnArrow} aria-hidden="true">→</span>
+                </button>
               </div>
-              <div className={commonStyles.heroImageBlock} aria-hidden="true">
-                <div className={commonStyles.heroImageCard} data-animate="float">
-                  <img
-                    src="/Ui&Ux-icon.svg"
-                    alt=""
-                    className={commonStyles.heroImage}
-                    loading="eager"
-                  />
-                  <div className={commonStyles.heroImageDot} />
-                  <div className={commonStyles.heroImageSparkles}>
-                    {[...Array(3)].map((_, i) => (
-                      <div key={i} className={commonStyles.sparkle} style={{ animationDelay: `${i * 0.2}s` }} />
-                    ))}
-                  </div>
+            </div>
+            <div className={commonStyles.heroImageBlock} aria-hidden="true">
+              <div className={commonStyles.heroImageCard} data-animate="float">
+                <img
+                  src="/Ui&Ux-icon.svg"
+                  alt=""
+                  className={commonStyles.heroImage}
+                  loading="eager"
+                />
+                <div className={commonStyles.heroImageDot} />
+                <div className={commonStyles.heroImageSparkles}>
+                  {[...Array(3)].map((_, i) => (
+                    <div key={i} className={commonStyles.sparkle} style={{ animationDelay: `${i * 0.2}s` }} />
+                  ))}
                 </div>
               </div>
             </div>
-          </section>
+          </div>
+        </section>
 
         {/* Service Overview - Side-by-side layout */}
         {/* Section divider */}
@@ -281,11 +286,10 @@ export default function UIUXProductDesignDetailPage() {
                     <Icon size={40} className={styles.techIcon} title={t} color={color} />
                   ) : (
                     <img
-                      src={`/meta/${
-                        t.toLowerCase().replace(/\s/g, '') === 'azureai' || t.toLowerCase().replace(/\s/g, '') === 'azure' || t.toLowerCase().replace(/\s/g, '') === 'microsoftazure'
+                      src={`/meta/${t.toLowerCase().replace(/\s/g, '') === 'azureai' || t.toLowerCase().replace(/\s/g, '') === 'azure' || t.toLowerCase().replace(/\s/g, '') === 'microsoftazure'
                           ? 'AzureAI.png'
                           : `${t.replace(/\s/g, '')}.png`
-                      }`}
+                        }`}
                       alt={t}
                       className={styles.techImage}
                     />
@@ -309,8 +313,8 @@ export default function UIUXProductDesignDetailPage() {
           </div>
           <div className={commonStyles.howGrid}>
             {engagementModels.map((model, index) => (
-              <div 
-                key={model.title} 
+              <div
+                key={model.title}
                 className={`${commonStyles.howCard} ${themeStyles.howCard}`}
                 style={{
                   borderColor: model.isPopular ? model.color : undefined,
@@ -386,9 +390,9 @@ export default function UIUXProductDesignDetailPage() {
           <a href="/contact" className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`} style={{ display: 'inline-block', marginTop: 8, textDecoration: 'underline', fontSize: '0.95rem' }}>Or send us a message</a>
         </section>
       </main>
-  {calendlyModal}
-  <ServiceSchema service={{ title: service.title!, description: service.description!, slug: 'ui-ux-product-design', features: service.features }} />
-  <Footer />
+      {calendlyModal}
+      <ServiceSchema service={{ title: service.title!, description: service.description!, slug: 'ui-ux-product-design', features: service.features }} />
+      <Footer />
     </div>
   );
 }

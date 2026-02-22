@@ -5,6 +5,7 @@ import CookieConsentBanner from "../components/CookieConsentBanner/CookieConsent
 import { usePageView } from "@/hooks/usePageView";
 import { PageTransition } from "@/components/PageTransition";
 import { ScrollProgressBar } from "@/components/ScrollProgressBar";
+import ScrollToTop from "@/components/ScrollToTop/ScrollToTop";
 
 function AnalyticsWrapper() {
   usePageView();
@@ -23,6 +24,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
           {children}
         </PageTransition>
         <CookieConsentBanner />
+        <ScrollToTop />
       </LazyMotion>
     </MotionConfig>
   );
