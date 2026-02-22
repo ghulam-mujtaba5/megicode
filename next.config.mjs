@@ -105,12 +105,6 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      // Ensure trailing slash consistency (no trailing slash)
-      {
-        source: '/:path+/',
-        destination: '/:path+',
-        permanent: true,
-      },
       // Common www subdomain mistypes & old URL patterns
       {
         source: '/home',
