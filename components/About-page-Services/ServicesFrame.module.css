@@ -9,27 +9,28 @@
 /* Individual skill card */
 .skillCard {
   
-    background-color: #e8ebee; /* Background color of the skill card */
+    background-color: #ffffff;
+    box-shadow: 0 2px 8px rgba(60, 80, 120, 0.06), 0 6px 20px rgba(60, 80, 120, 0.04);
    
 }
 
 /* Specific styles for UI & UX Designing card */
 .uiuxCard {
-    background-color: #e8ebee; /* Light blue background */
-    border: 2px solid #33a552; /* Blue border */
+    background-color: #ffffff;
+    border: 2px solid #33a552;
 }
 
 /* Specific styles for Development card */
 .developmentCard {
-    background-color: #e8ebee; /* Light grey background */
-    border: 2px solid #f1792e; /* Grey border */
+    background-color: #ffffff;
+    border: 2px solid #f1792e;
 }
 
 
 /* Specific styles for Data Science & AI card */
 .dataScienceCard {
-    background-color: #e8ebee; /* Light yellow background */
-    border: 2px solid #4573df; /* Yellow border */
+    background-color: #ffffff;
+    border: 2px solid #4573df;
 
 }
 
@@ -43,8 +44,12 @@
 /* Container for skill name and progress bar */
 .skillNameContainer {
    
-    background-color: #e8ebee; /* Background color for the skill name container */
+    background-color: #ffffff;
    
+}
+
+.skillName {
+    color: #23272f;
 }
 
 

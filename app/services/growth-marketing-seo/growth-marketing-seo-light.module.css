@@ -1,0 +1,163 @@
+.main {
+  background: linear-gradient(120deg, #f7fafd 70%, #eaf6ff 100%);
+  color-scheme: light;
+}
+
+.bgShapeLeft {
+  background: radial-gradient(circle, rgba(69, 115, 223, 0.1) 0%, rgba(255, 255, 255, 0) 80%);
+}
+
+.bgShapeRight {
+  background: radial-gradient(circle, rgba(69, 115, 223, 0.1) 0%, rgba(255, 255, 255, 0) 80%);
+}
+
+.heroBlurCircle {
+  background: radial-gradient(circle, #eaf6ff 0%, #4573df11 80%);
+}
+
+.heroTitle {
+  color: #222b3a;
+  text-shadow: 0 6px 32px rgba(69, 115, 223, 0.2);
+}
+
+.heroDesc {
+  color: #3a4a5d;
+}
+
+.overviewSection {
+  background: rgba(255, 255, 255, 0.96);
+  border: 1.5px solid #eaf6ff;
+}
+
+.overviewTitle {
+  color: #4573df;
+}
+
+.overviewDesc {
+  color: #222b3a;
+}
+
+.overviewImage {
+  background: #f7fafd;
+  border: 1.5px solid #eaf6ff;
+}
+
+.whyStatCard {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(69, 115, 223, 0.1) 100%);
+  border: 1px solid rgba(69, 115, 223, 0.2);
+  color: #4573df;
+}
+
+.whyStatDesc {
+  color: #3a4a5d;
+}
+
+.processSection {
+  background: rgba(255, 255, 255, 0.96);
+  border: 1.5px solid #eaf6ff;
+}
+
+.processTitle {
+  color: #4573df;
+}
+
+.processStepIcon {
+  background: linear-gradient(135deg, rgba(69, 115, 223, 0.1) 0%, rgba(255, 255, 255, 0.95) 100%);
+  border: 1px solid rgba(69, 115, 223, 0.3);
+}
+
+.processStepTitle {
+  color: #4573df;
+}
+
+.processStepDesc {
+  color: #3a4a5d;
+}
+
+.processStepConnector {
+  background: #eaf6ff;
+}
+
+.featureCard {
+  background: rgba(255, 255, 255, 0.96);
+  color: #222b3a;
+  border: 1px solid rgba(69, 115, 223, 0.2);
+}
+
+.featureCard:hover {
+  background: rgba(255, 255, 255, 0.98);
+}
+
+.techSection {
+  background: rgba(255, 255, 255, 0.96);
+  border: 1.5px solid #eaf6ff;
+}
+
+.techTitle {
+  color: #4573df;
+}
+
+.techCard {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1.5px solid #eaf6ff;
+}
+
+.howSection {
+  background: linear-gradient(100deg, #4573df 0%, #7ba0ff 60%, #cfe8ef 100%);
+}
+
+.howCard {
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(69, 115, 223, 0.2);
+}
+
+.howCard:hover {
+  background: rgba(255, 255, 255, 0.98);
+}
+
+.iconWrapper {
+  background: linear-gradient(135deg, rgba(69, 115, 223, 0.1) 0%, rgba(255, 255, 255, 0.98) 100%);
+  border: 1px solid rgba(69, 115, 223, 0.3);
+}
+
+.benefitItem {
+  color: #3a4a5d;
+}
+
+.testimonialSection {
+  background: linear-gradient(100deg, #e3e6ea 60%, #f7fafd 100%);
+}
+
+.testimonialQuote {
+  color: #222b3a;
+}
+
+.testimonialAuthor {
+  color: #4573df;
+}
+
+.testimonialCompany {
+  color: #3a4a5d;
+}
+
+.ctaSection {
+  background: linear-gradient(100deg, #4573df 0%, #7ba0ff 60%, #cfe8ef 100%);
+}
+
+.ctaBtnMain {
+  background: rgba(255, 255, 255, 0.96);
+  color: #4573df;
+  border: 2.5px solid #fff;
+}
+
+.ctaBtnMain:hover {
+  background: #eaf6ff;
+}
+
+.ctaDesc {
+  color: #fff;
+}
+
+.sectionDivider {
+  border-color: #eaf6ff;
+}

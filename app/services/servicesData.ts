@@ -272,6 +272,34 @@ const servicesData = [
       images: ["/meta/services-og.png"],
     },
     canonical: "https://megicode.com/services/it-consulting-support",
+  },
+  {
+    icon: "/data visualization icon.svg",
+    title: "Growth Marketing & SEO for Startups",
+    slug: "growth-marketing-seo",
+    description: "Data-driven growth marketing for AI-powered products and SaaS startups. We build organic traffic engines, run high-ROI ad campaigns, and optimize every step of your funnel — so you get users, not just visitors.",
+    features: [
+      "Technical SEO for SaaS & AI Products",
+      "Content Marketing & Thought Leadership",
+      "Performance Marketing (Google & Meta Ads)",
+      "Conversion Rate Optimization (CRO)",
+      "Analytics Setup & Growth Dashboards"
+    ],
+    techs: ["Google Analytics", "SEMrush", "Ahrefs", "Google Ads", "Meta Ads", "HubSpot"],
+    keywords: ["startup growth marketing agency", "SEO for SaaS companies", "growth marketing for AI startups", "SaaS content marketing", "startup performance marketing", "conversion rate optimization for startups", "technical SEO agency", "growth hacking for startups"],
+    openGraph: {
+      title: "Growth Marketing & SEO for Startups | Megicode",
+      description: "Data-driven growth marketing for SaaS and AI startups. Technical SEO, content strategy, paid ads, and conversion optimization.",
+      url: "https://megicode.com/services/growth-marketing-seo",
+      images: [{ url: "/meta/services-og.png", width: 1200, height: 630, alt: "Growth Marketing & SEO | Megicode" }],
+    },
+    twitter: {
+      card: "summary_large_image" as const,
+      title: "Growth Marketing & SEO for Startups | Megicode",
+      description: "Data-driven growth marketing for SaaS and AI startups. SEO, content, paid ads, and CRO.",
+      images: ["/meta/services-og.png"],
+    },
+    canonical: "https://megicode.com/services/growth-marketing-seo",
   }
 ];
 

@@ -38,19 +38,18 @@
 .skillCard {
     width: 100%;
     max-width: 336px; /* Maximum width of the skill card */
-    border-radius: 8px; /* Rounded corners */
+    border-radius: 12px; /* Rounded corners */
     padding: 20px; /* Padding inside the skill card */
     padding-top: 20px;
     box-sizing: border-box;
     position: relative;
     margin-top: 20px; /* Adding margin from the top */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, border-color 0.35s ease;
 
 }
 
 .skillCard:hover {
     transform: translateY(-5px); /* Move the card up slightly on hover */
-    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
 }
 .uiuxCard .icon{
     width: 48px;
