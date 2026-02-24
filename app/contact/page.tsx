@@ -328,18 +328,6 @@ export default function ContactPage() {
 
         {/* Hero Section */}
         <section className={styles.heroSection} ref={heroRef}>
-          {/* Contact / email Lottie animation */}
-          <LottiePlayer
-            src="/lottie/contact-email.json"
-            loop
-            style={{
-              width: 'clamp(120px, 18vw, 200px)',
-              height: 'clamp(120px, 18vw, 200px)',
-              marginBottom: '1rem',
-              filter: theme === 'dark' ? 'brightness(1.1)' : 'none'
-            }}
-            ariaLabel="Animated envelope illustration"
-          />
           <h1 ref={titleRef} className={styles.heroTitle}>Contact Us</h1>
           <p className={styles.heroDescription}>
             Ready to transform your business? Get in touch with our expert team and let's discuss how we can help you achieve your goals.
@@ -574,7 +562,20 @@ export default function ContactPage() {
 
             {/* Contact Information */}
             <div className={styles.card}>
-              <h3>Contact Information</h3>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
+                <LottiePlayer
+                  src="/lottie/contact-email.json"
+                  loop
+                  style={{
+                    width: '64px',
+                    height: '64px',
+                    flexShrink: 0,
+                    filter: theme === 'dark' ? 'brightness(1.1)' : 'none'
+                  }}
+                  ariaLabel="Animated envelope illustration"
+                />
+                <h3 style={{ margin: 0 }}>Contact Information</h3>
+              </div>
               
               <div className={styles.contactInfo}>
                 <div className={styles.contactItem}>

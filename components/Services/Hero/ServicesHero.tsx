@@ -1,16 +1,10 @@
 'use client';
 import React from 'react';
-import dynamic from 'next/dynamic';
 import { motion, easeOut } from 'framer-motion';
 import { useTheme } from '../../../context/ThemeContext';
 import commonStyles from './ServicesHeroCommon.module.css';
 import lightStyles from './ServicesHeroLight.module.css';
 import darkStyles from './ServicesHeroDark.module.css';
-
-const LottiePlayer = dynamic(
-  () => import('../../LottiePlayer/LottiePlayer'),
-  { ssr: false }
-);
 
 const ServicesHero = () => {
   const { theme } = useTheme();
@@ -82,21 +76,6 @@ const ServicesHero = () => {
           initial="hidden"
           animate="visible"
         >
-          {/* Rocket Lottie animation — represents launching digital solutions */}
-          <motion.div
-            variants={titleVariants}
-            style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}
-          >
-            <LottiePlayer
-              src="/lottie/rocket-hero.json"
-              loop
-              style={{
-                width: 'clamp(140px, 18vw, 200px)',
-                height: 'clamp(140px, 18vw, 200px)'
-              }}
-              ariaLabel="Animated rocket representing digital innovation and launch"
-            />
-          </motion.div>
           <motion.h1 
             className={`${commonStyles.title} ${themeStyles.title}`}
             variants={titleVariants}

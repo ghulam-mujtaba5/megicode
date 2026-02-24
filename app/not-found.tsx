@@ -285,22 +285,7 @@ export default function NotFound() {
           </motion.h1>
         </motion.div>
 
-        {/* Floating Message with motivational text */}
-        {/* Rocket animation — suggests heading somewhere new */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.7 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.4, duration: 0.6, ease: 'easeOut' }}
-          style={{ display: 'flex', justifyContent: 'center', marginBottom: '0.5rem' }}
-        >
-          <LottiePlayer
-            src="/lottie/rocket-hero.json"
-            loop
-            style={{ width: 'clamp(160px, 22vw, 220px)', height: 'clamp(160px, 22vw, 220px)' }}
-            ariaLabel="Animated rocket ready to take you back home"
-          />
-        </motion.div>
-
+        {/* Message */}
         <motion.div
           variants={floatingVariants}
           initial="initial"
@@ -316,8 +301,20 @@ export default function NotFound() {
         </motion.div>
 
 
-        {/* Interactive Home Button with pulse and glow */}
+        {/* Rocket animation + Return Home CTA */}
         <motion.div
+          initial={{ opacity: 0, scale: 0.7 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.6, duration: 0.5, ease: 'easeOut' }}
+          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '1.5rem' }}
+        >
+          <LottiePlayer
+            src="/lottie/rocket-hero.json"
+            loop
+            style={{ width: 'clamp(100px, 14vw, 140px)', height: 'clamp(100px, 14vw, 140px)', marginBottom: '0.5rem' }}
+            ariaLabel="Animated rocket ready to take you back home"
+          />
+          <motion.div
           whileHover={{ scale: 1.12, boxShadow: "0 0 24px 6px #3b82f6" }}
           whileTap={{ scale: 0.96 }}
           animate={{
@@ -333,11 +330,12 @@ export default function NotFound() {
             repeatType: "loop",
             ease: "easeInOut"
           }}
-          style={{ marginTop: "2rem", borderRadius: 40 }}
+          style={{ borderRadius: 40 }}
         >
           <Link href="/" className={styles.homeButton}>
             Return Home
           </Link>
+        </motion.div>
         </motion.div>
       </motion.div>
 

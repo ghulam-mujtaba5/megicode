@@ -115,18 +115,6 @@ const Frame = () => {
           ))}
         </motion.p>
 
-        {/* Tagline — appears after subtitle finishes */}
-        <motion.p
-          className={`${commonStyles.tagline} ${themeStyles.tagline}`}
-          initial={{ opacity: 0, y: 14, filter: 'blur(6px)' }}
-          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-          transition={{ duration: 0.55, delay: 3.1, ease: [0.16, 1, 0.3, 1] as const }}
-        >
-          Elevate Your Business with{' '}
-          <span className={`${commonStyles.taglineAccent} ${themeStyles.taglineAccent}`}>
-            AI-Driven Innovation
-          </span>
-        </motion.p>
       </motion.div>
     </section>
   );

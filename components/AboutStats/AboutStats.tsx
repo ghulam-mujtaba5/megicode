@@ -1,6 +1,5 @@
 'use client';
 import React from 'react';
-import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import commonStyles from './AboutStatsCommon.module.css';
 import lightStyles from './AboutStatsLight.module.css';
@@ -8,11 +7,6 @@ import darkStyles from './AboutStatsDark.module.css';
 import { useTheme } from '../../context/ThemeContext';
 import { ProjectsIcon, GlobalIcon, ClientsIcon, TechStackIcon } from '../IconSystem/StatsIcons';
 import { staggerContainer, fadeInUp, scaleIn } from '../../utils/animations';
-
-const LottiePlayer = dynamic(
-  () => import('../LottiePlayer/LottiePlayer'),
-  { ssr: false }
-);
 
 interface StatItemProps {
   Icon: React.ComponentType<{ size?: number; color?: string }>;
@@ -81,15 +75,6 @@ const AboutStats = () => {  const stats = [
         viewport={{ once: true, amount: 0.2 }}
       >
         <h2 className={`${commonStyles.title} ${themeStyles.title}`}>Key Milestones & Metrics</h2>
-        {/* Analytics / data Lottie animation aligned with section title */}
-        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem' }}>
-          <LottiePlayer
-            src="/lottie/analytics-data.json"
-            loop
-            style={{ width: 'clamp(180px, 25vw, 260px)', height: 'clamp(180px, 25vw, 260px)' }}
-            ariaLabel="Animated data analytics chart illustration"
-          />
-        </div>
         <motion.div 
           className={commonStyles.statsGrid}
           variants={staggerContainer}
