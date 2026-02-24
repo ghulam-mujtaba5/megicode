@@ -27,6 +27,8 @@ import {
 
 import NavBarMobile from "../../../components/NavBar_Mobile/NavBar-mobile";
 import NewNavBar from "../../../components/NavBar_Desktop_Company/NewNavBar";
+import dynamic from "next/dynamic";
+const LottiePlayer = dynamic(() => import('../../../components/LottiePlayer/LottiePlayer'), { ssr: false });
 // Clone the service object and override the techs array to remove 'AI' and 'Azure', and add other relevant technologies
 const service = {
   ...servicesData.find(s => s.slug === "custom-web-development"),
@@ -205,11 +207,12 @@ export default function WebDevelopmentDetailPage() {
             </div>
             <div className={commonStyles.heroImageBlock} aria-hidden="true">
               <div className={commonStyles.heroImageCard} data-animate="float">
-                <img
-                  src="/web app icon.svg"
-                  alt="Web App Illustration"
-                  className={commonStyles.heroImage}
-                  loading="eager"
+                {/* Web coding Lottie — code editor animation for custom web development */}
+                <LottiePlayer
+                  src="/lottie/web-coding.json"
+                  loop
+                  style={{ width: '100%', height: '100%', minWidth: '180px', minHeight: '180px' }}
+                  ariaLabel="Animated code editor illustration for custom web development"
                 />
                 <div className={commonStyles.heroImageDot} />
                 <div className={commonStyles.heroImageSparkles}>

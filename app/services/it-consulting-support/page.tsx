@@ -210,10 +210,10 @@ export default function ITConsultingSupportPage() {
               <div className={commonStyles.heroImageCard} data-animate="float">
                 {/* Team Lottie — expert team providing consulting & support */}
                 <LottiePlayer
-                  src="/lottie/team-careers.json"
+                  src="/lottie/security-it.json"
                   loop
                   style={{ width: '100%', height: '100%', minWidth: '180px', minHeight: '180px' }}
-                  ariaLabel="Animated team illustration representing expert IT consulting support"
+                  ariaLabel="Animated security shield illustration for IT consulting and support"
                 />
                 <div className={commonStyles.heroImageDot} />
                 <div className={commonStyles.heroImageSparkles}>

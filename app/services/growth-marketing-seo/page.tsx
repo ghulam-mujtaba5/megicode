@@ -18,6 +18,8 @@ import { SiGoogleanalytics, SiSemrush, SiGoogleads, SiMeta, SiHubspot } from "re
 
 import NavBarMobile from "../../../components/NavBar_Mobile/NavBar-mobile";
 import NewNavBar from "../../../components/NavBar_Desktop_Company/NewNavBar";
+import dynamic from "next/dynamic";
+const LottiePlayer = dynamic(() => import('../../../components/LottiePlayer/LottiePlayer'), { ssr: false });
 
 const service = {
   ...servicesData.find(s => s.slug === "growth-marketing-seo"),
@@ -189,11 +191,12 @@ export default function GrowthMarketingSeoPage() {
             </div>
             <div className={commonStyles.heroImageBlock} aria-hidden="true">
               <div className={commonStyles.heroImageCard} data-animate="float">
-                <img
-                  src="/data visualization icon.svg"
-                  alt="Growth Marketing & SEO illustration"
-                  className={commonStyles.heroImage}
-                  loading="eager"
+                {/* Growth SEO Lottie — upward growth chart for marketing & SEO */}
+                <LottiePlayer
+                  src="/lottie/growth-seo.json"
+                  loop
+                  style={{ width: '100%', height: '100%', minWidth: '180px', minHeight: '180px' }}
+                  ariaLabel="Animated growth chart illustration for growth marketing and SEO"
                 />
                 <div className={commonStyles.heroImageDot} />
                 <div className={commonStyles.heroImageSparkles}>

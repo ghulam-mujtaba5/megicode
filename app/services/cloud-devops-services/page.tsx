@@ -220,10 +220,10 @@ export default function CloudDevOpsPage() {
               <div className={commonStyles.heroImageCard} data-animate="float">
                 {/* Analytics Lottie — live metrics, monitoring, dashboards in DevOps */}
                 <LottiePlayer
-                  src="/lottie/analytics-data.json"
+                  src="/lottie/cloud-devops.json"
                   loop
                   style={{ width: '100%', height: '100%', minWidth: '180px', minHeight: '180px' }}
-                  ariaLabel="Animated analytics chart representing cloud monitoring and DevOps metrics"
+                  ariaLabel="Animated cloud infrastructure illustration for DevOps services"
                 />
                 <div className={commonStyles.heroImageDot} />
                 <div className={commonStyles.heroImageSparkles}>

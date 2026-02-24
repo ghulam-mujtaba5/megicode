@@ -14,16 +14,12 @@
   max-width: 800px;
   aspect-ratio: 1;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: all;
-  will-change: transform;
-  display: flex;
   align-items: stretch;
   justify-content: flex-end;
-  z-index: 1;
   pointer-events: auto;
-  overflow: hidden;
+  will-change: transform;
+  z-index: 1;
+  overflow: visible;
   user-select: none;
 }
 

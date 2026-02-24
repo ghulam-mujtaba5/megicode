@@ -199,10 +199,10 @@ export default function AutomationIntegrationPage() {
               <div className={commonStyles.heroImageCard} data-animate="float">
                 {/* Rocket Lottie animation — symbolizes boosted automation workflows */}
                 <LottiePlayer
-                  src="/lottie/rocket-hero.json"
+                  src="/lottie/automation-gears.json"
                   loop
                   style={{ width: '100%', height: '100%', minWidth: '180px', minHeight: '180px' }}
-                  ariaLabel="Animated rocket symbolising automation and workflow acceleration"
+                  ariaLabel="Animated gears illustration symbolising automation and workflow integration"
                 />
                 <div className={commonStyles.heroImageDot} />
                 <div className={commonStyles.heroImageSparkles}>

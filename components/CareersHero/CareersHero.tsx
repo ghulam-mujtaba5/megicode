@@ -62,24 +62,16 @@ const CareersHero: React.FC = () => {
             </div>
           </div>
           <div className={common.visualContent}>
-            {/* Team / people Lottie animation — fully visible, card below */}
-            <div className={common.visualStack}>
-              <LottiePlayer
-                src="/lottie/team-careers.json"
-                loop
-                style={{
-                  width: 'clamp(240px, 32vw, 340px)',
-                  height: 'clamp(240px, 32vw, 340px)',
-                  display: 'block',
-                }}
-                ariaLabel="Animated illustration of a collaborative team"
-              />
-              {/* Our Vision card revealed below the animation — no overlap */}
-              <div className={cx(common.floatingCard, themed.floatingCard)}>
-                <h3>Our Vision</h3>
-                <p>To set the ideal standard of quality and innovation in business and technology</p>
-              </div>
-            </div>
+            <LottiePlayer
+              src="/lottie/team-careers.json"
+              loop
+              style={{
+                width: 'clamp(240px, 32vw, 340px)',
+                height: 'clamp(240px, 32vw, 340px)',
+                display: 'block',
+              }}
+              ariaLabel="Animated illustration of a collaborative team"
+            />
           </div>
         </div>
       </div>

@@ -19,10 +19,8 @@ const ORBIT_ICONS = [
 
 const ORBIT_RADIUS = 140;
 const ORBIT_SPEED = 35;
-const PARTICLE_COUNT = 32;
 const QUANTUM_PARTICLES = 16;
 const ENERGY_FLOW_SPEED = 2;
-const WAVE_AMPLITUDE = 3;
 
 const MegicodeHeroAnimationAdvanced: React.FC = () => {
   const themeValue = useTheme()?.theme || 'light';
@@ -30,12 +28,18 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
   const [focusedIcon, setFocusedIcon] = useState<string | null>(null);
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
   const [orbitAngle, setOrbitAngle] = useState(0);
-  const [particles, setParticles] = useState<Array<{ x: number; y: number; speed: number; angle: number }>>([]);
-  const [quantumParticles, setQuantumParticles] = useState<Array<{ x: number; y: number; angle: number; phase: number }>>([]);
-  const [energyFlow, setEnergyFlow] = useState<number>(0);
+  const [quantumParticles, setQuantumParticles] = useState<Array<{ x: number; y: number; angle: number; phase: number }>>(() =>
+    Array.from({ length: QUANTUM_PARTICLES }, () => ({
+      x: (Math.random() - 0.5) * ORBIT_RADIUS * 2,
+      y: (Math.random() - 0.5) * ORBIT_RADIUS * 2,
+      angle: Math.random() * Math.PI * 2,
+      phase: Math.random() * Math.PI * 2
+    }))
+  );
+  const [energyFlow, setEnergyFlow] = useState(0);
   const svgRef = useRef<SVGSVGElement>(null);
 
-  // Animate orbit angle
+  // Unified animation loop — single requestAnimationFrame for smooth 60fps
   useEffect(() => {
     let frame: number;
     let last = performance.now();
@@ -43,6 +47,14 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
       const dt = (now - last) / 1000;
       last = now;
       setOrbitAngle(a => (a + dt * (2 * Math.PI) / ORBIT_SPEED) % (2 * Math.PI));
+      setQuantumParticles(prev => prev.map(p => {
+        let newX = p.x + Math.cos(p.angle) * 0.5;
+        let newY = p.y + Math.sin(p.angle) * 0.5;
+        if (Math.abs(newX) > ORBIT_RADIUS) newX = -newX;
+        if (Math.abs(newY) > ORBIT_RADIUS) newY = -newY;
+        return { ...p, angle: p.angle + 0.02, phase: p.phase + 0.03, x: newX, y: newY };
+      }));
+      setEnergyFlow(prev => (prev + ENERGY_FLOW_SPEED) % 360);
       frame = requestAnimationFrame(animate);
     }
     frame = requestAnimationFrame(animate);
@@ -59,61 +71,9 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
       });
     }
   };
-  // Particles with horizontal movement only
-  useEffect(() => {
-    setParticles(
-      Array.from({ length: PARTICLE_COUNT }, () => ({
-        x: Math.random() * 960,
-        y: Math.random() * 640,
-        angle: Math.random() * Math.PI * 2,
-        speed: 0.3 + Math.random() * 0.8
-      }))
-    );
-  }, []);
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setParticles(prev => prev.map(p => ({
-        ...p,
-        x: (p.x + Math.cos(p.angle) * p.speed + 960) % 960,
-        y: p.y
-      })));
-    }, 60);
-    return () => clearInterval(interval);
-  }, []);
-
-  // Initialize quantum particles
-  useEffect(() => {
-    setQuantumParticles(
-      Array.from({ length: QUANTUM_PARTICLES }, () => ({
-        x: (Math.random() - 0.5) * ORBIT_RADIUS * 2,
-        y: (Math.random() - 0.5) * ORBIT_RADIUS * 2,
-        angle: Math.random() * Math.PI * 2,
-        phase: Math.random() * Math.PI * 2
-      }))
-    );
-  }, []);
-
-  // Animate quantum particles and energy flow
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setQuantumParticles(prev => prev.map(p => ({
-        ...p,
-        angle: p.angle + 0.02,
-        phase: p.phase + 0.03,
-        x: p.x + Math.cos(p.angle) * 0.5,
-        y: p.y + Math.sin(p.angle) * 0.5
-      })).map(p => ({
-        ...p,
-        x: Math.abs(p.x) > ORBIT_RADIUS ? -p.x : p.x,
-        y: Math.abs(p.y) > ORBIT_RADIUS ? -p.y : p.y
-      })));
-      setEnergyFlow(prev => (prev + ENERGY_FLOW_SPEED) % 360);
-    }, 16);
-    return () => clearInterval(interval);
-  }, []);
 
   // Only render on desktop/tablet (not mobile)
-  const [isMobile, setIsMobile] = React.useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 768);
     checkMobile();
@@ -144,7 +104,19 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
         aria-label="Megicode quantum animation with orbiting service icons"
         role="img"
       >
-        {/* Removed quantumGlow radialGradient and quantumBlur filter for minimal look */}
+        <defs>
+          <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#4573df" />
+            <stop offset="100%" stopColor="#6B9BFF" />
+          </linearGradient>
+          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="6" result="coloredBlur" />
+            <feMerge>
+              <feMergeNode in="coloredBlur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
 
         {/* Quantum particles */}
         {quantumParticles.map((particle, i) => (
@@ -155,9 +127,6 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
             r={2}
             fill="#4573df"
             opacity={0.6}
-            style={{
-              filter: 'url(#quantumBlur)',
-            }}
             animate={{
               opacity: [0.6, 0.8, 0.6],
               scale: [1, 1.5, 1],
@@ -181,7 +150,6 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
               strokeWidth="1.5"
               strokeDasharray="4 4"
               opacity="0.4"
-              style={{ filter: 'url(#quantumBlur)' }}
             />
           );
         })}
@@ -302,8 +270,9 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
                       width={120}
                       height={32}
                       rx={12}
-                      fill={themeValue === 'dark' ? 'rgba(30,34,54,0.82)' : 'rgba(255,255,255,0.82)'}
-                      style={{ filter: 'blur(1.5px)', stroke: '#f1792e', strokeWidth: 2 }}
+                      fill={themeValue === 'dark' ? 'rgba(30,34,54,0.92)' : 'rgba(255,255,255,0.92)'}
+                      stroke="#f1792e"
+                      strokeWidth={2}
                     />
                     <motion.text
                       x={cx}
@@ -321,14 +290,6 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
             </g>
           );
         })}
-        {/* SVG Filters */}
-        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="6" result="coloredBlur" />
-          <feMerge>
-            <feMergeNode in="coloredBlur" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
       </motion.svg>
     </div>
   );
