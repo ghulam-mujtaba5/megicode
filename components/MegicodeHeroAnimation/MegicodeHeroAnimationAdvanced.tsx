@@ -1,7 +1,7 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import { useTheme } from '../../context/ThemeContext';
-import { motion, AnimatePresence, easeInOut } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import styles from './MegicodeHeroAnimation.module.css';
 
 const ORBIT_ICONS = [
@@ -20,7 +20,6 @@ const ORBIT_ICONS = [
 const ORBIT_RADIUS = 140;
 const ORBIT_SPEED = 35;
 const QUANTUM_PARTICLES = 16;
-const ENERGY_FLOW_SPEED = 2;
 
 const MegicodeHeroAnimationAdvanced: React.FC = () => {
   const themeValue = useTheme()?.theme || 'light';
@@ -36,7 +35,6 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
       phase: Math.random() * Math.PI * 2
     }))
   );
-  const [energyFlow, setEnergyFlow] = useState(0);
   const svgRef = useRef<SVGSVGElement>(null);
 
   // Unified animation loop — single requestAnimationFrame for smooth 60fps
@@ -54,7 +52,6 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
         if (Math.abs(newY) > ORBIT_RADIUS) newY = -newY;
         return { ...p, angle: p.angle + 0.02, phase: p.phase + 0.03, x: newX, y: newY };
       }));
-      setEnergyFlow(prev => (prev + ENERGY_FLOW_SPEED) % 360);
       frame = requestAnimationFrame(animate);
     }
     frame = requestAnimationFrame(animate);
@@ -104,20 +101,6 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
         aria-label="Megicode quantum animation with orbiting service icons"
         role="img"
       >
-        <defs>
-          <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#4573df" />
-            <stop offset="100%" stopColor="#6B9BFF" />
-          </linearGradient>
-          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="6" result="coloredBlur" />
-            <feMerge>
-              <feMergeNode in="coloredBlur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-        </defs>
-
         {/* Quantum particles */}
         {quantumParticles.map((particle, i) => (
           <motion.circle
@@ -138,37 +121,6 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
             }}
           />
         ))}
-
-        {/* Energy flow lines */}
-        {Array.from({ length: 8 }).map((_, i) => {
-          const angle = (i * Math.PI * 2) / 8 + (energyFlow * Math.PI) / 180;
-          return (
-            <motion.path
-              key={`energy-${i}`}
-              d={`M${Math.cos(angle) * 80},${Math.sin(angle) * 80} L${Math.cos(angle) * 160},${Math.sin(angle) * 160}`}
-              stroke="url(#blueGrad)"
-              strokeWidth="1.5"
-              strokeDasharray="4 4"
-              opacity="0.4"
-            />
-          );
-        })}
-
-        {/* Hexagonal crystal-like background */}
-        <motion.path
-          d="M0,-240 L208,-120 L208,120 L0,240 L-208,120 L-208,-120 Z"
-          fill="url(#blueGrad)"
-          opacity="0.08"
-          stroke="url(#blueGrad)"
-          strokeWidth="1"
-        />
-        <motion.path
-          d="M0,-180 L156,-90 L156,90 L0,180 L-156,90 L-156,-90 Z"
-          fill="url(#blueGrad)"
-          opacity="0.12"
-          stroke="url(#blueGrad)"
-          strokeWidth="1"
-        />
 
         {/* Crystal-like connecting lines */}
         {ORBIT_ICONS.map((_, i) => {
@@ -209,18 +161,7 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
           );
         })}
 
-        {/* Central M node - proper M shape */}
-        <motion.path
-          d="M-90 60 L-60 -60 L0 60 L60 -60 L90 60"
-          stroke="url(#blueGrad)"
-          strokeWidth="12"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ duration: 2.5, repeat: Infinity, repeatType: 'reverse', ease: easeInOut }}
-          filter={(hoveredIcon || focusedIcon) ? 'url(#glow)' : undefined}
-        />        {/* Orbiting SVG icons with floating effect */}
+        {/* Orbiting SVG icons with floating effect */}
         {ORBIT_ICONS.map((item, i) => {          const angle = orbitAngle + (i * (2 * Math.PI) / ORBIT_ICONS.length);
           // Floating effect with reduced amplitude for smoother movement
           const float = Math.sin(orbitAngle + i) * 5;
