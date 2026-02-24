@@ -28,6 +28,12 @@ import {
 
 import NavBarMobile from "../../../components/NavBar_Mobile/NavBar-mobile";
 import NewNavBar from "../../../components/NavBar_Desktop_Company/NewNavBar";
+import dynamic from 'next/dynamic';
+
+const LottiePlayer = dynamic(
+  () => import('../../../components/LottiePlayer/LottiePlayer'),
+  { ssr: false }
+);
 // Clone the service object and override the techs array to remove 'AI' and 'Azure', and add other relevant technologies
 const service = {
   ...servicesData.find(s => s.slug === "data-analytics-bi"),
@@ -205,11 +211,12 @@ export default function DataAnalyticsDetailPage() {
             </div>
             <div className={commonStyles.heroImageBlock} aria-hidden="true">
               <div className={commonStyles.heroImageCard} data-animate="float">
-                <img
-                  src="/Big Data Analytics.svg"
-                  alt="Data Analytics Illustration"
-                  className={commonStyles.heroImage}
-                  loading="eager"
+                {/* Analytics Lottie animation replaces static SVG */}
+                <LottiePlayer
+                  src="/lottie/analytics-data.json"
+                  loop
+                  style={{ width: '100%', height: '100%', minWidth: '180px', minHeight: '180px' }}
+                  ariaLabel="Animated data analytics chart illustration"
                 />
                 <div className={commonStyles.heroImageDot} />
                 <div className={commonStyles.heroImageSparkles}>

@@ -1,9 +1,15 @@
 "use client";
 import React from 'react';
+import dynamic from 'next/dynamic';
 import { useTheme } from '../../context/ThemeContext';
 import common from './CareersHeroCommon.module.css';
 import light from './CareersHeroLight.module.css';
 import dark from './CareersHeroDark.module.css';
+
+const LottiePlayer = dynamic(
+  () => import('../LottiePlayer/LottiePlayer'),
+  { ssr: false }
+);
 
 const CareersHero: React.FC = () => {
   const { theme } = useTheme();
@@ -56,7 +62,20 @@ const CareersHero: React.FC = () => {
             </div>
           </div>
           <div className={common.visualContent}>
-            <div className={common.heroImage}>
+            {/* Team / people Lottie animation */}
+            <div
+              style={{
+                position: 'relative',
+                width: 'clamp(260px, 35vw, 360px)',
+                height: 'clamp(260px, 35vw, 360px)',
+              }}
+            >
+              <LottiePlayer
+                src="/lottie/team-careers.json"
+                loop
+                style={{ width: '100%', height: '100%' }}
+                ariaLabel="Animated illustration of a collaborative team"
+              />
               <div className={common.imageOverlay}>
                 <div className={cx(common.floatingCard, themed.floatingCard)}>
                   <h3>Our Vision</h3>

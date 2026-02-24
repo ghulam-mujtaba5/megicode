@@ -18,6 +18,12 @@ import { FaRobot, FaLanguage, FaEye, FaCogs, FaSearch, FaDatabase, FaRocket, FaL
 
 import NavBarMobile from "../../../components/NavBar_Mobile/NavBar-mobile";
 import NewNavBar from "../../../components/NavBar_Desktop_Company/NewNavBar";
+import dynamic from 'next/dynamic';
+
+const LottiePlayer = dynamic(
+  () => import('../../../components/LottiePlayer/LottiePlayer'),
+  { ssr: false }
+);
 // Clone the service object and override the techs array to remove 'AI' and 'Azure', and add other relevant technologies
 const service = {
   ...servicesData.find(s => s.slug === "ai-machine-learning"),
@@ -191,11 +197,17 @@ export default function AIMachineLearningDetailPage() {
             </div>
             <div className={commonStyles.heroImageBlock} aria-hidden="true">
               <div className={commonStyles.heroImageCard} data-animate="float">
-                <img
-                  src="/Ai icon.svg"
-                  alt="AI & Machine Learning illustration"
-                  className={commonStyles.heroImage}
-                  loading="eager"
+                {/* AI Brain Lottie animation replaces static SVG */}
+                <LottiePlayer
+                  src="/lottie/ai-brain.json"
+                  loop
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    minWidth: '180px',
+                    minHeight: '180px'
+                  }}
+                  ariaLabel="Animated AI brain neural network illustration"
                 />
                 <div className={commonStyles.heroImageDot} />
                 <div className={commonStyles.heroImageSparkles}>

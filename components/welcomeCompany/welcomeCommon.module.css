@@ -45,6 +45,43 @@
   transform-origin: center;
 }
 
+/* Tagline: Elevate Your Business with AI-Driven Innovation */
+.tagline {
+  margin-top: 1.4rem;
+  font-size: clamp(1rem, 2.2vw, 1.4rem);
+  font-weight: 600;
+  font-family: 'Open Sans', sans-serif;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+  position: relative;
+  display: inline-block;
+}
+
+.taglineAccent {
+  position: relative;
+  display: inline;
+  white-space: nowrap;
+}
+
+/* Animated underline sweep beneath the accent words */
+.taglineAccent::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #4573df, #60a5fa);
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: underlineSweep 0.7s cubic-bezier(.16,1,.3,1) 3.4s forwards;
+}
+
+@keyframes underlineSweep {
+  to { transform: scaleX(1); }
+}
+
 /* Shimmer sweep effect */
 .shimmer {
   position: absolute;

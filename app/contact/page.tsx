@@ -15,6 +15,9 @@ import NavBarMobile from "../../components/NavBar_Mobile/NavBar-mobile";
 import ThemeToggleIcon from "../../components/Icon/sbicon";
 import { SITE_SOCIAL, getCopyrightText } from '@/lib/constants';
 
+// Lottie animation (client-only, SSR-safe)
+const LottiePlayer = dynamic(() => import('@/components/LottiePlayer/LottiePlayer'), { ssr: false });
+
 // Component interfaces
 interface FooterProps {
   linkedinUrl: string;
@@ -325,6 +328,18 @@ export default function ContactPage() {
 
         {/* Hero Section */}
         <section className={styles.heroSection} ref={heroRef}>
+          {/* Contact / email Lottie animation */}
+          <LottiePlayer
+            src="/lottie/contact-email.json"
+            loop
+            style={{
+              width: 'clamp(120px, 18vw, 200px)',
+              height: 'clamp(120px, 18vw, 200px)',
+              marginBottom: '1rem',
+              filter: theme === 'dark' ? 'brightness(1.1)' : 'none'
+            }}
+            ariaLabel="Animated envelope illustration"
+          />
           <h1 ref={titleRef} className={styles.heroTitle}>Contact Us</h1>
           <p className={styles.heroDescription}>
             Ready to transform your business? Get in touch with our expert team and let's discuss how we can help you achieve your goals.
