@@ -10,6 +10,8 @@ import { ServiceFAQs } from "../ServiceDetailSections";
 import { FaPencilRuler, FaPalette, FaUserCheck, FaRegObjectGroup, FaUsers, FaRocket, FaLifeRing } from "react-icons/fa";
 import { SiFigma, SiAdobe, SiSketch, SiInvision } from "react-icons/si";
 
+import dynamic from "next/dynamic";
+const LottiePlayer = dynamic(() => import('../../../components/LottiePlayer/LottiePlayer'), { ssr: false });
 import NavBarMobile from "../../../components/NavBar_Mobile/NavBar-mobile";
 import NewNavBar from "../../../components/NavBar_Desktop_Company/NewNavBar";
 import Footer from "../../../components/Footer/Footer";
@@ -183,11 +185,12 @@ export default function UIUXProductDesignDetailPage() {
             </div>
             <div className={commonStyles.heroImageBlock} aria-hidden="true">
               <div className={commonStyles.heroImageCard} data-animate="float">
-                <img
-                  src="/Ui&Ux-icon.svg"
-                  alt="UI/UX Product Design illustration"
-                  className={commonStyles.heroImage}
-                  loading="eager"
+                {/* AI Brain Lottie — design intelligence, creative thinking, smart UX */}
+                <LottiePlayer
+                  src="/lottie/ai-brain.json"
+                  loop
+                  style={{ width: '100%', height: '100%', minWidth: '180px', minHeight: '180px' }}
+                  ariaLabel="Animated brain illustration representing intelligent UI/UX design thinking"
                 />
                 <div className={commonStyles.heroImageDot} />
                 <div className={commonStyles.heroImageSparkles}>

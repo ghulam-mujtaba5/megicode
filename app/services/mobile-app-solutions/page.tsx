@@ -18,6 +18,8 @@ import { FaMobileAlt, FaCode, FaPaintBrush, FaRocket, FaLifeRing, FaAppStoreIos,
 
 import NavBarMobile from "../../../components/NavBar_Mobile/NavBar-mobile";
 import NewNavBar from "../../../components/NavBar_Desktop_Company/NewNavBar";
+import dynamic from "next/dynamic";
+const LottiePlayer = dynamic(() => import('../../../components/LottiePlayer/LottiePlayer'), { ssr: false });
 const service = servicesData.find(s => s.slug === "mobile-app-solutions");
 
 const processSteps = [
@@ -181,11 +183,12 @@ export default function MobileAppSolutionsPage() {
             </div>
             <div className={commonStyles.heroImageBlock} aria-hidden="true">
               <div className={commonStyles.heroImageCard} data-animate="float">
-                <img
-                  src="/mobile app icon.svg"
-                  alt="Mobile App Solutions illustration"
-                  className={commonStyles.heroImage}
-                  loading="eager"
+                {/* Rocket Lottie — launching your mobile app to market */}
+                <LottiePlayer
+                  src="/lottie/rocket-hero.json"
+                  loop
+                  style={{ width: '100%', height: '100%', minWidth: '180px', minHeight: '180px' }}
+                  ariaLabel="Animated rocket illustration symbolising app launch"
                 />
                 <div className={commonStyles.heroImageDot} />
                 <div className={commonStyles.heroImageSparkles}>

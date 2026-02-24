@@ -33,6 +33,8 @@ import {
   FaClipboardCheck
 } from "react-icons/fa";
 
+import dynamic from "next/dynamic";
+const LottiePlayer = dynamic(() => import('../../../components/LottiePlayer/LottiePlayer'), { ssr: false });
 import NavBarMobile from "../../../components/NavBar_Mobile/NavBar-mobile";
 import NewNavBar from "../../../components/NavBar_Desktop_Company/NewNavBar";
 // Clone the service object and override the techs array to remove 'AI' and 'Azure', and add other relevant technologies
@@ -206,11 +208,12 @@ export default function ITConsultingSupportPage() {
             </div>
             <div className={commonStyles.heroImageBlock} aria-hidden="true">
               <div className={commonStyles.heroImageCard} data-animate="float">
-                <img
-                  src="/it-consulting-support-icon.svg"
-                  alt="IT Consulting & Support illustration"
-                  className={commonStyles.heroImage}
-                  loading="eager"
+                {/* Team Lottie — expert team providing consulting & support */}
+                <LottiePlayer
+                  src="/lottie/team-careers.json"
+                  loop
+                  style={{ width: '100%', height: '100%', minWidth: '180px', minHeight: '180px' }}
+                  ariaLabel="Animated team illustration representing expert IT consulting support"
                 />
                 <div className={commonStyles.heroImageDot} />
                 <div className={commonStyles.heroImageSparkles}>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import dynamic from "next/dynamic";
 import styles from "./ProjectDetailCommon.module.css";
 import darkStyles from "./ProjectDetailDark.module.css";
 import lightStyles from "./ProjectDetailLight.module.css";
@@ -11,6 +12,8 @@ import {
   FaExternalLinkAlt, FaGithub, FaBriefcase, FaIndustry,
   FaClock, FaUsers, FaQuoteLeft, FaArrowRight
 } from "react-icons/fa";
+
+const LottiePlayer = dynamic(() => import('../LottiePlayer/LottiePlayer'), { ssr: false });
 
 interface Artifact {
   type: string;
@@ -310,6 +313,15 @@ export default function ProjectDetailContent({ project }: { project: ProjectDeta
 
       {/* ===== CTA SECTION ===== */}
       <section className={`${styles.ctaSection} ${themeStyles.ctaSection}`}>
+        {/* Rocket animation — launching your project idea */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
+          <LottiePlayer
+            src="/lottie/rocket-hero.json"
+            loop
+            style={{ width: '100px', height: '100px' }}
+            ariaLabel="Animated rocket illustration symbolising launching your next project"
+          />
+        </div>
         <h2 className={styles.ctaTitle}>Want a Similar Solution?</h2>
         <p className={styles.ctaText}>
           Let&apos;s discuss how Megicode can build something like this for your business.
