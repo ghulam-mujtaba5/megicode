@@ -1,75 +1,82 @@
-.detailWrapper {
-  --background: #181c22;
-  color: #e8eaf0;
-  font-family: 'Open Sans', 'Inter', Arial, sans-serif;
-}
-
-.visualSectionHeader {
-  color: #4573df;
-}
-.sectionText {
+/* ===== DARK THEME ===== */
+.caseStudy {
   color: #e8eaf0;
 }
 
-.sect.iconRow {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.25rem 1.5rem;
-  margin-top: 0.5rem;
-  align-items: center;
-}
-.techWithIcon {
-  background: rgba(69,115,223,0.13);
-  color: #e8eaf0;
-  border: 1px solid rgba(102,126,234,0.13);
-}
-.techWithIcon:hover {
-  background: rgba(69,115,223,0.23);
-  color: #ff9800;
+.hero {
+  background: linear-gradient(135deg, #1a2234 0%, #1e293b 50%, #1a1f2e 100%);
+  border: 1px solid rgba(69, 115, 223, 0.15);
 }
 
-.metricsCards {
-  background: none;
+.heroCta {
+  background: #4573df;
+  color: #fff;
 }
+
+.heroCtaSecondary {
+  color: #e8eaf0;
+  border-color: rgba(232, 234, 240, 0.2);
+}
+
+.quickFacts {
+  background: rgba(69, 115, 223, 0.08);
+  border: 1px solid rgba(69, 115, 223, 0.12);
+}
+
 .metricCard {
-  background: rgba(69,115,223,0.13);
-  color: #e8eaf0;
-  box-shadow: 0 2px 8px rgba(69,115,223,0.09);
-  border: 1px solid rgba(102,126,234,0.18);
+  background: rgba(69, 115, 223, 0.1);
+  border: 1px solid rgba(69, 115, 223, 0.15);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
 }
 .metricCard:hover {
-  background: rgba(69,115,223,0.21);
-}
-.metricLabel {
-  color: #e8eaf0;
-}
-.metricValue {
-  color: #ff9800;
+  box-shadow: 0 6px 20px rgba(69, 115, 223, 0.2);
 }
 
-.screenshotImg {
-  box-shadow: 0 2px 16px rgba(69,115,223,0.19);
-  border: 1px solid rgba(102,126,234,0.11);
-}
-.artifactGallery {
-  background: none;
-}
-.artifactCard {
-  background: rgba(99,102,241,0.13);
-  color: #e8eaf0;
-  border: 1px solid rgba(102,126,234,0.14);
-}
-.artifactCard:hover {
-  background: rgba(99,102,241,0.23);
-  color: #ff9800;
+.challengeCallout {
+  background: rgba(246, 199, 0, 0.08);
+  border-left-color: #f6c700;
 }
 
-.testimonial {
-  background: rgba(69,115,223,0.13);
-  border-left-color: #ff9800;
-  color: #e8eaf0;
+.testimonialSection {
+  background: rgba(69, 115, 223, 0.08);
+  border: 1px solid rgba(69, 115, 223, 0.12);
 }
-.testimonial:before {
-  color: #ff9800;
+
+.timelineItem .timelineContent {
+  background: rgba(69, 115, 223, 0.06);
+}
+
+.techChip {
+  background: rgba(69, 115, 223, 0.1);
+  color: #e8eaf0;
+  border: 1px solid rgba(69, 115, 223, 0.15);
+}
+.techChip:hover {
+  background: rgba(69, 115, 223, 0.2);
+  box-shadow: 0 4px 12px rgba(69, 115, 223, 0.15);
+}
+
+.lessonCard {
+  background: rgba(246, 199, 0, 0.06);
+  border: 1px solid rgba(246, 199, 0, 0.1);
+}
+
+.artifactLink {
+  background: rgba(99, 102, 241, 0.1);
+  color: #e8eaf0;
+  border: 1px solid rgba(99, 102, 241, 0.15);
+}
+.artifactLink:hover {
+  background: rgba(99, 102, 241, 0.2);
+}
+
+.ctaSection {
+  background: linear-gradient(135deg, #1a2234 0%, #1e293b 100%);
+  border: 1px solid rgba(69, 115, 223, 0.15);
+}
+
+.ctaButton {
+  background: #4573df;
+  color: #fff;
 }
 

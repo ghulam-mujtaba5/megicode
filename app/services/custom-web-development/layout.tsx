@@ -2,19 +2,19 @@ import type { Metadata } from 'next';
 import { serviceJsonLd, breadcrumbJsonLd } from '@/lib/metadata';
 
 export const metadata: Metadata = {
-  title: 'Custom Web Application Development | Scalable Solutions for Startups & Enterprises',
-  description: 'Ship production-ready web apps 2x faster. Megicode builds high-performance, SEO-optimized web applications with React, Next.js, Node.js & TypeScript. Full-stack development, SaaS platforms, e-commerce & enterprise portals.',
-  keywords: ['custom web development company', 'hire web developers Pakistan', 'Next.js development agency', 'React web application development', 'SaaS platform development', 'full-stack web development services', 'e-commerce web development', 'enterprise web portal development', 'scalable web applications', 'TypeScript development'],
+  title: 'SaaS & Web Platform Development | Build Your Startup MVP Faster | Megicode',
+  description: 'Launch your SaaS product faster. Megicode builds production-ready web platforms and startup MVPs with Next.js, React, Node.js & TypeScript — including auth, payments, dashboards, and AI features baked in.',
+  keywords: ['SaaS MVP development', 'startup web development', 'Next.js SaaS builder', 'web platform development', 'startup MVP builder', 'full-stack SaaS development', 'React web development', 'TypeScript SaaS platform'],
   openGraph: {
-    title: 'Custom Web App Development for Startups & Enterprises | Megicode',
-    description: 'Ship production-ready web apps 2x faster. Full-stack React, Next.js & Node.js development — from SaaS to enterprise portals.',
+    title: 'SaaS & Web Platform Development | Build Your Startup MVP | Megicode',
+    description: 'Launch your SaaS product faster with Next.js, React & TypeScript — auth, payments, dashboards & AI features included.',
     url: 'https://megicode.com/services/custom-web-development',
-    images: [{ url: '/meta/services-og.png', width: 1200, height: 630, alt: 'Custom Web Development | Megicode' }],
+    images: [{ url: '/meta/services-og.png', width: 1200, height: 630, alt: 'SaaS & Web Platform Development | Megicode' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Custom Web App Development for Startups & Enterprises | Megicode',
-    description: 'Ship production-ready web apps 2x faster. Full-stack React, Next.js & Node.js development — from SaaS to enterprise portals.',
+    title: 'SaaS & Web Platform Development | Build Your Startup MVP | Megicode',
+    description: 'Launch your SaaS product faster with Next.js, React & TypeScript — auth, payments, dashboards & AI features included.',
     images: ['/meta/services-og.png'],
   },
   alternates: {
@@ -26,11 +26,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const breadcrumb = breadcrumbJsonLd([
     { name: 'Home', path: '/' },
     { name: 'Services', path: '/services' },
-    { name: 'Custom Web Development', path: '/services/custom-web-development' },
+    { name: 'SaaS & Web Platform Development', path: '/services/custom-web-development' },
   ]);
   const service = serviceJsonLd({
-    name: 'Custom Web Development',
-    description: 'Robust, scalable, and secure web applications built with React, Next.js, Node.js, and TypeScript.',
+    name: 'SaaS & Web Platform Development',
+    description: 'Production-ready SaaS platforms and web applications for startups, built with Next.js, React & TypeScript.',
     path: '/services/custom-web-development',
     category: 'Web Development',
   });

@@ -71,17 +71,17 @@ const AboutMeSection = () => {
             className={`${commonStyles.subtitle} ${themeStyles.subtitle} ${themeStyles['subtitle-gradient']}`}
             variants={fadeInDown}
           >
-            Your Vision, Our Expertise
+            Your AI Tech Partner — From Idea to Scale
           </motion.p>
           <motion.div
             className={`${commonStyles.description} ${themeStyles.description}`}
             variants={fadeInUp}
           >
             <p className={`${commonStyles.aboutDescription} ${themeStyles.aboutDescription}`}>
-              Megicode specializes in emerging technologies to drive efficiency, productivity, and growth for businesses worldwide. From ideation to implementation, we collaborate with clients to bring their vision to life with excellence.
+              Megicode is an AI-focused software company that partners with startups, non-technical founders, and growing businesses to build intelligent products. We handle the tech — from AI-powered MVPs to production-ready SaaS platforms — so you can focus on your vision.
             </p>
             <p className={`${commonStyles.missionStatement} ${themeStyles.missionStatement} ${themeStyles['mission-gradient']}`}>
-              Our mission is to exceed expectations by delivering best-in-class software solutions, with a strong focus on integrating emerging technologies such as data science and AI.
+              Our mission is to be the technical co-founder every startup deserves — delivering AI-powered software, strategic CTO-level guidance, and automation that gives small teams an unfair advantage.
             </p>
           </motion.div>
         </motion.div>

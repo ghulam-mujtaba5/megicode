@@ -56,7 +56,7 @@ const engagementModels = [
       "Direct Expert Access",
       "Seamless Integration"
     ],
-    color: "#6EA8FF",
+    color: "#4573df",
     isPopular: true
   },
   {
@@ -109,11 +109,11 @@ const faqs = [
 
 // Features/deliverables with icons
 const features = [
-  { icon: <FaSync color="#4ea8ff" size={36} title="Workflow Automation" />, label: "Workflow Automation" },
-  { icon: <FaLink color="#4ea8ff" size={36} title="System Integration" />, label: "System Integration" },
-  { icon: <FaTools color="#4ea8ff" size={36} title="Custom Scripting" />, label: "Custom Scripting" },
-  { icon: <FaCheckCircle color="#4ea8ff" size={36} title="Error Handling & Monitoring" />, label: "Error Handling & Monitoring" },
-  { icon: <FaChalkboardTeacher color="#4ea8ff" size={36} title="Training & Documentation" />, label: "Training & Documentation" },
+  { icon: <FaSync color="#4573df" size={36} title="Workflow Automation" />, label: "Workflow Automation" },
+  { icon: <FaLink color="#4573df" size={36} title="System Integration" />, label: "System Integration" },
+  { icon: <FaTools color="#4573df" size={36} title="Custom Scripting" />, label: "Custom Scripting" },
+  { icon: <FaCheckCircle color="#4573df" size={36} title="Error Handling & Monitoring" />, label: "Error Handling & Monitoring" },
+  { icon: <FaChalkboardTeacher color="#4573df" size={36} title="Training & Documentation" />, label: "Training & Documentation" },
 ];
 
 const testimonial = {
@@ -385,6 +385,7 @@ export default function AutomationIntegrationPage() {
           </button>
           <div className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}>Ready to automate your business? Let&apos;s talk about your vision.</div>
           <a href="/contact" className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`} style={{ display: 'inline-block', marginTop: 8, textDecoration: 'underline', fontSize: '0.95rem' }}>Or send us a message</a>
+          <a href="/projects" className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`} style={{ display: 'inline-block', marginTop: 12, textDecoration: 'underline', fontSize: '0.95rem', opacity: 0.85 }}>See Our Case Studies &rarr;</a>
         </section>
       </main>
       {calendlyModalElement}

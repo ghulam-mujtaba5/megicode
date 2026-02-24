@@ -52,7 +52,7 @@ const engagementModels = [
       "Direct Expert Access",
       "Seamless Integration"
     ],
-    color: "#6EA8FF",
+    color: "#4573df",
     isPopular: true
   },
   {
@@ -72,27 +72,27 @@ const processSteps = [
   {
     title: "Research & Discovery",
     desc: "User & business research.",
-    icon: <FaUsers color="#4ea8ff" size={36} title="Research & Discovery" />
+    icon: <FaUsers color="#4573df" size={36} title="Research & Discovery" />
   },
   {
     title: "Wireframing & Prototyping",
     desc: "Flows & prototypes.",
-    icon: <FaPencilRuler color="#4ea8ff" size={36} title="Wireframing & Prototyping" />
+    icon: <FaPencilRuler color="#4573df" size={36} title="Wireframing & Prototyping" />
   },
   {
     title: "UI/UX Design",
     desc: "Visual & UX design.",
-    icon: <FaPalette color="#4ea8ff" size={36} title="UI/UX Design" />
+    icon: <FaPalette color="#4573df" size={36} title="UI/UX Design" />
   },
   {
     title: "Usability Testing",
     desc: "Test & iterate.",
-    icon: <FaUserCheck color="#4ea8ff" size={36} title="Usability Testing" />
+    icon: <FaUserCheck color="#4573df" size={36} title="Usability Testing" />
   },
   {
     title: "Handoff & Support",
     desc: "Dev handoff & support.",
-    icon: <FaLifeRing color="#4ea8ff" size={36} title="Handoff & Support" />
+    icon: <FaLifeRing color="#4573df" size={36} title="Handoff & Support" />
   }
 ];
 
@@ -105,11 +105,11 @@ const faqs = [
 
 // Features/deliverables with icons
 const features = [
-  { icon: <FaRegObjectGroup color="#4ea8ff" size={36} title="Design Systems" />, label: "Design Systems" },
-  { icon: <FaPalette color="#4ea8ff" size={36} title="Brand Identity" />, label: "Brand Identity" },
-  { icon: <FaPencilRuler color="#4ea8ff" size={36} title="Wireframes & Prototypes" />, label: "Wireframes & Prototypes" },
-  { icon: <FaUserCheck color="#4ea8ff" size={36} title="User Testing" />, label: "User Testing" },
-  { icon: <FaLifeRing color="#4ea8ff" size={36} title="Ongoing Support" />, label: "Ongoing Support" },
+  { icon: <FaRegObjectGroup color="#4573df" size={36} title="Design Systems" />, label: "Design Systems" },
+  { icon: <FaPalette color="#4573df" size={36} title="Brand Identity" />, label: "Brand Identity" },
+  { icon: <FaPencilRuler color="#4573df" size={36} title="Wireframes & Prototypes" />, label: "Wireframes & Prototypes" },
+  { icon: <FaUserCheck color="#4573df" size={36} title="User Testing" />, label: "User Testing" },
+  { icon: <FaLifeRing color="#4573df" size={36} title="Ongoing Support" />, label: "Ongoing Support" },
 ];
 
 const testimonial = {
@@ -185,7 +185,7 @@ export default function UIUXProductDesignDetailPage() {
               <div className={commonStyles.heroImageCard} data-animate="float">
                 <img
                   src="/Ui&Ux-icon.svg"
-                  alt=""
+                  alt="UI/UX Product Design illustration"
                   className={commonStyles.heroImage}
                   loading="eager"
                 />
@@ -388,6 +388,7 @@ export default function UIUXProductDesignDetailPage() {
           </button>
           <div className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}>Ready to elevate your product? Let&apos;s talk about your vision.</div>
           <a href="/contact" className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`} style={{ display: 'inline-block', marginTop: 8, textDecoration: 'underline', fontSize: '0.95rem' }}>Or send us a message</a>
+          <a href="/projects" className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`} style={{ display: 'inline-block', marginTop: 12, textDecoration: 'underline', fontSize: '0.95rem', opacity: 0.85 }}>See Our Case Studies &rarr;</a>
         </section>
       </main>
       {calendlyModal}

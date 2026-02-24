@@ -6,8 +6,8 @@ import styles from './welcomeLight.module.css';
 import darkStyles from './welcomeDark.module.css';
 import commonStyles from './welcomeCommon.module.css';
 
-const welcomeChars = 'Welcome to'.split('');
-const serviceWords = 'Elevate your Business with our Services.'.split(' ');
+const welcomeChars = 'Your AI Tech Partner —'.split('');
+const serviceWords = 'We build AI-powered software for startups, founders & growing businesses.'.split(' ');
 
 const charStagger = {
   hidden: {},
@@ -50,7 +50,7 @@ const Frame = () => {
   return (
     <section
       className={`${commonStyles.container} ${theme === 'dark' ? darkStyles.darkContainer : styles.container}`}
-      aria-label="Welcome to Megicode"
+      aria-label="Megicode — AI-Powered Software for Startups"
     >
       <motion.div
         className={`${commonStyles.textContainer} ${themeStyles.textContainer}`}

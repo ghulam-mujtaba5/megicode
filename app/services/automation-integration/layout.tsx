@@ -2,19 +2,19 @@ import type { Metadata } from 'next';
 import { serviceJsonLd, breadcrumbJsonLd } from '@/lib/metadata';
 
 export const metadata: Metadata = {
-  title: 'Business Automation & API Integration Services | Save 100+ Hours/Month',
-  description: 'Eliminate manual workflows and connect your systems. Megicode delivers custom workflow automation, API integrations, ETL pipelines & RPA solutions using Python, Zapier, Make & Node.js — saving businesses 100+ hours per month.',
-  keywords: ['business process automation services', 'API integration company', 'workflow automation consulting', 'RPA development services', 'ETL pipeline development', 'Zapier automation experts', 'custom API development', 'process optimization consulting', 'data integration services', 'automation agency Pakistan'],
+  title: 'AI Automation for Businesses | Intelligent Workflow Automation | Megicode',
+  description: 'Replace manual work with AI-powered automation. Megicode builds intelligent workflow automation, AI chatbots, smart integrations, and process optimization for SMEs — saving businesses 100+ hours per month.',
+  keywords: ['AI automation for business', 'intelligent workflow automation', 'AI chatbot development', 'business process automation', 'AI for SMEs', 'workflow AI integration', 'smart business automation', 'AI-powered operations'],
   openGraph: {
-    title: 'Business Automation & API Integration | Save 100+ Hours/Month | Megicode',
-    description: 'Eliminate manual workflows and connect your systems. Custom automation, API integrations & RPA solutions.',
+    title: 'AI Automation for Businesses | Intelligent Workflows | Megicode',
+    description: 'Replace manual work with AI-powered automation — intelligent workflows, AI chatbots & smart integrations for SMEs.',
     url: 'https://megicode.com/services/automation-integration',
-    images: [{ url: '/meta/services-og.png', width: 1200, height: 630, alt: 'Automation & Integration | Megicode' }],
+    images: [{ url: '/meta/services-og.png', width: 1200, height: 630, alt: 'AI Automation for Businesses | Megicode' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Business Automation & API Integration | Save 100+ Hours/Month | Megicode',
-    description: 'Eliminate manual workflows and connect your systems. Custom automation, API integrations & RPA solutions.',
+    title: 'AI Automation for Businesses | Intelligent Workflows | Megicode',
+    description: 'Replace manual work with AI-powered automation — intelligent workflows, AI chatbots & smart integrations for SMEs.',
     images: ['/meta/services-og.png'],
   },
   alternates: {
@@ -26,13 +26,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const breadcrumb = breadcrumbJsonLd([
     { name: 'Home', path: '/' },
     { name: 'Services', path: '/services' },
-    { name: 'Automation & Integration', path: '/services/automation-integration' },
+    { name: 'AI Automation for Businesses', path: '/services/automation-integration' },
   ]);
   const service = serviceJsonLd({
-    name: 'Automation & Integration',
-    description: 'Workflow automation, API integration, ETL pipelines, and robotic process automation.',
+    name: 'AI Automation for Businesses',
+    description: 'Intelligent workflow automation, AI chatbots, smart integrations, and process optimization for SMEs.',
     path: '/services/automation-integration',
-    category: 'Business Automation',
+    category: 'AI Automation',
   });
   return (
     <>

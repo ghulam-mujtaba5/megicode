@@ -2,19 +2,19 @@ import type { Metadata } from 'next';
 import { serviceJsonLd, breadcrumbJsonLd } from '@/lib/metadata';
 
 export const metadata: Metadata = {
-  title: 'IT Consulting & Technical Support | CTO-as-a-Service for Startups',
-  description: 'Get expert IT leadership without the full-time cost. Megicode provides technology strategy, security audits, compliance consulting, infrastructure guidance & 24/7 technical support — your fractional CTO partner.',
-  keywords: ['IT consulting services Pakistan', 'CTO as a service', 'fractional CTO for startups', 'IT strategy consulting', 'security audit services', 'compliance consulting', 'technology roadmapping', 'IT infrastructure consulting', 'managed IT support', 'IT outsourcing Pakistan'],
+  title: 'Technical Co-Founder as a Service | CTO-Level Guidance for Startups | Megicode',
+  description: 'Get a technical co-founder without giving up equity. Megicode provides CTO-level tech strategy, architecture decisions, team building, product roadmapping, and investor-ready technical due diligence for non-technical founders.',
+  keywords: ['technical co-founder service', 'CTO as a service', 'fractional CTO for startups', 'startup tech strategy', 'non-technical founder tech partner', 'startup architecture advice', 'tech due diligence', 'startup CTO advisory'],
   openGraph: {
-    title: 'IT Consulting & CTO-as-a-Service for Startups | Megicode',
-    description: 'Get expert IT leadership without the full-time cost. Strategy, security audits & 24/7 technical support.',
+    title: 'Technical Co-Founder as a Service | CTO for Startups | Megicode',
+    description: 'CTO-level tech strategy, architecture decisions, team building & investor-ready due diligence for non-technical founders.',
     url: 'https://megicode.com/services/it-consulting-support',
-    images: [{ url: '/meta/services-og.png', width: 1200, height: 630, alt: 'IT Consulting & Support | Megicode' }],
+    images: [{ url: '/meta/services-og.png', width: 1200, height: 630, alt: 'Technical Co-Founder as a Service | Megicode' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'IT Consulting & CTO-as-a-Service for Startups | Megicode',
-    description: 'Get expert IT leadership without the full-time cost. Strategy, security audits & 24/7 technical support.',
+    title: 'Technical Co-Founder as a Service | CTO for Startups | Megicode',
+    description: 'CTO-level tech strategy, architecture decisions, team building & investor-ready due diligence for non-technical founders.',
     images: ['/meta/services-og.png'],
   },
   alternates: {
@@ -26,13 +26,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const breadcrumb = breadcrumbJsonLd([
     { name: 'Home', path: '/' },
     { name: 'Services', path: '/services' },
-    { name: 'IT Consulting & Support', path: '/services/it-consulting-support' },
+    { name: 'Technical Co-Founder as a Service', path: '/services/it-consulting-support' },
   ]);
   const service = serviceJsonLd({
-    name: 'IT Consulting & Support',
-    description: 'Expert IT strategy, security audits, compliance consulting, and ongoing technical support.',
+    name: 'Technical Co-Founder as a Service',
+    description: 'CTO-level tech strategy, architecture decisions, team building, and investor-ready due diligence for startups.',
     path: '/services/it-consulting-support',
-    category: 'IT Services',
+    category: 'Technical Advisory',
   });
   return (
     <>

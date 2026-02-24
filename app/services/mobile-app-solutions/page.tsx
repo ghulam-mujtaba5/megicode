@@ -72,7 +72,7 @@ const engagementModels = [
       "Direct Expert Access",
       "Seamless Integration"
     ],
-    color: "#6EA8FF",
+    color: "#4573df",
     isPopular: true
   },
   {
@@ -183,7 +183,7 @@ export default function MobileAppSolutionsPage() {
               <div className={commonStyles.heroImageCard} data-animate="float">
                 <img
                   src="/mobile app icon.svg"
-                  alt=""
+                  alt="Mobile App Solutions illustration"
                   className={commonStyles.heroImage}
                   loading="eager"
                 />
@@ -388,6 +388,7 @@ export default function MobileAppSolutionsPage() {
           </button>
           <div className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}>Ready to build your next mobile app? Let&apos;s talk about your vision.</div>
           <a href="/contact" className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`} style={{ display: 'inline-block', marginTop: 8, textDecoration: 'underline', fontSize: '0.95rem' }}>Or send us a message</a>
+          <a href="/projects" className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`} style={{ display: 'inline-block', marginTop: 12, textDecoration: 'underline', fontSize: '0.95rem', opacity: 0.85 }}>See Our Case Studies &rarr;</a>
         </section>
       </main>
       {calendlyModalElement}

@@ -62,7 +62,7 @@ export default function Breadcrumbs({
 
     const activeLinkStyle: React.CSSProperties = {
         ...linkStyle,
-        color: '#4ea8ff',
+        color: '#4573df',
         fontWeight: 600,
         pointerEvents: 'none',
     };

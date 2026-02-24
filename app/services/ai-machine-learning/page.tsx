@@ -56,7 +56,7 @@ const engagementModels = [
       "Direct Expert Access",
       "Seamless Integration"
     ],
-    color: "#6EA8FF",
+    color: "#4573df",
     isPopular: true
   },
   {
@@ -193,7 +193,7 @@ export default function AIMachineLearningDetailPage() {
               <div className={commonStyles.heroImageCard} data-animate="float">
                 <img
                   src="/Ai icon.svg"
-                  alt=""
+                  alt="AI & Machine Learning illustration"
                   className={commonStyles.heroImage}
                   loading="eager"
                 />
@@ -413,6 +413,7 @@ export default function AIMachineLearningDetailPage() {
           </button>
           <div className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}>Ready to unlock the power of AI? Let&apos;s talk about your vision.</div>
           <a href="/contact" className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`} style={{ display: 'inline-block', marginTop: 8, textDecoration: 'underline', fontSize: '0.95rem' }}>Or send us a message</a>
+          <a href="/projects" className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`} style={{ display: 'inline-block', marginTop: 12, textDecoration: 'underline', fontSize: '0.95rem', opacity: 0.85 }}>See Our Case Studies &rarr;</a>
         </section>
       </main>
       {calendlyModalElement}

@@ -14,79 +14,77 @@ const ServicesFrame = () => {
 
   const skillsData = [
     {
-      title: "UI & UX Designing",
-      titleicon: "/Ui&Ux-icon.svg",
-      description: "Creating intuitive and engaging user experiences across all platforms",
+      title: "AI-Powered Development",
+      titleicon: "/Ai icon.svg",
+      description: "Building intelligent products with AI and machine learning at the core",
       skills: [
         { 
-          name: "Desktop Application", 
-          icon: "/Desktop-App-icon.svg", 
-          darkIcon: "/Desktop App Dark.svg",
-          description: "Powerful native applications with smooth performance"
-        },
-        { 
-          name: "Web Application", 
+          name: "AI-Powered SaaS MVPs", 
           icon: "/web app icon.svg",
-          description: "Responsive and modern web solutions"
+          description: "Launch your AI product idea as a production-ready SaaS"
         },
         { 
-          name: "Mobile App", 
-          icon: "/mobile app icon.svg", 
-          darkIcon: "/Mobile App Dark.svg",
-          description: "Native and cross-platform mobile experiences"
+          name: "LLM & GPT Integration", 
+          icon: "/Ai icon.svg",
+          description: "Add ChatGPT, RAG systems, and AI agents to any product"
+        },
+        { 
+          name: "Custom ML Models", 
+          icon: "/ds&ai-icon.svg",
+          description: "Predictive analytics and intelligent automation"
         },
       ],
       cardClass: themeStyles.uiuxCard
     },
     {
-      title: "Development",
-      titleicon: "/devlopment-icon.svg",
-      description: "Building robust and scalable solutions with cutting-edge technology",
+      title: "Startup Technical Partnership",
+      titleicon: "/it-consulting-support-icon.svg",
+      description: "Your technical co-founder — from first line of code to scale",
       skills: [
         { 
-          name: "Desktop Application", 
-          icon: "/Desktop-App-icon.svg", 
-          darkIcon: "/Desktop App Dark.svg",
-          description: "High-performance desktop software solutions"
-        },
-        { 
-          name: "Web Application", 
+          name: "SaaS & Web Platforms", 
           icon: "/web app icon.svg",
-          description: "Full-stack web development with modern frameworks"
+          description: "Full-stack web apps built for startups and growth"
         },
         { 
-          name: "Mobile App", 
+          name: "Mobile Apps", 
           icon: "/mobile app icon.svg", 
           darkIcon: "/Mobile App Dark.svg",
-          description: "Cross-platform mobile development"
+          description: "Cross-platform iOS & Android with AI features"
+        },
+        { 
+          name: "CTO as a Service", 
+          icon: "/Desktop-App-icon.svg", 
+          darkIcon: "/Desktop App Dark.svg",
+          description: "Tech strategy & team building for non-technical founders"
         },
       ],
       cardClass: themeStyles.developmentCard
     },
     {
-      title: "Data Science & AI",
-      titleicon: "/ds&ai-icon.svg",
-      description: "Leveraging data and AI to drive insights and innovation",
+      title: "AI Automation & Integration",
+      titleicon: "/data scrapping icon.svg",
+      description: "Replacing manual work with intelligent automation for SMEs",
       skills: [
         { 
-          name: "Data Scraping", 
+          name: "Workflow Automation", 
           icon: "/data scrapping icon.svg",
-          description: "Automated data collection and processing"
+          description: "AI-powered process automation that saves hours weekly"
         },
         { 
-          name: "Data Visualization", 
-          icon: "/data visualization icon.svg",
-          description: "Interactive and insightful data presentations"
-        },
-        { 
-          name: "Big Data Analytics", 
-          icon: "/Big Data Analytics.svg",
-          description: "Large-scale data processing and analysis"
-        },
-        { 
-          name: "AI Solution Development", 
+          name: "Smart Chatbots", 
           icon: "/Ai icon.svg",
-          description: "Custom AI and machine learning solutions"
+          description: "AI assistants and chatbots for customer support & ops"
+        },
+        { 
+          name: "System Integration", 
+          icon: "/data visualization icon.svg",
+          description: "Connect your tools with intelligent API integrations"
+        },
+        { 
+          name: "AI-Powered Analytics", 
+          icon: "/Big Data Analytics.svg",
+          description: "Dashboards and insights powered by machine learning"
         }
       ],
       cardClass: themeStyles.dataScienceCard

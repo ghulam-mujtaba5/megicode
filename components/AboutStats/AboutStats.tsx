@@ -44,7 +44,7 @@ const AboutStats = () => {  const stats = [
     {
       Icon: ProjectsIcon,
       number: '15+',
-      label: 'Projects Delivered'
+      label: 'AI & Software Products Built'
     },
     {
       Icon: GlobalIcon,
@@ -53,12 +53,12 @@ const AboutStats = () => {  const stats = [
     },
     {      Icon: ClientsIcon,
       number: '10+',
-      label: 'Clients Served'
+      label: 'Startups & Businesses Partnered'
     },
     {
       Icon: TechStackIcon,
-      number: '20+',
-      label: 'Tools & Frameworks'
+      number: '25+',
+      label: 'AI & Dev Tools Mastered'
     }
   ];
 

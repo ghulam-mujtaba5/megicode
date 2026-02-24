@@ -21,11 +21,11 @@ export const viewport = {
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://megicode.com'),
   title: {
-    default: "Megicode — Software Development Agency | AI, Web & Mobile Solutions",
+    default: "Megicode — AI-Powered Software Development for Startups & Businesses",
     template: "%s | Megicode"
   },
-  description: "Megicode is a next-generation software development agency in Lahore, Pakistan. We build custom AI models, scalable web & mobile applications, cloud solutions, and data analytics platforms for startups and enterprises worldwide.",
-  keywords: ["software development agency Pakistan", "custom AI development", "web application development", "mobile app development company", "cloud migration services", "data analytics consulting", "hire software developers Pakistan", "startup software agency", "Next.js development", "React development agency", "full-stack development services", "generative AI consulting"],
+  description: "Megicode builds AI-powered software for startups, non-technical founders, and growing businesses. From AI SaaS MVPs and LLM integration to technical co-founder services and intelligent automation — your tech partner from idea to scale.",
+  keywords: ["AI software development", "AI-powered MVP development", "technical co-founder service", "AI SaaS builder", "LLM integration", "startup software partner", "AI automation for business", "CTO as a service", "AI product development", "React development", "Next.js development", "generative AI consulting"],
   authors: [{ name: "Ghulam Mujtaba" }],
   creator: "Ghulam Mujtaba",
   publisher: "Megicode",
@@ -59,8 +59,8 @@ export const metadata = {
     locale: "en_US",
     url: "https://megicode.com",
     siteName: "Megicode",
-    title: "Megicode — Software Development Agency | AI, Web & Mobile Solutions",
-    description: "Next-generation software agency in Pakistan. Custom AI, scalable web & mobile apps, cloud solutions & data analytics for startups and enterprises.",
+    title: "Megicode — AI-Powered Software Development for Startups & Businesses",
+    description: "AI-powered software for startups, founders & growing businesses. From AI SaaS MVPs to technical co-founder services.",
     images: [
       {
         url: "/meta/og-image.png",
@@ -73,8 +73,8 @@ export const metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Megicode — Software Development Agency | AI, Web & Mobile",
-    description: "Next-generation software agency in Pakistan. Custom AI, scalable web & mobile apps, cloud solutions & data analytics.",
+    title: "Megicode — AI-Powered Software for Startups & Businesses",
+    description: "AI-powered software for startups, founders & growing businesses. From AI SaaS MVPs to technical co-founder services.",
     images: ["/meta/twitter-card.png"],
     creator: "@megicode",
   },
@@ -120,28 +120,29 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       "availableLanguage": ["English", "Urdu"]
     }],
     "knowsAbout": [
-      "Custom Software Development",
-      "Artificial Intelligence",
-      "Machine Learning",
+      "AI-Powered Software Development",
+      "AI SaaS MVP Development",
+      "Technical Co-Founder Services",
+      "LLM & GPT Integration",
+      "RAG System Development",
+      "AI Agent Development",
       "Generative AI",
-      "LLM Development",
+      "Machine Learning",
+      "AI Automation for SMEs",
+      "SaaS Platform Development",
       "Web Application Development",
       "Mobile App Development",
       "React",
       "Next.js",
       "Node.js",
       "TypeScript",
-      "UI/UX Design",
-      "Cloud Computing",
+      "Python",
+      "OpenAI",
+      "LangChain",
+      "Product Design & UX",
+      "Cloud Infrastructure",
       "AWS",
-      "DevOps",
-      "CI/CD",
-      "Kubernetes",
-      "Data Analytics",
-      "Business Intelligence",
-      "Power BI",
-      "SaaS Development",
-      "MVP Development",
+      "DevOps & CI/CD",
       "Startup Software Solutions"
     ],
     "sameAs": [...SOCIAL_PROFILES]
@@ -152,7 +153,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     "@type": "WebSite",
     "name": "Megicode",
     "url": "https://megicode.com",
-    "description": "Next-generation software development agency in Lahore, Pakistan. Custom AI, scalable web & mobile apps, cloud solutions & data analytics for startups and enterprises worldwide.",
+    "description": "AI-powered software development for startups, founders, and growing businesses. From AI SaaS MVPs and LLM integration to technical co-founder services — your tech partner from idea to scale.",
     "publisher": {
       "@type": "Organization",
       "name": "Megicode"

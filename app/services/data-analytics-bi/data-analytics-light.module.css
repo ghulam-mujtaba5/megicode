@@ -8,7 +8,7 @@
 }
 
 .bgShapeRight {
-  background: radial-gradient(circle, rgba(110, 168, 255, 0.1) 0%, rgba(255, 255, 255, 0) 80%);
+  background: radial-gradient(circle, rgba(69, 115, 223, 0.1) 0%, rgba(255, 255, 255, 0) 80%);
 }
 
 .heroBlurCircle {
@@ -63,7 +63,7 @@
 
 .processStepIcon {
   background: linear-gradient(135deg, rgba(69, 115, 223, 0.1) 0%, rgba(255, 255, 255, 0.95) 100%);
-  border: 1px solid rgba(110, 168, 255, 0.3);
+  border: 1px solid rgba(69, 115, 223, 0.3);
 }
 
 .processStepTitle {
@@ -103,12 +103,12 @@
 }
 
 .howSection {
-  background: linear-gradient(100deg, #4573df 0%, #6ea8ff 60%, #cfe8ef 100%);
+  background: linear-gradient(100deg, #4573df 0%, #7ba0ff 60%, #cfe8ef 100%);
 }
 
 .howCard {
   background: rgba(255, 255, 255, 0.96);
-  border: 1px solid rgba(110, 168, 255, 0.2);
+  border: 1px solid rgba(69, 115, 223, 0.2);
 }
 
 .howCard:hover {
@@ -117,7 +117,7 @@
 
 .iconWrapper {
   background: linear-gradient(135deg, rgba(69, 115, 223, 0.1) 0%, rgba(255, 255, 255, 0.98) 100%);
-  border: 1px solid rgba(110, 168, 255, 0.3);
+  border: 1px solid rgba(69, 115, 223, 0.3);
 }
 
 .benefitItem {
@@ -141,7 +141,7 @@
 }
 
 .ctaSection {
-  background: linear-gradient(100deg, #4573df 0%, #6ea8ff 60%, #cfe8ef 100%);
+  background: linear-gradient(100deg, #4573df 0%, #7ba0ff 60%, #cfe8ef 100%);
 }
 
 .ctaBtnMain {

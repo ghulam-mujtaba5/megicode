@@ -1,12 +1,12 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Software Development Services | AI, Web, Mobile & Cloud | Megicode',
-  description: "End-to-end software development services for startups and enterprises. From custom AI solutions and web apps to mobile development, cloud migration & UI/UX design — Megicode turns your vision into production-ready software.",
-  keywords: ['software development services Pakistan', 'custom software development company', 'AI development agency', 'web development services', 'mobile app development', 'cloud migration services', 'UI UX design agency', 'hire software developers Pakistan', 'startup software development', 'enterprise software solutions'],
+  title: 'AI-Powered Software Development Services | Megicode',
+  description: "AI-powered software development for startups, founders, and growing businesses. From AI SaaS MVPs and LLM integration to technical co-founder services and intelligent automation — your tech partner from idea to scale.",
+  keywords: ['AI software development', 'AI-powered MVP development', 'technical co-founder service', 'AI SaaS builder', 'LLM integration services', 'AI automation for business', 'startup software development', 'AI product development'],
   openGraph: {
-    title: 'End-to-End Software Development Services | AI, Web, Mobile & Cloud | Megicode',
-    description: "From AI solutions and web apps to mobile development & cloud migration — Megicode turns your vision into production-ready software.",
+    title: 'AI-Powered Software Development Services | Megicode',
+    description: "From AI SaaS MVPs and LLM integration to technical co-founder services — your tech partner from idea to scale.",
     url: 'https://megicode.com/services',
     siteName: 'Megicode',
     images: [
@@ -14,14 +14,14 @@ export const metadata: Metadata = {
         url: '/meta/services-og.png',
         width: 1200,
         height: 630,
-        alt: 'Megicode Services – If You Can Imagine It, We Can Build It',
+        alt: 'Megicode Services — AI-Powered Software for Startups',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Services | Megicode',
-    description: "Explore our comprehensive software development services—If You Can Imagine It, We Can Build It.",
+    title: 'AI-Powered Software Development Services | Megicode',
+    description: "From AI SaaS MVPs and LLM integration to technical co-founder services — your tech partner from idea to scale.",
     images: ['/meta/services-og.png'],
   },
   alternates: {

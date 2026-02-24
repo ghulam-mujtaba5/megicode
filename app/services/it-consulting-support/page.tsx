@@ -71,7 +71,7 @@ const engagementModels = [
       "Certified experts",
       "Enterprise collaboration"
     ],
-    color: "#6EA8FF",
+    color: "#4573df",
     isPopular: true
   },
   {
@@ -208,7 +208,7 @@ export default function ITConsultingSupportPage() {
               <div className={commonStyles.heroImageCard} data-animate="float">
                 <img
                   src="/it-consulting-support-icon.svg"
-                  alt=""
+                  alt="IT Consulting & Support illustration"
                   className={commonStyles.heroImage}
                   loading="eager"
                 />
@@ -426,6 +426,7 @@ export default function ITConsultingSupportPage() {
           </button>
           <div className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}>Ready for secure, reliable IT? Let&apos;s talk about your vision.</div>
           <a href="/contact" className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`} style={{ display: 'inline-block', marginTop: 8, textDecoration: 'underline', fontSize: '0.95rem' }}>Or send us a message</a>
+          <a href="/projects" className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`} style={{ display: 'inline-block', marginTop: 12, textDecoration: 'underline', fontSize: '0.95rem', opacity: 0.85 }}>See Our Case Studies &rarr;</a>
         </section>
       </main>
       {calendlyModalElement}

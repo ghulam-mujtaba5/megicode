@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./ProjectDetailCommon.module.css";
 import darkStyles from "./ProjectDetailDark.module.css";
 import lightStyles from "./ProjectDetailLight.module.css";
 import { useTheme } from "../../context/ThemeContext";
 import Image from "next/image";
+import Link from "next/link";
 import { TechIcon } from "./TechIconMap";
 import { SectionIcon } from "./SectionIconMap";
+import {
+  FaExternalLinkAlt, FaGithub, FaBriefcase, FaIndustry,
+  FaClock, FaUsers, FaQuoteLeft, FaArrowRight
+} from "react-icons/fa";
 
 interface Artifact {
   type: string;
@@ -34,199 +39,334 @@ interface ProjectDetail {
   metrics?: Record<string, string>;
   testimonial?: string;
   image: string;
+  clientName?: string;
+  clientIndustry?: string;
+  duration?: string;
+  teamSize?: string;
+  overview?: string;
 }
 
-import { useState } from "react";
+const categoryLabels: Record<string, string> = {
+  web: "Web Development",
+  ai: "AI & Machine Learning",
+  mobile: "Mobile App",
+  desktop: "Desktop App",
+  uiux: "UI/UX Design",
+  "data-engineering": "Data Engineering",
+};
 
 export default function ProjectDetailContent({ project }: { project: ProjectDetail }) {
   const { theme } = useTheme();
   const themeStyles = theme === "dark" ? darkStyles : lightStyles;
+
   return (
-    <div className={`${styles.detailWrapper} ${themeStyles.detailWrapper}`}>  
-      <h1 className={styles.title}>{project.title}</h1>
-      <div className={styles.visualSectionHeader}><SectionIcon name="Problem" /> <span>Problem</span></div>
-      <div className={styles.metricCard} style={{display:'flex',alignItems:'center',gap:12,background:'var(--background, #f5f7fa)'}}>
-        <SectionIcon name="Problem" size={26} />
-        <span style={{fontWeight:600,fontSize:'1.1rem'}}>{project.problem}</span>
-      </div>
-      {project.challenge && (
-        <div>
-          <div className={styles.visualSectionHeader}><SectionIcon name="Challenge" /> <span>Challenge</span></div>
-          <div className={styles.metricCard} style={{display:'flex',alignItems:'center',gap:12,background:'var(--background, #fffbe7)'}}>
-            <SectionIcon name="Challenge" size={26} />
-            <span style={{fontWeight:600,fontSize:'1.1rem'}}>{project.challenge}</span>
-          </div>
+    <article className={`${styles.caseStudy} ${themeStyles.caseStudy}`}>
+      {/* ===== HERO SECTION ===== */}
+      <header className={`${styles.hero} ${themeStyles.hero}`}>
+        <span className={styles.categoryBadge}>
+          {categoryLabels[project.category] || project.category}
+        </span>
+        <h1 className={styles.heroTitle}>{project.title}</h1>
+        {project.overview && (
+          <p className={styles.heroOverview}>{project.overview}</p>
+        )}
+        <div className={styles.heroActions}>
+          {project.liveUrl && (
+            <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className={`${styles.heroCta} ${themeStyles.heroCta}`}>
+              Visit Live Site <FaExternalLinkAlt size={14} />
+            </a>
+          )}
+          {project.github && (
+            <a href={project.github} target="_blank" rel="noopener noreferrer" className={`${styles.heroCtaSecondary} ${themeStyles.heroCtaSecondary}`}>
+              <FaGithub size={16} /> View Code
+            </a>
+          )}
+        </div>
+      </header>
+
+      {/* ===== QUICK FACTS BAR ===== */}
+      {(project.clientName || project.clientIndustry || project.duration || project.teamSize) && (
+        <div className={`${styles.quickFacts} ${themeStyles.quickFacts}`}>
+          {project.clientName && (
+            <div className={styles.factItem}>
+              <FaBriefcase size={16} className={styles.factIcon} />
+              <div>
+                <span className={styles.factLabel}>Client</span>
+                <span className={styles.factValue}>{project.clientName}</span>
+              </div>
+            </div>
+          )}
+          {project.clientIndustry && (
+            <div className={styles.factItem}>
+              <FaIndustry size={16} className={styles.factIcon} />
+              <div>
+                <span className={styles.factLabel}>Industry</span>
+                <span className={styles.factValue}>{project.clientIndustry}</span>
+              </div>
+            </div>
+          )}
+          {project.duration && (
+            <div className={styles.factItem}>
+              <FaClock size={16} className={styles.factIcon} />
+              <div>
+                <span className={styles.factLabel}>Duration</span>
+                <span className={styles.factValue}>{project.duration}</span>
+              </div>
+            </div>
+          )}
+          {project.teamSize && (
+            <div className={styles.factItem}>
+              <FaUsers size={16} className={styles.factIcon} />
+              <div>
+                <span className={styles.factLabel}>Team</span>
+                <span className={styles.factValue}>{project.teamSize}</span>
+              </div>
+            </div>
+          )}
         </div>
       )}
-      <div className={styles.visualSectionHeader}><SectionIcon name="Solution" /> <span>Solution</span></div>
-      <div className={styles.metricCard} style={{display:'flex',alignItems:'center',gap:12,background:'var(--background, #e6f7ff)'}}>
-        <SectionIcon name="Solution" size={26} />
-        <span style={{fontWeight:600,fontSize:'1.1rem'}}>{project.solution}</span>
-      </div>
-      <div className={styles.visualSectionHeader}><SectionIcon name="Impact" /> <span>Impact</span></div>
-      <div className={styles.metricCard} style={{display:'flex',alignItems:'center',gap:12,background:'var(--background, #e7fff3)'}}>
-        <SectionIcon name="Impact" size={26} />
-        <span style={{fontWeight:600,fontSize:'1.1rem'}}>{project.impact}</span>
-      </div>
-      {project.implementation && (
-        <div>
-          <div className={styles.visualSectionHeader}><SectionIcon name="Implementation" /> <span>Implementation</span></div>
-          <div className={styles.metricCard} style={{display:'flex',alignItems:'center',gap:12,background:'var(--background, #f0f7ff)'}}>
-            <SectionIcon name="Implementation" size={26} />
-            <span style={{fontWeight:600,fontSize:'1.1rem'}}>{project.implementation}</span>
-          </div>
-        </div>
-      )}
-      {project.process && project.process.length > 0 && (
-        <div>
-          <div className={styles.visualSectionHeader}><SectionIcon name="Process" /> <span>Process</span></div>
-          <div className={styles.timelineWrapper}>
-            {project.process.map((step, idx) => (
-              <div key={idx} className={styles.timelineStep}>
-                <div className={styles.timelineIcon}><SectionIcon name="Process Step" size={22} /></div>
-                <div className={styles.timelineContent}><span style={{fontWeight:500}}>{step}</span></div>
-                {idx < project.process.length - 1 && <div className={styles.timelineConnector} />}
+
+      {/* ===== KEY METRICS ===== */}
+      {project.metrics && (
+        <section className={styles.metricsSection}>
+          <div className={styles.metricsGrid}>
+            {Object.entries(project.metrics).map(([label, value]) => (
+              <div key={label} className={`${styles.metricCard} ${themeStyles.metricCard}`}>
+                <span className={styles.metricValue}>{value}</span>
+                <span className={styles.metricLabel}>{label}</span>
               </div>
             ))}
           </div>
-        </div>
+        </section>
       )}
-      {project.toolsUsed && project.toolsUsed.length > 0 && (
-        <div>
-          <div className={styles.visualSectionHeader}><SectionIcon name="Tools Used" /> <span>Tools Used</span></div>
-          <div className={styles.iconRow}>
-            {project.toolsUsed.map((tool, idx) => (
-              <span key={idx} className={styles.techWithIcon}><TechIcon name={tool} size={28} /><span style={{marginLeft:4,fontWeight:500}}>{tool}</span></span>
+
+      {/* ===== THE CHALLENGE ===== */}
+      <section className={styles.contentSection}>
+        <div className={styles.sectionHeader}>
+          <SectionIcon name="Problem" size={24} />
+          <h2 className={styles.sectionTitle}>The Challenge</h2>
+        </div>
+        <p className={styles.sectionText}>{project.problem}</p>
+        {project.challenge && (
+          <div className={`${styles.challengeCallout} ${themeStyles.challengeCallout}`}>
+            <SectionIcon name="Challenge" size={20} />
+            <p>{project.challenge}</p>
+          </div>
+        )}
+      </section>
+
+      {/* ===== OUR SOLUTION ===== */}
+      <section className={styles.contentSection}>
+        <div className={styles.sectionHeader}>
+          <SectionIcon name="Solution" size={24} />
+          <h2 className={styles.sectionTitle}>Our Solution</h2>
+        </div>
+        <p className={styles.sectionText}>{project.solution}</p>
+      </section>
+
+      {/* ===== TESTIMONIAL (prominent placement) ===== */}
+      {project.testimonial && (
+        <section className={`${styles.testimonialSection} ${themeStyles.testimonialSection}`}>
+          <FaQuoteLeft size={28} className={styles.quoteIcon} />
+          <blockquote className={styles.testimonialText}>
+            {project.testimonial}
+          </blockquote>
+        </section>
+      )}
+
+      {/* ===== PROCESS TIMELINE ===== */}
+      {project.process && project.process.length > 0 && (
+        <section className={styles.contentSection}>
+          <div className={styles.sectionHeader}>
+            <SectionIcon name="Process" size={24} />
+            <h2 className={styles.sectionTitle}>Our Process</h2>
+          </div>
+          <div className={styles.timeline}>
+            {project.process.map((step, idx) => (
+              <div key={idx} className={`${styles.timelineItem} ${themeStyles.timelineItem}`}>
+                <div className={styles.timelineNumber}>{idx + 1}</div>
+                <div className={styles.timelineContent}>
+                  <span>{step}</span>
+                </div>
+              </div>
             ))}
           </div>
-        </div>
+        </section>
       )}
+
+      {/* ===== IMPACT & RESULTS ===== */}
+      <section className={styles.contentSection}>
+        <div className={styles.sectionHeader}>
+          <SectionIcon name="Impact" size={24} />
+          <h2 className={styles.sectionTitle}>Impact & Results</h2>
+        </div>
+        <p className={styles.sectionText}>{project.impact}</p>
+      </section>
+
+      {/* ===== IMPLEMENTATION ===== */}
+      {project.implementation && (
+        <section className={styles.contentSection}>
+          <div className={styles.sectionHeader}>
+            <SectionIcon name="Implementation" size={24} />
+            <h2 className={styles.sectionTitle}>Implementation</h2>
+          </div>
+          <p className={styles.sectionText}>{project.implementation}</p>
+        </section>
+      )}
+
+      {/* ===== TECH STACK ===== */}
+      <section className={styles.contentSection}>
+        <div className={styles.sectionHeader}>
+          <SectionIcon name="Tech Stack" size={24} />
+          <h2 className={styles.sectionTitle}>Tech Stack</h2>
+        </div>
+        <div className={styles.techGrid}>
+          {project.techStack.map((tech, idx) => (
+            <div key={idx} className={`${styles.techChip} ${themeStyles.techChip}`}>
+              <TechIcon name={tech} size={24} />
+              <span>{tech}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ===== TOOLS USED ===== */}
+      {project.toolsUsed && project.toolsUsed.length > 0 &&
+        JSON.stringify(project.toolsUsed) !== JSON.stringify(project.techStack) && (
+        <section className={styles.contentSection}>
+          <div className={styles.sectionHeader}>
+            <SectionIcon name="Tools Used" size={24} />
+            <h2 className={styles.sectionTitle}>Tools & Technologies</h2>
+          </div>
+          <div className={styles.techGrid}>
+            {project.toolsUsed.map((tool, idx) => (
+              <div key={idx} className={`${styles.techChip} ${themeStyles.techChip}`}>
+                <TechIcon name={tool} size={24} />
+                <span>{tool}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* ===== LESSONS LEARNED ===== */}
+      {project.lessonsLearned && project.lessonsLearned.length > 0 && (
+        <section className={styles.contentSection}>
+          <div className={styles.sectionHeader}>
+            <SectionIcon name="Lessons Learned" size={24} />
+            <h2 className={styles.sectionTitle}>Key Takeaways</h2>
+          </div>
+          <div className={styles.lessonsGrid}>
+            {project.lessonsLearned.map((lesson, idx) => (
+              <div key={idx} className={`${styles.lessonCard} ${themeStyles.lessonCard}`}>
+                <span className={styles.lessonNumber}>{idx + 1}</span>
+                <p>{lesson}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* ===== NEXT STEPS ===== */}
+      {project.nextSteps && (
+        <section className={styles.contentSection}>
+          <div className={styles.sectionHeader}>
+            <SectionIcon name="Next Steps" size={24} />
+            <h2 className={styles.sectionTitle}>What&apos;s Next</h2>
+          </div>
+          <p className={styles.sectionText}>{project.nextSteps}</p>
+        </section>
+      )}
+
+      {/* ===== ARTIFACTS ===== */}
       {project.artifacts && project.artifacts.length > 0 && (
-        <div>
-          <div className={styles.visualSectionHeader}><SectionIcon name="Artifacts" /> <span>Artifacts</span></div>
-          <div className={styles.artifactGallery}>
+        <section className={styles.contentSection}>
+          <div className={styles.sectionHeader}>
+            <SectionIcon name="Artifacts" size={24} />
+            <h2 className={styles.sectionTitle}>Artifacts & Deliverables</h2>
+          </div>
+          <div className={styles.artifactsList}>
             {project.artifacts.map((artifact, idx) => (
-              <a key={idx} href={artifact.url} target="_blank" rel="noopener noreferrer" className={styles.artifactCard}>
-                <SectionIcon name="Artifacts" size={22} />
-                <span style={{fontWeight:500}}>{artifact.type}</span>
-                <svg width="18" height="18" viewBox="0 0 20 20" fill="none" style={{marginLeft:8}} aria-hidden="true"><circle cx="10" cy="10" r="9" stroke="#4573df" strokeWidth="2"/><path d="M7 10l2 2 4-4" stroke="#22c55e" strokeWidth="2" fill="none"/></svg>
+              <a key={idx} href={artifact.url} target="_blank" rel="noopener noreferrer" className={`${styles.artifactLink} ${themeStyles.artifactLink}`}>
+                <SectionIcon name="Artifacts" size={18} />
+                <span>{artifact.type}</span>
+                <FaExternalLinkAlt size={12} />
               </a>
             ))}
           </div>
-        </div>
-      )}
-      {project.lessonsLearned && project.lessonsLearned.length > 0 && (
-        <div>
-          <div className={styles.visualSectionHeader}><SectionIcon name="Lessons Learned" /> <span>Lessons Learned</span></div>
-          <div className={styles.lessonsList}>
-            {project.lessonsLearned.map((lesson, idx) => (
-              <div key={idx} className={styles.lessonCard}>
-                <SectionIcon name="Lessons Learned" size={22} />
-                <span style={{fontWeight:500}}>{lesson}</span>
-                <svg width="18" height="18" viewBox="0 0 20 20" fill="none" style={{marginLeft:8}} aria-hidden="true"><rect x="3" y="3" width="14" height="14" rx="4" stroke="#f6c700" strokeWidth="2"/><path d="M7 10l2 2 4-4" stroke="#22c55e" strokeWidth="2" fill="none"/></svg>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-      {project.nextSteps && (
-        <div>
-          <div className={styles.visualSectionHeader}><SectionIcon name="Next Steps" /> <span>Next Steps</span></div>
-          <div className={styles.metricCard} style={{display:'flex',alignItems:'center',gap:12,background:'var(--background, #e7f7ff)'}}>
-            <SectionIcon name="Next Steps" size={26} />
-            <span style={{fontWeight:600,fontSize:'1.1rem'}}>{project.nextSteps}</span>
-          </div>
-        </div>
-      )}
-      {project.metrics && (
-        <div>
-          <div className={styles.visualSectionHeader}><SectionIcon name="Impact" /> <span>Key Metrics</span></div>
-          <div className={styles.metricsCards}>
-            {Object.entries(project.metrics).map(([k, v]) => (
-              <div key={k} className={styles.metricCard} style={{display:'flex',alignItems:'center',gap:10}}>
-                <svg width="22" height="22" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="2" y="2" width="16" height="16" rx="5" stroke="#4573df" strokeWidth="2"/><path d="M7 10l2 2 4-4" stroke="#22c55e" strokeWidth="2" fill="none"/></svg>
-                <span className={styles.metricLabel}>{k}</span>
-                <span className={styles.metricValue}>{v}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-      <div className={styles.visualSectionHeader}><SectionIcon name="Tech Stack" /> <span>Tech Stack</span></div>
-      <div className={styles.iconRow}>
-        {project.techStack.map((tech, idx) => (
-          <span key={idx} className={styles.techWithIcon}><TechIcon name={tech} size={28} /><span style={{marginLeft:4,fontWeight:500}}>{tech}</span></span>
-        ))}
-      </div>
-      {project.github && (
-        <div className={styles.section}>
-          <a href={project.github} target="_blank" rel="noopener noreferrer" className={styles.githubLink}>
-            <svg width="22" height="22" viewBox="0 0 20 20" fill="none" style={{verticalAlign:'middle',marginRight:6}} aria-hidden="true"><circle cx="10" cy="10" r="9" stroke="#23272f" strokeWidth="2"/><path d="M7 10l2 2 4-4" stroke="#4573df" strokeWidth="2" fill="none"/></svg>
-            View on GitHub
-          </a>
-        </div>
-      )}
-      {project.liveUrl && (
-        <div className={styles.section}>
-          <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className={styles.githubLink}>
-            <svg width="22" height="22" viewBox="0 0 20 20" fill="none" style={{verticalAlign:'middle',marginRight:6}} aria-hidden="true"><circle cx="10" cy="10" r="9" stroke="#4573df" strokeWidth="2"/><path d="M6 10h8M13 7l3 3-3 3" stroke="#22c55e" strokeWidth="2" fill="none"/></svg>
-            Visit Live Site
-          </a>
-        </div>
-      )}
-      {/* Screenshot gallery with modal/zoom */}
-      {project.screenshots && project.screenshots.length > 0 && (
-        <ScreenshotGallery images={project.screenshots} projectTitle={project.title} />
-      )}
-      {project.testimonial && (
-        <blockquote className={styles.testimonial}>
-          <SectionIcon name="Testimonial" size={24} />
-          <span style={{marginLeft:10}}>{project.testimonial}</span>
-        </blockquote>
+        </section>
       )}
 
-    {/* ScreenshotGallery component for modal/zoom, below */}
-    </div>
+      {/* ===== SCREENSHOTS ===== */}
+      {project.screenshots && project.screenshots.length > 0 && (
+        <section className={styles.contentSection}>
+          <div className={styles.sectionHeader}>
+            <SectionIcon name="Artifacts" size={24} />
+            <h2 className={styles.sectionTitle}>Screenshots</h2>
+          </div>
+          <ScreenshotGallery images={project.screenshots} projectTitle={project.title} />
+        </section>
+      )}
+
+      {/* ===== CTA SECTION ===== */}
+      <section className={`${styles.ctaSection} ${themeStyles.ctaSection}`}>
+        <h2 className={styles.ctaTitle}>Want a Similar Solution?</h2>
+        <p className={styles.ctaText}>
+          Let&apos;s discuss how Megicode can build something like this for your business.
+        </p>
+        <Link href="/contact" className={`${styles.ctaButton} ${themeStyles.ctaButton}`}>
+          Start a Conversation <FaArrowRight size={14} />
+        </Link>
+      </section>
+    </article>
   );
 }
 
-// ScreenshotGallery: visual gallery with modal/zoom and SVG overlays
-function ScreenshotGallery({ images, projectTitle }: { images: string[], projectTitle: string }) {
-  const [openIdx, setOpenIdx] = useState<number|null>(null);
+function ScreenshotGallery({ images, projectTitle }: { images: string[]; projectTitle: string }) {
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
   return (
-    <div className={styles.screenshotsSection}>
-      <div className={styles.visualSectionHeader} style={{marginBottom:8}}>
-        <SectionIcon name="Artifacts" /> <span>Screenshots</span>
-      </div>
+    <>
       <div className={styles.screenshotGrid}>
         {images.map((src, idx) => (
-          <div key={idx} style={{position:'relative',cursor:'zoom-in'}} onClick={() => setOpenIdx(idx)}>
+          <button
+            key={idx}
+            className={styles.screenshotButton}
+            onClick={() => setOpenIdx(idx)}
+            aria-label={`View ${projectTitle} screenshot ${idx + 1}`}
+          >
             <Image
               src={src}
-              alt={projectTitle + " screenshot " + (idx + 1)}
-              width={400}
-              height={250}
+              alt={`${projectTitle} screenshot ${idx + 1}`}
+              width={480}
+              height={300}
               className={styles.screenshotImg}
-              style={{border:'2px solid #4573df'}}
             />
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" style={{position:'absolute',top:8,right:8,background:'#fff',borderRadius:'50%',boxShadow:'0 2px 8px rgba(69,115,223,0.11)'}} aria-hidden="true"><rect x="8" y="8" width="16" height="16" rx="4" stroke="#4573df" strokeWidth="2"/><path d="M12 16h8M16 12v8" stroke="#4573df" strokeWidth="2"/></svg>
-          </div>
+          </button>
         ))}
       </div>
       {openIdx !== null && (
-        <div style={{position:'fixed',top:0,left:0,width:'100vw',height:'100vh',background:'rgba(20,24,31,0.86)',zIndex:1000,display:'flex',alignItems:'center',justifyContent:'center'}} onClick={() => setOpenIdx(null)}>
+        <div
+          className={styles.screenshotModal}
+          onClick={() => setOpenIdx(null)}
+          role="dialog"
+          aria-label="Screenshot preview"
+        >
           <Image
             src={images[openIdx]}
-            alt={projectTitle + " screenshot " + (openIdx+1)}
-            width={900}
-            height={600}
-            style={{borderRadius:18,boxShadow:'0 8px 48px #23272f'}}
+            alt={`${projectTitle} screenshot ${openIdx + 1}`}
+            width={1000}
+            height={650}
+            className={styles.screenshotModalImg}
           />
-          <button onClick={e => {e.stopPropagation();setOpenIdx(null);}} style={{position:'absolute',top:32,right:32,background:'#fff',border:'none',borderRadius:'50%',width:44,height:44,boxShadow:'0 2px 8px #23272f',cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center'}} aria-label="Close gallery">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" stroke="#4573df" strokeWidth="2"/><path d="M10 10l8 8M18 10l-8 8" stroke="#ff9800" strokeWidth="2"/></svg>
+          <button
+            onClick={(e) => { e.stopPropagation(); setOpenIdx(null); }}
+            className={styles.screenshotClose}
+            aria-label="Close preview"
+          >
+            ✕
           </button>
         </div>
       )}
-    </div>
+    </>
   );
 }

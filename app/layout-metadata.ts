@@ -25,9 +25,9 @@ export const faviconMetadata: Metadata['icons'] = {
 };
 
 export const manifestMetadata = {
-  name: "Megicode - Modern Software Solutions",
+  name: "Megicode - AI-Powered Software for Startups",
   short_name: "Megicode",
-  description: "Expert software development services including web, mobile, desktop applications, AI solutions, and data science.",
+  description: "AI-powered software development for startups, founders, and growing businesses. Your technical co-founder from idea to scale.",
   theme_color: "#4573df",
   background_color: "#1d2127",
   display: "standalone",

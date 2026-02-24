@@ -2,19 +2,19 @@ import type { Metadata } from 'next';
 import { serviceJsonLd, breadcrumbJsonLd } from '@/lib/metadata';
 
 export const metadata: Metadata = {
-  title: 'Cloud Migration & DevOps Services | AWS, Azure & Kubernetes Experts',
-  description: 'Migrate to the cloud with zero downtime. Megicode delivers end-to-end cloud migration, CI/CD pipeline automation, Kubernetes orchestration & infrastructure-as-code using AWS, Azure, Docker & Terraform.',
-  keywords: ['cloud migration services Pakistan', 'DevOps consulting agency', 'AWS migration services', 'Azure cloud services', 'CI/CD pipeline setup', 'Kubernetes consulting', 'Docker containerization', 'infrastructure as code Terraform', 'cloud cost optimization', 'DevOps automation'],
+  title: 'Cloud Infrastructure & DevOps | Startup-Ready Cloud Architecture | Megicode',
+  description: 'Scale your startup infrastructure with confidence. Megicode delivers cloud architecture design, CI/CD pipelines, auto-scaling, and cost optimization on AWS & Vercel — built for startups going from zero to scale.',
+  keywords: ['startup cloud architecture', 'DevOps for startups', 'CI/CD pipeline setup', 'AWS cloud services', 'Vercel deployment', 'cloud cost optimization', 'infrastructure as code', 'startup DevOps', 'Docker containerization', 'GitHub Actions CI/CD'],
   openGraph: {
-    title: 'Cloud Migration & DevOps Experts | AWS, Azure, Kubernetes | Megicode',
-    description: 'Migrate to the cloud with zero downtime. End-to-end CI/CD, Kubernetes & infrastructure automation.',
+    title: 'Cloud Infrastructure & DevOps for Startups | Megicode',
+    description: 'Scale your startup infrastructure — cloud architecture, CI/CD pipelines, auto-scaling & cost optimization.',
     url: 'https://megicode.com/services/cloud-devops-services',
-    images: [{ url: '/meta/services-og.png', width: 1200, height: 630, alt: 'Cloud & DevOps Services | Megicode' }],
+    images: [{ url: '/meta/services-og.png', width: 1200, height: 630, alt: 'Cloud Infrastructure & DevOps | Megicode' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Cloud Migration & DevOps Experts | AWS, Azure, Kubernetes | Megicode',
-    description: 'Migrate to the cloud with zero downtime. End-to-end CI/CD, Kubernetes & infrastructure automation.',
+    title: 'Cloud Infrastructure & DevOps for Startups | Megicode',
+    description: 'Scale your startup infrastructure — cloud architecture, CI/CD pipelines, auto-scaling & cost optimization.',
     images: ['/meta/services-og.png'],
   },
   alternates: {
@@ -26,13 +26,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const breadcrumb = breadcrumbJsonLd([
     { name: 'Home', path: '/' },
     { name: 'Services', path: '/services' },
-    { name: 'Cloud & DevOps Services', path: '/services/cloud-devops-services' },
+    { name: 'Cloud Infrastructure & DevOps', path: '/services/cloud-devops-services' },
   ]);
   const service = serviceJsonLd({
-    name: 'Cloud & DevOps Services',
-    description: 'Cloud migration, CI/CD pipelines, infrastructure automation, and container orchestration.',
+    name: 'Cloud Infrastructure & DevOps',
+    description: 'Startup-ready cloud architecture, CI/CD pipelines, auto-scaling, and infrastructure cost optimization.',
     path: '/services/cloud-devops-services',
-    category: 'Cloud Computing',
+    category: 'Cloud & DevOps',
   });
   return (
     <>

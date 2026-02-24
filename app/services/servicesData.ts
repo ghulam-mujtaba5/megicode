@@ -1,331 +1,275 @@
 const servicesData = [
   {
     icon: "/Ai icon.svg",
-    title: "AI & Machine Learning Solutions",
+    title: "AI-Powered Product Development",
     slug: "ai-machine-learning",
-    description: "Custom AI models, automation, and intelligent systems to drive innovation and efficiency for your business.",
+    description: "We build intelligent software products with AI baked in from day one. From GPT-powered SaaS tools to custom ML models — we turn your AI idea into a production-ready product.",
     features: [
-      "AI Model Development",
-      "Machine Learning Integration",
-      "Natural Language Processing",
-      "Computer Vision",
-      "AI-Powered Automation"
+      "AI-Powered SaaS MVPs",
+      "LLM & ChatGPT Integration",
+      "Custom ML Model Development",
+      "RAG Systems & AI Agents",
+      "Predictive Analytics Engines"
     ],
-    techs: ["TensorFlow", "PyTorch", "OpenAI", "Scikit-learn", "Azure AI"],
-    keywords: ["AI development agency Pakistan", "custom AI solutions for startups", "machine learning consulting", "generative AI consulting", "hire AI developers", "NLP development", "computer vision solutions"],
+    techs: ["Python", "OpenAI", "LangChain", "TensorFlow", "Next.js", "FastAPI"],
+    keywords: ["AI MVP development", "build AI SaaS product", "GPT integration for startups", "AI product development agency", "LLM application development", "custom AI software company", "AI startup technical partner", "RAG system development"],
     openGraph: {
-      title: "AI & Machine Learning Solutions | Megicode",
-      description: "Custom AI models, automation, and intelligent systems to drive innovation and efficiency for your business.",
+      title: "AI-Powered Product Development for Startups | Megicode",
+      description: "We build intelligent software products with AI baked in from day one. GPT-powered SaaS, custom ML models, and AI agents — from idea to production.",
       url: "https://megicode.com/services/ai-machine-learning",
-      images: [
-        {
-          url: "https://megicode.com/images/og-ai.jpg",
-          width: 1200,
-          height: 630,
-          alt: "AI & Machine Learning Solutions",
-        },
-      ],
+      images: [{ url: "/meta/services-og.png", width: 1200, height: 630, alt: "AI-Powered Product Development | Megicode" }],
     },
     twitter: {
-      card: "summary_large_image",
-      title: "AI & Machine Learning Solutions | Megicode",
-      description: "Custom AI models, automation, and intelligent systems to drive innovation and efficiency for your business.",
-      images: ["https://megicode.com/images/twitter-ai.jpg"],
+      card: "summary_large_image" as const,
+      title: "AI-Powered Product Development for Startups | Megicode",
+      description: "We build intelligent software products with AI baked in from day one. GPT-powered SaaS, custom ML models, and AI agents.",
+      images: ["/meta/services-og.png"],
     },
     canonical: "https://megicode.com/services/ai-machine-learning",
   },
   {
     icon: "/ds&ai-icon.svg",
-    title: "Data Analytics & Business Intelligence",
+    title: "AI Integration & Data Intelligence",
     slug: "data-analytics-bi",
-    description: "Transform data into actionable insights with analytics, dashboards, and business intelligence solutions.",
+    description: "Already have a product? We add AI superpowers to it. From intelligent dashboards and predictive analytics to AI chatbots and smart search — we integrate AI into your existing software.",
     features: [
-      "Big Data Analytics",
-      "Predictive Analytics",
-      "BI Dashboards",
-      "Data Warehousing",
-      "Data Visualization"
+      "AI Integration into Existing Products",
+      "Intelligent Dashboards & Analytics",
+      "AI Chatbot Development",
+      "Smart Search & Recommendations",
+      "Data Pipeline Automation"
     ],
-    techs: ["Python", "Power BI", "Tableau", "SQL", "Spark"],
-    keywords: ["data analytics services Pakistan", "business intelligence consulting", "Power BI dashboard development", "Tableau consulting", "predictive analytics solutions"],
+    techs: ["Python", "OpenAI", "Power BI", "SQL", "Pandas", "FastAPI"],
+    keywords: ["AI integration for existing software", "add AI to my product", "AI chatbot development", "intelligent dashboard development", "predictive analytics for startups", "AI data analytics agency"],
     openGraph: {
-      title: "Data Analytics & Business Intelligence | Megicode",
-      description: "Transform data into actionable insights with analytics, dashboards, and business intelligence solutions.",
+      title: "AI Integration & Data Intelligence for Startups | Megicode",
+      description: "Add AI superpowers to your existing product. Intelligent dashboards, AI chatbots, smart search, and predictive analytics integration.",
       url: "https://megicode.com/services/data-analytics-bi",
-      images: [
-        {
-          url: "https://megicode.com/images/og-data.jpg",
-          width: 1200,
-          height: 630,
-          alt: "Data Analytics & Business Intelligence",
-        },
-      ],
+      images: [{ url: "/meta/services-og.png", width: 1200, height: 630, alt: "AI Integration & Data Intelligence | Megicode" }],
     },
     twitter: {
-      card: "summary_large_image",
-      title: "Data Analytics & Business Intelligence | Megicode",
-      description: "Transform data into actionable insights with analytics, dashboards, and business intelligence solutions.",
-      images: ["https://megicode.com/images/twitter-data.jpg"],
+      card: "summary_large_image" as const,
+      title: "AI Integration & Data Intelligence for Startups | Megicode",
+      description: "Add AI superpowers to your existing product. Intelligent dashboards, AI chatbots, smart search, and predictive analytics.",
+      images: ["/meta/services-og.png"],
     },
     canonical: "https://megicode.com/services/data-analytics-bi",
   },
   {
     icon: "/web app icon.svg",
-    title: "Custom Web Development",
+    title: "SaaS & Web Platform Development",
     slug: "custom-web-development",
-    description: "Robust, scalable, and secure web applications tailored to your business goals and user needs. We build high-performance sites and applications that not only look great but are also optimized for search engines and conversions.",
+    description: "Full-stack SaaS platforms and web applications for startups and growing businesses. We build scalable, production-ready products — from MVP to market-ready platforms with payment, auth, and admin panels built in.",
     process: [
       {
-        title: "1. Discovery & Strategy",
-        description: "We start by understanding your business goals, target audience, and technical requirements to create a detailed project roadmap and strategy."
+        title: "1. Product Discovery & Strategy",
+        description: "We map your business model, user personas, and core features to build a product roadmap that minimizes time-to-market."
       },
       {
         title: "2. UI/UX Design & Prototyping",
-        description: "Our design team creates intuitive wireframes and high-fidelity prototypes to visualize the user experience before development begins."
+        description: "Conversion-focused design with high-fidelity prototypes you can test with real users before writing a single line of code."
       },
       {
-        title: "3. Agile Development & Testing",
-        description: "We use an agile methodology to build your application in iterative sprints, with continuous testing to ensure quality and reliability."
+        title: "3. Agile Sprint Development",
+        description: "We ship in 2-week sprints with demo reviews, so you see progress every step of the way."
       },
       {
-        title: "4. Deployment & Launch",
-        description: "We handle the entire deployment process, ensuring a smooth launch on scalable cloud infrastructure."
+        title: "4. Launch & Go Live",
+        description: "Production deployment on scalable cloud infrastructure with CI/CD, monitoring, and zero-downtime deploys."
       },
       {
-        title: "5. Ongoing Support & Optimization",
-        description: "After launch, we provide ongoing maintenance, support, and performance optimization to ensure your application continues to meet your needs."
+        title: "5. Growth & Iteration",
+        description: "Post-launch analytics, A/B testing, feature iterations, and scaling support as your user base grows."
       }
     ],
     benefits: [
       {
-        title: "Scalable Architecture",
-        description: "We build applications on modern, scalable architectures that can grow with your business, handling increased traffic and functionality without compromising performance."
+        title: "Built for Scale",
+        description: "Architecture designed to handle 10 users or 100,000 — auto-scaling infrastructure that grows with your startup."
       },
       {
-        title: "Enhanced Security",
-        description: "Security is at the core of our development process. We implement best practices to protect your application and user data from threats."
+        title: "Startup-Grade Security",
+        description: "Auth, encryption, RBAC, and compliance built in from day one — so you're investor-ready and user-safe."
       },
       {
-        title: "SEO-Friendly by Design",
-        description: "We build with SEO in mind from the start, ensuring your application is optimized for search engines to attract organic traffic."
+        title: "SEO & Performance First",
+        description: "Server-rendered, Core Web Vitals optimized, and SEO-ready — because organic traffic is your cheapest growth channel."
       }
     ],
     faqs: [
       {
-        question: "How long does it take to build a custom web application?",
-        answer: "The timeline for a custom web application can vary significantly based on the complexity and features required. A simple project might take 2-3 months, while a more complex application could take 6 months or longer. We provide a detailed timeline after the initial discovery phase."
+        question: "How fast can you build an MVP?",
+        answer: "A focused MVP typically takes 6-10 weeks. We prioritize core features that validate your business hypothesis, then iterate based on real user feedback."
       },
       {
-        question: "Do you provide ongoing support after the application is launched?",
-        answer: "Yes, we offer a range of ongoing support and maintenance packages to ensure your application remains secure, up-to-date, and performs optimally. We can tailor a support plan to fit your specific needs."
+        question: "Do you work with non-technical founders?",
+        answer: "That's our specialty. We handle everything technical — architecture, development, deployment, and maintenance — so you can focus on business and customers."
       },
       {
-        question: "Can you integrate the web application with our existing systems?",
-        answer: "Absolutely. We specialize in creating custom APIs and integrations to connect your new web application with your existing software, such as CRMs, ERPs, and other third-party services."
+        question: "Can you integrate with third-party tools and APIs?",
+        answer: "Absolutely. We build custom integrations with payment processors (Stripe, Razorpay), CRMs, email tools, analytics platforms, and any API-based service."
       }
     ],
     features: [
-      "Full-Stack Development",
-      "API & Microservices",
-      "E-commerce Solutions",
-      "CMS & Portals",
-      "Performance Optimization"
+      "SaaS MVP Development",
+      "Full-Stack Web Applications",
+      "Admin Dashboards & Portals",
+      "API Development & Integration",
+      "Payment & Subscription Systems"
     ],
-    techs: ["React", "Next.js", "Node.js", "TypeScript", "GraphQL"],
-    keywords: ["custom web development company", "hire web developers Pakistan", "Next.js development agency", "React web application", "SaaS platform development"],
+    techs: ["Next.js", "React", "Node.js", "TypeScript", "PostgreSQL", "Stripe"],
+    keywords: ["SaaS MVP development", "startup web development agency", "build SaaS platform", "Next.js development agency", "full-stack development for startups", "hire web developers for startup", "MVP development company"],
     openGraph: {
-      title: "Custom Web Development | Megicode",
-      description: "Robust, scalable, and secure web applications tailored to your business goals and user needs.",
+      title: "SaaS & Web Platform Development for Startups | Megicode",
+      description: "Full-stack SaaS platforms and web apps for startups. From MVP to market-ready products with payment, auth, and admin panels built in.",
       url: "https://megicode.com/services/custom-web-development",
-      images: [
-        {
-          url: "https://megicode.com/images/og-web.jpg",
-          width: 1200,
-          height: 630,
-          alt: "Custom Web Development",
-        },
-      ],
+      images: [{ url: "/meta/services-og.png", width: 1200, height: 630, alt: "SaaS & Web Platform Development | Megicode" }],
     },
     twitter: {
-      card: "summary_large_image",
-      title: "Custom Web Development | Megicode",
-      description: "Robust, scalable, and secure web applications tailored to your business goals and user needs.",
-      images: ["https://megicode.com/images/twitter-web.jpg"],
+      card: "summary_large_image" as const,
+      title: "SaaS & Web Platform Development for Startups | Megicode",
+      description: "Full-stack SaaS platforms and web apps for startups. From MVP to market-ready products.",
+      images: ["/meta/services-og.png"],
     },
     canonical: "https://megicode.com/services/custom-web-development"
   },
   {
     icon: "/mobile app icon.svg",
-    title: "Mobile App Solutions",
+    title: "Mobile App Development",
     slug: "mobile-app-solutions",
-    description: "Native and cross-platform mobile apps for iOS and Android, designed for performance and engagement.",
+    description: "Cross-platform mobile apps with AI features for startups and businesses. We build performant iOS and Android apps using React Native and Flutter — with intelligent features that set you apart.",
     features: [
-      "iOS & Android Apps",
-      "Cross-Platform Development",
-      "Mobile UI/UX Design",
-      "App Store Launch",
-      "Ongoing Support"
+      "React Native & Flutter Apps",
+      "AI-Powered Mobile Features",
+      "Real-time & Push Notifications",
+      "Offline-First Architecture",
+      "App Store Optimization & Launch"
     ],
-    techs: ["React Native", "Flutter", "Swift", "Kotlin", "Firebase"],
-    keywords: ["mobile app development Pakistan", "hire mobile app developers", "iOS app development", "React Native agency", "Flutter app development"],
+    techs: ["React Native", "Flutter", "Firebase", "Node.js", "TypeScript"],
+    keywords: ["mobile app development for startups", "React Native development agency", "Flutter app development", "AI mobile app development", "cross-platform mobile app company", "startup mobile app builder"],
     openGraph: {
-      title: "Mobile App Solutions | Megicode",
-      description: "Native and cross-platform mobile apps for iOS and Android, designed for performance and engagement.",
+      title: "Mobile App Development for Startups | Megicode",
+      description: "Cross-platform mobile apps with AI features. React Native and Flutter development for startups and growing businesses.",
       url: "https://megicode.com/services/mobile-app-solutions",
-      images: [
-        {
-          url: "https://megicode.com/images/og-mobile.jpg",
-          width: 1200,
-          height: 630,
-          alt: "Mobile App Solutions",
-        },
-      ],
+      images: [{ url: "/meta/services-og.png", width: 1200, height: 630, alt: "Mobile App Development | Megicode" }],
     },
     twitter: {
-      card: "summary_large_image",
-      title: "Mobile App Solutions | Megicode",
-      description: "Native and cross-platform mobile apps for iOS and Android, designed for performance and engagement.",
-      images: ["https://megicode.com/images/twitter-mobile.jpg"],
+      card: "summary_large_image" as const,
+      title: "Mobile App Development for Startups | Megicode",
+      description: "Cross-platform mobile apps with AI features. React Native and Flutter development for startups.",
+      images: ["/meta/services-og.png"],
     },
     canonical: "https://megicode.com/services/mobile-app-solutions",
   },
   {
     icon: "/meta/rm.svg",
-    title: "Cloud & DevOps Services",
+    title: "Cloud Infrastructure & DevOps",
     slug: "cloud-devops-services",
-    description: "Cloud migration, CI/CD, and infrastructure automation for scalable, secure, and efficient operations.",
+    description: "Scalable cloud architecture and DevOps for startups going from 0 to scale. We set up your entire cloud infrastructure, CI/CD pipelines, and monitoring — so your product stays fast, secure, and reliable as you grow.",
     features: [
-      "Cloud Migration & Management",
-      "DevOps Automation",
-      "CI/CD Pipeline Setup",
+      "Cloud Architecture for Startups",
+      "CI/CD Pipeline Automation",
       "Infrastructure as Code",
-      "Monitoring & Security"
+      "Auto-Scaling & Cost Optimization",
+      "Security & Compliance Setup"
     ],
-    techs: ["AWS", "Azure", "Docker", "Kubernetes", "Terraform"],
-    keywords: ["cloud migration services Pakistan", "DevOps consulting agency", "AWS migration", "Kubernetes consulting", "CI/CD pipeline setup"],
+    techs: ["AWS", "Vercel", "Docker", "GitHub Actions", "Terraform"],
+    keywords: ["cloud infrastructure for startups", "DevOps for SaaS companies", "AWS setup for startups", "CI/CD pipeline for startups", "cloud cost optimization", "startup DevOps agency"],
     openGraph: {
-      title: "Cloud & DevOps Services | Megicode",
-      description: "Cloud migration, CI/CD, and infrastructure automation for scalable, secure, and efficient operations.",
+      title: "Cloud Infrastructure & DevOps for Startups | Megicode",
+      description: "Scalable cloud architecture and DevOps for startups. CI/CD, auto-scaling, monitoring, and security — built to grow with you.",
       url: "https://megicode.com/services/cloud-devops-services",
-      images: [
-        {
-          url: "https://megicode.com/images/og-cloud.jpg",
-          width: 1200,
-          height: 630,
-          alt: "Cloud & DevOps Services",
-        },
-      ],
+      images: [{ url: "/meta/services-og.png", width: 1200, height: 630, alt: "Cloud & DevOps for Startups | Megicode" }],
     },
     twitter: {
-      card: "summary_large_image",
-      title: "Cloud & DevOps Services | Megicode",
-      description: "Cloud migration, CI/CD, and infrastructure automation for scalable, secure, and efficient operations.",
-      images: ["https://megicode.com/images/twitter-cloud.jpg"],
+      card: "summary_large_image" as const,
+      title: "Cloud Infrastructure & DevOps for Startups | Megicode",
+      description: "Scalable cloud architecture and DevOps for startups. CI/CD, auto-scaling, and security.",
+      images: ["/meta/services-og.png"],
     },
     canonical: "https://megicode.com/services/cloud-devops-services",
   },
   {
     icon: "/data scrapping icon.svg",
-    title: "Automation & Integration",
+    title: "AI Automation for Businesses",
     slug: "automation-integration",
-    description: "Workflow automation, data integration, and process optimization to streamline your business.",
+    description: "Intelligent workflow automation for SMEs and growing companies. We replace manual, repetitive tasks with AI-powered automation — saving you hours every week and reducing human error.",
     features: [
-      "Business Process Automation",
-      "API Integration",
-      "ETL Pipelines",
-      "RPA (Robotic Process Automation)",
-      "Custom Scripting"
+      "AI-Powered Workflow Automation",
+      "Smart Chatbots & Virtual Assistants",
+      "API & System Integration",
+      "Automated Reporting & Alerts",
+      "Process Optimization with AI"
     ],
-    techs: ["Python", "Zapier", "Make", "Node.js", "Selenium"],
-    keywords: ["business process automation services", "API integration company", "workflow automation consulting", "RPA development", "Zapier automation experts"],
+    techs: ["Python", "OpenAI", "n8n", "Zapier", "Node.js", "Make"],
+    keywords: ["AI automation for small business", "workflow automation agency", "AI chatbot for business", "business process automation with AI", "automate repetitive tasks AI", "SME automation solutions", "intelligent automation company"],
     openGraph: {
-      title: "Automation & Integration | Megicode",
-      description: "Workflow automation, data integration, and process optimization to streamline your business.",
+      title: "AI Automation for Businesses & SMEs | Megicode",
+      description: "Intelligent workflow automation for SMEs. Replace manual tasks with AI-powered automation that saves hours every week.",
       url: "https://megicode.com/services/automation-integration",
-      images: [
-        {
-          url: "https://megicode.com/images/og-automation.jpg",
-          width: 1200,
-          height: 630,
-          alt: "Automation & Integration",
-        },
-      ],
+      images: [{ url: "/meta/services-og.png", width: 1200, height: 630, alt: "AI Automation for Businesses | Megicode" }],
     },
     twitter: {
-      card: "summary_large_image",
-      title: "Automation & Integration | Megicode",
-      description: "Workflow automation, data integration, and process optimization to streamline your business.",
-      images: ["https://megicode.com/images/twitter-automation.jpg"],
+      card: "summary_large_image" as const,
+      title: "AI Automation for Businesses & SMEs | Megicode",
+      description: "Replace manual tasks with AI-powered automation. Smart chatbots, workflow automation, and system integration.",
+      images: ["/meta/services-og.png"],
     },
     canonical: "https://megicode.com/services/automation-integration",
   },
   {
     icon: "/Ui&Ux-icon.svg",
-    title: "UI/UX & Product Design",
+    title: "Product Design & UX Strategy",
     slug: "ui-ux-product-design",
-    description: "User-centered design for engaging, intuitive, and accessible digital products.",
+    description: "Conversion-focused design for AI-powered products and SaaS platforms. We design interfaces that users love — backed by research, prototyping, and iterative testing to maximize engagement and retention.",
     features: [
-      "User Research & Personas",
-      "Wireframing & Prototyping",
+      "Product Strategy & Roadmapping",
       "UI/UX Design Systems",
-      "Usability Testing",
-      "Brand Identity Design"
+      "High-Fidelity Prototyping",
+      "Conversion-Focused Design",
+      "Usability Testing & Iteration"
     ],
-    techs: ["Figma", "Adobe XD", "Sketch", "InVision", "Zeplin"],
-    keywords: ["UI UX design agency Pakistan", "product design services", "Figma design agency", "UX research and strategy", "conversion-focused design"],
+    techs: ["Figma", "Framer", "Storybook", "Adobe XD", "Analytics"],
+    keywords: ["SaaS product design agency", "startup UX design", "AI product design", "conversion focused UI design", "Figma design agency for startups", "product design for SaaS"],
     openGraph: {
-      title: "UI/UX & Product Design | Megicode",
-      description: "User-centered design for engaging, intuitive, and accessible digital products.",
+      title: "Product Design & UX Strategy for Startups | Megicode",
+      description: "Conversion-focused design for SaaS and AI-powered products. Research-backed interfaces that maximize engagement and retention.",
       url: "https://megicode.com/services/ui-ux-product-design",
-      images: [
-        {
-          url: "https://megicode.com/images/og-uiux.jpg",
-          width: 1200,
-          height: 630,
-          alt: "UI/UX & Product Design",
-        },
-      ],
+      images: [{ url: "/meta/services-og.png", width: 1200, height: 630, alt: "Product Design & UX | Megicode" }],
     },
     twitter: {
-      card: "summary_large_image",
-      title: "UI/UX & Product Design | Megicode",
-      description: "User-centered design for engaging, intuitive, and accessible digital products.",
-      images: ["https://megicode.com/images/twitter-uiux.jpg"],
+      card: "summary_large_image" as const,
+      title: "Product Design & UX Strategy for Startups | Megicode",
+      description: "Conversion-focused design for SaaS and AI-powered products. Interfaces that maximize engagement.",
+      images: ["/meta/services-og.png"],
     },
     canonical: "https://megicode.com/services/ui-ux-product-design",
   },
   {
     icon: "/it-consulting-support-icon.svg",
-    title: "IT Consulting & Support",
+    title: "Technical Co-Founder as a Service",
     slug: "it-consulting-support",
-    description: "Expert guidance, security, and ongoing support to help you achieve your technology goals.",
+    description: "Your dedicated tech partner — from idea to scale. For non-technical founders who need CTO-level guidance without hiring a full-time CTO. We handle architecture, team building, tech strategy, and investor-ready due diligence.",
     features: [
-      "Technology Strategy & Roadmapping",
-      "IT Infrastructure Consulting",
-      "Security Audits & Compliance",
-      "Ongoing Maintenance & Support",
-      "Training & Documentation"
+      "CTO-Level Tech Strategy",
+      "Architecture & Stack Selection",
+      "Development Team Building",
+      "Product Roadmap Planning",
+      "Investor-Ready Tech Due Diligence"
     ],
-    techs: ["ITIL", "ISO 27001", "Microsoft 365", "Google Workspace", "Jira"],
-    keywords: ["IT consulting services Pakistan", "CTO as a service", "fractional CTO for startups", "security audit services", "managed IT support"],
+    techs: ["Architecture", "Agile", "Team Management", "Due Diligence", "Roadmapping"],
+    keywords: ["technical co-founder for startups", "fractional CTO service", "CTO as a service", "tech partner for non-technical founders", "startup technical advisor", "outsourced CTO for startup", "tech strategy consulting for founders"],
     openGraph: {
-      title: "IT Consulting & Support | Megicode",
-      description: "Expert guidance, security, and ongoing support to help you achieve your technology goals.",
+      title: "Technical Co-Founder as a Service | Megicode",
+      description: "CTO-level guidance for non-technical founders. Architecture, team building, tech strategy, and investor-ready due diligence — without hiring a full-time CTO.",
       url: "https://megicode.com/services/it-consulting-support",
-      images: [
-        {
-          url: "https://megicode.com/images/og-it.jpg",
-          width: 1200,
-          height: 630,
-          alt: "IT Consulting & Support",
-        },
-      ],
+      images: [{ url: "/meta/services-og.png", width: 1200, height: 630, alt: "Technical Co-Founder as a Service | Megicode" }],
     },
     twitter: {
-      card: "summary_large_image",
-      title: "IT Consulting & Support | Megicode",
-      description: "Expert guidance, security, and ongoing support to help you achieve your technology goals.",
-      images: ["https://megicode.com/images/twitter-it.jpg"],
+      card: "summary_large_image" as const,
+      title: "Technical Co-Founder as a Service | Megicode",
+      description: "CTO-level guidance for non-technical founders. Architecture, strategy, and investor-ready tech due diligence.",
+      images: ["/meta/services-og.png"],
     },
     canonical: "https://megicode.com/services/it-consulting-support",
   }

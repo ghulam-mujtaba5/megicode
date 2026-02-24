@@ -30,16 +30,16 @@ const AboutHero = () => {
           className={`${commonStyles.heading} ${themeStyles.heading}`}
           variants={fadeInUp}
         >
-          <span className={commonStyles.gradientText}>Transforming</span> Ideas into{' '}
-          <span className={commonStyles.gradientText}>Intelligent</span> Solutions
+          Your <span className={commonStyles.gradientText}>AI-Powered</span> Technical{' '}
+          <span className={commonStyles.gradientText}>Partner</span>
         </motion.h1>
 
         <motion.p 
           className={`${commonStyles.subheading} ${themeStyles.subheading}`}
           variants={fadeInUp}
         >
-          We craft scalable, AI-powered software solutions that drive innovation 
-          and empower businesses to achieve breakthrough results.
+          We build intelligent software for startups, founders, and growing businesses
+          — from first MVP to production-ready AI products.
         </motion.p>
       </motion.div>
 

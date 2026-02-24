@@ -66,7 +66,7 @@ const engagementModels = [
       "Direct Expert Access",
       "Seamless Integration"
     ],
-    color: "#6EA8FF",
+    color: "#4573df",
     isPopular: true
   },
   {
@@ -240,7 +240,7 @@ export default function DataAnalyticsDetailPage() {
                 width: 180,
                 maxWidth: '100%',
                 borderRadius: 32,
-                boxShadow: '0 8px 32px #4ea8ff33',
+                boxShadow: '0 8px 32px #4573df33',
                 background: isDark ? 'rgba(36,41,54,0.98)' : '#fff',
                 padding: 18,
                 border: `2px solid ${palette.cardInnerBorder}`
@@ -311,7 +311,7 @@ export default function DataAnalyticsDetailPage() {
               let color = undefined;
               switch (t.toLowerCase()) {
                 case "python": Icon = SiPython; color = "#3776AB"; break;
-                case "power bi": Icon = SiTableau; color = "#00A4EF"; break; // Using Tableau icon temporarily for Power BI
+                case "power bi": Icon = FaChartBar; color = "#F2C811"; break;
                 case "tableau": Icon = SiTableau; color = "#E97627"; break;
                 case "sql": Icon = SiMysql; color = "#4479A1"; break;
                 case "spark": Icon = SiApachespark; color = "#E25A1C"; break;
@@ -424,6 +424,7 @@ export default function DataAnalyticsDetailPage() {
           </button>
           <div className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}>Ready to unlock your data? Let&apos;s talk about your vision.</div>
           <a href="/contact" className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`} style={{ display: 'inline-block', marginTop: 8, textDecoration: 'underline', fontSize: '0.95rem' }}>Or send us a message</a>
+          <a href="/projects" className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`} style={{ display: 'inline-block', marginTop: 12, textDecoration: 'underline', fontSize: '0.95rem', opacity: 0.85 }}>See Our Case Studies &rarr;</a>
         </section>
       </main>
       {calendlyModalElement}

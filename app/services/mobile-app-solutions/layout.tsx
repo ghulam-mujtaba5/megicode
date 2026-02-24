@@ -2,19 +2,19 @@ import type { Metadata } from 'next';
 import { serviceJsonLd, breadcrumbJsonLd } from '@/lib/metadata';
 
 export const metadata: Metadata = {
-  title: 'Mobile App Development Services | Hire iOS & Android App Developers',
-  description: 'Launch your mobile app in weeks, not months. Megicode builds high-performance native and cross-platform mobile apps for iOS & Android using React Native, Flutter, Swift & Kotlin — from MVP to scale.',
-  keywords: ['mobile app development Pakistan', 'hire mobile app developers', 'iOS app development services', 'Android app development company', 'React Native development agency', 'Flutter app development', 'cross-platform mobile apps', 'startup MVP app development', 'mobile UI UX design', 'app store optimization'],
+  title: 'Mobile App Development | Cross-Platform iOS & Android with AI Features | Megicode',
+  description: 'Build mobile apps that stand out with AI features. Megicode develops cross-platform iOS & Android apps using React Native and Flutter — with AI-powered features, real-time sync, and startup-ready architecture.',
+  keywords: ['mobile app development', 'AI-powered mobile apps', 'React Native development', 'Flutter app development', 'startup mobile app', 'cross-platform mobile apps', 'iOS Android development', 'mobile MVP development'],
   openGraph: {
-    title: 'Hire Top Mobile App Developers | iOS & Android | Megicode',
-    description: 'Launch your mobile app in weeks, not months. Native & cross-platform apps for iOS & Android — from MVP to scale.',
+    title: 'Mobile App Development | iOS & Android with AI Features | Megicode',
+    description: 'Cross-platform mobile apps with AI features, real-time sync, and startup-ready architecture.',
     url: 'https://megicode.com/services/mobile-app-solutions',
-    images: [{ url: '/meta/services-og.png', width: 1200, height: 630, alt: 'Mobile App Solutions | Megicode' }],
+    images: [{ url: '/meta/services-og.png', width: 1200, height: 630, alt: 'Mobile App Development | Megicode' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Hire Top Mobile App Developers | iOS & Android | Megicode',
-    description: 'Launch your mobile app in weeks, not months. Native & cross-platform apps for iOS & Android — from MVP to scale.',
+    title: 'Mobile App Development | iOS & Android with AI Features | Megicode',
+    description: 'Cross-platform mobile apps with AI features, real-time sync, and startup-ready architecture.',
     images: ['/meta/services-og.png'],
   },
   alternates: {
@@ -26,11 +26,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const breadcrumb = breadcrumbJsonLd([
     { name: 'Home', path: '/' },
     { name: 'Services', path: '/services' },
-    { name: 'Mobile App Solutions', path: '/services/mobile-app-solutions' },
+    { name: 'Mobile App Development', path: '/services/mobile-app-solutions' },
   ]);
   const service = serviceJsonLd({
-    name: 'Mobile App Solutions',
-    description: 'Native and cross-platform mobile apps for iOS and Android, designed for performance and engagement.',
+    name: 'Mobile App Development',
+    description: 'Cross-platform iOS & Android apps with AI features, real-time sync, and startup-ready architecture.',
     path: '/services/mobile-app-solutions',
     category: 'Mobile Development',
   });

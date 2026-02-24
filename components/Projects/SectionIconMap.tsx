@@ -13,20 +13,20 @@ interface IconInfo {
 }
 
 const sectionIconMap: Record<string, IconInfo> = {
-  'Problem': { component: FaPuzzlePiece, color: "#1e90ff" },
+  'Problem': { component: FaPuzzlePiece, color: "#4573df" },
   'Challenge': { component: FaLightbulb, color: "#f6c700" },
-  'Solution': { component: FaLightbulb, color: "#1e90ff" },
+  'Solution': { component: FaLightbulb, color: "#4573df" },
   'Impact': { component: FaChartLine, color: "#22c55e" },
   'Implementation': { component: FaCogs, color: "#6366f1" },
   'Process': { component: FaTasks, color: "#6366f1" },
-  'Tools Used': { component: FaTools, color: "#1e90ff" },
+  'Tools Used': { component: FaTools, color: "#4573df" },
   'Artifacts': { component: FaFileAlt, color: "#6366f1" },
   'Lessons Learned': { component: FaGraduationCap, color: "#f6c700" },
   'Next Steps': { component: FaArrowRight, color: "#6366f1" },
   'Tech Stack': { component: FaRocket, color: "#6366f1" },
   'Testimonial': { component: FaQuoteLeft, color: "#f6c700" },
   'Process Step': { component: FaCheckCircle, color: "#22c55e" },
-  'Timeline': { component: FaCalendarAlt, color: "#1e90ff" },
+  'Timeline': { component: FaCalendarAlt, color: "#4573df" },
   // Add more as needed
 };
 

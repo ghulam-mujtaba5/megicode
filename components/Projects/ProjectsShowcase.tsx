@@ -34,6 +34,11 @@ export interface Project {
   metrics?: Record<string, string>;
   testimonial?: string;
   image: string;
+  clientName?: string;
+  clientIndustry?: string;
+  duration?: string;
+  teamSize?: string;
+  overview?: string;
 }
 
 import Link from "next/link";

@@ -77,7 +77,7 @@ const engagementModels = [
       "Direct Expert Access",
       "Seamless Integration"
     ],
-    color: "#6EA8FF",
+    color: "#4573df",
     isPopular: true
   },
   {
@@ -97,27 +97,27 @@ const processSteps = [
   {
     title: "Assessment & Planning",
     desc: "Infra & cloud goals.",
-    icon: <FaSearch color="#4ea8ff" size={36} title="Assessment & Planning" />
+    icon: <FaSearch color="#4573df" size={36} title="Assessment & Planning" />
   },
   {
     title: "Architecture & Setup",
     desc: "Cloud & CI/CD setup.",
-    icon: <FaServer color="#4ea8ff" size={36} title="Architecture & Setup" />
+    icon: <FaServer color="#4573df" size={36} title="Architecture & Setup" />
   },
   {
     title: "Migration & Automation",
     desc: "Migrate & automate.",
-    icon: <FaCloud color="#4ea8ff" size={36} title="Migration & Automation" />
+    icon: <FaCloud color="#4573df" size={36} title="Migration & Automation" />
   },
   {
     title: "Monitoring & Optimization",
     desc: "Monitor & optimize.",
-    icon: <FaChartLine color="#4ea8ff" size={36} title="Monitoring & Optimization" />
+    icon: <FaChartLine color="#4573df" size={36} title="Monitoring & Optimization" />
   },
   {
     title: "Ongoing Support",
     desc: "Continuous improvement.",
-    icon: <FaLifeRing color="#4ea8ff" size={36} title="Ongoing Support" />
+    icon: <FaLifeRing color="#4573df" size={36} title="Ongoing Support" />
   }
 ];
 
@@ -130,11 +130,11 @@ const faqs = [
 
 // Features/deliverables with icons
 const features = [
-  { icon: <FaCloud color="#4ea8ff" size={36} title="Cloud Migration" />, label: "Cloud Migration" },
-  { icon: <FaCodeBranch color="#4ea8ff" size={36} title="CI/CD Automation" />, label: "CI/CD Automation" },
-  { icon: <FaCogs color="#4ea8ff" size={36} title="Infrastructure as Code" />, label: "Infrastructure as Code" },
-  { icon: <FaShieldAlt color="#4ea8ff" size={36} title="Security & Compliance" />, label: "Security & Compliance" },
-  { icon: <FaChartLine color="#4ea8ff" size={36} title="Monitoring & Optimization" />, label: "Monitoring & Optimization" },
+  { icon: <FaCloud color="#4573df" size={36} title="Cloud Migration" />, label: "Cloud Migration" },
+  { icon: <FaCodeBranch color="#4573df" size={36} title="CI/CD Automation" />, label: "CI/CD Automation" },
+  { icon: <FaCogs color="#4573df" size={36} title="Infrastructure as Code" />, label: "Infrastructure as Code" },
+  { icon: <FaShieldAlt color="#4573df" size={36} title="Security & Compliance" />, label: "Security & Compliance" },
+  { icon: <FaChartLine color="#4573df" size={36} title="Monitoring & Optimization" />, label: "Monitoring & Optimization" },
 ];
 
 const testimonial = {
@@ -219,7 +219,7 @@ export default function CloudDevOpsPage() {
                 <img
                   src="/meta/rm.svg"
                   alt="Cloud & DevOps RM Illustration"
-                  style={{ width: 180, maxWidth: '100%', borderRadius: 32, boxShadow: '0 8px 32px #4ea8ff33', background: isDark ? 'rgba(36,41,54,0.98)' : '#fff', padding: 18, border: `2px solid ${palette.cardInnerBorder}` }}
+                  style={{ width: 180, maxWidth: '100%', borderRadius: 32, boxShadow: '0 8px 32px #4573df33', background: isDark ? 'rgba(36,41,54,0.98)' : '#fff', padding: 18, border: `2px solid ${palette.cardInnerBorder}` }}
                 />
                 <div className={commonStyles.heroImageDot} />
                 <div className={commonStyles.heroImageSparkles}>
@@ -246,7 +246,7 @@ export default function CloudDevOpsPage() {
               alt="Cloud & DevOps Overview"
               className={`${commonStyles.overviewImage} ${themeStyles.overviewImage}`}
               data-animate="fade-in"
-              style={{ width: 180, maxWidth: '100%', borderRadius: 32, boxShadow: '0 8px 32px #4ea8ff33', background: isDark ? 'rgba(36,41,54,0.98)' : '#fff', padding: 18, border: `2px solid ${palette.cardInnerBorder}` }}
+              style={{ width: 180, maxWidth: '100%', borderRadius: 32, boxShadow: '0 8px 32px #4573df33', background: isDark ? 'rgba(36,41,54,0.98)' : '#fff', padding: 18, border: `2px solid ${palette.cardInnerBorder}` }}
             />
           </div>
         </section>
@@ -429,6 +429,7 @@ export default function CloudDevOpsPage() {
           </button>
           <div className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}>Ready to modernize your infrastructure? Let&apos;s talk about your vision.</div>
           <a href="/contact" className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`} style={{ display: 'inline-block', marginTop: 8, textDecoration: 'underline', fontSize: '0.95rem' }}>Or send us a message</a>
+          <a href="/projects" className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`} style={{ display: 'inline-block', marginTop: 12, textDecoration: 'underline', fontSize: '0.95rem', opacity: 0.85 }}>See Our Case Studies &rarr;</a>
         </section>
       </main>
       {calendlyModalElement}

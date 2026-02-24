@@ -7,12 +7,12 @@ export function OurProcess({ steps, theme }: { steps: { title: string; desc: str
   const isDark = theme === 'dark';
   return (
     <section style={{ marginTop: 32, marginBottom: 32 }}>
-      <h2 style={{ fontSize: "1.25rem", fontWeight: 700, color: "#4ea8ff", marginBottom: 18 }}>Our Process</h2>
+      <h2 style={{ fontSize: "1.25rem", fontWeight: 700, color: "#4573df", marginBottom: 18 }}>Our Process</h2>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap' }}>
         {steps.map((step, i) => (
           <div key={i} style={{ flex: 1, minWidth: 120, textAlign: 'center', position: 'relative' }}>
             <div style={{
-              width: 48, height: 48, margin: '0 auto 8px', borderRadius: '50%', background: isDark ? '#2a2f45' : '#e3e6ea', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 8px #4ea8ff22', fontSize: 26
+              width: 48, height: 48, margin: '0 auto 8px', borderRadius: '50%', background: isDark ? '#2a2f45' : '#e3e6ea', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 8px #4573df22', fontSize: 26
             }}>
               {step.icon
                 ? (typeof step.icon === 'string'
@@ -20,10 +20,10 @@ export function OurProcess({ steps, theme }: { steps: { title: string; desc: str
                     : step.icon)
                 : <span role="img" aria-label="step">🔹</span>}
             </div>
-            <div style={{ fontWeight: 700, color: '#4ea8ff', fontSize: '1.05rem', marginBottom: 4 }}>{step.title}</div>
+            <div style={{ fontWeight: 700, color: '#4573df', fontSize: '1.05rem', marginBottom: 4 }}>{step.title}</div>
             <div style={{ fontSize: '0.98rem', color: isDark ? '#c8ccd4' : '#444', opacity: 0.85 }}>{step.desc}</div>
             {i < steps.length - 1 && (
-              <div style={{ position: 'absolute', right: -6, top: 24, width: 12, height: 2, background: '#4ea8ff55', zIndex: 0 }} />
+              <div style={{ position: 'absolute', right: -6, top: 24, width: 12, height: 2, background: '#4573df55', zIndex: 0 }} />
             )}
           </div>
         ))}
@@ -38,7 +38,7 @@ export function EngagementModels({ theme }: { theme?: string } = {}) {
   const isDark = theme === 'dark';
   return (
     <section style={{ marginTop: 32, marginBottom: 32 }}>
-      <h2 style={{ fontSize: "1.15rem", fontWeight: 700, color: "#4ea8ff", marginBottom: 10 }}>Engagement Models</h2>
+      <h2 style={{ fontSize: "1.15rem", fontWeight: 700, color: "#4573df", marginBottom: 10 }}>Engagement Models</h2>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
         <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
           <span style={{ fontSize: '1.3rem' }} aria-label="Fixed Price" role="img">📊</span>
@@ -70,7 +70,7 @@ export function MethodologyAndCommunication({ theme }: { theme?: string } = {}) 
   const isDark = theme === 'dark';
   return (
     <section style={{ marginTop: 32, marginBottom: 32 }}>
-      <h2 style={{ fontSize: "1.15rem", fontWeight: 700, color: "#4ea8ff", marginBottom: 10 }}>Methodology & Communication</h2>
+      <h2 style={{ fontSize: "1.15rem", fontWeight: 700, color: "#4573df", marginBottom: 10 }}>Methodology & Communication</h2>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
         <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
           <span style={{ fontSize: '1.3rem' }} aria-label="Agile, CMMI L3+" role="img">⚡</span>
@@ -110,11 +110,11 @@ export function ServiceFAQs({ faqs, theme }: { faqs: { q: string; a: string }[];
   const isDark = theme === 'dark';
   return (
     <section style={{ marginTop: 32, marginBottom: 32 }}>
-      <h2 style={{ fontSize: "1.15rem", fontWeight: 700, color: "#4ea8ff", marginBottom: 10 }}>FAQs</h2>
+      <h2 style={{ fontSize: "1.15rem", fontWeight: 700, color: "#4573df", marginBottom: 10 }}>FAQs</h2>
       <div style={{ maxWidth: 600, margin: '0 auto' }}>
         {faqs.map((faq, i) => (
-          <div key={i} style={{ marginBottom: 12, borderRadius: 8, background: isDark ? '#1e2233' : '#e3e6ea', boxShadow: '0 1px 4px #4ea8ff11' }}>
-            <button onClick={() => setOpen(open === i ? null : i)} style={{ width: '100%', background: 'none', border: 'none', textAlign: 'left', padding: '0.7rem 1rem', fontWeight: 700, color: '#4ea8ff', fontSize: '1.01rem', cursor: 'pointer' }}>
+          <div key={i} style={{ marginBottom: 12, borderRadius: 8, background: isDark ? '#1e2233' : '#e3e6ea', boxShadow: '0 1px 4px #4573df11' }}>
+            <button onClick={() => setOpen(open === i ? null : i)} style={{ width: '100%', background: 'none', border: 'none', textAlign: 'left', padding: '0.7rem 1rem', fontWeight: 700, color: '#4573df', fontSize: '1.01rem', cursor: 'pointer' }}>
               {faq.q}
             </button>
             {open === i && (

@@ -1,8 +1,9 @@
 import HomePageClient from "./HomePageClient";
 
 export const metadata = {
-  title: "Megicode — Custom Software Development, AI & Web Solutions in Pakistan",
-  description: "Megicode is a next-generation software agency in Pakistan specializing in custom AI development, scalable web & mobile applications, cloud migration, and data analytics. We help startups and enterprises ship production-ready software faster.",
+  title: "Megicode — AI-Powered Software Development for Startups & Businesses",
+  description: "Megicode builds AI-powered software for startups, non-technical founders, and growing businesses. From AI SaaS MVPs to intelligent automation — your technical co-founder from idea to scale.",
+  keywords: ['AI software development', 'AI-powered MVP', 'technical co-founder', 'AI SaaS development', 'startup software partner', 'AI automation for business', 'LLM integration', 'AI development company'],
   alternates: {
     canonical: 'https://megicode.com',
   },

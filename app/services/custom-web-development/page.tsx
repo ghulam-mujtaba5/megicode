@@ -66,7 +66,7 @@ const engagementModels = [
       "Direct Expert Access",
       "Seamless Integration"
     ],
-    color: "#6EA8FF",
+    color: "#4573df",
     isPopular: true
   },
   {
@@ -240,7 +240,7 @@ export default function WebDevelopmentDetailPage() {
                 width: 180,
                 maxWidth: '100%',
                 borderRadius: 32,
-                boxShadow: '0 8px 32px #4ea8ff33',
+                boxShadow: '0 8px 32px #4573df33',
                 background: isDark ? 'rgba(36,41,54,0.98)' : '#fff',
                 padding: 18,
                 border: `2px solid ${palette.cardInnerBorder}`
@@ -425,6 +425,7 @@ export default function WebDevelopmentDetailPage() {
           </button>
           <div className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}>Ready to build your next web app? Let&apos;s talk about your vision.</div>
           <a href="/contact" className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`} style={{ display: 'inline-block', marginTop: 8, textDecoration: 'underline', fontSize: '0.95rem' }}>Or send us a message</a>
+          <a href="/projects" className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`} style={{ display: 'inline-block', marginTop: 12, textDecoration: 'underline', fontSize: '0.95rem', opacity: 0.85 }}>See Our Case Studies &rarr;</a>
         </section>
       </main>
       {calendlyModalElement}
