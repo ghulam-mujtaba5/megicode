@@ -7,7 +7,7 @@ import darkStyles from './welcomeDark.module.css';
 import commonStyles from './welcomeCommon.module.css';
 
 const welcomeChars = 'Welcome to'.split('');
-const serviceWords = 'We design and develop desktop, web, and mobile applications with precision.'.split(' ');
+const serviceWords = 'Elevate Your Business with AI-Driven Innovation'.split(' ');
 
 const charStagger = {
   hidden: {},
