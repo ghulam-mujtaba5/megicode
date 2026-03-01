@@ -208,4 +208,11 @@ html.dark, body.dark {
     padding-bottom: 0;
     margin-bottom: 0;
   }
+
+  /* Push breadcrumbs below the absolutely-positioned mobile hamburger nav
+     The mobile toggle button occupies roughly 35-65px from the page top,
+     so a 72px top margin ensures breadcrumbs never overlap the nav area. */
+  .breadcrumbs-nav {
+    margin-top: 72px !important;
+  }
 }
