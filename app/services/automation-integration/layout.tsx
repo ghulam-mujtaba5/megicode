@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'AI Automation for Businesses | Intelligent Workflows | Megicode',
     description: 'Replace manual work with AI-powered automation — intelligent workflows, AI chatbots & smart integrations for SMEs.',
-    url: 'https://megicode.com/services/automation-integration',
+    url: 'https://www.megicode.com/services/automation-integration',
     images: [{ url: '/meta/services-og.png', width: 1200, height: 630, alt: 'AI Automation for Businesses | Megicode' }],
   },
   twitter: {
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     images: ['/meta/services-og.png'],
   },
   alternates: {
-    canonical: 'https://megicode.com/services/automation-integration',
+    canonical: 'https://www.megicode.com/services/automation-integration',
   },
 };
 

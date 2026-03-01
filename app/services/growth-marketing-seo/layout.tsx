@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Growth Marketing & SEO for Startups | Data-Driven Growth | Megicode',
     description: 'Data-driven growth marketing for SaaS and AI startups — SEO, content, paid ads & conversion optimization.',
-    url: 'https://megicode.com/services/growth-marketing-seo',
+    url: 'https://www.megicode.com/services/growth-marketing-seo',
     images: [{ url: '/meta/services-og.png', width: 1200, height: 630, alt: 'Growth Marketing & SEO | Megicode' }],
   },
   twitter: {
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     images: ['/meta/services-og.png'],
   },
   alternates: {
-    canonical: 'https://megicode.com/services/growth-marketing-seo',
+    canonical: 'https://www.megicode.com/services/growth-marketing-seo',
   },
 };
 

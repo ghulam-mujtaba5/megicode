@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Careers at Megicode',
     description: 'Join our team of innovators. Explore open positions in software development, AI, data science, and design.',
-    url: 'https://megicode.com/careers',
+    url: 'https://www.megicode.com/careers',
   },
   twitter: {
     card: 'summary_large_image',
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     description: 'Join our team of innovators. Explore open positions in software development, AI, data science, and design.',
   },
   alternates: {
-    canonical: 'https://megicode.com/careers',
+    canonical: 'https://www.megicode.com/careers',
   },
 };
 

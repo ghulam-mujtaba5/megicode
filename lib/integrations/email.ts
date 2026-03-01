@@ -21,7 +21,7 @@ export const EmailService = {
         html: `
           <h1>Welcome, ${clientName}!</h1>
           <p>We are thrilled to start this journey with you.</p>
-          <p>You can access your client portal here: <a href="https://megicode.com/internal/login">Client Portal</a></p>
+          <p>You can access your client portal here: <a href="https://www.megicode.com/internal/login">Client Portal</a></p>
         `,
       });
       return { success: true, data };

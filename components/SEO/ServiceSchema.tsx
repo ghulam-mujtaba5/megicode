@@ -12,7 +12,7 @@ interface ServiceSchemaProps {
 }
 
 const ServiceSchema: React.FC<ServiceSchemaProps> = ({ service }) => {
-  const serviceUrl = `https://megicode.com/services/${service.slug}`;
+  const serviceUrl = `https://www.megicode.com/services/${service.slug}`;
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -23,7 +23,7 @@ const ServiceSchema: React.FC<ServiceSchemaProps> = ({ service }) => {
     provider: {
       '@type': 'Organization',
       name: 'Megicode',
-      url: 'https://megicode.com',
+      url: 'https://www.megicode.com',
     },
     areaServed: {
       '@type': 'Place',

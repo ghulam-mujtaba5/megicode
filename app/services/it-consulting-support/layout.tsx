@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Technical Co-Founder as a Service | CTO for Startups | Megicode',
     description: 'CTO-level tech strategy, architecture decisions, team building & investor-ready due diligence for non-technical founders.',
-    url: 'https://megicode.com/services/it-consulting-support',
+    url: 'https://www.megicode.com/services/it-consulting-support',
     images: [{ url: '/meta/services-og.png', width: 1200, height: 630, alt: 'Technical Co-Founder as a Service | Megicode' }],
   },
   twitter: {
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     images: ['/meta/services-og.png'],
   },
   alternates: {
-    canonical: 'https://megicode.com/services/it-consulting-support',
+    canonical: 'https://www.megicode.com/services/it-consulting-support',
   },
 };
 

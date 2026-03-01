@@ -42,7 +42,7 @@ User-agent: Amazonbot
 Allow: /
 
 # Host
-Host: https://megicode.com
+Host: https://www.megicode.com
 
 # Sitemaps
-Sitemap: https://megicode.com/sitemap.xml
+Sitemap: https://www.megicode.com/sitemap.xml

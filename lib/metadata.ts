@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 // ─── Constants ───────────────────────────────────────────────
-export const SITE_URL = 'https://megicode.com';
+export const SITE_URL = 'https://www.megicode.com';
 export const SITE_NAME = 'Megicode';
 export const DEFAULT_OG_IMAGE = '/meta/og-image.png';
 export const SERVICES_OG_IMAGE = '/meta/services-og.png';
@@ -22,7 +22,7 @@ export const SOCIAL_PROFILES = [
 ] as const;
 
 // ─── Canonical URL helper ────────────────────────────────────
-/** Always returns https://megicode.com/path (no www, no trailing slash) */
+/** Always returns https://www.megicode.com/path (no www, no trailing slash) */
 export function canonicalUrl(path: string): string {
   const clean = path === '/' ? '' : path.replace(/\/+$/, '');
   return `${SITE_URL}${clean}`;

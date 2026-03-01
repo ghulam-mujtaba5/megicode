@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'AI Integration & Data Intelligence | Add AI to Your Product | Megicode',
     description: 'Add AI superpowers to your existing product — GPT chatbots, smart search, recommendation engines & AI analytics.',
-    url: 'https://megicode.com/services/data-analytics-bi',
+    url: 'https://www.megicode.com/services/data-analytics-bi',
     images: [{ url: '/meta/services-og.png', width: 1200, height: 630, alt: 'AI Integration & Data Intelligence | Megicode' }],
   },
   twitter: {
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     images: ['/meta/services-og.png'],
   },
   alternates: {
-    canonical: 'https://megicode.com/services/data-analytics-bi',
+    canonical: 'https://www.megicode.com/services/data-analytics-bi',
   },
 };
 

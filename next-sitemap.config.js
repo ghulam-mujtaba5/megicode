@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 const config = {
-  siteUrl: 'https://megicode.com',
+  siteUrl: 'https://www.megicode.com',
   generateRobotsTxt: true,
   changefreq: 'weekly',
   priority: 0.7,

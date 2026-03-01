@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     };
   }
 
-  const pageUrl = `https://megicode.com/article/${id}`;
+  const pageUrl = `https://www.megicode.com/article/${id}`;
   const imageUrl = article.heroImage?.sizes?.medium?.url || 
                   article.heroImage?.url || 
                   article.coverImage || 

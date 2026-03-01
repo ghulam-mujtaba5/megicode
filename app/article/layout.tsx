@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Articles & Insights | Megicode',
     description: 'Read the latest articles and insights on software development, AI, cloud computing, and digital transformation.',
-    url: 'https://megicode.com/article',
+    url: 'https://www.megicode.com/article',
   },
   twitter: {
     card: 'summary_large_image',
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     description: 'Read the latest articles and insights on software development, AI, and digital transformation.',
   },
   alternates: {
-    canonical: 'https://megicode.com/article',
+    canonical: 'https://www.megicode.com/article',
   },
 };
 

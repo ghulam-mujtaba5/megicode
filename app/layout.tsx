@@ -19,7 +19,7 @@ export const viewport = {
 };
 
 export const metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://megicode.com'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.megicode.com'),
   title: {
     default: "Megicode — AI-Powered Software Development for Startups & Businesses",
     template: "%s | Megicode"
@@ -57,7 +57,7 @@ export const metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://megicode.com",
+    url: "https://www.megicode.com",
     siteName: "Megicode",
     title: "Megicode — AI-Powered Software Development for Startups & Businesses",
     description: "AI-powered software for startups, founders & growing businesses. From AI SaaS MVPs to technical co-founder services.",
@@ -79,7 +79,7 @@ export const metadata = {
     creator: "@megicode",
   },
   alternates: {
-    canonical: 'https://megicode.com',
+    canonical: 'https://www.megicode.com',
   },
   robots: {
     index: true,
@@ -99,8 +99,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Megicode",
-    "url": "https://megicode.com",
-    "logo": `https://megicode.com${PWA_ICON}`,
+    "url": "https://www.megicode.com",
+    "logo": `https://www.megicode.com${PWA_ICON}`,
     "email": "contact@megicode.com",
     "foundingDate": "2024",
     "numberOfEmployees": {
@@ -152,7 +152,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Megicode",
-    "url": "https://megicode.com",
+    "url": "https://www.megicode.com",
     "description": "AI-powered software development for startups, founders, and growing businesses. From AI SaaS MVPs and LLM integration to technical co-founder services — your tech partner from idea to scale.",
     "publisher": {
       "@type": "Organization",
@@ -162,7 +162,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       "@type": "SearchAction",
       "target": {
         "@type": "EntryPoint",
-        "urlTemplate": "https://megicode.com/services?q={search_term_string}"
+        "urlTemplate": "https://www.megicode.com/services?q={search_term_string}"
       },
       "query-input": "required name=search_term_string"
     }
@@ -182,12 +182,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       "Privacy Policy"
     ],
     "url": [
-      "https://megicode.com/about",
-      "https://megicode.com/services",
-      "https://megicode.com/projects",
-      "https://megicode.com/reviews",
-      "https://megicode.com/contact",
-      "https://megicode.com/privacy-policy"
+      "https://www.megicode.com/about",
+      "https://www.megicode.com/services",
+      "https://www.megicode.com/projects",
+      "https://www.megicode.com/reviews",
+      "https://www.megicode.com/contact",
+      "https://www.megicode.com/privacy-policy"
     ]
   };
 

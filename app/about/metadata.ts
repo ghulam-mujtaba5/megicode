@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'About Megicode | Your AI-Powered Technical Partner',
     description: "We build AI-powered software for startups and growing businesses — from first MVP to production-ready AI products. Your technical co-founder from idea to scale.",
-    url: 'https://megicode.com/about',
+    url: 'https://www.megicode.com/about',
     siteName: 'Megicode',
     images: [
       {
@@ -25,6 +25,6 @@ export const metadata: Metadata = {
     images: ['/api/og?title=About%20Megicode&subtitle=Your%20AI-Powered%20Technical%20Partner'],
   },
   alternates: {
-    canonical: 'https://megicode.com/about',
+    canonical: 'https://www.megicode.com/about',
   },
 }

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Mobile App Development | iOS & Android with AI Features | Megicode',
     description: 'Cross-platform mobile apps with AI features, real-time sync, and startup-ready architecture.',
-    url: 'https://megicode.com/services/mobile-app-solutions',
+    url: 'https://www.megicode.com/services/mobile-app-solutions',
     images: [{ url: '/meta/services-og.png', width: 1200, height: 630, alt: 'Mobile App Development | Megicode' }],
   },
   twitter: {
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     images: ['/meta/services-og.png'],
   },
   alternates: {
-    canonical: 'https://megicode.com/services/mobile-app-solutions',
+    canonical: 'https://www.megicode.com/services/mobile-app-solutions',
   },
 };
 

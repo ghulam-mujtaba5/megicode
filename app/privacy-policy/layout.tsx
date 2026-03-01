@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Privacy Policy | Megicode',
     description: 'Learn how Megicode collects, uses, and protects your personal data.',
-    url: 'https://megicode.com/privacy-policy',
+    url: 'https://www.megicode.com/privacy-policy',
   },
   twitter: {
     card: 'summary',
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     description: 'Learn how Megicode collects, uses, and protects your personal data.',
   },
   alternates: {
-    canonical: 'https://megicode.com/privacy-policy',
+    canonical: 'https://www.megicode.com/privacy-policy',
   },
 };
 

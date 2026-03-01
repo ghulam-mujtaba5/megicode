@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Client Reviews & Testimonials | Megicode',
     description: "Read what real clients say about working with Megicode.",
-    url: 'https://megicode.com/reviews',
+    url: 'https://www.megicode.com/reviews',
     siteName: 'Megicode',
     images: [
       {
@@ -25,6 +25,6 @@ export const metadata: Metadata = {
     images: ['/api/og?title=Client%20Reviews%20%26%20Testimonials&subtitle=What%20our%20clients%20say%20about%20Megicode'],
   },
   alternates: {
-    canonical: 'https://megicode.com/reviews',
+    canonical: 'https://www.megicode.com/reviews',
   },
 };

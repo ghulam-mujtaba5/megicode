@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Projects & Products | Megicode',
     description: "Real projects, real products, real impact. See what Megicode builds — clinic platforms, university portals, and more.",
-    url: 'https://megicode.com/projects',
+    url: 'https://www.megicode.com/projects',
     siteName: 'Megicode',
     images: [
       {
@@ -25,6 +25,6 @@ export const metadata: Metadata = {
     images: ['/api/og?title=Projects%20%26%20Products&subtitle=Real%20Platforms%20We%20Built%20%26%20Shipped'],
   },
   alternates: {
-    canonical: 'https://megicode.com/projects',
+    canonical: 'https://www.megicode.com/projects',
   },
 };

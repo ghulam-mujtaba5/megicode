@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Cloud Infrastructure & DevOps for Startups | Megicode',
     description: 'Scale your startup infrastructure — cloud architecture, CI/CD pipelines, auto-scaling & cost optimization.',
-    url: 'https://megicode.com/services/cloud-devops-services',
+    url: 'https://www.megicode.com/services/cloud-devops-services',
     images: [{ url: '/meta/services-og.png', width: 1200, height: 630, alt: 'Cloud Infrastructure & DevOps | Megicode' }],
   },
   twitter: {
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     images: ['/meta/services-og.png'],
   },
   alternates: {
-    canonical: 'https://megicode.com/services/cloud-devops-services',
+    canonical: 'https://www.megicode.com/services/cloud-devops-services',
   },
 };
 

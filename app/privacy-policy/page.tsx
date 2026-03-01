@@ -22,7 +22,7 @@ export default function PrivacyPolicyPage() {
         <section className={styles.section}>
           <h2 className={styles.subheading}>1. Introduction</h2>
           <p>
-            Welcome to <strong>Megicode</strong> (<a href="https://megicode.com" target="_blank" rel="noopener noreferrer">megicode.com</a>). We are a technology company specializing in modern, scalable, and innovative software solutions, including web, mobile, desktop, and AI-driven applications. This Privacy Policy explains how we collect, use, and protect your information when you use our website and services.
+            Welcome to <strong>Megicode</strong> (<a href="https://www.megicode.com" target="_blank" rel="noopener noreferrer">megicode.com</a>). We are a technology company specializing in modern, scalable, and innovative software solutions, including web, mobile, desktop, and AI-driven applications. This Privacy Policy explains how we collect, use, and protect your information when you use our website and services.
           </p>
         </section>
         <section className={styles.section}>

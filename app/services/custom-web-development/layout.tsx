@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'SaaS & Web Platform Development | Build Your Startup MVP | Megicode',
     description: 'Launch your SaaS product faster with Next.js, React & TypeScript — auth, payments, dashboards & AI features included.',
-    url: 'https://megicode.com/services/custom-web-development',
+    url: 'https://www.megicode.com/services/custom-web-development',
     images: [{ url: '/meta/services-og.png', width: 1200, height: 630, alt: 'SaaS & Web Platform Development | Megicode' }],
   },
   twitter: {
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     images: ['/meta/services-og.png'],
   },
   alternates: {
-    canonical: 'https://megicode.com/services/custom-web-development',
+    canonical: 'https://www.megicode.com/services/custom-web-development',
   },
 };
 

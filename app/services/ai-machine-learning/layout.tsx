@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'AI-Powered Product Development | Build Intelligent SaaS | Megicode',
     description: 'Build AI-first products with custom ML models, GPT/LLM integration, RAG systems, and AI agents.',
-    url: 'https://megicode.com/services/ai-machine-learning',
+    url: 'https://www.megicode.com/services/ai-machine-learning',
     images: [{ url: '/meta/services-og.png', width: 1200, height: 630, alt: 'AI-Powered Product Development | Megicode' }],
   },
   twitter: {
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     images: ['/meta/services-og.png'],
   },
   alternates: {
-    canonical: 'https://megicode.com/services/ai-machine-learning',
+    canonical: 'https://www.megicode.com/services/ai-machine-learning',
   },
 };
 

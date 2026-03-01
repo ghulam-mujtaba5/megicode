@@ -16,7 +16,7 @@ const servicesData = [
     openGraph: {
       title: "AI-Powered Product Development for Startups | Megicode",
       description: "We build intelligent software products with AI baked in from day one. GPT-powered SaaS, custom ML models, and AI agents — from idea to production.",
-      url: "https://megicode.com/services/ai-machine-learning",
+      url: "https://www.megicode.com/services/ai-machine-learning",
       images: [{ url: "/meta/services-og.png", width: 1200, height: 630, alt: "AI-Powered Product Development | Megicode" }],
     },
     twitter: {
@@ -25,7 +25,7 @@ const servicesData = [
       description: "We build intelligent software products with AI baked in from day one. GPT-powered SaaS, custom ML models, and AI agents.",
       images: ["/meta/services-og.png"],
     },
-    canonical: "https://megicode.com/services/ai-machine-learning",
+    canonical: "https://www.megicode.com/services/ai-machine-learning",
   },
   {
     icon: "/ds&ai-icon.svg",
@@ -44,7 +44,7 @@ const servicesData = [
     openGraph: {
       title: "AI Integration & Data Intelligence for Startups | Megicode",
       description: "Add AI superpowers to your existing product. Intelligent dashboards, AI chatbots, smart search, and predictive analytics integration.",
-      url: "https://megicode.com/services/data-analytics-bi",
+      url: "https://www.megicode.com/services/data-analytics-bi",
       images: [{ url: "/meta/services-og.png", width: 1200, height: 630, alt: "AI Integration & Data Intelligence | Megicode" }],
     },
     twitter: {
@@ -53,7 +53,7 @@ const servicesData = [
       description: "Add AI superpowers to your existing product. Intelligent dashboards, AI chatbots, smart search, and predictive analytics.",
       images: ["/meta/services-og.png"],
     },
-    canonical: "https://megicode.com/services/data-analytics-bi",
+    canonical: "https://www.megicode.com/services/data-analytics-bi",
   },
   {
     icon: "/web app icon.svg",
@@ -122,7 +122,7 @@ const servicesData = [
     openGraph: {
       title: "SaaS & Web Platform Development for Startups | Megicode",
       description: "Full-stack SaaS platforms and web apps for startups. From MVP to market-ready products with payment, auth, and admin panels built in.",
-      url: "https://megicode.com/services/custom-web-development",
+      url: "https://www.megicode.com/services/custom-web-development",
       images: [{ url: "/meta/services-og.png", width: 1200, height: 630, alt: "SaaS & Web Platform Development | Megicode" }],
     },
     twitter: {
@@ -131,7 +131,7 @@ const servicesData = [
       description: "Full-stack SaaS platforms and web apps for startups. From MVP to market-ready products.",
       images: ["/meta/services-og.png"],
     },
-    canonical: "https://megicode.com/services/custom-web-development"
+    canonical: "https://www.megicode.com/services/custom-web-development"
   },
   {
     icon: "/mobile app icon.svg",
@@ -150,7 +150,7 @@ const servicesData = [
     openGraph: {
       title: "Mobile App Development for Startups | Megicode",
       description: "Cross-platform mobile apps with AI features. React Native and Flutter development for startups and growing businesses.",
-      url: "https://megicode.com/services/mobile-app-solutions",
+      url: "https://www.megicode.com/services/mobile-app-solutions",
       images: [{ url: "/meta/services-og.png", width: 1200, height: 630, alt: "Mobile App Development | Megicode" }],
     },
     twitter: {
@@ -159,7 +159,7 @@ const servicesData = [
       description: "Cross-platform mobile apps with AI features. React Native and Flutter development for startups.",
       images: ["/meta/services-og.png"],
     },
-    canonical: "https://megicode.com/services/mobile-app-solutions",
+    canonical: "https://www.megicode.com/services/mobile-app-solutions",
   },
   {
     icon: "/meta/rm.svg",
@@ -178,7 +178,7 @@ const servicesData = [
     openGraph: {
       title: "Cloud Infrastructure & DevOps for Startups | Megicode",
       description: "Scalable cloud architecture and DevOps for startups. CI/CD, auto-scaling, monitoring, and security — built to grow with you.",
-      url: "https://megicode.com/services/cloud-devops-services",
+      url: "https://www.megicode.com/services/cloud-devops-services",
       images: [{ url: "/meta/services-og.png", width: 1200, height: 630, alt: "Cloud & DevOps for Startups | Megicode" }],
     },
     twitter: {
@@ -187,7 +187,7 @@ const servicesData = [
       description: "Scalable cloud architecture and DevOps for startups. CI/CD, auto-scaling, and security.",
       images: ["/meta/services-og.png"],
     },
-    canonical: "https://megicode.com/services/cloud-devops-services",
+    canonical: "https://www.megicode.com/services/cloud-devops-services",
   },
   {
     icon: "/data scrapping icon.svg",
@@ -206,7 +206,7 @@ const servicesData = [
     openGraph: {
       title: "AI Automation for Businesses & SMEs | Megicode",
       description: "Intelligent workflow automation for SMEs. Replace manual tasks with AI-powered automation that saves hours every week.",
-      url: "https://megicode.com/services/automation-integration",
+      url: "https://www.megicode.com/services/automation-integration",
       images: [{ url: "/meta/services-og.png", width: 1200, height: 630, alt: "AI Automation for Businesses | Megicode" }],
     },
     twitter: {
@@ -215,7 +215,7 @@ const servicesData = [
       description: "Replace manual tasks with AI-powered automation. Smart chatbots, workflow automation, and system integration.",
       images: ["/meta/services-og.png"],
     },
-    canonical: "https://megicode.com/services/automation-integration",
+    canonical: "https://www.megicode.com/services/automation-integration",
   },
   {
     icon: "/Ui&Ux-icon.svg",
@@ -234,7 +234,7 @@ const servicesData = [
     openGraph: {
       title: "Product Design & UX Strategy for Startups | Megicode",
       description: "Conversion-focused design for SaaS and AI-powered products. Research-backed interfaces that maximize engagement and retention.",
-      url: "https://megicode.com/services/ui-ux-product-design",
+      url: "https://www.megicode.com/services/ui-ux-product-design",
       images: [{ url: "/meta/services-og.png", width: 1200, height: 630, alt: "Product Design & UX | Megicode" }],
     },
     twitter: {
@@ -243,7 +243,7 @@ const servicesData = [
       description: "Conversion-focused design for SaaS and AI-powered products. Interfaces that maximize engagement.",
       images: ["/meta/services-og.png"],
     },
-    canonical: "https://megicode.com/services/ui-ux-product-design",
+    canonical: "https://www.megicode.com/services/ui-ux-product-design",
   },
   {
     icon: "/it-consulting-support-icon.svg",
@@ -262,7 +262,7 @@ const servicesData = [
     openGraph: {
       title: "Technical Co-Founder as a Service | Megicode",
       description: "CTO-level guidance for non-technical founders. Architecture, team building, tech strategy, and investor-ready due diligence — without hiring a full-time CTO.",
-      url: "https://megicode.com/services/it-consulting-support",
+      url: "https://www.megicode.com/services/it-consulting-support",
       images: [{ url: "/meta/services-og.png", width: 1200, height: 630, alt: "Technical Co-Founder as a Service | Megicode" }],
     },
     twitter: {
@@ -271,7 +271,7 @@ const servicesData = [
       description: "CTO-level guidance for non-technical founders. Architecture, strategy, and investor-ready tech due diligence.",
       images: ["/meta/services-og.png"],
     },
-    canonical: "https://megicode.com/services/it-consulting-support",
+    canonical: "https://www.megicode.com/services/it-consulting-support",
   },
   {
     icon: "/data visualization icon.svg",
@@ -290,7 +290,7 @@ const servicesData = [
     openGraph: {
       title: "Growth Marketing & SEO for Startups | Megicode",
       description: "Data-driven growth marketing for SaaS and AI startups. Technical SEO, content strategy, paid ads, and conversion optimization.",
-      url: "https://megicode.com/services/growth-marketing-seo",
+      url: "https://www.megicode.com/services/growth-marketing-seo",
       images: [{ url: "/meta/services-og.png", width: 1200, height: 630, alt: "Growth Marketing & SEO | Megicode" }],
     },
     twitter: {
@@ -299,7 +299,7 @@ const servicesData = [
       description: "Data-driven growth marketing for SaaS and AI startups. SEO, content, paid ads, and CRO.",
       images: ["/meta/services-og.png"],
     },
-    canonical: "https://megicode.com/services/growth-marketing-seo",
+    canonical: "https://www.megicode.com/services/growth-marketing-seo",
   }
 ];
 

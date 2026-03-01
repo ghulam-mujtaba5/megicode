@@ -18,7 +18,7 @@ interface ArticleSchemaProps {
 }
 
 const ArticleSchema: React.FC<ArticleSchemaProps> = ({ article }) => {
-  const pageUrl = `https://megicode.com/article/${article.id}`;
+  const pageUrl = `https://www.megicode.com/article/${article.id}`;
   const imageUrl = article.heroImage?.sizes?.medium?.url || 
                    article.heroImage?.url || 
                    article.coverImage || 
@@ -45,7 +45,7 @@ const ArticleSchema: React.FC<ArticleSchemaProps> = ({ article }) => {
       'name': 'Megicode',
   'logo': {
     '@type': 'ImageObject',
-    'url': `https://megicode.com${PWA_ICON}`,
+    'url': `https://www.megicode.com${PWA_ICON}`,
   },
     },
   };
