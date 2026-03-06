@@ -1,0 +1,41 @@
+/* Dark theme styles for PrivacyPolicy */
+
+.privacyMain {
+  background: linear-gradient(135deg, #181a1b 0%, #23272f 100%);
+  color: #e5e5e5;
+}
+
+.heading {
+  color: #60aaff;
+}
+
+.date {
+  color: #60aaff;
+}
+
+.section {
+  background: rgba(35, 39, 47, 0.85);
+  border: 1.5px solid #2d3140;
+  box-shadow: 0 8px 32px rgba(69, 115, 223, 0.13);
+}
+
+.subheading {
+  color: #60aaff;
+}
+
+.section p,
+.section ul {
+  color: #e5e5e5;
+}
+
+.section a {
+  color: #60aaff;
+}
+
+.section a:hover {
+  color: #3388cc;
+}
+
+.section strong {
+  color: #60aaff;
+}

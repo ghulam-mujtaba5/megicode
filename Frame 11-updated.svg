@@ -1,0 +1,103 @@
+<svg width="1783" height="316" viewBox="0 0 1783 316" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap');
+    </style>
+
+    <!-- Background: solid brand color matching LinkedIn profile -->
+
+    <!-- Icon gradients -->
+    <linearGradient id="icon_grad_1" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#667EEA"/>
+      <stop offset="1" stop-color="#4573DF"/>
+    </linearGradient>
+    <linearGradient id="icon_grad_2" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4573DF"/>
+      <stop offset="1" stop-color="#2D4FA2"/>
+    </linearGradient>
+    <linearGradient id="icon_grad_3" x1="0" y1="24" x2="24" y2="0" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#667EEA"/>
+      <stop offset="1" stop-color="#3A5BC7"/>
+    </linearGradient>
+
+    <!-- Subtle glow filter -->
+    <filter id="icon_glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1.2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+  </defs>
+
+  <!-- ═══════════════ BACKGROUND ═══════════════ -->
+  <rect x="0" y="0" width="1783" height="316" fill="#1d2027"/>
+
+  <!-- Top accent line (solid, no gradient) -->
+  <rect x="0" y="0" width="1783" height="2.5" fill="#4573DF" opacity="0.4"/>
+
+  <!-- ═══════════════ RIGHT-SIDE ICONS (Lucide open-source, MIT) ═══════════════ -->
+
+
+
+  <!-- Code brackets — Lucide 'code-2' (software development) -->
+  <g opacity="0.14" transform="translate(1260, 70) scale(2.8)" filter="url(#icon_glow)" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="m18 16 4-4-4-4" stroke="url(#icon_grad_1)" stroke-width="1.1"/>
+    <path d="m6 8-4 4 4 4" stroke="url(#icon_grad_1)" stroke-width="1.1"/>
+    <path d="m14.5 4-5 16" stroke="url(#icon_grad_3)" stroke-width="0.8"/>
+  </g>
+
+  <!-- CPU chip — Lucide 'cpu' (AI & technology) -->
+  <g opacity="0.12" transform="translate(1400, 30) scale(4.2)" filter="url(#icon_glow)" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <!-- Outer housing -->
+    <rect x="4" y="4" width="16" height="16" rx="2" stroke="url(#icon_grad_2)" stroke-width="0.6"/>
+    <!-- Inner core with subtle fill -->
+    <rect x="9" y="9" width="6" height="6" stroke="url(#icon_grad_1)" stroke-width="0.5" fill="#4573DF" fill-opacity="0.06"/>
+    <!-- Pins -->
+    <path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 15h3M1 9h3M1 15h3" stroke="url(#icon_grad_3)" stroke-width="0.4"/>
+  </g>
+
+  <!-- Globe — Lucide 'globe' (web & global platforms) -->
+  <g opacity="0.11" transform="translate(1540, 120) scale(3.3)" filter="url(#icon_glow)" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <circle cx="12" cy="12" r="10" stroke="url(#icon_grad_1)" stroke-width="0.8"/>
+    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke="url(#icon_grad_3)" stroke-width="0.6"/>
+    <path d="M2 12h20" stroke="url(#icon_grad_2)" stroke-width="0.5"/>
+  </g>
+
+  <!-- Stacked layers — Lucide 'layers' (full-stack platforms) -->
+  <g opacity="0.10" transform="translate(1350, 185) scale(2.8)" filter="url(#icon_glow)" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <polygon points="12,2 2,7 12,12 22,7" stroke="url(#icon_grad_1)" stroke-width="0.8" fill="#4573DF" fill-opacity="0.04"/>
+    <polyline points="2,17 12,22 22,17" stroke="url(#icon_grad_3)" stroke-width="0.7"/>
+    <polyline points="2,12 12,17 22,12" stroke="url(#icon_grad_2)" stroke-width="0.7"/>
+  </g>
+
+  <!-- ═══════════════ TEXT CONTENT ═══════════════ -->
+
+  <!-- Heading: Megicode -->
+  <text x="509" y="130" font-family="Inter, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="62" font-weight="700" letter-spacing="-0.5">
+    <tspan fill="white">Megi</tspan><tspan fill="#4573DF">code</tspan>
+  </text>
+
+  <!-- Tagline -->
+  <text x="511" y="168" font-family="Inter, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="24" font-weight="400" fill="white" opacity="0.88" letter-spacing="0.4">
+    If You Can Imagine It, We Can Build It
+  </text>
+
+  <!-- Separator line -->
+  <line x1="511" y1="186" x2="810" y2="186" stroke="#4573DF" stroke-width="1" opacity="0.2"/>
+
+  <!-- Services (4 categories covering all 9 services) -->
+  <circle cx="517" cy="214" r="3.5" fill="#4573DF" opacity="0.9"/>
+  <text x="529" y="219" font-family="Inter, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15.5" font-weight="400" fill="white" opacity="0.82" letter-spacing="0.3">AI Development</text>
+
+  <circle cx="685" cy="214" r="3.5" fill="#4573DF" opacity="0.9"/>
+  <text x="697" y="219" font-family="Inter, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15.5" font-weight="400" fill="white" opacity="0.82" letter-spacing="0.3">SaaS &amp; Web Platforms</text>
+
+  <circle cx="886" cy="214" r="3.5" fill="#4573DF" opacity="0.9"/>
+  <text x="898" y="219" font-family="Inter, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15.5" font-weight="400" fill="white" opacity="0.82" letter-spacing="0.3">Mobile Apps</text>
+
+  <circle cx="1008" cy="214" r="3.5" fill="#4573DF" opacity="0.9"/>
+  <text x="1020" y="219" font-family="Inter, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15.5" font-weight="400" fill="white" opacity="0.82" letter-spacing="0.3">AI-Driven Growth Partner</text>
+
+</svg>

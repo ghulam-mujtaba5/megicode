@@ -48,8 +48,8 @@ const CareersHero: React.FC = () => {
                 <span className={common.statLabel}>Team Members</span>
               </div>
               <div className={common.stat}>
-                <span className={common.statNumber}>3</span>
-                <span className={common.statLabel}>Years of Excellence</span>
+                <span className={common.statNumber}>1+</span>
+                <span className={common.statLabel}>Year of Excellence</span>
               </div>
             </div>
             <div className={common.ctaButtons}>

@@ -102,7 +102,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     "url": "https://www.megicode.com",
     "logo": `https://www.megicode.com${PWA_ICON}`,
     "email": "contact@megicode.com",
-    "foundingDate": "2024",
+    "foundingDate": "2025-07",
     "numberOfEmployees": {
       "@type": "QuantitativeValue",
       "minValue": 2,
