@@ -22,7 +22,7 @@ export const SOCIAL_PROFILES = [
 ] as const;
 
 // ─── Canonical URL helper ────────────────────────────────────
-/** Always returns https://www.megicode.com/path (no www, no trailing slash) */
+/** Always returns https://www.megicode.com/path (no trailing slash) */
 export function canonicalUrl(path: string): string {
   const clean = path === '/' ? '' : path.replace(/\/+$/, '');
   return `${SITE_URL}${clean}`;

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/:path((?!_next|api|meta|favicon|sitemap|robots).*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "megicode.com"
+        }
+      ],
+      "destination": "https://www.megicode.com/:path",
+      "permanent": true
+    }
+  ]
+}

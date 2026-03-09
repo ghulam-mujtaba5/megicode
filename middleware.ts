@@ -2,14 +2,22 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 const CANONICAL_HOST = 'www.megicode.com';
+const CANONICAL_ORIGIN = 'https://www.megicode.com';
 
 export function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
+  const host = request.headers.get('host') || '';
 
-  // 1. Force Canonical Host (www.megicode.com)
-  // Vercel's primary domain is www.megicode.com, so we enforce that here.
-  // Non-www requests are automatically redirected by Vercel (307).
-  // If you change Vercel's primary domain, update CANONICAL_HOST above.
+  // 1. Force Canonical Host (www.megicode.com) with 301 permanent redirect.
+  //    Handles non-www → www and any other non-canonical hostnames.
+  //    Vercel domain config for megicode.com should point to the project
+  //    (not a redirect alias) so this middleware can issue a proper 301.
+  if (host && host !== CANONICAL_HOST && !host.startsWith('localhost') && !host.includes('vercel.app')) {
+    return NextResponse.redirect(
+      `${CANONICAL_ORIGIN}${url.pathname}${url.search}`,
+      301
+    );
+  }
 
   // 2. Remove trailing slashes (except root "/")
   if (url.pathname !== '/' && url.pathname.endsWith('/')) {
