@@ -4,6 +4,7 @@ import { Providers } from "./providers";
 import dynamic from "next/dynamic";
 import ClientLayout from "./ClientLayout";
 import GoogleAnalytics from "@/components/GoogleAnalytics/GoogleAnalytics";
+import MicrosoftClarity from "@/components/MicrosoftClarity/MicrosoftClarity";
 import { PWA_ICON, LOGO_MAIN_LIGHT, LOGO_MAIN_DARK } from "@/lib/logo";
 import { professionalServiceJsonLd, SITE_URL, SOCIAL_PROFILES } from "@/lib/metadata";
 
@@ -211,6 +212,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalService) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(navJsonLd) }} />
+        <MicrosoftClarity />
         <GoogleAnalytics />
       </head>
       <body>
