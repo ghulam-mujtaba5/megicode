@@ -151,9 +151,9 @@ What makes us different:
 → Startup-Grade Speed: We move fast without breaking things — MVPs in weeks, not months
 → Full-Stack Capability: Idea → Design → Development → Deployment → Scaling
 → Proven Track Record: 50+ projects delivered, 15+ AI products built, 5+ countries served
-→ We Build Our Own Products: CampusAxis (15,000+ users) proves we practice what we preach
+→ We Build Large-Scale Platforms: CampusAxis (15,000+ users) proves we practice what we preach
 
-Our flagship product CampusAxis (campusaxis.pk) — Pakistan's largest free student platform — demonstrates our ability to conceive, build, scale, and operate real products with real users.
+Our flagship community platform CampusAxis (campusaxis.pk) — Pakistan's largest free student platform — demonstrates our ability to conceive, build, scale, and operate highly trafficked platforms as a social impact initiative.
 
 Services: AI Product Development | SaaS & Web Platforms | Mobile Apps | AI Integration | Cloud & DevOps | AI Automation | Product Design | Technical Co-Founder as a Service | Growth Marketing & SEO
 ```
@@ -197,7 +197,7 @@ Megicode is an AI-focused software company that partners with startups, non-tech
 
 The company offers nine core service lines: AI-Powered Product Development, AI Integration & Data Intelligence, SaaS & Web Platform Development, Mobile App Development, Cloud Infrastructure & DevOps, AI Automation for Businesses, Product Design & UX Strategy, Technical Co-Founder as a Service, and Growth Marketing & SEO.
 
-With 50+ projects delivered across 5+ countries and 15+ AI products built, Megicode has established itself as a trusted technical partner for early-stage companies and scaling businesses. The company's flagship product, CampusAxis (campusaxis.pk), is Pakistan's largest free student platform serving 15,000+ active students across 20+ universities.
+With 50+ projects delivered across 5+ countries and 15+ AI tools built, Megicode has established itself as a trusted technical partner for early-stage companies and scaling businesses. The company's flagship community initiative, CampusAxis (campusaxis.pk), is Pakistan's largest free student platform serving 15,000+ active students across 20+ universities.
 
 Megicode's tech stack spans Next.js, React, TypeScript, Python, Node.js, OpenAI, LangChain, TensorFlow, AWS, and more — enabling end-to-end product development from AI-powered MVPs to enterprise-grade platforms.
 ```
@@ -473,7 +473,7 @@ Software Company, Information Technology Company
 
 ### Bio
 ```
-AI-focused software company & the technical co-founder every startup deserves. We build intelligent products from idea to scale. Creators of CampusAxis — Pakistan's largest free student platform (15,000+ users, 20+ universities).
+AI-focused software company & the technical co-founder every startup deserves. We build intelligent platforms from idea to scale. Creators of CampusAxis — Pakistan's largest free student platform (15,000+ users, 20+ universities).
 
 50+ projects delivered | 15+ AI products built | Team of 15+
 
@@ -507,7 +507,7 @@ We offer:
 
 What makes us different:
 • AI-first approach — every product has intelligence baked in
-• We build our own products too — CampusAxis serves 15,000+ students
+• We build our own community platforms too — CampusAxis serves 15,000+ students
 • Startup-grade speed — MVPs in weeks, not months
 • End-to-end capability — idea to design to development to scale
 
@@ -532,7 +532,7 @@ Megicode is an AI-powered software development company that serves as the techni
 
 50+ projects delivered | 15+ AI products built | 5+ countries served | Team of 15+
 
-Featured Product: CampusAxis (campusaxis.pk) — Pakistan's largest free student platform with 15,000+ active users.
+Featured Community Platform: CampusAxis (campusaxis.pk) — Pakistan's largest free student platform with 15,000+ active users.
 
 Services: AI Product Development, SaaS & Web Platforms, Mobile Apps, AI Automation, Cloud & DevOps, Technical Co-Founder as a Service, Growth Marketing.
 ```
@@ -649,7 +649,7 @@ No commitment required — just a conversation about building something great.
 - [ ] Consistent color scheme (#4573DF primary blue)
 - [ ] Website URL (megicode.com) linked on every profile
 - [ ] Calendly link (calendly.com/megicode) in professional profiles
-- [ ] CampusAxis mentioned as proof of product capability
+- [ ] CampusAxis mentioned as proof of platform capability
 
 ---
 

@@ -167,7 +167,7 @@ I build AI-powered products that solve real problems at scale.
 
 As Co-Founder & CTO of Megicode, I lead a team of 15+ engineers, designers, and strategists building intelligent software for startups, founders, and growing businesses. We've delivered 50+ projects across 5+ countries — from AI-powered SaaS MVPs to full production platforms.
 
-Our flagship product, CampusAxis (campusaxis.pk), is Pakistan's largest free student platform — 15,000+ active students, 20+ universities, 48,000+ past papers — built, scaled, and operated by our team. It's proof that we build products, not just projects.
+Our flagship community platform, CampusAxis (campusaxis.pk), is Pakistan's largest free student platform — 15,000+ active students, 20+ universities, 48,000+ past papers — built, scaled, and operated by our team as a pro-bono initiative. It's proof that we build highly scalable systems that truly impact users.
 
 ━━━━━━━━━━━━━━━━
 
@@ -218,7 +218,7 @@ I help founders turn ideas into products that scale.
 
 As Co-Founder & CEO of Megicode, I lead business strategy, partnerships, and growth for an AI-focused software company serving startups, founders, and growing businesses across 5+ countries.
 
-We've delivered 50+ projects, built 15+ AI products, and created CampusAxis — Pakistan's #1 student platform with 15,000+ active users — all proving that Megicode doesn't just build software, we build products that create lasting impact.
+We've delivered 50+ projects, built 15+ AI tools, and created CampusAxis — Pakistan's #1 student platform with 15,000+ active users — all proving that Megicode doesn't just build software, we build platforms that create lasting impact.
 
 ━━━━━━━━━━━━━━━━
 
@@ -522,7 +522,7 @@ Each founder should have a personal banner that connects back to Megicode:
 
 ### Megicode's 5 Unfair Advantages on LinkedIn
 
-1. **We Build Our Own Products** — CampusAxis (15,000+ users) is proof of execution that no pure-agency can match
+1. **We Build Large-Scale Community Platforms** — CampusAxis (15,000+ users) is proof of execution that no pure-agency can match
 2. **Technical Co-Founder Positioning** — No competitor in Pakistan owns this specific LinkedIn niche
 3. **AI-First, Not AI-Adjacent** — Every product has intelligence built in; this is our DNA, not a service add-on
 4. **Two Active Founders** — Both Ghulam (CTO) and Azan (CEO) can drive personal brand reach independently

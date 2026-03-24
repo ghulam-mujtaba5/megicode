@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Projects & Products | Megicode – Real Platforms We Built & Shipped',
-  description: "Explore real projects by Megicode — from the Aesthetics Place clinic platform (aestheticsplace.pk) to CampusAxis university portal (campusaxis.pk). Full-stack web apps, management systems, and products we built and shipped.",
+  description: "Explore real projects by Megicode — from the Aesthetics Place clinic platform (aestheticsplace.pk) to CampusAxis university portal (campusaxis.pk). Full-stack web apps, management systems, and community initiatives we built and shipped.",
   keywords: ['megicode projects', 'aesthetics clinic website', 'university portal', 'campusaxis', 'aestheticsplace', 'next.js projects', 'full stack web development', 'megicode portfolio', 'pakistan software company'],
   openGraph: {
     title: 'Projects & Products | Megicode',

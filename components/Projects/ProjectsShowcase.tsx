@@ -87,7 +87,7 @@ const ProjectsShowcase = () => {
                 />
                 <div className={styles.cardBadges}>
                   {project.liveUrl && <span className={styles.liveBadge}>🟢 Live</span>}
-                  {project.slug === 'campusaxis-university-portal' && <span className={styles.productBadge}>Our Product</span>}
+                  {project.slug === 'campusaxis-university-portal' && <span className={styles.productBadge}>Community Initiative</span>}
                 </div>
               </div>
               <div className={styles.projectContent}>
