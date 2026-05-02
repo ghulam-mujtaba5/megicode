@@ -8,7 +8,9 @@
   padding-top: 4%;
   height: auto;
   position: relative; /* Allows for absolute positioning of child elements */
-  min-height: 320px;
+  /* Tall enough to fully contain the absolutely-positioned hero animation
+     (viewBox 720×480, ~430px tall on desktop) without clipping at the top. */
+  min-height: 560px;
 }
 
 .textContainer {
@@ -102,6 +104,8 @@
 @media (max-width: 1024px) {
   .container {
     padding-left: 6%;
+    /* Stacked layout — let content drive height instead of the desktop 560px floor. */
+    min-height: 0;
   }
 
   .textContainer {
