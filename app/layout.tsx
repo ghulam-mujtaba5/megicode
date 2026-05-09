@@ -193,7 +193,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   };
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         {/* Dynamic favicons for light/dark mode using user's transparent logo variants */}
         <link
@@ -215,7 +215,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <MicrosoftClarity />
         <GoogleAnalytics />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         <a href="#main-content" className="skip-to-main">Skip to main content</a>
         <Providers>
           <ClientLayout>
