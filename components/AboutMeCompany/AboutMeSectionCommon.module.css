@@ -87,7 +87,7 @@
     font-weight: 700;
     margin-bottom: 0.7rem;
     color: var(--md-on-background, #1a202c);
-    font-family: 'Poppins', 'Open Sans', Arial, sans-serif;
+    font-family: 'Open Sans', Arial, sans-serif;
     letter-spacing: -0.02em;
     text-align: left;
 }
@@ -96,9 +96,8 @@
     font-size: 1.35rem;
     font-weight: 600;
     margin-bottom: 2.2rem;
-    color: #4573df;
     letter-spacing: 0.01em;
-    font-family: 'Poppins', 'Open Sans', Arial, sans-serif;
+    font-family: 'Open Sans', Arial, sans-serif;
 }
 
 .description {
@@ -119,13 +118,30 @@
 }
 
 .missionStatement {
-    font-weight: 700;
-    color: #4573df;
+    font-weight: 600;
     margin-top: 2.5rem;
     padding-top: 1.2rem;
-    border-top: 1px solid #dbeafe;
     font-size: 1.13rem;
     letter-spacing: 0.01em;
+    font-family: 'Open Sans', Arial, sans-serif;
+}
+
+.learnMore {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  margin-top: 1.8rem;
+  padding: 8px 18px;
+  border-radius: 100px;
+  width: fit-content;
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), background 0.22s ease;
+}
+.learnMore:hover {
+  transform: translateX(3px);
 }
 
 /* Responsive styles */

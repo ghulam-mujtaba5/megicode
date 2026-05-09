@@ -7,10 +7,10 @@
 }
 
 .internalPortalLink {
-    color: #6b9fff;
+    color: #adb5bd;
 }
 
 .internalPortalLink:hover {
-    color: #8fb4ff;
+    color: #eaf6ff;
     opacity: 1;
 }

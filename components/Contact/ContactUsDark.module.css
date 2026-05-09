@@ -13,41 +13,36 @@
 }
 
 .nameInput,
-.emailInput {
-    border: 1px solid #fff;
-    background-color: #fff;
-    color: #272b32;
+.emailInput,
+.messageInput {
+    border: 1px solid #3e444c;
+    background-color: #2c323a;
+    color: #e0e6ed;
 }
 
-.messageInput {
-    border: 1px solid #fff;
-    background-color: #fff;
-    color: #272b32;
+.nameInput::placeholder,
+.emailInput::placeholder,
+.messageInput::placeholder {
+    color: #6b7280;
 }
 
 .sendButtonBorder {
- 
-    background-color: #1d2127;
-    
+    background-color: #4573df;
 }
 
 .sendLabel {
     color: #fff;
-    
 }
 
 .sendButton {
-
     color: #fff;
-    background-color: #1d2127;
-    
-   
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #4573df;
+    box-shadow: 0 2px 8px rgba(69, 115, 223, 0.22);
 }
 
 .sendButton:hover {
-    background-color: #1d2127;
-    border: 1.5px solid #4573df;
+    background-color: #2d4fa2;
+    border: none;
 }
 
 .darkModeButton {
@@ -114,28 +109,21 @@
       
     }
 
-    /* Adjust input fields for mobile */
     .nameInput,
     .emailInput,
     .messageInput {
-        
-        border: 1px solid #ccc;
-       
+        border: 1px solid #3e444c;
+        background-color: #2c323a;
+        color: #e0e6ed;
     }
 
-     /* Adjust send button for mobile */
     .sendButton {
-    
-        background-color: #1d2127;
-       
+        background-color: #4573df;
         color: #fff;
-        
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
-    /* Adjust send button hover effect for mobile */
     .sendButton:hover {
-        background-color: #1d2127;
+        background-color: #2d4fa2;
     }
  
 

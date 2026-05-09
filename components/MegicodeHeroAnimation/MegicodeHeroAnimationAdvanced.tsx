@@ -101,12 +101,12 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
     []
   );
 
-  // Aurora blobs
+  // Aurora blobs — brand colors only (#4573df primary, #2d4fa2 dark variant)
   const aurora = useMemo(
     () => [
       { x: -180, y: -90,  r: 280, hueShift: 0,   speed: 0.18, color: '#4573df' },
-      { x:  170, y:  100, r: 250, hueShift: 80,  speed: 0.13, color: '#7c3aed' },
-      { x:  220, y: -130, r: 200, hueShift: 160, speed: 0.20, color: '#06b6d4' },
+      { x:  170, y:  100, r: 250, hueShift: 0,   speed: 0.13, color: '#2d4fa2' },
+      { x:  220, y: -130, r: 200, hueShift: 0,   speed: 0.20, color: '#4573df' },
     ],
     []
   );

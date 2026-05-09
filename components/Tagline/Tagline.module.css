@@ -1,35 +1,38 @@
 .taglineSection {
   padding: 4rem 2rem;
   text-align: center;
-  background-color: transparent; /* Make it blend with the page background */
-  border-top: 1px solid rgba(128, 128, 128, 0.2);
-  border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+  background-color: transparent;
+  border-top: 1px solid rgba(69, 115, 223, 0.1);
+  border-bottom: 1px solid rgba(69, 115, 223, 0.1);
   margin: 2rem 0;
 }
 
 .taglineText {
-  font-size: 2.25rem; /* 36px */
-  font-weight: 300; /* Lighter font weight for elegance */
+  font-size: clamp(1.625rem, 3vw, 2.25rem);
+  font-weight: 300;
   font-family: 'Open Sans', sans-serif;
   font-style: italic;
-  color: #334155; /* A softer text color for light mode */
+  color: #334155;
   margin: 0;
   line-height: 1.4;
 }
 
 .highlight {
   color: #4573df;
-  font-weight: 400;
+  font-weight: 600;
+  font-style: normal;
 }
 
 .taglineSection.dark .taglineText {
-  color: #cbd5e1; /* A softer text color for dark mode */
+  color: #adb5bd;
+}
+
+.taglineSection.dark {
+  border-top-color: #3e444c;
+  border-bottom-color: #3e444c;
 }
 
 @media (max-width: 768px) {
-  .taglineText {
-    font-size: 1.875rem; /* 30px */
-  }
   .taglineSection {
     padding: 3rem 1rem;
   }

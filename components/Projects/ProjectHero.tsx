@@ -13,7 +13,7 @@ const ProjectHero = () => {
     <section className={`${styles.heroSection} ${themeStyles.heroSection}`}>
       <div className={styles.heroContent}>
         <h1 className={`${styles.title} ${themeStyles.title}`}>
-          Real Projects. Real Products. Real Impact.
+          Our Projects &amp; Products
         </h1>
         <p className={`${styles.subtitle} ${themeStyles.subtitle}`}>
           From clinic management systems to university portals — see what we build and ship.

@@ -40,7 +40,7 @@ const CareersHero: React.FC = () => {
             </p>
             <div className={common.stats}>
               <div className={common.stat}>
-                <span className={common.statNumber}>50+</span>
+                <span className={common.statNumber}>10+</span>
                 <span className={common.statLabel}>Projects Delivered</span>
               </div>
               <div className={common.stat}>

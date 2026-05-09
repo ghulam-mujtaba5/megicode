@@ -2,50 +2,17 @@
 import React from 'react';
 import { useTheme } from '../../context/ThemeContext';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { useCalendlyModal } from '../CalendlyModal';
 import styles from './welcomeLight.module.css';
 import darkStyles from './welcomeDark.module.css';
 import commonStyles from './welcomeCommon.module.css';
 
-const welcomeChars = 'Welcome to'.split('');
-const serviceWords = 'Elevate Your Business with AI-Driven Innovation'.split(' ');
-
-const charStagger = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.04, delayChildren: 0.2 },
-  },
-};
-
-const charVariant = {
-  hidden: { opacity: 0, y: 12, filter: 'blur(8px)' },
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: 'blur(0px)',
-    transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] as const },
-  },
-};
-
-const wordStagger = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.08, delayChildren: 1.8 },
-  },
-};
-
-const wordVariant = {
-  hidden: { opacity: 0, y: 16, filter: 'blur(6px)' },
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: 'blur(0px)',
-    transition: { duration: 0.45, ease: [0.25, 0.1, 0.25, 1] as const },
-  },
-};
 
 const Frame = () => {
   const { theme } = useTheme();
   const themeStyles = theme === 'dark' ? darkStyles : styles;
+  const [openCalendly, calendlyModal] = useCalendlyModal();
 
   return (
     <section
@@ -58,62 +25,80 @@ const Frame = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <h1 className={`${commonStyles.text} ${themeStyles.text}`}>
-          {/* "Welcome to" - character stagger with blur reveal */}
+        <h1 className={commonStyles.heroHeading}>
+          {/* "Welcome to" \u2014 small eyebrow label */}
           <motion.span
-            variants={charStagger}
-            initial="hidden"
-            animate="visible"
-            style={{ display: 'inline-block' }}
+            className={`${commonStyles.welcomeEyebrow} ${themeStyles.welcomeEyebrow}`}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] as const }}
           >
-            {welcomeChars.map((char, i) => (
-              <motion.span
-                key={i}
-                variants={charVariant}
-                style={{ display: 'inline-block', whiteSpace: char === ' ' ? 'pre' : undefined }}
-              >
-                {char === ' ' ? '\u00A0' : char}
-              </motion.span>
-            ))}
+            Welcome to
           </motion.span>
-          {' '}
-          {/* "Megicode" - word-level animation so background-clip:text works correctly */}
-          <motion.span
-            className={`${commonStyles.softBuilt} ${themeStyles.softBuilt}`}
-            initial={{ opacity: 0, y: 18, scale: 0.85, filter: 'blur(10px)' }}
-            animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
-            transition={{ duration: 0.5, delay: 0.9, ease: [0.16, 1, 0.3, 1] as const }}
-            style={{ display: 'inline-block' }}
-          >
-            Megicode
-            {/* Shimmer sweep overlay */}
+
+          {/* Brand name on its own line */}
+          <span className={commonStyles.brandLine}>
+            {/* "Megi" \u2014 white (dark) / dark navy (light) */}
             <motion.span
-              className={commonStyles.shimmer}
-              initial={{ left: '-100%' }}
-              animate={{ left: '200%' }}
-              transition={{ duration: 1.2, delay: 1.8, ease: 'easeInOut' }}
-              aria-hidden="true"
-            />
-          </motion.span>
+              className={`${commonStyles.brandMegi} ${themeStyles.brandMegi}`}
+              initial={{ opacity: 0, y: 22, scale: 0.88, filter: 'blur(10px)' }}
+              animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
+              transition={{ duration: 0.55, delay: 0.55, ease: [0.16, 1, 0.3, 1] as const }}
+              style={{ display: 'inline-block', position: 'relative' }}
+            >
+              Megi
+              <motion.span
+                className={commonStyles.shimmer}
+                initial={{ left: '-100%' }}
+                animate={{ left: '200%' }}
+                transition={{ duration: 1.1, delay: 1.5, ease: 'easeInOut' }}
+                aria-hidden="true"
+              />
+            </motion.span>
+            {/* "code" \u2014 brand blue always */}
+            <motion.span
+              className={`${commonStyles.brandCode} ${themeStyles.brandCode}`}
+              initial={{ opacity: 0, y: 22, scale: 0.88, filter: 'blur(10px)' }}
+              animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
+              transition={{ duration: 0.55, delay: 0.7, ease: [0.16, 1, 0.3, 1] as const }}
+              style={{ display: 'inline-block' }}
+            >
+              code
+            </motion.span>
+          </span>
         </h1>
 
-        {/* Subtitle - word-by-word blur reveal */}
+        {/* Subtitle */}
         <motion.p
           className={`${commonStyles.paragraph} ${themeStyles.paragraph}`}
-          variants={wordStagger}
-          initial="hidden"
-          animate="visible"
+          initial={{ opacity: 0, y: 14, filter: 'blur(4px)' }}
+          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          transition={{ duration: 0.55, delay: 1.4, ease: [0.25, 0.1, 0.25, 1] as const }}
         >
-          {serviceWords.map((word, i) => (
-            <motion.span
-              key={i}
-              variants={wordVariant}
-              style={{ display: 'inline-block', marginRight: '0.3em' }}
-            >
-              {word}
-            </motion.span>
-          ))}
+          Elevate Your Business with AI-Driven Innovation
         </motion.p>
+
+        {/* Hero CTAs */}
+        <motion.div
+          className={commonStyles.heroActions}
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 2.0, ease: [0.25, 0.1, 0.25, 1] }}
+        >
+          <button
+            onClick={openCalendly}
+            className={`${commonStyles.heroPrimary} ${themeStyles.heroPrimary}`}
+          >
+            Start a Project
+          </button>
+          <Link
+            href="/services"
+            className={`${commonStyles.heroSecondary} ${themeStyles.heroSecondary}`}
+          >
+            Our Services
+          </Link>
+        </motion.div>
+        {calendlyModal}
 
       </motion.div>
     </section>

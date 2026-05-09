@@ -24,7 +24,7 @@ const ContactSection = ({
   const [error, setError] = useState(null);
   const [isSending, setIsSending] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
   const nameInputRef = useRef(null);
 
   useEffect(() => {
@@ -94,9 +94,6 @@ const ContactSection = ({
     [name, emailInput, message, validateEmail]
   );
 
-  const handleDarkModeButtonClick = useCallback(() => {
-    toggleTheme();
-  }, [toggleTheme]);
 
   const themeStyles = useMemo(() => (theme === 'light' ? lightStyles : darkStyles), [theme]);
 
@@ -208,22 +205,9 @@ const ContactSection = ({
           <img
             className={`${commonStyles.emailIcon} ${themeStyles.emailIcon}`}
             alt="Email"
-            src={theme === 'light' ? "email icon.svg" : "EmailDark.svg"}
+            src={theme === 'light' ? "email-icon.svg" : "EmailDark.svg"}
             loading="lazy"
           />
-
-          <button
-            className={`${commonStyles.darkModeButton} ${themeStyles.darkModeButton}`}
-            onClick={handleDarkModeButtonClick}
-            aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-          >
-            <div className={`${commonStyles.darkModeButtonBorder} ${themeStyles.darkModeButtonBorder}`} />
-            <div className={`${commonStyles.buttonState1} ${themeStyles.buttonState}`} />
-            <div className={`${commonStyles.buttonState} ${themeStyles.buttonState1}`} />
-            <b className={`${commonStyles.darkModeLabel} ${themeStyles.darkModeLabel}`}>
-              {theme === 'light' ? 'Light Mode' : 'Dark Mode'}
-            </b>
-          </button>
           {/* Certification badges removed as requested */}
         </div>
       </section>

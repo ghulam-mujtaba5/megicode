@@ -1,10 +1,10 @@
 
 "use client";
 import React, { useMemo } from 'react';
-import LetsTalkButton from '../CTA/LetsTalkButton';
 import { useTheme } from '../../context/ThemeContext';
 import { motion } from 'framer-motion';
-import { fadeInUp, fadeInDown, staggerContainer, scaleOnHover } from '../../utils/animations';
+import { HiArrowRight } from 'react-icons/hi2';
+import { fadeInUp, fadeInDown, staggerContainer } from '../../utils/animations';
 import commonStyles from './AboutMeSectionCommon.module.css';
 import lightStyles from './AboutMeSectionLight.module.css';
 import darkStyles from './AboutMeSectionDark.module.css';
@@ -36,24 +36,14 @@ const AboutMeSection = () => {
 
   return (
     <>
-      <LetsTalkButton />
       <motion.section
         className={`${commonStyles.cardSurface} ${themeStyles.cardSurface} ${containerClass}`}
-        variants={scaleOnHover}
-        initial="hidden"
-        whileInView="visible"
-        whileHover="hover"
-        whileTap="tap"
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
+        transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
         role="region"
         aria-labelledby="aboutus-heading"
-        tabIndex={0}
-        style={{ cursor: 'pointer' }}
-        onClick={() => {
-          if (typeof window !== 'undefined') {
-            window.location.href = '/about';
-          }
-        }}
       >
         <motion.div 
           className={sectionClass}
@@ -84,6 +74,17 @@ const AboutMeSection = () => {
               Our mission is to be the technical co-founder every startup deserves — delivering AI-powered software, strategic CTO-level guidance, and automation that gives small teams an unfair advantage.
             </p>
           </motion.div>
+
+          {/* Explicit click affordance */}
+          <motion.a
+            href="/about"
+            className={`${commonStyles.learnMore} ${themeStyles.learnMore}`}
+            variants={fadeInUp}
+            aria-label="Learn more about Megicode"
+          >
+            Learn more about us
+            <HiArrowRight size={15} aria-hidden="true" />
+          </motion.a>
         </motion.div>
       </motion.section>
     </>

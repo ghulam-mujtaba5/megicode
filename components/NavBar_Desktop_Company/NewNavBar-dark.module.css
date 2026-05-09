@@ -40,3 +40,12 @@
 .navLink:hover::after {
     width: 100%;
 }
+
+.themeToggle {
+  color: #adb5bd;
+  background: rgba(255, 255, 255, 0.06);
+}
+.themeToggle:hover {
+  color: #eaf6ff;
+  background: rgba(255, 255, 255, 0.1);
+}

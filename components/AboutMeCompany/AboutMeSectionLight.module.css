@@ -1,8 +1,21 @@
+/* Glassmorphism — fits perfectly over the light gradient page background */
 .cardSurface {
-  background: #e8ebee;
-  box-shadow: 0 4px 16px 0 rgba(60, 80, 120, 0.08);
-  /* border: 1.5px solid #e8ebee; */
-  border: 1.5px solid #2d4fa2;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(20px) saturate(1.6);
+  -webkit-backdrop-filter: blur(20px) saturate(1.6);
+  box-shadow:
+    0 8px 32px rgba(60, 80, 120, 0.1),
+    0 1px 4px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  border: 1.5px solid rgba(255, 255, 255, 0.72);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.cardSurface:hover {
+  border-color: rgba(69, 115, 223, 0.28);
+  box-shadow:
+    0 14px 44px rgba(60, 80, 120, 0.14),
+    0 2px 8px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
 }
 
 .accentBar {
@@ -16,8 +29,7 @@
 }
 
 .subtitle {
-  /* fallback solid color */
-  color: #4573df;
+  color: #475569;
 }
 
 .subtitle-gradient {
@@ -35,12 +47,10 @@
 }
 
 .missionStatement {
-  /* fallback solid color */
-  color: #4573df;
-  border-top: 1px solid #e8ebee;
+  color: #1e293b;
+  border-top: 1px solid #e2e8f0;
   margin-top: 2.2rem;
   padding-top: 1.2rem;
-  font-weight: 600;
 }
 
 .mission-gradient {
@@ -50,5 +60,14 @@
   background-clip: text;
   color: transparent;
   font-weight: 600;
+}
+
+.learnMore {
+  color: #4573df;
+  background: rgba(69, 115, 223, 0.08);
+  border: 1px solid rgba(69, 115, 223, 0.22);
+}
+.learnMore:hover {
+  background: rgba(69, 115, 223, 0.14);
 }
 
