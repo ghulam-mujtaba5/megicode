@@ -1,66 +1,135 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Services section — LIGHT theme
+   Page bg: linear-gradient(135deg, #f8fafc 0%, #e8eaf6 100%)
+   Brand: primary #4573df / #2d4fa2 | secondary #ff9800 (accent only)
+   ═══════════════════════════════════════════════════════════════════════════ */
 
-/* Skills section title */
-.skillsTitle {
+.section { background: transparent; }
 
-    color: #191d23;
-
+/* ─── Section header ──────────────────────────────────────────────────────── */
+.eyebrow {
+  background: rgba(69, 115, 223, 0.09);
+  color: #4573df;
+  border: 1px solid rgba(69, 115, 223, 0.16);
 }
 
-/* Individual skill card */
-.skillCard {
-  
-    background-color: #ffffff;
-    box-shadow: 0 2px 8px rgba(60, 80, 120, 0.06), 0 6px 20px rgba(60, 80, 120, 0.04);
-   
+.sectionTitle { color: #0f172a; }
+
+.sectionSub { color: #64748b; }
+
+/* Gradient accent on title — defined in common via brand colors, no override needed */
+.titleAccent { color: #4573df; } /* fallback for non-supporting browsers */
+
+/* ─── Primary featured card (AI) — brand blue gradient ────────────────────── */
+.primaryCard {
+  background: linear-gradient(145deg, #4a7ae4 0%, #4573df 35%, #2d4fa2 75%, #233e87 100%);
+  border: none;
+  box-shadow:
+    0 20px 56px rgba(69, 115, 223, 0.32),
+    0 4px 14px rgba(69, 115, 223, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  transition: box-shadow 0.32s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.primaryCard:hover {
+  box-shadow:
+    0 28px 68px rgba(69, 115, 223, 0.42),
+    0 8px 24px rgba(69, 115, 223, 0.24);
+  transform: translateY(-5px);
+}
+/* Subtle radial bloom */
+.primaryCard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 78% 12%, rgba(255,255,255,0.11) 0%, transparent 52%),
+    radial-gradient(ellipse at 18% 88%, rgba(255,255,255,0.06) 0%, transparent 48%);
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 0;
 }
 
-/* Specific styles for UI & UX Designing card */
-.uiuxCard {
-    background-color: #ffffff;
-    border: 2px solid #33a552;
+/* ─── Secondary card (Automation) — glassmorphism, orange border accent ────── */
+/* Orange is the brand's secondary color — used as a subtle accent, NOT a fill */
+.secondaryCard {
+  background: rgba(255, 255, 255, 0.62);
+  backdrop-filter: blur(22px) saturate(1.6);
+  -webkit-backdrop-filter: blur(22px) saturate(1.6);
+  border: 1.5px solid rgba(255, 152, 0, 0.24);
+  box-shadow:
+    0 8px 28px rgba(255, 152, 0, 0.07),
+    0 2px 6px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transition: border-color 0.28s ease, box-shadow 0.28s ease,
+              transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.secondaryCard:hover {
+  border-color: rgba(255, 152, 0, 0.45);
+  box-shadow:
+    0 14px 44px rgba(255, 152, 0, 0.12),
+    0 4px 12px rgba(0, 0, 0, 0.06);
+  transform: translateY(-5px);
 }
 
-/* Specific styles for Development card */
-.developmentCard {
-    background-color: #ffffff;
-    border: 2px solid #f1792e;
+/* ─── Standard cards — subtle glassmorphism ────────────────────────────────── */
+.standardCard {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  border: 1.5px solid rgba(255, 255, 255, 0.72);
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.05),
+    0 0 0 0.5px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.28s ease, box-shadow 0.28s ease,
+              transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              background 0.28s ease;
+}
+.standardCard:hover {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(69, 115, 223, 0.36);
+  box-shadow:
+    0 8px 28px rgba(69, 115, 223, 0.1),
+    0 2px 6px rgba(0, 0, 0, 0.05);
+  transform: translateY(-4px);
 }
 
-
-/* Specific styles for Data Science & AI card */
-.dataScienceCard {
-    background-color: #ffffff;
-    border: 2px solid #4573df;
-
+/* ─── Icon wrapper (standard + wide cards) ─────────────────────────────────── */
+/* Base color: brand blue. Wide card overrides via inline style (orange). */
+.iconWrapStd {
+  background: rgba(69, 115, 223, 0.09);
+  color: #4573df;
+}
+.standardCard:hover .iconWrapStd {
+  background: rgba(69, 115, 223, 0.14);
 }
 
-/* Header styling */
-.header {
-   
-    color: #191d23;
-    
+/* ─── Typography (standard + wide) ───────────────────────────────────────── */
+.cardTitle  { color: #0f172a; }
+.cardTagline { color: #64748b; }
+.cardDesc   { color: #64748b; }
+
+/* ─── Hover arrow ─────────────────────────────────────────────────────────── */
+.hoverArrow { color: #4573df; }
+
+/* ─── Wide (Automation) card CTA ──────────────────────────────────────────── */
+.wideCta {
+  color: #c2410c;                          /* orange-700, readable on light bg */
+  background: rgba(255, 152, 0, 0.09);
+  border: 1px solid rgba(255, 152, 0, 0.28);
+}
+.wideCta:hover {
+  background: rgba(255, 152, 0, 0.15);
 }
 
-/* Container for skill name and progress bar */
-.skillNameContainer {
-   
-    background-color: #ffffff;
-   
+/* ─── Bottom CTA button ───────────────────────────────────────────────────── */
+.ctaBtn {
+  background: transparent;
+  color: #4573df;
+  border: 2px solid rgba(69, 115, 223, 0.5);
 }
-
-.skillName {
-    color: #23272f;
-}
-
-
-/* Media query for smaller screens */
-@media (max-width: 768px) {
-    /* Adjustments for smaller screens */
-    .skillFrame {
-        justify-content: center; /* Center align skill cards */
-    }
-    
-    .skillsTitle {
-        padding-left: 3%; /* Adjust padding for smaller screens */
-    }
+.ctaBtn:hover {
+  background: #4573df;
+  color: #ffffff;
+  border-color: #4573df;
+  box-shadow: 0 6px 22px rgba(69, 115, 223, 0.28);
 }

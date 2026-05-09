@@ -1,182 +1,391 @@
-/* SkillFrame container */
-.skillFrame {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 20px; /* Padding around the skill cards */
-    box-sizing: border-box;
-    gap: 20px; /* Gap between skill cards */
-    padding-left: 6%; /* Left padding */
-    padding-right: 6%; /* Right padding */
-    padding-bottom: 5%;
-    
+/* ═══════════════════════════════════════════════════════════════════════════
+   Services section — common layout (theme-agnostic)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Section ─────────────────────────────────────────────────────────────── */
+.section {
+  width: 100%;
+  padding: 88px 6% 80px;
+  box-sizing: border-box;
 }
 
-/* Skills section title */
-.skillsTitle {
-    width: 100%;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 24px; /* Adjust font size */
-    font-weight: bold;
-    margin-bottom: 20px; /* Space between the title and the skill cards */
-    text-align: left;
-    box-sizing: border-box;
-    display: flex; /* Allow for flex layout */
-    align-items: center; /* Align items vertically */
+/* ─── Section header ──────────────────────────────────────────────────────── */
+.sectionHead {
+  max-width: 660px;
+  margin: 0 auto 60px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
 }
 
-/* Title icon styling */
-.titleicon {
-    width: 48px;
-    height: 48px;
-    margin-right: 10px;
-    object-fit: contain;
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 100px;
 }
 
-/* Individual skill card */
-.skillCard {
-    width: 100%;
-    max-width: 336px; /* Maximum width of the skill card */
-    border-radius: 12px; /* Rounded corners */
-    padding: 20px; /* Padding inside the skill card */
-    padding-top: 20px;
-    box-sizing: border-box;
-    position: relative;
-    margin-top: 20px; /* Adding margin from the top */
-    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, border-color 0.35s ease;
-
+.sectionTitle {
+  font-family: 'Open Sans', sans-serif;
+  font-size: clamp(1.875rem, 3.2vw, 2.625rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  margin: 0;
 }
 
-.skillCard:hover {
-    transform: translateY(-5px); /* Move the card up slightly on hover */
-}
-.uiuxCard .icon{
-    width: 48px;
-    height: 48px;
-    max-width: 48px;
-    object-fit: contain;
-}
-
-.developmentCard .icon{
-    width: 48px;
-    height: 48px;
-    max-width: 48px;
-    object-fit: contain;
+/* Gradient accent inside heading — brand blue */
+.titleAccent {
+  display: block;
+  background: linear-gradient(90deg, #4573df 0%, #2d4fa2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-
-
-/* Header styling */
-.header {
-    position: relative;
-    width: 100%; /* Adjusted width for mobile */
-    height: 40px; /* Adjusted height to accommodate the icon */
-    display: flex;
-    align-items: center; /* Center align the icon and text */
-    justify-content: flex-start; /* Align items to the start */
-    font-size: 20px;
-    font-family: 'Open Sans';
+.sectionSub {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.7;
+  max-width: 520px;
+  margin: 0;
 }
 
-/* Title styling */
-.title {
-    margin: 0;
-    text-align: left;
-    padding-left: 10%;
-   
+/* ─── Bento grid ──────────────────────────────────────────────────────────── */
+/*
+  3-column layout:
+  Row 1-2: [AI — col 1-2, 2 rows tall]  [SaaS]
+                                         [Mobile]
+  Row 3:   [UI/UX]  [Cloud]  [Data]
+  Row 4:   [Automation — col 1-2]        [Consulting]
+*/
+.bentoGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, auto);
+  gap: 14px;
+  width: 100%;
 }
 
-/* Skill row container */
-.skillRow {
-    display: flex;
-    align-items: center;
-    margin-top: 0;
-    padding-top: 1px;
-    position: relative;
-    line-height: 1.2;
+/* ─── Grid positions ─────────────────────────────────────────────────────── */
+.posAI      { grid-column: 1 / 3; grid-row: 1 / 3; }
+.posSaaS    { grid-column: 3;     grid-row: 1; }
+.posMobile  { grid-column: 3;     grid-row: 2; }
+.posUIUX    { grid-column: 1;     grid-row: 3; }
+.posCloud   { grid-column: 2;     grid-row: 3; }
+.posData    { grid-column: 3;     grid-row: 3; }
+.posAuto    { grid-column: 1 / 3; grid-row: 4; }
+.posConsult { grid-column: 3;     grid-row: 4; }
+
+/* ─── Card shell ─────────────────────────────────────────────────────────── */
+.card {
+  border-radius: 18px;
+  position: relative;
+  overflow: hidden;
 }
 
-/* Container for skill name and progress bar */
-.skillNameContainer {
-    display: flex;
-    flex-direction: column;
-    margin-left: auto;
-    position: relative;
-    border-radius: 3px;
-    padding: 1px 3px;
-    box-sizing: border-box;
-    width: 210px;
-    height: 26px;
+/* ─── Card inner link ────────────────────────────────────────────────────── */
+.cardInner {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px;
+  height: 100%;
+  box-sizing: border-box;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  z-index: 1;
 }
 
-/* Skill name text */
-.skillName {
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 1.2;
-    margin: 0;
-    padding: 0;
+/* Larger padding for featured + wide cards */
+.cardInnerLarge {
+  padding: 28px 30px;
+  gap: 16px;
 }
 
-/* Icons container */
-.icons {
-    display: flex;
-    justify-content: space-around;
+/* ─── Icon row ───────────────────────────────────────────────────────────── */
+.iconRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-/* Individual icon */
-.icon {
-    width: 48px;
-    height: 48px;
-    max-width: 48px;
-    object-fit: contain;
+/* Standard card icon wrapper — color + bg set by theme file */
+.iconWrapStd {
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.cardInner:hover .iconWrapStd {
+  transform: scale(1.1) rotate(-3deg);
 }
 
+/* Featured (AI) card icon wrapper — white glass */
+.iconWrapFeatured {
+  width: 46px;
+  height: 46px;
+  border-radius: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), background 0.25s ease;
+}
+.cardInner:hover .iconWrapFeatured {
+  transform: scale(1.08);
+  background: rgba(255, 255, 255, 0.26);
+}
 
-  /* Keyframes for fade-in animation */
-@keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+/* "Core Service" badge on AI card */
+.featuredBadge {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  padding: 4px 11px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+/* ─── Title block ─────────────────────────────────────────────────────────── */
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+}
+
+/* Standard card title — color from theme */
+.cardTitle {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.28;
+  margin: 0;
+}
+
+/* Wide (Automation) card title — larger, still theme-colored */
+.cardTitleWide {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.375rem;
+  font-weight: 700;
+  line-height: 1.22;
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+
+/* Featured (AI) card title — large, white */
+.cardTitleFeatured {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.625rem;
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: #ffffff;
+}
+
+/* Standard + wide tagline — color from theme */
+.cardTagline {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* Featured tagline — white */
+.cardTaglineFeatured {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.83);
+  margin: 0;
+}
+
+/* ─── Description ─────────────────────────────────────────────────────────── */
+/* Standard description (wide / secondary cards) — color from theme */
+.cardDesc {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Featured (AI) description — white */
+.cardDescFeatured {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.72;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.76);
+}
+
+/* ─── Tech logo row ───────────────────────────────────────────────────────── */
+.techRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+/* Unified tech logo pill — color + background supplied via inline style */
+.techLogo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+.techLogo:hover {
+  transform: translateY(-2px) scale(1.08);
+}
+
+/* ─── Featured (AI) card CTA ──────────────────────────────────────────────── */
+.featuredCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 100px;
+  padding: 8px 18px;
+  width: fit-content;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: background 0.22s ease, transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.cardInner:hover .featuredCta {
+  background: rgba(255, 255, 255, 0.22);
+  transform: translateX(3px);
+}
+
+/* ─── Wide (Automation) card CTA — color from theme ─────────────────────── */
+.wideCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  border-radius: 100px;
+  padding: 8px 18px;
+  width: fit-content;
+  transition: background 0.22s ease, transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.cardInner:hover .wideCta {
+  transform: translateX(3px);
+}
+
+/* ─── Standard card hover arrow ──────────────────────────────────────────── */
+.hoverArrow {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.cardInner:hover .hoverArrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ─── Bottom CTA ──────────────────────────────────────────────────────────── */
+.ctaRow {
+  display: flex;
+  justify-content: center;
+  margin-top: 48px;
+}
+
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  padding: 13px 30px;
+  border-radius: 100px;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.25s ease,
+              background 0.25s ease,
+              color 0.25s ease;
+}
+.ctaBtn:hover {
+  transform: translateY(-2px);
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────────────── */
+
+/* Tablet: 2-column, featured/wide cards span full width */
+@media (max-width: 960px) {
+  .bentoGrid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    gap: 12px;
   }
-  
-  /* Animation class to apply */
-  .animateIn {
-    animation: fadeInUp 0.6s ease-out;
-  }
-  
-  /* Ensure cards are initially invisible until animated */
-  .skillCard {
-    opacity: 0; /* Initial state */
-    transition: opacity 0.6s ease-out; /* Transition effect for opacity */
-  }
-  
-  /* Once animated, the card remains visible */
-  .skillCard.animateIn {
-    opacity: 1;
-  }
-  
-/* Media query for smaller screens */
-@media (max-width: 768px) {
-    /* Adjustments for smaller screens */
-    .skillFrame {
-        justify-content: center; /* Center align skill cards */
-    }
-    
-    .skillsTitle {
-        padding-left: 3%; /* Adjust padding for smaller screens */
-    }
+  .posAI,
+  .posAuto { grid-column: 1 / 3; grid-row: auto; }
+  .posSaaS, .posMobile, .posUIUX,
+  .posCloud, .posData, .posConsult { grid-column: auto; grid-row: auto; }
 
-    /* Title styling */
-.title {
- 
-    font-size: 22px;
+  .section { padding: 72px 5% 64px; }
+  .sectionHead { margin-bottom: 48px; }
 }
-    
+
+/* Mobile: single column */
+@media (max-width: 580px) {
+  .bentoGrid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .posAI, .posSaaS, .posMobile, .posUIUX,
+  .posCloud, .posData, .posAuto, .posConsult {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .section { padding: 56px 4% 52px; }
+  .sectionHead { margin-bottom: 36px; gap: 10px; }
+
+  .cardInner { padding: 20px; }
+  .cardInnerLarge { padding: 22px; gap: 13px; }
+  .cardTitleFeatured { font-size: 1.375rem; }
+  .cardTitleWide { font-size: 1.25rem; }
+  .ctaRow { margin-top: 36px; }
 }

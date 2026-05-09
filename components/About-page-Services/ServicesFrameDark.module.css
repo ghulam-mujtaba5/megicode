@@ -1,60 +1,117 @@
-/* Skills section title */
-.skillsTitle {
+/* ═══════════════════════════════════════════════════════════════════════════
+   Services section — DARK theme
+   Page bg: #1d2127  Surface: #262b34 / #2c323a
+   Brand: primary #4573df (accent only — borders/icons/text, never as fill)
+   Secondary: #ff9800 (accent only — Automation card border)
+   ═══════════════════════════════════════════════════════════════════════════ */
 
-    color: #f0f0f0;
- 
+.section { background: transparent; }
+
+/* ─── Section header ──────────────────────────────────────────────────────── */
+.eyebrow {
+  background: rgba(69, 115, 223, 0.12);
+  color: #adb5bd;
+  border: 1px solid #3e444c;
 }
 
-/* Individual skill card */
-.skillCard {
+.sectionTitle { color: #eaf6ff; }
 
-    background-color: #262b34;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18), 0 6px 20px rgba(0, 0, 0, 0.1);
+.sectionSub { color: #adb5bd; }
+
+.titleAccent { color: #4573df; } /* fallback for non-supporting browsers */
+
+/* ─── Primary featured card (AI) — brand blue gradient (same light + dark) ── */
+.primaryCard {
+  background: linear-gradient(145deg, #4a7ae4 0%, #4573df 35%, #2d4fa2 75%, #233e87 100%);
+  border: 1px solid rgba(69, 115, 223, 0.3);
+  box-shadow:
+    0 20px 56px rgba(69, 115, 223, 0.22),
+    0 4px 14px rgba(69, 115, 223, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  transition: box-shadow 0.32s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.primaryCard:hover {
+  box-shadow:
+    0 28px 68px rgba(69, 115, 223, 0.32),
+    0 8px 24px rgba(69, 115, 223, 0.18);
+  transform: translateY(-5px);
+}
+.primaryCard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 78% 12%, rgba(255,255,255,0.09) 0%, transparent 52%),
+    radial-gradient(ellipse at 18% 88%, rgba(255,255,255,0.04) 0%, transparent 48%);
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 0;
 }
 
-/* Specific styles for UI & UX Designing card */
-.uiuxCard {
-    background-color: #262b34;
-    border: 2px solid #33a552;
+/* ─── Secondary card (Automation) — solid dark surface, orange border ──────── */
+.secondaryCard {
+  background: #262b34;
+  border: 1.5px solid rgba(255, 152, 0, 0.22);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.24);
+  transition: border-color 0.28s ease, box-shadow 0.28s ease,
+              transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.secondaryCard:hover {
+  border-color: rgba(255, 152, 0, 0.42);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.36);
+  transform: translateY(-5px);
 }
 
-/* Specific styles for Development card */
-.developmentCard {
-    background-color: #262b34;
-    border: 2px solid #f1792e;
+/* ─── Standard cards — solid dark surface ─────────────────────────────────── */
+.standardCard {
+  background: #2c323a;
+  border: 1.5px solid #3e444c;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: border-color 0.28s ease, box-shadow 0.28s ease,
+              transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.standardCard:hover {
+  border-color: #4573df;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.32);
+  transform: translateY(-4px);
 }
 
-/* Specific styles for Data Science & AI card */
-.dataScienceCard {
-    background-color: #262b34;
-    border: 2px solid #4573df;
+/* ─── Icon wrapper (standard + wide cards) ─────────────────────────────────── */
+.iconWrapStd {
+  background: #3e444c;
+  color: #4573df;
+}
+.standardCard:hover .iconWrapStd {
+  background: #464d57;
 }
 
-/* Header styling */
-.header {
-  
-    color: #f0f0f0;
-    
+/* ─── Typography (standard + wide) ───────────────────────────────────────── */
+.cardTitle  { color: #eaf6ff; }
+.cardTagline { color: #adb5bd; }
+.cardDesc   { color: #adb5bd; }
+
+/* ─── Hover arrow ─────────────────────────────────────────────────────────── */
+.hoverArrow { color: #4573df; }
+
+/* ─── Wide (Automation) card CTA ──────────────────────────────────────────── */
+.wideCta {
+  color: #fb923c;
+  background: rgba(255, 152, 0, 0.1);
+  border: 1px solid rgba(255, 152, 0, 0.24);
+}
+.wideCta:hover {
+  background: rgba(255, 152, 0, 0.16);
 }
 
-/* Container for skill name */
-.skillNameContainer {
-    background-color: #262b34;
-   
+/* ─── Bottom CTA button ───────────────────────────────────────────────────── */
+.ctaBtn {
+  background: transparent;
+  color: #e0e6ed;
+  border: 2px solid #3e444c;
 }
-
-/* Skill name text */
-.skillName {
-    color: #eaf6ff;
-}
-
-/* Media query for smaller screens */
-@media (max-width: 768px) {
-    .skillFrame {
-        justify-content: center;
-    }
-    
-    .skillsTitle {
-        padding-left: 3%;
-    }
+.ctaBtn:hover {
+  background: #4573df;
+  color: #ffffff;
+  border-color: #4573df;
+  box-shadow: 0 6px 22px rgba(69, 115, 223, 0.22);
 }
