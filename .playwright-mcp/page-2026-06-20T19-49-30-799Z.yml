@@ -1,0 +1,641 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e5]:
+        - link "Home" [ref=e6] [cursor=pointer]:
+          - /url: /
+          - img "Wajdan" [ref=e8]
+        - navigation [ref=e9]:
+          - link "What you're missing?" [ref=e10] [cursor=pointer]:
+            - /url: /services
+            - text: What you're missing?
+          - link "About" [ref=e11] [cursor=pointer]:
+            - /url: /about
+            - text: About
+          - link "Results" [ref=e12] [cursor=pointer]:
+            - /url: /#results
+            - text: Results
+          - link "Pricing" [ref=e13] [cursor=pointer]:
+            - /url: /pricing
+            - text: Pricing
+          - link "Book Free Audit" [ref=e14] [cursor=pointer]:
+            - /url: https://funnel.wajdan.co/booking-page-page
+            - text: Book Free Audit
+            - img [ref=e15]
+    - generic [ref=e19]:
+      - generic [ref=e20]: For Consultancies
+      - heading "We Build The Most Ruthless & Effective System for Rapid Scaling of Consultation Firms — In 60 Days." [level=1] [ref=e21]
+      - paragraph [ref=e22]:
+        - text: While every other agency sells you leads and disappears — we build the complete infrastructure that turns Meta traffic into qualified, pre-nurtured, showed-up consultation bookings.
+        - generic [ref=e23]: Or we work for free.
+      - generic [ref=e26]:
+        - generic "Wajdan VSL" [ref=e27]
+        - generic [ref=e32]: Live Demo
+        - generic [ref=e33]:
+          - slider "Video progress" [ref=e34] [cursor=pointer]: "3.6"
+          - generic [ref=e35]:
+            - button "Pause" [ref=e36] [cursor=pointer]:
+              - img [ref=e37]
+            - button "Skip forward 15 seconds" [ref=e40] [cursor=pointer]:
+              - img [ref=e41]
+            - generic [ref=e43]: 0:11 / 5:25
+            - button "Unmute video" [ref=e45] [cursor=pointer]:
+              - img [ref=e46]
+      - generic [ref=e50]:
+        - link "Show Me What's Broken — Free" [ref=e51] [cursor=pointer]:
+          - /url: https://funnel.wajdan.co/booking-page-page
+          - text: Show Me What's Broken — Free
+          - img [ref=e52]
+        - link "See The System" [ref=e54] [cursor=pointer]:
+          - /url: "#system"
+      - button "Only 6 spots / month" [ref=e56] [cursor=pointer]:
+        - img [ref=e57]
+        - text: Only 6 spots / month
+      - generic [ref=e59]:
+        - generic [ref=e62]: 60-day booking quality commitment
+        - generic [ref=e65]: No long-term contracts
+        - generic [ref=e68]: Based in Europe
+        - generic [ref=e71]: Built for consultation firms only
+    - generic [ref=e72]:
+      - generic [ref=e73]:
+        - paragraph [ref=e74]: Built On The Platforms That Pay
+        - heading "Meta, Google, GoHighLevel and the full stack we wire into your funnel" [level=3] [ref=e75]
+      - generic [ref=e77]:
+        - generic [ref=e78]:
+          - img [ref=e80]
+          - img [ref=e82]
+          - img [ref=e84]
+          - img [ref=e86]
+          - img [ref=e88]
+          - img [ref=e90]
+          - img [ref=e92]
+          - img [ref=e94]
+          - img [ref=e96]
+          - img [ref=e98]
+          - img [ref=e100]
+          - img [ref=e102]
+          - img [ref=e104]
+          - img [ref=e106]
+          - img [ref=e108]
+          - img [ref=e110]
+          - img [ref=e112]
+          - img [ref=e114]
+          - img [ref=e116]
+          - img [ref=e118]
+          - img [ref=e120]
+          - img [ref=e122]
+          - img [ref=e124]
+          - img [ref=e126]
+          - img [ref=e128]
+          - img [ref=e130]
+          - img [ref=e132]
+          - img [ref=e134]
+        - generic [ref=e135]:
+          - generic [ref=e136]:
+            - img [ref=e138]
+            - generic [ref=e140]: Meta
+          - generic [ref=e141]:
+            - img [ref=e143]
+            - generic [ref=e145]: Facebook
+          - generic [ref=e146]:
+            - img [ref=e148]
+            - generic [ref=e150]: Zapier / Make
+          - generic [ref=e151]:
+            - img [ref=e153]
+            - generic [ref=e155]: Gmail
+          - generic [ref=e156]:
+            - img [ref=e158]
+            - generic [ref=e160]: GoHighLevel
+          - generic [ref=e161]:
+            - img [ref=e163]
+            - generic [ref=e165]: Instantly
+          - generic [ref=e166]:
+            - img [ref=e168]
+            - generic [ref=e170]: Calendly
+          - generic [ref=e171]:
+            - img [ref=e173]
+            - generic [ref=e175]: Meta
+          - generic [ref=e176]:
+            - img [ref=e178]
+            - generic [ref=e180]: Facebook
+          - generic [ref=e181]:
+            - img [ref=e183]
+            - generic [ref=e185]: Zapier / Make
+          - generic [ref=e186]:
+            - img [ref=e188]
+            - generic [ref=e190]: Gmail
+          - generic [ref=e191]:
+            - img [ref=e193]
+            - generic [ref=e195]: GoHighLevel
+          - generic [ref=e196]:
+            - img [ref=e198]
+            - generic [ref=e200]: Instantly
+          - generic [ref=e201]:
+            - img [ref=e203]
+            - generic [ref=e205]: Calendly
+          - generic [ref=e206]:
+            - img [ref=e208]
+            - generic [ref=e210]: Meta
+          - generic [ref=e211]:
+            - img [ref=e213]
+            - generic [ref=e215]: Facebook
+          - generic [ref=e216]:
+            - img [ref=e218]
+            - generic [ref=e220]: Zapier / Make
+          - generic [ref=e221]:
+            - img [ref=e223]
+            - generic [ref=e225]: Gmail
+          - generic [ref=e226]:
+            - img [ref=e228]
+            - generic [ref=e230]: GoHighLevel
+          - generic [ref=e231]:
+            - img [ref=e233]
+            - generic [ref=e235]: Instantly
+          - generic [ref=e236]:
+            - img [ref=e238]
+            - generic [ref=e240]: Calendly
+          - generic [ref=e241]:
+            - img [ref=e243]
+            - generic [ref=e245]: Meta
+          - generic [ref=e246]:
+            - img [ref=e248]
+            - generic [ref=e250]: Facebook
+          - generic [ref=e251]:
+            - img [ref=e253]
+            - generic [ref=e255]: Zapier / Make
+          - generic [ref=e256]:
+            - img [ref=e258]
+            - generic [ref=e260]: Gmail
+          - generic [ref=e261]:
+            - img [ref=e263]
+            - generic [ref=e265]: GoHighLevel
+          - generic [ref=e266]:
+            - img [ref=e268]
+            - generic [ref=e270]: Instantly
+          - generic [ref=e271]:
+            - img [ref=e273]
+            - generic [ref=e275]: Calendly
+    - generic [ref=e277]:
+      - generic [ref=e278]:
+        - paragraph [ref=e279]: You.
+        - paragraph [ref=e280]: Yeah you are the consultancy owner who wants to stop watching money leave your ad account every week while your calendar sits half empty. The one who wants a system where qualified, pre-nurtured, ready-to-buy prospects actually show up to your consultations.
+        - paragraph [ref=e282]: "Then I promise you: this is the most important f*cking page you will read this year."
+        - paragraph [ref=e283]: (And no — we haven't lost the plot. Keep reading.)
+      - generic [ref=e284]:
+        - heading "You've probably already tried the ads thing." [level=2] [ref=e285]:
+          - text: You've probably already
+          - text: tried the ads thing.
+        - paragraph [ref=e287]: You hired someone. An agency. A freelancer who "specialised in Meta." Maybe your own internal person who watched a YouTube course and felt confident.
+        - paragraph [ref=e288]: You gave them budget. You gave them access. You gave them time.
+        - paragraph [ref=e289]: Leads started coming in. The dashboard showed numbers. CPL looking decent. The report landed in your inbox every Monday morning.
+        - paragraph [ref=e290]: The numbers looked fine.
+        - paragraph [ref=e291]: And then you looked at your actual booked consultations.
+        - paragraph [ref=e293]: And those two numbers? Pure Instagram vs reality.
+        - paragraph [ref=e294]:
+          - text: AND MEANWHILE? YOUR MONEY'S ON F*CKING FIRE.
+          - text: EVERY. SINGLE. WEEK.
+        - list [ref=e295]:
+          - listitem [ref=e296]:
+            - img [ref=e297]
+            - generic [ref=e300]: Paying for leads who don't even pick up the phone.
+          - listitem [ref=e301]:
+            - img [ref=e302]
+            - generic [ref=e305]: Paying for "booked" calls that ghost you before the day arrives.
+          - listitem [ref=e306]:
+            - img [ref=e307]
+            - generic [ref=e310]: Paying for a Monday morning PDF that tells you everything — except whether any of it ever turns into a paying client.
+      - generic [ref=e312]:
+        - heading "Why is none of this turning into actual clients?" [level=2] [ref=e313]:
+          - text: Why is none of this
+          - text: turning into actual clients?
+        - paragraph [ref=e315]: "Here's the answer. And it's going to make you furious. Not at yourself. At every agency that ripped you off without telling you this:"
+      - generic [ref=e316]:
+        - generic [ref=e317]:
+          - generic [ref=e318]: 🤡
+          - heading "Getting leads is the easy part." [level=2] [ref=e319]
+        - paragraph [ref=e320]: Any agency can fill a form. Any agency can lower your cost per click. Any agency can produce a dashboard that looks like progress.
+        - generic [ref=e321]: from the moment they click your ad and never let go until they are sitting ...
+        - paragraph [ref=e322]: (That gap — between form submission and a qualified, pre-nurtured, showed-up consultation? That's where your money goes. Every. Single. Time.)
+        - heading "That's not bad targeting. That's your worst fear." [level=2] [ref=e325]:
+          - text: That's not bad targeting.
+          - generic [ref=e326]: That's your worst fear.
+        - generic [ref=e327]:
+          - heading "We don't start with your ads." [level=3] [ref=e329]
+          - heading "We start with your offer." [level=3] [ref=e330]
+          - paragraph [ref=e331]: The offer your ideal education client is desperately searching for — that nobody in your market is actually giving them. We find that gap. We craft the offer that fills it. Then — and only then — do we build everything else around it.
+    - generic [ref=e333]:
+      - generic [ref=e334]:
+        - paragraph [ref=e335]: The Real Problem
+        - heading "Bricks ≠ House." [level=2] [ref=e336]
+        - paragraph [ref=e337]: You have been sold individual components. Not a system.
+      - generic [ref=e339]:
+        - generic [ref=e340] [cursor=pointer]:
+          - img [ref=e342]
+          - generic [ref=e347]: Offer
+        - generic [ref=e348] [cursor=pointer]:
+          - img [ref=e350]
+          - generic [ref=e357]: Funnel
+        - generic [ref=e358] [cursor=pointer]:
+          - img [ref=e360]
+          - generic [ref=e364]: Automation
+        - generic [ref=e365] [cursor=pointer]:
+          - img [ref=e367]
+          - generic [ref=e373]: Ads
+        - generic [ref=e374] [cursor=pointer]:
+          - img [ref=e376]
+          - generic [ref=e383]: Results
+      - generic [ref=e385]:
+        - generic [ref=e386]:
+          - generic [ref=e387]:
+            - generic [ref=e389]: ✕
+            - heading "What You've Been Sold" [level=3] [ref=e390]
+          - list [ref=e391]:
+            - listitem [ref=e392]:
+              - generic [ref=e393]: ✕
+              - generic [ref=e394]: An ad account that "looks good" on paper
+            - listitem [ref=e395]:
+              - generic [ref=e396]: ✕
+              - generic [ref=e397]: Leads that ghost you before the call
+            - listitem [ref=e398]:
+              - generic [ref=e399]: ✕
+              - generic [ref=e400]: A Monday morning PDF no one reads
+            - listitem [ref=e401]:
+              - generic [ref=e402]: ✕
+              - generic [ref=e403]: A freelancer who handles one piece
+            - listitem [ref=e404]:
+              - generic [ref=e405]: ✕
+              - generic [ref=e406]: Dashboards. Not booked consultations.
+        - generic [ref=e407]:
+          - generic [ref=e409]:
+            - img [ref=e411]
+            - heading "What You Actually Need" [level=3] [ref=e418]
+          - list [ref=e419]:
+            - listitem [ref=e420]:
+              - img [ref=e422]
+              - generic [ref=e425]: An offer so good, they feel foolish saying no
+            - listitem [ref=e426]:
+              - img [ref=e428]
+              - generic [ref=e431]: A funnel that qualifies before they call
+            - listitem [ref=e432]:
+              - img [ref=e434]
+              - generic [ref=e437]: Automated nurture that shows up even when you sleep
+            - listitem [ref=e438]:
+              - img [ref=e440]
+              - generic [ref=e443]: Ads engineered to book — not just click
+            - listitem [ref=e444]:
+              - img [ref=e446]
+              - generic [ref=e449]: One system. End to end. Accountable.
+      - link "Build The Full System →" [ref=e452] [cursor=pointer]:
+        - /url: https://funnel.wajdan.co/booking-page-page
+    - generic [ref=e455]:
+      - heading "We Call It The Half-Service Trap." [level=2] [ref=e458]
+      - generic [ref=e460]:
+        - paragraph [ref=e461]: You pay for a complete marketing service. You receive the top half — traffic and leads.
+        - paragraph [ref=e462]: The bottom half — offer creation, qualification, CRM infrastructure, automation, follow-up sequences, no-show reduction — was never built.
+        - paragraph [ref=e464]:
+          - text: The agency hit their deliverable. The leads were real.
+          - generic [ref=e466]: The failure was invisible.
+        - paragraph [ref=e467]:
+          - img [ref=e468]
+          - text: And it costs you more every month than their retainer ever did.
+      - generic [ref=e471]:
+        - heading "So how do you fix something the entire industry pretends isn't broken?" [level=3] [ref=e473]
+        - heading "You build the other half." [level=3] [ref=e474]
+        - paragraph [ref=e475]: (Can you hear that? That's the sound of every agency you've ever fired wishing they'd thought of this.)
+        - link "Order A Free Funnel Audit" [ref=e476] [cursor=pointer]:
+          - /url: https://funnel.wajdan.co/booking-page-page
+          - text: Order A Free Funnel Audit
+          - img [ref=e477]
+    - generic [ref=e481]:
+      - generic [ref=e482]:
+        - paragraph [ref=e483]: What Actually Happens
+        - heading "The Lead Lifecycle. Every Single Time." [level=2] [ref=e484]:
+          - text: The Lead Lifecycle.
+          - text: Every Single Time.
+        - paragraph [ref=e485]: From the second a prospect submits a form to the second they sit in front of you — automated, monitored, and impossible to forget.
+      - generic [ref=e490]:
+        - generic [ref=e491]:
+          - generic [ref=e492]:
+            - img [ref=e493]
+            - generic [ref=e496]: "01"
+          - paragraph [ref=e497]: Form Submit
+          - paragraph [ref=e498]: 0s
+        - generic [ref=e499]:
+          - generic [ref=e500]:
+            - img [ref=e501]
+            - generic [ref=e503]: "02"
+          - paragraph [ref=e504]: SMS Confirm
+          - paragraph [ref=e505]: 18s
+        - generic [ref=e506]:
+          - generic [ref=e507]:
+            - img [ref=e508]
+            - generic [ref=e512]: "03"
+          - paragraph [ref=e513]: Pre-Nurture
+          - paragraph [ref=e514]: 2m
+        - generic [ref=e515]:
+          - generic [ref=e516]:
+            - img [ref=e517]
+            - generic [ref=e522]: "04"
+          - paragraph [ref=e523]: Reminders
+          - paragraph [ref=e524]: 24h / 2h / 15m
+        - generic [ref=e525]:
+          - generic [ref=e526]:
+            - img [ref=e527]
+            - generic [ref=e530]: "05"
+          - paragraph [ref=e531]: Showed Up
+          - paragraph [ref=e532]: Closed
+    - generic [ref=e535]:
+      - generic [ref=e536]:
+        - paragraph [ref=e537]: The Wajdan System
+        - heading "Five Layers. One System." [level=2] [ref=e538]
+        - paragraph [ref=e539]: Remove any one layer and the whole thing leaks. This is the complete sequence — built in this exact order, before traffic goes live.
+      - generic [ref=e540]:
+        - generic [ref=e541]:
+          - button "01 Offer Creation" [ref=e542] [cursor=pointer]:
+            - generic [ref=e543]: "01"
+            - generic [ref=e544]: Offer Creation
+          - button "02 Funnel + VSL" [ref=e545] [cursor=pointer]:
+            - generic [ref=e546]: "02"
+            - generic [ref=e547]: Funnel + VSL
+          - button "03 GHL + Automation" [ref=e548] [cursor=pointer]:
+            - generic [ref=e549]: "03"
+            - generic [ref=e550]: GHL + Automation
+          - button "04 Meta Campaigns" [ref=e551] [cursor=pointer]:
+            - generic [ref=e552]: "04"
+            - generic [ref=e553]: Meta Campaigns
+          - button "05 Conversion Loop" [ref=e554] [cursor=pointer]:
+            - generic [ref=e555]: "05"
+            - generic [ref=e556]: Conversion Loop
+        - generic [ref=e557]:
+          - generic [ref=e559]:
+            - generic [ref=e560]:
+              - img [ref=e563]
+              - generic [ref=e568]: Layer 01
+              - heading "Offer Creation" [level=3] [ref=e569]
+              - generic [ref=e570]:
+                - generic [ref=e571]: 100%
+                - generic [ref=e572]: Foundation
+            - generic [ref=e574]:
+              - generic [ref=e575] [cursor=pointer]:
+                - img [ref=e577]
+                - generic [ref=e580]: Research
+              - generic [ref=e581] [cursor=pointer]:
+                - img [ref=e583]
+                - generic [ref=e588]: Competitor
+              - generic [ref=e589] [cursor=pointer]:
+                - img [ref=e591]
+                - generic [ref=e594]: Position
+              - generic [ref=e595] [cursor=pointer]:
+                - img [ref=e597]
+                - generic [ref=e599]: Message
+              - generic [ref=e600] [cursor=pointer]:
+                - img [ref=e602]
+                - generic [ref=e604]: Validate
+              - generic [ref=e605] [cursor=pointer]:
+                - img [ref=e607]
+                - generic [ref=e611]: Brief
+          - generic [ref=e613]:
+            - 'button "Go to layer 01: Offer Creation" [ref=e614] [cursor=pointer]': "01"
+            - img [ref=e615]
+            - 'button "Go to layer 02: Funnel + VSL" [ref=e617] [cursor=pointer]': "02"
+            - img [ref=e618]
+            - 'button "Go to layer 03: GHL + Automation" [ref=e620] [cursor=pointer]': "03"
+            - img [ref=e621]
+            - 'button "Go to layer 04: Meta Campaigns" [ref=e623] [cursor=pointer]': "04"
+            - img [ref=e624]
+            - 'button "Go to layer 05: Conversion Loop" [ref=e626] [cursor=pointer]': "05"
+    - generic [ref=e629]:
+      - paragraph [ref=e630]: Want to see how each layer works in detail?
+      - link "Explore the System Layers" [ref=e631] [cursor=pointer]:
+        - /url: /services
+        - text: Explore the System Layers
+        - img [ref=e632]
+    - generic [ref=e636]:
+      - generic [ref=e638]:
+        - heading "Don't Just Take Our Word For It" [level=2] [ref=e639]
+        - paragraph [ref=e640]: See what happens when you plug our system into your business. Real results from real people.
+      - generic [ref=e641]:
+        - generic [ref=e643] [cursor=pointer]:
+          - img [ref=e647]
+          - generic [ref=e649]:
+            - paragraph [ref=e650]: Client Call
+            - paragraph [ref=e651]: Call Review
+        - generic [ref=e653] [cursor=pointer]:
+          - img [ref=e657]
+          - generic [ref=e659]:
+            - paragraph [ref=e660]: Testimonial
+            - paragraph [ref=e661]: Zohaib
+        - generic [ref=e663] [cursor=pointer]:
+          - img [ref=e667]
+          - generic [ref=e669]:
+            - paragraph [ref=e670]: Testimonial
+            - paragraph [ref=e671]: Nam
+        - generic [ref=e673] [cursor=pointer]:
+          - img [ref=e677]
+          - generic [ref=e679]:
+            - paragraph [ref=e680]: Testimonial
+            - paragraph [ref=e681]: HCSG
+    - generic [ref=e684]:
+      - generic [ref=e685]:
+        - heading "Proof!" [level=2] [ref=e686]
+        - paragraph [ref=e688]: Consultancy funnels we've built — and what happened after.
+      - img "Dashboard Proof of Results" [ref=e690]
+    - generic [ref=e691]:
+      - generic [ref=e692]:
+        - paragraph [ref=e693]: Without vs With
+        - heading "What Your Funnel Looks Like Right Now vs After." [level=2] [ref=e694]:
+          - text: What Your Funnel Looks Like
+          - text: Right Now vs After.
+        - paragraph [ref=e695]: You don't need a thousand words to understand the problem. This is it.
+      - generic [ref=e696]:
+        - generic [ref=e697]:
+          - generic [ref=e699]:
+            - generic [ref=e701]:
+              - img [ref=e702]
+              - generic [ref=e705]: Without the System
+            - generic [ref=e706]:
+              - generic [ref=e707]:
+                - img [ref=e710]
+                - generic [ref=e714]: Generic ad — attracts nobody specific
+              - generic [ref=e715]:
+                - img [ref=e718]
+                - generic [ref=e722]: Lead submits form — silence
+              - generic [ref=e723]:
+                - img [ref=e726]
+                - generic [ref=e731]: Staff calls tomorrow — lead is cold
+              - generic [ref=e732]:
+                - img [ref=e735]
+                - generic [ref=e740]: No reminder. No-show. Slot wasted
+              - generic [ref=e741]:
+                - img [ref=e744]
+                - generic [ref=e747]: Budget burns. Blame the ads
+            - generic [ref=e748]:
+              - generic [ref=e749]: Average Show Rate
+              - generic: 28%
+          - generic [ref=e751]:
+            - generic [ref=e753]:
+              - img [ref=e754]
+              - generic [ref=e756]: With the Wajdan System
+            - generic [ref=e757]:
+              - generic [ref=e758]:
+                - img [ref=e761]
+                - generic [ref=e766]: Ad built on a proven offer
+              - generic [ref=e767]:
+                - img [ref=e770]
+                - generic [ref=e773]: System triggers in 18 seconds
+              - generic [ref=e774]:
+                - img [ref=e777]
+                - generic [ref=e781]: Reminders at 24h, 2h, 15min
+              - generic [ref=e782]:
+                - img [ref=e785]
+                - generic [ref=e791]: Prospect shows up warm and ready
+              - generic [ref=e792]:
+                - img [ref=e795]
+                - generic [ref=e798]: Conversion data loops back to Meta
+            - generic [ref=e799]:
+              - generic [ref=e800]: After the System
+              - generic: 84%
+        - generic [ref=e802]:
+          - generic [ref=e803]:
+            - generic: 3×
+            - generic [ref=e804]: More Bookings
+          - generic [ref=e805]:
+            - generic: 18s
+            - generic [ref=e806]: Response Time
+          - generic [ref=e807]:
+            - generic: 40%
+            - generic [ref=e808]: Lower Cost
+          - generic [ref=e809]:
+            - generic: "60"
+            - generic [ref=e810]: Days to ROI
+    - generic [ref=e814]:
+      - img [ref=e817]
+      - heading "How the Hell Can We Guarantee Results?" [level=2] [ref=e820]:
+        - text: How the Hell Can We
+        - text: Guarantee Results?
+      - generic [ref=e822]:
+        - generic [ref=e823]: The 60-Day Commitment
+        - blockquote [ref=e824]: "\"If we don't improve the quality of your consultation bookings within the first 60 days — we continue optimising your system at no management fee until we do.\""
+      - generic [ref=e827]: The offer's rotting for 4 years Cuz We Always delivered
+      - generic [ref=e829]:
+        - img [ref=e831]
+        - generic [ref=e833]:
+          - 'heading "Strict Limit: 6 Clients Per Month" [level=3] [ref=e834]'
+          - paragraph [ref=e835]: We refuse to spread our team thin. High-performance funnels require focus. When the 6 spots are filled, you go on the waitlist. No exceptions.
+      - generic [ref=e836]:
+        - link "Claim Your Free Strategy Session" [ref=e837] [cursor=pointer]:
+          - /url: https://funnel.wajdan.co/booking-page-page
+          - generic [ref=e838]: Claim Your Free Strategy Session
+          - img [ref=e839]
+        - generic [ref=e841]:
+          - generic [ref=e842]:
+            - img [ref=e843]
+            - img [ref=e845]
+            - img [ref=e847]
+            - img [ref=e849]
+            - img [ref=e851]
+          - paragraph [ref=e853]: Trusted by consultancies across Europe, UAE & beyond
+    - generic [ref=e856]:
+      - generic [ref=e857]:
+        - heading "Who This Is For." [level=2] [ref=e858]
+        - paragraph [ref=e859]: Make sure to Read this so you dont waste our time.
+      - generic [ref=e860]:
+        - generic [ref=e862]:
+          - generic [ref=e863]:
+            - img [ref=e865]
+            - heading "Perfect Fit" [level=3] [ref=e868]
+          - list [ref=e869]:
+            - listitem [ref=e870]:
+              - img [ref=e871]
+              - generic [ref=e874]: You run an education consultancy already getting leads — but far fewer qualified consultations than you're paying for
+            - listitem [ref=e875]:
+              - img [ref=e876]
+              - generic [ref=e879]: You've been burned by at least one agency that promised results and delivered Monday morning excuses
+            - listitem [ref=e880]:
+              - img [ref=e881]
+              - generic [ref=e884]: You want to measure marketing by booked calls and show rates — not impressions, clicks, and CPL
+            - listitem [ref=e885]:
+              - img [ref=e886]
+              - generic [ref=e889]: You're ready to invest in a complete system — not another month of hoping the ads improve on their own
+        - generic [ref=e891]:
+          - generic [ref=e892]:
+            - img [ref=e894]
+            - heading "Close This Tab If" [level=3] [ref=e896]
+          - list [ref=e897]:
+            - listitem [ref=e898]:
+              - img [ref=e899]
+              - generic [ref=e901]: You're looking for the cheapest leads possible regardless of quality, intent, or wasted time chasing them
+            - listitem [ref=e902]:
+              - img [ref=e903]
+              - generic [ref=e905]: You have no capacity to follow up with incoming enquiries — automated or otherwise
+            - listitem [ref=e906]:
+              - img [ref=e907]
+              - generic [ref=e909]: You think the problem is the creatives and all you need is better-looking ads
+            - listitem [ref=e910]:
+              - img [ref=e911]
+              - generic [ref=e913]: You're not willing to let a system do the work your staff has been forgetting to do
+    - generic [ref=e916]:
+      - heading "I Guess What We're Trying To Say Is That You Should Hit The Damn Button" [level=2] [ref=e918]
+      - link "HIT THE DAMN BUTTON" [ref=e920] [cursor=pointer]:
+        - /url: https://funnel.wajdan.co/booking-page-page
+    - contentinfo [ref=e921]:
+      - generic [ref=e922]:
+        - generic [ref=e923]:
+          - generic [ref=e924]:
+            - link "Wajdan Digital Alchemy" [ref=e925] [cursor=pointer]:
+              - /url: /
+              - img "Wajdan Digital Alchemy" [ref=e926]
+            - paragraph [ref=e927]: Client Acquisition Systems for Education Consultancies. We build the complete infrastructure that turns Meta traffic into qualified, pre-nurtured, showed-up consultation bookings.
+            - generic [ref=e928]:
+              - img [ref=e929]
+              - img [ref=e931]
+              - img [ref=e933]
+              - img [ref=e935]
+              - img [ref=e937]
+            - paragraph [ref=e939]: Trusted by consultancies across Europe, UAE & beyond
+          - generic [ref=e940]:
+            - heading "Platform" [level=4] [ref=e941]
+            - list [ref=e942]:
+              - listitem [ref=e943]:
+                - link "How It Works" [ref=e944] [cursor=pointer]:
+                  - /url: /#system
+              - listitem [ref=e945]:
+                - link "Results" [ref=e946] [cursor=pointer]:
+                  - /url: /#results
+              - listitem [ref=e947]:
+                - link "Pricing" [ref=e948] [cursor=pointer]:
+                  - /url: /pricing
+              - listitem [ref=e949]:
+                - link "Services" [ref=e950] [cursor=pointer]:
+                  - /url: /services
+              - listitem [ref=e951]:
+                - link "About" [ref=e952] [cursor=pointer]:
+                  - /url: /about
+              - listitem [ref=e953]:
+                - link "Contact" [ref=e954] [cursor=pointer]:
+                  - /url: /#contact
+          - generic [ref=e955]:
+            - heading "Ready to Scale?" [level=4] [ref=e956]
+            - paragraph [ref=e957]: Stop relying on referrals and start building a predictable client acquisition system.
+            - link "Book Free Audit" [ref=e958] [cursor=pointer]:
+              - /url: https://funnel.wajdan.co/booking-page-page
+              - text: Book Free Audit
+              - img [ref=e959]
+        - generic [ref=e962]:
+          - paragraph [ref=e963]: © 2026 Wajdan Digital Alchemy. Client acquisition systems for consultancies.
+          - generic [ref=e964]:
+            - link "Facebook" [ref=e965] [cursor=pointer]:
+              - /url: https://www.facebook.com/share/1bhtmDksoi/?mibextid=wwXIfr
+              - img [ref=e966]
+            - link "LinkedIn" [ref=e968] [cursor=pointer]:
+              - /url: https://www.linkedin.com/company/wajdan-growth-marketing-agency/
+              - img [ref=e969]
+            - link "Instagram" [ref=e971] [cursor=pointer]:
+              - /url: https://www.instagram.com/wajdandigital
+              - img [ref=e972]
+            - link "WhatsApp" [ref=e974] [cursor=pointer]:
+              - /url: https://wa.me/36709495643
+              - img [ref=e975]
+  - region "Notifications (F8)":
+    - list
+  - alert [ref=e977]

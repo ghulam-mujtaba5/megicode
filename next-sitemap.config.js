@@ -76,6 +76,7 @@ const config = {
     const projectSlugs = [
       'aesthetics-clinic-platform',
       'campusaxis-university-portal',
+      'wajdan-growth-system-website',
       'fintech-uiux-revamp',
       'desktop-pos-javafx',
       'mobile-expense-tracker',

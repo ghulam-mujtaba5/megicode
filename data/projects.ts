@@ -108,5 +108,59 @@ export const projects: Project[] = [
     screenshots: [
       "/images/campusaxis.png"
     ]
+  },
+  {
+    slug: "wajdan-growth-system-website",
+    title: "Wajdan Digital Alchemy — High‑Converting Growth Agency Website",
+    category: "web",
+    clientName: "Wajdan Digital Alchemy",
+    clientIndustry: "Growth Marketing & Lead Generation (Education Consultancies)",
+    duration: "6 weeks",
+    teamSize: "2 engineers + 1 UI/UX designer",
+    overview: "A conversion‑first Next.js website for a European growth agency — built to turn cold visitors into booked, qualified consultation audits.",
+    description: "A high‑performance, conversion‑optimized marketing website for Wajdan Digital Alchemy, a European growth agency that builds end‑to‑end client‑acquisition systems for education consultancies. Built on Next.js, the site sells the agency's signature 60‑day growth system through a story‑driven sales narrative — hero value proposition, the 'Half‑Service Trap' problem framing, a five‑layer system breakdown (Offer, Funnel + VSL, GHL + Automation, Meta Campaigns, Conversion Loop), live results, social proof, pricing, and a 'Book Free Audit' conversion flow. Engineered for speed, mobile‑first responsiveness, and clarity so every section moves the visitor toward booking a call.",
+    problem: "Wajdan had a category‑defining offer but no digital home to sell it. Growth agencies live and die by their own conversion rate, yet most have generic, slow, template‑looking sites that fail to communicate a differentiated system or build trust with high‑intent prospects. Wajdan needed a website that practiced what it preached — one that frames the problem sharply, explains a sophisticated multi‑layer system simply, proves results credibly, and drives qualified education‑consultancy owners to book a free audit instead of bouncing.",
+    challenge: "Translate a premium, multi‑layered service offering — offer creation, funnels and video sales letters, GoHighLevel CRM automation, Meta ad campaigns, and a data conversion loop — into a single, fast, scannable narrative that converts cold traffic into booked calls. The site needed to load instantly, look elite on mobile (where most ad traffic lands), guide visitors through a persuasive story arc, surface proof and a show‑up guarantee without feeling salesy, and funnel everyone toward one clear action: booking a free audit.",
+    solution: "Megicode designed and built a conversion‑first website on Next.js with a React frontend, optimized for Core Web Vitals and mobile‑first ad traffic. The page architecture follows a deliberate persuasion sequence: a bold hero with the agency's core promise, the 'What You're Missing' problem section that names the Half‑Service Trap, a transparent five‑layer system breakdown, a lead‑lifecycle timeline showing automated SMS confirmations and reminder sequences, a results/social‑proof block (show rates improving from 28% to 84%), scarcity framing (max 6 clients per month), a risk‑reversal guarantee, transparent pricing, and a frictionless 'Book Free Audit' CTA wired to a scheduling flow. We implemented clean semantic markup, fast image delivery, smooth scroll‑based reveals, and on‑page SEO so the site ranks for growth‑system and consultation‑scaling queries while staying laser‑focused on conversion.",
+    process: [
+      "Discovery session to extract the agency's offer, ideal client profile, and differentiators",
+      "Messaging and copy architecture — mapping the visitor's journey from cold to booked call",
+      "Conversion‑focused wireframing of the full sales narrative and CTA placement",
+      "UI/UX design — bold, high‑contrast, mobile‑first visual system for paid traffic",
+      "Next.js development with performance and Core Web Vitals as first‑class constraints",
+      "Sectioned build: hero, problem framing, five‑layer system, lifecycle timeline, proof, pricing",
+      "Booking flow integration for the 'Book Free Audit' conversion action",
+      "On‑page SEO, semantic structure, Open Graph, and metadata optimization",
+      "Performance, responsiveness, and cross‑device QA",
+      "Deployment and post‑launch conversion refinements"
+    ],
+    toolsUsed: [
+      "Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "Vercel", "Figma"
+    ],
+    implementation: "Delivered in a focused 6‑week engagement. We started from the offer and messaging — because for a growth agency the copy is the product — then designed a mobile‑first visual system and built it in Next.js with performance budgets enforced throughout. The site shipped on Vercel with optimized images, lazy‑loaded media, and a scheduling‑backed booking CTA. Post‑launch, we iterated on section ordering and CTA copy to tighten the path from landing to booked audit.",
+    impact: "Wajdan went from no dedicated web presence to a fast, premium website that sells its 60‑day growth system on its own terms. The site gives the agency a credible, differentiated home for its paid traffic — framing the problem, explaining a complex five‑layer system simply, proving results, and converting high‑intent education‑consultancy owners into booked free audits. It now functions as the agency's primary closing asset: the destination every Meta campaign points to, engineered to convert rather than just inform.",
+    lessonsLearned: [
+      "For a growth agency, the website IS the proof — it has to out‑convert the sites it promises to beat.",
+      "A clear problem‑agitation‑solution narrative converts far better than a feature list.",
+      "Mobile‑first is non‑negotiable when nearly all traffic arrives from Meta ads.",
+      "Risk reversal and scarcity, used honestly, dramatically lift booking intent.",
+      "Performance is a conversion feature — every 100ms of load time costs booked calls."
+    ],
+    nextSteps: "Planned enhancements include A/B testing of hero messaging and CTA variants, a results/case‑study section as new client wins land, blog content targeting consultation‑scaling keywords for organic reach, and tighter analytics on the booking funnel to optimize conversion rate over time.",
+    techStack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "Vercel"],
+    liveUrl: "https://wajdan.co",
+    testimonial: "Megicode built us a website that actually sells. It captures our entire system in a way prospects instantly understand, it's fast, it looks premium, and it turns our ad traffic into booked audits. As a growth agency our own site has to convert — and this one does. — Founder, Wajdan Digital Alchemy",
+    metrics: {
+      "Web Presence": "0 → High‑Converting Sales Site",
+      "Built With": "Next.js (Mobile‑First)",
+      "System Layers Sold": "5 (Offer → Conversion Loop)",
+      "Primary Goal": "Booked Free Audits",
+      "Show Rate Story": "28% → 84%",
+      "Core Web Vitals": "Performance‑Optimized"
+    },
+    image: "/images/wajdan.png",
+    screenshots: [
+      "/images/wajdan.png"
+    ]
   }
 ];

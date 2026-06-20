@@ -127,6 +127,8 @@
         { "keyword": "web development portfolio", "intent": "informational", "priority": "high" },
         { "keyword": "clinic management system", "intent": "commercial", "priority": "medium" },
         { "keyword": "university portal development", "intent": "commercial", "priority": "medium" },
+        { "keyword": "high converting agency website", "intent": "commercial", "priority": "medium" },
+        { "keyword": "next.js landing page development", "intent": "commercial", "priority": "medium" },
         { "keyword": "full stack project examples", "intent": "informational", "priority": "medium" }
       ]
     },
@@ -202,6 +204,7 @@
       "/projects": [
         "/projects/aesthetics-clinic-platform",
         "/projects/campusaxis-university-portal",
+        "/projects/wajdan-growth-system-website",
         "/projects/fintech-uiux-revamp",
         "/projects/desktop-pos-javafx",
         "/projects/mobile-expense-tracker",
