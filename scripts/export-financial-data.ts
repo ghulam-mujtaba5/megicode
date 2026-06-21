@@ -10,7 +10,7 @@ config({ path: resolve(process.cwd(), '.env.local') }); // Load .env.local
 import { drizzle } from 'drizzle-orm/libsql';
 import { createClient } from '@libsql/client';
 import { desc, sql } from 'drizzle-orm';
-import * as XLSX from 'xlsx';
+import { utils as XLSXUtils, writeWorkbookFile } from '../lib/excel/xlsxCompat';
 import * as schema from '../lib/db/schema';
 import path from 'path';
 
@@ -64,7 +64,7 @@ async function exportFinancialData() {
   const db = drizzle(client, { schema });
 
   // Create workbook
-  const workbook = XLSX.utils.book_new();
+  const workbook = XLSXUtils.book_new();
 
   try {
     // =========================================================================
@@ -88,7 +88,7 @@ async function exportFinancialData() {
 
     console.log(`   Found ${foundersData.length} founders`);
 
-    const foundersSheet = XLSX.utils.json_to_sheet(
+    const foundersSheet = XLSXUtils.json_to_sheet(
       foundersData.map(f => ({
         'ID': f.id,
         'Name': f.name,
@@ -101,7 +101,7 @@ async function exportFinancialData() {
         'Created At': formatDate(f.createdAt),
       }))
     );
-    XLSX.utils.book_append_sheet(workbook, foundersSheet, 'Founders');
+    XLSXUtils.book_append_sheet(workbook, foundersSheet, 'Founders');
 
     // =========================================================================
     // 2. COMPANY ACCOUNTS
@@ -131,7 +131,7 @@ async function exportFinancialData() {
     // Get founder names for mapping
     const founderMap = new Map(foundersData.map(f => [f.id, f.name]));
 
-    const accountsSheet = XLSX.utils.json_to_sheet(
+    const accountsSheet = XLSXUtils.json_to_sheet(
       accountsData.map(a => ({
         'ID': a.id,
         'Account Name': a.name,
@@ -149,7 +149,7 @@ async function exportFinancialData() {
         'Created At': formatDate(a.createdAt),
       }))
     );
-    XLSX.utils.book_append_sheet(workbook, accountsSheet, 'Company Accounts');
+    XLSXUtils.book_append_sheet(workbook, accountsSheet, 'Company Accounts');
 
     // =========================================================================
     // 3. EXPENSES
@@ -184,7 +184,7 @@ async function exportFinancialData() {
     // Get account names for mapping
     const accountMap = new Map(accountsData.map(a => [a.id, a.name]));
 
-    const expensesSheet = XLSX.utils.json_to_sheet(
+    const expensesSheet = XLSXUtils.json_to_sheet(
       expensesData.map(e => ({
         'ID': e.id,
         'Title': e.title,
@@ -207,7 +207,7 @@ async function exportFinancialData() {
         'Created At': formatDate(e.createdAt),
       }))
     );
-    XLSX.utils.book_append_sheet(workbook, expensesSheet, 'Expenses');
+    XLSXUtils.book_append_sheet(workbook, expensesSheet, 'Expenses');
 
     // =========================================================================
     // 4. FOUNDER CONTRIBUTIONS
@@ -233,7 +233,7 @@ async function exportFinancialData() {
 
     console.log(`   Found ${contributionsData.length} contributions`);
 
-    const contributionsSheet = XLSX.utils.json_to_sheet(
+    const contributionsSheet = XLSXUtils.json_to_sheet(
       contributionsData.map(c => ({
         'ID': c.id,
         'Founder': founderMap.get(c.founderId) || c.founderId,
@@ -250,7 +250,7 @@ async function exportFinancialData() {
         'Created At': formatDate(c.createdAt),
       }))
     );
-    XLSX.utils.book_append_sheet(workbook, contributionsSheet, 'Founder Contributions');
+    XLSXUtils.book_append_sheet(workbook, contributionsSheet, 'Founder Contributions');
 
     // =========================================================================
     // 5. PROFIT DISTRIBUTIONS
@@ -276,7 +276,7 @@ async function exportFinancialData() {
 
     console.log(`   Found ${distributionsData.length} distributions`);
 
-    const distributionsSheet = XLSX.utils.json_to_sheet(
+    const distributionsSheet = XLSXUtils.json_to_sheet(
       distributionsData.map(d => ({
         'ID': d.id,
         'Project ID': d.projectId || '',
@@ -295,7 +295,7 @@ async function exportFinancialData() {
         'Created At': formatDate(d.createdAt),
       }))
     );
-    XLSX.utils.book_append_sheet(workbook, distributionsSheet, 'Profit Distributions');
+    XLSXUtils.book_append_sheet(workbook, distributionsSheet, 'Profit Distributions');
 
     // =========================================================================
     // 6. FOUNDER DISTRIBUTION ITEMS
@@ -320,7 +320,7 @@ async function exportFinancialData() {
 
     console.log(`   Found ${distributionItemsData.length} distribution items`);
 
-    const distributionItemsSheet = XLSX.utils.json_to_sheet(
+    const distributionItemsSheet = XLSXUtils.json_to_sheet(
       distributionItemsData.map(di => ({
         'ID': di.id,
         'Distribution ID': di.distributionId,
@@ -335,7 +335,7 @@ async function exportFinancialData() {
         'Created At': formatDate(di.createdAt),
       }))
     );
-    XLSX.utils.book_append_sheet(workbook, distributionItemsSheet, 'Distribution Items');
+    XLSXUtils.book_append_sheet(workbook, distributionItemsSheet, 'Distribution Items');
 
     // =========================================================================
     // 7. FUND TRANSFERS
@@ -362,7 +362,7 @@ async function exportFinancialData() {
 
     console.log(`   Found ${transfersData.length} transfers`);
 
-    const transfersSheet = XLSX.utils.json_to_sheet(
+    const transfersSheet = XLSXUtils.json_to_sheet(
       transfersData.map(t => ({
         'ID': t.id,
         'Transfer Type': t.transferType,
@@ -380,7 +380,7 @@ async function exportFinancialData() {
         'Created At': formatDate(t.createdAt),
       }))
     );
-    XLSX.utils.book_append_sheet(workbook, transfersSheet, 'Fund Transfers');
+    XLSXUtils.book_append_sheet(workbook, transfersSheet, 'Fund Transfers');
 
     // =========================================================================
     // 8. FINANCIAL TRANSACTIONS (Audit Log)
@@ -406,7 +406,7 @@ async function exportFinancialData() {
 
     console.log(`   Found ${transactionsData.length} transactions`);
 
-    const transactionsSheet = XLSX.utils.json_to_sheet(
+    const transactionsSheet = XLSXUtils.json_to_sheet(
       transactionsData.map(t => ({
         'ID': t.id,
         'Type': t.transactionType,
@@ -423,7 +423,7 @@ async function exportFinancialData() {
         'Created At': formatDate(t.createdAt),
       }))
     );
-    XLSX.utils.book_append_sheet(workbook, transactionsSheet, 'Financial Transactions');
+    XLSXUtils.book_append_sheet(workbook, transactionsSheet, 'Financial Transactions');
 
     // =========================================================================
     // 9. SUBSCRIPTIONS
@@ -436,7 +436,7 @@ async function exportFinancialData() {
 
     console.log(`   Found ${subscriptionsData.length} subscriptions`);
 
-    const subscriptionsSheet = XLSX.utils.json_to_sheet(
+    const subscriptionsSheet = XLSXUtils.json_to_sheet(
       subscriptionsData.map(s => ({
         'ID': s.id,
         'Name': s.name,
@@ -458,7 +458,7 @@ async function exportFinancialData() {
         'Created At': formatDate(s.createdAt),
       }))
     );
-    XLSX.utils.book_append_sheet(workbook, subscriptionsSheet, 'Subscriptions');
+    XLSXUtils.book_append_sheet(workbook, subscriptionsSheet, 'Subscriptions');
 
     // =========================================================================
     // 10. INVOICES
@@ -487,7 +487,7 @@ async function exportFinancialData() {
 
     console.log(`   Found ${invoicesData.length} invoices`);
 
-    const invoicesSheet = XLSX.utils.json_to_sheet(
+    const invoicesSheet = XLSXUtils.json_to_sheet(
       invoicesData.map(i => ({
         'ID': i.id,
         'Invoice Number': i.invoiceNumber,
@@ -509,7 +509,7 @@ async function exportFinancialData() {
         'Created At': formatDate(i.createdAt),
       }))
     );
-    XLSX.utils.book_append_sheet(workbook, invoicesSheet, 'Invoices');
+    XLSXUtils.book_append_sheet(workbook, invoicesSheet, 'Invoices');
 
     // =========================================================================
     // 11. PAYMENTS
@@ -535,7 +535,7 @@ async function exportFinancialData() {
 
     console.log(`   Found ${paymentsData.length} payments`);
 
-    const paymentsSheet = XLSX.utils.json_to_sheet(
+    const paymentsSheet = XLSXUtils.json_to_sheet(
       paymentsData.map(p => ({
         'ID': p.id,
         'Invoice ID': p.invoiceId || '',
@@ -552,7 +552,7 @@ async function exportFinancialData() {
         'Created At': formatDate(p.createdAt),
       }))
     );
-    XLSX.utils.book_append_sheet(workbook, paymentsSheet, 'Payments');
+    XLSXUtils.book_append_sheet(workbook, paymentsSheet, 'Payments');
 
     // =========================================================================
     // 12. PROJECT FINANCIALS
@@ -586,7 +586,7 @@ async function exportFinancialData() {
 
     console.log(`   Found ${projectFinancialsData.length} project financials`);
 
-    const projectFinancialsSheet = XLSX.utils.json_to_sheet(
+    const projectFinancialsSheet = XLSXUtils.json_to_sheet(
       projectFinancialsData.map(pf => ({
         'ID': pf.id,
         'Project ID': pf.projectId,
@@ -612,7 +612,7 @@ async function exportFinancialData() {
         'Created At': formatDate(pf.createdAt),
       }))
     );
-    XLSX.utils.book_append_sheet(workbook, projectFinancialsSheet, 'Project Financials');
+    XLSXUtils.book_append_sheet(workbook, projectFinancialsSheet, 'Project Financials');
 
     // =========================================================================
     // 13. BUDGETS
@@ -625,7 +625,7 @@ async function exportFinancialData() {
 
     console.log(`   Found ${budgetsData.length} budgets`);
 
-    const budgetsSheet = XLSX.utils.json_to_sheet(
+    const budgetsSheet = XLSXUtils.json_to_sheet(
       budgetsData.map(b => ({
         'ID': b.id,
         'Name': b.name,
@@ -640,7 +640,7 @@ async function exportFinancialData() {
         'Created At': formatDate(b.createdAt),
       }))
     );
-    XLSX.utils.book_append_sheet(workbook, budgetsSheet, 'Budgets');
+    XLSXUtils.book_append_sheet(workbook, budgetsSheet, 'Budgets');
 
     // Budget map for categories
     const budgetMap = new Map(budgetsData.map(b => [b.id, b.name]));
@@ -665,7 +665,7 @@ async function exportFinancialData() {
 
     console.log(`   Found ${budgetCategoriesData.length} budget categories`);
 
-    const budgetCategoriesSheet = XLSX.utils.json_to_sheet(
+    const budgetCategoriesSheet = XLSXUtils.json_to_sheet(
       budgetCategoriesData.map(bc => ({
         'ID': bc.id,
         'Budget ID': bc.budgetId,
@@ -680,7 +680,7 @@ async function exportFinancialData() {
         'Created At': formatDate(bc.createdAt),
       }))
     );
-    XLSX.utils.book_append_sheet(workbook, budgetCategoriesSheet, 'Budget Categories');
+    XLSXUtils.book_append_sheet(workbook, budgetCategoriesSheet, 'Budget Categories');
 
     // =========================================================================
     // 15. CLIENTS
@@ -693,7 +693,7 @@ async function exportFinancialData() {
 
     console.log(`   Found ${clientsData.length} clients`);
 
-    const clientsSheet = XLSX.utils.json_to_sheet(
+    const clientsSheet = XLSXUtils.json_to_sheet(
       clientsData.map(c => ({
         'ID': c.id,
         'Name': c.name,
@@ -708,7 +708,7 @@ async function exportFinancialData() {
         'Created At': formatDate(c.createdAt),
       }))
     );
-    XLSX.utils.book_append_sheet(workbook, clientsSheet, 'Clients');
+    XLSXUtils.book_append_sheet(workbook, clientsSheet, 'Clients');
 
     // =========================================================================
     // 16. PROJECTS (for reference)
@@ -735,7 +735,7 @@ async function exportFinancialData() {
 
     console.log(`   Found ${projectsList.length} projects`);
 
-    const projectsSheet = XLSX.utils.json_to_sheet(
+    const projectsSheet = XLSXUtils.json_to_sheet(
       projectsList.map(p => ({
         'ID': p.id,
         'Name': p.name,
@@ -749,7 +749,7 @@ async function exportFinancialData() {
         'Created At': formatDate(p.createdAt),
       }))
     );
-    XLSX.utils.book_append_sheet(workbook, projectsSheet, 'Projects');
+    XLSXUtils.book_append_sheet(workbook, projectsSheet, 'Projects');
 
     // =========================================================================
     // 17. SUMMARY SHEET
@@ -813,8 +813,8 @@ async function exportFinancialData() {
       { 'Category': 'Database', 'Value': url?.replace(/libsql:\/\//, '').split('.')[0] || 'N/A', 'Raw Value': '' },
     ];
 
-    const summarySheet = XLSX.utils.json_to_sheet(summaryData);
-    XLSX.utils.book_append_sheet(workbook, summarySheet, 'Summary');
+    const summarySheet = XLSXUtils.json_to_sheet(summaryData);
+    XLSXUtils.book_append_sheet(workbook, summarySheet, 'Summary');
 
     // Move Summary to first position
     const sheetOrder = workbook.SheetNames;
@@ -832,7 +832,7 @@ async function exportFinancialData() {
     const outputPath = path.join(process.cwd(), `megicode-financial-export-${timestamp}.xlsx`);
 
     console.log('\n💾 Writing Excel file...');
-    XLSX.writeFile(workbook, outputPath, { compression: true });
+    await writeWorkbookFile(workbook, outputPath);
 
     console.log(`\n✅ Export complete!`);
     console.log(`📁 File saved: ${outputPath}`);

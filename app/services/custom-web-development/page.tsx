@@ -13,8 +13,9 @@ import servicesData from "../servicesData";
 import ServiceSchema from "@/components/SEO/ServiceSchema";
 import Breadcrumbs from "@/components/SEO/Breadcrumbs";
 import { ServiceFAQs } from "../ServiceDetailSections";
-import { SiReact, SiNextdotjs, SiNodedotjs, SiSpringboot, SiAmazon, SiDocker } from "react-icons/si";
+import { SiReact, SiNextdotjs, SiNodedotjs, SiSpringboot, SiDocker } from "react-icons/si";
 import {
+  FaAws,
   FaCode,
   FaPaintBrush,
   FaCloud,
@@ -317,7 +318,7 @@ export default function WebDevelopmentDetailPage() {
                 case "next.js": Icon = SiNextdotjs; color = "#000000"; break;
                 case "node.js": Icon = SiNodedotjs; color = "#339933"; break;
                 case "spring boot": Icon = SiSpringboot; color = "#6DB33F"; break;
-                case "aws": Icon = SiAmazon; color = "#FF9900"; break;
+                case "aws": Icon = FaAws; color = "#FF9900"; break;
                 case "docker": Icon = SiDocker; color = "#2496ED"; break;
                 default: Icon = null; color = undefined;
               }

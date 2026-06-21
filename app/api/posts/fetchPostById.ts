@@ -1,26 +1,11 @@
 import { NextResponse } from 'next/server';
 
+import { getBlogPostPayload } from '@/lib/blog/posts';
+
 export async function fetchPostById(id: string) {
   try {
-    const res = await fetch(`https://payloadw.onrender.com/api/posts/${id}`, {
-      next: { revalidate: 60 }, // Cache for 60 seconds
-    });
-
-    if (!res.ok) {
-      return NextResponse.json(
-        { error: `Failed to fetch post: ${res.statusText}` },
-        { status: res.status }
-      );
-    }
-
-    const data = await res.json();
-    if (!data || (!data.doc && !data.id)) {
-      return NextResponse.json(
-        { error: 'Invalid response format from API' },
-        { status: 500 }
-      );
-    }
-
+    const data = await getBlogPostPayload(id);
+    if (!data) return NextResponse.json({ error: 'Post not found' }, { status: 404 });
     return NextResponse.json(data);
   } catch (error) {
     return NextResponse.json(

@@ -5,6 +5,7 @@ import { ThemeToggleClient } from "../../../components/Icon";
 import ArticleSchema from "@/components/SEO/ArticleSchema";
 import styles from './ArticleDetail.module.css';
 import { Metadata } from "next";
+import { getBlogPost } from "@/lib/blog/posts";
 // Dynamic metadata for SEO
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;
@@ -18,19 +19,17 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     };
   }
 
-  const pageUrl = `https://www.megicode.com/article/${id}`;
-  const imageUrl = article.heroImage?.sizes?.medium?.url || 
-                  article.heroImage?.url || 
-                  article.coverImage || 
-                  "/meta/default-og.jpg";
+  const pageUrl = `https://www.megicode.com/article/${article.slug || id}`;
+  const imageUrl = article.coverImage || "/meta/default-og.jpg";
+  const description = article.seoDescription || article.excerpt || article.title || "Read this article on Megicode.";
 
   return {
-    title: article.title || "Article | Megicode",
-    description: article.summary || article.title || "Read this article on Megicode.",
+    title: article.seoTitle || article.title || "Article | Megicode",
+    description,
     openGraph: {
       title: article.title,
 
-      description: article.summary || article.title,
+      description,
       url: pageUrl,
       type: "article",
       images: [imageUrl],
@@ -38,7 +37,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     twitter: {
       card: "summary_large_image",
       title: article.title,
-      description: article.summary || article.title,
+      description,
       images: [imageUrl],
     },
     alternates: {
@@ -62,15 +61,7 @@ async function getArticle(id: string) {
   if (!id) return null;
 
   try {
-    const res = await fetch(`https://payloadw.onrender.com/api/posts/${id}`, { next: { revalidate: 60 } });
-
-    if (!res.ok) {
-      console.error(`Failed to fetch article: ${res.status} ${res.statusText}`);
-      return null;
-    }
-
-    const data = await res.json();
-    return data?.doc || data;
+    return getBlogPost(id);
   } catch (error) {
     console.error('Error fetching article:', error);
     return null;
@@ -100,36 +91,20 @@ const ArticleDetailPage = async ({ params }: { params: Promise<{ id: string }> }
         <main className={styles.mainContent}>
           <article>
             {(() => {
-              // Prefer heroImage.sizes.medium.url, then heroImage.url, then coverImage
-              let imageUrl = null;
-              let alt = article.title || 'Article cover';
-              if (article.heroImage) {
-                if (article.heroImage.sizes && article.heroImage.sizes.medium && article.heroImage.sizes.medium.url) {
-                  imageUrl = article.heroImage.sizes.medium.url;
-                } else if (article.heroImage.url) {
-                  imageUrl = article.heroImage.url;
-                }
-                if (article.heroImage.alt) alt = article.heroImage.alt;
-              } else if (article.coverImage) {
+              let imageUrl = '';
+              let alt = article.coverImageAlt || article.title || 'Article cover';
+              if (article.coverImage) {
                 imageUrl = article.coverImage;
               }
               if (!imageUrl) return null;
-              // If not absolute, prefix with API URL
-              const isAbsolute = imageUrl.startsWith('http');
-              // Ensure imageUrl starts with a single slash
-              let normalizedPath = imageUrl;
-              if (!isAbsolute) {
-                if (!imageUrl.startsWith('/')) {
-                  normalizedPath = '/' + imageUrl;
-                }
-              }
-              const src = isAbsolute ? imageUrl : `https://payloadw.onrender.com${normalizedPath}`;
+              const src = imageUrl;
               // Theme is handled by CSS class on <html> or <body>
               return (
                 <img
                   src={src}
                   alt={alt}
                   className={styles.coverImage}
+                  style={{ objectFit: article.coverImageFit || 'cover' }}
                   onError={e => { e.currentTarget.style.display = 'none'; }}
                 />
               );
@@ -138,12 +113,10 @@ const ArticleDetailPage = async ({ params }: { params: Promise<{ id: string }> }
               {article.title}
             </h1>
             <div className={`${styles.articleMeta} article-meta`}>
-              {article.populatedAuthors && article.populatedAuthors[0]?.name} &middot; {article.createdAt && new Date(article.createdAt).toLocaleDateString()}
+              {article.authorName || 'Megicode Team'} &middot; {article.publishedAt || article.createdAt ? new Date(article.publishedAt || article.createdAt).toLocaleDateString() : ''}
             </div>
             <div className={`${styles.articleContent} article-content`}>
-              {article.content?.root?.children?.map((block, i) => (
-                <p key={i}>{block.children?.map((c) => c.text).join(' ')}</p>
-              )) || 'No content available.'}
+              <div dangerouslySetInnerHTML={{ __html: article.contentHtml || '<p>No content available.</p>' }} />
             </div>
           </article>
         </main>

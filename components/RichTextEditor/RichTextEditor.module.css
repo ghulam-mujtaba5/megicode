@@ -46,6 +46,69 @@
   border-color: rgba(59, 130, 246, 0.2);
 }
 
+.utilityBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px;
+  border-bottom: 1px solid var(--border-color, #e5e7eb);
+  background: var(--bg-surface, #fff);
+}
+
+.utilityBar details {
+  position: relative;
+}
+
+.utilityBar summary {
+  list-style: none;
+  cursor: pointer;
+  border: 1px solid var(--border-color, #e5e7eb);
+  border-radius: 4px;
+  padding: 6px 10px;
+  color: var(--text-secondary, #6b7280);
+  font-size: 0.85rem;
+}
+
+.utilityBar summary::-webkit-details-marker {
+  display: none;
+}
+
+.utilityPanel {
+  position: absolute;
+  z-index: 5;
+  top: calc(100% + 6px);
+  left: 0;
+  width: min(420px, 82vw);
+  padding: 12px;
+  border: 1px solid var(--border-color, #e5e7eb);
+  border-radius: 8px;
+  background: var(--bg-surface, #fff);
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.14);
+  display: grid;
+  gap: 8px;
+}
+
+.utilityPanel input,
+.utilityPanel textarea {
+  width: 100%;
+  border: 1px solid var(--border-color, #e5e7eb);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font: inherit;
+  background: var(--bg-surface, #fff);
+  color: var(--text-primary, #111827);
+}
+
+.utilityPanel button {
+  justify-self: end;
+  border: 0;
+  border-radius: 6px;
+  padding: 8px 12px;
+  background: var(--primary, #3b82f6);
+  color: #fff;
+  cursor: pointer;
+}
+
 .content {
   padding: 12px;
   min-height: 150px;
@@ -66,14 +129,29 @@
 }
 
 /* Typography inside editor */
-.content :global(.ProseMirror h1) { font-size: 1.5em; font-weight: 700; margin: 0.5em 0; }
-.content :global(.ProseMirror h2) { font-size: 1.25em; font-weight: 600; margin: 0.5em 0; }
-.content :global(.ProseMirror h3) { font-size: 1.1em; font-weight: 600; margin: 0.5em 0; }
-.content :global(.ProseMirror ul), 
-.content :global(.ProseMirror ol) { padding-left: 1.5em; margin: 0.5em 0; }
-.content :global(.ProseMirror blockquote) { 
-  border-left: 3px solid var(--border-color, #e5e7eb); 
-  padding-left: 1em; 
+.content :global(.ProseMirror h1) {
+  font-size: 1.5em;
+  font-weight: 700;
+  margin: 0.5em 0;
+}
+.content :global(.ProseMirror h2) {
+  font-size: 1.25em;
+  font-weight: 600;
+  margin: 0.5em 0;
+}
+.content :global(.ProseMirror h3) {
+  font-size: 1.1em;
+  font-weight: 600;
+  margin: 0.5em 0;
+}
+.content :global(.ProseMirror ul),
+.content :global(.ProseMirror ol) {
+  padding-left: 1.5em;
+  margin: 0.5em 0;
+}
+.content :global(.ProseMirror blockquote) {
+  border-left: 3px solid var(--border-color, #e5e7eb);
+  padding-left: 1em;
   margin: 0.5em 0;
   color: var(--text-secondary, #6b7280);
 }
@@ -96,4 +174,10 @@
   background: none;
   color: inherit;
   padding: 0;
+}
+
+.content :global(.ProseMirror img) {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
 }

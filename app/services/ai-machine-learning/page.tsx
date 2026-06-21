@@ -13,8 +13,8 @@ import servicesData from "../servicesData";
 import ServiceSchema from "@/components/SEO/ServiceSchema";
 import Breadcrumbs from "@/components/SEO/Breadcrumbs";
 import { ServiceFAQs } from "../ServiceDetailSections";
-import { SiPython, SiTensorflow, SiPytorch, SiScikitlearn, SiAmazon, SiGooglecloud } from "react-icons/si";
-import { FaRobot, FaLanguage, FaEye, FaCogs, FaSearch, FaDatabase, FaRocket, FaLifeRing } from "react-icons/fa";
+import { SiPython, SiTensorflow, SiPytorch, SiScikitlearn, SiGooglecloud } from "react-icons/si";
+import { FaAws, FaRobot, FaLanguage, FaEye, FaCogs, FaSearch, FaDatabase, FaRocket, FaLifeRing } from "react-icons/fa";
 
 import NavBarMobile from "../../../components/NavBar_Mobile/NavBar-mobile";
 import NewNavBar from "../../../components/NavBar_Desktop_Company/NewNavBar";
@@ -300,7 +300,7 @@ export default function AIMachineLearningDetailPage() {
                 case "scikit-learn": Icon = SiScikitlearn; color = "#F7931E"; break;
                 case "aws":
                 case "amazon aws":
-                case "amazon web services": Icon = SiAmazon; color = "#FF9900"; break;
+                case "amazon web services": Icon = FaAws; color = "#FF9900"; break;
                 case "google cloud": Icon = SiGooglecloud; color = "#4285F4"; break;
                 case "openai":
                   try {

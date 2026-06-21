@@ -14,7 +14,6 @@ import ServiceSchema from "@/components/SEO/ServiceSchema";
 import Breadcrumbs from "@/components/SEO/Breadcrumbs";
 import { ServiceFAQs } from "../ServiceDetailSections";
 import {
-  SiAmazon,
   SiDocker,
   SiKubernetes,
   SiTerraform,
@@ -23,6 +22,7 @@ import {
   SiGooglecloud
 } from "react-icons/si";
 import {
+  FaAws,
   FaCloud,
   FaCodeBranch,
   FaServer,
@@ -315,7 +315,7 @@ export default function CloudDevOpsPage() {
             {service.techs.map((t, i) => {
               const getTechIcon = (tech: string) => {
                 switch (tech.toLowerCase()) {
-                  case "aws": return { icon: SiAmazon, color: "#FF9900" };
+                  case "aws": return { icon: FaAws, color: "#FF9900" };
                   case "azure": return { icon: FaCloud, color: "#0089D6" };
                   case "docker": return { icon: SiDocker, color: "#2496ED" };
                   case "kubernetes": return { icon: SiKubernetes, color: "#326CE5" };

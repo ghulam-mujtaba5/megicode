@@ -8,12 +8,13 @@ import dark from './TechStackDark.module.css';
 import { fadeIn } from '../../utils/animations';
 import {
   SiTensorflow, SiPytorch, SiOpenai, SiScikitlearn,
-  SiPython, SiTableau, SiApachespark, SiReact, SiNextdotjs,
+  SiPython, SiLooker, SiApachespark, SiReact, SiNextdotjs,
   SiNodedotjs, SiTypescript, SiGraphql, SiFlutter, SiSwift, SiKotlin,
-  SiFirebase, SiAmazon, SiDocker, SiKubernetes, SiTerraform, SiJenkins,
-  SiFigma, SiAdobexd, SiSketch, SiInvision, SiAdobe,
+  SiFirebase, SiDocker, SiKubernetes, SiTerraform, SiJenkins,
+  SiFigma, SiSketch, SiInvision,
   SiSpringboot, SiExpress,
 } from 'react-icons/si';
+import { FaAws, FaPalette } from 'react-icons/fa';
 import { DiDatabase } from 'react-icons/di';
 
 const techCategories = {
@@ -62,7 +63,7 @@ const iconMap: { [key: string]: React.ElementType } = {
   'OpenAI': SiOpenai,
   'Scikit-learn': SiScikitlearn,
   'Python': SiPython,
-  'Tableau': SiTableau,
+  'Tableau': SiLooker,
   'SQL': DiDatabase,
   'Spark': SiApachespark,
   'React': SiReact,
@@ -75,16 +76,16 @@ const iconMap: { [key: string]: React.ElementType } = {
   'Swift': SiSwift,
   'Kotlin': SiKotlin,
   'Firebase': SiFirebase,
-  'Amazon Web Services': SiAmazon,
+  'Amazon Web Services': FaAws,
   'Docker': SiDocker,
   'Kubernetes': SiKubernetes,
   'Terraform': SiTerraform,
   'Jenkins': SiJenkins,
   'Figma': SiFigma,
-  'Adobe XD': SiAdobexd,
+  'Adobe XD': FaPalette,
   'Sketch': SiSketch,
   'InVision': SiInvision,
-  'Adobe Creative': SiAdobe,
+  'Adobe Creative': FaPalette,
 };
 
 const TechStack: React.FC = () => {

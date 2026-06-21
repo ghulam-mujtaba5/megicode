@@ -13,7 +13,7 @@ import servicesData from "../servicesData";
 import ServiceSchema from "@/components/SEO/ServiceSchema";
 import Breadcrumbs from "@/components/SEO/Breadcrumbs";
 import { ServiceFAQs } from "../ServiceDetailSections";
-import { SiPython, SiTableau, SiMysql, SiApachespark } from "react-icons/si";
+import { SiPython, SiLooker, SiMysql, SiApachespark } from "react-icons/si";
 import {
   FaSearch,
   FaDatabase,
@@ -319,7 +319,7 @@ export default function DataAnalyticsDetailPage() {
               switch (t.toLowerCase()) {
                 case "python": Icon = SiPython; color = "#3776AB"; break;
                 case "power bi": Icon = FaChartBar; color = "#F2C811"; break;
-                case "tableau": Icon = SiTableau; color = "#E97627"; break;
+                case "tableau": Icon = SiLooker; color = "#E97627"; break;
                 case "sql": Icon = SiMysql; color = "#4479A1"; break;
                 case "spark": Icon = SiApachespark; color = "#E25A1C"; break;
                 default: Icon = null; color = undefined;

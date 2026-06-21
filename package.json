@@ -1,7 +1,7 @@
 {
   "scripts": {
     "dev": "next dev",
-    "build": "next build --no-lint",
+    "build": "next build",
     "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "eslint . --max-warnings=0",
@@ -23,49 +23,51 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@libsql/client": "^0.15.15",
-    "@tiptap/extension-link": "^3.13.0",
-    "@tiptap/extension-placeholder": "^3.13.0",
-    "@tiptap/react": "^3.13.0",
-    "@tiptap/starter-kit": "^3.13.0",
+    "@libsql/client": "^0.17.4",
+    "@tiptap/extension-image": "^3.27.1",
+    "@tiptap/extension-link": "^3.27.1",
+    "@tiptap/extension-placeholder": "^3.27.1",
+    "@tiptap/react": "^3.27.1",
+    "@tiptap/starter-kit": "^3.27.1",
     "@types/react-big-calendar": "^1.16.3",
-    "date-fns": "^4.1.0",
-    "drizzle-orm": "^0.45.1",
-    "framer-motion": "^12.15.0",
+    "date-fns": "^4.4.0",
+    "drizzle-orm": "^0.45.2",
+    "exceljs": "^4.4.0",
+    "framer-motion": "^12.40.0",
     "lottie-react": "^2.4.1",
-    "next": "^15.4.1",
-    "next-auth": "^4.24.13",
-    "nodemailer": "^7.0.5",
-    "react": "^19.1.0",
-    "react-big-calendar": "^1.19.4",
-    "react-day-picker": "^9.12.0",
-    "react-dom": "^19.1.0",
-    "react-icons": "^5.5.0",
-    "resend": "^4.7.0",
-    "xlsx": "^0.18.5",
-    "zod": "^4.2.1"
+    "mongodb": "^7.3.0",
+    "next": "^16.2.9",
+    "next-auth": "^4.24.14",
+    "nodemailer": "^9.0.1",
+    "react": "^19.2.7",
+    "react-big-calendar": "^1.20.0",
+    "react-day-picker": "^10.0.1",
+    "react-dom": "^19.2.7",
+    "react-icons": "^5.6.0",
+    "resend": "^6.14.0",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@axe-core/react": "^4.10.2",
-    "@playwright/test": "^1.57.0",
-    "@trivago/prettier-plugin-sort-imports": "^6.0.0",
-    "@types/node": "22.15.29",
-    "@types/react": "19.1.6",
-    "@types/react-dom": "19.1.6",
-    "@types/sharp": "^0.31.1",
-    "dotenv": "^16.6.1",
-    "drizzle-kit": "^0.31.8",
-    "eslint": "^8.57.0",
-    "eslint-config-next": "^15.4.1",
+    "@axe-core/react": "^4.11.3",
+    "@playwright/test": "^1.61.0",
+    "@trivago/prettier-plugin-sort-imports": "^6.0.2",
+    "@types/node": "^26.0.0",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "dotenv": "^17.4.2",
+    "drizzle-kit": "^0.31.10",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "^16.2.9",
     "eslint-plugin-import": "^2.32.0",
+    "glob": "^13.0.6",
     "husky": "^9.1.7",
-    "lint-staged": "^16.2.7",
+    "lint-staged": "^17.0.8",
     "next-sitemap": "^4.2.3",
-    "png-to-ico": "^2.1.8",
-    "prettier": "^3.7.4",
-    "sharp": "^0.34.2",
+    "png-to-ico": "^3.0.1",
+    "prettier": "^3.8.4",
+    "sharp": "^0.35.2",
     "ts-node": "^10.9.2",
-    "typescript": "^5.8.3"
+    "typescript": "^6.0.3"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -77,6 +79,11 @@
     ]
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=22.22.1"
+  },
+  "overrides": {
+    "uuid": "^11.1.1",
+    "postcss": "^8.5.10",
+    "esbuild": "^0.25.12"
   }
 }

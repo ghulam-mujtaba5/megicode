@@ -8,7 +8,7 @@ import ServiceSchema from "@/components/SEO/ServiceSchema";
 import Breadcrumbs from "@/components/SEO/Breadcrumbs";
 import { ServiceFAQs } from "../ServiceDetailSections";
 import { FaPencilRuler, FaPalette, FaUserCheck, FaRegObjectGroup, FaUsers, FaRocket, FaLifeRing } from "react-icons/fa";
-import { SiFigma, SiAdobe, SiSketch, SiInvision } from "react-icons/si";
+import { SiFigma, SiSketch, SiInvision } from "react-icons/si";
 
 import dynamic from "next/dynamic";
 const LottiePlayer = dynamic(() => import('../../../components/LottiePlayer/LottiePlayer'), { ssr: false });
@@ -278,7 +278,7 @@ export default function UIUXProductDesignDetailPage() {
               let color = undefined;
               switch (t.toLowerCase()) {
                 case "figma": Icon = SiFigma; color = "#F24E1E"; break;
-                case "adobe xd": Icon = SiAdobe; color = "#FF61F6"; break;
+                case "adobe xd": Icon = FaPalette; color = "#FF61F6"; break;
                 case "sketch": Icon = SiSketch; color = "#F7B500"; break;
                 case "invision": Icon = SiInvision; color = "#FF3366"; break;
                 default: Icon = null; color = undefined;

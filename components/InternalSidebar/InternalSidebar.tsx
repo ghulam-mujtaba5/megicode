@@ -130,6 +130,7 @@ export default function InternalSidebar({
       label: 'Tools', 
       icon: Icons.tools,
       children: [
+        { label: 'Blog CMS', href: '/internal/blog', icon: Icons.book },
         { label: 'Templates', href: '/internal/templates', icon: Icons.projects },
         { label: 'Team', href: '/internal/team', icon: Icons.users },
       ]

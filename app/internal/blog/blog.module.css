@@ -1,0 +1,301 @@
+.page {
+  color: var(--int-text);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.header h1,
+.editorPanel h2,
+.sidePanel h2 {
+  margin: 0;
+}
+
+.header p {
+  margin: 0.35rem 0 0;
+  color: var(--int-text-muted);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.editorPanel,
+.sidePanel {
+  background: var(--int-surface);
+  border: 1px solid var(--int-border);
+  border-radius: 8px;
+  padding: 1.25rem;
+  box-shadow: var(--int-shadow);
+}
+
+.panelHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.formGrid label,
+.fullField,
+.seoBox label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  color: var(--int-text-secondary);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.formGrid input,
+.formGrid select,
+.fullField textarea,
+.seoBox input,
+.seoBox textarea {
+  width: 100%;
+  border: 1px solid var(--int-border);
+  border-radius: 6px;
+  padding: 0.75rem 0.85rem;
+  background: var(--int-surface);
+  color: var(--int-text);
+  font: inherit;
+}
+
+.fullField {
+  margin-top: 1rem;
+}
+
+.fullField textarea,
+.seoBox textarea {
+  min-height: 88px;
+  resize: vertical;
+}
+
+.editorBlock {
+  margin-top: 1rem;
+}
+
+.label {
+  display: block;
+  color: var(--int-text-secondary);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+.seoBox {
+  margin-top: 1rem;
+  border: 1px solid var(--int-border);
+  border-radius: 8px;
+  padding: 0.85rem;
+}
+
+.seoBox summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.seoBox label {
+  margin-top: 0.85rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.primaryButton,
+.secondaryButton,
+.textButton {
+  border: 0;
+  border-radius: 6px;
+  padding: 0.7rem 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.primaryButton {
+  background: var(--int-primary);
+  color: #fff;
+}
+
+.secondaryButton {
+  background: var(--int-bg-alt);
+  color: var(--int-text);
+  border: 1px solid var(--int-border);
+}
+
+.textButton {
+  background: transparent;
+  color: var(--int-primary);
+  padding: 0;
+}
+
+.primaryButton:disabled,
+.secondaryButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.message {
+  margin-bottom: 1rem;
+  padding: 0.8rem 1rem;
+  background: var(--int-primary-light);
+  color: var(--int-primary);
+  border-radius: 8px;
+}
+
+.previewCard {
+  border: 1px solid var(--int-border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 1rem 0 1.5rem;
+  background: var(--int-bg);
+}
+
+.previewCard img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  display: block;
+}
+
+.previewBody {
+  padding: 1rem;
+}
+
+.previewBody h3 {
+  margin: 0.65rem 0;
+  font-size: 1.15rem;
+}
+
+.previewBody p {
+  margin: 0 0 0.75rem;
+  color: var(--int-text-secondary);
+  line-height: 1.5;
+}
+
+.previewBody small,
+.muted {
+  color: var(--int-text-muted);
+}
+
+.chipRow,
+.tagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.65rem;
+}
+
+.chipRow span,
+.tagRow span {
+  border-radius: 999px;
+  padding: 0.2rem 0.5rem;
+  background: var(--int-bg-alt);
+  color: var(--int-text-secondary);
+  font-size: 0.75rem;
+}
+
+.tagRow {
+  margin-bottom: 0.75rem;
+}
+
+.statusBadge {
+  display: inline-flex;
+  border-radius: 999px;
+  padding: 0.2rem 0.55rem;
+  background: var(--int-primary-light);
+  color: var(--int-primary);
+  font-size: 0.75rem;
+  text-transform: capitalize;
+}
+
+.postList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.postItem {
+  border: 1px solid var(--int-border);
+  border-radius: 8px;
+  padding: 0.75rem;
+  background: var(--int-bg);
+}
+
+.postItem > button {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  padding: 0;
+  cursor: pointer;
+}
+
+.postItem strong,
+.postItem span {
+  display: block;
+}
+
+.postItem span {
+  margin-top: 0.25rem;
+  color: var(--int-text-muted);
+  font-size: 0.8rem;
+}
+
+.postActions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.65rem;
+}
+
+.postActions a,
+.postActions button {
+  border: 0;
+  background: transparent;
+  color: var(--int-primary);
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  text-decoration: none;
+}
+
+@media (max-width: 1100px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .header,
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

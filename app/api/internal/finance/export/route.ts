@@ -20,7 +20,7 @@ import {
   projects,
 } from '@/lib/db/schema';
 import { requireRole } from '@/lib/internal/auth';
-import * as XLSX from 'xlsx';
+import { utils as XLSXUtils, writeWorkbookBuffer } from '@/lib/excel/xlsxCompat';
 
 // Helper to format currency (from paisa/cents to readable format)
 function formatCurrency(amount: number | null, currency = 'PKR'): string {
@@ -49,7 +49,7 @@ export async function GET(request: Request) {
     const format = searchParams.get('format') || 'xlsx'; // xlsx or csv
     
     // Create workbook
-    const workbook = XLSX.utils.book_new();
+    const workbook = XLSXUtils.book_new();
     
     // =========================================================================
     // 1. FOUNDERS SHEET
@@ -69,7 +69,7 @@ export async function GET(request: Request) {
       .from(founders)
       .orderBy(founders.name);
     
-    const foundersSheet = XLSX.utils.json_to_sheet(
+    const foundersSheet = XLSXUtils.json_to_sheet(
       foundersData.map(f => ({
         'ID': f.id,
         'Name': f.name,
@@ -82,7 +82,7 @@ export async function GET(request: Request) {
         'Created At': formatDate(f.createdAt),
       }))
     );
-    XLSX.utils.book_append_sheet(workbook, foundersSheet, 'Founders');
+    XLSXUtils.book_append_sheet(workbook, foundersSheet, 'Founders');
     
     // =========================================================================
     // 2. COMPANY ACCOUNTS SHEET
@@ -107,7 +107,7 @@ export async function GET(request: Request) {
       .leftJoin(founders, sql`${companyAccounts.founderId} = ${founders.id}`)
       .orderBy(companyAccounts.name);
     
-    const accountsSheet = XLSX.utils.json_to_sheet(
+    const accountsSheet = XLSXUtils.json_to_sheet(
       accountsData.map(a => ({
         'ID': a.id,
         'Account Name': a.name,
@@ -125,7 +125,7 @@ export async function GET(request: Request) {
         'Created At': formatDate(a.createdAt),
       }))
     );
-    XLSX.utils.book_append_sheet(workbook, accountsSheet, 'Company Accounts');
+    XLSXUtils.book_append_sheet(workbook, accountsSheet, 'Company Accounts');
     
     // =========================================================================
     // 3. EXPENSES SHEET
@@ -156,7 +156,7 @@ export async function GET(request: Request) {
       .leftJoin(companyAccounts, sql`${expenses.paidFromAccountId} = ${companyAccounts.id}`)
       .orderBy(desc(expenses.expenseDate));
     
-    const expensesSheet = XLSX.utils.json_to_sheet(
+    const expensesSheet = XLSXUtils.json_to_sheet(
       expensesData.map(e => ({
         'ID': e.id,
         'Title': e.title,
@@ -179,7 +179,7 @@ export async function GET(request: Request) {
         'Created At': formatDate(e.createdAt),
       }))
     );
-    XLSX.utils.book_append_sheet(workbook, expensesSheet, 'Expenses');
+    XLSXUtils.book_append_sheet(workbook, expensesSheet, 'Expenses');
     
     // =========================================================================
     // 4. FOUNDER CONTRIBUTIONS SHEET
@@ -204,7 +204,7 @@ export async function GET(request: Request) {
       .leftJoin(companyAccounts, sql`${founderContributions.toAccountId} = ${companyAccounts.id}`)
       .orderBy(desc(founderContributions.contributedAt));
     
-    const contributionsSheet = XLSX.utils.json_to_sheet(
+    const contributionsSheet = XLSXUtils.json_to_sheet(
       contributionsData.map(c => ({
         'ID': c.id,
         'Founder': c.founderName || '',
@@ -221,7 +221,7 @@ export async function GET(request: Request) {
         'Created At': formatDate(c.createdAt),
       }))
     );
-    XLSX.utils.book_append_sheet(workbook, contributionsSheet, 'Founder Contributions');
+    XLSXUtils.book_append_sheet(workbook, contributionsSheet, 'Founder Contributions');
     
     // =========================================================================
     // 5. PROFIT DISTRIBUTIONS SHEET
@@ -244,7 +244,7 @@ export async function GET(request: Request) {
       .from(profitDistributions)
       .orderBy(desc(profitDistributions.createdAt));
     
-    const distributionsSheet = XLSX.utils.json_to_sheet(
+    const distributionsSheet = XLSXUtils.json_to_sheet(
       distributionsData.map(d => ({
         'ID': d.id,
         'Project ID': d.projectId || '',
@@ -263,7 +263,7 @@ export async function GET(request: Request) {
         'Created At': formatDate(d.createdAt),
       }))
     );
-    XLSX.utils.book_append_sheet(workbook, distributionsSheet, 'Profit Distributions');
+    XLSXUtils.book_append_sheet(workbook, distributionsSheet, 'Profit Distributions');
     
     // =========================================================================
     // 6. FOUNDER DISTRIBUTION ITEMS SHEET
@@ -287,7 +287,7 @@ export async function GET(request: Request) {
       .leftJoin(companyAccounts, sql`${founderDistributionItems.toAccountId} = ${companyAccounts.id}`)
       .orderBy(desc(founderDistributionItems.createdAt));
     
-    const distributionItemsSheet = XLSX.utils.json_to_sheet(
+    const distributionItemsSheet = XLSXUtils.json_to_sheet(
       distributionItemsData.map(di => ({
         'ID': di.id,
         'Distribution ID': di.distributionId,
@@ -302,7 +302,7 @@ export async function GET(request: Request) {
         'Created At': formatDate(di.createdAt),
       }))
     );
-    XLSX.utils.book_append_sheet(workbook, distributionItemsSheet, 'Distribution Items');
+    XLSXUtils.book_append_sheet(workbook, distributionItemsSheet, 'Distribution Items');
     
     // =========================================================================
     // 7. FUND TRANSFERS SHEET
@@ -324,7 +324,7 @@ export async function GET(request: Request) {
       .from(fundTransfers)
       .orderBy(desc(fundTransfers.transferredAt));
     
-    const transfersSheet = XLSX.utils.json_to_sheet(
+    const transfersSheet = XLSXUtils.json_to_sheet(
       transfersData.map(t => ({
         'ID': t.id,
         'Transfer Type': t.transferType,
@@ -340,7 +340,7 @@ export async function GET(request: Request) {
         'Created At': formatDate(t.createdAt),
       }))
     );
-    XLSX.utils.book_append_sheet(workbook, transfersSheet, 'Fund Transfers');
+    XLSXUtils.book_append_sheet(workbook, transfersSheet, 'Fund Transfers');
     
     // =========================================================================
     // 8. FINANCIAL TRANSACTIONS SHEET (Audit Log)
@@ -364,7 +364,7 @@ export async function GET(request: Request) {
       .orderBy(desc(financialTransactions.transactionDate))
       .limit(5000); // Limit to prevent huge exports
     
-    const transactionsSheet = XLSX.utils.json_to_sheet(
+    const transactionsSheet = XLSXUtils.json_to_sheet(
       transactionsData.map(t => ({
         'ID': t.id,
         'Type': t.transactionType,
@@ -381,7 +381,7 @@ export async function GET(request: Request) {
         'Created At': formatDate(t.createdAt),
       }))
     );
-    XLSX.utils.book_append_sheet(workbook, transactionsSheet, 'Financial Transactions');
+    XLSXUtils.book_append_sheet(workbook, transactionsSheet, 'Financial Transactions');
     
     // =========================================================================
     // 9. SUBSCRIPTIONS SHEET
@@ -391,7 +391,7 @@ export async function GET(request: Request) {
       .from(subscriptions)
       .orderBy(subscriptions.name);
     
-    const subscriptionsSheet = XLSX.utils.json_to_sheet(
+    const subscriptionsSheet = XLSXUtils.json_to_sheet(
       subscriptionsData.map(s => ({
         'ID': s.id,
         'Name': s.name,
@@ -413,7 +413,7 @@ export async function GET(request: Request) {
         'Created At': formatDate(s.createdAt),
       }))
     );
-    XLSX.utils.book_append_sheet(workbook, subscriptionsSheet, 'Subscriptions');
+    XLSXUtils.book_append_sheet(workbook, subscriptionsSheet, 'Subscriptions');
     
     // =========================================================================
     // 10. INVOICES SHEET
@@ -439,7 +439,7 @@ export async function GET(request: Request) {
       .from(invoices)
       .orderBy(desc(invoices.createdAt));
     
-    const invoicesSheet = XLSX.utils.json_to_sheet(
+    const invoicesSheet = XLSXUtils.json_to_sheet(
       invoicesData.map(i => ({
         'ID': i.id,
         'Invoice Number': i.invoiceNumber,
@@ -461,7 +461,7 @@ export async function GET(request: Request) {
         'Created At': formatDate(i.createdAt),
       }))
     );
-    XLSX.utils.book_append_sheet(workbook, invoicesSheet, 'Invoices');
+    XLSXUtils.book_append_sheet(workbook, invoicesSheet, 'Invoices');
     
     // =========================================================================
     // 11. PAYMENTS SHEET
@@ -484,7 +484,7 @@ export async function GET(request: Request) {
       .from(payments)
       .orderBy(desc(payments.createdAt));
     
-    const paymentsSheet = XLSX.utils.json_to_sheet(
+    const paymentsSheet = XLSXUtils.json_to_sheet(
       paymentsData.map(p => ({
         'ID': p.id,
         'Invoice ID': p.invoiceId || '',
@@ -501,7 +501,7 @@ export async function GET(request: Request) {
         'Created At': formatDate(p.createdAt),
       }))
     );
-    XLSX.utils.book_append_sheet(workbook, paymentsSheet, 'Payments');
+    XLSXUtils.book_append_sheet(workbook, paymentsSheet, 'Payments');
     
     // =========================================================================
     // 12. PROJECT FINANCIALS SHEET
@@ -528,7 +528,7 @@ export async function GET(request: Request) {
       .leftJoin(projects, sql`${projectFinancials.projectId} = ${projects.id}`)
       .orderBy(desc(projectFinancials.createdAt));
     
-    const projectFinancialsSheet = XLSX.utils.json_to_sheet(
+    const projectFinancialsSheet = XLSXUtils.json_to_sheet(
       projectFinancialsData.map(pf => ({
         'ID': pf.id,
         'Project ID': pf.projectId,
@@ -554,7 +554,7 @@ export async function GET(request: Request) {
         'Created At': formatDate(pf.createdAt),
       }))
     );
-    XLSX.utils.book_append_sheet(workbook, projectFinancialsSheet, 'Project Financials');
+    XLSXUtils.book_append_sheet(workbook, projectFinancialsSheet, 'Project Financials');
     
     // =========================================================================
     // 13. BUDGETS SHEET
@@ -564,7 +564,7 @@ export async function GET(request: Request) {
       .from(budgets)
       .orderBy(desc(budgets.periodStart));
     
-    const budgetsSheet = XLSX.utils.json_to_sheet(
+    const budgetsSheet = XLSXUtils.json_to_sheet(
       budgetsData.map(b => ({
         'ID': b.id,
         'Name': b.name,
@@ -579,7 +579,7 @@ export async function GET(request: Request) {
         'Created At': formatDate(b.createdAt),
       }))
     );
-    XLSX.utils.book_append_sheet(workbook, budgetsSheet, 'Budgets');
+    XLSXUtils.book_append_sheet(workbook, budgetsSheet, 'Budgets');
     
     // =========================================================================
     // 14. BUDGET CATEGORIES SHEET
@@ -600,7 +600,7 @@ export async function GET(request: Request) {
       .leftJoin(budgets, sql`${budgetCategories.budgetId} = ${budgets.id}`)
       .orderBy(budgetCategories.category);
     
-    const budgetCategoriesSheet = XLSX.utils.json_to_sheet(
+    const budgetCategoriesSheet = XLSXUtils.json_to_sheet(
       budgetCategoriesData.map(bc => ({
         'ID': bc.id,
         'Budget ID': bc.budgetId,
@@ -615,7 +615,7 @@ export async function GET(request: Request) {
         'Created At': formatDate(bc.createdAt),
       }))
     );
-    XLSX.utils.book_append_sheet(workbook, budgetCategoriesSheet, 'Budget Categories');
+    XLSXUtils.book_append_sheet(workbook, budgetCategoriesSheet, 'Budget Categories');
     
     // =========================================================================
     // 15. SUMMARY SHEET
@@ -689,8 +689,8 @@ export async function GET(request: Request) {
       { 'Category': 'Export Date', 'Value': new Date().toISOString(), 'Raw Value': new Date().toISOString() },
     ];
     
-    const summarySheet = XLSX.utils.json_to_sheet(summaryData);
-    XLSX.utils.book_append_sheet(workbook, summarySheet, 'Summary');
+    const summarySheet = XLSXUtils.json_to_sheet(summaryData);
+    XLSXUtils.book_append_sheet(workbook, summarySheet, 'Summary');
     
     // Move Summary to the first position
     const sheetOrder = workbook.SheetNames;
@@ -706,11 +706,7 @@ export async function GET(request: Request) {
     const filename = `megicode-financial-export-${timestamp}.xlsx`;
     
     // Write to buffer
-    const buffer = XLSX.write(workbook, { 
-      type: 'buffer', 
-      bookType: 'xlsx',
-      compression: true,
-    });
+    const buffer = await writeWorkbookBuffer(workbook);
     
     // Return as downloadable file
     return new NextResponse(buffer, {

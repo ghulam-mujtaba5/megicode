@@ -12,8 +12,12 @@ import { SITE_SOCIAL, getCopyrightText } from '@/lib/constants';
 interface Article {
   _id?: string;
   id?: string;
+  slug?: string;
   title: string;
   createdAt: string;
+  excerpt?: string;
+  summary?: string;
+  coverImage?: string;
   populatedAuthors?: { name: string }[];
   content?: { root?: { children?: { children?: { text: string }[] }[] } };
 }
@@ -118,7 +122,7 @@ const ArticlePage = () => {
             {articles.map((article) => (
               <Link
                 key={article._id || article.id}
-                href={`/article/${article._id || article.id}`}
+                href={`/article/${article.slug || article._id || article.id}`}
                 style={{ textDecoration: "none" }}
               >
                 <article
@@ -169,7 +173,7 @@ const ArticlePage = () => {
                       fontWeight: 400
                     }}
                   >
-                    {article.content?.root?.children?.[0]?.children?.map((c) => c.text).join(' ')?.slice(0, 200) || 'No preview available.'}
+                    {article.excerpt || article.summary || article.content?.root?.children?.[0]?.children?.map((c) => c.text).join(' ')?.slice(0, 200) || 'No preview available.'}
                   </p>
                 </article>
               </Link>

@@ -1,9 +1,9 @@
 import React from 'react';
 import Image from 'next/image';
 import { IconType } from 'react-icons';
-import { FaFigma } from 'react-icons/fa';
+import { FaFigma, FaPalette } from 'react-icons/fa';
 import { 
-    SiAdobexd, SiReact, SiMaterialdesign, SiJira, SiRedux, SiFirebase, SiSupabase, 
+    SiReact, SiMaterialdesign, SiJira, SiRedux, SiFirebase, SiSupabase,
     SiNodedotjs, SiPython, SiPandas, SiScikitlearn, SiJupyter, SiDocker, SiMiro, 
     SiSlack, SiGithub, SiPostgresql, SiTensorflow, SiStreamlit 
 } from 'react-icons/si';
@@ -25,7 +25,7 @@ type TechIconInfo = ReactIconInfo | SvgIconInfo;
 // Map tech/tool names to icon metadata
 const techIconMap: Record<string, TechIconInfo> = {
   'Figma': { type: 'react-icon', component: FaFigma, color: '#a259ff' },
-  'Adobe XD': { type: 'react-icon', component: SiAdobexd, color: '#ff61f6' },
+  'Adobe XD': { type: 'react-icon', component: FaPalette, color: '#ff61f6' },
   'React Native': { type: 'react-icon', component: SiReact, color: '#61dafb' },
   'React Native CLI': { type: 'react-icon', component: SiReact, color: '#61dafb' },
   'React': { type: 'react-icon', component: SiReact, color: '#61dafb' },

@@ -20,11 +20,12 @@ import {
   SiOpenai, SiPython, SiTensorflow, SiPytorch,
   SiNextdotjs, SiReact, SiTypescript, SiNodedotjs,
   SiFlutter, SiFirebase,
-  SiFigma, SiAdobe, SiFramer,
-  SiAmazon, SiDocker, SiKubernetes, SiTerraform,
-  SiApachespark, SiTableau,
+  SiFigma, SiFramer,
+  SiDocker, SiKubernetes, SiTerraform,
+  SiApachespark, SiLooker,
   SiZapier, SiGit, SiGithub,
 } from 'react-icons/si';
+import { FaAws, FaPalette } from 'react-icons/fa';
 import commonStyles from './ServicesFrameCommon.module.css';
 import lightStyles from './ServicesFrame.module.css';
 import darkStyles from './ServicesFrameDark.module.css';
@@ -116,7 +117,7 @@ const SERVICES: ServiceItem[] = [
     href: '/services',
     techs: [
       { Icon: SiFigma,  name: 'Figma',  color: '#F24E1E' },
-      { Icon: SiAdobe,  name: 'Adobe',  color: '#FF0000' },
+      { Icon: FaPalette,  name: 'Adobe',  color: '#FF0000' },
       { Icon: SiFramer, name: 'Framer', color: '#0055FF' },
     ],
   },
@@ -128,7 +129,7 @@ const SERVICES: ServiceItem[] = [
     tagline: 'Infrastructure that ships fast and stays up.',
     href: '/services',
     techs: [
-      { Icon: SiAmazon,     name: 'AWS',        color: '#FF9900' },
+      { Icon: FaAws,     name: 'AWS',        color: '#FF9900' },
       { Icon: SiDocker,     name: 'Docker',     color: '#2496ED' },
       { Icon: SiKubernetes, name: 'Kubernetes', color: '#326CE5' },
     ],
@@ -143,7 +144,7 @@ const SERVICES: ServiceItem[] = [
     techs: [
       { Icon: SiPython,      name: 'Python',  color: '#3776AB' },
       { Icon: SiApachespark, name: 'Spark',   color: '#E25A1C' },
-      { Icon: SiTableau,     name: 'Tableau', color: '#E97627' },
+      { Icon: SiLooker,     name: 'Tableau', color: '#E97627' },
     ],
   },
   {

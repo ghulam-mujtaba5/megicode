@@ -16,11 +16,11 @@ import { ServiceFAQs } from "../ServiceDetailSections";
 import {
   SiJira,
   SiGooglechrome,
-  SiAmazon,
   SiDocker,
   SiSlack
 } from "react-icons/si";
 import {
+  FaAws,
   FaChartLine,
   FaNetworkWired,
   FaServer,
@@ -305,7 +305,7 @@ export default function ITConsultingSupportPage() {
                   color = "#0052CC";
                   break;
                 case "aws":
-                  Icon = SiAmazon;
+                  Icon = FaAws;
                   color = "#FF9900";
                   break;
                 case "google workspace":
