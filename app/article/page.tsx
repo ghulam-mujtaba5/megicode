@@ -1,6 +1,6 @@
 'use client';
-import React, { useEffect, useState } from 'react';
 
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 import { SITE_SOCIAL, getCopyrightText } from '@/lib/constants';
@@ -12,6 +12,8 @@ import ThemeToggleIcon from '../../components/Icon/sbicon';
 import NewNavBar from '../../components/NavBar_Desktop_Company/NewNavBar';
 import NavBarMobile from '../../components/NavBar_Mobile/NavBar-mobile';
 import { useTheme } from '../../context/ThemeContext';
+
+import styles from './ArticleList.module.css';
 
 interface Article {
   _id?: string;
@@ -25,22 +27,47 @@ interface Article {
   coverImage?: string;
   coverImageAlt?: string;
   coverImageFit?: React.CSSProperties['objectFit'];
+  categories?: string[];
   populatedAuthors?: { name: string }[];
   content?: { root?: { children?: { children?: { text: string }[] }[] } };
+}
+
+function articleUrl(article: Article) {
+  return `/article/${article.slug || article._id || article.id}`;
+}
+
+function articlePreview(article: Article) {
+  return (
+    article.excerpt ||
+    article.summary ||
+    article.content?.root?.children?.[0]?.children
+      ?.map((child) => child.text)
+      .join(' ')
+      ?.slice(0, 200) ||
+    'No preview available.'
+  );
+}
+
+function formatDate(article: Article) {
+  const value = article.publishedAt || article.createdAt;
+  return value
+    ? new Date(value).toLocaleDateString(undefined, {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+      })
+    : '';
 }
 
 const ArticlePage = () => {
   const { theme, toggleTheme } = useTheme();
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  const [failedImages, setFailedImages] = useState<Record<string, boolean>>({});
 
   const { linkedinUrl, instagramUrl, githubUrl } = SITE_SOCIAL;
   const copyrightText = getCopyrightText();
+  const isDark = theme === 'dark';
 
   useEffect(() => {
     fetch('/api/posts')
@@ -50,193 +77,97 @@ const ArticlePage = () => {
       })
       .then((data) => {
         setArticles(data?.docs || []);
-        setLoading(false);
       })
       .catch(() => {
+        setArticles([]);
+      })
+      .finally(() => {
         setLoading(false);
       });
   }, []);
 
-  const isMobile = isClient && window.innerWidth < 768;
-
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        minHeight: '100vh',
-        background:
-          theme === 'dark'
-            ? 'linear-gradient(135deg, #181c22 0%, #232946 100%)'
-            : 'linear-gradient(135deg, #f8fafc 0%, #e8eaf6 100%)',
-        overflowX: 'hidden',
-        transition: 'background 0.3s',
-      }}
-    >
-      {/* Theme Toggle Icon */}
-      <div
+    <div className={`${styles.pageShell} ${isDark ? styles.dark : ''}`}>
+      <button
         id="theme-toggle"
-        role="button"
-        tabIndex={0}
+        type="button"
         onClick={toggleTheme}
-        style={{ margin: '0 0 0 1.5rem', width: 40, zIndex: 50, position: 'fixed' }}
+        className={styles.themeToggle}
+        aria-label="Toggle theme"
       >
         <ThemeToggleIcon />
-      </div>
+      </button>
       <nav id="desktop-navbar" aria-label="Main Navigation">
         <NewNavBar />
       </nav>
       <nav id="mobile-navbar" aria-label="Mobile Navigation">
         <NavBarMobile />
       </nav>
-      <main
-        id="main-content"
-        style={{
-          flex: '1 0 auto',
-          maxWidth: 900,
-          width: '100%',
-          margin: '0 auto',
-          padding: isMobile ? '4rem 1.5rem 3rem' : '5rem 1rem 4rem',
-          boxSizing: 'border-box',
-        }}
-      >
-        <h1
-          style={{
-            fontSize: 40,
-            fontWeight: 800,
-            marginBottom: 36,
-            letterSpacing: '-1px',
-            background: 'linear-gradient(135deg, #4573df 0%, #2d4fa2 100%)',
-            WebkitBackgroundClip: 'text',
-            backgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            color: '#4573df',
-          }}
-        >
-          Articles
-        </h1>
+
+      <main id="main-content" className={styles.mainContent}>
+        <section className={styles.hero}>
+          <div>
+            <span className={styles.eyebrow}>Megicode Insights</span>
+            <h1 className={styles.title}>Articles that help you build smarter systems.</h1>
+            <p className={styles.subtitle}>
+              Practical notes on AI automation, custom software, scalable platforms, analytics,
+              security, and modern product delivery.
+            </p>
+          </div>
+          {!loading && <div className={styles.countPill}>{articles.length} articles</div>}
+        </section>
+
         {loading ? (
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              minHeight: '400px',
-              width: '100%',
-            }}
-          >
+          <div className={styles.state}>
             <LoadingAnimation size="medium" />
           </div>
         ) : articles.length === 0 ? (
-          <div
-            style={{
-              color: theme === 'dark' ? '#b0b8c1' : '#232946',
-              fontSize: 20,
-              textAlign: 'center',
-              marginTop: 60,
-            }}
-          >
-            No articles found.
-          </div>
+          <div className={styles.state}>No articles found.</div>
         ) : (
-          <div
-            style={{
-              display: 'grid',
-              gap: 40,
-              gridTemplateColumns: '1fr',
-            }}
-          >
-            {articles.map((article) => (
-              <Link
-                key={article._id || article.id || article.slug}
-                href={`/article/${article.slug || article._id || article.id}`}
-                style={{ textDecoration: 'none' }}
-              >
-                <article
-                  style={{
-                    background:
-                      theme === 'dark' ? 'rgba(36, 41, 54, 0.98)' : 'rgba(255,255,255,0.98)',
-                    border: theme === 'dark' ? '1.5px solid #2e3440' : '1.5px solid #e3e8ee',
-                    borderRadius: 20,
-                    boxShadow:
-                      theme === 'dark'
-                        ? '0 4px 32px 0 rgba(0,0,0,0.25)'
-                        : '0 4px 24px 0 rgba(60,60,120,0.07)',
-                    padding: 0,
-                    transition: 'box-shadow 0.2s, border 0.2s, background 0.2s',
-                    position: 'relative',
-                    overflow: 'hidden',
-                    cursor: 'pointer',
-                  }}
-                >
-                  {article.coverImage && (
-                    <img
-                      src={article.coverImage}
-                      alt={article.coverImageAlt || article.title}
-                      style={{
-                        display: 'block',
-                        width: '100%',
-                        height: isMobile ? 190 : 260,
-                        objectFit: article.coverImageFit || 'cover',
-                        background: theme === 'dark' ? '#111827' : '#e8eaf6',
-                      }}
-                    />
-                  )}
-                  <div style={{ padding: '2.5rem 2rem 2rem 2rem' }}>
-                    <h2
-                      style={{
-                        fontSize: 26,
-                        fontWeight: 700,
-                        marginBottom: 10,
-                        color: theme === 'dark' ? '#e3e8ee' : '#232946',
-                        letterSpacing: '-0.5px',
-                      }}
-                    >
-                      {article.title}
-                    </h2>
-                    <div
-                      style={{
-                        color: theme === 'dark' ? '#b0b8c1' : '#5a6270',
-                        fontSize: 15,
-                        marginBottom: 18,
-                        fontWeight: 500,
-                      }}
-                    >
-                      {article.populatedAuthors?.[0]?.name || 'Megicode Team'} &middot;{' '}
-                      {new Date(article.publishedAt || article.createdAt).toLocaleDateString()}
+          <section className={styles.grid} aria-label="Articles">
+            {articles.map((article) => {
+              const key = article._id || article.id || article.slug || article.title;
+              const category = article.categories?.[0] || 'Megicode';
+              const imageFailed = failedImages[key];
+
+              return (
+                <Link key={key} href={articleUrl(article)} className={styles.cardLink}>
+                  <article className={styles.card}>
+                    <div className={styles.imageWrap}>
+                      {article.coverImage && !imageFailed ? (
+                        <img
+                          src={article.coverImage}
+                          alt={article.coverImageAlt || article.title}
+                          style={{ objectFit: article.coverImageFit || 'cover' }}
+                          onError={() => setFailedImages((current) => ({ ...current, [key]: true }))}
+                        />
+                      ) : (
+                        <div className={styles.fallbackArt}>{article.title.slice(0, 1)}</div>
+                      )}
+                      <span className={styles.category}>{category}</span>
                     </div>
-                    <p
-                      style={{
-                        fontSize: 18,
-                        lineHeight: 1.7,
-                        color: theme === 'dark' ? '#c7d0e0' : '#232946',
-                        marginBottom: 0,
-                        fontWeight: 400,
-                      }}
-                    >
-                      {article.excerpt ||
-                        article.summary ||
-                        article.content?.root?.children?.[0]?.children
-                          ?.map((c) => c.text)
-                          .join(' ')
-                          ?.slice(0, 200) ||
-                        'No preview available.'}
-                    </p>
-                  </div>
-                </article>
-              </Link>
-            ))}
-          </div>
+                    <div className={styles.cardBody}>
+                      <h2 className={styles.cardTitle}>{article.title}</h2>
+                      <p className={styles.meta}>
+                        {article.populatedAuthors?.[0]?.name || 'Megicode Team'} · {formatDate(article)}
+                      </p>
+                      <p className={styles.excerpt}>{articlePreview(article)}</p>
+                      <span className={styles.readMore}>Read article</span>
+                    </div>
+                  </article>
+                </Link>
+              );
+            })}
+          </section>
         )}
       </main>
-      <div style={{ flexShrink: 0, width: '100%' }}>
-        <Footer
-          linkedinUrl={linkedinUrl}
-          instagramUrl={instagramUrl}
-          githubUrl={githubUrl}
-          copyrightText={copyrightText}
-        />
-      </div>
+
+      <Footer
+        linkedinUrl={linkedinUrl}
+        instagramUrl={instagramUrl}
+        githubUrl={githubUrl}
+        copyrightText={copyrightText}
+      />
     </div>
   );
 };

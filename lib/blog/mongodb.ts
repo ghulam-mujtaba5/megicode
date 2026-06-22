@@ -19,7 +19,7 @@ function getMongoClient() {
     const client = new MongoClient(uri, {
       maxPoolSize: 10,
       minPoolSize: 0,
-      serverSelectionTimeoutMS: 5000,
+      serverSelectionTimeoutMS: 15000,
     });
     clientPromise = client.connect();
   }

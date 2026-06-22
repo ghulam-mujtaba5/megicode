@@ -1,41 +1,83 @@
-import NavBarDesktop from "../../../components/NavBar_Desktop_Company/NewNavBar";
-import NavBarMobile from "../../../components/NavBar_Mobile/NavBar-mobile";
-import Footer from "../../../components/Footer/Footer";
-import { ThemeToggleClient } from "../../../components/Icon";
-import ArticleSchema from "@/components/SEO/ArticleSchema";
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+
+import Footer from '@/components/Footer/Footer';
+import { ThemeToggleClient } from '@/components/Icon';
+import NavBarDesktop from '@/components/NavBar_Desktop_Company/NewNavBar';
+import NavBarMobile from '@/components/NavBar_Mobile/NavBar-mobile';
+import ArticleSchema from '@/components/SEO/ArticleSchema';
+import { SITE_SOCIAL, getCopyrightText } from '@/lib/constants';
+import { getBlogPost } from '@/lib/blog/posts';
+
 import styles from './ArticleDetail.module.css';
-import { Metadata } from "next";
-import { getBlogPost } from "@/lib/blog/posts";
-// Dynamic metadata for SEO
-export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+
+export const revalidate = 60;
+
+export async function generateStaticParams() {
+  return [];
+}
+
+async function getArticle(id: string) {
+  if (!id) return null;
+
+  try {
+    return await getBlogPost(id);
+  } catch (error) {
+    console.error('Error fetching article:', error);
+    return null;
+  }
+}
+
+function absoluteUrl(pathOrUrl?: string) {
+  if (!pathOrUrl) return 'https://www.megicode.com/meta/default-og.jpg';
+  if (/^https?:\/\//i.test(pathOrUrl)) return pathOrUrl;
+  return `https://www.megicode.com${pathOrUrl.startsWith('/') ? pathOrUrl : `/${pathOrUrl}`}`;
+}
+
+function formatDate(value?: string | null) {
+  return value
+    ? new Date(value).toLocaleDateString(undefined, {
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric',
+      })
+    : '';
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
   const { id } = await params;
   const article = await getArticle(id);
 
   if (!article) {
     return {
-      title: "Article Not Found | Megicode",
-      description: "This article could not be found.",
+      title: 'Article Not Found | Megicode',
+      description: 'This article could not be found.',
       robots: { index: false, follow: false },
     };
   }
 
   const pageUrl = `https://www.megicode.com/article/${article.slug || id}`;
-  const imageUrl = article.coverImage || "/meta/default-og.jpg";
-  const description = article.seoDescription || article.excerpt || article.title || "Read this article on Megicode.";
+  const imageUrl = absoluteUrl(article.coverImage);
+  const description =
+    article.seoDescription || article.excerpt || article.title || 'Read this article on Megicode.';
 
   return {
-    title: article.seoTitle || article.title || "Article | Megicode",
+    title: article.seoTitle || article.title || 'Article | Megicode',
     description,
     openGraph: {
       title: article.title,
-
       description,
       url: pageUrl,
-      type: "article",
-      images: [imageUrl],
+      type: 'article',
+      images: [{ url: imageUrl, width: 1200, height: 630, alt: article.coverImageAlt || article.title }],
     },
     twitter: {
-      card: "summary_large_image",
+      card: 'summary_large_image',
       title: article.title,
       description,
       images: [imageUrl],
@@ -45,86 +87,76 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     },
   };
 }
-import { notFound } from "next/navigation";
-
-// ISR: revalidate every 60 seconds
-export const revalidate = 60;
-
-// Generate static params for all articles (optional: you can fetch all IDs from your API)
-export async function generateStaticParams() {
-  // Avoid pre-generating article pages during build to prevent long external
-  // API fetches from blocking the build. Pages will be rendered on demand.
-  return [];
-}
-
-async function getArticle(id: string) {
-  if (!id) return null;
-
-  try {
-    return getBlogPost(id);
-  } catch (error) {
-    console.error('Error fetching article:', error);
-    return null;
-  }
-}
 
 const ArticleDetailPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
   const article = await getArticle(id);
-  // Theme is handled client-side; default to 'light' for SSR, but useEffect will update on client
   if (!article) return notFound();
+
+  const category = article.categories?.[0] || 'Megicode Insights';
+  const publishedDate = formatDate(article.publishedAt || article.createdAt);
+  const { linkedinUrl, instagramUrl, githubUrl } = SITE_SOCIAL;
+  const copyrightText = getCopyrightText();
 
   return (
     <>
       <ArticleSchema article={article} />
-      <div className={`article-detail-theme-bg ${styles.articleDetailThemeBg}`}>
-        {/* Remove role from ThemeToggleClient for better accessibility */}
+      <div className={styles.articleDetailThemeBg}>
         <ThemeToggleClient className={styles.themeToggle} />
         <nav id="desktop-navbar" aria-label="Main Navigation">
-          {/* Ensure NavBarDesktop renders a <ul> with <li> for navigation links */}
           <NavBarDesktop />
         </nav>
         <nav id="mobile-navbar" aria-label="Mobile Navigation">
-          {/* Ensure NavBarMobile renders a <ul> with <li> for navigation links */}
           <NavBarMobile />
         </nav>
+
         <main className={styles.mainContent}>
-          <article>
-            {(() => {
-              let imageUrl = '';
-              let alt = article.coverImageAlt || article.title || 'Article cover';
-              if (article.coverImage) {
-                imageUrl = article.coverImage;
-              }
-              if (!imageUrl) return null;
-              const src = imageUrl;
-              // Theme is handled by CSS class on <html> or <body>
-              return (
-                <img
-                  src={src}
-                  alt={alt}
-                  className={styles.coverImage}
-                  style={{ objectFit: article.coverImageFit || 'cover' }}
-                  onError={e => { e.currentTarget.style.display = 'none'; }}
-                />
-              );
-            })()}
-            <h1 className={`${styles.articleTitle} article-title`}>
-              {article.title}
-            </h1>
-            <div className={`${styles.articleMeta} article-meta`}>
-              {article.authorName || 'Megicode Team'} &middot; {article.publishedAt || article.createdAt ? new Date(article.publishedAt || article.createdAt).toLocaleDateString() : ''}
-            </div>
-            <div className={`${styles.articleContent} article-content`}>
-              <div dangerouslySetInnerHTML={{ __html: article.contentHtml || '<p>No content available.</p>' }} />
+          <Link href="/article" className={styles.backLink}>
+            Back to articles
+          </Link>
+
+          <article className={styles.articleShell}>
+            <header className={styles.hero}>
+              <div className={styles.heroCopy}>
+                <span className={styles.category}>{category}</span>
+                <h1 className={styles.articleTitle}>{article.title}</h1>
+                <p className={styles.articleDescription}>
+                  {article.seoDescription || article.excerpt || 'Read the latest Megicode insight.'}
+                </p>
+                <div className={styles.articleMeta}>
+                  <span>{article.authorName || 'Megicode Team'}</span>
+                  {publishedDate && <span>{publishedDate}</span>}
+                </div>
+              </div>
+
+              <div className={styles.coverFrame}>
+                {article.coverImage ? (
+                  <img
+                    src={article.coverImage}
+                    alt={article.coverImageAlt || article.title}
+                    className={styles.coverImage}
+                    style={{ objectFit: article.coverImageFit || 'cover' }}
+                  />
+                ) : (
+                  <div className={styles.coverFallback}>{article.title.slice(0, 1)}</div>
+                )}
+              </div>
+            </header>
+
+            <div className={styles.contentCard}>
+              <div
+                className={styles.articleContent}
+                dangerouslySetInnerHTML={{ __html: article.contentHtml || '<p>No content available.</p>' }}
+              />
             </div>
           </article>
         </main>
+
         <Footer
-          linkedinUrl="https://www.linkedin.com/company/megicode"
-          instagramUrl="https://www.instagram.com/megicode/"
-          githubUrl="https://github.com/megicodes"
-          copyrightText="Copyright 2025 Megicode. All Rights Reserved."
+          linkedinUrl={linkedinUrl}
+          instagramUrl={instagramUrl}
+          githubUrl={githubUrl}
+          copyrightText={copyrightText}
         />
       </div>
     </>
