@@ -138,6 +138,7 @@ export function RichTextEditor({
   const [codeText, setCodeText] = useState('');
   const [markdownText, setMarkdownText] = useState('');
   const [sourceText, setSourceText] = useState(content);
+  const [uploadingImage, setUploadingImage] = useState(false);
 
   const markdownToHtml = useMemo(() => {
     return (markdown: string) => {
@@ -227,8 +228,37 @@ export function RichTextEditor({
                   setImageUrl('');
                 }}
               >
-                Insert
+                Insert from URL
               </button>
+              <div style={{ borderTop: '1px solid var(--border-color, #e5e7eb)', paddingTop: 8, marginTop: 4 }}>
+                <label style={{ fontSize: '0.8rem', color: 'var(--text-secondary, #6b7280)', display: 'block', marginBottom: 4 }}>
+                  Or upload image (converts to WebP)
+                </label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={async (event) => {
+                    const file = event.target.files?.[0];
+                    if (!file || !editor) return;
+                    setUploadingImage(true);
+                    try {
+                      const formData = new FormData();
+                      formData.append('file', file);
+                      const res = await fetch('/api/internal/upload', { method: 'POST', body: formData });
+                      const data = await res.json();
+                      if (!res.ok) throw new Error(data.error || 'Upload failed');
+                      editor.chain().focus().setImage({ src: data.url, alt: file.name.replace(/\.[^.]+$/, '') }).run();
+                    } catch (err) {
+                      alert(err instanceof Error ? err.message : 'Upload failed');
+                    } finally {
+                      setUploadingImage(false);
+                      event.target.value = '';
+                    }
+                  }}
+                  disabled={uploadingImage}
+                />
+                {uploadingImage && <span style={{ fontSize: '0.75rem', color: 'var(--primary, #3b82f6)' }}>Uploading...</span>}
+              </div>
             </div>
           </details>
           <details>

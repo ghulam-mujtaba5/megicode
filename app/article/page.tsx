@@ -1,13 +1,17 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import NewNavBar from "../../components/NavBar_Desktop_Company/NewNavBar";
-import NavBarMobile from "../../components/NavBar_Mobile/NavBar-mobile";
-import Footer from "../../components/Footer/Footer";
-import ThemeToggleIcon from "../../components/Icon/sbicon";
-import { useTheme } from "../../context/ThemeContext";
-import LoadingAnimation from "@/components/LoadingAnimation/LoadingAnimation";
+'use client';
+import React, { useEffect, useState } from 'react';
+
+import Link from 'next/link';
+
 import { SITE_SOCIAL, getCopyrightText } from '@/lib/constants';
+
+import LoadingAnimation from '@/components/LoadingAnimation/LoadingAnimation';
+
+import Footer from '../../components/Footer/Footer';
+import ThemeToggleIcon from '../../components/Icon/sbicon';
+import NewNavBar from '../../components/NavBar_Desktop_Company/NewNavBar';
+import NavBarMobile from '../../components/NavBar_Mobile/NavBar-mobile';
+import { useTheme } from '../../context/ThemeContext';
 
 interface Article {
   _id?: string;
@@ -15,9 +19,12 @@ interface Article {
   slug?: string;
   title: string;
   createdAt: string;
+  publishedAt?: string;
   excerpt?: string;
   summary?: string;
   coverImage?: string;
+  coverImageAlt?: string;
+  coverImageFit?: React.CSSProperties['objectFit'];
   populatedAuthors?: { name: string }[];
   content?: { root?: { children?: { children?: { text: string }[] }[] } };
 }
@@ -31,12 +38,12 @@ const ArticlePage = () => {
   useEffect(() => {
     setIsClient(true);
   }, []);
-  
+
   const { linkedinUrl, instagramUrl, githubUrl } = SITE_SOCIAL;
   const copyrightText = getCopyrightText();
 
   useEffect(() => {
-    fetch("/api/posts")
+    fetch('/api/posts')
       .then((res) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();
@@ -58,13 +65,22 @@ const ArticlePage = () => {
         display: 'flex',
         flexDirection: 'column',
         minHeight: '100vh',
-        background: theme === "dark" ? "linear-gradient(135deg, #181c22 0%, #232946 100%)" : "linear-gradient(135deg, #f8fafc 0%, #e8eaf6 100%)",
-        overflowX: "hidden",
-        transition: "background 0.3s"
+        background:
+          theme === 'dark'
+            ? 'linear-gradient(135deg, #181c22 0%, #232946 100%)'
+            : 'linear-gradient(135deg, #f8fafc 0%, #e8eaf6 100%)',
+        overflowX: 'hidden',
+        transition: 'background 0.3s',
       }}
     >
       {/* Theme Toggle Icon */}
-      <div id="theme-toggle" role="button" tabIndex={0} onClick={toggleTheme} style={{ margin: "0 0 0 1.5rem", width: 40, zIndex: 50, position: 'fixed' }}>
+      <div
+        id="theme-toggle"
+        role="button"
+        tabIndex={0}
+        onClick={toggleTheme}
+        style={{ margin: '0 0 0 1.5rem', width: 40, zIndex: 50, position: 'fixed' }}
+      >
         <ThemeToggleIcon />
       </div>
       <nav id="desktop-navbar" aria-label="Main Navigation">
@@ -81,100 +97,132 @@ const ArticlePage = () => {
           width: '100%',
           margin: '0 auto',
           padding: isMobile ? '4rem 1.5rem 3rem' : '5rem 1rem 4rem',
-          boxSizing: 'border-box'
+          boxSizing: 'border-box',
         }}
       >
         <h1
-  style={{
-    fontSize: 40,
-    fontWeight: 800,
-    marginBottom: 36,
-    letterSpacing: "-1px",
-    background: "linear-gradient(135deg, #4573df 0%, #2d4fa2 100%)",
-    WebkitBackgroundClip: "text",
-    backgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    color: "#4573df"
-  }}
->
-  Articles
-</h1>
+          style={{
+            fontSize: 40,
+            fontWeight: 800,
+            marginBottom: 36,
+            letterSpacing: '-1px',
+            background: 'linear-gradient(135deg, #4573df 0%, #2d4fa2 100%)',
+            WebkitBackgroundClip: 'text',
+            backgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            color: '#4573df',
+          }}
+        >
+          Articles
+        </h1>
         {loading ? (
-          <div style={{ 
-            display: 'flex', 
-            justifyContent: 'center', 
-            alignItems: 'center', 
-            minHeight: '400px',
-            width: '100%'
-          }}>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              minHeight: '400px',
+              width: '100%',
+            }}
+          >
             <LoadingAnimation size="medium" />
           </div>
         ) : articles.length === 0 ? (
-          <div style={{ color: theme === "dark" ? "#b0b8c1" : "#232946", fontSize: 20, textAlign: "center", marginTop: 60 }}>No articles found.</div>
+          <div
+            style={{
+              color: theme === 'dark' ? '#b0b8c1' : '#232946',
+              fontSize: 20,
+              textAlign: 'center',
+              marginTop: 60,
+            }}
+          >
+            No articles found.
+          </div>
         ) : (
           <div
             style={{
-              display: "grid",
+              display: 'grid',
               gap: 40,
-              gridTemplateColumns: "1fr"
+              gridTemplateColumns: '1fr',
             }}
           >
             {articles.map((article) => (
               <Link
-                key={article._id || article.id}
+                key={article._id || article.id || article.slug}
                 href={`/article/${article.slug || article._id || article.id}`}
-                style={{ textDecoration: "none" }}
+                style={{ textDecoration: 'none' }}
               >
                 <article
                   style={{
-                    background: theme === "dark"
-                      ? "rgba(36, 41, 54, 0.98)"
-                      : "rgba(255,255,255,0.98)",
-                    border: theme === "dark" ? "1.5px solid #2e3440" : "1.5px solid #e3e8ee",
+                    background:
+                      theme === 'dark' ? 'rgba(36, 41, 54, 0.98)' : 'rgba(255,255,255,0.98)',
+                    border: theme === 'dark' ? '1.5px solid #2e3440' : '1.5px solid #e3e8ee',
                     borderRadius: 20,
                     boxShadow:
-                      theme === "dark"
-                        ? "0 4px 32px 0 rgba(0,0,0,0.25)"
-                        : "0 4px 24px 0 rgba(60,60,120,0.07)",
-                    padding: "2.5rem 2rem 2rem 2rem",
-                    transition: "box-shadow 0.2s, border 0.2s, background 0.2s",
-                    position: "relative",
-                    overflow: "hidden",
-                    cursor: "pointer"
+                      theme === 'dark'
+                        ? '0 4px 32px 0 rgba(0,0,0,0.25)'
+                        : '0 4px 24px 0 rgba(60,60,120,0.07)',
+                    padding: 0,
+                    transition: 'box-shadow 0.2s, border 0.2s, background 0.2s',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    cursor: 'pointer',
                   }}
                 >
-                  <h2
-                    style={{
-                      fontSize: 26,
-                      fontWeight: 700,
-                      marginBottom: 10,
-                      color: theme === "dark" ? "#e3e8ee" : "#232946",
-                      letterSpacing: "-0.5px"
-                    }}
-                  >
-                    {article.title}
-                  </h2>
-                  <div
-                    style={{
-                      color: theme === "dark" ? "#b0b8c1" : "#5a6270",
-                      fontSize: 15,
-                      marginBottom: 18,
-                      fontWeight: 500
-                    }}
-                  >
-                    {article.populatedAuthors && article.populatedAuthors[0]?.name} &middot; {new Date(article.createdAt).toLocaleDateString()}
+                  {article.coverImage && (
+                    <img
+                      src={article.coverImage}
+                      alt={article.coverImageAlt || article.title}
+                      style={{
+                        display: 'block',
+                        width: '100%',
+                        height: isMobile ? 190 : 260,
+                        objectFit: article.coverImageFit || 'cover',
+                        background: theme === 'dark' ? '#111827' : '#e8eaf6',
+                      }}
+                    />
+                  )}
+                  <div style={{ padding: '2.5rem 2rem 2rem 2rem' }}>
+                    <h2
+                      style={{
+                        fontSize: 26,
+                        fontWeight: 700,
+                        marginBottom: 10,
+                        color: theme === 'dark' ? '#e3e8ee' : '#232946',
+                        letterSpacing: '-0.5px',
+                      }}
+                    >
+                      {article.title}
+                    </h2>
+                    <div
+                      style={{
+                        color: theme === 'dark' ? '#b0b8c1' : '#5a6270',
+                        fontSize: 15,
+                        marginBottom: 18,
+                        fontWeight: 500,
+                      }}
+                    >
+                      {article.populatedAuthors?.[0]?.name || 'Megicode Team'} &middot;{' '}
+                      {new Date(article.publishedAt || article.createdAt).toLocaleDateString()}
+                    </div>
+                    <p
+                      style={{
+                        fontSize: 18,
+                        lineHeight: 1.7,
+                        color: theme === 'dark' ? '#c7d0e0' : '#232946',
+                        marginBottom: 0,
+                        fontWeight: 400,
+                      }}
+                    >
+                      {article.excerpt ||
+                        article.summary ||
+                        article.content?.root?.children?.[0]?.children
+                          ?.map((c) => c.text)
+                          .join(' ')
+                          ?.slice(0, 200) ||
+                        'No preview available.'}
+                    </p>
                   </div>
-                  <p
-                    style={{
-                      fontSize: 18,
-                      lineHeight: 1.7,
-                      color: theme === "dark" ? "#c7d0e0" : "#232946",
-                      marginBottom: 0,
-                      fontWeight: 400
-                    }}
-                  >
-                    {article.excerpt || article.summary || article.content?.root?.children?.[0]?.children?.map((c) => c.text).join(' ')?.slice(0, 200) || 'No preview available.'}
-                  </p>
                 </article>
               </Link>
             ))}

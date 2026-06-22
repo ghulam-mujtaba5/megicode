@@ -98,6 +98,16 @@ const nextConfig = {
           },
         ],
       },
+      {
+        // Cache uploaded blog images for 30 days
+        source: '/uploads/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=86400, s-maxage=2592000, stale-while-revalidate=86400',
+          },
+        ],
+      },
     ];
   },
   async redirects() {

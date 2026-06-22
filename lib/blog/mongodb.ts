@@ -1,13 +1,18 @@
-import { MongoClient, type Db } from 'mongodb';
+import { type Db, MongoClient } from 'mongodb';
 
-const uri = process.env.MONGODB_URI || process.env.MONGO_URI || process.env.DATABASE_URI;
+const uri =
+  process.env.MONGODB_URI ||
+  process.env.MONGODB_URL ||
+  process.env.MONGO_URI ||
+  process.env.MONGO_URL ||
+  process.env.DATABASE_URI;
 const dbName = process.env.MONGODB_DB || process.env.MONGO_DB || 'megicode';
 
 let clientPromise: Promise<MongoClient> | null = null;
 
 function getMongoClient() {
   if (!uri) {
-    throw new Error('Missing MONGODB_URI environment variable');
+    throw new Error('Missing MongoDB connection environment variable');
   }
 
   if (!clientPromise) {

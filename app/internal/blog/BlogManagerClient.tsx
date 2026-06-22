@@ -44,6 +44,7 @@ export default function BlogManagerClient() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState('');
+  const [uploading, setUploading] = useState(false);
 
   async function loadPosts() {
     setLoading(true);
@@ -67,6 +68,28 @@ export default function BlogManagerClient() {
 
   function updateField<K extends keyof BlogPostInput>(key: K, value: BlogPostInput[K]) {
     setForm((current) => ({ ...current, [key]: value }));
+  }
+
+  async function handleCoverImageUpload(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    setMessage('');
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      const res = await fetch('/api/internal/upload', { method: 'POST', body: formData });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Upload failed');
+      updateField('coverImage', data.url);
+      if (!form.coverImageAlt) updateField('coverImageAlt', file.name.replace(/\.[^.]+$/, ''));
+      setMessage('Cover image uploaded and converted to WebP.');
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : 'Upload failed');
+    } finally {
+      setUploading(false);
+      event.target.value = '';
+    }
   }
 
   function editPost(post: BlogPost) {
@@ -211,6 +234,17 @@ export default function BlogManagerClient() {
               />
             </label>
             <label>
+              Cover image upload
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleCoverImageUpload}
+                disabled={uploading}
+                style={{ padding: '0.5rem 0' }}
+              />
+              {uploading && <span style={{ fontSize: '0.8rem', color: 'var(--int-primary)' }}>Uploading &amp; converting to WebP...</span>}
+            </label>
+            <label>
               Cover image alt
               <input
                 value={form.coverImageAlt || ''}
@@ -346,8 +380,19 @@ export default function BlogManagerClient() {
               posts.map((post) => (
                 <div key={post.id} className={styles.postItem}>
                   <button type="button" onClick={() => editPost(post)}>
-                    <strong>{post.title}</strong>
-                    <span>{post.status} - {formatDate(post.publishedAt || post.updatedAt)}</span>
+                    <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+                      {post.coverImage && (
+                        <img
+                          src={post.coverImage}
+                          alt={post.coverImageAlt || ''}
+                          style={{ width: 56, height: 42, objectFit: 'cover', borderRadius: 4, flexShrink: 0 }}
+                        />
+                      )}
+                      <div>
+                        <strong>{post.title}</strong>
+                        <span>{post.status} - {formatDate(post.publishedAt || post.updatedAt)}</span>
+                      </div>
+                    </div>
                   </button>
                   <div className={styles.postActions}>
                     {post.status === 'published' && (
