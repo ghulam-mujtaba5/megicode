@@ -425,30 +425,31 @@ async function seed() {
       const tags = [data.primary_keyword, ...secondary].filter(Boolean);
 
       const doc = {
-        title: brand(data.title || slug),
+        title: brand((data.title as string) || slug),
         slug,
-        excerpt: brand(data.meta_description || ''),
+        excerpt: brand((data.meta_description as string) || ''),
         contentHtml: brand(html),
         coverImage: `/images/blog/${slug}.webp`,
         coverImageAlt: brand(
-          data.image_alt_text || `Megicode illustration for ${data.title || slug}`
+          (data.image_alt_text as string) ||
+            `Megicode illustration for ${(data.title as string) || slug}`
         ),
         coverImageFit: 'cover',
         authorName: 'Megicode Team',
         tags,
-        categories: data.category ? [data.category] : ['Megicode Insights'],
+        categories: data.category ? [data.category as string] : ['Megicode Insights'],
         status: 'published',
         publishedAt,
-        seoTitle: brand(data.seo_title || data.title || slug),
-        seoDescription: brand(data.meta_description || ''),
-        primaryKeyword: data.primary_keyword || '',
+        seoTitle: brand((data.seo_title as string) || (data.title as string) || slug),
+        seoDescription: brand((data.meta_description as string) || ''),
+        primaryKeyword: (data.primary_keyword as string) || '',
         keywords: secondary,
-        funnelStage: data.funnel_stage || '',
-        audience: data.target_audience || '',
+        funnelStage: (data.funnel_stage as string) || '',
+        audience: (data.target_audience as string) || '',
         readingMinutes,
-        ctaLabel: brand(data.recommended_cta || 'Book a strategy call with Megicode'),
+        ctaLabel: brand((data.recommended_cta as string) || 'Book a strategy call with Megicode'),
         ctaText: brand(
-          data.conversion_goal ||
+          (data.conversion_goal as string) ||
             'Get a practical next-step plan for your product, platform, or automation idea.'
         ),
         faqs: faqs.map((f: { question: string; answer: string }) => ({
