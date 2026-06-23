@@ -1,5 +1,15 @@
 export type BlogStatus = 'draft' | 'published';
 
+export interface BlogFaq {
+  question: string;
+  answer: string;
+}
+
+export interface BlogRelatedLink {
+  label: string;
+  href: string;
+}
+
 export interface BlogPostInput {
   title: string;
   slug?: string;
@@ -15,6 +25,16 @@ export interface BlogPostInput {
   publishedAt?: string | null;
   seoTitle?: string;
   seoDescription?: string;
+  // Executive SEO fields
+  primaryKeyword?: string;
+  keywords?: string[];
+  funnelStage?: string;
+  audience?: string;
+  readingMinutes?: number;
+  ctaLabel?: string;
+  ctaText?: string;
+  faqs?: BlogFaq[];
+  relatedLinks?: BlogRelatedLink[];
 }
 
 export interface BlogPost extends BlogPostInput {

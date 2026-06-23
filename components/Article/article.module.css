@@ -1,0 +1,257 @@
+/* Reading progress bar */
+.progressTrack {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 60;
+  width: 100%;
+  height: 3px;
+  background: transparent;
+  pointer-events: none;
+}
+
+.progressBar {
+  height: 100%;
+  background: linear-gradient(90deg, #4573df, #2d4fa2);
+  border-radius: 0 3px 3px 0;
+  transition: width 0.08s linear;
+}
+
+/* Table of contents */
+.toc {
+  position: sticky;
+  top: 96px;
+  align-self: start;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  padding: 1.25rem 1.1rem;
+  border: 1px solid rgba(69, 115, 223, 0.16);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+}
+
+:global([data-theme='dark']) .toc {
+  border-color: rgba(69, 115, 223, 0.24);
+  background: rgba(36, 44, 62, 0.55);
+}
+
+.tocTitle {
+  margin: 0 0 0.75rem;
+  color: #2d4fa2;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+:global([data-theme='dark']) .tocTitle {
+  color: #93c5fd;
+}
+
+.tocList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tocItem {
+  margin: 0;
+  border-left: 2px solid transparent;
+  padding: 0.32rem 0 0.32rem 0.75rem;
+  line-height: 1.35;
+}
+
+.tocItem a {
+  color: #51607a;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.18s ease;
+}
+
+.tocItem a:hover {
+  color: #2d4fa2;
+}
+
+.tocSub {
+  padding-left: 1.5rem;
+}
+
+.tocSub a {
+  font-size: 0.84rem;
+  font-weight: 500;
+}
+
+.tocActive {
+  border-left-color: #4573df;
+}
+
+.tocActive a {
+  color: #2d4fa2;
+  font-weight: 800;
+}
+
+:global([data-theme='dark']) .tocItem a {
+  color: #97a6c0;
+}
+
+:global([data-theme='dark']) .tocItem a:hover,
+:global([data-theme='dark']) .tocActive a {
+  color: #bfdbfe;
+}
+
+:global([data-theme='dark']) .tocActive {
+  border-left-color: #93c5fd;
+}
+
+/* FAQ accordion */
+.faqSection {
+  margin-top: 2.75rem;
+}
+
+.faqHeading {
+  margin: 0 0 1.4rem;
+  color: #1a1a1a;
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+:global([data-theme='dark']) .faqHeading {
+  color: #f8fafc;
+}
+
+.faqList {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.faqItem {
+  overflow: hidden;
+  border: 1px solid rgba(69, 115, 223, 0.16);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.78);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.faqItemOpen {
+  border-color: rgba(69, 115, 223, 0.4);
+  box-shadow: 0 8px 26px rgba(69, 115, 223, 0.12);
+}
+
+:global([data-theme='dark']) .faqItem {
+  border-color: rgba(69, 115, 223, 0.22);
+  background: rgba(36, 44, 62, 0.6);
+}
+
+:global([data-theme='dark']) .faqItemOpen {
+  border-color: rgba(147, 197, 253, 0.45);
+}
+
+.faqQuestion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  padding: 1.15rem 1.3rem;
+  border: 0;
+  background: transparent;
+  color: #1a2540;
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+
+:global([data-theme='dark']) .faqQuestion {
+  color: #e8eefc;
+}
+
+.faqIcon {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: rgba(69, 115, 223, 0.12);
+  color: #2d4fa2;
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+:global([data-theme='dark']) .faqIcon {
+  background: rgba(147, 197, 253, 0.18);
+  color: #bfdbfe;
+}
+
+.faqAnswer {
+  padding: 0 1.3rem 1.25rem;
+  color: #45506a;
+  font-size: 1rem;
+  line-height: 1.72;
+}
+
+.faqAnswer p {
+  margin: 0;
+}
+
+:global([data-theme='dark']) .faqAnswer {
+  color: #c4d0e6;
+}
+
+/* Share */
+.share {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.shareLabel {
+  color: #51607a;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+:global([data-theme='dark']) .shareLabel {
+  color: #97a6c0;
+}
+
+.shareButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.shareButton {
+  padding: 0.5rem 0.9rem;
+  border: 1px solid rgba(69, 115, 223, 0.24);
+  border-radius: 999px;
+  background: rgba(69, 115, 223, 0.08);
+  color: #2d4fa2;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background 0.18s ease,
+    transform 0.18s ease;
+}
+
+.shareButton:hover {
+  background: rgba(69, 115, 223, 0.18);
+  transform: translateY(-1px);
+}
+
+:global([data-theme='dark']) .shareButton {
+  border-color: rgba(147, 197, 253, 0.3);
+  background: rgba(147, 197, 253, 0.12);
+  color: #bfdbfe;
+}

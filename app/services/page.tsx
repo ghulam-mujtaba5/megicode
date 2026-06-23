@@ -1,24 +1,27 @@
-"use client";
+'use client';
 
-import React, { Suspense } from "react";
-import Link from 'next/link';
+import React, { Suspense } from 'react';
+
 import dynamic from 'next/dynamic';
-import { useTheme } from "../../context/ThemeContext";
-import NewNavBar from "../../components/NavBar_Desktop_Company/NewNavBar";
-import NavBarMobile from "../../components/NavBar_Mobile/NavBar-mobile";
-import Footer from "../../components/Footer/Footer";
-import ThemeToggleIcon from "../../components/Icon/sbicon";
-import LoadingAnimation from "@/components/LoadingAnimation/LoadingAnimation";
-import servicesData from "./servicesData";
+
 import { SITE_SOCIAL, getCopyrightText } from '@/lib/constants';
+
+import LoadingAnimation from '@/components/LoadingAnimation/LoadingAnimation';
 import Breadcrumbs from '@/components/SEO/Breadcrumbs';
 
+import Footer from '../../components/Footer/Footer';
+import ThemeToggleIcon from '../../components/Icon/sbicon';
+import NewNavBar from '../../components/NavBar_Desktop_Company/NewNavBar';
+import NavBarMobile from '../../components/NavBar_Mobile/NavBar-mobile';
+import { useTheme } from '../../context/ThemeContext';
+import servicesData from './servicesData';
+
 // Dynamic imports for optimized loading
-const ServicesHero = dynamic(() => import("../../components/Services/Hero/ServicesHero"), {
-  loading: () => <LoadingAnimation size="medium" />
+const ServicesHero = dynamic(() => import('../../components/Services/Hero/ServicesHero'), {
+  loading: () => <LoadingAnimation size="medium" />,
 });
-const ServiceCard = dynamic(() => import("../../components/Services/Card/ServiceCard"), {
-  loading: () => <LoadingAnimation size="medium" />
+const ServiceCard = dynamic(() => import('../../components/Services/Card/ServiceCard'), {
+  loading: () => <LoadingAnimation size="medium" />,
 });
 
 export default function ServicesPage() {
@@ -28,11 +31,27 @@ export default function ServicesPage() {
   const copyrightText = getCopyrightText();
 
   return (
-    <div style={{ backgroundColor: theme === "dark" ? "var(--page-bg-dark, #1d2127)" : "var(--page-bg, #ffffff)", minHeight: "100vh", overflowX: "hidden" }}>
+    <div
+      style={{
+        backgroundColor:
+          theme === 'dark' ? 'var(--page-bg-dark, #1d2127)' : 'var(--page-bg, #ffffff)',
+        minHeight: '100vh',
+        overflowX: 'hidden',
+      }}
+    >
       {/* Theme Toggle Icon */}
-      <div id="theme-toggle" role="button" tabIndex={0} aria-label="Toggle theme"
+      <div
+        id="theme-toggle"
+        role="button"
+        tabIndex={0}
+        aria-label="Toggle theme"
         onClick={toggleTheme}
-        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleTheme(); } }}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleTheme();
+          }
+        }}
       >
         <ThemeToggleIcon />
       </div>
@@ -48,7 +67,17 @@ export default function ServicesPage() {
       </nav>
 
       <main id="main-content" aria-label="Services Main Content">
-        <h1 style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden' }}>Our Services</h1>
+        <h1
+          style={{
+            position: 'absolute',
+            left: '-9999px',
+            width: '1px',
+            height: '1px',
+            overflow: 'hidden',
+          }}
+        >
+          Our Services
+        </h1>
 
         {/* Breadcrumbs for Navigation & SEO */}
         <div style={{ maxWidth: '1320px', margin: '20px auto 0', padding: '0 2rem' }}>
@@ -62,13 +91,14 @@ export default function ServicesPage() {
           {servicesData.map((service, idx) => (
             <ServiceCard
               key={idx}
-              icon={service.icon}
+              slug={service.slug}
               title={service.title}
               description={service.description}
               features={service.features}
               techs={service.techs}
               href={`/services/${service.slug}`}
               delay={idx * 0.1}
+              index={idx}
             />
           ))}
         </section>
@@ -83,7 +113,7 @@ export default function ServicesPage() {
           gap: 1.75rem;
           position: relative;
         }
-        
+
         @media (max-width: 860px) {
           .services-grid {
             grid-template-columns: 1fr 1fr;
@@ -102,7 +132,7 @@ export default function ServicesPage() {
       `}</style>
 
       {/* Footer */}
-      <footer id="footer-section" aria-label="Footer" style={{ width: "100%", overflow: "hidden" }}>
+      <footer id="footer-section" aria-label="Footer" style={{ width: '100%', overflow: 'hidden' }}>
         <Footer
           linkedinUrl={linkedinUrl}
           instagramUrl={instagramUrl}
@@ -113,6 +143,3 @@ export default function ServicesPage() {
     </div>
   );
 }
-
-
-

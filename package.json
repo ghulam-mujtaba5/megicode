@@ -17,6 +17,7 @@
     "db:seed:users": "ts-node scripts/db-seed-minimal.ts",
     "db:seed:article": "ts-node scripts/seed-blog-article.ts",
     "db:seed:demo": "ts-node scripts/seed-demo-articles.ts",
+    "db:seed:blogs": "ts-node scripts/seed-blogs.ts",
     "db:setup": "npm run db:migrate-turso && npm run db:seed",
     "test:e2e": "npx playwright test",
     "test:e2e:ui": "npx playwright test --ui",

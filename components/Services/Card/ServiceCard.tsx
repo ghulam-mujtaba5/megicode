@@ -1,29 +1,37 @@
 'use client';
 import React from 'react';
-import { motion, easeOut } from 'framer-motion';
+
+import { easeOut, motion } from 'framer-motion';
+
 import { useTheme } from '../../../context/ThemeContext';
 import commonStyles from './ServiceCardCommon.module.css';
-import lightStyles from './ServiceCardLight.module.css';
 import darkStyles from './ServiceCardDark.module.css';
+import lightStyles from './ServiceCardLight.module.css';
+import ServiceIcon from './ServiceIcon';
 
 interface ServiceCardProps {
-  icon: string;
+  /** Service slug used to resolve the animated, theme-adaptive icon. */
+  slug?: string;
+  /** @deprecated legacy static icon path — kept for backward compatibility. */
+  icon?: string;
   title: string;
   description: string;
   features: string[];
   techs: string[];
   delay?: number;
+  index?: number;
   href?: string;
 }
 
 const ServiceCard: React.FC<ServiceCardProps> = ({
-  icon,
+  slug,
   title,
   description,
   features,
   techs,
   delay = 0,
-  href
+  index = 0,
+  href,
 }) => {
   const { theme } = useTheme();
   const themeStyles = theme === 'dark' ? darkStyles : lightStyles;
@@ -36,9 +44,9 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       transition: {
         duration: 0.55,
         delay,
-        ease: easeOut
-      }
-    }
+        ease: easeOut,
+      },
+    },
   };
 
   const contentVariants = {
@@ -47,9 +55,9 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       opacity: 1,
       transition: {
         staggerChildren: 0.06,
-        delayChildren: delay + 0.15
-      }
-    }
+        delayChildren: delay + 0.15,
+      },
+    },
   };
 
   const itemVariants = {
@@ -59,9 +67,9 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       y: 0,
       transition: {
         duration: 0.35,
-        ease: easeOut
-      }
-    }
+        ease: easeOut,
+      },
+    },
   };
 
   return (
@@ -70,26 +78,16 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       variants={cardVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-40px" }}
+      viewport={{ once: true, margin: '-40px' }}
     >
       {/* Top accent bar */}
       <div className={commonStyles.accentBar} />
 
-      <a
-        href={href}
-        className={commonStyles.cardLink}
-        aria-label={`Learn more about ${title}`}
-      >
+      <a href={href} className={commonStyles.cardLink} aria-label={`Learn more about ${title}`}>
         <div className={commonStyles.cardContent}>
           {/* Header: Icon + Title */}
           <div className={commonStyles.headerRow}>
-            <motion.div
-              className={`${commonStyles.iconWrapper} ${themeStyles.iconWrapper}`}
-              whileHover={{ scale: 1.06 }}
-              transition={{ type: "spring", stiffness: 350, damping: 20 }}
-            >
-              <img src={icon} alt="" className={commonStyles.icon} aria-hidden="true" />
-            </motion.div>
+            <ServiceIcon slug={slug} index={index} />
 
             <motion.h3
               className={`${commonStyles.title} ${themeStyles.title}`}

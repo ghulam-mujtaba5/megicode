@@ -1,4 +1,4 @@
-import { ObjectId, type Collection, type Document, type Filter } from 'mongodb';
+import { type Collection, type Document, type Filter, ObjectId } from 'mongodb';
 
 import { getMongoDb } from './mongodb';
 import type { BlogPost, BlogPostInput, BlogStatus } from './types';
@@ -94,9 +94,7 @@ function buildPostInput(input: BlogPostInput, slug: string): BlogPostDocument {
   const now = new Date().toISOString();
   const cleanExcerpt = input.excerpt?.trim() || stripHtml(input.contentHtml).slice(0, 180);
   const publishedAt =
-    input.status === 'published'
-      ? input.publishedAt || now
-      : input.publishedAt || null;
+    input.status === 'published' ? input.publishedAt || now : input.publishedAt || null;
 
   return {
     title: input.title.trim(),
@@ -115,12 +113,36 @@ function buildPostInput(input: BlogPostInput, slug: string): BlogPostDocument {
     publishedAt,
     seoTitle: input.seoTitle?.trim() || input.title.trim(),
     seoDescription: input.seoDescription?.trim() || cleanExcerpt,
+    primaryKeyword: input.primaryKeyword?.trim() || '',
+    keywords: Array.isArray(input.keywords)
+      ? input.keywords.map((k) => k.trim()).filter(Boolean)
+      : [],
+    funnelStage: input.funnelStage?.trim() || '',
+    audience: input.audience?.trim() || '',
+    readingMinutes:
+      typeof input.readingMinutes === 'number' && input.readingMinutes > 0
+        ? Math.round(input.readingMinutes)
+        : undefined,
+    ctaLabel: input.ctaLabel?.trim() || '',
+    ctaText: input.ctaText?.trim() || '',
+    faqs: Array.isArray(input.faqs)
+      ? input.faqs
+          .map((f) => ({ question: f.question?.trim() || '', answer: f.answer?.trim() || '' }))
+          .filter((f) => f.question && f.answer)
+      : [],
+    relatedLinks: Array.isArray(input.relatedLinks)
+      ? input.relatedLinks
+          .map((l) => ({ label: l.label?.trim() || '', href: l.href?.trim() || '' }))
+          .filter((l) => l.label && l.href)
+      : [],
     createdAt: now,
     updatedAt: now,
   };
 }
 
-export async function listBlogPosts(options: { includeDrafts?: boolean; status?: BlogStatus } = {}) {
+export async function listBlogPosts(
+  options: { includeDrafts?: boolean; status?: BlogStatus } = {}
+) {
   const collection = await postsCollection();
   await ensureIndexes(collection);
 
@@ -131,10 +153,7 @@ export async function listBlogPosts(options: { includeDrafts?: boolean; status?:
     filter.status = 'published';
   }
 
-  const docs = await collection
-    .find(filter)
-    .sort({ publishedAt: -1, updatedAt: -1 })
-    .toArray();
+  const docs = await collection.find(filter).sort({ publishedAt: -1, updatedAt: -1 }).toArray();
 
   return docs.map((doc) => normalizePost(doc as BlogPostDocument & { _id: ObjectId }));
 }
@@ -162,6 +181,39 @@ export async function getBlogPost(idOrSlug: string, options: { includeDrafts?: b
 
   const doc = await collection.findOne(filter);
   return doc ? normalizePost(doc as BlogPostDocument & { _id: ObjectId }) : null;
+}
+
+export async function getRelatedPosts(
+  slug: string,
+  category?: string,
+  limit = 3
+): Promise<BlogPost[]> {
+  const collection = await postsCollection();
+  await ensureIndexes(collection);
+
+  const base: Filter<BlogPostDocument> = { status: 'published', slug: { $ne: slug } };
+
+  let docs: BlogPostDocument[] = [];
+  if (category) {
+    docs = (await collection
+      .find({ ...base, categories: category })
+      .sort({ publishedAt: -1 })
+      .limit(limit)
+      .toArray()) as BlogPostDocument[];
+  }
+
+  if (docs.length < limit) {
+    const exclude = new Set(docs.map((d) => d.slug));
+    exclude.add(slug);
+    const fill = (await collection
+      .find({ status: 'published', slug: { $nin: Array.from(exclude) } })
+      .sort({ publishedAt: -1 })
+      .limit(limit - docs.length)
+      .toArray()) as BlogPostDocument[];
+    docs = [...docs, ...fill];
+  }
+
+  return docs.map((doc) => normalizePost(doc as BlogPostDocument & { _id: ObjectId }));
 }
 
 export async function getBlogPostPayload(idOrSlug: string) {

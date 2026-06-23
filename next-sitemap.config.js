@@ -38,7 +38,7 @@ const config = {
     ],
     additionalSitemaps: [],
   },
-  additionalPaths: async (config) => {
+  additionalPaths: async () => {
     // ── Static pages (explicitly listed for Next.js 15 App Router compatibility) ──
     const staticPages = [
       { loc: '/', changefreq: 'daily', priority: 1.0 },
@@ -92,10 +92,52 @@ const config = {
       lastmod: new Date().toISOString(),
     }));
 
+    // ── Article detail pages (pulled live from MongoDB blog CMS) ──
+    let articlePages = [];
+    try {
+      const uri =
+        process.env.MONGODB_URI ||
+        process.env.MONGODB_URL ||
+        process.env.MONGO_URI ||
+        process.env.MONGO_URL ||
+        process.env.DATABASE_URI;
+      if (uri) {
+        // eslint-disable-next-line @typescript-eslint/no-require-imports
+        const { MongoClient } = require('mongodb');
+        const dbName = process.env.MONGODB_DB || process.env.MONGO_DB || 'megicode';
+        const client = new MongoClient(uri, { serverSelectionTimeoutMS: 10000 });
+        await client.connect();
+        try {
+          const posts = await client
+            .db(dbName)
+            .collection('blog_posts')
+            .find(
+              { status: 'published' },
+              { projection: { slug: 1, updatedAt: 1, publishedAt: 1 } }
+            )
+            .toArray();
+          articlePages = posts
+            .filter((p) => p.slug)
+            .map((p) => ({
+              loc: `/article/${p.slug}`,
+              changefreq: 'weekly',
+              priority: 0.8,
+              lastmod: new Date(p.updatedAt || p.publishedAt || Date.now()).toISOString(),
+            }));
+        } finally {
+          await client.close();
+        }
+        console.log(`[sitemap] added ${articlePages.length} article URLs`);
+      }
+    } catch (error) {
+      console.warn('[sitemap] could not load article URLs from MongoDB:', error.message);
+    }
+
     return [
       ...staticPages.map((p) => ({ ...p, lastmod: new Date().toISOString() })),
       ...servicePages,
       ...projectPages,
+      ...articlePages,
     ];
   },
   transform: async (config, path) => {

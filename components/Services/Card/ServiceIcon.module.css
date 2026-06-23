@@ -1,0 +1,65 @@
+.iconWrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  min-width: 54px;
+  border: 1px solid transparent;
+  border-radius: 16px;
+  overflow: visible;
+  will-change: transform;
+  transition: box-shadow 0.35s ease;
+}
+
+/* Soft accent glow behind the icon — intensifies on card hover. */
+.glow {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  filter: blur(14px);
+  transform: scale(0.85);
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+:global(.card:hover) .glow {
+  opacity: 0.32;
+  transform: scale(1.05);
+}
+
+.iconInner {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+}
+
+@media (max-width: 480px) {
+  .iconWrap {
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+    border-radius: 13px;
+  }
+
+  .iconInner svg {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .iconWrap,
+  .glow,
+  .iconInner {
+    transition: none;
+  }
+}
