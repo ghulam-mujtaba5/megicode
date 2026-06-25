@@ -429,7 +429,11 @@ async function seed() {
         slug,
         excerpt: brand((data.meta_description as string) || ''),
         contentHtml: brand(html),
-        coverImage: `/images/blog/${slug}.webp`,
+        coverImage: fs.existsSync(
+          path.join(process.cwd(), 'public', 'images', 'blog', `${slug}.png`)
+        )
+          ? `/images/blog/${slug}.png`
+          : `/images/blog/${slug}.webp`,
         coverImageAlt: brand(
           (data.image_alt_text as string) ||
             `Megicode illustration for ${(data.title as string) || slug}`
