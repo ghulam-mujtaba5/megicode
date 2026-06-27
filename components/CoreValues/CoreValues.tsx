@@ -29,9 +29,9 @@ const ValueCard: React.FC<ValueCardProps> = ({ title, description, iconSrc }) =>
       <div className={commonStyles.iconWrapper}>
         <div
           style={{
-            width: 72,
-            height: 72,
-            borderRadius: '1rem',
+            width: 110,
+            height: 110,
+            borderRadius: '1.25rem',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -44,8 +44,8 @@ const ValueCard: React.FC<ValueCardProps> = ({ title, description, iconSrc }) =>
           <Image
             src={iconSrc}
             alt={title}
-            width={56}
-            height={56}
+            width={80}
+            height={80}
             style={{
               objectFit: 'contain',
             }}
