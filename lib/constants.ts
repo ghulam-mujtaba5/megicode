@@ -26,5 +26,4 @@ export const NAV_SECTIONS = [
   { id: 'article', label: 'Article', href: '/article' },
   { id: 'contact', label: 'Contact', href: '/contact' },
   { id: 'reviews', label: 'Reviews', href: '/reviews' },
-  { id: 'careers', label: 'Careers', href: '/careers' },
 ] as const;
