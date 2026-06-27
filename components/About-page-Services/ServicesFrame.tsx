@@ -191,7 +191,7 @@ const SERVICES: ServiceItem[] = [
     id: 'consulting',
     gridClass: commonStyles.posConsult,
     illusType: 'consulting' as ServiceIllusType,
-    svgSrc: '/technical-consulting-icon.svg',
+    svgSrc: '/it-consulting-support-icon.svg',
     title: 'Technical Consulting',
     tagline: 'Get the right roadmap before you build.',
     cta: 'Get Roadmap',

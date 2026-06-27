@@ -27,7 +27,7 @@ const SVG_MAP: Record<string, IconMeta> = {
   'cloud-devops': { src: '/devlopment-icon.svg', accent: '#0ea5e9' },
   'ai-automation-agents': { src: '/ds%26ai-icon.svg', accent: '#f59e0b' },
   'ui-ux-design': { src: '/Ui%26Ux-icon.svg', accent: '#ec4899' },
-  'technical-consulting': { src: '/technical-consulting-icon.svg', accent: '#10b981' },
+  'technical-consulting': { src: '/it-consulting-support-icon.svg', accent: '#10b981' },
   'growth-marketing-seo': { src: '/data%20visualization%20icon.svg', accent: '#f97316' },
 };
 

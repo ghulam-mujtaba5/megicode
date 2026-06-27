@@ -392,10 +392,11 @@
 
 /* ─── Standard card hover arrow ──────────────────────────────────────────── */
 .hoverArrow {
-  display: flex;
-  justify-content: flex-end;
+  display: inline-flex;
+  justify-content: flex-start;
   align-items: center;
   gap: 6px;
+  width: fit-content;
   opacity: 0;
   transform: translateX(-6px);
   transition:

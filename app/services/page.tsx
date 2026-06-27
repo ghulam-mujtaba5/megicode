@@ -132,6 +132,21 @@ const supportingServices = [
     href: '/services/data-analytics',
   },
   {
+    slug: 'growth-marketing-seo',
+    title: 'Growth Marketing & SEO',
+    description:
+      'Improve organic visibility, technical SEO, content strategy, and conversion tracking for SaaS, AI products, and business platforms.',
+    features: [
+      'Technical SEO Audits',
+      'Content Growth Strategy',
+      'Analytics & Conversion Tracking',
+      'Paid Campaign Support',
+    ],
+    techs: ['Google Analytics', 'SEMrush', 'Ahrefs', 'Google Ads', 'HubSpot'],
+    ctaText: 'Grow My Traffic',
+    href: '/services/growth-marketing-seo',
+  },
+  {
     slug: 'technical-consulting',
     title: 'Technical Consulting',
     description:
@@ -283,8 +298,8 @@ export default function ServicesPage() {
           </div>
 
           <p className={`delivery-note ${isDark ? 'note-dark' : 'note-light'}`}>
-            Need mobile apps, UX design, cloud setup, data, or roadmap support? These are available
-            as part of complete product delivery.
+            Need mobile apps, UX design, cloud setup, data, SEO, or roadmap support? These are
+            available as part of complete product delivery.
           </p>
         </section>
       </main>
