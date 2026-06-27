@@ -1,18 +1,7 @@
 'use client';
 import React from 'react';
 import { FaAws, FaPalette } from 'react-icons/fa';
-// Service icons — Heroicons v2 (geometric, purpose-matched, MIT)
-import {
-  HiArrowRight,
-  HiBolt,
-  HiChartBarSquare,
-  HiCloud,
-  HiComputerDesktop,
-  HiDevicePhoneMobile,
-  HiPaintBrush,
-  HiShieldCheck,
-  HiSparkles,
-} from 'react-icons/hi2';
+import { HiArrowRight } from 'react-icons/hi2';
 // Tech brand logos — Simple Icons (real brand marks, same source as TechStack)
 import {
   SiApachespark,
@@ -37,6 +26,7 @@ import {
   SiZapier,
 } from 'react-icons/si';
 
+import Image from 'next/image';
 import Link from 'next/link';
 
 import { motion } from 'framer-motion';
@@ -66,9 +56,10 @@ interface ServiceItem {
   featured?: true;
   /** Automation card: wide (2-col) glass card with description */
   isWide?: true;
-  /** Custom icon accent color for wide/special cards */
-  iconAccent?: string;
-  icon: React.ComponentType<{ size?: number }>;
+  /** Branded SVG icon path (served from /public) */
+  svgSrc: string;
+  /** Dark-mode variant of the branded SVG (optional) */
+  svgSrcDark?: string;
   title: string;
   tagline: string;
   /** Shown only on featured + wide cards */
@@ -89,7 +80,7 @@ const SERVICES: ServiceItem[] = [
     gridClass: commonStyles.posAI,
     featured: true,
     illusType: 'ai' as ServiceIllusType,
-    icon: HiSparkles,
+    svgSrc: '/Ai%20icon.svg',
     title: 'AI-Powered Development',
     tagline: 'Ship intelligent features in weeks, not quarters.',
     description:
@@ -106,7 +97,7 @@ const SERVICES: ServiceItem[] = [
     id: 'web',
     gridClass: commonStyles.posSaaS,
     illusType: 'web' as ServiceIllusType,
-    icon: HiComputerDesktop,
+    svgSrc: '/web%20app%20icon.svg',
     title: 'SaaS & Web Platforms',
     tagline: 'Full-stack products built to scale from day one.',
     href: '/services',
@@ -120,7 +111,8 @@ const SERVICES: ServiceItem[] = [
     id: 'mobile',
     gridClass: commonStyles.posMobile,
     illusType: 'mobile' as ServiceIllusType,
-    icon: HiDevicePhoneMobile,
+    svgSrc: '/mobile%20app%20icon.svg',
+    svgSrcDark: '/Mobile%20App%20Dark.svg',
     title: 'Mobile App Solutions',
     tagline: 'Cross-platform apps with native feel and speed.',
     href: '/services',
@@ -134,7 +126,7 @@ const SERVICES: ServiceItem[] = [
     id: 'uiux',
     gridClass: commonStyles.posUIUX,
     illusType: 'uiux' as ServiceIllusType,
-    icon: HiPaintBrush,
+    svgSrc: '/Ui%26Ux-icon.svg',
     title: 'UI/UX Product Design',
     tagline: 'Interfaces users understand and actually enjoy.',
     href: '/services',
@@ -148,7 +140,7 @@ const SERVICES: ServiceItem[] = [
     id: 'cloud',
     gridClass: commonStyles.posCloud,
     illusType: 'cloud' as ServiceIllusType,
-    icon: HiCloud,
+    svgSrc: '/devlopment-icon.svg',
     title: 'Cloud & DevOps',
     tagline: 'Infrastructure that ships fast and stays up.',
     href: '/services',
@@ -162,7 +154,7 @@ const SERVICES: ServiceItem[] = [
     id: 'data',
     gridClass: commonStyles.posData,
     illusType: 'data' as ServiceIllusType,
-    icon: HiChartBarSquare,
+    svgSrc: '/Big%20Data%20Analytics.svg',
     title: 'Data Analytics & BI',
     tagline: 'Turn raw data into decisions that compound.',
     href: '/services',
@@ -176,9 +168,8 @@ const SERVICES: ServiceItem[] = [
     id: 'automation',
     gridClass: commonStyles.posAuto,
     isWide: true,
-    iconAccent: '#ff9800',
     illusType: 'automation' as ServiceIllusType,
-    icon: HiBolt,
+    svgSrc: '/ds%26ai-icon.svg',
     title: 'Automation & Integration',
     tagline: 'Connect everything. Eliminate the manual.',
     description:
@@ -195,7 +186,7 @@ const SERVICES: ServiceItem[] = [
     id: 'consulting',
     gridClass: commonStyles.posConsult,
     illusType: 'consulting' as ServiceIllusType,
-    icon: HiShieldCheck,
+    svgSrc: '/it-consulting-support-icon.svg',
     title: 'IT Consulting',
     tagline: 'Strategy that aligns your tech with business growth.',
     href: '/services',
@@ -337,15 +328,15 @@ const ServicesFrame = () => {
           // Card theme class
           const cardTheme = isFeatured ? t.primaryCard : isWide ? t.secondaryCard : t.standardCard;
 
-          // Icon wrapper class + inline style
+          // Icon wrapper class
           const iconWrapCls = isFeatured
             ? commonStyles.iconWrapFeatured
             : `${commonStyles.iconWrapStd} ${t.iconWrapStd}`;
 
-          const iconWrapStyle =
-            !isFeatured && service.iconAccent
-              ? { background: `${service.iconAccent}18`, color: service.iconAccent }
-              : undefined;
+          // Resolve theme-aware SVG src
+          const iconSrc =
+            theme === 'dark' && service.svgSrcDark ? service.svgSrcDark : service.svgSrc;
+          const iconSize = isFeatured ? 28 : isWide ? 26 : 24;
 
           // Card inner: larger padding for featured/wide
           const innerCls = `${commonStyles.cardInner} ${isFeatured || isWide ? commonStyles.cardInnerLarge : ''}`;
@@ -364,8 +355,19 @@ const ServicesFrame = () => {
               >
                 {/* Icon row */}
                 <div className={commonStyles.iconRow}>
-                  <span className={iconWrapCls} style={iconWrapStyle} aria-hidden="true">
-                    <service.icon size={isFeatured ? 22 : isWide ? 21 : 19} />
+                  <span className={iconWrapCls} aria-hidden="true">
+                    <Image
+                      src={iconSrc}
+                      alt=""
+                      width={iconSize}
+                      height={iconSize}
+                      unoptimized
+                      style={{
+                        display: 'block',
+                        filter:
+                          theme === 'dark' && !service.svgSrcDark ? 'brightness(1.2)' : undefined,
+                      }}
+                    />
                   </span>
                   {isFeatured && <span className={commonStyles.featuredBadge}>Core Service</span>}
                 </div>

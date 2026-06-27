@@ -1,19 +1,8 @@
 'use client';
 
 import React from 'react';
-import type { IconType } from 'react-icons';
-import {
-  HiArrowTrendingUp,
-  HiBolt,
-  HiCloud,
-  HiComputerDesktop,
-  HiCpuChip,
-  HiDevicePhoneMobile,
-  HiPaintBrush,
-  HiRocketLaunch,
-  HiSparkles,
-  HiSquares2X2,
-} from 'react-icons/hi2';
+
+import Image from 'next/image';
 
 import { motion, useReducedMotion } from 'framer-motion';
 
@@ -21,28 +10,31 @@ import { useTheme } from '../../../context/ThemeContext';
 import styles from './ServiceIcon.module.css';
 
 interface IconMeta {
-  Icon: IconType;
+  src: string;
+  darkSrc?: string;
   accent: string;
 }
 
-// Maps each service slug to a purpose-matched Heroicon + brand-cohesive accent.
-const ICON_MAP: Record<string, IconMeta> = {
-  'ai-machine-learning': { Icon: HiSparkles, accent: '#4573df' },
-  'data-analytics-bi': { Icon: HiCpuChip, accent: '#8b5cf6' },
-  'custom-web-development': { Icon: HiComputerDesktop, accent: '#2563eb' },
-  'mobile-app-solutions': { Icon: HiDevicePhoneMobile, accent: '#06b6d4' },
-  'cloud-devops-services': { Icon: HiCloud, accent: '#0ea5e9' },
-  'automation-integration': { Icon: HiBolt, accent: '#f59e0b' },
-  'ui-ux-product-design': { Icon: HiPaintBrush, accent: '#ec4899' },
-  'it-consulting-support': { Icon: HiRocketLaunch, accent: '#10b981' },
-  'growth-marketing-seo': { Icon: HiArrowTrendingUp, accent: '#f97316' },
+const SVG_MAP: Record<string, IconMeta> = {
+  'ai-machine-learning': { src: '/Ai%20icon.svg', accent: '#4573df' },
+  'data-analytics-bi': { src: '/Big%20Data%20Analytics.svg', accent: '#8b5cf6' },
+  'custom-web-development': { src: '/web%20app%20icon.svg', accent: '#2563eb' },
+  'mobile-app-solutions': {
+    src: '/mobile%20app%20icon.svg',
+    darkSrc: '/Mobile%20App%20Dark.svg',
+    accent: '#06b6d4',
+  },
+  'cloud-devops-services': { src: '/devlopment-icon.svg', accent: '#0ea5e9' },
+  'automation-integration': { src: '/ds%26ai-icon.svg', accent: '#f59e0b' },
+  'ui-ux-product-design': { src: '/Ui%26Ux-icon.svg', accent: '#ec4899' },
+  'it-consulting-support': { src: '/it-consulting-support-icon.svg', accent: '#10b981' },
+  'growth-marketing-seo': { src: '/data%20visualization%20icon.svg', accent: '#f97316' },
 };
 
-const FALLBACK: IconMeta = { Icon: HiSquares2X2, accent: '#4573df' };
+const FALLBACK: IconMeta = { src: '/Ai%20icon.svg', accent: '#4573df' };
 
 interface ServiceIconProps {
   slug?: string;
-  /** Index used to stagger the idle float so icons don't pulse in unison. */
   index?: number;
 }
 
@@ -51,15 +43,14 @@ const ServiceIcon: React.FC<ServiceIconProps> = ({ slug, index = 0 }) => {
   const reduce = useReducedMotion();
   const isDark = theme === 'dark';
 
-  const { Icon, accent } = (slug && ICON_MAP[slug]) || FALLBACK;
+  const { src, darkSrc, accent } = (slug && SVG_MAP[slug]) || FALLBACK;
+  const imgSrc = isDark && darkSrc ? darkSrc : src;
 
-  // Theme-adaptive tinting derived from the accent colour.
   const wrapStyle: React.CSSProperties = {
     background: isDark
       ? `linear-gradient(135deg, ${accent}2e 0%, ${accent}12 100%)`
       : `linear-gradient(135deg, ${accent}1f 0%, ${accent}0d 100%)`,
     borderColor: isDark ? `${accent}4d` : `${accent}33`,
-    color: accent,
   };
 
   const idle = reduce
@@ -91,11 +82,20 @@ const ServiceIcon: React.FC<ServiceIconProps> = ({ slug, index = 0 }) => {
     >
       <span className={styles.glow} style={{ background: accent }} aria-hidden="true" />
       <motion.span className={styles.iconInner} animate={idle}>
-        <Icon size={26} />
+        <Image
+          src={imgSrc}
+          alt=""
+          width={32}
+          height={32}
+          unoptimized
+          style={{
+            display: 'block',
+            filter: isDark && !darkSrc ? 'brightness(1.2)' : undefined,
+          }}
+        />
       </motion.span>
     </motion.span>
   );
 };
 
 export default ServiceIcon;
-export { ICON_MAP };

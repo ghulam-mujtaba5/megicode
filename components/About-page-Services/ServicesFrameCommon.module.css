@@ -194,18 +194,23 @@
 }
 
 .iconWrapStd svg,
-.iconWrapFeatured svg {
+.iconWrapFeatured svg,
+.iconWrapStd img,
+.iconWrapFeatured img {
   animation: svcIconFloat 3.6s ease-in-out infinite;
   will-change: transform;
 }
 
 /* Two-phase stagger so the grid doesn't pulse in unison */
 .card:nth-child(even) .iconWrapStd svg,
-.card:nth-child(even) .iconWrapFeatured svg {
+.card:nth-child(even) .iconWrapFeatured svg,
+.card:nth-child(even) .iconWrapStd img,
+.card:nth-child(even) .iconWrapFeatured img {
   animation-delay: -1.8s;
 }
 
-.card:nth-child(3n) .iconWrapStd svg {
+.card:nth-child(3n) .iconWrapStd svg,
+.card:nth-child(3n) .iconWrapStd img {
   animation-delay: -0.9s;
 }
 
@@ -220,7 +225,9 @@
 
 @media (prefers-reduced-motion: reduce) {
   .iconWrapStd svg,
-  .iconWrapFeatured svg {
+  .iconWrapFeatured svg,
+  .iconWrapStd img,
+  .iconWrapFeatured img {
     animation: none;
   }
 }

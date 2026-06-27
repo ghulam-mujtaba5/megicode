@@ -70,7 +70,7 @@ const CareersHero: React.FC = () => {
           </div>
           <div className={common.visualContent}>
             <LottiePlayer
-              src="/lottie/16_team_collaboration.json"
+              src="/lottie/team-careers.json"
               loop
               style={{
                 width: 'clamp(240px, 32vw, 340px)',
