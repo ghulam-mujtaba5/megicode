@@ -1,22 +1,16 @@
-"use client";
-import React, { useState, useCallback, useMemo, useRef, useEffect } from 'react';
+'use client';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+
+import { motion, useAnimation } from 'framer-motion';
 
 import { useTheme } from '../../context/ThemeContext';
+import PlexusCanvas from '../Backgrounds/PlexusCanvas';
 import commonStyles from './ContactUsCommon.module.css';
-import lightStyles from './ContactUsLight.module.css';
 import darkStyles from './ContactUsDark.module.css';
-import { motion, useAnimation } from 'framer-motion';
-import SuccessToast from "./SuccessToast";
-import PlexusCanvas from "../Backgrounds/PlexusCanvas";
+import lightStyles from './ContactUsLight.module.css';
+import SuccessToast from './SuccessToast';
 
-
-
-const ContactSection = ({
-  email = "contact@megicode.com",
-
-  showCertificationBadge = false,
-  showAdditionalCertificationBadge = false
-}) => {
+const ContactSection = ({ email = 'contact@megicode.com' }) => {
   const [name, setName] = useState('');
   const [emailInput, setEmailInput] = useState('');
   const [message, setMessage] = useState('');
@@ -85,7 +79,7 @@ const ContactSection = ({
         } else {
           setError(result.error || 'Failed to send message. Please try again later.');
         }
-      } catch (err) {
+      } catch {
         setError('Failed to send message. Please try again later.');
       } finally {
         setIsSending(false);
@@ -93,7 +87,6 @@ const ContactSection = ({
     },
     [name, emailInput, message, validateEmail]
   );
-
 
   const themeStyles = useMemo(() => (theme === 'light' ? lightStyles : darkStyles), [theme]);
 
@@ -118,13 +111,13 @@ const ContactSection = ({
     return () => observer.unobserve(el);
   }, [controls]);
 
-
-
   return (
     <>
       <SuccessToast show={showSuccess} onClose={() => setShowSuccess(false)} />
       <section className={`${commonStyles.contactSection} ${themeStyles.contactSection}`}>
-        <div className={`${commonStyles.contactFormBackground} ${themeStyles.contactFormBackground}`}>
+        <div
+          className={`${commonStyles.contactFormBackground} ${themeStyles.contactFormBackground}`}
+        >
           {/* Themed plexus canvas background (conservative settings) */}
           <PlexusCanvas maxNodes={100} maxDistance={120} speed={0.15} />
         </div>
@@ -137,7 +130,9 @@ const ContactSection = ({
           animate={controls}
           transition={{ duration: 0.5 }}
         >
-          <label className={`${commonStyles.nameLabel} ${themeStyles.nameLabel}`} htmlFor="name">Name</label>
+          <label className={`${commonStyles.nameLabel} ${themeStyles.nameLabel}`} htmlFor="name">
+            Name
+          </label>
           <input
             className={`${commonStyles.nameInput} ${themeStyles.nameInput}`}
             type="text"
@@ -150,7 +145,9 @@ const ContactSection = ({
             required
             ref={nameInputRef}
           />
-          <label className={`${commonStyles.emailLabel} ${themeStyles.emailLabel}`} htmlFor="email">Email</label>
+          <label className={`${commonStyles.emailLabel} ${themeStyles.emailLabel}`} htmlFor="email">
+            Email
+          </label>
           <input
             className={`${commonStyles.emailInput} ${themeStyles.emailInput}`}
             type="email"
@@ -162,7 +159,12 @@ const ContactSection = ({
             onChange={handleEmailChange}
             required
           />
-          <label className={`${commonStyles.messageLabel} ${themeStyles.messageLabel}`} htmlFor="message">Message</label>
+          <label
+            className={`${commonStyles.messageLabel} ${themeStyles.messageLabel}`}
+            htmlFor="message"
+          >
+            Message
+          </label>
           <textarea
             className={`${commonStyles.messageInput} ${themeStyles.messageInput}`}
             name="message"
@@ -195,17 +197,60 @@ const ContactSection = ({
           </p>
         )}
         <div className={`${commonStyles.contactDetails} ${themeStyles.contactDetails}`}>
-          <p className={`${commonStyles.contactEmail} ${themeStyles.contactEmail}`}>{email}</p>
-
-          <h2 className={`${commonStyles.contactMeDescription} ${themeStyles.contactMeDescription}`}>Contact Us</h2>
-          <div className={`${commonStyles.contactMeLabel} ${themeStyles.contactMeLabel}`}>
-            <p className={`${commonStyles.doYouHave} ${themeStyles.doYouHave}`}>Do you have any project idea?</p>
-            <p className={`${commonStyles.doyouHave} ${themeStyles.doyouHave}`}>Let’s discuss and turn them into reality!</p>
+          {/* ── Connector: email address with dot node ─────────────── */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
+            <div className="connector-dot" aria-hidden="true" />
+            <p
+              className={`${commonStyles.contactEmail} ${themeStyles.contactEmail}`}
+              style={{ margin: 0 }}
+            >
+              {email}
+            </p>
           </div>
+
+          {/* ── Flowing connector divider ───────────────────────────── */}
+          <div
+            className="divider-node"
+            aria-hidden="true"
+            style={{ maxWidth: 240, margin: '0 0 14px' }}
+          >
+            <div className="divider-node-dot" />
+          </div>
+
+          <h2
+            className={`${commonStyles.contactMeDescription} ${themeStyles.contactMeDescription}`}
+          >
+            Contact Us
+          </h2>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/icons/icon-team-success.png"
+            alt=""
+            width={72}
+            height={72}
+            loading="lazy"
+            aria-hidden="true"
+            style={{
+              display: 'block',
+              margin: '0.75rem auto 1rem',
+              objectFit: 'contain',
+              filter: 'drop-shadow(0 8px 24px rgba(69,115,223,0.28))',
+              opacity: 0.88,
+            }}
+          />
+          <div className={`${commonStyles.contactMeLabel} ${themeStyles.contactMeLabel}`}>
+            <p className={`${commonStyles.doYouHave} ${themeStyles.doYouHave}`}>
+              Do you have any project idea?
+            </p>
+            <p className={`${commonStyles.doyouHave} ${themeStyles.doyouHave}`}>
+              Let’s discuss and turn them into reality!
+            </p>
+          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             className={`${commonStyles.emailIcon} ${themeStyles.emailIcon}`}
             alt="Email"
-            src={theme === 'light' ? "email-icon.svg" : "EmailDark.svg"}
+            src={theme === 'light' ? 'email-icon.svg' : 'EmailDark.svg'}
             loading="lazy"
           />
           {/* Certification badges removed as requested */}
@@ -216,5 +261,3 @@ const ContactSection = ({
 };
 
 export default ContactSection;
-
-

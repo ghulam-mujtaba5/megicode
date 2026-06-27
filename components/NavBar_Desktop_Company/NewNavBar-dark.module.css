@@ -1,51 +1,78 @@
-/* NewNavBar-dark.module.css */
+/* NewNavBar-dark.module.css — Deep glass on brand #1D2127 */
 .navbar {
-  background: linear-gradient(145deg, rgba(40,44,52,0.96) 0%, rgba(27,30,37,0.92) 100%);
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(69, 115, 223, 0.13);
-  /* box-shadow: 0 4px 24px 0 rgba(69,115,223,0.05), 0 1.5px 6px 0 rgba(0,0,0,0.12); */
+  /* Base: brand dark #1D2127 with deep glass */
+  background: rgba(24, 28, 34, 0.94);
+  -webkit-backdrop-filter: blur(24px) saturate(1.55);
+  backdrop-filter: blur(24px) saturate(1.55);
+  border-bottom: 1px solid rgba(69, 115, 223, 0.16);
+  box-shadow:
+    inset 0 1px 0 rgba(69, 115, 223, 0.12),
+    0 6px 28px rgba(0, 0, 0, 0.45),
+    0 2px 8px rgba(0, 0, 0, 0.28);
 }
 
+/* Inactive link: muted cool-white — readable on dark surface */
 .navLink {
-  color: #e1e5f2; /* Light color for readability on dark background */
+  color: #8899bb;
   text-decoration: none;
-  transition: color 0.2s ease-in-out;
+  font-weight: 500;
+  font-size: 0.92rem;
+  padding: 0.28rem 0.5rem;
+  border-radius: 6px;
   position: relative;
-  padding-bottom: 0.3rem;
+  transition:
+    color 0.18s ease,
+    transform 0.18s ease;
 }
 
+/* Hover: near-white, subtle lift, NO box background */
 .navLink:hover {
-  color: #ffffff; /* Brighter on hover */
+  color: #eaf6ff;
+  transform: translateY(-1px);
 }
 
 .navLink:focus-visible {
-  outline: 2px solid #4573df;
-  outline-offset: 2px;
-  border-radius: 4px;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(69, 115, 223, 0.5);
+  border-radius: 6px;
 }
 
+/* Sliding underline with soft glow */
 .navLink::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: 0;
-    left: 50%;
-    background: linear-gradient(90deg, #4573df, #2d4fa2);
-    transition: all 0.3s ease-in-out;
-    transform: translateX(-50%);
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #4573df, #7aa4f8);
+  border-radius: 1px;
+  transform: translateX(-50%);
+  transition: width 0.25s ease;
+  box-shadow: 0 0 6px rgba(69, 115, 223, 0.55);
 }
-
 .navLink:hover::after {
-    width: 100%;
+  width: 80%;
 }
 
+/* Neumorphic theme toggle on dark surface */
 .themeToggle {
-  color: #adb5bd;
-  background: rgba(255, 255, 255, 0.06);
+  color: #8ab4f8;
+  background: #1a1f2e;
+  box-shadow:
+    3px 3px 8px rgba(0, 0, 0, 0.55),
+    -2px -2px 6px rgba(38, 48, 72, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(69, 115, 223, 0.15);
+  transition:
+    color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 .themeToggle:hover {
-  color: #eaf6ff;
-  background: rgba(255, 255, 255, 0.1);
+  color: #dce8ff;
+  box-shadow:
+    4px 4px 14px rgba(0, 0, 0, 0.65),
+    -2px -2px 8px rgba(38, 48, 72, 0.4),
+    0 0 18px rgba(69, 115, 223, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
 }

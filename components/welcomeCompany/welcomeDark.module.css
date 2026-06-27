@@ -8,18 +8,17 @@
   color: #adb5bd;
 }
 
-/* "Welcome to" eyebrow — muted in dark */
 .welcomeEyebrow {
   color: #6b7280;
 }
 
-/* "Megi" — pure white in dark mode (user request) */
 .brandMegi {
   color: #ffffff;
 }
 
-/* "code" color is set globally in common as #4573df */
-.brandCode { color: #4573df; }
+.brandCode {
+  color: #4573df;
+}
 
 .tagline {
   color: #adb5bd;
@@ -30,49 +29,46 @@
 }
 
 /* ─── Hero CTAs — dark theme ──────────────────────────────────────────────── */
+
+/* Primary: 3D pill — brand blue with deeper glow on dark */
 .heroPrimary {
-  background: #4573df;
+  background: linear-gradient(135deg, #5a87e8 0%, #4573df 100%);
   color: #ffffff;
-  border: 2px solid #4573df;
-  box-shadow: 0 4px 16px rgba(69, 115, 223, 0.22);
+  border: none;
+  box-shadow:
+    0 5px 0 #142c80,
+    0 8px 24px rgba(69, 115, 223, 0.48),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 .heroPrimary:hover {
-  background: #2d4fa2;
-  border-color: #2d4fa2;
-  box-shadow: 0 6px 22px rgba(69, 115, 223, 0.32);
+  background: linear-gradient(135deg, #6a93ef 0%, #4f7ce8 100%);
+  box-shadow:
+    0 7px 0 #142c80,
+    0 16px 36px rgba(69, 115, 223, 0.58),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+.heroPrimary:active {
+  transform: translateY(3px) !important;
+  box-shadow:
+    0 2px 0 #142c80,
+    0 4px 12px rgba(69, 115, 223, 0.28),
+    inset 0 2px 5px rgba(0, 0, 0, 0.18);
 }
 
+/* Ghost pill on dark — subtle glow border */
 .heroSecondary {
-  background: transparent;
-  color: #e0e6ed;
-  border: 2px solid #3e444c;
+  background: rgba(255, 255, 255, 0.05);
+  color: #c0d4ff;
+  border: 1.5px solid rgba(69, 115, 223, 0.28);
+  box-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 .heroSecondary:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: #4573df;
+  background: rgba(69, 115, 223, 0.12);
+  border-color: rgba(69, 115, 223, 0.55);
   color: #eaf6ff;
-}
-
-/* ─── Hero CTAs — dark theme ──────────────────────────────────────────────── */
-.heroPrimary {
-  background: #4573df;
-  color: #ffffff;
-  border: 2px solid #4573df;
-  box-shadow: 0 4px 16px rgba(69, 115, 223, 0.22);
-}
-.heroPrimary:hover {
-  background: #2d4fa2;
-  border-color: #2d4fa2;
-  box-shadow: 0 6px 22px rgba(69, 115, 223, 0.32);
-}
-
-.heroSecondary {
-  background: transparent;
-  color: #e0e6ed;
-  border: 2px solid #3e444c;
-}
-.heroSecondary:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: #4573df;
-  color: #eaf6ff;
+  box-shadow:
+    0 4px 20px rgba(69, 115, 223, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }

@@ -10,18 +10,17 @@
   color: #475569;
 }
 
-/* "Welcome to" eyebrow — muted slate */
 .welcomeEyebrow {
   color: #64748b;
 }
 
-/* "Megi" — dark navy on light bg */
 .brandMegi {
   color: #0f172a;
 }
 
-/* "code" color is set globally in common as #4573df */
-.brandCode { color: #4573df; }
+.brandCode {
+  color: #4573df;
+}
 
 .tagline {
   color: #444;
@@ -32,24 +31,45 @@
 }
 
 /* ─── Hero CTAs — light theme ─────────────────────────────────────────────── */
+
+/* Primary: 3D pill — brand blue with depth shadow */
 .heroPrimary {
-  background: #4573df;
+  background: linear-gradient(135deg, #5a87e8 0%, #4573df 100%);
   color: #ffffff;
-  border: 2px solid #4573df;
-  box-shadow: 0 4px 16px rgba(69, 115, 223, 0.26);
+  border: none;
+  box-shadow:
+    0 5px 0 #1e3d9e,
+    0 8px 22px rgba(69, 115, 223, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
 }
 .heroPrimary:hover {
-  background: #2d4fa2;
-  border-color: #2d4fa2;
-  box-shadow: 0 6px 22px rgba(69, 115, 223, 0.36);
+  background: linear-gradient(135deg, #6a93ef 0%, #4f7ce8 100%);
+  box-shadow:
+    0 7px 0 #1e3d9e,
+    0 14px 32px rgba(69, 115, 223, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+.heroPrimary:active {
+  transform: translateY(3px) !important;
+  box-shadow:
+    0 2px 0 #1e3d9e,
+    0 4px 10px rgba(69, 115, 223, 0.25),
+    inset 0 2px 5px rgba(0, 0, 0, 0.12);
 }
 
+/* Ghost pill — subtle brand-tinted outline */
 .heroSecondary {
-  background: transparent;
+  background: rgba(69, 115, 223, 0.07);
   color: #4573df;
-  border: 2px solid rgba(69, 115, 223, 0.42);
+  border: 1.5px solid rgba(69, 115, 223, 0.32);
+  box-shadow:
+    0 2px 10px rgba(69, 115, 223, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.82);
 }
 .heroSecondary:hover {
-  background: rgba(69, 115, 223, 0.07);
-  border-color: rgba(69, 115, 223, 0.7);
+  background: rgba(69, 115, 223, 0.12);
+  border-color: rgba(69, 115, 223, 0.58);
+  box-shadow:
+    0 4px 18px rgba(69, 115, 223, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.88);
 }

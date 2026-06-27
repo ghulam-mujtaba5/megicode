@@ -1,7 +1,9 @@
-"use client";
-import React, { useRef, useState, useEffect, useMemo, useId, useCallback } from 'react';
+'use client';
+import React, { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react';
+
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+
 import { useTheme } from '../../context/ThemeContext';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import styles from './MegicodeHeroAnimation.module.css';
 
 type Node = {
@@ -20,23 +22,128 @@ type Node = {
 // so the SVG never bleeds into the navbar above. Inner ring is closer & larger.
 // iconScale compensates for differing source SVG padding (AI icon viewBox is 31×28; the rest are 48×48 with internal padding).
 const NODES: Node[] = [
-  { id: 'ai',      label: 'AI / Machine Learning',  src: '/Ai%20icon.svg',                  x:    0, y: -150, ring: 'inner', iconScale: 0.95 },
-  { id: 'web',     label: 'Web Applications',       src: '/web%20app%20icon.svg',           x:  170, y:  -30, ring: 'inner', iconScale: 1.25 },
-  { id: 'mobile',  label: 'Mobile Apps',            src: '/mobile%20app%20icon.svg',        darkSrc: '/Mobile%20App%20Dark.svg', x:   90, y:  150, ring: 'inner', iconScale: 1.20 },
-  { id: 'uiux',    label: 'UI / UX Design',         src: '/Ui&Ux-icon.svg',                 x: -155, y:   55, ring: 'inner', iconScale: 1.25 },
-  { id: 'data',    label: 'Data Visualization',     src: '/data%20visualization%20icon.svg', x:  255, y:  150, ring: 'outer', iconScale: 1.30 },
-  { id: 'bigdata', label: 'Big Data Analytics',     src: '/Big%20Data%20Analytics.svg',     x:  240, y: -160, ring: 'outer', iconScale: 1.30 },
-  { id: 'dev',     label: 'Custom Development',     src: '/devlopment-icon.svg',            x: -255, y: -160, ring: 'outer', iconScale: 1.25 },
-  { id: 'desktop', label: 'Desktop Apps',           src: '/Desktop-App-icon.svg',           darkSrc: '/Desktop App Dark.svg', x: -250, y:  170, ring: 'outer', iconScale: 1.25 },
+  {
+    id: 'ai',
+    label: 'AI / Machine Learning',
+    src: '/Ai%20icon.svg',
+    x: 0,
+    y: -150,
+    ring: 'inner',
+    iconScale: 0.95,
+  },
+  {
+    id: 'web',
+    label: 'Web Applications',
+    src: '/web%20app%20icon.svg',
+    x: 170,
+    y: -30,
+    ring: 'inner',
+    iconScale: 1.25,
+  },
+  {
+    id: 'mobile',
+    label: 'Mobile Apps',
+    src: '/mobile%20app%20icon.svg',
+    darkSrc: '/Mobile%20App%20Dark.svg',
+    x: 90,
+    y: 150,
+    ring: 'inner',
+    iconScale: 1.2,
+  },
+  {
+    id: 'uiux',
+    label: 'UI / UX Design',
+    src: '/Ui&Ux-icon.svg',
+    x: -155,
+    y: 55,
+    ring: 'inner',
+    iconScale: 1.25,
+  },
+  {
+    id: 'data',
+    label: 'Data Visualization',
+    src: '/data%20visualization%20icon.svg',
+    x: 255,
+    y: 150,
+    ring: 'outer',
+    iconScale: 1.3,
+  },
+  {
+    id: 'bigdata',
+    label: 'Big Data Analytics',
+    src: '/Big%20Data%20Analytics.svg',
+    x: 240,
+    y: -160,
+    ring: 'outer',
+    iconScale: 1.3,
+  },
+  {
+    id: 'dev',
+    label: 'Custom Development',
+    src: '/devlopment-icon.svg',
+    x: -255,
+    y: -160,
+    ring: 'outer',
+    iconScale: 1.25,
+  },
+  {
+    id: 'desktop',
+    label: 'Desktop Apps',
+    src: '/Desktop-App-icon.svg',
+    darkSrc: '/Desktop App Dark.svg',
+    x: -250,
+    y: 170,
+    ring: 'outer',
+    iconScale: 1.25,
+  },
 ];
+
+// ─── Organic blob variants — [top, right, bottom, left] radius multipliers ───
+// Each node gets a unique asymmetric blob shape instead of a generic circle.
+const BLOB_VARIANTS: [number, number, number, number][] = [
+  [1.14, 0.88, 1.08, 1.06], // ai      — taller, narrower
+  [0.93, 1.16, 0.9, 0.98], // web     — wider, shorter
+  [1.06, 0.94, 1.16, 0.9], // mobile  — taller bottom
+  [0.9, 1.1, 1.06, 1.14], // uiux    — wider left
+  [1.12, 0.86, 1.06, 1.1], // data    — tall, narrow
+  [0.9, 1.12, 0.94, 1.06], // bigdata — wider right
+  [1.08, 0.96, 1.14, 0.88], // dev     — tall bottom, narrow left
+  [0.94, 1.1, 0.88, 1.12], // desktop — shorter, wide left
+];
+
+const BC = 0.552; // Bezier circle approximation factor
+
+/** Returns an organic 4-anchor blob path centered at (0, 0). */
+function blobPath(r: number, v: [number, number, number, number]): string {
+  const T = +(r * v[0]).toFixed(2);
+  const R = +(r * v[1]).toFixed(2);
+  const B = +(r * v[2]).toFixed(2);
+  const L = +(r * v[3]).toFixed(2);
+  return [
+    `M 0,${-T}`,
+    `C ${+(T * BC).toFixed(2)},${-T} ${R},${+(-R * BC).toFixed(2)} ${R},0`,
+    `C ${R},${+(R * BC).toFixed(2)} ${+(B * BC).toFixed(2)},${B} 0,${B}`,
+    `C ${+(-B * BC).toFixed(2)},${B} ${-L},${+(L * BC).toFixed(2)} ${-L},0`,
+    `C ${-L},${+(-L * BC).toFixed(2)} ${+(-T * BC).toFixed(2)},${-T} 0,${-T} Z`,
+  ].join(' ');
+}
 
 const CORE_RADIUS = 46;
 const PACKET_PHASES = NODES.map((_, i) => (i * 0.731) % 1);
 const PACKET_PERIOD = 4.0;
-const THINK_INTERVAL = 2.4;       // seconds between "thinking" pulses
+const THINK_INTERVAL = 2.4; // seconds between "thinking" pulses
 const CLICK_RIPPLE_DURATION = 1.1; // seconds
 
 type Ripple = { id: number; x: number; y: number; t0: number };
+
+const AMBIENT_PARTICLES = Array.from({ length: 24 }, () => ({
+  baseX: (Math.random() - 0.5) * 700,
+  baseY: (Math.random() - 0.5) * 460,
+  phase: Math.random() * Math.PI * 2,
+  speed: 0.22 + Math.random() * 0.4,
+  radius: 0.7 + Math.random() * 1.6,
+  drift: 14 + Math.random() * 26,
+}));
 
 const MegicodeHeroAnimationAdvanced: React.FC = () => {
   const themeValue = useTheme()?.theme || 'light';
@@ -87,26 +194,12 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [prefersReducedMotion]);
 
-  // Ambient particles
-  const particles = useMemo(
-    () =>
-      Array.from({ length: 24 }, () => ({
-        baseX: (Math.random() - 0.5) * 700,
-        baseY: (Math.random() - 0.5) * 460,
-        phase: Math.random() * Math.PI * 2,
-        speed: 0.22 + Math.random() * 0.4,
-        radius: 0.7 + Math.random() * 1.6,
-        drift: 14 + Math.random() * 26,
-      })),
-    []
-  );
-
   // Aurora blobs — brand colors only (#4573df primary, #2d4fa2 dark variant)
   const aurora = useMemo(
     () => [
-      { x: -180, y: -90,  r: 280, hueShift: 0,   speed: 0.18, color: '#4573df' },
-      { x:  170, y:  100, r: 250, hueShift: 0,   speed: 0.13, color: '#2d4fa2' },
-      { x:  220, y: -130, r: 200, hueShift: 0,   speed: 0.20, color: '#4573df' },
+      { x: -180, y: -90, r: 280, hueShift: 0, speed: 0.18, color: '#4573df' },
+      { x: 170, y: 100, r: 250, hueShift: 0, speed: 0.13, color: '#2d4fa2' },
+      { x: 220, y: -130, r: 200, hueShift: 0, speed: 0.2, color: '#4573df' },
     ],
     []
   );
@@ -185,7 +278,12 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
   };
   const fadeUp = {
     hidden: { opacity: 0, y: 6, scale: 0.97 },
-    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] as const } },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] as const },
+    },
   };
 
   // Periodic intelligence shockwave
@@ -221,19 +319,19 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
         <defs>
           {aurora.map((b, i) => (
             <radialGradient key={`aur-${i}`} id={`aur-${uid}-${i}`} cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor={b.color} stopOpacity={isDark ? 0.34 : 0.20} />
+              <stop offset="0%" stopColor={b.color} stopOpacity={isDark ? 0.34 : 0.2} />
               <stop offset="60%" stopColor={b.color} stopOpacity={isDark ? 0.08 : 0.05} />
               <stop offset="100%" stopColor={b.color} stopOpacity="0" />
             </radialGradient>
           ))}
 
           <radialGradient id={`coreDisc-${uid}`} cx="35%" cy="30%" r="80%">
-            <stop offset="0%"  stopColor={palette.coreInner} stopOpacity="1" />
+            <stop offset="0%" stopColor={palette.coreInner} stopOpacity="1" />
             <stop offset="100%" stopColor={palette.coreOuter} stopOpacity="1" />
           </radialGradient>
 
           <radialGradient id={`coreGlow-${uid}`} cx="50%" cy="50%" r="50%">
-            <stop offset="0%"  stopColor={palette.accent}     stopOpacity="0.6" />
+            <stop offset="0%" stopColor={palette.accent} stopOpacity="0.6" />
             <stop offset="55%" stopColor={palette.accentDeep} stopOpacity="0.18" />
             <stop offset="100%" stopColor={palette.accentDeep} stopOpacity="0" />
           </radialGradient>
@@ -245,38 +343,58 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
           </linearGradient>
 
           <radialGradient id={`nodeHalo-${uid}`} cx="50%" cy="50%" r="50%">
-            <stop offset="0%"  stopColor={palette.nodeHalo} stopOpacity="0.6" />
+            <stop offset="0%" stopColor={palette.nodeHalo} stopOpacity="0.6" />
             <stop offset="100%" stopColor={palette.nodeHalo} stopOpacity="0" />
           </radialGradient>
 
           <radialGradient id={`cursorLight-${uid}`} cx="50%" cy="50%" r="50%">
-            <stop offset="0%"  stopColor={palette.accent} stopOpacity={isDark ? 0.22 : 0.14} />
+            <stop offset="0%" stopColor={palette.accent} stopOpacity={isDark ? 0.22 : 0.14} />
             <stop offset="100%" stopColor={palette.accent} stopOpacity="0" />
           </radialGradient>
 
           <radialGradient id={`thinkPulse-${uid}`} cx="50%" cy="50%" r="50%">
-            <stop offset="0%"  stopColor={palette.thinkGlow} stopOpacity="0.85" />
+            <stop offset="0%" stopColor={palette.thinkGlow} stopOpacity="0.85" />
             <stop offset="60%" stopColor={palette.thinkGlow} stopOpacity="0.35" />
             <stop offset="100%" stopColor={palette.thinkGlow} stopOpacity="0" />
           </radialGradient>
 
+          {/* Node blob fill — radial glass gradient (top-left bright → bottom-right tinted) */}
+          <radialGradient id={`nd-${uid}`} cx="32%" cy="22%" r="80%">
+            <stop offset="0%" stopColor={isDark ? '#1c3d70' : '#ffffff'} stopOpacity="1" />
+            <stop offset="100%" stopColor={isDark ? '#0c1828' : '#e6ecff'} stopOpacity="1" />
+          </radialGradient>
+
           <filter id={`coreGlowFilter-${uid}`} x="-100%" y="-100%" width="300%" height="300%">
             <feGaussianBlur stdDeviation="6" result="blur" />
-            <feColorMatrix in="blur" type="matrix"
-              values="0 0 0 0 0.27   0 0 0 0 0.45   0 0 0 0 0.87   0 0 0 1 0" result="tinted" />
+            <feColorMatrix
+              in="blur"
+              type="matrix"
+              values="0 0 0 0 0.27   0 0 0 0 0.45   0 0 0 0 0.87   0 0 0 1 0"
+              result="tinted"
+            />
             <feMerge>
               <feMergeNode in="tinted" />
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
 
-          <pattern id={`gridDots-${uid}`} x="0" y="0" width="34" height="34" patternUnits="userSpaceOnUse">
+          <pattern
+            id={`gridDots-${uid}`}
+            x="0"
+            y="0"
+            width="34"
+            height="34"
+            patternUnits="userSpaceOnUse"
+          >
             <circle cx="17" cy="17" r="1" fill={palette.gridDot} />
           </pattern>
         </defs>
 
         {/* Layer 1 — Aurora */}
-        <motion.g variants={fadeUp} style={{ transform: `translate(${mouse.x * 3}px, ${mouse.y * 3}px)` }}>
+        <motion.g
+          variants={fadeUp}
+          style={{ transform: `translate(${mouse.x * 3}px, ${mouse.y * 3}px)` }}
+        >
           {aurora.map((b, i) => {
             const dx = prefersReducedMotion ? 0 : Math.sin(t * b.speed + b.hueShift) * 26;
             const dy = prefersReducedMotion ? 0 : Math.cos(t * b.speed * 0.7 + b.hueShift) * 22;
@@ -294,8 +412,18 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
         </motion.g>
 
         {/* Layer 2 — Dot grid */}
-        <motion.g variants={fadeUp} style={{ transform: `translate(${mouse.x * 4}px, ${mouse.y * 4}px)` }}>
-          <rect x="-700" y="-500" width="1400" height="1000" fill={`url(#gridDots-${uid})`} opacity={0.6} />
+        <motion.g
+          variants={fadeUp}
+          style={{ transform: `translate(${mouse.x * 4}px, ${mouse.y * 4}px)` }}
+        >
+          <rect
+            x="-700"
+            y="-500"
+            width="1400"
+            height="1000"
+            fill={`url(#gridDots-${uid})`}
+            opacity={0.6}
+          />
         </motion.g>
 
         {/* Layer 3 — Cursor follow light */}
@@ -329,10 +457,15 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
         })}
 
         {/* Layer 5 — Ambient particles */}
-        <motion.g variants={fadeUp} style={{ transform: `translate(${mouse.x * 6}px, ${mouse.y * 6}px)` }}>
-          {particles.map((p, i) => {
+        <motion.g
+          variants={fadeUp}
+          style={{ transform: `translate(${mouse.x * 6}px, ${mouse.y * 6}px)` }}
+        >
+          {AMBIENT_PARTICLES.map((p, i) => {
             const dx = prefersReducedMotion ? 0 : Math.sin(t * p.speed + p.phase) * p.drift;
-            const dy = prefersReducedMotion ? 0 : Math.cos(t * p.speed * 0.8 + p.phase) * p.drift * 0.6;
+            const dy = prefersReducedMotion
+              ? 0
+              : Math.cos(t * p.speed * 0.8 + p.phase) * p.drift * 0.6;
             const op = 0.22 + (Math.sin(t * 0.8 + p.phase) + 1) * 0.18;
             return (
               <circle
@@ -349,13 +482,24 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
 
         {/* Layer 6 — Periodic shockwave */}
         {!prefersReducedMotion && shockPhase >= 0 && (
-          <circle cx={0} cy={0} r={shockR} fill="none" stroke={palette.shockwave} strokeWidth={1.4} opacity={shockOpacity} />
+          <circle
+            cx={0}
+            cy={0}
+            r={shockR}
+            fill="none"
+            stroke={palette.shockwave}
+            strokeWidth={1.4}
+            opacity={shockOpacity}
+          />
         )}
 
         {/* Layer 7 — Core breathing rings */}
-        <motion.g variants={fadeUp} style={{ transform: `translate(${mouse.x * 2}px, ${mouse.y * 2}px)` }}>
+        <motion.g
+          variants={fadeUp}
+          style={{ transform: `translate(${mouse.x * 2}px, ${mouse.y * 2}px)` }}
+        >
           {[0, 1, 2].map((i) => {
-            const phase = ((t / 4) + i / 3) % 1;
+            const phase = (t / 4 + i / 3) % 1;
             return (
               <circle
                 key={`pulse-${i}`}
@@ -373,7 +517,10 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
         </motion.g>
 
         {/* Layer 8 — Connections + comet packets (with hover boost & thinking burst) */}
-        <motion.g variants={fadeUp} style={{ transform: `translate(${mouse.x * 8}px, ${mouse.y * 8}px)` }}>
+        <motion.g
+          variants={fadeUp}
+          style={{ transform: `translate(${mouse.x * 8}px, ${mouse.y * 8}px)` }}
+        >
           {NODES.map((n, i) => {
             const dx = n.x;
             const dy = n.y;
@@ -390,7 +537,7 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
 
             // Active line gets faster packet stream
             const period = isActive ? PACKET_PERIOD * 0.45 : PACKET_PERIOD;
-            const phase = prefersReducedMotion ? 0.5 : ((t / period + PACKET_PHASES[i]) % 1);
+            const phase = prefersReducedMotion ? 0.5 : (t / period + PACKET_PHASES[i]) % 1;
             const cometCount = isActive ? 6 : 4;
 
             // Comet head + fading tail
@@ -419,31 +566,34 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
                   y2={endY}
                   stroke={isActive ? palette.accent : palette.line}
                   strokeWidth={isActive ? 2.2 : 1.1}
-                  opacity={isActive ? 0.95 : (activeId ? 0.38 : 0.62)}
+                  opacity={isActive ? 0.95 : activeId ? 0.38 : 0.62}
                   strokeLinecap="round"
                   strokeDasharray={lineLen}
                   initial={{ strokeDashoffset: lineLen }}
                   animate={{ strokeDashoffset: 0 }}
                   transition={{ duration: 0.7, delay: drawDelay, ease: [0.16, 1, 0.3, 1] }}
                 />
-                {!prefersReducedMotion && cometPositions.map((c, j) =>
-                  c && c.opacity > 0.05 ? (
-                    <circle
-                      key={`comet-${i}-${j}`}
-                      cx={c.x}
-                      cy={c.y}
-                      r={c.radius}
-                      fill={palette.packet}
-                      opacity={c.opacity * (isActive ? 1 : 0.85)}
-                      style={{ filter: j === 0 ? `drop-shadow(0 0 6px ${palette.accent})` : undefined }}
-                    />
-                  ) : null
-                )}
+                {!prefersReducedMotion &&
+                  cometPositions.map((c, j) =>
+                    c && c.opacity > 0.05 ? (
+                      <circle
+                        key={`comet-${i}-${j}`}
+                        cx={c.x}
+                        cy={c.y}
+                        r={c.radius}
+                        fill={palette.packet}
+                        opacity={c.opacity * (isActive ? 1 : 0.85)}
+                        style={{
+                          filter: j === 0 ? `drop-shadow(0 0 6px ${palette.accent})` : undefined,
+                        }}
+                      />
+                    ) : null
+                  )}
                 {/* Thinking burst — extra bright comet on the active "thinking" line */}
                 {isThinking && !prefersReducedMotion && (
                   <circle
-                    cx={endX + (startX - endX) * (((t * 1.5) % 1))}
-                    cy={endY + (startY - endY) * (((t * 1.5) % 1))}
+                    cx={endX + (startX - endX) * ((t * 1.5) % 1)}
+                    cy={endY + (startY - endY) * ((t * 1.5) % 1)}
                     r={4}
                     fill={palette.thinkGlow}
                     opacity={0.95}
@@ -456,7 +606,10 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
         </motion.g>
 
         {/* Layer 9 — Core: rotating sweep ring + glass disc + REAL Megicode logo + satellites */}
-        <motion.g variants={fadeUp} style={{ transform: `translate(${mouse.x * 3}px, ${mouse.y * 3}px)` }}>
+        <motion.g
+          variants={fadeUp}
+          style={{ transform: `translate(${mouse.x * 3}px, ${mouse.y * 3}px)` }}
+        >
           {!prefersReducedMotion && (
             <g transform={`rotate(${ringRotation})`}>
               <circle
@@ -473,12 +626,25 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
             </g>
           )}
 
-          <circle cx={0} cy={0} r={CORE_RADIUS + 14} fill="none" stroke={palette.accent} strokeWidth={0.8} opacity={0.22} />
+          <circle
+            cx={0}
+            cy={0}
+            r={CORE_RADIUS + 14}
+            fill="none"
+            stroke={palette.accent}
+            strokeWidth={0.8}
+            opacity={0.22}
+          />
 
           <motion.g
             animate={prefersReducedMotion ? undefined : { scale: [1, 1.05, 1] }}
             transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
-            style={{ transformOrigin: 'center', transformBox: 'fill-box' as React.CSSProperties['transformBox'] } as React.CSSProperties}
+            style={
+              {
+                transformOrigin: 'center',
+                transformBox: 'fill-box' as React.CSSProperties['transformBox'],
+              } as React.CSSProperties
+            }
           >
             <circle
               cx={0}
@@ -501,35 +667,37 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
           </motion.g>
 
           {/* 3 micro-satellites on a depth-aware orbit */}
-          {!prefersReducedMotion && [0, 1, 2].map((i) => {
-            const a = t * 0.6 + (i * Math.PI * 2) / 3;
-            const sr = CORE_RADIUS + 14;
-            const sx = Math.cos(a) * sr;
-            const sy = Math.sin(a) * sr * 0.36;
-            const z = Math.sin(a);
-            return (
-              <circle
-                key={`sat-${i}`}
-                cx={sx}
-                cy={sy}
-                r={2.4 + z * 0.6}
-                fill={palette.accent}
-                opacity={0.6 + z * 0.3}
-                style={{ filter: `drop-shadow(0 0 4px ${palette.accent})` }}
-              />
-            );
-          })}
+          {!prefersReducedMotion &&
+            [0, 1, 2].map((i) => {
+              const a = t * 0.6 + (i * Math.PI * 2) / 3;
+              const sr = CORE_RADIUS + 14;
+              const sx = Math.cos(a) * sr;
+              const sy = Math.sin(a) * sr * 0.36;
+              const z = Math.sin(a);
+              return (
+                <circle
+                  key={`sat-${i}`}
+                  cx={sx}
+                  cy={sy}
+                  r={2.4 + z * 0.6}
+                  fill={palette.accent}
+                  opacity={0.6 + z * 0.3}
+                  style={{ filter: `drop-shadow(0 0 4px ${palette.accent})` }}
+                />
+              );
+            })}
         </motion.g>
 
-        {/* Layer 10 — Service nodes */}
+        {/* Layer 10 — Service nodes (organic floating blobs) */}
         <motion.g style={{ transform: `translate(${mouse.x * 12}px, ${mouse.y * 12}px)` }}>
           {NODES.map((n, i) => {
-            // Magnetic attraction
+            // Magnetic attraction toward cursor
             const dxm = mouseSvgX - n.x;
             const dym = mouseSvgY - n.y;
             const distM = Math.hypot(dxm, dym);
             const threshold = 140;
-            let mx = 0, my = 0;
+            let mx = 0,
+              my = 0;
             if (!prefersReducedMotion && distM < threshold && (mouse.x !== 0 || mouse.y !== 0)) {
               const pull = (1 - distM / threshold) * 14;
               mx = (dxm / Math.max(distM, 1)) * pull;
@@ -541,13 +709,13 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
             const cy = n.y + float + my;
             const isActive = hoveredId === n.id || focusedId === n.id;
             const isThinking = thinkingId === n.id;
-            const dimmed = !!activeId && !isActive; // dim non-active when something is hovered
+            const dimmed = !!activeId && !isActive;
 
             const nodeR = n.ring === 'inner' ? 32 : 26;
-            // Each icon's effective size accounts for its source viewBox padding
-            const baseSize = (n.ring === 'inner' ? 36 : 30);
+            const baseSize = n.ring === 'inner' ? 36 : 30;
             const iconSize = baseSize * n.iconScale;
             const iconSrc = isDark && n.darkSrc ? n.darkSrc : n.src;
+            const bv = BLOB_VARIANTS[i];
 
             return (
               <motion.g
@@ -564,104 +732,134 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
                 animate={{ opacity: dimmed ? 0.5 : 1 }}
                 transition={{ duration: 0.25 }}
               >
-                {/* Thinking glow halo (subtle, persistent while node is "thinking") */}
-                {isThinking && !prefersReducedMotion && (
-                  <motion.circle
-                    cx={cx}
-                    cy={cy}
-                    r={nodeR + 18}
-                    fill={`url(#thinkPulse-${uid})`}
-                    initial={{ opacity: 0, scale: 0.7 }}
-                    animate={{ opacity: [0, 0.9, 0], scale: [0.7, 1.15, 1.3] }}
-                    transition={{ duration: 1.6, ease: 'easeOut' }}
-                  />
-                )}
-
-                {/* Hover halo */}
-                <AnimatePresence>
-                  {isActive && (
-                    <motion.circle
-                      cx={cx}
-                      cy={cy}
-                      r={nodeR + 22}
-                      fill={`url(#nodeHalo-${uid})`}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.8 }}
-                      transition={{ duration: 0.25 }}
+                {/* All node elements are positioned relative to (cx, cy) */}
+                <g transform={`translate(${cx},${cy})`}>
+                  {/* Thinking glow — blob-shaped halo */}
+                  {isThinking && !prefersReducedMotion && (
+                    <motion.path
+                      d={blobPath(nodeR + 18, bv)}
+                      fill={`url(#thinkPulse-${uid})`}
+                      initial={{ opacity: 0, scale: 0.7 }}
+                      animate={{ opacity: [0, 0.9, 0], scale: [0.7, 1.15, 1.3] }}
+                      transition={{ duration: 1.6, ease: 'easeOut' }}
+                      style={
+                        {
+                          transformOrigin: 'center',
+                          transformBox: 'fill-box',
+                        } as React.CSSProperties
+                      }
                     />
                   )}
-                </AnimatePresence>
 
-                {/* Glass capsule */}
-                <motion.circle
-                  cx={cx}
-                  cy={cy}
-                  r={nodeR}
-                  fill={palette.nodeFill}
-                  stroke={isActive ? palette.accent : (isThinking ? palette.thinkGlow : palette.nodeStroke)}
-                  strokeWidth={isActive ? 2 : (isThinking ? 1.6 : 1.2)}
-                  animate={{ scale: isActive ? 1.14 : (isThinking ? 1.06 : 1) }}
-                  transition={{ type: 'spring', stiffness: 280, damping: 22 }}
-                  style={{
-                    transformOrigin: `${cx}px ${cy}px`,
-                    filter: isActive
-                      ? `drop-shadow(0 8px 22px ${palette.coreGlow})`
-                      : isThinking
-                      ? `drop-shadow(0 0 12px ${palette.thinkGlow})`
-                      : `drop-shadow(0 2px 6px rgba(0,0,0,${isDark ? 0.4 : 0.08}))`,
-                  }}
-                />
-
-                {/* Icon (per-node sized) */}
-                <image
-                  href={iconSrc}
-                  x={cx - iconSize / 2}
-                  y={cy - iconSize / 2}
-                  width={iconSize}
-                  height={iconSize}
-                  style={{
-                    pointerEvents: 'none',
-                    filter: isDark && !n.darkSrc ? 'brightness(1.18)' : undefined,
-                  }}
-                  preserveAspectRatio="xMidYMid meet"
-                />
-
-                {/* Tooltip */}
-                <AnimatePresence>
-                  {isActive && (
-                    <motion.g
-                      initial={{ opacity: 0, y: 6 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 6 }}
-                      transition={{ duration: 0.18 }}
-                      style={{ pointerEvents: 'none' }}
-                    >
-                      <rect
-                        x={cx - n.label.length * 3.7 - 14}
-                        y={cy - nodeR - 38}
-                        width={n.label.length * 7.4 + 28}
-                        height={26}
-                        rx={13}
-                        fill={palette.tooltipBg}
-                        stroke={palette.tooltipBorder}
-                        strokeWidth={1}
-                        style={{ filter: `drop-shadow(0 6px 18px rgba(0,0,0,${isDark ? 0.5 : 0.12}))` }}
+                  {/* Hover halo — larger blob */}
+                  <AnimatePresence>
+                    {isActive && (
+                      <motion.path
+                        d={blobPath(nodeR + 22, bv)}
+                        fill={`url(#nodeHalo-${uid})`}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.8 }}
+                        transition={{ duration: 0.25 }}
+                        style={
+                          {
+                            transformOrigin: 'center',
+                            transformBox: 'fill-box',
+                          } as React.CSSProperties
+                        }
                       />
-                      <text
-                        x={cx}
-                        y={cy - nodeR - 20}
-                        textAnchor="middle"
-                        fontSize="12"
-                        fontWeight={600}
-                        fill={palette.tooltipText}
-                        style={{ userSelect: 'none', letterSpacing: 0.15 }}
+                    )}
+                  </AnimatePresence>
+
+                  {/* Organic blob body — glass gradient fill */}
+                  <motion.path
+                    d={blobPath(nodeR, bv)}
+                    fill={`url(#nd-${uid})`}
+                    stroke={
+                      isActive
+                        ? palette.accent
+                        : isThinking
+                          ? palette.thinkGlow
+                          : palette.nodeStroke
+                    }
+                    strokeWidth={isActive ? 2 : isThinking ? 1.6 : 1.2}
+                    animate={{ scale: isActive ? 1.14 : isThinking ? 1.06 : 1 }}
+                    transition={{ type: 'spring', stiffness: 280, damping: 22 }}
+                    style={
+                      {
+                        transformOrigin: 'center',
+                        transformBox: 'fill-box',
+                        filter: isActive
+                          ? `drop-shadow(0 8px 22px ${palette.coreGlow})`
+                          : isThinking
+                            ? `drop-shadow(0 0 12px ${palette.thinkGlow})`
+                            : `drop-shadow(0 2px 8px rgba(0,0,0,${isDark ? 0.42 : 0.09}))`,
+                      } as React.CSSProperties
+                    }
+                  />
+
+                  {/* Glass specular — top-left highlight (simulates 3D depth) */}
+                  <ellipse
+                    cx={nodeR * -0.16}
+                    cy={nodeR * -0.28}
+                    rx={nodeR * 0.42}
+                    ry={nodeR * 0.2}
+                    fill={isDark ? 'rgba(255,255,255,0.09)' : 'rgba(255,255,255,0.72)'}
+                    style={{ pointerEvents: 'none' }}
+                  />
+
+                  {/* Icon — centered at (0,0) within the translated group */}
+                  <image
+                    href={iconSrc}
+                    x={-iconSize / 2}
+                    y={-iconSize / 2}
+                    width={iconSize}
+                    height={iconSize}
+                    style={{
+                      pointerEvents: 'none',
+                      filter: isDark && !n.darkSrc ? 'brightness(1.18)' : undefined,
+                    }}
+                    preserveAspectRatio="xMidYMid meet"
+                  />
+
+                  {/* Tooltip — above the blob */}
+                  <AnimatePresence>
+                    {isActive && (
+                      <motion.g
+                        initial={{ opacity: 0, y: 6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 6 }}
+                        transition={{ duration: 0.18 }}
+                        style={{ pointerEvents: 'none' }}
                       >
-                        {n.label}
-                      </text>
-                    </motion.g>
-                  )}
-                </AnimatePresence>
+                        <rect
+                          x={-n.label.length * 3.7 - 14}
+                          y={-nodeR - 38}
+                          width={n.label.length * 7.4 + 28}
+                          height={26}
+                          rx={13}
+                          fill={palette.tooltipBg}
+                          stroke={palette.tooltipBorder}
+                          strokeWidth={1}
+                          style={{
+                            filter: `drop-shadow(0 6px 18px rgba(0,0,0,${isDark ? 0.5 : 0.12}))`,
+                          }}
+                        />
+                        <text
+                          x={0}
+                          y={-nodeR - 20}
+                          textAnchor="middle"
+                          fontSize="12"
+                          fontWeight={600}
+                          fill={palette.tooltipText}
+                          style={{ userSelect: 'none', letterSpacing: 0.15 }}
+                        >
+                          {n.label}
+                        </text>
+                      </motion.g>
+                    )}
+                  </AnimatePresence>
+                </g>
               </motion.g>
             );
           })}

@@ -427,6 +427,41 @@
   transform: translateY(-2px);
 }
 
+/* ─── Card illustration — hover-reveal 3D clay art ─────────────────────── */
+.cardIllus {
+  position: absolute;
+  bottom: -6px;
+  right: -6px;
+  width: 92px;
+  height: 92px;
+  opacity: 0;
+  transform: translateY(16px) scale(0.72) rotate(-10deg);
+  transition:
+    opacity 0.34s ease,
+    transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+  z-index: 0;
+  filter: drop-shadow(0 8px 18px rgba(69, 115, 223, 0.26));
+}
+
+.cardIllusFeatured {
+  width: 154px;
+  height: 154px;
+  right: -12px;
+  bottom: -12px;
+  filter: drop-shadow(0 14px 32px rgba(0, 0, 0, 0.18));
+}
+
+.cardIllusWide {
+  width: 116px;
+  height: 116px;
+}
+
+.cardInner:hover .cardIllus {
+  opacity: 0.88;
+  transform: translateY(-4px) scale(1.05) rotate(0deg);
+}
+
 /* ─── Responsive ─────────────────────────────────────────────────────────── */
 
 /* Tablet: 2-column, featured/wide cards span full width */

@@ -1,10 +1,13 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@600&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap');
 
 /* Import modern animations */
 @import './animations.css';
+
+/* Import 3D elements & morphism system */
+@import './3d-elements.css';
 
 /* Skip to main content link (accessibility) */
 .skip-to-main {
@@ -29,7 +32,18 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI,
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    Fira Sans,
+    Droid Sans,
+    Helvetica Neue,
+    sans-serif;
   line-height: 1.6;
   /* font-size: 18px; */
   overflow-x: hidden; /* Prevent horizontal scroll on body */
@@ -51,9 +65,9 @@ body {
   --page-bg: #ffffff;
   --page-bg-dark: #1d2127;
   /* Elevation shadows */
-  --md-elevation-1: 0 1px 3px rgba(60,60,60,0.12), 0 1px 2px rgba(60,60,60,0.24);
-  --md-elevation-2: 0 3px 6px rgba(60,60,60,0.16), 0 3px 6px rgba(60,60,60,0.23);
-  --md-elevation-3: 0 10px 20px rgba(60,60,60,0.19), 0 6px 6px rgba(60,60,60,0.23);
+  --md-elevation-1: 0 1px 3px rgba(60, 60, 60, 0.12), 0 1px 2px rgba(60, 60, 60, 0.24);
+  --md-elevation-2: 0 3px 6px rgba(60, 60, 60, 0.16), 0 3px 6px rgba(60, 60, 60, 0.23);
+  --md-elevation-3: 0 10px 20px rgba(60, 60, 60, 0.19), 0 6px 6px rgba(60, 60, 60, 0.23);
 }
 
 body {
@@ -62,7 +76,9 @@ body {
   background: var(--md-background);
   color: var(--md-on-background);
   font-family: 'Open Sans', 'Poppins', 'Inter', Arial, sans-serif;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
   /* Prevent mobile browser UI from affecting viewport */
   touch-action: manipulation;
 }
@@ -73,12 +89,12 @@ body {
 }
 
 /* Dark mode support */
-[data-theme="dark"] {
+[data-theme='dark'] {
   background: #181c22;
   color: #eaf6ff;
 }
 
-[data-theme="dark"] body {
+[data-theme='dark'] body {
   background: #181c22;
   color: #eaf6ff;
 }
@@ -131,11 +147,13 @@ h6 {
   color: #666;
 }
 
-html.light, body.light {
+html.light,
+body.light {
   background: #f8fafc !important;
 }
 
-html.dark, body.dark {
+html.dark,
+body.dark {
   background: #1d2127 !important;
 }
 
@@ -144,19 +162,22 @@ html.dark, body.dark {
   min-height: 100dvh; /* Use dynamic viewport height for mobile browsers */
   overflow-x: hidden;
   position: relative;
-  transition: background 0.4s, box-shadow 0.3s, border 0.3s;
+  transition:
+    background 0.4s,
+    box-shadow 0.3s,
+    border 0.3s;
 }
 
 .page-container.light {
   background: linear-gradient(135deg, #f8fafc 0%, #e8eaf6 100%);
   color-scheme: light;
-  box-shadow: 0 4px 24px 0 rgba(60,60,120,0.07);
+  box-shadow: 0 4px 24px 0 rgba(60, 60, 120, 0.07);
 }
 
 .page-container.dark {
   background: #1d2127;
   color-scheme: dark;
-  box-shadow: 0 4px 32px 0 rgba(0,0,0,0.25);
+  box-shadow: 0 4px 32px 0 rgba(0, 0, 0, 0.25);
 }
 
 .particle-background {
@@ -184,6 +205,70 @@ html.dark, body.dark {
   position: relative;
 }
 
+/* Service detail hero polish */
+.service-hero-gradient {
+  background:
+    radial-gradient(circle at 86% 22%, rgba(69, 115, 223, 0.14), transparent 28%),
+    linear-gradient(135deg, #ffffff 0%, #f8fafc 54%, #e8eaf6 100%) !important;
+  border: 1px solid rgba(69, 115, 223, 0.16) !important;
+  border-radius: 28px !important;
+  box-shadow: 0 22px 60px rgba(69, 115, 223, 0.12) !important;
+  min-height: auto !important;
+  padding: clamp(3rem, 6vw, 5.5rem) clamp(1.2rem, 4vw, 4rem) !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.service-hero-gradient h1,
+.service-hero-gradient h1 span {
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  -webkit-text-fill-color: #1d2127 !important;
+  color: #1d2127 !important;
+  text-shadow: none !important;
+  letter-spacing: 0 !important;
+  line-height: 1.08 !important;
+}
+
+.service-hero-gradient p {
+  color: #475569 !important;
+  font-weight: 600 !important;
+  max-width: 660px !important;
+}
+
+.service-hero-gradient > div:first-child {
+  display: none !important;
+}
+
+[data-theme='dark'] .service-hero-gradient {
+  background:
+    radial-gradient(circle at 86% 22%, rgba(123, 160, 255, 0.16), transparent 28%),
+    linear-gradient(135deg, #1d2127 0%, #242936 55%, #1d2127 100%) !important;
+  border-color: rgba(123, 160, 255, 0.22) !important;
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.28) !important;
+}
+
+[data-theme='dark'] .service-hero-gradient h1,
+[data-theme='dark'] .service-hero-gradient h1 span {
+  -webkit-text-fill-color: #f8fafc !important;
+  color: #f8fafc !important;
+}
+
+[data-theme='dark'] .service-hero-gradient p {
+  color: #d9e3f7 !important;
+}
+
+@media (max-width: 700px) {
+  .service-hero-gradient {
+    border-radius: 22px !important;
+    padding: 2.5rem 1rem !important;
+  }
+
+  .service-hero-gradient h1 {
+    font-size: clamp(2rem, 11vw, 3rem) !important;
+  }
+}
+
 /* Mobile-specific viewport fixes */
 @media (max-width: 768px) {
   body {
@@ -191,7 +276,7 @@ html.dark, body.dark {
     position: relative;
     overflow-x: hidden;
   }
-  
+
   .page-container {
     /* Use viewport units that work better on mobile */
     min-height: 100vh;
@@ -200,7 +285,7 @@ html.dark, body.dark {
     padding-bottom: 0;
     margin-bottom: 0;
   }
-  
+
   .main-content {
     /* Ensure content fills the available space properly */
     min-height: 100vh;

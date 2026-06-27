@@ -1,33 +1,50 @@
-"use client";
+'use client';
 import React from 'react';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { useTheme } from '../../context/ThemeContext';
+import { FaAws, FaPalette } from 'react-icons/fa';
 // Service icons — Heroicons v2 (geometric, purpose-matched, MIT)
 import {
-  HiSparkles,
+  HiArrowRight,
+  HiBolt,
+  HiChartBarSquare,
+  HiCloud,
   HiComputerDesktop,
   HiDevicePhoneMobile,
   HiPaintBrush,
-  HiCloud,
-  HiChartBarSquare,
-  HiBolt,
   HiShieldCheck,
-  HiArrowRight,
+  HiSparkles,
 } from 'react-icons/hi2';
 // Tech brand logos — Simple Icons (real brand marks, same source as TechStack)
 import {
-  SiOpenai, SiPython, SiTensorflow, SiPytorch,
-  SiNextdotjs, SiReact, SiTypescript, SiNodedotjs,
-  SiFlutter, SiFirebase,
-  SiFigma, SiFramer,
-  SiDocker, SiKubernetes, SiTerraform,
-  SiApachespark, SiLooker,
-  SiZapier, SiGit, SiGithub,
+  SiApachespark,
+  SiDocker,
+  SiFigma,
+  SiFirebase,
+  SiFlutter,
+  SiFramer,
+  SiGit,
+  SiGithub,
+  SiKubernetes,
+  SiLooker,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiOpenai,
+  SiPython,
+  SiPytorch,
+  SiReact,
+  SiTensorflow,
+  SiTerraform,
+  SiTypescript,
+  SiZapier,
 } from 'react-icons/si';
-import { FaAws, FaPalette } from 'react-icons/fa';
-import commonStyles from './ServicesFrameCommon.module.css';
+
+import Link from 'next/link';
+
+import { motion } from 'framer-motion';
+
+import { useTheme } from '../../context/ThemeContext';
+import { type ServiceIllusType, ServiceIllustration } from '../IconSystem/ServiceIllustrations';
 import lightStyles from './ServicesFrame.module.css';
+import commonStyles from './ServicesFrameCommon.module.css';
 import darkStyles from './ServicesFrameDark.module.css';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -58,6 +75,8 @@ interface ServiceItem {
   description?: string;
   href: string;
   techs: TechItem[];
+  /** Illustration type for inline SVG (replaces PNG) */
+  illusType: ServiceIllusType;
 }
 
 // ─── Services data ────────────────────────────────────────────────────────────
@@ -69,6 +88,7 @@ const SERVICES: ServiceItem[] = [
     id: 'ai',
     gridClass: commonStyles.posAI,
     featured: true,
+    illusType: 'ai' as ServiceIllusType,
     icon: HiSparkles,
     title: 'AI-Powered Development',
     tagline: 'Ship intelligent features in weeks, not quarters.',
@@ -76,75 +96,80 @@ const SERVICES: ServiceItem[] = [
       'We build LLM-powered products, RAG pipelines, and autonomous AI agents — integrated directly into your stack so your users experience real AI in production, not just a chatbot wrapper.',
     href: '/services/ai-machine-learning',
     techs: [
-      { Icon: SiOpenai,     name: 'OpenAI',     color: '#4A90E2' },
-      { Icon: SiPython,     name: 'Python',     color: '#3776AB' },
+      { Icon: SiOpenai, name: 'OpenAI', color: '#4A90E2' },
+      { Icon: SiPython, name: 'Python', color: '#3776AB' },
       { Icon: SiTensorflow, name: 'TensorFlow', color: '#FF6F00' },
-      { Icon: SiPytorch,    name: 'PyTorch',    color: '#EE4C2C' },
+      { Icon: SiPytorch, name: 'PyTorch', color: '#EE4C2C' },
     ],
   },
   {
     id: 'web',
     gridClass: commonStyles.posSaaS,
+    illusType: 'web' as ServiceIllusType,
     icon: HiComputerDesktop,
     title: 'SaaS & Web Platforms',
     tagline: 'Full-stack products built to scale from day one.',
     href: '/services',
     techs: [
-      { Icon: SiNextdotjs, name: 'Next.js',    color: '#000000', darkColor: '#e2e8f0' },
-      { Icon: SiReact,     name: 'React',      color: '#61DAFB' },
-      { Icon: SiTypescript,name: 'TypeScript', color: '#3178C6' },
+      { Icon: SiNextdotjs, name: 'Next.js', color: '#000000', darkColor: '#e2e8f0' },
+      { Icon: SiReact, name: 'React', color: '#61DAFB' },
+      { Icon: SiTypescript, name: 'TypeScript', color: '#3178C6' },
     ],
   },
   {
     id: 'mobile',
     gridClass: commonStyles.posMobile,
+    illusType: 'mobile' as ServiceIllusType,
     icon: HiDevicePhoneMobile,
     title: 'Mobile App Solutions',
     tagline: 'Cross-platform apps with native feel and speed.',
     href: '/services',
     techs: [
-      { Icon: SiReact,   name: 'React Native', color: '#61DAFB' },
-      { Icon: SiFlutter, name: 'Flutter',      color: '#02569B' },
-      { Icon: SiFirebase,name: 'Firebase',     color: '#FFCA28' },
+      { Icon: SiReact, name: 'React Native', color: '#61DAFB' },
+      { Icon: SiFlutter, name: 'Flutter', color: '#02569B' },
+      { Icon: SiFirebase, name: 'Firebase', color: '#FFCA28' },
     ],
   },
   {
     id: 'uiux',
     gridClass: commonStyles.posUIUX,
+    illusType: 'uiux' as ServiceIllusType,
     icon: HiPaintBrush,
     title: 'UI/UX Product Design',
     tagline: 'Interfaces users understand and actually enjoy.',
     href: '/services',
     techs: [
-      { Icon: SiFigma,  name: 'Figma',  color: '#F24E1E' },
-      { Icon: FaPalette,  name: 'Adobe',  color: '#FF0000' },
+      { Icon: SiFigma, name: 'Figma', color: '#F24E1E' },
+      { Icon: FaPalette, name: 'Adobe', color: '#FF0000' },
       { Icon: SiFramer, name: 'Framer', color: '#0055FF' },
     ],
   },
   {
     id: 'cloud',
     gridClass: commonStyles.posCloud,
+    illusType: 'cloud' as ServiceIllusType,
     icon: HiCloud,
     title: 'Cloud & DevOps',
     tagline: 'Infrastructure that ships fast and stays up.',
     href: '/services',
     techs: [
-      { Icon: FaAws,     name: 'AWS',        color: '#FF9900' },
-      { Icon: SiDocker,     name: 'Docker',     color: '#2496ED' },
+      { Icon: FaAws, name: 'AWS', color: '#FF9900' },
+      { Icon: SiDocker, name: 'Docker', color: '#2496ED' },
       { Icon: SiKubernetes, name: 'Kubernetes', color: '#326CE5' },
     ],
   },
   {
     id: 'data',
     gridClass: commonStyles.posData,
+    illusType: 'data' as ServiceIllusType,
     icon: HiChartBarSquare,
     title: 'Data Analytics & BI',
     tagline: 'Turn raw data into decisions that compound.',
     href: '/services',
     techs: [
-      { Icon: SiPython,      name: 'Python',  color: '#3776AB' },
-      { Icon: SiApachespark, name: 'Spark',   color: '#E25A1C' },
-      { Icon: SiLooker,     name: 'Tableau', color: '#E97627' },
+      { Icon: SiPython, name: 'Python', color: '#3776AB' },
+      { Icon: SiApachespark, name: 'Spark', color: '#E25A1C' },
+      { Icon: SiLooker, name: 'Tableau', color: '#E97627' },
     ],
   },
   {
@@ -152,6 +177,7 @@ const SERVICES: ServiceItem[] = [
     gridClass: commonStyles.posAuto,
     isWide: true,
     iconAccent: '#ff9800',
+    illusType: 'automation' as ServiceIllusType,
     icon: HiBolt,
     title: 'Automation & Integration',
     tagline: 'Connect everything. Eliminate the manual.',
@@ -159,23 +185,24 @@ const SERVICES: ServiceItem[] = [
       'We wire your entire SaaS stack — CRMs, databases, communication tools, internal workflows — so your team focuses on high-leverage work rather than repetitive tasks that machines should own.',
     href: '/services',
     techs: [
-      { Icon: SiZapier,   name: 'Zapier',  color: '#FF4A00' },
-      { Icon: SiNodedotjs,name: 'Node.js', color: '#339933' },
-      { Icon: SiPython,   name: 'Python',  color: '#3776AB' },
-      { Icon: SiGithub,   name: 'GitHub',  color: '#181717', darkColor: '#e2e8f0' },
+      { Icon: SiZapier, name: 'Zapier', color: '#FF4A00' },
+      { Icon: SiNodedotjs, name: 'Node.js', color: '#339933' },
+      { Icon: SiPython, name: 'Python', color: '#3776AB' },
+      { Icon: SiGithub, name: 'GitHub', color: '#181717', darkColor: '#e2e8f0' },
     ],
   },
   {
     id: 'consulting',
     gridClass: commonStyles.posConsult,
+    illusType: 'consulting' as ServiceIllusType,
     icon: HiShieldCheck,
     title: 'IT Consulting',
     tagline: 'Strategy that aligns your tech with business growth.',
     href: '/services',
     techs: [
-      { Icon: SiGit,      name: 'Git',       color: '#F05032' },
-      { Icon: SiGithub,   name: 'GitHub',    color: '#181717', darkColor: '#e2e8f0' },
-      { Icon: SiTerraform,name: 'Terraform', color: '#7B42BC' },
+      { Icon: SiGit, name: 'Git', color: '#F05032' },
+      { Icon: SiGithub, name: 'GitHub', color: '#181717', darkColor: '#e2e8f0' },
+      { Icon: SiTerraform, name: 'Terraform', color: '#7B42BC' },
     ],
   },
 ];
@@ -211,7 +238,7 @@ const TechRow = ({ techs, isFeatured, theme }: TechRowProps) => (
   <div className={commonStyles.techRow}>
     {techs.map(({ Icon, name, color, darkColor }) => {
       // Use real brand color; fall back to darkColor in dark mode for black/near-black logos
-      const resolvedColor = (theme === 'dark' && darkColor) ? darkColor : color;
+      const resolvedColor = theme === 'dark' && darkColor ? darkColor : color;
       // Tinted pill background: brand color at ~10% opacity (hex + '1a')
       // For featured cards (gradient bg): white glass pill regardless of brand color
       const pillStyle = isFeatured
@@ -241,7 +268,7 @@ const ServicesFrame = () => {
 
   return (
     <section
-      className={`${commonStyles.section} ${t.section}`}
+      className={`${commonStyles.section} ${t.section} bg-dots`}
       aria-labelledby="services-heading"
     >
       {/* Section header */}
@@ -253,20 +280,45 @@ const ServicesFrame = () => {
         viewport={{ once: true }}
       >
         <span className={`${commonStyles.eyebrow} ${t.eyebrow}`}>Services</span>
-        <h2
-          id="services-heading"
-          className={`${commonStyles.sectionTitle} ${t.sectionTitle}`}
+
+        {/* Connector dots flanking the eyebrow label */}
+        <div
+          aria-hidden="true"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 8,
+            margin: '6px 0 0',
+          }}
         >
+          <div className="connector-dot connector-dot-sm" />
+          <div className="connector-h" style={{ width: 40 }} />
+          <div className="connector-dot connector-dot-accent connector-dot-sm" />
+          <div className="connector-h" style={{ width: 40 }} />
+          <div className="connector-dot connector-dot-sm" />
+        </div>
+
+        <h2 id="services-heading" className={`${commonStyles.sectionTitle} ${t.sectionTitle}`}>
           Everything you need to{' '}
           <span className={`${commonStyles.titleAccent} ${t.titleAccent}`}>
             build, scale &amp; grow.
           </span>
         </h2>
         <p className={`${commonStyles.sectionSub} ${t.sectionSub}`}>
-          End-to-end software solutions — from AI-powered products to cloud
-          infrastructure — delivered by a team obsessed with craft and outcomes.
+          End-to-end software solutions — from AI-powered products to cloud infrastructure —
+          delivered by a team obsessed with craft and outcomes.
         </p>
       </motion.header>
+
+      {/* Divider node between header and grid */}
+      <div
+        className="divider-node"
+        aria-hidden="true"
+        style={{ maxWidth: 320, margin: '0 auto 8px' }}
+      >
+        <div className="divider-node-dot" />
+      </div>
 
       {/* Bento grid */}
       <motion.div
@@ -283,23 +335,20 @@ const ServicesFrame = () => {
           const hasDescription = Boolean(service.description);
 
           // Card theme class
-          const cardTheme = isFeatured
-            ? t.primaryCard
-            : isWide
-              ? t.secondaryCard
-              : t.standardCard;
+          const cardTheme = isFeatured ? t.primaryCard : isWide ? t.secondaryCard : t.standardCard;
 
           // Icon wrapper class + inline style
           const iconWrapCls = isFeatured
             ? commonStyles.iconWrapFeatured
             : `${commonStyles.iconWrapStd} ${t.iconWrapStd}`;
 
-          const iconWrapStyle = !isFeatured && service.iconAccent
-            ? { background: `${service.iconAccent}18`, color: service.iconAccent }
-            : undefined;
+          const iconWrapStyle =
+            !isFeatured && service.iconAccent
+              ? { background: `${service.iconAccent}18`, color: service.iconAccent }
+              : undefined;
 
           // Card inner: larger padding for featured/wide
-          const innerCls = `${commonStyles.cardInner} ${(isFeatured || isWide) ? commonStyles.cardInnerLarge : ''}`;
+          const innerCls = `${commonStyles.cardInner} ${isFeatured || isWide ? commonStyles.cardInnerLarge : ''}`;
 
           return (
             <motion.article
@@ -315,16 +364,10 @@ const ServicesFrame = () => {
               >
                 {/* Icon row */}
                 <div className={commonStyles.iconRow}>
-                  <span
-                    className={iconWrapCls}
-                    style={iconWrapStyle}
-                    aria-hidden="true"
-                  >
+                  <span className={iconWrapCls} style={iconWrapStyle} aria-hidden="true">
                     <service.icon size={isFeatured ? 22 : isWide ? 21 : 19} />
                   </span>
-                  {isFeatured && (
-                    <span className={commonStyles.featuredBadge}>Core Service</span>
-                  )}
+                  {isFeatured && <span className={commonStyles.featuredBadge}>Core Service</span>}
                 </div>
 
                 {/* Title block */}
@@ -371,9 +414,7 @@ const ServicesFrame = () => {
                 {(isFeatured || isWide) && (
                   <span
                     className={
-                      isFeatured
-                        ? commonStyles.featuredCta
-                        : `${commonStyles.wideCta} ${t.wideCta}`
+                      isFeatured ? commonStyles.featuredCta : `${commonStyles.wideCta} ${t.wideCta}`
                     }
                   >
                     Explore service <HiArrowRight size={13} aria-hidden="true" />
@@ -382,13 +423,22 @@ const ServicesFrame = () => {
 
                 {/* Hover arrow — standard cards only */}
                 {!isFeatured && !isWide && (
-                  <span
-                    className={`${commonStyles.hoverArrow} ${t.hoverArrow}`}
-                    aria-hidden="true"
-                  >
+                  <span className={`${commonStyles.hoverArrow} ${t.hoverArrow}`} aria-hidden="true">
                     <HiArrowRight size={14} />
                   </span>
                 )}
+
+                {/* Service illustration — inline SVG, reveals on hover from bottom-right */}
+                <span
+                  className={`${commonStyles.cardIllus}${isFeatured ? ` ${commonStyles.cardIllusFeatured}` : isWide ? ` ${commonStyles.cardIllusWide}` : ''}`}
+                  aria-hidden="true"
+                >
+                  <ServiceIllustration
+                    type={service.illusType}
+                    size={isFeatured ? 154 : isWide ? 116 : 92}
+                    isDark={theme === 'dark'}
+                  />
+                </span>
               </Link>
             </motion.article>
           );
