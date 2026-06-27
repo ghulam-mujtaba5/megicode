@@ -14,9 +14,9 @@
   --bg-color: #1d2127;
   --text-color: #ffffff;
   --card-bg: #1d2127;
-  --input-bg: rgba(28, 34, 47, 0.85);
-  --input-border: rgba(123, 160, 255, 0.12);
-  --border-color: rgba(123, 160, 255, 0.1);
+  --input-bg: rgba(29, 33, 39, 0.85);
+  --input-border: rgba(69, 115, 223, 0.12);
+  --border-color: rgba(69, 115, 223, 0.1);
   --primary: #4573df;
   --primary-light: #7ba0ff;
   --primary-dark: #2d4fa2;
@@ -30,8 +30,8 @@
   --text-color: #23272f;
   --card-bg: #ffffff;
   --input-bg: rgba(255, 255, 255, 0.95);
-  --input-border: rgba(69, 115, 223, 0.1);
-  --border-color: rgba(69, 115, 223, 0.1);
+  --input-border: rgba(69, 115, 223, 0.12);
+  --border-color: rgba(69, 115, 223, 0.12);
   --primary: #4573df;
   --primary-light: #7ba0ff;
   --primary-dark: #2d4fa2;
@@ -154,11 +154,11 @@
 }
 
 .container[data-theme='dark'] .heroSection {
-  background: rgba(69, 115, 223, 0.03);
+  background: rgba(69, 115, 223, 0.04);
 }
 
 .container[data-theme='light'] .heroSection {
-  background: rgba(69, 115, 223, 0.02);
+  background: rgba(69, 115, 223, 0.03);
 }
 
 .heroTitle {
@@ -349,9 +349,8 @@
 .sectionDivider {
   width: 100%;
   height: 2px;
-  background: #222a35;
+  background: rgba(69, 115, 223, 0.15);
   border-radius: 2px;
-  opacity: 0.15;
   margin: 2.5rem 0 2rem 0;
 }
 
@@ -416,32 +415,32 @@
 }
 
 .container[data-theme='dark'] .card {
-  background: rgba(28, 34, 47, 0.95);
+  background: #1d2127;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(123, 160, 255, 0.1);
+  border: 1px solid rgba(69, 115, 223, 0.1);
   box-shadow: 0 8px 24px rgba(17, 17, 17, 0.2);
 }
 
 .container[data-theme='dark'] .card:hover {
-  border-color: rgba(123, 160, 255, 0.18);
+  border-color: rgba(69, 115, 223, 0.2);
   box-shadow:
     0 8px 24px rgba(17, 17, 17, 0.3),
-    0 0 0 1px rgba(123, 160, 255, 0.08);
+    0 0 0 1px rgba(69, 115, 223, 0.08);
 }
 
 .container[data-theme='light'] .card {
-  background: rgba(255, 255, 255, 0.92);
+  background: #ffffff;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(69, 115, 223, 0.1);
+  border: 1px solid rgba(69, 115, 223, 0.15);
   box-shadow:
     0 4px 6px rgba(0, 0, 0, 0.05),
     0 10px 20px rgba(0, 0, 0, 0.04);
 }
 
 .container[data-theme='light'] .card:hover {
-  border-color: rgba(69, 115, 223, 0.2);
+  border-color: rgba(69, 115, 223, 0.25);
   box-shadow:
     0 8px 25px rgba(69, 115, 223, 0.08),
     0 4px 12px rgba(0, 0, 0, 0.06);
@@ -493,6 +492,7 @@
   justify-content: center;
   margin-right: 1rem;
   font-size: 1.5rem;
+  box-shadow: 0 4px 12px rgba(69, 115, 223, 0.2);
 }
 
 .formTitle {
@@ -687,12 +687,14 @@
   box-shadow:
     0 0 0 3px rgba(69, 115, 223, 0.2),
     0 4px 12px rgba(69, 115, 223, 0.15);
+  border-color: #4573df;
 }
 
 .container[data-theme='light'] .input:focus {
   box-shadow:
     0 0 0 3px rgba(69, 115, 223, 0.1),
     0 4px 12px rgba(69, 115, 223, 0.1);
+  border-color: #4573df;
 }
 
 .input::placeholder {
@@ -886,6 +888,7 @@
   color: #fff;
   border-radius: 10px;
   padding: 0.4rem;
+  box-shadow: 0 4px 12px rgba(69, 115, 223, 0.2);
 }
 
 .contactDetails {
@@ -1157,6 +1160,7 @@
   color: #fff;
   border-radius: 10px;
   flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(69, 115, 223, 0.2);
 }
 
 .faqQuestionText {
