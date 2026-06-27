@@ -1,6 +1,7 @@
-"use client";
-import React, { useRef, useEffect, useState, CSSProperties } from "react";
-import Lottie, { LottieRefCurrentProps } from "lottie-react";
+'use client';
+import React, { CSSProperties, useEffect, useRef, useState } from 'react';
+
+import Lottie, { LottieRefCurrentProps } from 'lottie-react';
 
 interface LottiePlayerProps {
   /** Path relative to /public, e.g. "/lottie/contact-email.json" */
@@ -16,12 +17,23 @@ interface LottiePlayerProps {
   speed?: number;
 }
 
-/**
- * SSR-safe Lottie animation player that:
- * - Lazy-loads animation JSON on the client only
- * - Pauses when scrolled out of view (IntersectionObserver)
- * - Falls back gracefully on network / parse errors
- */
+/** Catches any synchronous errors lottie-web throws during setup/layout effects. */
+class LottieErrorBoundary extends React.Component<
+  { children: React.ReactNode },
+  { crashed: boolean }
+> {
+  constructor(props: { children: React.ReactNode }) {
+    super(props);
+    this.state = { crashed: false };
+  }
+  static getDerivedStateFromError() {
+    return { crashed: true };
+  }
+  render() {
+    return this.state.crashed ? null : this.props.children;
+  }
+}
+
 const LottiePlayer: React.FC<LottiePlayerProps> = ({
   src,
   loop = true,
@@ -40,20 +52,26 @@ const LottiePlayer: React.FC<LottiePlayerProps> = ({
   // Fetch animation JSON client-side
   useEffect(() => {
     let cancelled = false;
-    setAnimationData(null);
-    setError(false);
     fetch(src)
       .then((res) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();
       })
       .then((data) => {
-        if (!cancelled) setAnimationData(data);
+        if (!cancelled) {
+          setError(false);
+          setAnimationData(data);
+        }
       })
       .catch(() => {
-        if (!cancelled) setError(true);
+        if (!cancelled) {
+          setAnimationData(null);
+          setError(true);
+        }
       });
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+    };
   }, [src]);
 
   // Adjust playback speed
@@ -81,30 +99,27 @@ const LottiePlayer: React.FC<LottiePlayerProps> = ({
     return () => observer.disconnect();
   }, [pauseWhenHidden, animationData]);
 
-  if (error || (!animationData && typeof window !== "undefined")) {
-    // Render nothing on error – the surrounding layout still shows
-    return null;
-  }
-
-  if (!animationData) return null;
+  if (error || !animationData) return null;
 
   return (
-    <div
-      ref={containerRef}
-      className={className}
-      style={style}
-      aria-hidden={ariaLabel ? undefined : "true"}
-      aria-label={ariaLabel}
-      role={ariaLabel ? "img" : undefined}
-    >
-      <Lottie
-        lottieRef={lottieRef}
-        animationData={animationData}
-        loop={loop}
-        autoplay={autoplay}
-        style={{ width: "100%", height: "100%" }}
-      />
-    </div>
+    <LottieErrorBoundary>
+      <div
+        ref={containerRef}
+        className={className}
+        style={style}
+        aria-hidden={ariaLabel ? undefined : 'true'}
+        aria-label={ariaLabel}
+        role={ariaLabel ? 'img' : undefined}
+      >
+        <Lottie
+          lottieRef={lottieRef}
+          animationData={animationData}
+          loop={loop}
+          autoplay={autoplay}
+          style={{ width: '100%', height: '100%' }}
+        />
+      </div>
+    </LottieErrorBoundary>
   );
 };
 
