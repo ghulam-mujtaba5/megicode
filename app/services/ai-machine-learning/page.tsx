@@ -16,7 +16,6 @@ import {
 import { RiPriceTag3Fill, RiTeamFill, RiTimeFill } from 'react-icons/ri';
 import {
   SiGooglecloud,
-  SiMicrosoftazure,
   SiOpenai,
   SiPython,
   SiPytorch,
@@ -446,8 +445,8 @@ export default function AIMachineLearningDetailPage() {
                 case 'azureai':
                 case 'azure ai':
                 case 'microsoft azure':
-                  Icon = SiMicrosoftazure;
-                  color = '#0089D6';
+                  Icon = null;
+                  color = undefined;
                   break;
                 default:
                   Icon = null;

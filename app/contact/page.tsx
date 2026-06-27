@@ -194,6 +194,7 @@ export default function ContactPage() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [submitError, setSubmitError] = useState('');
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [, setTouched] = useState<{ [key: string]: boolean }>({});
 
   const validateField = (name: string, value: string) => {
     switch (name) {

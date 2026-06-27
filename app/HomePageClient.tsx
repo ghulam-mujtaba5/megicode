@@ -100,7 +100,7 @@ export default function HomePageClient() {
             aria-labelledby="contact-heading"
             className="content-section"
           >
-            <ContactSection email={contactEmail} showCertificationBadge={false} />
+            <ContactSection email={contactEmail} />
           </section>
           {/* Footer */}
           <Footer
