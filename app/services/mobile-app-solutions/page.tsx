@@ -238,7 +238,7 @@ export default function MobileAppSolutionsPage() {
               <div className={commonStyles.heroImageCard} data-animate="float">
                 {/* Rocket Lottie - launching your mobile app to market */}
                 <LottiePlayer
-                  src="/lottie/04_mobile_app_development.json"
+                  src="/lottie/mobile-app.json"
                   loop
                   style={{ width: '100%', height: '100%', minWidth: '180px', minHeight: '180px' }}
                   ariaLabel="Animated mobile device illustration for mobile app development"

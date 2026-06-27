@@ -253,7 +253,7 @@ export default function UIUXProductDesignDetailPage() {
               <div className={commonStyles.heroImageCard} data-animate="float">
                 {/* AI Brain Lottie - design intelligence, creative thinking, smart UX */}
                 <LottiePlayer
-                  src="/lottie/14_uiux_web_design.json"
+                  src="/lottie/design-ux.json"
                   loop
                   style={{ width: '100%', height: '100%', minWidth: '180px', minHeight: '180px' }}
                   ariaLabel="Animated design illustration for UI UX product design services"

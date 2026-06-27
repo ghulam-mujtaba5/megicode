@@ -14,14 +14,14 @@ export type ServiceIllusType =
   | 'consulting';
 
 const LOTTIE_MAP: Record<ServiceIllusType, string> = {
-  ai: '/lottie/01_ai_saas_dashboard.json',
-  web: '/lottie/03_software_development_code.json',
-  mobile: '/lottie/04_mobile_app_development.json',
-  uiux: '/lottie/14_uiux_web_design.json',
-  cloud: '/lottie/05_cloud_infrastructure.json',
-  data: '/lottie/07_data_analytics_growth.json',
-  automation: '/lottie/02_ai_automation_agent.json',
-  consulting: '/lottie/06_cybersecurity_trust.json',
+  ai: '/lottie/ai-brain.json',
+  web: '/lottie/web-coding.json',
+  mobile: '/lottie/mobile-app.json',
+  uiux: '/lottie/design-ux.json',
+  cloud: '/lottie/cloud-devops.json',
+  data: '/lottie/analytics-data.json',
+  automation: '/lottie/automation-gears.json',
+  consulting: '/lottie/security-it.json',
 };
 
 interface ServiceIllusProps {

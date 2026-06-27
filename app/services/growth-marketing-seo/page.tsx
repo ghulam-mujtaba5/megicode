@@ -233,7 +233,7 @@ export default function GrowthMarketingSeoPage() {
               <div className={commonStyles.heroImageCard} data-animate="float">
                 {/* Growth SEO Lottie - upward growth chart for marketing & SEO */}
                 <LottiePlayer
-                  src="/lottie/09_api_integration.json"
+                  src="/lottie/growth-seo.json"
                   loop
                   style={{ width: '100%', height: '100%', minWidth: '180px', minHeight: '180px' }}
                   ariaLabel="Animated growth chart illustration for growth marketing and SEO"

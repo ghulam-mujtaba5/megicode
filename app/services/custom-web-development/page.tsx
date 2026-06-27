@@ -228,7 +228,7 @@ export default function WebDevelopmentDetailPage() {
               <div className={commonStyles.heroImageCard} data-animate="float">
                 {/* Web coding Lottie - code editor animation for custom web development */}
                 <LottiePlayer
-                  src="/lottie/03_software_development_code.json"
+                  src="/lottie/web-coding.json"
                   loop
                   style={{ width: '100%', height: '100%', minWidth: '180px', minHeight: '180px' }}
                   ariaLabel="Animated code editor illustration for custom web development"
