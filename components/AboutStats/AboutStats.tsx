@@ -1,35 +1,37 @@
 'use client';
 import React from 'react';
 
+import Image from 'next/image';
+
 import { motion } from 'framer-motion';
 
 import { useTheme } from '../../context/ThemeContext';
 import { fadeInUp, scaleIn, staggerContainer } from '../../utils/animations';
-import LottiePlayer from '../LottiePlayer/LottiePlayer';
 import commonStyles from './AboutStatsCommon.module.css';
 import darkStyles from './AboutStatsDark.module.css';
 import lightStyles from './AboutStatsLight.module.css';
 
 interface StatItemProps {
-  lottieFile: string;
+  iconSrc: string;
   number: string;
   label: string;
 }
 
-const StatItem: React.FC<StatItemProps> = ({ lottieFile, number, label }) => {
+const StatItem: React.FC<StatItemProps> = ({ iconSrc, number, label }) => {
   const { theme } = useTheme();
   const themeStyles = theme === 'dark' ? darkStyles : lightStyles;
 
   return (
     <motion.div className={`${commonStyles.statItem} ${themeStyles.statItem}`} variants={scaleIn}>
       <div className={`${commonStyles.iconWrapper} ${themeStyles.iconWrapper}`}>
-        <LottiePlayer
-          src={lottieFile}
-          loop
-          autoplay
-          pauseWhenHidden
-          speed={0.7}
-          style={{ width: 56, height: 56 }}
+        <Image
+          src={iconSrc}
+          alt={label}
+          width={72}
+          height={72}
+          style={{
+            objectFit: 'contain',
+          }}
         />
       </div>
       <motion.div className={`${commonStyles.number} ${themeStyles.number}`} variants={fadeInUp}>
@@ -46,22 +48,22 @@ const AboutStats = () => {
 
   const stats = [
     {
-      lottieFile: '/lottie/03_software_development_code.json',
+      iconSrc: '/icons/about-stats/software-development.png',
       number: '15+',
       label: 'AI & Software Products Built',
     },
     {
-      lottieFile: '/lottie/07_data_analytics_growth.json',
+      iconSrc: '/icons/about-stats/global-reach.png',
       number: '5+',
       label: 'Countries Served',
     },
     {
-      lottieFile: '/lottie/16_team_collaboration.json',
+      iconSrc: '/icons/about-stats/partnerships.png',
       number: '10+',
       label: 'Startups & Businesses Partnered',
     },
     {
-      lottieFile: '/lottie/02_ai_automation_agent.json',
+      iconSrc: '/icons/about-stats/tools-mastered.png',
       number: '25+',
       label: 'AI & Dev Tools Mastered',
     },
@@ -81,7 +83,7 @@ const AboutStats = () => {
           {stats.map((stat) => (
             <StatItem
               key={stat.label}
-              lottieFile={stat.lottieFile}
+              iconSrc={stat.iconSrc}
               number={stat.number}
               label={stat.label}
             />

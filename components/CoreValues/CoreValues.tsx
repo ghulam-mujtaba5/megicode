@@ -1,11 +1,12 @@
 'use client';
 import React from 'react';
 
+import Image from 'next/image';
+
 import { motion } from 'framer-motion';
 
 import { useTheme } from '../../context/ThemeContext';
 import { fadeInUp, staggerContainer } from '../../utils/animations';
-import LottiePlayer from '../LottiePlayer/LottiePlayer';
 import commonStyles from './CoreValuesCommon.module.css';
 import darkStyles from './CoreValuesDark.module.css';
 import lightStyles from './CoreValuesLight.module.css';
@@ -13,10 +14,10 @@ import lightStyles from './CoreValuesLight.module.css';
 interface ValueCardProps {
   title: string;
   description: string;
-  lottieFile: string;
+  iconSrc: string;
 }
 
-const ValueCard: React.FC<ValueCardProps> = ({ title, description, lottieFile }) => {
+const ValueCard: React.FC<ValueCardProps> = ({ title, description, iconSrc }) => {
   const { theme } = useTheme();
   const themeStyles = theme === 'dark' ? darkStyles : lightStyles;
 
@@ -40,13 +41,14 @@ const ValueCard: React.FC<ValueCardProps> = ({ title, description, lottieFile })
             border: '1px solid rgba(69,115,223,0.15)',
           }}
         >
-          <LottiePlayer
-            src={lottieFile}
-            loop
-            autoplay
-            pauseWhenHidden
-            speed={0.65}
-            style={{ width: 48, height: 48 }}
+          <Image
+            src={iconSrc}
+            alt={title}
+            width={56}
+            height={56}
+            style={{
+              objectFit: 'contain',
+            }}
           />
         </div>
       </div>
@@ -67,34 +69,34 @@ const CoreValues = () => {
       title: 'Innovation',
       description:
         'Pioneering breakthrough solutions with cutting-edge AI and advanced technologies to transform businesses.',
-      lottieFile: '/lottie/10_product_launch_rocket.json',
+      iconSrc: '/icons/core-values/innovation.png',
     },
     {
       title: 'Excellence',
       description:
         'Delivering exceptional quality through robust, scalable, and secure software solutions.',
-      lottieFile: '/lottie/14_uiux_web_design.json',
+      iconSrc: '/icons/core-values/excellence.png',
     },
     {
       title: 'Collaboration',
       description:
         'Building strong partnerships with clients through transparent communication and shared success.',
-      lottieFile: '/lottie/16_team_collaboration.json',
+      iconSrc: '/icons/core-values/collaboration.png',
     },
     {
       title: 'Growth',
       description: 'Continuously evolving and adapting to drive measurable business outcomes.',
-      lottieFile: '/lottie/07_data_analytics_growth.json',
+      iconSrc: '/icons/core-values/growth.png',
     },
     {
       title: 'Client Focus',
       description: 'Understanding and exceeding client expectations with tailored solutions.',
-      lottieFile: '/lottie/12_customer_support_agent.json',
+      iconSrc: '/icons/core-values/client-focus.png',
     },
     {
       title: 'Integrity',
       description: 'Operating with unwavering commitment to ethical practices and transparency.',
-      lottieFile: '/lottie/06_cybersecurity_trust.json',
+      iconSrc: '/icons/core-values/integrity.png',
     },
   ];
 
@@ -115,7 +117,7 @@ const CoreValues = () => {
               key={value.title}
               title={value.title}
               description={value.description}
-              lottieFile={value.lottieFile}
+              iconSrc={value.iconSrc}
             />
           ))}
         </motion.div>
