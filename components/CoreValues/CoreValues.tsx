@@ -44,8 +44,8 @@ const ValueCard: React.FC<ValueCardProps> = ({ title, description, iconSrc }) =>
           <Image
             src={iconSrc}
             alt={title}
-            width={80}
-            height={80}
+            width={100}
+            height={100}
             style={{
               objectFit: 'contain',
             }}
