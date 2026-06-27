@@ -54,14 +54,14 @@ const config = {
 
     // ── Service sub-pages ──
     const serviceSlugs = [
-      'ai-machine-learning',
-      'data-analytics-bi',
+      'ai-saas-mvp-development',
+      'data-analytics',
       'custom-web-development',
-      'mobile-app-solutions',
-      'cloud-devops-services',
-      'automation-integration',
-      'ui-ux-product-design',
-      'it-consulting-support',
+      'mobile-app-development',
+      'cloud-devops',
+      'ai-automation-agents',
+      'ui-ux-design',
+      'technical-consulting',
       'growth-marketing-seo',
     ];
 

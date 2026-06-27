@@ -113,21 +113,17 @@ const nextConfig = {
   async redirects() {
     return [
       // Common www subdomain mistypes & old URL patterns
-      {
-        source: '/home',
-        destination: '/',
-        permanent: true,
-      },
-      {
-        source: '/index',
-        destination: '/',
-        permanent: true,
-      },
-      {
-        source: '/index.html',
-        destination: '/',
-        permanent: true,
-      },
+      { source: '/home', destination: '/', permanent: true },
+      { source: '/index', destination: '/', permanent: true },
+      { source: '/index.html', destination: '/', permanent: true },
+      // Service slug renames — 301 redirects preserve SEO equity
+      { source: '/services/automation-integration', destination: '/services/ai-automation-agents', permanent: true },
+      { source: '/services/ai-machine-learning', destination: '/services/ai-saas-mvp-development', permanent: true },
+      { source: '/services/mobile-app-solutions', destination: '/services/mobile-app-development', permanent: true },
+      { source: '/services/cloud-devops-services', destination: '/services/cloud-devops', permanent: true },
+      { source: '/services/ui-ux-product-design', destination: '/services/ui-ux-design', permanent: true },
+      { source: '/services/data-analytics-bi', destination: '/services/data-analytics', permanent: true },
+      { source: '/services/it-consulting-support', destination: '/services/technical-consulting', permanent: true },
     ];
   },
 };

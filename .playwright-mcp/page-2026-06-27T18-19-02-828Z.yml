@@ -1,0 +1,101 @@
+- generic [active] [ref=e1]:
+  - link "Skip to main content" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - button "Open Next.js Dev Tools" [ref=e8] [cursor=pointer]:
+    - img [ref=e9]
+  - alert [ref=e12]
+  - generic [ref=e14]:
+    - button "Toggle theme"
+    - navigation "Main Navigation":
+      - navigation [ref=e15]:
+        - generic [ref=e16]:
+          - link "Megicode Logo" [ref=e18] [cursor=pointer]:
+            - /url: /
+            - img "Megicode Logo" [ref=e19]
+          - list [ref=e20]:
+            - listitem [ref=e21]:
+              - link "Home" [ref=e22] [cursor=pointer]:
+                - /url: /
+            - listitem [ref=e23]:
+              - link "About" [ref=e24] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=e25]:
+              - link "Services" [ref=e26] [cursor=pointer]:
+                - /url: /services
+            - listitem [ref=e27]:
+              - link "Project" [ref=e28] [cursor=pointer]:
+                - /url: /projects
+            - listitem [ref=e29]:
+              - link "Article" [ref=e30] [cursor=pointer]:
+                - /url: /article
+            - listitem [ref=e31]:
+              - link "Contact" [ref=e32] [cursor=pointer]:
+                - /url: /contact
+            - listitem [ref=e33]:
+              - link "Reviews" [ref=e34] [cursor=pointer]:
+                - /url: /reviews
+            - listitem [ref=e35]:
+              - button "Switch to dark mode" [ref=e36] [cursor=pointer]:
+                - img [ref=e37]
+    - navigation "Mobile Navigation"
+    - main "Services Main Content" [ref=e39]:
+      - heading "Our Services" [level=1] [ref=e40]
+      - navigation "Breadcrumb" [ref=e42]:
+        - list [ref=e43]:
+          - listitem [ref=e44]:
+            - link "Home" [ref=e45] [cursor=pointer]:
+              - /url: /
+              - img [ref=e46]
+              - generic [ref=e48]: Home
+          - listitem [ref=e49]:
+            - img [ref=e50]
+          - listitem [ref=e52]:
+            - link "Services":
+              - /url: /services
+      - img "Megicode Logo" [ref=e64]
+      - region "What we're best at" [ref=e65]:
+        - generic [ref=e66]:
+          - generic [ref=e67]: Core Services
+          - heading "What we're best at" [level=2] [ref=e68]
+          - paragraph [ref=e69]: Three focused services that define Megicode's core strength — pick the one that fits your stage.
+        - generic [ref=e70]:
+          - img "Megicode Logo" [ref=e82]
+          - img "Megicode Logo" [ref=e94]
+          - img "Megicode Logo" [ref=e106]
+      - region "Additional Capabilities" [ref=e107]:
+        - generic [ref=e108]:
+          - generic [ref=e109]: Also Available
+          - heading "Additional Capabilities" [level=2] [ref=e110]
+          - paragraph [ref=e111]: Offered as part of comprehensive project delivery — not as standalone services.
+        - generic [ref=e112]:
+          - img "Megicode Logo" [ref=e124]
+          - img "Megicode Logo" [ref=e136]
+          - img "Megicode Logo" [ref=e148]
+          - img "Megicode Logo" [ref=e160]
+          - img "Megicode Logo" [ref=e172]
+          - img "Megicode Logo" [ref=e184]
+        - paragraph [ref=e185]: Need mobile apps, UX design, cloud setup, or SEO support? These are available as part of complete product delivery.
+    - contentinfo "Footer" [ref=e186]:
+      - contentinfo [ref=e187]:
+        - generic [ref=e188]:
+          - img "Copyright Icon" [ref=e190]
+          - paragraph [ref=e191]: Copyright 2026 Megicode. All Rights Reserved.
+          - link "Access Internal Portal" [ref=e192] [cursor=pointer]:
+            - /url: /internal/login
+            - img [ref=e193]
+            - text: Portal
+          - link "LinkedIn" [ref=e196] [cursor=pointer]:
+            - /url: https://www.linkedin.com/company/megicode
+          - link "Instagram" [ref=e197] [cursor=pointer]:
+            - /url: https://www.instagram.com/megicode/
+          - link "GitHub" [ref=e198] [cursor=pointer]:
+            - /url: https://github.com/megicodes
+  - dialog "Cookie consent banner" [ref=e199]:
+    - generic [ref=e200]:
+      - text: This site uses cookies for a better experience.
+      - link "Learn more" [ref=e201] [cursor=pointer]:
+        - /url: /privacy-policy
+      - text: .
+    - generic [ref=e202]:
+      - button "Accept cookies" [ref=e203] [cursor=pointer]: Accept
+      - button "Decline cookies" [ref=e204] [cursor=pointer]: Decline

@@ -85,7 +85,7 @@ const SERVICES: ServiceItem[] = [
     tagline: 'Ship intelligent features in weeks, not quarters.',
     description:
       'We build LLM-powered products, RAG pipelines, and autonomous AI agents — integrated directly into your stack so your users experience real AI in production, not just a chatbot wrapper.',
-    href: '/services/ai-machine-learning',
+    href: '/services/ai-saas-mvp-development',
     techs: [
       { Icon: SiOpenai, name: 'OpenAI', color: '#4A90E2' },
       { Icon: SiPython, name: 'Python', color: '#3776AB' },
@@ -186,7 +186,7 @@ const SERVICES: ServiceItem[] = [
     id: 'consulting',
     gridClass: commonStyles.posConsult,
     illusType: 'consulting' as ServiceIllusType,
-    svgSrc: '/it-consulting-support-icon.svg',
+    svgSrc: '/technical-consulting-icon.svg',
     title: 'IT Consulting',
     tagline: 'Strategy that aligns your tech with business growth.',
     href: '/services',

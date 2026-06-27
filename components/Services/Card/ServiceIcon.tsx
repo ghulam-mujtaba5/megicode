@@ -16,18 +16,18 @@ interface IconMeta {
 }
 
 const SVG_MAP: Record<string, IconMeta> = {
-  'ai-machine-learning': { src: '/Ai%20icon.svg', accent: '#4573df' },
-  'data-analytics-bi': { src: '/Big%20Data%20Analytics.svg', accent: '#8b5cf6' },
+  'ai-saas-mvp-development': { src: '/Ai%20icon.svg', accent: '#4573df' },
+  'data-analytics': { src: '/Big%20Data%20Analytics.svg', accent: '#8b5cf6' },
   'custom-web-development': { src: '/web%20app%20icon.svg', accent: '#2563eb' },
-  'mobile-app-solutions': {
+  'mobile-app-development': {
     src: '/mobile%20app%20icon.svg',
     darkSrc: '/Mobile%20App%20Dark.svg',
     accent: '#06b6d4',
   },
-  'cloud-devops-services': { src: '/devlopment-icon.svg', accent: '#0ea5e9' },
-  'automation-integration': { src: '/ds%26ai-icon.svg', accent: '#f59e0b' },
-  'ui-ux-product-design': { src: '/Ui%26Ux-icon.svg', accent: '#ec4899' },
-  'it-consulting-support': { src: '/it-consulting-support-icon.svg', accent: '#10b981' },
+  'cloud-devops': { src: '/devlopment-icon.svg', accent: '#0ea5e9' },
+  'ai-automation-agents': { src: '/ds%26ai-icon.svg', accent: '#f59e0b' },
+  'ui-ux-design': { src: '/Ui%26Ux-icon.svg', accent: '#ec4899' },
+  'technical-consulting': { src: '/technical-consulting-icon.svg', accent: '#10b981' },
   'growth-marketing-seo': { src: '/data%20visualization%20icon.svg', accent: '#f97316' },
 };
 

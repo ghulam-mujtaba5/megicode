@@ -14,7 +14,7 @@ export type ServicePageCopy = {
 };
 
 const servicePageCopy = {
-  'ui-ux-product-design': {
+  'ui-ux-design': {
     mainSalesPitch:
       'Good design makes users trust faster, understand faster, and take action faster.',
     supportingLine: 'We remove confusion from screens so users feel confident using your product.',
@@ -104,7 +104,7 @@ const servicePageCopy = {
       ],
     },
   },
-  'ai-machine-learning': {
+  'ai-saas-mvp-development': {
     mainSalesPitch:
       'AI should not be added for hype; it should make your product smarter and more useful.',
     supportingLine:
@@ -148,7 +148,7 @@ const servicePageCopy = {
       ],
     },
   },
-  'data-analytics-bi': {
+  'data-analytics': {
     mainSalesPitch: 'Better data turns guessing into confident decisions.',
     supportingLine:
       'We build dashboards, reports, analytics, and decision-support tools that make performance clear.',
@@ -190,7 +190,7 @@ const servicePageCopy = {
       ],
     },
   },
-  'mobile-app-solutions': {
+  'mobile-app-development': {
     mainSalesPitch: 'A mobile app keeps your business closer to customers every day.',
     supportingLine:
       'We build fast, clean mobile experiences that improve access, engagement, and retention.',
@@ -232,7 +232,7 @@ const servicePageCopy = {
       ],
     },
   },
-  'cloud-devops-services': {
+  'cloud-devops': {
     mainSalesPitch:
       'Your product cannot scale if the system behind it is slow, fragile, or hard to update.',
     supportingLine:
@@ -276,7 +276,7 @@ const servicePageCopy = {
       ],
     },
   },
-  'automation-integration': {
+  'ai-automation-agents': {
     mainSalesPitch: 'Repetitive work is not a growth strategy.',
     supportingLine:
       'We automate manual tasks, follow-ups, reports, lead handling, and tool-to-tool workflows.',
@@ -320,7 +320,7 @@ const servicePageCopy = {
       ],
     },
   },
-  'it-consulting-support': {
+  'technical-consulting': {
     mainSalesPitch:
       'You do not need to be technical to build a serious tech product; you need the right technical partner.',
     supportingLine:

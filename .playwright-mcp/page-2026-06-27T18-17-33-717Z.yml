@@ -1,0 +1,194 @@
+- generic [active] [ref=e1]:
+  - link "Skip to main content" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e4]:
+    - button "Toggle theme"
+    - navigation "Main Navigation":
+      - navigation [ref=e5]:
+        - generic [ref=e6]:
+          - link "Megicode Logo" [ref=e8] [cursor=pointer]:
+            - /url: /
+            - img "Megicode Logo" [ref=e9]
+          - list [ref=e10]:
+            - listitem [ref=e11]:
+              - link "Home" [ref=e12] [cursor=pointer]:
+                - /url: /
+            - listitem [ref=e13]:
+              - link "About" [ref=e14] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=e15]:
+              - link "Services" [ref=e16] [cursor=pointer]:
+                - /url: /services
+            - listitem [ref=e17]:
+              - link "Project" [ref=e18] [cursor=pointer]:
+                - /url: /projects
+            - listitem [ref=e19]:
+              - link "Article" [ref=e20] [cursor=pointer]:
+                - /url: /article
+            - listitem [ref=e21]:
+              - link "Contact" [ref=e22] [cursor=pointer]:
+                - /url: /contact
+            - listitem [ref=e23]:
+              - link "Reviews" [ref=e24] [cursor=pointer]:
+                - /url: /reviews
+            - listitem [ref=e25]:
+              - button "Switch to dark mode" [ref=e26] [cursor=pointer]:
+                - img [ref=e27]
+    - navigation "Mobile Navigation"
+    - main "Services Main Content" [ref=e29]:
+      - heading "Our Services" [level=1] [ref=e30]
+      - navigation "Breadcrumb" [ref=e32]:
+        - list [ref=e33]:
+          - listitem [ref=e34]:
+            - link "Home" [ref=e35] [cursor=pointer]:
+              - /url: /
+              - img [ref=e36]
+              - generic [ref=e38]: Home
+          - listitem [ref=e39]:
+            - img [ref=e40]
+          - listitem [ref=e42]:
+            - link "Services":
+              - /url: /services
+      - generic [ref=e45]:
+        - heading "Transformative Solutions for the Digital Age" [level=1] [ref=e46]:
+          - text: Transformative Solutions for the
+          - generic [ref=e47]: Digital Age
+        - paragraph [ref=e48]: Empowering businesses with cutting-edge AI and advanced technologies, crafting innovative solutions that drive exceptional growth and seamless digital transformation.
+      - region "What we're best at" [ref=e49]:
+        - generic [ref=e50]:
+          - text: Core Services
+          - heading "What we're best at" [level=2] [ref=e51]
+          - paragraph [ref=e52]: Three focused services that define Megicode's core strength — pick the one that fits your stage.
+        - generic [ref=e53]:
+          - link "Learn more about AI Automation & Agents" [ref=e56] [cursor=pointer]:
+            - /url: /services/automation-integration
+            - generic [ref=e57]:
+              - heading "AI Automation & Agents" [level=3] [ref=e61]
+              - generic [ref=e62]:
+                - paragraph [ref=e63]: Automate repetitive business work using AI chatbots, WhatsApp flows, CRMs, booking systems, and workflow agents that save time and capture more leads.
+                - separator [ref=e64]
+                - generic [ref=e65]:
+                  - generic [ref=e66]:
+                    - generic [ref=e67]:
+                      - generic [ref=e68]: ✓
+                      - text: AI Chatbots & WhatsApp Flows
+                    - generic [ref=e69]:
+                      - generic [ref=e70]: ✓
+                      - text: CRM & Booking Automation
+                    - generic [ref=e71]:
+                      - generic [ref=e72]: ✓
+                      - text: Workflow Agents
+                  - generic [ref=e73]:
+                    - generic [ref=e74]: Python
+                    - generic [ref=e75]: OpenAI
+                    - generic [ref=e76]: n8n
+                    - generic [ref=e77]: Zapier
+                  - generic [ref=e78]:
+                    - text: Explore service
+                    - generic [ref=e79]: →
+          - link "Learn more about AI SaaS & MVP Development" [ref=e82] [cursor=pointer]:
+            - /url: /services/ai-machine-learning
+            - generic [ref=e83]:
+              - heading "AI SaaS & MVP Development" [level=3] [ref=e87]
+              - generic [ref=e88]:
+                - paragraph [ref=e89]: Turn your AI product idea into a launch-ready MVP with auth, dashboard, database, payments, AI features, admin panel, and deployment.
+                - separator [ref=e90]
+                - generic [ref=e91]:
+                  - generic [ref=e92]:
+                    - generic [ref=e93]:
+                      - generic [ref=e94]: ✓
+                      - text: Auth & User Management
+                    - generic [ref=e95]:
+                      - generic [ref=e96]: ✓
+                      - text: AI Feature Integration
+                    - generic [ref=e97]:
+                      - generic [ref=e98]: ✓
+                      - text: Payment Systems
+                  - generic [ref=e99]:
+                    - generic [ref=e100]: Next.js
+                    - generic [ref=e101]: OpenAI
+                    - generic [ref=e102]: Python
+                    - generic [ref=e103]: PostgreSQL
+                  - generic [ref=e104]:
+                    - text: Explore service
+                    - generic [ref=e105]: →
+          - link "Learn more about Custom Web Apps & Business Platforms" [ref=e108] [cursor=pointer]:
+            - /url: /services/custom-web-development
+            - generic [ref=e109]:
+              - heading "Custom Web Apps & Business Platforms" [level=3] [ref=e113]
+              - generic [ref=e114]:
+                - paragraph [ref=e115]: Build portals, dashboards, booking systems, CRMs, and management platforms tailored to your business operations.
+                - separator [ref=e116]
+                - generic [ref=e117]:
+                  - generic [ref=e118]:
+                    - generic [ref=e119]:
+                      - generic [ref=e120]: ✓
+                      - text: Business Portals & Dashboards
+                    - generic [ref=e121]:
+                      - generic [ref=e122]: ✓
+                      - text: Booking & CRM Systems
+                    - generic [ref=e123]:
+                      - generic [ref=e124]: ✓
+                      - text: Admin Panels & API Integration
+                  - generic [ref=e125]:
+                    - generic [ref=e126]: Next.js
+                    - generic [ref=e127]: React
+                    - generic [ref=e128]: Node.js
+                    - generic [ref=e129]: PostgreSQL
+                  - generic [ref=e130]:
+                    - text: Explore service
+                    - generic [ref=e131]: →
+      - region "Additional Capabilities" [ref=e132]:
+        - generic [ref=e133]:
+          - text: Also Available
+          - heading "Additional Capabilities" [level=2] [ref=e134]
+          - paragraph [ref=e135]: Offered as part of comprehensive project delivery — not standalone services.
+        - generic [ref=e136]:
+          - link "Learn more about Mobile App Development" [ref=e137] [cursor=pointer]:
+            - /url: /services/mobile-app-solutions
+            - heading "Mobile App Development" [level=3] [ref=e141]
+            - paragraph [ref=e142]: Cross-platform iOS & Android apps built with React Native and Flutter, with AI features baked in.
+            - text: Learn more →
+          - link "Learn more about Cloud & DevOps" [ref=e143] [cursor=pointer]:
+            - /url: /services/cloud-devops-services
+            - heading "Cloud & DevOps" [level=3] [ref=e147]
+            - paragraph [ref=e148]: Scalable cloud infrastructure, CI/CD pipelines, and auto-scaling setup for growing products.
+            - text: Learn more →
+          - link "Learn more about UI/UX Design" [ref=e149] [cursor=pointer]:
+            - /url: /services/ui-ux-product-design
+            - heading "UI/UX Design" [level=3] [ref=e153]
+            - paragraph [ref=e154]: Conversion-focused design systems and high-fidelity prototypes for SaaS and AI products.
+            - text: Learn more →
+          - link "Learn more about SEO & Growth Support" [ref=e155] [cursor=pointer]:
+            - /url: /services/growth-marketing-seo
+            - heading "SEO & Growth Support" [level=3] [ref=e159]
+            - paragraph [ref=e160]: Technical SEO, content strategy, and performance marketing for AI products and SaaS startups.
+            - text: Learn more →
+          - link "Learn more about Data Dashboards" [ref=e161] [cursor=pointer]:
+            - /url: /services/data-analytics-bi
+            - heading "Data Dashboards" [level=3] [ref=e165]
+            - paragraph [ref=e166]: Intelligent dashboards, analytics integrations, and AI-powered data pipelines for your product.
+            - text: Learn more →
+          - link "Learn more about Technical Consulting" [ref=e167] [cursor=pointer]:
+            - /url: /services/it-consulting-support
+            - heading "Technical Consulting" [level=3] [ref=e171]
+            - paragraph [ref=e172]: CTO-level tech strategy, architecture decisions, and investor-ready technical due diligence.
+            - text: Learn more →
+        - paragraph [ref=e173]: Need mobile apps, UX design, cloud setup, or SEO support? These are available as part of complete product delivery.
+    - contentinfo "Footer" [ref=e174]:
+      - contentinfo [ref=e175]:
+        - generic [ref=e176]:
+          - img "Copyright Icon" [ref=e178]
+          - paragraph [ref=e179]: Copyright 2026 Megicode. All Rights Reserved.
+          - link "Access Internal Portal" [ref=e180] [cursor=pointer]:
+            - /url: /internal/login
+            - img [ref=e181]
+            - text: Portal
+          - link "LinkedIn" [ref=e184] [cursor=pointer]:
+            - /url: https://www.linkedin.com/company/megicode
+          - link "Instagram" [ref=e185] [cursor=pointer]:
+            - /url: https://www.instagram.com/megicode/
+          - link "GitHub" [ref=e186] [cursor=pointer]:
+            - /url: https://github.com/megicodes
+  - button "Open Next.js Dev Tools" [ref=e192] [cursor=pointer]:
+    - img [ref=e193]
