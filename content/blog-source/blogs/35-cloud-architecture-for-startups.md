@@ -16,12 +16,7 @@ buyer_psychology_angle: 'scale without waste'
 conversion_goal: 'Generate qualified discovery calls for MegiCode services'
 recommended_cta: 'Book a Cloud Architecture Blueprint with MegiCode'
 recommended_internal_links:
-  [
-    '/services/cloud-devops',
-    '/services/seo-growth-marketing',
-    '/services/ui-ux-product-design',
-    '/contact',
-  ]
+  ['/services/cloud-devops', '/services/seo-growth-marketing', '/services/ui-ux-design', '/contact']
 recommended_image: '/images/blog/cloud-architecture-for-startups.png'
 image_alt_text: 'MegiCode blog illustration for Cloud Architecture for Startups'
 editorial_status: 'executive SEO upgrade - ready for editorial review'
@@ -178,7 +173,7 @@ Use these links naturally inside the article body and CTA sections:
 
 - `/services/cloud-devops`
 - `/services/seo-growth-marketing`
-- `/services/ui-ux-product-design`
+- `/services/ui-ux-design`
 - `/contact`
 
 ## FAQ

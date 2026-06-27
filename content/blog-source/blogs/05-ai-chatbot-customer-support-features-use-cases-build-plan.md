@@ -15,7 +15,8 @@ target_audience: 'clinics, agencies, service businesses, and growing startups'
 buyer_psychology_angle: 'speed, reassurance, and support quality'
 conversion_goal: 'Generate qualified discovery calls for MegiCode services'
 recommended_cta: 'Book a Support Automation Plan with MegiCode'
-recommended_internal_links: ['/services/ai-machine-learning', '/services', '/projects', '/contact']
+recommended_internal_links:
+  ['/services/ai-saas-mvp-development', '/services', '/projects', '/contact']
 recommended_image: '/images/blog/ai-chatbot-customer-support-features-use-cases-build-plan.png'
 image_alt_text: 'MegiCode blog illustration for AI Chatbot for Customer Support'
 editorial_status: 'executive SEO upgrade - ready for editorial review'
@@ -170,7 +171,7 @@ That is the difference between hiring a developer and working with a product-foc
 
 Use these links naturally inside the article body and CTA sections:
 
-- `/services/ai-machine-learning`
+- `/services/ai-saas-mvp-development`
 - `/services`
 - `/projects`
 - `/contact`

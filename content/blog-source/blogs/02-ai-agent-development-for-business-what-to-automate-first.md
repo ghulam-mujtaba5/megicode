@@ -16,7 +16,8 @@ target_audience: 'SMEs, founders, operations teams, and service businesses'
 buyer_psychology_angle: 'fear of wasting time on “AI theater” instead of measurable automation'
 conversion_goal: 'Generate qualified discovery calls for MegiCode services'
 recommended_cta: 'Book a AI Workflow Audit with MegiCode'
-recommended_internal_links: ['/services/ai-machine-learning', '/services', '/projects', '/contact']
+recommended_internal_links:
+  ['/services/ai-saas-mvp-development', '/services', '/projects', '/contact']
 recommended_image: '/images/blog/ai-agent-development-for-business-what-to-automate-first.png'
 image_alt_text: 'MegiCode blog illustration for AI Agent Development for Business: What to Automate First'
 editorial_status: 'executive SEO upgrade - ready for editorial review'
@@ -171,7 +172,7 @@ That is the difference between hiring a developer and working with a product-foc
 
 Use these links naturally inside the article body and CTA sections:
 
-- `/services/ai-machine-learning`
+- `/services/ai-saas-mvp-development`
 - `/services`
 - `/projects`
 - `/contact`

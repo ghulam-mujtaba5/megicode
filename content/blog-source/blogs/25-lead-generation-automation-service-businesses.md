@@ -17,7 +17,7 @@ buyer_psychology_angle: 'more booked calls with less admin work'
 conversion_goal: 'Generate qualified discovery calls for MegiCode services'
 recommended_cta: 'Book a Lead Funnel Automation Plan with MegiCode'
 recommended_internal_links:
-  ['/services/automation-integration', '/services/ai-machine-learning', '/projects', '/contact']
+  ['/services/ai-automation-agents', '/services/ai-saas-mvp-development', '/projects', '/contact']
 recommended_image: '/images/blog/lead-generation-automation-service-businesses.png'
 image_alt_text: 'MegiCode blog illustration for Lead Generation Automation for Service Businesses'
 editorial_status: 'executive SEO upgrade - ready for editorial review'
@@ -172,8 +172,8 @@ That is the difference between hiring a developer and working with a product-foc
 
 Use these links naturally inside the article body and CTA sections:
 
-- `/services/automation-integration`
-- `/services/ai-machine-learning`
+- `/services/ai-automation-agents`
+- `/services/ai-saas-mvp-development`
 - `/projects`
 - `/contact`
 

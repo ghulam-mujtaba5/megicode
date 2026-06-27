@@ -49,7 +49,7 @@ function slugifyHeading(value: string) {
 
 const RELATED_LABELS: Record<string, string> = {
   '/services': 'Explore Megicode Services',
-  '/services/ai-machine-learning': 'AI & Machine Learning',
+  '/services/ai-saas-mvp-development': 'AI & Machine Learning',
   '/services/web-development': 'Web Development',
   '/services/mobile-app-development': 'Mobile App Development',
   '/services/cloud-devops': 'Cloud & DevOps',

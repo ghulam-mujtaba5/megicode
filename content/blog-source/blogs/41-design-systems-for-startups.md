@@ -16,12 +16,7 @@ buyer_psychology_angle: 'team speed and product polish'
 conversion_goal: 'Generate qualified discovery calls for MegiCode services'
 recommended_cta: 'Book a Design System Starter Kit with MegiCode'
 recommended_internal_links:
-  [
-    '/services/cloud-devops',
-    '/services/seo-growth-marketing',
-    '/services/ui-ux-product-design',
-    '/contact',
-  ]
+  ['/services/cloud-devops', '/services/seo-growth-marketing', '/services/ui-ux-design', '/contact']
 recommended_image: '/images/blog/design-systems-for-startups.png'
 image_alt_text: 'MegiCode blog illustration for Design Systems for Startups'
 editorial_status: 'executive SEO upgrade - ready for editorial review'
@@ -178,7 +173,7 @@ Use these links naturally inside the article body and CTA sections:
 
 - `/services/cloud-devops`
 - `/services/seo-growth-marketing`
-- `/services/ui-ux-product-design`
+- `/services/ui-ux-design`
 - `/contact`
 
 ## FAQ

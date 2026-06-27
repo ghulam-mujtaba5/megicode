@@ -16,7 +16,7 @@ buyer_psychology_angle: 'inspiration filtered through business reality'
 conversion_goal: 'Generate qualified discovery calls for MegiCode services'
 recommended_cta: 'Book a AI Mobile App Ideation Session with MegiCode'
 recommended_internal_links:
-  ['/services/mobile-app-development', '/services/ui-ux-product-design', '/projects', '/contact']
+  ['/services/mobile-app-development', '/services/ui-ux-design', '/projects', '/contact']
 recommended_image: '/images/blog/ai-powered-mobile-app-ideas-startups.png'
 image_alt_text: 'MegiCode blog illustration for AI-Powered Mobile App Ideas for Startups and Small Businesses'
 editorial_status: 'executive SEO upgrade - ready for editorial review'
@@ -172,7 +172,7 @@ That is the difference between hiring a developer and working with a product-foc
 Use these links naturally inside the article body and CTA sections:
 
 - `/services/mobile-app-development`
-- `/services/ui-ux-product-design`
+- `/services/ui-ux-design`
 - `/projects`
 - `/contact`
 

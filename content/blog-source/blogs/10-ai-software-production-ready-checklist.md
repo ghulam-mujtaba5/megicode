@@ -16,7 +16,8 @@ target_audience: 'founders and teams preparing to launch AI products'
 buyer_psychology_angle: 'confidence to launch without embarrassing failures'
 conversion_goal: 'Generate qualified discovery calls for MegiCode services'
 recommended_cta: 'Book a Production Readiness Review with MegiCode'
-recommended_internal_links: ['/services/ai-machine-learning', '/services', '/projects', '/contact']
+recommended_internal_links:
+  ['/services/ai-saas-mvp-development', '/services', '/projects', '/contact']
 recommended_image: '/images/blog/ai-software-production-ready-checklist.png'
 image_alt_text: 'MegiCode blog illustration for What Makes AI Software Production-Ready? A Practical Checklist'
 editorial_status: 'executive SEO upgrade - ready for editorial review'
@@ -171,7 +172,7 @@ That is the difference between hiring a developer and working with a product-foc
 
 Use these links naturally inside the article body and CTA sections:
 
-- `/services/ai-machine-learning`
+- `/services/ai-saas-mvp-development`
 - `/services`
 - `/projects`
 - `/contact`
