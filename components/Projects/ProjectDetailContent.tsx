@@ -1,17 +1,25 @@
-import React, { useState } from "react";
-import dynamic from "next/dynamic";
-import styles from "./ProjectDetailCommon.module.css";
-import darkStyles from "./ProjectDetailDark.module.css";
-import lightStyles from "./ProjectDetailLight.module.css";
-import { useTheme } from "../../context/ThemeContext";
-import Image from "next/image";
-import Link from "next/link";
-import { TechIcon } from "./TechIconMap";
-import { SectionIcon } from "./SectionIconMap";
+import React, { useState } from 'react';
 import {
-  FaExternalLinkAlt, FaGithub, FaBriefcase, FaIndustry,
-  FaClock, FaUsers, FaQuoteLeft, FaArrowRight
-} from "react-icons/fa";
+  FaArrowRight,
+  FaBriefcase,
+  FaClock,
+  FaExternalLinkAlt,
+  FaGithub,
+  FaIndustry,
+  FaQuoteLeft,
+  FaUsers,
+} from 'react-icons/fa';
+
+import dynamic from 'next/dynamic';
+import Image from 'next/image';
+import Link from 'next/link';
+
+import { useTheme } from '../../context/ThemeContext';
+import styles from './ProjectDetailCommon.module.css';
+import darkStyles from './ProjectDetailDark.module.css';
+import lightStyles from './ProjectDetailLight.module.css';
+import { SectionIcon } from './SectionIconMap';
+import { TechIcon } from './TechIconMap';
 
 const LottiePlayer = dynamic(() => import('../LottiePlayer/LottiePlayer'), { ssr: false });
 
@@ -50,49 +58,73 @@ interface ProjectDetail {
 }
 
 const categoryLabels: Record<string, string> = {
-  web: "Web Development",
-  ai: "AI & Machine Learning",
-  mobile: "Mobile App",
-  desktop: "Desktop App",
-  uiux: "UI/UX Design",
-  "data-engineering": "Data Engineering",
+  web: 'Web Development',
+  ai: 'AI & Machine Learning',
+  mobile: 'Mobile App',
+  desktop: 'Desktop App',
+  uiux: 'UI/UX Design',
+  'data-engineering': 'Data Engineering',
 };
 
 export default function ProjectDetailContent({ project }: { project: ProjectDetail }) {
   const { theme } = useTheme();
-  const themeStyles = theme === "dark" ? darkStyles : lightStyles;
+  const themeStyles = theme === 'dark' ? darkStyles : lightStyles;
 
   return (
     <article className={`${styles.caseStudy} ${themeStyles.caseStudy}`}>
-      {/* ===== HERO SECTION ===== */}
+      {/* ═══ HERO — two-column on desktop ═══ */}
       <header className={`${styles.hero} ${themeStyles.hero}`}>
-        <span className={styles.categoryBadge}>
-          {categoryLabels[project.category] || project.category}
-        </span>
-        <h1 className={styles.heroTitle}>{project.title}</h1>
-        {project.overview && (
-          <p className={styles.heroOverview}>{project.overview}</p>
-        )}
-        <div className={styles.heroActions}>
-          {project.liveUrl && (
-            <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className={`${styles.heroCta} ${themeStyles.heroCta}`}>
-              Visit Live Site <FaExternalLinkAlt size={14} />
-            </a>
-          )}
-          {project.github && (
-            <a href={project.github} target="_blank" rel="noopener noreferrer" className={`${styles.heroCtaSecondary} ${themeStyles.heroCtaSecondary}`}>
-              <FaGithub size={16} /> View Code
-            </a>
+        <div className={styles.heroInner}>
+          <div className={styles.heroText}>
+            <span className={styles.categoryBadge}>
+              {categoryLabels[project.category] || project.category}
+            </span>
+            <h1 className={styles.heroTitle}>{project.title}</h1>
+            {project.overview && <p className={styles.heroOverview}>{project.overview}</p>}
+            <div className={styles.heroActions}>
+              {project.liveUrl && (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${styles.heroCta} ${themeStyles.heroCta}`}
+                >
+                  Visit Live Site <FaExternalLinkAlt size={13} />
+                </a>
+              )}
+              {project.github && (
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${styles.heroCtaSecondary} ${themeStyles.heroCtaSecondary}`}
+                >
+                  <FaGithub size={15} /> View Code
+                </a>
+              )}
+            </div>
+          </div>
+          {project.image && (
+            <div className={`${styles.heroImageWrap} ${themeStyles.heroImageWrap}`}>
+              <Image
+                src={project.image}
+                alt={project.title}
+                width={560}
+                height={360}
+                className={styles.heroImage}
+                priority
+              />
+            </div>
           )}
         </div>
       </header>
 
-      {/* ===== QUICK FACTS BAR ===== */}
+      {/* ═══ QUICK FACTS BAR ═══ */}
       {(project.clientName || project.clientIndustry || project.duration || project.teamSize) && (
         <div className={`${styles.quickFacts} ${themeStyles.quickFacts}`}>
           {project.clientName && (
             <div className={styles.factItem}>
-              <FaBriefcase size={16} className={styles.factIcon} />
+              <FaBriefcase size={15} className={styles.factIcon} />
               <div>
                 <span className={styles.factLabel}>Client</span>
                 <span className={styles.factValue}>{project.clientName}</span>
@@ -101,7 +133,7 @@ export default function ProjectDetailContent({ project }: { project: ProjectDeta
           )}
           {project.clientIndustry && (
             <div className={styles.factItem}>
-              <FaIndustry size={16} className={styles.factIcon} />
+              <FaIndustry size={15} className={styles.factIcon} />
               <div>
                 <span className={styles.factLabel}>Industry</span>
                 <span className={styles.factValue}>{project.clientIndustry}</span>
@@ -110,7 +142,7 @@ export default function ProjectDetailContent({ project }: { project: ProjectDeta
           )}
           {project.duration && (
             <div className={styles.factItem}>
-              <FaClock size={16} className={styles.factIcon} />
+              <FaClock size={15} className={styles.factIcon} />
               <div>
                 <span className={styles.factLabel}>Duration</span>
                 <span className={styles.factValue}>{project.duration}</span>
@@ -119,7 +151,7 @@ export default function ProjectDetailContent({ project }: { project: ProjectDeta
           )}
           {project.teamSize && (
             <div className={styles.factItem}>
-              <FaUsers size={16} className={styles.factIcon} />
+              <FaUsers size={15} className={styles.factIcon} />
               <div>
                 <span className={styles.factLabel}>Team</span>
                 <span className={styles.factValue}>{project.teamSize}</span>
@@ -129,7 +161,7 @@ export default function ProjectDetailContent({ project }: { project: ProjectDeta
         </div>
       )}
 
-      {/* ===== KEY METRICS ===== */}
+      {/* ═══ KEY METRICS — prominent strip ═══ */}
       {project.metrics && (
         <section className={styles.metricsSection}>
           <div className={styles.metricsGrid}>
@@ -143,120 +175,144 @@ export default function ProjectDetailContent({ project }: { project: ProjectDeta
         </section>
       )}
 
-      {/* ===== THE CHALLENGE ===== */}
+      {/* ═══ CHALLENGE ═══ */}
       <section className={styles.contentSection}>
         <div className={styles.sectionHeader}>
-          <SectionIcon name="Problem" size={24} />
+          <SectionIcon name="Problem" size={22} />
           <h2 className={styles.sectionTitle}>The Challenge</h2>
         </div>
-        <p className={styles.sectionText}>{project.problem}</p>
+        <p
+          className={`${styles.sectionText} ${styles.sectionTextCard} ${themeStyles.sectionTextCard}`}
+        >
+          {project.problem}
+        </p>
         {project.challenge && (
           <div className={`${styles.challengeCallout} ${themeStyles.challengeCallout}`}>
-            <SectionIcon name="Challenge" size={20} />
+            <SectionIcon name="Challenge" size={18} />
             <p>{project.challenge}</p>
           </div>
         )}
       </section>
 
-      {/* ===== OUR SOLUTION ===== */}
+      <div className={styles.sectionDivider} />
+
+      {/* ═══ SOLUTION ═══ */}
       <section className={styles.contentSection}>
         <div className={styles.sectionHeader}>
-          <SectionIcon name="Solution" size={24} />
+          <SectionIcon name="Solution" size={22} />
           <h2 className={styles.sectionTitle}>Our Solution</h2>
         </div>
-        <p className={styles.sectionText}>{project.solution}</p>
+        <p
+          className={`${styles.sectionText} ${styles.sectionTextCard} ${themeStyles.sectionTextCard}`}
+        >
+          {project.solution}
+        </p>
       </section>
 
-      {/* ===== TESTIMONIAL (prominent placement) ===== */}
+      {/* ═══ TESTIMONIAL ═══ */}
       {project.testimonial && (
-        <section className={`${styles.testimonialSection} ${themeStyles.testimonialSection}`}>
-          <FaQuoteLeft size={28} className={styles.quoteIcon} />
-          <blockquote className={styles.testimonialText}>
-            {project.testimonial}
-          </blockquote>
-        </section>
+        <>
+          <div className={styles.sectionDivider} />
+          <section className={`${styles.testimonialSection} ${themeStyles.testimonialSection}`}>
+            <FaQuoteLeft size={32} className={styles.quoteIcon} />
+            <blockquote className={styles.testimonialText}>{project.testimonial}</blockquote>
+          </section>
+        </>
       )}
 
-      {/* ===== PROCESS TIMELINE ===== */}
+      <div className={styles.sectionDivider} />
+
+      {/* ═══ PROCESS — step cards grid ═══ */}
       {project.process && project.process.length > 0 && (
         <section className={styles.contentSection}>
           <div className={styles.sectionHeader}>
-            <SectionIcon name="Process" size={24} />
+            <SectionIcon name="Process" size={22} />
             <h2 className={styles.sectionTitle}>Our Process</h2>
           </div>
-          <div className={styles.timeline}>
+          <div className={styles.stepsGrid}>
             {project.process.map((step, idx) => (
-              <div key={idx} className={`${styles.timelineItem} ${themeStyles.timelineItem}`}>
-                <div className={styles.timelineNumber}>{idx + 1}</div>
-                <div className={styles.timelineContent}>
-                  <span>{step}</span>
-                </div>
+              <div key={idx} className={`${styles.stepCard} ${themeStyles.stepCard}`}>
+                <div className={styles.stepNum}>{idx + 1}</div>
+                <p className={styles.stepText}>{step}</p>
               </div>
             ))}
           </div>
         </section>
       )}
 
-      {/* ===== IMPACT & RESULTS ===== */}
+      <div className={styles.sectionDivider} />
+
+      {/* ═══ IMPACT & RESULTS ═══ */}
       <section className={styles.contentSection}>
         <div className={styles.sectionHeader}>
-          <SectionIcon name="Impact" size={24} />
+          <SectionIcon name="Impact" size={22} />
           <h2 className={styles.sectionTitle}>Impact & Results</h2>
         </div>
-        <p className={styles.sectionText}>{project.impact}</p>
+        <p
+          className={`${styles.sectionText} ${styles.sectionTextCard} ${themeStyles.sectionTextCard}`}
+        >
+          {project.impact}
+        </p>
       </section>
 
-      {/* ===== IMPLEMENTATION ===== */}
+      {/* ═══ IMPLEMENTATION ═══ */}
       {project.implementation && (
         <section className={styles.contentSection}>
           <div className={styles.sectionHeader}>
-            <SectionIcon name="Implementation" size={24} />
+            <SectionIcon name="Implementation" size={22} />
             <h2 className={styles.sectionTitle}>Implementation</h2>
           </div>
-          <p className={styles.sectionText}>{project.implementation}</p>
+          <p
+            className={`${styles.sectionText} ${styles.sectionTextCard} ${themeStyles.sectionTextCard}`}
+          >
+            {project.implementation}
+          </p>
         </section>
       )}
 
-      {/* ===== TECH STACK ===== */}
+      {/* ═══ TECH STACK ═══ */}
       <section className={styles.contentSection}>
         <div className={styles.sectionHeader}>
-          <SectionIcon name="Tech Stack" size={24} />
+          <SectionIcon name="Tech Stack" size={22} />
           <h2 className={styles.sectionTitle}>Tech Stack</h2>
         </div>
         <div className={styles.techGrid}>
           {project.techStack.map((tech, idx) => (
             <div key={idx} className={`${styles.techChip} ${themeStyles.techChip}`}>
-              <TechIcon name={tech} size={24} />
+              <TechIcon name={tech} size={22} />
               <span>{tech}</span>
             </div>
           ))}
         </div>
       </section>
 
-      {/* ===== TOOLS USED ===== */}
-      {project.toolsUsed && project.toolsUsed.length > 0 &&
+      {/* ═══ TOOLS USED ═══ */}
+      {project.toolsUsed &&
+        project.toolsUsed.length > 0 &&
         JSON.stringify(project.toolsUsed) !== JSON.stringify(project.techStack) && (
-        <section className={styles.contentSection}>
-          <div className={styles.sectionHeader}>
-            <SectionIcon name="Tools Used" size={24} />
-            <h2 className={styles.sectionTitle}>Tools & Technologies</h2>
-          </div>
-          <div className={styles.techGrid}>
-            {project.toolsUsed.map((tool, idx) => (
-              <div key={idx} className={`${styles.techChip} ${themeStyles.techChip}`}>
-                <TechIcon name={tool} size={24} />
-                <span>{tool}</span>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
+          <section className={styles.contentSection}>
+            <div className={styles.sectionHeader}>
+              <SectionIcon name="Tools Used" size={22} />
+              <h2 className={styles.sectionTitle}>Tools & Technologies</h2>
+            </div>
+            <div className={styles.techGrid}>
+              {project.toolsUsed.map((tool, idx) => (
+                <div key={idx} className={`${styles.techChip} ${themeStyles.techChip}`}>
+                  <TechIcon name={tool} size={22} />
+                  <span>{tool}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
-      {/* ===== LESSONS LEARNED ===== */}
+      <div className={styles.sectionDivider} />
+
+      {/* ═══ LESSONS LEARNED ═══ */}
       {project.lessonsLearned && project.lessonsLearned.length > 0 && (
         <section className={styles.contentSection}>
           <div className={styles.sectionHeader}>
-            <SectionIcon name="Lessons Learned" size={24} />
+            <SectionIcon name="Lessons Learned" size={22} />
             <h2 className={styles.sectionTitle}>Key Takeaways</h2>
           </div>
           <div className={styles.lessonsGrid}>
@@ -270,56 +326,65 @@ export default function ProjectDetailContent({ project }: { project: ProjectDeta
         </section>
       )}
 
-      {/* ===== NEXT STEPS ===== */}
+      {/* ═══ NEXT STEPS ═══ */}
       {project.nextSteps && (
         <section className={styles.contentSection}>
           <div className={styles.sectionHeader}>
-            <SectionIcon name="Next Steps" size={24} />
+            <SectionIcon name="Next Steps" size={22} />
             <h2 className={styles.sectionTitle}>What&apos;s Next</h2>
           </div>
-          <p className={styles.sectionText}>{project.nextSteps}</p>
+          <p
+            className={`${styles.sectionText} ${styles.sectionTextCard} ${themeStyles.sectionTextCard}`}
+          >
+            {project.nextSteps}
+          </p>
         </section>
       )}
 
-      {/* ===== ARTIFACTS ===== */}
+      {/* ═══ ARTIFACTS ═══ */}
       {project.artifacts && project.artifacts.length > 0 && (
         <section className={styles.contentSection}>
           <div className={styles.sectionHeader}>
-            <SectionIcon name="Artifacts" size={24} />
+            <SectionIcon name="Artifacts" size={22} />
             <h2 className={styles.sectionTitle}>Artifacts & Deliverables</h2>
           </div>
           <div className={styles.artifactsList}>
             {project.artifacts.map((artifact, idx) => (
-              <a key={idx} href={artifact.url} target="_blank" rel="noopener noreferrer" className={`${styles.artifactLink} ${themeStyles.artifactLink}`}>
-                <SectionIcon name="Artifacts" size={18} />
+              <a
+                key={idx}
+                href={artifact.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${styles.artifactLink} ${themeStyles.artifactLink}`}
+              >
+                <SectionIcon name="Artifacts" size={16} />
                 <span>{artifact.type}</span>
-                <FaExternalLinkAlt size={12} />
+                <FaExternalLinkAlt size={11} />
               </a>
             ))}
           </div>
         </section>
       )}
 
-      {/* ===== SCREENSHOTS ===== */}
+      {/* ═══ SCREENSHOTS ═══ */}
       {project.screenshots && project.screenshots.length > 0 && (
         <section className={styles.contentSection}>
           <div className={styles.sectionHeader}>
-            <SectionIcon name="Artifacts" size={24} />
+            <SectionIcon name="Artifacts" size={22} />
             <h2 className={styles.sectionTitle}>Screenshots</h2>
           </div>
           <ScreenshotGallery images={project.screenshots} projectTitle={project.title} />
         </section>
       )}
 
-      {/* ===== CTA SECTION ===== */}
+      {/* ═══ CTA ═══ */}
       <section className={`${styles.ctaSection} ${themeStyles.ctaSection}`}>
-        {/* Rocket animation — launching your project idea */}
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
           <LottiePlayer
-            src="/lottie/rocket-hero.json"
+            src="/lottie/10_product_launch_rocket.json"
             loop
-            style={{ width: '100px', height: '100px' }}
-            ariaLabel="Animated rocket illustration symbolising launching your next project"
+            style={{ width: 96, height: 96 }}
+            ariaLabel="Animated rocket illustration"
           />
         </div>
         <h2 className={styles.ctaTitle}>Want a Similar Solution?</h2>
@@ -327,7 +392,7 @@ export default function ProjectDetailContent({ project }: { project: ProjectDeta
           Let&apos;s discuss how Megicode can build something like this for your business.
         </p>
         <Link href="/contact" className={`${styles.ctaButton} ${themeStyles.ctaButton}`}>
-          Start a Conversation <FaArrowRight size={14} />
+          Start a Conversation <FaArrowRight size={13} />
         </Link>
       </section>
     </article>
@@ -371,7 +436,10 @@ function ScreenshotGallery({ images, projectTitle }: { images: string[]; project
             className={styles.screenshotModalImg}
           />
           <button
-            onClick={(e) => { e.stopPropagation(); setOpenIdx(null); }}
+            onClick={(e) => {
+              e.stopPropagation();
+              setOpenIdx(null);
+            }}
             className={styles.screenshotClose}
             aria-label="Close preview"
           >

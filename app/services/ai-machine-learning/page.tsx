@@ -236,7 +236,7 @@ export default function AIMachineLearningDetailPage() {
               <div className={commonStyles.heroImageCard} data-animate="float">
                 {/* AI Brain Lottie animation replaces static SVG */}
                 <LottiePlayer
-                  src="/lottie/ai-brain.json"
+                  src="/lottie/01_ai_saas_dashboard.json"
                   loop
                   style={{
                     width: '100%',

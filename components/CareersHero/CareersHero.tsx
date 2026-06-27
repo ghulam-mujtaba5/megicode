@@ -1,15 +1,14 @@
-"use client";
+'use client';
 import React from 'react';
+
 import dynamic from 'next/dynamic';
+
 import { useTheme } from '../../context/ThemeContext';
 import common from './CareersHeroCommon.module.css';
-import light from './CareersHeroLight.module.css';
 import dark from './CareersHeroDark.module.css';
+import light from './CareersHeroLight.module.css';
 
-const LottiePlayer = dynamic(
-  () => import('../LottiePlayer/LottiePlayer'),
-  { ssr: false }
-);
+const LottiePlayer = dynamic(() => import('../LottiePlayer/LottiePlayer'), { ssr: false });
 
 const CareersHero: React.FC = () => {
   const { theme } = useTheme();
@@ -32,11 +31,13 @@ const CareersHero: React.FC = () => {
         <div className={common.heroContent}>
           <div className={common.textContent}>
             <h1 className={cx(common.title, themed.title)}>
-              Join Our Mission to <span className={cx(common.highlight, themed.highlight)}>Shape the Future</span>
+              Join Our Mission to{' '}
+              <span className={cx(common.highlight, themed.highlight)}>Shape the Future</span>
             </h1>
             <p className={cx(common.subtitle, themed.subtitle)}>
-              Be part of a team that transforms ideas into intelligent solutions. 
-              At Megicode, we're not just building software—we're crafting the digital world of tomorrow.
+              Be part of a team that transforms ideas into intelligent solutions. At Megicode,
+              we&apos;re not just building software—we&apos;re crafting the digital world of
+              tomorrow.
             </p>
             <div className={common.stats}>
               <div className={common.stat}>
@@ -53,17 +54,23 @@ const CareersHero: React.FC = () => {
               </div>
             </div>
             <div className={common.ctaButtons}>
-              <button className={cx(common.primaryBtn, themed.primaryBtn)} onClick={() => handleScroll('open-positions')}>
+              <button
+                className={cx(common.primaryBtn, themed.primaryBtn)}
+                onClick={() => handleScroll('open-positions')}
+              >
                 View Open Positions
               </button>
-              <button className={cx(common.secondaryBtn, themed.secondaryBtn)} onClick={() => handleScroll('company-culture')}>
+              <button
+                className={cx(common.secondaryBtn, themed.secondaryBtn)}
+                onClick={() => handleScroll('company-culture')}
+              >
                 Learn About Our Culture
               </button>
             </div>
           </div>
           <div className={common.visualContent}>
             <LottiePlayer
-              src="/lottie/team-careers.json"
+              src="/lottie/16_team_collaboration.json"
               loop
               style={{
                 width: 'clamp(240px, 32vw, 340px)',

@@ -1,38 +1,38 @@
 'use client';
 import React from 'react';
+
 import { motion } from 'framer-motion';
-import commonStyles from './AboutStatsCommon.module.css';
-import lightStyles from './AboutStatsLight.module.css';
-import darkStyles from './AboutStatsDark.module.css';
+
 import { useTheme } from '../../context/ThemeContext';
-import { ProjectsIcon, GlobalIcon, ClientsIcon, TechStackIcon } from '../IconSystem/StatsIcons';
-import { staggerContainer, fadeInUp, scaleIn } from '../../utils/animations';
+import { fadeInUp, scaleIn, staggerContainer } from '../../utils/animations';
+import LottiePlayer from '../LottiePlayer/LottiePlayer';
+import commonStyles from './AboutStatsCommon.module.css';
+import darkStyles from './AboutStatsDark.module.css';
+import lightStyles from './AboutStatsLight.module.css';
 
 interface StatItemProps {
-  Icon: React.ComponentType<{ size?: number; color?: string }>;
+  lottieFile: string;
   number: string;
   label: string;
-  delay: number;
 }
 
-const StatItem: React.FC<StatItemProps> = ({ Icon, number, label, delay }) => {
+const StatItem: React.FC<StatItemProps> = ({ lottieFile, number, label }) => {
   const { theme } = useTheme();
   const themeStyles = theme === 'dark' ? darkStyles : lightStyles;
-  
-  const iconColor = theme === 'dark' ? '#6b8ee6' : '#4573df';
-  
+
   return (
-    <motion.div 
-      className={`${commonStyles.statItem} ${themeStyles.statItem}`}
-      variants={scaleIn}
-    >
+    <motion.div className={`${commonStyles.statItem} ${themeStyles.statItem}`} variants={scaleIn}>
       <div className={`${commonStyles.iconWrapper} ${themeStyles.iconWrapper}`}>
-        <Icon size={40} color={iconColor} />
+        <LottiePlayer
+          src={lottieFile}
+          loop
+          autoplay
+          pauseWhenHidden
+          speed={0.7}
+          style={{ width: 56, height: 56 }}
+        />
       </div>
-      <motion.div 
-        className={`${commonStyles.number} ${themeStyles.number}`}
-        variants={fadeInUp}
-      >
+      <motion.div className={`${commonStyles.number} ${themeStyles.number}`} variants={fadeInUp}>
         {number}
       </motion.div>
       <div className={`${commonStyles.label} ${themeStyles.label}`}>{label}</div>
@@ -40,34 +40,36 @@ const StatItem: React.FC<StatItemProps> = ({ Icon, number, label, delay }) => {
   );
 };
 
-const AboutStats = () => {  const stats = [
-    {
-      Icon: ProjectsIcon,
-      number: '15+',
-      label: 'AI & Software Products Built'
-    },
-    {
-      Icon: GlobalIcon,
-      number: '5+',
-      label: 'Countries Served'
-    },
-    {      Icon: ClientsIcon,
-      number: '10+',
-      label: 'Startups & Businesses Partnered'
-    },
-    {
-      Icon: TechStackIcon,
-      number: '25+',
-      label: 'AI & Dev Tools Mastered'
-    }
-  ];
-
+const AboutStats = () => {
   const { theme } = useTheme();
   const themeStyles = theme === 'dark' ? darkStyles : lightStyles;
 
+  const stats = [
+    {
+      lottieFile: '/lottie/03_software_development_code.json',
+      number: '15+',
+      label: 'AI & Software Products Built',
+    },
+    {
+      lottieFile: '/lottie/07_data_analytics_growth.json',
+      number: '5+',
+      label: 'Countries Served',
+    },
+    {
+      lottieFile: '/lottie/16_team_collaboration.json',
+      number: '10+',
+      label: 'Startups & Businesses Partnered',
+    },
+    {
+      lottieFile: '/lottie/02_ai_automation_agent.json',
+      number: '25+',
+      label: 'AI & Dev Tools Mastered',
+    },
+  ];
+
   return (
     <section className={`${commonStyles.statsSection} ${themeStyles.statsSection}`}>
-      <motion.div 
+      <motion.div
         className={commonStyles.container}
         variants={fadeInUp}
         initial="hidden"
@@ -75,17 +77,13 @@ const AboutStats = () => {  const stats = [
         viewport={{ once: true, amount: 0.2 }}
       >
         <h2 className={`${commonStyles.title} ${themeStyles.title}`}>Key Milestones & Metrics</h2>
-        <motion.div 
-          className={commonStyles.statsGrid}
-          variants={staggerContainer}
-        >
-          {stats.map((stat, index) => (
+        <motion.div className={commonStyles.statsGrid} variants={staggerContainer}>
+          {stats.map((stat) => (
             <StatItem
               key={stat.label}
-              Icon={stat.Icon}
+              lottieFile={stat.lottieFile}
               number={stat.number}
               label={stat.label}
-              delay={index * 0.1}
             />
           ))}
         </motion.div>

@@ -234,7 +234,7 @@ export default function DataAnalyticsDetailPage() {
               <div className={commonStyles.heroImageCard} data-animate="float">
                 {/* Analytics Lottie animation replaces static SVG */}
                 <LottiePlayer
-                  src="/lottie/analytics-data.json"
+                  src="/lottie/07_data_analytics_growth.json"
                   loop
                   style={{ width: '100%', height: '100%', minWidth: '180px', minHeight: '180px' }}
                   ariaLabel="Animated data analytics chart illustration"

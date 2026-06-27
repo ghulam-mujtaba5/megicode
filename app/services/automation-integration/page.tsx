@@ -234,7 +234,7 @@ export default function AutomationIntegrationPage() {
               <div className={commonStyles.heroImageCard} data-animate="float">
                 {/* Rocket Lottie animation - symbolizes boosted automation workflows */}
                 <LottiePlayer
-                  src="/lottie/automation-gears.json"
+                  src="/lottie/02_ai_automation_agent.json"
                   loop
                   style={{ width: '100%', height: '100%', minWidth: '180px', minHeight: '180px' }}
                   ariaLabel="Animated gears illustration symbolising automation and workflow integration"

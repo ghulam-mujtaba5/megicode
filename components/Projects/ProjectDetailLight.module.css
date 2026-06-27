@@ -70,6 +70,26 @@
   background: rgba(99, 102, 241, 0.12);
 }
 
+.heroImageWrap {
+  box-shadow:
+    0 12px 40px rgba(69, 115, 223, 0.12),
+    0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.sectionTextCard {
+  background: rgba(69, 115, 223, 0.03);
+}
+
+.stepCard {
+  background: #f5f7ff;
+  border-color: rgba(69, 115, 223, 0.08);
+}
+
+.stepCard:hover {
+  box-shadow: 0 6px 20px rgba(69, 115, 223, 0.1);
+  border-color: rgba(69, 115, 223, 0.2);
+}
+
 .ctaSection {
   background: linear-gradient(135deg, #f0f4ff 0%, #e8eeff 100%);
   border: 1px solid rgba(69, 115, 223, 0.1);
@@ -79,4 +99,3 @@
   background: #4573df;
   color: #fff;
 }
-

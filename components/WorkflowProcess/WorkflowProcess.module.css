@@ -1,0 +1,319 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   WorkflowProcess — How We Work section
+   Responsive: desktop 6-col row → tablet 3×2 → mobile 2×3 → xs 1-col
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Section ─────────────────────────────────────────────────────────────── */
+.section {
+  position: relative;
+  width: 100%;
+  padding: 96px 6% 88px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.sectionLight {
+  background: linear-gradient(160deg, #f5f7fa 0%, #eef2fb 50%, #f5f7fa 100%);
+}
+
+.sectionDark {
+  background: linear-gradient(160deg, #11182a 0%, #131d35 50%, #11182a 100%);
+}
+
+/* ─── Gradient blobs ──────────────────────────────────────────────────────── */
+.blob1,
+.blob2 {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(72px);
+  animation: blobDrift 14s ease-in-out infinite alternate;
+}
+
+.blob1 {
+  width: 480px;
+  height: 480px;
+  top: -120px;
+  left: -100px;
+  background: radial-gradient(circle, rgba(69, 115, 223, 0.13) 0%, transparent 70%);
+}
+
+.blob2 {
+  width: 360px;
+  height: 360px;
+  bottom: -80px;
+  right: -60px;
+  background: radial-gradient(circle, rgba(255, 152, 0, 0.1) 0%, transparent 70%);
+  animation-delay: -6s;
+}
+
+@keyframes blobDrift {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(24px, 18px) scale(1.06);
+  }
+}
+
+/* ─── Inner container ─────────────────────────────────────────────────────── */
+.inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* ─── Section header ──────────────────────────────────────────────────────── */
+.head {
+  text-align: center;
+  margin-bottom: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 100px;
+}
+
+.eyebrowLight {
+  color: #4573df;
+  background: rgba(69, 115, 223, 0.1);
+}
+
+.eyebrowDark {
+  color: #7ba8ff;
+  background: rgba(110, 168, 255, 0.14);
+}
+
+.title {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  margin: 0;
+  max-width: 600px;
+}
+
+.titleLight {
+  color: #23272f;
+}
+.titleDark {
+  color: #eaf1ff;
+}
+
+.titleAccent {
+  background: linear-gradient(90deg, #4573df 0%, #2d4fa2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  max-width: 480px;
+  margin: 0;
+}
+
+.subtitleLight {
+  color: #555f6e;
+}
+.subtitleDark {
+  color: #7a8ba8;
+}
+
+/* ─── Steps row ───────────────────────────────────────────────────────────── */
+.stepsRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ─── Connector ───────────────────────────────────────────────────────────── */
+.connector {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  margin-top: 52px;
+  transform-origin: left center;
+}
+
+.connectorLight {
+  color: #4573df;
+  opacity: 0.45;
+}
+.connectorDark {
+  color: #6ea8ff;
+  opacity: 0.4;
+}
+
+/* ─── Step card ───────────────────────────────────────────────────────────── */
+.stepCard {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 24px 12px 20px;
+  border-radius: 18px;
+  border: 1px solid transparent;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+  cursor: default;
+}
+
+.stepCard:hover {
+  transform: translateY(-4px);
+}
+
+.stepCardLight {
+  background: rgba(255, 255, 255, 0.7);
+  border-color: rgba(69, 115, 223, 0.1);
+  box-shadow: 0 2px 16px rgba(69, 115, 223, 0.06);
+}
+
+.stepCardLight:hover {
+  border-color: rgba(69, 115, 223, 0.2);
+  box-shadow: 0 8px 32px rgba(69, 115, 223, 0.12);
+}
+
+.stepCardDark {
+  background: rgba(20, 30, 52, 0.6);
+  border-color: rgba(110, 168, 255, 0.1);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
+}
+
+.stepCardDark:hover {
+  border-color: rgba(110, 168, 255, 0.22);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* ─── Number badge ────────────────────────────────────────────────────────── */
+.numBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 3px 9px;
+  border-radius: 100px;
+  border: 1.5px solid;
+  margin-bottom: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── Icon wrapper ────────────────────────────────────────────────────────── */
+.iconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  margin-bottom: 14px;
+  transition: transform 0.2s ease;
+}
+
+.stepCard:hover .iconWrap {
+  transform: scale(1.07);
+}
+
+/* ─── Text ────────────────────────────────────────────────────────────────── */
+.stepTitle {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  margin: 0 0 8px;
+  letter-spacing: -0.01em;
+}
+
+.stepTitleLight {
+  color: #23272f;
+}
+.stepTitleDark {
+  color: #eaf1ff;
+}
+
+.stepDesc {
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.stepDescLight {
+  color: #64748b;
+}
+.stepDescDark {
+  color: #6b80a0;
+}
+
+/* ─── Responsive ──────────────────────────────────────────────────────────── */
+
+/* Tablet: 3 steps per row, connectors become vertical or hidden */
+@media (max-width: 1100px) {
+  .stepsRow {
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+  }
+
+  .connector {
+    display: none;
+  }
+
+  .stepCard {
+    flex: 0 0 calc(33.333% - 12px);
+    max-width: none;
+  }
+}
+
+/* Mobile */
+@media (max-width: 680px) {
+  .section {
+    padding: 72px 5% 64px;
+  }
+
+  .stepsRow {
+    gap: 12px;
+  }
+
+  .stepCard {
+    flex: 0 0 calc(50% - 6px);
+    max-width: none;
+    padding: 20px 10px 16px;
+  }
+
+  .iconWrap {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+  }
+}
+
+/* Extra small */
+@media (max-width: 420px) {
+  .stepCard {
+    flex: 0 0 100%;
+  }
+}

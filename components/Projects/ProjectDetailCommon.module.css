@@ -8,10 +8,37 @@
 
 /* ===== HERO SECTION ===== */
 .hero {
-  padding: 3.5rem 2.5rem 2.5rem;
+  padding: 3rem 2.5rem 2.5rem;
   border-radius: 20px;
   margin-bottom: 2rem;
-  text-align: center;
+}
+
+/* Two-column hero: text left, image right */
+.heroInner {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.heroText {
+  text-align: left;
+}
+
+.heroImageWrap {
+  border-radius: 14px;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  position: relative;
+  border: 1px solid rgba(69, 115, 223, 0.12);
+}
+
+.heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
 }
 
 .categoryBadge {
@@ -60,7 +87,9 @@
   font-weight: 600;
   font-size: 0.95rem;
   text-decoration: none;
-  transition: transform 0.15s, box-shadow 0.15s;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
 }
 .heroCta:hover {
   transform: translateY(-2px);
@@ -77,7 +106,9 @@
   font-size: 0.95rem;
   text-decoration: none;
   border: 2px solid rgba(69, 115, 223, 0.3);
-  transition: transform 0.15s, border-color 0.15s;
+  transition:
+    transform 0.15s,
+    border-color 0.15s;
 }
 .heroCtaSecondary:hover {
   transform: translateY(-2px);
@@ -135,7 +166,9 @@
   padding: 1.25rem 1rem;
   border-radius: 14px;
   text-align: center;
-  transition: transform 0.15s, box-shadow 0.15s;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
 }
 .metricCard:hover {
   transform: translateY(-3px);
@@ -289,7 +322,9 @@
   border-radius: 10px;
   font-size: 0.95rem;
   font-weight: 500;
-  transition: transform 0.15s, box-shadow 0.15s;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
 }
 .techChip:hover {
   transform: translateY(-2px);
@@ -365,7 +400,9 @@
   cursor: zoom-in;
   border-radius: 12px;
   overflow: hidden;
-  transition: transform 0.15s, box-shadow 0.15s;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
 }
 .screenshotButton:hover {
   transform: translateY(-3px);
@@ -454,14 +491,100 @@
   font-weight: 700;
   font-size: 1rem;
   text-decoration: none;
-  transition: transform 0.15s, box-shadow 0.15s;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
 }
 .ctaButton:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(69, 115, 223, 0.3);
 }
 
+/* ===== SECTION DIVIDER ===== */
+.sectionDivider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(69, 115, 223, 0.18) 20%,
+    rgba(69, 115, 223, 0.18) 80%,
+    transparent 100%
+  );
+  margin: 0.25rem 0 2.25rem;
+}
+
+/* ===== SECTION TEXT CARD ===== */
+.sectionTextCard {
+  padding: 1.25rem 1.5rem;
+  border-radius: 12px;
+  border-left: 4px solid #4573df;
+  font-size: 1.04rem;
+  line-height: 1.78;
+}
+
+/* ===== PROCESS STEP CARDS ===== */
+.stepsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.stepCard {
+  padding: 1.25rem 1rem;
+  border-radius: 14px;
+  border: 1px solid transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.stepCard:hover {
+  transform: translateY(-3px);
+}
+
+.stepNum {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4573df 0%, #2d4fa2 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.82rem;
+  font-weight: 800;
+  flex-shrink: 0;
+  letter-spacing: 0.02em;
+}
+
+.stepText {
+  margin: 0;
+  font-size: 0.925rem;
+  line-height: 1.6;
+}
+
 /* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .stepsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .heroInner {
+    grid-template-columns: 1fr;
+  }
+  .heroText {
+    text-align: center;
+  }
+  .stepsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 700px) {
   .caseStudy {
     padding: 0 0.5rem;
