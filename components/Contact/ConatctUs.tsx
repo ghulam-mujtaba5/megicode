@@ -222,22 +222,6 @@ const ContactSection = ({ email = 'contact@megicode.com' }) => {
           >
             Contact Us
           </h2>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/icons/icon-team-success.png"
-            alt=""
-            width={72}
-            height={72}
-            loading="lazy"
-            aria-hidden="true"
-            style={{
-              display: 'block',
-              margin: '0.75rem auto 1rem',
-              objectFit: 'contain',
-              filter: 'drop-shadow(0 8px 24px rgba(69,115,223,0.28))',
-              opacity: 0.88,
-            }}
-          />
           <div className={`${commonStyles.contactMeLabel} ${themeStyles.contactMeLabel}`}>
             <p className={`${commonStyles.doYouHave} ${themeStyles.doYouHave}`}>
               Do you have any project idea?
