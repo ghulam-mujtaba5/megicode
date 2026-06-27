@@ -18,6 +18,7 @@ interface ServiceCardProps {
   description: string;
   features: string[];
   techs: string[];
+  ctaText?: string;
   delay?: number;
   index?: number;
   href?: string;
@@ -29,6 +30,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   description,
   features,
   techs,
+  ctaText = 'Explore service',
   delay = 0,
   index = 0,
   href,
@@ -146,7 +148,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
                 className={`${commonStyles.ctaRow} ${themeStyles.ctaRow}`}
                 variants={itemVariants}
               >
-                Explore service
+                {ctaText}
                 <span className={commonStyles.ctaIcon}>&#8594;</span>
               </motion.div>
             </motion.div>

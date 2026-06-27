@@ -35,6 +35,7 @@ const coreServices = [
       'Lead Capture Systems',
     ],
     techs: ['Python', 'OpenAI', 'n8n', 'Zapier', 'Node.js'],
+    ctaText: 'Automate My Leads',
     href: '/services/ai-automation-agents',
   },
   {
@@ -49,6 +50,7 @@ const coreServices = [
       'Admin Dashboard',
     ],
     techs: ['Next.js', 'OpenAI', 'Python', 'PostgreSQL', 'Stripe'],
+    ctaText: 'Plan My AI MVP',
     href: '/services/ai-saas-mvp-development',
   },
   {
@@ -63,30 +65,32 @@ const coreServices = [
       'Scalable Architecture',
     ],
     techs: ['Next.js', 'React', 'Node.js', 'PostgreSQL', 'TypeScript'],
+    ctaText: 'Build My Platform',
     href: '/services/custom-web-development',
   },
 ];
 
 const supportingServices = [
   {
-    slug: 'mobile-app-development',
-    title: 'Mobile App Development',
+    slug: 'ui-ux-design',
+    title: 'UI/UX Product Design',
     description:
-      'Cross-platform iOS & Android apps built with React Native and Flutter, with AI features baked in.',
+      'Design interfaces users understand and trust, from product flows to high-fidelity SaaS and platform screens.',
     features: [
-      'React Native & Flutter Apps',
-      'AI-Powered Mobile Features',
-      'Push Notifications',
-      'App Store Optimization',
+      'Product Flow Design',
+      'High-Fidelity Prototyping',
+      'Design Systems',
+      'Usability Review',
     ],
-    techs: ['React Native', 'Flutter', 'Firebase', 'Node.js', 'TypeScript'],
-    href: '/services/mobile-app-development',
+    techs: ['Figma', 'Framer', 'Storybook', 'Adobe XD'],
+    ctaText: 'Improve My UX',
+    href: '/services/ui-ux-design',
   },
   {
     slug: 'cloud-devops',
     title: 'Cloud & DevOps',
     description:
-      'Scalable cloud infrastructure, CI/CD pipelines, and auto-scaling setup for growing products.',
+      'Launch faster with stable deployment, infrastructure, CI/CD, monitoring, and release workflows.',
     features: [
       'Cloud Architecture Setup',
       'CI/CD Pipeline Automation',
@@ -94,48 +98,37 @@ const supportingServices = [
       'Security & Compliance',
     ],
     techs: ['AWS', 'Vercel', 'Docker', 'GitHub Actions', 'Terraform'],
+    ctaText: 'Prepare My Launch',
     href: '/services/cloud-devops',
   },
   {
-    slug: 'ui-ux-design',
-    title: 'UI/UX Design',
+    slug: 'mobile-app-development',
+    title: 'Mobile App Development',
     description:
-      'Conversion-focused design systems and high-fidelity prototypes for SaaS and AI products.',
+      'Bring your platform to iOS and Android with cross-platform apps that connect to your product backend.',
     features: [
-      'UI/UX Design Systems',
-      'High-Fidelity Prototyping',
-      'Conversion-Focused Design',
-      'Usability Testing',
+      'React Native & Flutter Apps',
+      'iOS & Android Delivery',
+      'Push Notifications',
+      'App Store Readiness',
     ],
-    techs: ['Figma', 'Framer', 'Storybook', 'Adobe XD'],
-    href: '/services/ui-ux-design',
-  },
-  {
-    slug: 'growth-marketing-seo',
-    title: 'SEO & Growth Support',
-    description:
-      'Technical SEO, content strategy, and performance marketing for AI products and SaaS startups.',
-    features: [
-      'Technical SEO for SaaS',
-      'Content Marketing',
-      'Google & Meta Ads',
-      'Conversion Rate Optimization',
-    ],
-    techs: ['Google Analytics', 'SEMrush', 'Ahrefs', 'Google Ads', 'HubSpot'],
-    href: '/services/growth-marketing-seo',
+    techs: ['React Native', 'Flutter', 'Firebase', 'Node.js', 'TypeScript'],
+    ctaText: 'Discuss Mobile App',
+    href: '/services/mobile-app-development',
   },
   {
     slug: 'data-analytics',
-    title: 'Data Dashboards',
+    title: 'Data Analytics & BI',
     description:
-      'Intelligent dashboards, analytics integrations, and AI-powered data pipelines for your product.',
+      'Turn scattered data into clear dashboards, reports, and business intelligence your team can act on.',
     features: [
-      'Intelligent Dashboards & Analytics',
-      'AI Chatbot Integration',
-      'Smart Search & Recommendations',
+      'Business Dashboards',
+      'Analytics Integrations',
+      'Reporting Views',
       'Data Pipeline Automation',
     ],
     techs: ['Python', 'OpenAI', 'Power BI', 'SQL', 'Pandas'],
+    ctaText: 'Build My Dashboard',
     href: '/services/data-analytics',
   },
   {
@@ -150,6 +143,7 @@ const supportingServices = [
       'Investor-Ready Due Diligence',
     ],
     techs: ['Architecture', 'Agile', 'Team Management', 'Roadmapping'],
+    ctaText: 'Get Roadmap',
     href: '/services/technical-consulting',
   },
 ];
@@ -242,6 +236,7 @@ export default function ServicesPage() {
                 description={service.description}
                 features={service.features}
                 techs={service.techs}
+                ctaText={service.ctaText}
                 href={service.href}
                 delay={idx * 0.1}
                 index={idx}
@@ -257,16 +252,16 @@ export default function ServicesPage() {
         >
           <header className="section-head">
             <span className={`eyebrow ${isDark ? 'eyebrow-dark' : 'eyebrow-light'}`}>
-              Also Available
+              Supporting Capabilities
             </span>
             <h2
               id="supporting-heading"
               className={`section-title ${isDark ? 'title-dark' : 'title-light'}`}
             >
-              Additional Capabilities
+              Supporting Capabilities
             </h2>
             <p className={`section-sub ${isDark ? 'sub-dark' : 'sub-light'}`}>
-              Offered as part of comprehensive project delivery — not as standalone services.
+              Specialist capabilities that support the core product, automation, and platform work.
             </p>
           </header>
 
@@ -279,6 +274,7 @@ export default function ServicesPage() {
                 description={service.description}
                 features={service.features}
                 techs={service.techs}
+                ctaText={service.ctaText}
                 href={service.href}
                 delay={idx * 0.08}
                 index={idx}
@@ -287,8 +283,8 @@ export default function ServicesPage() {
           </div>
 
           <p className={`delivery-note ${isDark ? 'note-dark' : 'note-light'}`}>
-            Need mobile apps, UX design, cloud setup, or SEO support? These are available as part of
-            complete product delivery.
+            Need mobile apps, UX design, cloud setup, data, or roadmap support? These are available
+            as part of complete product delivery.
           </p>
         </section>
       </main>

@@ -18,9 +18,7 @@ import {
   SiNodedotjs,
   SiOpenai,
   SiPython,
-  SiPytorch,
   SiReact,
-  SiTensorflow,
   SiTerraform,
   SiTypescript,
   SiZapier,
@@ -64,6 +62,7 @@ interface ServiceItem {
   tagline: string;
   /** Shown only on featured + wide cards */
   description?: string;
+  cta: string;
   href: string;
   techs: TechItem[];
   /** Illustration type for inline SVG (replaces PNG) */
@@ -76,50 +75,52 @@ interface ServiceItem {
 
 const SERVICES: ServiceItem[] = [
   {
-    id: 'ai',
+    id: 'automation',
     gridClass: commonStyles.posAI,
     featured: true,
-    illusType: 'ai' as ServiceIllusType,
-    svgSrc: '/Ai%20icon.svg',
-    title: 'AI-Powered Development',
-    tagline: 'Ship intelligent features in weeks, not quarters.',
+    illusType: 'automation' as ServiceIllusType,
+    svgSrc: '/ds%26ai-icon.svg',
+    title: 'AI Automation & Agents',
+    tagline: 'Automate leads, replies, bookings, and repetitive workflows.',
     description:
-      'We build LLM-powered products, RAG pipelines, and autonomous AI agents — integrated directly into your stack so your users experience real AI in production, not just a chatbot wrapper.',
-    href: '/services/ai-saas-mvp-development',
+      'We build AI agents and workflow automation that handle lead capture, customer replies, bookings, reminders, and repetitive operations inside your existing business systems.',
+    cta: 'Automate My Leads',
+    href: '/services/ai-automation-agents',
     techs: [
       { Icon: SiOpenai, name: 'OpenAI', color: '#4A90E2' },
       { Icon: SiPython, name: 'Python', color: '#3776AB' },
-      { Icon: SiTensorflow, name: 'TensorFlow', color: '#FF6F00' },
-      { Icon: SiPytorch, name: 'PyTorch', color: '#EE4C2C' },
+      { Icon: SiZapier, name: 'Zapier', color: '#FF4A00' },
+      { Icon: SiNodedotjs, name: 'Node.js', color: '#339933' },
     ],
   },
   {
-    id: 'web',
+    id: 'ai-saas',
     gridClass: commonStyles.posSaaS,
-    illusType: 'web' as ServiceIllusType,
-    svgSrc: '/web%20app%20icon.svg',
-    title: 'SaaS & Web Platforms',
-    tagline: 'Full-stack products built to scale from day one.',
-    href: '/services',
+    illusType: 'ai' as ServiceIllusType,
+    svgSrc: '/Ai%20icon.svg',
+    title: 'AI SaaS & MVP Development',
+    tagline: 'Turn your AI idea into a launch-ready product.',
+    cta: 'Plan My AI MVP',
+    href: '/services/ai-saas-mvp-development',
     techs: [
       { Icon: SiNextdotjs, name: 'Next.js', color: '#000000', darkColor: '#e2e8f0' },
-      { Icon: SiReact, name: 'React', color: '#61DAFB' },
+      { Icon: SiOpenai, name: 'OpenAI', color: '#4A90E2' },
       { Icon: SiTypescript, name: 'TypeScript', color: '#3178C6' },
     ],
   },
   {
-    id: 'mobile',
+    id: 'web',
     gridClass: commonStyles.posMobile,
-    illusType: 'mobile' as ServiceIllusType,
-    svgSrc: '/mobile%20app%20icon.svg',
-    svgSrcDark: '/Mobile%20App%20Dark.svg',
-    title: 'Mobile App Solutions',
-    tagline: 'Cross-platform apps with native feel and speed.',
-    href: '/services',
+    illusType: 'web' as ServiceIllusType,
+    svgSrc: '/web%20app%20icon.svg',
+    title: 'Custom Web Apps & Business Platforms',
+    tagline: 'Build dashboards, portals, CRMs, and booking systems for real operations.',
+    cta: 'Build My Platform',
+    href: '/services/custom-web-development',
     techs: [
-      { Icon: SiReact, name: 'React Native', color: '#61DAFB' },
-      { Icon: SiFlutter, name: 'Flutter', color: '#02569B' },
-      { Icon: SiFirebase, name: 'Firebase', color: '#FFCA28' },
+      { Icon: SiNextdotjs, name: 'Next.js', color: '#000000', darkColor: '#e2e8f0' },
+      { Icon: SiReact, name: 'React', color: '#61DAFB' },
+      { Icon: SiTypescript, name: 'TypeScript', color: '#3178C6' },
     ],
   },
   {
@@ -128,8 +129,9 @@ const SERVICES: ServiceItem[] = [
     illusType: 'uiux' as ServiceIllusType,
     svgSrc: '/Ui%26Ux-icon.svg',
     title: 'UI/UX Product Design',
-    tagline: 'Interfaces users understand and actually enjoy.',
-    href: '/services',
+    tagline: 'Design interfaces users understand and trust.',
+    cta: 'Improve My UX',
+    href: '/services/ui-ux-design',
     techs: [
       { Icon: SiFigma, name: 'Figma', color: '#F24E1E' },
       { Icon: FaPalette, name: 'Adobe', color: '#FF0000' },
@@ -137,13 +139,30 @@ const SERVICES: ServiceItem[] = [
     ],
   },
   {
-    id: 'cloud',
+    id: 'mobile',
     gridClass: commonStyles.posCloud,
+    illusType: 'mobile' as ServiceIllusType,
+    svgSrc: '/mobile%20app%20icon.svg',
+    svgSrcDark: '/Mobile%20App%20Dark.svg',
+    title: 'Mobile App Solutions',
+    tagline: 'Bring your platform to iOS and Android.',
+    cta: 'Discuss Mobile App',
+    href: '/services/mobile-app-development',
+    techs: [
+      { Icon: SiReact, name: 'React Native', color: '#61DAFB' },
+      { Icon: SiFlutter, name: 'Flutter', color: '#02569B' },
+      { Icon: SiFirebase, name: 'Firebase', color: '#FFCA28' },
+    ],
+  },
+  {
+    id: 'cloud',
+    gridClass: commonStyles.posData,
     illusType: 'cloud' as ServiceIllusType,
     svgSrc: '/devlopment-icon.svg',
     title: 'Cloud & DevOps',
-    tagline: 'Infrastructure that ships fast and stays up.',
-    href: '/services',
+    tagline: 'Launch faster with stable deployment and infrastructure.',
+    cta: 'Prepare My Launch',
+    href: '/services/cloud-devops',
     techs: [
       { Icon: FaAws, name: 'AWS', color: '#FF9900' },
       { Icon: SiDocker, name: 'Docker', color: '#2496ED' },
@@ -152,12 +171,16 @@ const SERVICES: ServiceItem[] = [
   },
   {
     id: 'data',
-    gridClass: commonStyles.posData,
+    gridClass: commonStyles.posAuto,
+    isWide: true,
     illusType: 'data' as ServiceIllusType,
     svgSrc: '/Big%20Data%20Analytics.svg',
     title: 'Data Analytics & BI',
-    tagline: 'Turn raw data into decisions that compound.',
-    href: '/services',
+    tagline: 'Turn scattered data into clear decisions.',
+    description:
+      'We bring scattered business data into dashboards, reports, and decision views your team can trust without digging through disconnected spreadsheets and tools.',
+    cta: 'Build My Dashboard',
+    href: '/services/data-analytics',
     techs: [
       { Icon: SiPython, name: 'Python', color: '#3776AB' },
       { Icon: SiApachespark, name: 'Spark', color: '#E25A1C' },
@@ -165,31 +188,14 @@ const SERVICES: ServiceItem[] = [
     ],
   },
   {
-    id: 'automation',
-    gridClass: commonStyles.posAuto,
-    isWide: true,
-    illusType: 'automation' as ServiceIllusType,
-    svgSrc: '/ds%26ai-icon.svg',
-    title: 'Automation & Integration',
-    tagline: 'Connect everything. Eliminate the manual.',
-    description:
-      'We wire your entire SaaS stack — CRMs, databases, communication tools, internal workflows — so your team focuses on high-leverage work rather than repetitive tasks that machines should own.',
-    href: '/services',
-    techs: [
-      { Icon: SiZapier, name: 'Zapier', color: '#FF4A00' },
-      { Icon: SiNodedotjs, name: 'Node.js', color: '#339933' },
-      { Icon: SiPython, name: 'Python', color: '#3776AB' },
-      { Icon: SiGithub, name: 'GitHub', color: '#181717', darkColor: '#e2e8f0' },
-    ],
-  },
-  {
     id: 'consulting',
     gridClass: commonStyles.posConsult,
     illusType: 'consulting' as ServiceIllusType,
     svgSrc: '/technical-consulting-icon.svg',
-    title: 'IT Consulting',
-    tagline: 'Strategy that aligns your tech with business growth.',
-    href: '/services',
+    title: 'Technical Consulting',
+    tagline: 'Get the right roadmap before you build.',
+    cta: 'Get Roadmap',
+    href: '/services/technical-consulting',
     techs: [
       { Icon: SiGit, name: 'Git', color: '#F05032' },
       { Icon: SiGithub, name: 'GitHub', color: '#181717', darkColor: '#e2e8f0' },
@@ -419,13 +425,14 @@ const ServicesFrame = () => {
                       isFeatured ? commonStyles.featuredCta : `${commonStyles.wideCta} ${t.wideCta}`
                     }
                   >
-                    Explore service <HiArrowRight size={13} aria-hidden="true" />
+                    {service.cta} <HiArrowRight size={13} aria-hidden="true" />
                   </span>
                 )}
 
                 {/* Hover arrow — standard cards only */}
                 {!isFeatured && !isWide && (
                   <span className={`${commonStyles.hoverArrow} ${t.hoverArrow}`} aria-hidden="true">
+                    <span className={commonStyles.hoverArrowText}>{service.cta}</span>
                     <HiArrowRight size={14} />
                   </span>
                 )}

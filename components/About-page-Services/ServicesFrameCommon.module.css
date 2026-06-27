@@ -395,11 +395,20 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  gap: 6px;
   opacity: 0;
   transform: translateX(-6px);
   transition:
     opacity 0.2s ease,
     transform 0.2s ease;
+}
+
+.hoverArrowText {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
 }
 .cardInner:hover .hoverArrow {
   opacity: 1;
