@@ -1,7 +1,150 @@
 'use client';
 import React from 'react';
 
+import Link from 'next/link';
+
 import type { ServicePageCopy } from './servicePageCopy';
+
+const serviceCatalog = [
+  {
+    slug: 'ai-automation-agents',
+    title: 'AI Automation & Agents',
+    href: '/services/ai-automation-agents',
+    summary: 'Automate leads, replies, bookings, and repetitive workflows.',
+  },
+  {
+    slug: 'ai-saas-mvp-development',
+    title: 'AI SaaS & MVP Development',
+    href: '/services/ai-saas-mvp-development',
+    summary: 'Turn an AI idea into a launch-ready product.',
+  },
+  {
+    slug: 'custom-web-development',
+    title: 'Custom Web Apps & Business Platforms',
+    href: '/services/custom-web-development',
+    summary: 'Build portals, dashboards, CRMs, and booking systems.',
+  },
+  {
+    slug: 'ui-ux-design',
+    title: 'UI/UX Product Design',
+    href: '/services/ui-ux-design',
+    summary: 'Design interfaces users understand and trust.',
+  },
+  {
+    slug: 'cloud-devops',
+    title: 'Cloud & DevOps',
+    href: '/services/cloud-devops',
+    summary: 'Launch faster with stable deployment and infrastructure.',
+  },
+  {
+    slug: 'mobile-app-development',
+    title: 'Mobile App Development',
+    href: '/services/mobile-app-development',
+    summary: 'Bring your platform to iOS and Android.',
+  },
+  {
+    slug: 'data-analytics',
+    title: 'Data Analytics & BI',
+    href: '/services/data-analytics',
+    summary: 'Turn scattered data into clear decisions.',
+  },
+  {
+    slug: 'growth-marketing-seo',
+    title: 'Growth Marketing & SEO',
+    href: '/services/growth-marketing-seo',
+    summary: 'Improve visibility, traffic quality, and conversions.',
+  },
+  {
+    slug: 'technical-consulting',
+    title: 'Technical Consulting',
+    href: '/services/technical-consulting',
+    summary: 'Get the right roadmap before you build.',
+  },
+];
+
+const bestSellingSlugs = [
+  'ai-automation-agents',
+  'ai-saas-mvp-development',
+  'custom-web-development',
+];
+
+const recommendationMap: Record<string, string[]> = {
+  'ai-automation-agents': ['ai-saas-mvp-development', 'custom-web-development', 'data-analytics'],
+  'ai-saas-mvp-development': ['ai-automation-agents', 'ui-ux-design', 'cloud-devops'],
+  'custom-web-development': ['ai-automation-agents', 'data-analytics', 'cloud-devops'],
+  'ui-ux-design': ['custom-web-development', 'ai-saas-mvp-development', 'growth-marketing-seo'],
+  'cloud-devops': ['custom-web-development', 'ai-saas-mvp-development', 'technical-consulting'],
+  'mobile-app-development': ['ui-ux-design', 'custom-web-development', 'cloud-devops'],
+  'data-analytics': ['ai-automation-agents', 'custom-web-development', 'technical-consulting'],
+  'growth-marketing-seo': ['ui-ux-design', 'custom-web-development', 'data-analytics'],
+  'technical-consulting': ['ai-saas-mvp-development', 'custom-web-development', 'cloud-devops'],
+};
+
+function getServiceBySlug(slug: string) {
+  return serviceCatalog.find((service) => service.slug === slug);
+}
+
+function getRecommendedSlugs(currentSlug: string, history: string[], sourceHint: string) {
+  const hinted = /chatbot|automation|whatsapp|lead|booking/i.test(sourceHint)
+    ? ['ai-automation-agents', 'custom-web-development', 'data-analytics']
+    : /seo|growth|traffic|content/i.test(sourceHint)
+      ? ['growth-marketing-seo', 'ui-ux-design', 'data-analytics']
+      : /mobile|ios|android/i.test(sourceHint)
+        ? ['mobile-app-development', 'ui-ux-design', 'cloud-devops']
+        : /dashboard|analytics|data|bi/i.test(sourceHint)
+          ? ['data-analytics', 'ai-automation-agents', 'custom-web-development']
+          : [];
+
+  return [...hinted, ...(recommendationMap[currentSlug] || []), ...history]
+    .filter((slug) => slug !== currentSlug)
+    .filter((slug, index, list) => list.indexOf(slug) === index)
+    .slice(0, 3);
+}
+
+function useVisitorContext(currentSlug: string) {
+  const [isReturning, setIsReturning] = React.useState(false);
+  const [viewedSlugs, setViewedSlugs] = React.useState<string[]>([]);
+  const [localTime, setLocalTime] = React.useState('');
+  const [sourceHint, setSourceHint] = React.useState('');
+
+  React.useEffect(() => {
+    const formatTime = () => {
+      setLocalTime(
+        new Intl.DateTimeFormat(undefined, {
+          hour: 'numeric',
+          minute: '2-digit',
+          timeZoneName: 'short',
+        }).format(new Date())
+      );
+    };
+
+    formatTime();
+    const interval = window.setInterval(formatTime, 60_000);
+
+    const hasVisited = window.localStorage.getItem('megicode:returningVisitor') === 'true';
+    const previous = JSON.parse(
+      window.localStorage.getItem('megicode:viewedServices') || '[]'
+    ) as string[];
+    const nextViewed = [currentSlug, ...previous.filter((slug) => slug !== currentSlug)].slice(
+      0,
+      5
+    );
+
+    window.localStorage.setItem('megicode:returningVisitor', 'true');
+    window.localStorage.setItem('megicode:viewedServices', JSON.stringify(nextViewed));
+    window.sessionStorage.setItem('megicode:lastService', currentSlug);
+
+    window.setTimeout(() => {
+      setIsReturning(hasVisited);
+      setViewedSlugs(previous.filter((slug) => slug !== currentSlug).slice(0, 3));
+      setSourceHint(`${document.referrer} ${window.location.pathname}`.toLowerCase());
+    }, 0);
+
+    return () => window.clearInterval(interval);
+  }, [currentSlug]);
+
+  return { isReturning, viewedSlugs, localTime, sourceHint };
+}
 
 export function OurProcess({
   steps,
@@ -120,6 +263,312 @@ export function ServiceProofStrip({ proof, theme }: { proof: string; theme?: str
       />
       <span style={{ color: '#4573df', fontWeight: 800, flexShrink: 0 }}>Proof</span>
       <span>{proof}</span>
+    </section>
+  );
+}
+
+export function ServicePersonalizationPanel({
+  currentSlug,
+  currentTitle,
+  primaryCta,
+  onConsultationClick,
+  theme,
+}: {
+  currentSlug: string;
+  currentTitle: string;
+  primaryCta: string;
+  onConsultationClick: () => void;
+  theme?: string;
+}) {
+  const { isReturning, viewedSlugs, localTime } = useVisitorContext(currentSlug);
+  const isDark = theme === 'dark';
+  const heading = isDark ? '#f8fafc' : '#1d2127';
+  const text = isDark ? '#dbe6fb' : '#334155';
+  const panel = isDark
+    ? 'linear-gradient(135deg, rgba(29,33,39,0.96), rgba(36,41,54,0.92))'
+    : 'linear-gradient(135deg, #ffffff, #f8fafc)';
+  const quickLinks = isReturning
+    ? viewedSlugs.map(getServiceBySlug).filter(Boolean)
+    : bestSellingSlugs.map(getServiceBySlug).filter(Boolean);
+
+  return (
+    <section
+      aria-label="Personalized service guidance"
+      style={{
+        width: 'min(1120px, calc(100% - 32px))',
+        margin: '0 auto 2.5rem',
+        border: isDark ? '1px solid rgba(123,160,255,0.22)' : '1px solid rgba(69,115,223,0.16)',
+        borderRadius: 22,
+        padding: '1.25rem',
+        background: panel,
+        boxShadow: isDark ? '0 18px 48px rgba(0,0,0,0.22)' : '0 18px 48px rgba(69,115,223,0.08)',
+      }}
+    >
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))',
+          gap: '1rem',
+          alignItems: 'center',
+        }}
+      >
+        <div>
+          <p
+            style={{
+              margin: '0 0 0.35rem',
+              color: '#4573df',
+              fontSize: '0.78rem',
+              fontWeight: 800,
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+            }}
+          >
+            {isReturning ? 'Welcome back' : 'New here? Start with the proven paths'}
+          </p>
+          <h2
+            style={{
+              margin: 0,
+              color: heading,
+              fontSize: 'clamp(1.25rem, 2vw, 1.7rem)',
+              lineHeight: 1.2,
+              letterSpacing: 0,
+            }}
+          >
+            {isReturning
+              ? `Continue exploring ${currentTitle} with a faster next step.`
+              : 'Choose the outcome you want, then book the right consultation.'}
+          </h2>
+          <p style={{ margin: '0.75rem 0 0', color: text, lineHeight: 1.6, fontWeight: 620 }}>
+            Local time: {localTime || 'detecting...'} · Remote-first delivery · Serving clients in
+            5+ countries.
+          </p>
+        </div>
+
+        <div style={{ display: 'grid', gap: '0.75rem' }}>
+          <button
+            type="button"
+            onClick={onConsultationClick}
+            style={{
+              border: 0,
+              borderRadius: 999,
+              padding: '0.9rem 1.35rem',
+              background: 'linear-gradient(135deg, #ff9800, #f97316)',
+              color: '#ffffff',
+              fontWeight: 800,
+              fontSize: '0.98rem',
+              cursor: 'pointer',
+              boxShadow: '0 14px 30px rgba(249,115,22,0.28)',
+              width: 'fit-content',
+            }}
+          >
+            {isReturning ? primaryCta : 'Get a Free AI Consultation'}
+          </button>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.55rem' }}>
+            {quickLinks.map(
+              (service) =>
+                service && (
+                  <Link
+                    key={service.slug}
+                    href={service.href}
+                    style={{
+                      borderRadius: 999,
+                      padding: '0.55rem 0.8rem',
+                      border: isDark
+                        ? '1px solid rgba(123,160,255,0.26)'
+                        : '1px solid rgba(69,115,223,0.18)',
+                      color: '#4573df',
+                      background: isDark ? 'rgba(123,160,255,0.08)' : 'rgba(69,115,223,0.08)',
+                      textDecoration: 'none',
+                      fontWeight: 750,
+                      fontSize: '0.84rem',
+                    }}
+                  >
+                    {service.title}
+                  </Link>
+                )
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function ServiceConversionPanel({
+  copy,
+  primaryCta,
+  onConsultationClick,
+  theme,
+}: {
+  copy: ServicePageCopy;
+  primaryCta: string;
+  onConsultationClick: () => void;
+  theme?: string;
+}) {
+  const isDark = theme === 'dark';
+  return (
+    <section
+      aria-label="Service action prompt"
+      style={{
+        width: 'min(1120px, calc(100% - 32px))',
+        margin: '2.5rem auto',
+        borderRadius: 24,
+        padding: '1.4rem',
+        background: 'linear-gradient(135deg, #4573df, #2d4fa2)',
+        color: '#ffffff',
+        boxShadow: isDark ? '0 22px 52px rgba(0,0,0,0.28)' : '0 22px 52px rgba(69,115,223,0.18)',
+      }}
+    >
+      <div
+        style={{
+          display: 'flex',
+          gap: '1rem',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+        }}
+      >
+        <div style={{ maxWidth: 720 }}>
+          <p
+            style={{
+              margin: '0 0 0.35rem',
+              fontWeight: 850,
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              fontSize: '0.78rem',
+              color: 'rgba(255,255,255,0.78)',
+            }}
+          >
+            Outcome first
+          </p>
+          <h2
+            style={{
+              margin: 0,
+              fontSize: 'clamp(1.35rem, 2.2vw, 2rem)',
+              lineHeight: 1.18,
+              letterSpacing: 0,
+              color: '#ffffff',
+            }}
+          >
+            {copy.abVariant}
+          </h2>
+        </div>
+        <button
+          type="button"
+          onClick={onConsultationClick}
+          style={{
+            border: 0,
+            borderRadius: 999,
+            padding: '0.95rem 1.45rem',
+            background: '#ff9800',
+            color: '#ffffff',
+            fontWeight: 850,
+            fontSize: '0.98rem',
+            cursor: 'pointer',
+            boxShadow: '0 16px 32px rgba(0,0,0,0.22)',
+          }}
+        >
+          {primaryCta}
+        </button>
+      </div>
+    </section>
+  );
+}
+
+export function ServiceRecommendationPanel({
+  currentSlug,
+  theme,
+}: {
+  currentSlug: string;
+  theme?: string;
+}) {
+  const { viewedSlugs, sourceHint } = useVisitorContext(currentSlug);
+  const isDark = theme === 'dark';
+  const heading = isDark ? '#f8fafc' : '#1d2127';
+  const text = isDark ? '#dbe6fb' : '#334155';
+  const recommended = getRecommendedSlugs(currentSlug, viewedSlugs, sourceHint)
+    .map(getServiceBySlug)
+    .filter(Boolean);
+
+  return (
+    <section
+      aria-labelledby="smart-recommendations-title"
+      style={{
+        margin: '3rem 0',
+        display: 'grid',
+        gap: '1rem',
+      }}
+    >
+      <div>
+        <p
+          style={{
+            margin: '0 0 0.45rem',
+            color: '#4573df',
+            fontWeight: 850,
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            fontSize: '0.8rem',
+          }}
+        >
+          Recommended next
+        </p>
+        <h2
+          id="smart-recommendations-title"
+          style={{
+            margin: 0,
+            color: heading,
+            fontSize: 'clamp(1.45rem, 2.2vw, 2rem)',
+            lineHeight: 1.2,
+            letterSpacing: 0,
+          }}
+        >
+          Services that usually pair well with this goal
+        </h2>
+      </div>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))',
+          gap: '1rem',
+        }}
+      >
+        {recommended.map(
+          (service) =>
+            service && (
+              <Link
+                key={service.slug}
+                href={service.href}
+                style={{
+                  border: isDark
+                    ? '1px solid rgba(123,160,255,0.22)'
+                    : '1px solid rgba(69,115,223,0.16)',
+                  borderRadius: 18,
+                  padding: '1.1rem',
+                  background: isDark ? 'rgba(36,41,54,0.9)' : 'rgba(255,255,255,0.9)',
+                  boxShadow: isDark
+                    ? '0 14px 34px rgba(0,0,0,0.16)'
+                    : '0 14px 34px rgba(69,115,223,0.07)',
+                  textDecoration: 'none',
+                }}
+              >
+                <h3
+                  style={{
+                    margin: '0 0 0.45rem',
+                    color: heading,
+                    fontSize: '1.02rem',
+                    lineHeight: 1.3,
+                    letterSpacing: 0,
+                  }}
+                >
+                  {service.title}
+                </h3>
+                <p style={{ margin: 0, color: text, lineHeight: 1.55, fontWeight: 600 }}>
+                  {service.summary}
+                </p>
+              </Link>
+            )
+        )}
+      </div>
     </section>
   );
 }

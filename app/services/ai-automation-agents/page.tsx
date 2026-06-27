@@ -33,9 +33,12 @@ import NavBarMobile from '../../../components/NavBar_Mobile/NavBar-mobile';
 import { useTheme } from '../../../context/ThemeContext';
 import { useInViewAnimation } from '../../../hooks/useInViewAnimation';
 import {
+  ServiceConversionPanel,
   ServiceDecisionGuide,
   ServiceFAQs,
+  ServicePersonalizationPanel,
   ServiceProofStrip,
+  ServiceRecommendationPanel,
   ServiceUsabilityBlocks,
 } from '../ServiceDetailSections';
 import servicePageCopy from '../servicePageCopy';
@@ -255,6 +258,13 @@ export default function AutomationIntegrationPage() {
         </section>
 
         <ServiceProofStrip proof={serviceCopy.proofMicroLine} theme={theme} />
+        <ServicePersonalizationPanel
+          currentSlug="ai-automation-agents"
+          currentTitle={service.title!}
+          primaryCta={serviceCopy.primaryCta}
+          onConsultationClick={openCalendly}
+          theme={theme}
+        />
 
         {/* Service Overview - Side-by-side layout */}
         {/* Section divider */}
@@ -427,6 +437,13 @@ export default function AutomationIntegrationPage() {
           </div>
         </section>
 
+        <ServiceRecommendationPanel currentSlug="ai-automation-agents" theme={theme} />
+        <ServiceConversionPanel
+          copy={serviceCopy}
+          primaryCta={serviceCopy.primaryCta}
+          onConsultationClick={openCalendly}
+          theme={theme}
+        />
         <ServiceDecisionGuide copy={serviceCopy} theme={theme} />
 
         {/* How We Work Section */}
@@ -522,26 +539,41 @@ export default function AutomationIntegrationPage() {
             href="/contact"
             className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}
             style={{
-              display: 'inline-block',
-              marginTop: 8,
-              textDecoration: 'underline',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginTop: 14,
+              marginRight: 10,
+              padding: '0.75rem 1.15rem',
+              borderRadius: 999,
+              border: '1px solid rgba(255,255,255,0.42)',
+              background: 'rgba(255,255,255,0.12)',
+              color: '#ffffff',
+              textDecoration: 'none',
               fontSize: '0.95rem',
+              fontWeight: 800,
             }}
           >
-            Or send us a message
+            Send Project Details
           </a>
           <Link
             href="/projects"
             className={`${commonStyles.ctaDesc} ${themeStyles.ctaDesc}`}
             style={{
-              display: 'inline-block',
-              marginTop: 12,
-              textDecoration: 'underline',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginTop: 14,
+              padding: '0.75rem 1.15rem',
+              borderRadius: 999,
+              background: 'rgba(255,255,255,0.92)',
+              color: '#2d4fa2',
+              textDecoration: 'none',
               fontSize: '0.95rem',
-              opacity: 0.85,
+              fontWeight: 800,
             }}
           >
-            See Our Case Studies &rarr;
+            View Case Studies
           </Link>
         </section>
       </main>

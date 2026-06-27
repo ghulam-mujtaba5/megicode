@@ -53,6 +53,18 @@ body {
   --md-primary: #4573df;
   --md-primary-variant: #2d4fa2;
   --md-secondary: #ff9800;
+  --brand-primary: #4573df;
+  --brand-primary-dark: #2d4fa2;
+  --brand-accent: #ff9800;
+  --brand-surface: #f8fafc;
+  --brand-muted-surface: #e8eaf6;
+  --brand-ink: #1d2127;
+  --brand-text: #334155;
+  --brand-radius-card: 18px;
+  --brand-radius-button: 999px;
+  --brand-shadow-cta: 0 16px 34px rgba(69, 115, 223, 0.24);
+  --brand-cta-primary-bg: linear-gradient(135deg, #4573df, #2d4fa2);
+  --brand-cta-accent-bg: linear-gradient(135deg, #ff9800, #f97316);
   --md-background: #fff;
   --md-surface: #f5f7fa;
   --md-error: #b00020;
