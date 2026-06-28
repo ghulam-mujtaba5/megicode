@@ -510,15 +510,21 @@ export default function ContactPage() {
                       <option value="" disabled hidden>
                         Select a service…
                       </option>
-                      <option value="ai-ml">AI &amp; Machine Learning</option>
-                      <option value="web-development">Web Development</option>
-                      <option value="mobile-apps">Mobile Applications</option>
-                      <option value="ui-ux-design">UI/UX Design</option>
-                      <option value="cloud-devops">Cloud &amp; DevOps</option>
-                      <option value="data-analytics">Data Analytics &amp; BI</option>
-                      <option value="automation">Automation &amp; Integration</option>
-                      <option value="consulting">IT Consulting</option>
-                      <option value="other">Other</option>
+                      <option value="ai-automation-agents">AI Automation &amp; Agents</option>
+                      <option value="ai-saas-mvp-development">AI SaaS / MVP Development</option>
+                      <option value="custom-web-platform">
+                        Custom Web App / Business Platform
+                      </option>
+                      <option value="clinic-booking-system">
+                        Clinic / Appointment / Booking System
+                      </option>
+                      <option value="website-seo-leads">Website + SEO + Lead Generation</option>
+                      <option value="ui-ux-product-design">UI/UX Product Design</option>
+                      <option value="cloud-devops-deployment">Cloud / DevOps / Deployment</option>
+                      <option value="technical-consulting-roadmap">
+                        Technical Consulting / Roadmap
+                      </option>
+                      <option value="not-sure-yet">Not sure yet</option>
                     </select>
                     <label htmlFor="service" className={styles.floatingLabel}>
                       Service Interest *

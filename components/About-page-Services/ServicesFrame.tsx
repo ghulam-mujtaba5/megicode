@@ -204,6 +204,46 @@ const SERVICES: ServiceItem[] = [
   },
 ];
 
+const BUYER_SITUATIONS = [
+  {
+    number: '01',
+    badge: 'Lead automation',
+    iconSrc: '/ds%26ai-icon.svg',
+    problem: 'I am losing leads or wasting time manually',
+    outcome: 'AI agents, instant replies, booking flows, follow-ups, and workflow automation.',
+    result: 'Stop late replies and manual handoffs',
+    href: '/services/ai-automation-agents',
+  },
+  {
+    number: '02',
+    badge: 'AI product build',
+    iconSrc: '/Ai%20icon.svg',
+    problem: 'I have an AI product or SaaS idea',
+    outcome: 'MVP roadmap, product architecture, LLM features, dashboard, and launch support.',
+    result: 'Move from idea to a buildable product',
+    href: '/services/ai-saas-mvp-development',
+  },
+  {
+    number: '03',
+    badge: 'Business platform',
+    iconSrc: '/web%20app%20icon.svg',
+    problem: 'My business needs a custom portal or dashboard',
+    outcome: 'Web apps, CRMs, booking systems, internal tools, client portals, and reports.',
+    result: 'Replace scattered tools with one system',
+    href: '/services/custom-web-development',
+  },
+  {
+    number: '04',
+    badge: 'Roadmap clarity',
+    iconSrc: '/it-consulting-support-icon.svg',
+    problem: 'I am not sure what to build first',
+    outcome:
+      'Technical roadmap, stack decision, risk review, and build plan before spending heavily.',
+    result: 'Choose the right first move before committing budget',
+    href: '/services/technical-consulting',
+  },
+];
+
 // ─── Animation variants ───────────────────────────────────────────────────────
 
 const EASE_OUT: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -297,22 +337,68 @@ const ServicesFrame = () => {
         </div>
 
         <h2 id="services-heading" className={`${commonStyles.sectionTitle} ${t.sectionTitle}`}>
-          Everything you need to{' '}
+          What do you need help with?{' '}
           <span className={`${commonStyles.titleAccent} ${t.titleAccent}`}>
-            build, scale &amp; grow.
+            Choose by business outcome.
           </span>
         </h2>
         <p className={`${commonStyles.sectionSub} ${t.sectionSub}`}>
-          End-to-end software solutions — from AI-powered products to cloud infrastructure —
-          delivered by a team obsessed with craft and outcomes.
+          Start from the problem your buyer, team, or founder is feeling today, then move into the
+          right Megicode service path.
         </p>
       </motion.header>
+
+      <motion.div
+        className={commonStyles.situationGrid}
+        variants={stagger}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: '-50px' }}
+        aria-label="Service selection by buyer situation"
+      >
+        {BUYER_SITUATIONS.map((item, index) => (
+          <motion.article
+            key={item.problem}
+            variants={cardIn}
+            className={`${commonStyles.situationCard} ${t.situationCard}`}
+            style={{ '--situation-index': index } as React.CSSProperties}
+          >
+            <Link href={item.href} className={commonStyles.situationLink}>
+              <span className={commonStyles.situationTopline}>
+                <span className={`${commonStyles.situationIcon} ${t.situationIcon}`}>
+                  <Image src={item.iconSrc} alt="" width={32} height={32} unoptimized />
+                </span>
+                <span className={`${commonStyles.situationNumber} ${t.situationNumber}`}>
+                  {item.number}
+                </span>
+              </span>
+              <span className={`${commonStyles.situationBadge} ${t.situationBadge}`}>
+                {item.badge}
+              </span>
+              <span className={commonStyles.situationBody}>
+                <h3 className={`${commonStyles.situationTitle} ${t.situationTitle}`}>
+                  {item.problem}
+                </h3>
+                <p className={`${commonStyles.situationOutcome} ${t.situationOutcome}`}>
+                  {item.outcome}
+                </p>
+              </span>
+              <span className={`${commonStyles.situationResult} ${t.situationResult}`}>
+                {item.result}
+              </span>
+              <span className={`${commonStyles.situationCta} ${t.situationCta}`}>
+                Match this service <HiArrowRight size={14} aria-hidden="true" />
+              </span>
+            </Link>
+          </motion.article>
+        ))}
+      </motion.div>
 
       {/* Divider node between header and grid */}
       <div
         className="divider-node"
         aria-hidden="true"
-        style={{ maxWidth: 320, margin: '0 auto 8px' }}
+        style={{ maxWidth: 320, margin: '42px auto 8px' }}
       >
         <div className="divider-node-dot" />
       </div>

@@ -1,11 +1,30 @@
-/* ── Dark Theme: Service Card ── */
-
 .card {
   background: #262b34;
   border: 1.5px solid rgba(123, 160, 255, 0.1);
   box-shadow:
     0 2px 8px rgba(0, 0, 0, 0.18),
     0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.card::before {
+  background:
+    linear-gradient(135deg, rgba(69, 115, 223, 0.13), transparent 52%),
+    radial-gradient(circle at 14% 12%, rgba(255, 152, 0, 0.1), transparent 34%);
+}
+
+.featuredCard {
+  background: linear-gradient(145deg, #1c3163 0%, #172a52 42%, #0d1836 100%);
+  border-color: rgba(69, 115, 223, 0.46);
+}
+
+.featuredCard::before {
+  background:
+    radial-gradient(ellipse at 78% 10%, rgba(69, 115, 223, 0.44), transparent 56%),
+    radial-gradient(ellipse at 12% 90%, rgba(255, 152, 0, 0.16), transparent 46%);
+}
+
+.revealGlow {
+  background: linear-gradient(135deg, #4573df, #2d4fa2);
 }
 
 .card:hover {
@@ -15,31 +34,29 @@
     0 0 0 1px rgba(69, 115, 223, 0.15);
 }
 
-.iconWrapper {
+.badge,
+.indexPill {
+  color: #c0d4ff;
   background: rgba(69, 115, 223, 0.12);
-  border: 1px solid rgba(69, 115, 223, 0.2);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.card:hover .iconWrapper {
-  background: rgba(69, 115, 223, 0.18);
-  box-shadow: 0 4px 16px rgba(69, 115, 223, 0.15);
+  border: 1px solid rgba(69, 115, 223, 0.22);
 }
 
 .title {
   color: #eaf6ff;
 }
 
+.bestFor {
+  color: #9aa4b2;
+}
+
 .description {
   color: #b0bec5;
 }
 
-.divider {
-  background: linear-gradient(90deg, rgba(123, 160, 255, 0.15), transparent);
-}
-
-.featuresContainer {
-  border-top: none;
+.resultBox {
+  color: #d7e4ff;
+  background: rgba(69, 115, 223, 0.12);
+  border: 1px solid rgba(69, 115, 223, 0.22);
 }
 
 .feature {
@@ -49,6 +66,17 @@
 .featureIcon {
   background: rgba(69, 115, 223, 0.15);
   color: #7ba0ff;
+}
+
+.pathStep {
+  color: #d7dde5;
+  background: rgba(69, 115, 223, 0.1);
+  border: 1px solid rgba(69, 115, 223, 0.18);
+}
+
+.pathStep span {
+  color: #c0d4ff;
+  background: rgba(69, 115, 223, 0.16);
 }
 
 .techBadge {
@@ -65,6 +93,7 @@
 .ctaRow {
   color: #7ba0ff;
   background: rgba(69, 115, 223, 0.1);
+  border: 1px solid rgba(69, 115, 223, 0.16);
 }
 
 .card:hover .ctaRow {

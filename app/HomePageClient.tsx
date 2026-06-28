@@ -19,11 +19,18 @@ import MegicodeHeroAnimationAdvancedClient from './megicode/MegicodeHeroAnimatio
 const AboutMeSection = dynamic(() => import('../components/AboutMeCompany/AboutMeSectionLight'), {
   loading: () => <LoadingAnimation size="medium" />,
 });
+const HomeProof = dynamic(() => import('../components/HomeProof/HomeProof'));
 const Tagline = dynamic(() => import('../components/Tagline/Tagline'));
 const ServicesFrame = dynamic(() => import('../components/About-page-Services/ServicesFrame'), {
   loading: () => <LoadingAnimation size="medium" />,
 });
-const TechStack = dynamic(() => import('../components/TechStack/TechStack'), {
+const HomeShippedPlatforms = dynamic(
+  () => import('../components/HomeShippedPlatforms/HomeShippedPlatforms'),
+  {
+    loading: () => <LoadingAnimation size="medium" />,
+  }
+);
+const HomeTestimonials = dynamic(() => import('../components/HomeTestimonials/HomeTestimonials'), {
   loading: () => <LoadingAnimation size="medium" />,
 });
 const ContactSection = dynamic(() => import('../components/Contact/ConatctUs'), {
@@ -72,6 +79,7 @@ export default function HomePageClient() {
             <WelcomeFrame />
             <MegicodeHeroAnimationAdvancedClient />
           </section>
+          <HomeProof />
           {/* About Me Section */}
           <section id="about-section" aria-labelledby="about-heading" className="content-section">
             <AboutMeSection />
@@ -86,14 +94,8 @@ export default function HomePageClient() {
             <ServicesFrame />
           </section>
 
-          {/* Tech Stack Section */}
-          <section
-            id="tech-stack-section"
-            aria-labelledby="tech-stack-heading"
-            className="content-section"
-          >
-            <TechStack />
-          </section>
+          <HomeShippedPlatforms />
+          <HomeTestimonials />
           {/* Contact Section */}
           <section
             id="contact-section"

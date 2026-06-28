@@ -1,32 +1,79 @@
 .techStackSection {
-  background-color: #f8f9fa;
-  color: #343a40;
+  background: linear-gradient(135deg, rgba(248, 250, 252, 0.98) 0%, rgba(232, 234, 246, 0.82) 100%);
+  color: #1d2127;
+}
+
+.eyebrow {
+  color: #4573df;
+  background: rgba(69, 115, 223, 0.09);
+  border: 1px solid rgba(69, 115, 223, 0.16);
 }
 
 .heading {
-  color: #212529;
+  color: #0f172a;
 }
 
 .subheading {
-  color: #6c757d;
+  color: #64748b;
 }
 
 .categoryCard {
-  background-color: #ffffff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(69, 115, 223, 0.13);
+  box-shadow:
+    0 12px 32px rgba(69, 115, 223, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(14px);
+}
+
+.categoryCard::before {
+  background:
+    linear-gradient(135deg, rgba(69, 115, 223, 0.08), transparent 52%),
+    radial-gradient(circle at 12% 10%, rgba(255, 152, 0, 0.1), transparent 34%);
+}
+
+.cardGlow {
+  background: linear-gradient(135deg, #4573df, #2d4fa2);
 }
 
 .categoryCard:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  border-color: rgba(69, 115, 223, 0.34);
+  box-shadow: 0 20px 46px rgba(69, 115, 223, 0.13);
+}
+
+.categoryIcon {
+  color: #4573df;
+  background: rgba(69, 115, 223, 0.09);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.76);
+}
+
+.techCount {
+  color: #2d4fa2;
+  background: rgba(69, 115, 223, 0.08);
+  border: 1px solid rgba(69, 115, 223, 0.13);
 }
 
 .categoryTitle {
-  border-color: #4573df; /* Primary brand color */
-  color: #343a40;
+  color: #0f172a;
+}
+
+.categoryOutcome {
+  color: #64748b;
+}
+
+.categoryProof {
+  color: #1d3f8f;
+  background: rgba(69, 115, 223, 0.08);
+  border: 1px solid rgba(69, 115, 223, 0.13);
 }
 
 .techItem {
-  background-color: #e9ecef;
-  color: #495057;
+  background: rgba(241, 245, 249, 0.9);
+  color: #334155;
+  border: 1px solid rgba(69, 115, 223, 0.08);
+}
+
+.techItem:hover {
+  background: rgba(255, 255, 255, 0.96);
+  border-color: rgba(69, 115, 223, 0.2);
 }

@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import { HiArrowRight, HiBolt, HiCheckCircle, HiSparkles, HiUserGroup } from 'react-icons/hi2';
 
 import { easeOut, motion } from 'framer-motion';
 
@@ -22,6 +23,11 @@ interface ServiceCardProps {
   delay?: number;
   index?: number;
   href?: string;
+  badge?: string;
+  bestFor?: string;
+  result?: string;
+  path?: string[];
+  featured?: boolean;
 }
 
 const ServiceCard: React.FC<ServiceCardProps> = ({
@@ -34,6 +40,11 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   delay = 0,
   index = 0,
   href,
+  badge = 'Service path',
+  bestFor = 'Founders and teams who need a reliable build partner',
+  result = 'A clearer path from idea to shipped software',
+  path = ['Scope', 'Build', 'Launch'],
+  featured = false,
 }) => {
   const { theme } = useTheme();
   const themeStyles = theme === 'dark' ? darkStyles : lightStyles;
@@ -76,27 +87,43 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
 
   return (
     <motion.div
-      className={`${commonStyles.card} ${themeStyles.card}`}
+      className={`${commonStyles.card} ${featured ? commonStyles.featuredCard : ''} ${themeStyles.card} ${featured ? themeStyles.featuredCard : ''}`}
       variants={cardVariants}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: '-40px' }}
+      whileHover={{ y: -7 }}
     >
-      {/* Top accent bar */}
       <div className={commonStyles.accentBar} />
+      <span className={`${commonStyles.revealGlow} ${themeStyles.revealGlow}`} aria-hidden="true" />
 
       <a href={href} className={commonStyles.cardLink} aria-label={`Learn more about ${title}`}>
         <div className={commonStyles.cardContent}>
-          {/* Header: Icon + Title */}
+          <div className={commonStyles.topMeta}>
+            <span className={`${commonStyles.badge} ${themeStyles.badge}`}>
+              <HiSparkles size={14} aria-hidden="true" />
+              {badge}
+            </span>
+            <span className={`${commonStyles.indexPill} ${themeStyles.indexPill}`}>
+              {String(index + 1).padStart(2, '0')}
+            </span>
+          </div>
+
           <div className={commonStyles.headerRow}>
             <ServiceIcon slug={slug} index={index} />
 
-            <motion.h3
-              className={`${commonStyles.title} ${themeStyles.title}`}
-              variants={itemVariants}
-            >
-              {title}
-            </motion.h3>
+            <div className={commonStyles.titleBlock}>
+              <motion.h3
+                className={`${commonStyles.title} ${themeStyles.title}`}
+                variants={itemVariants}
+              >
+                {title}
+              </motion.h3>
+              <span className={`${commonStyles.bestFor} ${themeStyles.bestFor}`}>
+                <HiUserGroup size={14} aria-hidden="true" />
+                {bestFor}
+              </span>
+            </div>
           </div>
 
           <motion.div variants={contentVariants} initial="hidden" animate="visible">
@@ -107,14 +134,27 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
               {description}
             </motion.p>
 
-            {/* Divider */}
-            <hr className={`${commonStyles.divider} ${themeStyles.divider}`} />
+            <motion.div
+              className={`${commonStyles.resultBox} ${themeStyles.resultBox}`}
+              variants={itemVariants}
+            >
+              <HiBolt size={17} aria-hidden="true" />
+              <span>{result}</span>
+            </motion.div>
 
             <motion.div
               className={`${commonStyles.featuresContainer} ${themeStyles.featuresContainer}`}
               variants={contentVariants}
             >
-              {/* Features */}
+              <motion.div className={commonStyles.pathRow} variants={itemVariants}>
+                {path.slice(0, 3).map((step, stepIndex) => (
+                  <span key={step} className={`${commonStyles.pathStep} ${themeStyles.pathStep}`}>
+                    <span>{stepIndex + 1}</span>
+                    {step}
+                  </span>
+                ))}
+              </motion.div>
+
               <motion.div className={commonStyles.featuresList}>
                 {features.slice(0, 3).map((feature, index) => (
                   <motion.div
@@ -123,14 +163,13 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
                     variants={itemVariants}
                   >
                     <span className={`${commonStyles.featureIcon} ${themeStyles.featureIcon}`}>
-                      &#10003;
+                      <HiCheckCircle size={14} aria-hidden="true" />
                     </span>
                     {feature}
                   </motion.div>
                 ))}
               </motion.div>
 
-              {/* Tech badges */}
               <motion.div className={commonStyles.techsList} variants={contentVariants}>
                 {techs.slice(0, 4).map((tech, index) => (
                   <motion.span
@@ -143,13 +182,14 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
                 ))}
               </motion.div>
 
-              {/* CTA */}
               <motion.div
                 className={`${commonStyles.ctaRow} ${themeStyles.ctaRow}`}
                 variants={itemVariants}
               >
                 {ctaText}
-                <span className={commonStyles.ctaIcon}>&#8594;</span>
+                <span className={commonStyles.ctaIcon}>
+                  <HiArrowRight size={15} aria-hidden="true" />
+                </span>
               </motion.div>
             </motion.div>
           </motion.div>

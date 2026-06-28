@@ -228,41 +228,289 @@ export function OurProcess({
   );
 }
 
+type EvidenceInsight = {
+  label: string;
+  title: string;
+  sourceContext: string;
+  execution: string;
+  shippedProof: string;
+};
+
+function getEvidenceInsight(proof: string): EvidenceInsight {
+  if (/bill gates|automation/i.test(proof)) {
+    return {
+      label: 'Workflow evidence',
+      title: 'Automation only works when the process is already mapped clearly.',
+      sourceContext:
+        'The point is not to replace judgment with blind bots. The real value comes from removing repeated handoffs, late replies, copy-paste work, and missed follow-ups.',
+      execution:
+        'Megicode maps the workflow first, then adds AI agents, logs, fallbacks, human review points, and tool integrations so automation stays controlled.',
+      shippedProof:
+        'Relevant build: clinic platform with WhatsApp booking, patient records, billing flow, reminders, and operational handoffs.',
+    };
+  }
+
+  if (/mit|genai|ai pilots/i.test(proof)) {
+    return {
+      label: 'AI product evidence',
+      title: 'AI features create value when they are part of the product workflow.',
+      sourceContext:
+        'Most weak AI pilots fail because the model sits outside the real user journey. Useful AI needs data, permissions, UX, measurement, and fallback paths.',
+      execution:
+        'Megicode scopes the MVP around one core job, then adds LLM features where they improve speed, decisions, search, scoring, summaries, or support.',
+      shippedProof:
+        'Relevant build: student platform serving 15,000+ active students with resources, calculators, reviews, and community workflows.',
+    };
+  }
+
+  if (/pwc|speed|convenience|easy experiences/i.test(proof)) {
+    return {
+      label: 'Platform evidence',
+      title: 'Custom software should make daily work faster, not just look custom.',
+      sourceContext:
+        'Buyers and teams reward speed, convenience, and clarity. A portal or dashboard must remove friction from the real business process.',
+      execution:
+        'Megicode models roles, data, approvals, reports, and customer touchpoints before UI so the platform fits operations instead of forcing workarounds.',
+      shippedProof:
+        'Relevant builds: clinic operations platform and CampusAxis-style student platform with admin, records, resources, and user-facing flows.',
+    };
+  }
+
+  if (/stanford|credible websites/i.test(proof)) {
+    return {
+      label: 'UX evidence',
+      title: 'Trust is designed through clarity, hierarchy, and useful signals.',
+      sourceContext:
+        'Users judge credibility quickly. Confusing screens, weak proof, unclear actions, and inconsistent components make the product feel risky.',
+      execution:
+        'Megicode redesigns flows around buyer intent, task clarity, states, responsive behavior, and reusable interface systems developers can ship.',
+      shippedProof:
+        'Relevant build: growth-agency website with funnel narrative, proof placement, pricing clarity, and booking-focused conversion paths.',
+    };
+  }
+
+  if (/dora|failure rate|recovery|delivery/i.test(proof)) {
+    return {
+      label: 'Delivery evidence',
+      title: 'Reliable launches depend on release discipline, not last-minute fixes.',
+      sourceContext:
+        'Strong teams measure delivery speed, change failure, recovery, and reliability because product trust depends on stable releases.',
+      execution:
+        'Megicode sets up deployment paths, environments, monitoring, rollback thinking, and release checks so the product can grow without fragile operations.',
+      shippedProof:
+        'Relevant delivery: SaaS and platform launches with production hosting, admin access, data flows, and post-launch maintenance readiness.',
+    };
+  }
+
+  if (/53%|mobile visits|3 seconds/i.test(proof)) {
+    return {
+      label: 'Mobile evidence',
+      title: 'Mobile users leave when speed and task flow are not designed first.',
+      sourceContext:
+        'Mobile performance and tap-level clarity matter because users decide before they read every detail.',
+      execution:
+        'Megicode plans navigation, loading states, core journeys, backend sync, notifications, and app-store readiness around repeated customer use.',
+      shippedProof:
+        'Relevant pattern: platform extensions where customer and staff workflows need fast access, clean states, and reliable backend connection.',
+    };
+  }
+
+  if (/mckinsey|core workflows|data/i.test(proof)) {
+    return {
+      label: 'Decision evidence',
+      title: 'Analytics works when it answers operational questions directly.',
+      sourceContext:
+        'Dashboards fail when they become chart collections. Leaders need one trusted view that explains performance, bottlenecks, and next actions.',
+      execution:
+        'Megicode connects sources, defines KPIs, cleans reporting logic, and builds dashboards around the decisions teams make every week.',
+      shippedProof:
+        'Relevant pattern: admin and reporting layers for platforms where records, bookings, users, and business activity need clear visibility.',
+    };
+  }
+
+  if (/cb insights|execution|product-market fit/i.test(proof)) {
+    return {
+      label: 'Roadmap evidence',
+      title: 'The first technical decision can shape the entire product cost.',
+      sourceContext:
+        'Execution risk grows when founders start with the wrong scope, stack, vendor, architecture, or release order.',
+      execution:
+        'Megicode turns business goals into MVP scope, architecture options, risk review, budget logic, and a build sequence before heavy spending.',
+      shippedProof:
+        'Relevant proof: product roadmaps and platform builds where scope, roles, launch path, and maintainability were planned before development.',
+    };
+  }
+
+  return {
+    label: 'Growth evidence',
+    title: 'Traffic becomes valuable only when the page helps buyers decide.',
+    sourceContext:
+      'SEO should connect search intent, page structure, proof, messaging, and conversion actions instead of chasing visits alone.',
+    execution:
+      'Megicode improves technical SEO, funnel narrative, analytics, proof placement, and CTAs so qualified visitors know what to do next.',
+    shippedProof:
+      'Relevant build: growth agency website with conversion-focused sections, proof, pricing clarity, and booking flow.',
+  };
+}
+
 export function ServiceProofStrip({ proof, theme }: { proof: string; theme?: string }) {
   const isDark = theme === 'dark';
+  const evidence = getEvidenceInsight(proof);
+  const cardBg = isDark ? 'rgba(38,43,52,0.88)' : 'rgba(255,255,255,0.9)';
+  const text = isDark ? '#dbe6fb' : '#334155';
+  const muted = isDark ? '#aeb9c9' : '#5f6f83';
+
   return (
     <section
       aria-label="Service proof point"
       style={{
         width: 'min(1120px, calc(100% - 32px))',
-        margin: '-0.5rem auto 2.4rem',
-        padding: '0.9rem 1.1rem',
-        borderRadius: 14,
+        margin: '-0.5rem auto 2.6rem',
+        padding: '1.1rem',
+        borderRadius: 24,
         border: isDark ? '1px solid rgba(123,160,255,0.22)' : '1px solid rgba(69,115,223,0.16)',
-        background: isDark ? 'rgba(29,33,39,0.82)' : 'rgba(255,255,255,0.86)',
-        boxShadow: isDark ? '0 14px 34px rgba(0,0,0,0.2)' : '0 12px 30px rgba(69,115,223,0.08)',
-        display: 'flex',
-        alignItems: 'center',
-        gap: '0.75rem',
-        color: isDark ? '#dce6ff' : '#334155',
-        fontSize: '0.92rem',
-        lineHeight: 1.55,
-        fontWeight: 600,
+        background: isDark
+          ? 'linear-gradient(135deg, rgba(29,33,39,0.96), rgba(38,43,52,0.92))'
+          : 'linear-gradient(135deg, #ffffff, #f8fafc)',
+        boxShadow: isDark ? '0 24px 58px rgba(0,0,0,0.24)' : '0 22px 52px rgba(69,115,223,0.11)',
+        color: text,
+        position: 'relative',
+        overflow: 'hidden',
       }}
     >
-      <span
+      <div
         aria-hidden="true"
         style={{
-          width: 10,
-          height: 10,
-          borderRadius: '50%',
-          background: '#4573df',
-          boxShadow: '0 0 0 6px rgba(69,115,223,0.12)',
-          flexShrink: 0,
+          position: 'absolute',
+          inset: 0,
+          background:
+            'linear-gradient(135deg, rgba(69,115,223,0.1), transparent 42%), radial-gradient(circle at 92% 12%, rgba(45,79,162,0.13), transparent 32%)',
+          pointerEvents: 'none',
         }}
       />
-      <span style={{ color: '#4573df', fontWeight: 800, flexShrink: 0 }}>Proof</span>
-      <span>{proof}</span>
+      <div style={{ position: 'relative', zIndex: 1 }}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.8rem',
+            flexWrap: 'wrap',
+            marginBottom: '1rem',
+          }}
+        >
+          <span
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.45rem',
+              color: '#4573df',
+              fontSize: '0.76rem',
+              fontWeight: 900,
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              padding: '0.42rem 0.72rem',
+              borderRadius: 999,
+              background: isDark ? 'rgba(69,115,223,0.16)' : 'rgba(69,115,223,0.09)',
+              border: isDark
+                ? '1px solid rgba(123,160,255,0.22)'
+                : '1px solid rgba(69,115,223,0.12)',
+            }}
+          >
+            <span
+              aria-hidden="true"
+              style={{
+                width: 8,
+                height: 8,
+                borderRadius: '50%',
+                background: '#4573df',
+                boxShadow: '0 0 0 5px rgba(69,115,223,0.12)',
+              }}
+            />
+            {evidence.label}
+          </span>
+          <span style={{ color: muted, fontSize: '0.9rem', fontWeight: 700 }}>{proof}</span>
+        </div>
+
+        <h2
+          style={{
+            margin: '0 0 1rem',
+            color: isDark ? '#f8fafc' : '#1d2127',
+            fontSize: 'clamp(1.25rem, 2.2vw, 1.75rem)',
+            lineHeight: 1.22,
+            letterSpacing: 0,
+          }}
+        >
+          {evidence.title}
+        </h2>
+
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 230px), 1fr))',
+            gap: '0.85rem',
+          }}
+        >
+          {[
+            ['Market reality', evidence.sourceContext],
+            ['Megicode approach', evidence.execution],
+            ['Relevant proof', evidence.shippedProof],
+          ].map(([title, body], index) => (
+            <article
+              key={title}
+              style={{
+                minHeight: 156,
+                padding: '1rem',
+                borderRadius: 18,
+                background: cardBg,
+                border: isDark
+                  ? '1px solid rgba(123,160,255,0.16)'
+                  : '1px solid rgba(69,115,223,0.11)',
+                boxShadow: isDark
+                  ? '0 12px 28px rgba(0,0,0,0.16)'
+                  : '0 12px 28px rgba(69,115,223,0.07)',
+              }}
+            >
+              <div
+                style={{
+                  width: 34,
+                  height: 34,
+                  borderRadius: 999,
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#ffffff',
+                  background: index === 1 ? '#2d4fa2' : '#4573df',
+                  fontWeight: 900,
+                  fontSize: '0.78rem',
+                  marginBottom: '0.75rem',
+                }}
+              >
+                {String(index + 1).padStart(2, '0')}
+              </div>
+              <h3
+                style={{
+                  margin: '0 0 0.45rem',
+                  color: isDark ? '#f1f5f9' : '#0f172a',
+                  fontSize: '0.98rem',
+                  lineHeight: 1.28,
+                }}
+              >
+                {title}
+              </h3>
+              <p
+                style={{
+                  margin: 0,
+                  color: muted,
+                  fontSize: '0.9rem',
+                  lineHeight: 1.58,
+                }}
+              >
+                {body}
+              </p>
+            </article>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }

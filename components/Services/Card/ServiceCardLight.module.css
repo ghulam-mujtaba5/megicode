@@ -1,30 +1,67 @@
-/* ── Light Theme: Service Card ── */
-
 .card {
-  background: #ffffff;
-  border: 1.5px solid #e0e6ed;
+  background: rgba(255, 255, 255, 0.84);
+  border: 1.5px solid rgba(69, 115, 223, 0.12);
   box-shadow:
-    0 2px 6px rgba(60, 80, 120, 0.06),
-    0 8px 24px rgba(60, 80, 120, 0.05);
+    0 14px 34px rgba(69, 115, 223, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(14px);
+}
+
+.card::before {
+  background:
+    linear-gradient(135deg, rgba(69, 115, 223, 0.08), transparent 52%),
+    radial-gradient(circle at 14% 12%, rgba(255, 152, 0, 0.12), transparent 34%);
+}
+
+.featuredCard {
+  background: linear-gradient(
+    145deg,
+    rgba(13, 27, 62, 0.96),
+    rgba(17, 29, 64, 0.96) 45%,
+    rgba(6, 14, 31, 0.96)
+  );
+  border-color: rgba(69, 115, 223, 0.36);
+}
+
+.featuredCard::before {
+  background:
+    radial-gradient(ellipse at 78% 10%, rgba(69, 115, 223, 0.34), transparent 56%),
+    radial-gradient(ellipse at 12% 90%, rgba(255, 152, 0, 0.18), transparent 46%);
+}
+
+.revealGlow {
+  background: linear-gradient(135deg, #4573df, #2d4fa2);
 }
 
 .card:hover {
-  border-color: #4573df;
+  border-color: rgba(69, 115, 223, 0.34);
   box-shadow:
-    0 8px 32px rgba(69, 115, 223, 0.12),
+    0 22px 48px rgba(69, 115, 223, 0.14),
     0 2px 8px rgba(69, 115, 223, 0.06);
 }
 
-.iconWrapper {
-  background: #f0f4ff;
-  border: 1px solid #dce4f8;
-  box-shadow: 0 2px 6px rgba(69, 115, 223, 0.05);
+.badge {
+  color: #2d4fa2;
+  background: rgba(69, 115, 223, 0.08);
+  border: 1px solid rgba(69, 115, 223, 0.14);
 }
 
-.card:hover .iconWrapper {
-  background: #e4ecff;
-  border-color: #b8ccf5;
-  box-shadow: 0 4px 14px rgba(69, 115, 223, 0.1);
+.featuredCard .badge {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.13);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.indexPill {
+  color: #4573df;
+  background: rgba(69, 115, 223, 0.08);
+  border: 1px solid rgba(69, 115, 223, 0.13);
+}
+
+.featuredCard .indexPill {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.11);
+  border-color: rgba(255, 255, 255, 0.18);
 }
 
 .title {
@@ -35,12 +72,27 @@
   color: #4a5568;
 }
 
-.divider {
-  background: linear-gradient(90deg, #e0e6ed, transparent);
+.bestFor {
+  color: #526070;
 }
 
-.featuresContainer {
-  border-top: none;
+.featuredCard .title,
+.featuredCard .description,
+.featuredCard .feature,
+.featuredCard .bestFor {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.resultBox {
+  color: #1d3f8f;
+  background: rgba(69, 115, 223, 0.08);
+  border: 1px solid rgba(69, 115, 223, 0.13);
+}
+
+.featuredCard .resultBox {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.18);
 }
 
 .feature {
@@ -50,6 +102,29 @@
 .featureIcon {
   background: #eef2ff;
   color: #4573df;
+}
+
+.pathStep {
+  color: #334155;
+  background: rgba(69, 115, 223, 0.07);
+  border: 1px solid rgba(69, 115, 223, 0.11);
+}
+
+.pathStep span {
+  color: #4573df;
+  background: rgba(69, 115, 223, 0.12);
+}
+
+.featuredCard .pathStep {
+  color: rgba(255, 255, 255, 0.86);
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.featuredCard .pathStep span,
+.featuredCard .featureIcon {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.14);
 }
 
 .techBadge {
@@ -64,11 +139,20 @@
 }
 
 .ctaRow {
-  color: #4573df;
-  background: #f0f4ff;
+  color: #2d4fa2;
+  background: rgba(69, 115, 223, 0.1);
+  border: 1px solid rgba(69, 115, 223, 0.2);
+  box-shadow: 0 8px 18px rgba(69, 115, 223, 0.08);
 }
 
 .card:hover .ctaRow {
   background: #4573df;
   color: #ffffff;
+}
+
+.featuredCard .techBadge,
+.featuredCard .ctaRow {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.18);
 }

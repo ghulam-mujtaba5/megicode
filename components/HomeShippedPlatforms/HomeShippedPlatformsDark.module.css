@@ -1,0 +1,60 @@
+.section {
+  background: #1d2127;
+}
+
+.eyebrow {
+  color: #c0d4ff;
+  background: rgba(69, 115, 223, 0.12);
+  border: 1px solid #3e444c;
+}
+
+.title {
+  color: #eaf6ff;
+}
+
+.subtitle {
+  color: #adb5bd;
+}
+
+.card {
+  background: #262b34;
+  border: 1px solid #3e444c;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
+}
+
+.card::before {
+  background:
+    linear-gradient(135deg, rgba(69, 115, 223, 0.13), transparent 54%),
+    radial-gradient(circle at 12% 12%, rgba(255, 152, 0, 0.12), transparent 34%);
+}
+
+.glow {
+  background: linear-gradient(135deg, #4573df, #2d4fa2);
+}
+
+.badge,
+.index,
+.stat {
+  color: #c0d4ff;
+  background: rgba(69, 115, 223, 0.12);
+  border: 1px solid rgba(69, 115, 223, 0.22);
+}
+
+.cardTitle {
+  color: #ffffff;
+}
+
+.result {
+  color: #d7dde5;
+}
+
+.proofImageWrap {
+  border: 1px solid rgba(123, 160, 255, 0.22);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+}
+
+.cta {
+  color: #ffffff;
+  background: linear-gradient(135deg, #4573df, #2d4fa2);
+  box-shadow: 0 14px 32px rgba(69, 115, 223, 0.24);
+}

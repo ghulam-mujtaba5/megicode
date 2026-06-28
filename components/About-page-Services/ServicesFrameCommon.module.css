@@ -59,6 +59,167 @@
   margin: 0;
 }
 
+/* ─── Buyer situation selector ───────────────────────────────────────────── */
+.situationGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  max-width: 1200px;
+  margin: -24px auto 0;
+}
+
+.situationCard {
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  transition:
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.28s ease,
+    box-shadow 0.28s ease;
+}
+
+.situationCard::before,
+.situationCard::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+}
+
+.situationCard::before {
+  inset: 0;
+  opacity: 0.9;
+}
+
+.situationCard::after {
+  width: 92px;
+  height: 92px;
+  right: -34px;
+  bottom: -34px;
+  border-radius: 999px;
+  opacity: 0.28;
+  transition:
+    transform 0.34s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.28s ease;
+}
+
+.situationCard:hover {
+  transform: translateY(-6px);
+}
+
+.situationCard:hover::after {
+  opacity: 0.45;
+  transform: scale(1.2);
+}
+
+.situationLink {
+  height: 100%;
+  min-height: 286px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  padding: 24px;
+  box-sizing: border-box;
+  color: inherit;
+  text-decoration: none;
+  position: relative;
+  z-index: 1;
+}
+
+.situationTopline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.situationIcon {
+  width: 50px;
+  height: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  flex-shrink: 0;
+  transition:
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.28s ease;
+}
+
+.situationCard:hover .situationIcon {
+  transform: translateY(-2px) rotate(-3deg) scale(1.05);
+}
+
+.situationNumber {
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  font-size: 0.78rem;
+  line-height: 1;
+  font-weight: 800;
+}
+
+.situationBadge {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 11px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.situationBody {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  flex: 1;
+}
+
+.situationTitle {
+  margin: 0;
+  font-size: 1.08rem;
+  line-height: 1.28;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.situationOutcome {
+  margin: 0;
+  font-size: 0.91rem;
+  line-height: 1.62;
+}
+
+.situationResult {
+  display: block;
+  padding: 11px 12px;
+  border-radius: 14px;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  font-weight: 800;
+}
+
+.situationCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  font-size: 0.84rem;
+  line-height: 1;
+  font-weight: 800;
+  padding-top: 2px;
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.situationCard:hover .situationCta {
+  transform: translateX(3px);
+}
+
 /* ─── Bento grid ──────────────────────────────────────────────────────────── */
 /*
   3-column layout:
@@ -509,6 +670,10 @@
   .sectionHead {
     margin-bottom: 48px;
   }
+  .situationGrid {
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: -18px;
+  }
 }
 
 /* Mobile: single column */
@@ -535,6 +700,15 @@
   .sectionHead {
     margin-bottom: 36px;
     gap: 10px;
+  }
+  .situationGrid {
+    grid-template-columns: 1fr;
+    margin-top: -12px;
+    gap: 10px;
+  }
+  .situationLink {
+    min-height: 0;
+    padding: 20px;
   }
 
   .cardInner {

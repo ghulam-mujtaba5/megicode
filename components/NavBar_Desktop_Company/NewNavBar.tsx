@@ -91,12 +91,12 @@ const NewNavBar = () => {
           </li>
           <li>
             <Link href="/projects" className={themeStyles.navLink}>
-              Project
+              Case Studies
             </Link>
           </li>
           <li>
             <Link href="/article" className={themeStyles.navLink}>
-              Article
+              Insights
             </Link>
           </li>
           <li>
@@ -106,7 +106,7 @@ const NewNavBar = () => {
           </li>
           <li>
             <Link href="/reviews" className={themeStyles.navLink}>
-              Reviews
+              Results
             </Link>
           </li>
           <li>

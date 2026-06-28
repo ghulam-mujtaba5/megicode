@@ -1,6 +1,7 @@
 .techStackSection {
-  padding: 6rem 2rem;
+  padding: 6rem 6%;
   text-align: center;
+  overflow: hidden;
 }
 
 .container {
@@ -8,61 +9,205 @@
   margin: 0 auto;
 }
 
+.header {
+  max-width: 760px;
+  margin: 0 auto 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
 .heading {
-  font-size: 2.8rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
+  font-size: clamp(1.875rem, 3vw, 2.7rem);
+  line-height: 1.18;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: 0;
 }
 
 .subheading {
-  font-size: 1.2rem;
-  max-width: 700px;
-  margin: 0 auto 4rem auto;
-  line-height: 1.6;
+  font-size: 1.06rem;
+  max-width: 660px;
+  margin: 0;
+  line-height: 1.7;
 }
 
 .categoriesGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
   text-align: left;
 }
 
 .categoryCard {
-  padding: 2rem;
-  border-radius: 12px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-height: 310px;
+  padding: 24px;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition:
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.28s ease,
+    border-color 0.28s ease;
+}
+
+.categoryCard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.82;
+  pointer-events: none;
+}
+
+.cardGlow {
+  position: absolute;
+  width: 112px;
+  height: 112px;
+  right: -42px;
+  bottom: -42px;
+  border-radius: 999px;
+  opacity: 0.18;
+  transform: scale(0.8);
+  transition:
+    transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.28s ease;
+}
+
+.categoryCard:hover .cardGlow {
+  opacity: 0.34;
+  transform: scale(1.25);
+}
+
+.categoryTop,
+.categoryTitle,
+.categoryOutcome,
+.categoryProof,
+.techGrid {
+  position: relative;
+  z-index: 1;
+}
+
+.categoryTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.categoryIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 15px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.techCount {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  line-height: 1;
+  font-weight: 800;
 }
 
 .categoryTitle {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 1.5rem;
-  border-left: 4px solid;
-  padding-left: 1rem;
+  font-size: 1.18rem;
+  line-height: 1.25;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: 0;
+}
+
+.categoryOutcome {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.62;
+}
+
+.categoryProof {
+  width: fit-content;
+  padding: 8px 11px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  line-height: 1.2;
+  font-weight: 800;
 }
 
 .techGrid {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 9px;
+  margin-top: auto;
 }
 
 .techItem {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  font-weight: 500;
+  gap: 7px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  line-height: 1;
+  font-weight: 700;
+  transition:
+    transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.2s ease;
+}
+
+.techItem:hover {
+  transform: translateY(-2px);
 }
 
 .techIcon {
-  font-size: 1.5rem;
-  margin-right: 0.75rem;
+  font-size: 1.05rem;
+  flex-shrink: 0;
 }
 
 .techName {
   line-height: 1;
+}
+
+@media (max-width: 960px) {
+  .categoriesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 620px) {
+  .techStackSection {
+    padding: 4rem 16px;
+  }
+
+  .header {
+    margin-bottom: 2.5rem;
+  }
+
+  .categoriesGrid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .categoryCard {
+    min-height: 0;
+    padding: 22px;
+  }
 }
