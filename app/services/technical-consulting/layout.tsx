@@ -54,6 +54,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       'CTO-level tech strategy, architecture decisions, team building, and investor-ready due diligence for startups.',
     path: '/services/technical-consulting',
     category: 'Technical Advisory',
+    offers: [
+      {
+        name: 'Technical Consulting / Roadmap',
+        description:
+          'MVP scope, architecture options, risk review, stack decision, budget logic, and practical build sequence before development.',
+      },
+    ],
   });
   return (
     <>

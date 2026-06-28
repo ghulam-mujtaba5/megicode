@@ -92,24 +92,55 @@ export function serviceJsonLd(opts: {
   description: string;
   path: string;
   category?: string;
+  offers?: Array<{ name: string; description: string }>;
 }): Record<string, unknown> {
   return {
     '@context': 'https://schema.org',
     '@type': 'Service',
+    '@id': `${canonicalUrl(opts.path)}#service`,
     serviceType: opts.name,
     name: opts.name,
     description: opts.description,
     url: canonicalUrl(opts.path),
     provider: {
       '@type': 'Organization',
+      '@id': `${SITE_URL}#organization`,
       name: SITE_NAME,
       url: SITE_URL,
     },
+    audience: [
+      { '@type': 'Audience', audienceType: 'Startup founders' },
+      { '@type': 'Audience', audienceType: 'Small and medium businesses' },
+      { '@type': 'Audience', audienceType: 'Non-technical founders' },
+    ],
     areaServed: {
       '@type': 'Place',
       name: 'Worldwide',
     },
     ...(opts.category && { category: opts.category }),
+    ...(opts.offers?.length && {
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: `${opts.name} delivery options`,
+        itemListElement: opts.offers.map((offer) => ({
+          '@type': 'Offer',
+          name: offer.name,
+          description: offer.description,
+          availability: 'https://schema.org/InStock',
+          url: canonicalUrl(opts.path),
+          seller: {
+            '@type': 'Organization',
+            '@id': `${SITE_URL}#organization`,
+            name: SITE_NAME,
+          },
+        })),
+      },
+    }),
+    potentialAction: {
+      '@type': 'ScheduleAction',
+      target: canonicalUrl('/contact'),
+      name: 'Book a consultation',
+    },
   };
 }
 
@@ -139,8 +170,7 @@ export function reviewJsonLd(
     ratingValue: number;
   }>
 ): Record<string, unknown> {
-  const avgRating =
-    reviews.reduce((sum, r) => sum + r.ratingValue, 0) / reviews.length;
+  const avgRating = reviews.reduce((sum, r) => sum + r.ratingValue, 0) / reviews.length;
 
   return {
     '@context': 'https://schema.org',
@@ -205,6 +235,7 @@ export function professionalServiceJsonLd(): Record<string, unknown> {
   return {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
+    '@id': `${SITE_URL}#professional-service`,
     name: SITE_NAME,
     url: SITE_URL,
     logo: `${SITE_URL}/meta/android-chrome-512x512.png`,
@@ -218,6 +249,42 @@ export function professionalServiceJsonLd(): Record<string, unknown> {
       addressCountry: 'PK',
     },
     priceRange: '$$',
+    areaServed: [
+      { '@type': 'Country', name: 'Pakistan' },
+      { '@type': 'Country', name: 'United States' },
+      { '@type': 'Country', name: 'United Kingdom' },
+      { '@type': 'Country', name: 'United Arab Emirates' },
+      { '@type': 'Country', name: 'Canada' },
+    ],
+    makesOffer: [
+      {
+        '@type': 'Offer',
+        name: 'AI Automation & Agents',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'AI automation, lead replies, booking flows, and workflow agents',
+          url: canonicalUrl('/services/ai-automation-agents'),
+        },
+      },
+      {
+        '@type': 'Offer',
+        name: 'AI SaaS / MVP Development',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'AI SaaS MVP roadmap, product build, and launch support',
+          url: canonicalUrl('/services/ai-saas-mvp-development'),
+        },
+      },
+      {
+        '@type': 'Offer',
+        name: 'Custom Web Apps & Business Platforms',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Custom portals, CRMs, booking systems, dashboards, and business platforms',
+          url: canonicalUrl('/services/custom-web-development'),
+        },
+      },
+    ],
     openingHoursSpecification: {
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],

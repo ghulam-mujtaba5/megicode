@@ -12,6 +12,10 @@ const config = {
     '/megicode',
     '/api/*',
     '/api',
+    '/case-studies',
+    '/insights',
+    '/articles',
+    '/results',
     '/error',
     '/loading',
     '/not-found',
@@ -146,6 +150,10 @@ const config = {
       path.startsWith('/internal') ||
       path.startsWith('/megicode') ||
       path.startsWith('/api') ||
+      path === '/case-studies' ||
+      path === '/insights' ||
+      path === '/articles' ||
+      path === '/results' ||
       path.includes('/error') ||
       path.includes('/loading') ||
       path === '/not-found' ||

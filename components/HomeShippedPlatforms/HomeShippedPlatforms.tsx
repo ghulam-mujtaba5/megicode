@@ -1,7 +1,13 @@
 'use client';
 
 import React from 'react';
-import { HiArrowRight, HiCheckBadge, HiSparkles } from 'react-icons/hi2';
+import {
+  HiArrowRight,
+  HiCheckBadge,
+  HiMagnifyingGlassPlus,
+  HiSparkles,
+  HiXMark,
+} from 'react-icons/hi2';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -45,6 +51,31 @@ const platforms = [
 export default function HomeShippedPlatforms() {
   const { theme } = useTheme();
   const themeStyles = theme === 'dark' ? darkStyles : lightStyles;
+  const [activeProof, setActiveProof] = React.useState<{
+    src: string;
+    alt: string;
+    title: string;
+  } | null>(null);
+
+  React.useEffect(() => {
+    if (!activeProof) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setActiveProof(null);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [activeProof]);
 
   return (
     <section
@@ -93,7 +124,18 @@ export default function HomeShippedPlatforms() {
               <h3 className={`${commonStyles.cardTitle} ${themeStyles.cardTitle}`}>{item.title}</h3>
               <p className={`${commonStyles.result} ${themeStyles.result}`}>{item.result}</p>
               {'proofImage' in item && item.proofImage ? (
-                <div className={`${commonStyles.proofImageWrap} ${themeStyles.proofImageWrap}`}>
+                <button
+                  type="button"
+                  className={`${commonStyles.proofImageWrap} ${themeStyles.proofImageWrap}`}
+                  onClick={() =>
+                    setActiveProof({
+                      src: item.proofImage.src,
+                      alt: item.proofImage.alt,
+                      title: item.title,
+                    })
+                  }
+                  aria-label="Open CampusAxis Google Analytics proof screenshot"
+                >
                   <Image
                     src={item.proofImage.src}
                     alt={item.proofImage.alt}
@@ -102,7 +144,11 @@ export default function HomeShippedPlatforms() {
                     className={commonStyles.proofImage}
                     sizes="(max-width: 960px) 100vw, 33vw"
                   />
-                </div>
+                  <span className={`${commonStyles.zoomHint} ${themeStyles.zoomHint}`}>
+                    <HiMagnifyingGlassPlus size={15} aria-hidden="true" />
+                    View proof
+                  </span>
+                </button>
               ) : null}
               <div className={commonStyles.stats}>
                 {item.stats.map((stat) => (
@@ -119,6 +165,54 @@ export default function HomeShippedPlatforms() {
           ))}
         </div>
       </div>
+
+      {activeProof ? (
+        <div
+          className={`${commonStyles.lightbox} ${themeStyles.lightbox}`}
+          role="dialog"
+          aria-modal="true"
+          aria-label="CampusAxis analytics proof"
+          onClick={() => setActiveProof(null)}
+        >
+          <motion.div
+            className={`${commonStyles.lightboxPanel} ${themeStyles.lightboxPanel}`}
+            initial={{ opacity: 0, y: 18, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className={commonStyles.lightboxHeader}>
+              <div>
+                <span className={`${commonStyles.lightboxEyebrow} ${themeStyles.lightboxEyebrow}`}>
+                  CampusAxis Google Analytics
+                </span>
+                <h3 className={`${commonStyles.lightboxTitle} ${themeStyles.lightboxTitle}`}>
+                  13K users, 24K views, and 72K tracked events.
+                </h3>
+              </div>
+              <button
+                type="button"
+                className={`${commonStyles.closeButton} ${themeStyles.closeButton}`}
+                onClick={() => setActiveProof(null)}
+                aria-label="Close analytics proof screenshot"
+              >
+                <HiXMark size={20} aria-hidden="true" />
+              </button>
+            </div>
+            <div className={`${commonStyles.lightboxImageWrap} ${themeStyles.lightboxImageWrap}`}>
+              <Image
+                src={activeProof.src}
+                alt={activeProof.alt}
+                width={1920}
+                height={876}
+                className={commonStyles.lightboxImage}
+                sizes="96vw"
+                priority
+              />
+            </div>
+          </motion.div>
+        </div>
+      ) : null}
     </section>
   );
 }

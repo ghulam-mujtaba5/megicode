@@ -1,7 +1,10 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+
 import { projects } from '@/data/projects';
-import { canonicalUrl, SITE_NAME, breadcrumbJsonLd, caseStudyJsonLd } from '@/lib/metadata';
+
+import { SITE_NAME, breadcrumbJsonLd, canonicalUrl, caseStudyJsonLd } from '@/lib/metadata';
+
 import ProjectDetailClient from './ProjectDetailClient';
 
 type Props = {
@@ -58,7 +61,7 @@ export default async function ProjectDetailPage({ params }: Props) {
 
   const breadcrumbs = breadcrumbJsonLd([
     { name: 'Home', path: '/' },
-    { name: 'Projects', path: '/projects' },
+    { name: 'Case Studies', path: '/projects' },
     { name: project.title, path: `/projects/${slug}` },
   ]);
 
@@ -73,8 +76,14 @@ export default async function ProjectDetailPage({ params }: Props) {
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(caseStudy) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(caseStudy) }}
+      />
       <ProjectDetailClient slug={slug} />
     </>
   );

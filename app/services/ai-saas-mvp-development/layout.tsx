@@ -56,6 +56,18 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       'Build AI-first SaaS products with custom ML models, GPT/LLM integration, RAG systems, and AI agents.',
     path: '/services/ai-saas-mvp-development',
     category: 'AI Development',
+    offers: [
+      {
+        name: 'MVP Roadmap',
+        description:
+          'Feature scope, architecture, build sequence, AI feature planning, budget logic, and launch roadmap.',
+      },
+      {
+        name: 'Full SaaS MVP Build',
+        description:
+          'UX, product development, AI features, dashboard, authentication, payments, deployment, and launch handover.',
+      },
+    ],
   });
   return (
     <>

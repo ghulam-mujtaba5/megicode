@@ -1,0 +1,34 @@
+# Megicode
+
+Megicode builds AI automation, AI SaaS MVPs, custom web apps, booking systems, dashboards, portals, and technical roadmaps for startups, non-technical founders, clinics, agencies, and growing businesses.
+
+## Core URLs
+
+- Home: https://www.megicode.com/
+- Services: https://www.megicode.com/services
+- Case studies: https://www.megicode.com/projects
+- Results and reviews: https://www.megicode.com/reviews
+- Insights: https://www.megicode.com/article
+- Contact: https://www.megicode.com/contact
+
+## Primary Services
+
+- AI Automation & Agents: https://www.megicode.com/services/ai-automation-agents
+- AI SaaS / MVP Development: https://www.megicode.com/services/ai-saas-mvp-development
+- Custom Web Apps & Business Platforms: https://www.megicode.com/services/custom-web-development
+- UI/UX Product Design: https://www.megicode.com/services/ui-ux-design
+- Cloud & DevOps: https://www.megicode.com/services/cloud-devops
+- Mobile App Development: https://www.megicode.com/services/mobile-app-development
+- Data Analytics & BI: https://www.megicode.com/services/data-analytics
+- Growth Marketing & SEO: https://www.megicode.com/services/growth-marketing-seo
+- Technical Consulting / Roadmap: https://www.megicode.com/services/technical-consulting
+
+## Proof And Case Studies
+
+- The Aesthetics Place clinic platform: https://www.megicode.com/projects/aesthetics-clinic-platform
+- CampusAxis student platform: https://www.megicode.com/projects/campusaxis-university-portal
+- Wajdan Digital Alchemy growth website: https://www.megicode.com/projects/wajdan-growth-system-website
+
+## Positioning
+
+Megicode is best for buyers who need a practical software partner, not generic development. The company focuses on workflow clarity, shipped proof, reliable delivery, and measurable business outcomes.

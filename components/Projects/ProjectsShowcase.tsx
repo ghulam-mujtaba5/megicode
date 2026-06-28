@@ -1,11 +1,14 @@
-"use client";
+'use client';
 import React from 'react';
+
+import Image from 'next/image';
+import Link from 'next/link';
+
+import { useTheme } from '../../context/ThemeContext';
+import { projects } from '../../data/projects';
 import styles from './ProjectsShowcaseCommon.module.css';
 import darkStyles from './ProjectsShowcaseDark.module.css';
 import lightStyles from './ProjectsShowcaseLight.module.css';
-import { useTheme } from '../../context/ThemeContext';
-import { projects } from "../../data/projects";
-import Image from 'next/image';
 
 export interface Artifact {
   type: string;
@@ -41,7 +44,6 @@ export interface Project {
   overview?: string;
 }
 
-import Link from "next/link";
 const ProjectsShowcase = () => {
   const { theme } = useTheme();
   const themeStyles = theme === 'dark' ? darkStyles : lightStyles;
@@ -53,12 +55,13 @@ const ProjectsShowcase = () => {
     { key: 'desktop', label: 'Desktop' },
     { key: 'web', label: 'Web' },
     { key: 'ai', label: 'AI' },
-    { key: 'data-engineering', label: 'Data Engineering' }
+    { key: 'data-engineering', label: 'Data Engineering' },
   ];
 
-  const filteredProjects = activeCategory === 'all'
-    ? projects
-    : projects.filter(project => project.category === activeCategory);
+  const filteredProjects =
+    activeCategory === 'all'
+      ? projects
+      : projects.filter((project) => project.category === activeCategory);
 
   return (
     <section className={`${styles.showcaseSection} ${themeStyles.showcaseSection}`}>
@@ -75,8 +78,16 @@ const ProjectsShowcase = () => {
       </div>
       <div className={styles.projectsGrid}>
         {filteredProjects.map((project) => (
-          <Link key={project.slug} href={`/projects/${project.slug}`} className={styles.projectCardLink}>
-            <div className={`${styles.projectCard} ${themeStyles.projectCard}`} tabIndex={0} aria-label={`View details for ${project.title}`}>
+          <Link
+            key={project.slug}
+            href={`/projects/${project.slug}`}
+            className={styles.projectCardLink}
+          >
+            <div
+              className={`${styles.projectCard} ${themeStyles.projectCard}`}
+              tabIndex={0}
+              aria-label={`View details for ${project.title}`}
+            >
               <div className={styles.imageContainer}>
                 <Image
                   src={project.image}
@@ -87,20 +98,34 @@ const ProjectsShowcase = () => {
                 />
                 <div className={styles.cardBadges}>
                   {project.liveUrl && <span className={styles.liveBadge}>🟢 Live</span>}
-                  {project.slug === 'campusaxis-university-portal' && <span className={styles.productBadge}>Community Initiative</span>}
+                  {project.slug === 'campusaxis-university-portal' && (
+                    <span className={styles.productBadge}>Community Initiative</span>
+                  )}
                 </div>
               </div>
               <div className={styles.projectContent}>
-                <h3 className={`${styles.projectTitle} ${themeStyles.projectTitle}`}>{project.title}</h3>
-                <p className={`${styles.projectDescription} ${themeStyles.projectDescription}`}>{project.description}</p>
+                <h3 className={`${styles.projectTitle} ${themeStyles.projectTitle}`}>
+                  {project.title}
+                </h3>
+                <p className={`${styles.projectDescription} ${themeStyles.projectDescription}`}>
+                  {project.description}
+                </p>
                 <div className={styles.technologies}>
                   {project.techStack.map((tech, index) => (
-                    <span key={index} className={`${styles.techTag} ${themeStyles.techTag}`}>{tech}</span>
+                    <span key={index} className={`${styles.techTag} ${themeStyles.techTag}`}>
+                      {tech}
+                    </span>
                   ))}
                 </div>
                 <div className={styles.cardFooter}>
-                  <span className={`${styles.detailLink} ${themeStyles.detailLink}`}>View Details →</span>
-                  {project.liveUrl && <span className={styles.liveUrlText}>{project.liveUrl.replace('https://', '').replace('http://', '')}</span>}
+                  <span className={`${styles.detailLink} ${themeStyles.detailLink}`}>
+                    View Case Study →
+                  </span>
+                  {project.liveUrl && (
+                    <span className={styles.liveUrlText}>
+                      {project.liveUrl.replace('https://', '').replace('http://', '')}
+                    </span>
+                  )}
                 </div>
               </div>
             </div>

@@ -54,6 +54,18 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       'Intelligent workflow automation, AI chatbots, smart integrations, and process optimization for SMEs.',
     path: '/services/ai-automation-agents',
     category: 'AI Automation',
+    offers: [
+      {
+        name: 'AI Automation Setup',
+        description:
+          'Workflow mapping, AI agent setup, CRM and booking integrations, follow-up automation, and human review points.',
+      },
+      {
+        name: 'Clinic AI Receptionist',
+        description:
+          'WhatsApp booking, patient intake, appointment reminders, and staff handoff automation for clinics and appointment-based businesses.',
+      },
+    ],
   });
   return (
     <>
