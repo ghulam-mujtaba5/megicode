@@ -566,7 +566,6 @@ export function ServicePersonalizationPanel({
             type="button"
             onClick={onConsultationClick}
             style={{
-              border: 0,
               borderRadius: 999,
               padding: '0.9rem 1.35rem',
               background: isDark ? 'rgba(255,255,255,0.055)' : 'rgba(255,255,255,0.82)',
