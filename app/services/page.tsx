@@ -201,40 +201,58 @@ const supportingServices = [
 
 const offerPackages = [
   {
-    name: 'Starter Audit',
-    fit: 'You know something is inefficient, but need the right first step.',
-    includes: ['Workflow or website audit', 'Priority fix list', 'Implementation roadmap'],
-    cta: 'Book Free Audit',
-  },
-  {
     name: 'MVP Roadmap',
-    fit: 'You have an AI/SaaS idea and need a practical build plan.',
+    price: 'From $400',
+    timeline: '5-10 business days',
+    fit: 'Founders who need scope, architecture, timeline, and budget clarity before build.',
     includes: ['Feature scope', 'Tech architecture', 'Timeline and budget logic'],
-    cta: 'Get MVP Roadmap',
+    cta: 'Start With Roadmap',
+    href: '/pricing#packages',
   },
   {
     name: 'AI Automation Setup',
-    fit: 'You want leads, replies, bookings, or reporting automated.',
-    includes: ['Workflow mapping', 'AI agent or automation', 'Tool integrations'],
-    cta: 'See What We Can Automate',
+    price: 'From $900',
+    timeline: '1-5 weeks',
+    fit: 'Teams losing leads, replies, bookings, follow-ups, or reporting to manual work.',
+    includes: ['Workflow mapping', 'AI automation', 'CRM, form, email, or WhatsApp logic'],
+    cta: 'Automate Workflow',
+    href: '/pricing#packages',
   },
   {
     name: 'Clinic AI Receptionist',
-    fit: 'You run a clinic or appointment-based service and need faster lead handling.',
-    includes: ['WhatsApp booking flow', 'Patient intake logic', 'Reminder and handoff setup'],
-    cta: 'Automate Clinic Bookings',
+    price: 'From $1,250 setup + $150/mo',
+    timeline: '2-5 weeks',
+    fit: 'Clinics that need faster inquiry capture, booking, reminders, and staff handoff.',
+    includes: ['Patient intake logic', 'Booking flow', 'Reminder and routing setup'],
+    cta: 'View Clinic Packages',
+    href: '/pricing#packages',
   },
   {
-    name: 'Full SaaS MVP Build',
-    fit: 'You need the product designed, built, launched, and supported.',
-    includes: ['UX + development', 'AI features', 'Deployment and handover'],
-    cta: 'Discuss My Project',
+    name: 'AI SaaS MVP Build',
+    price: 'From $4,500',
+    timeline: '4-14+ weeks',
+    fit: 'Founders ready to build a focused AI product with auth, dashboard, and launch setup.',
+    includes: ['UX and development', 'AI features', 'Deployment and launch support'],
+    cta: 'Plan My MVP',
+    href: '/pricing#packages',
+  },
+  {
+    name: 'Custom Business Platform',
+    price: 'From $3,500',
+    timeline: '4-14+ weeks',
+    fit: 'Businesses replacing spreadsheets, disconnected tools, and manual operations.',
+    includes: ['Admin portals', 'Booking or CRM systems', 'Dashboards and integrations'],
+    cta: 'Build My Platform',
+    href: '/pricing#packages',
   },
   {
     name: 'Monthly Support / Retainer',
+    price: 'From $200/mo',
+    timeline: 'Ongoing',
     fit: 'You already have a product and need steady improvements after launch.',
     includes: ['Feature updates', 'Monitoring and fixes', 'Growth and automation support'],
     cta: 'Plan Ongoing Support',
+    href: '/pricing#packages',
   },
 ];
 
@@ -396,11 +414,11 @@ export default function ServicesPage() {
               id="offers-heading"
               className={`section-title ${isDark ? 'title-dark' : 'title-light'}`}
             >
-              Clear ways to start without guessing the budget.
+              Productized ways to work with Megicode.
             </h2>
             <p className={`section-sub ${isDark ? 'sub-dark' : 'sub-light'}`}>
-              Pick a starting model based on risk: audit first, roadmap first, automation first,
-              clinic booking first, full MVP build, or monthly support.
+              Pick a starting model based on risk: roadmap first, automation first, clinic booking
+              first, full MVP build, custom platform, or monthly support.
             </p>
           </header>
 
@@ -418,6 +436,10 @@ export default function ServicesPage() {
                   </span>
                   <h3>{offer.name}</h3>
                 </div>
+                <div className="offer-meta">
+                  <strong>{offer.price}</strong>
+                  <span>{offer.timeline}</span>
+                </div>
                 <p>{offer.fit}</p>
                 <ul>
                   {offer.includes.map((item) => (
@@ -425,7 +447,7 @@ export default function ServicesPage() {
                   ))}
                 </ul>
                 <a
-                  href="/contact"
+                  href={offer.href}
                   className={`offer-cta ${isDark ? 'offer-cta-dark' : 'offer-cta-light'}`}
                 >
                   {offer.cta}
@@ -620,6 +642,25 @@ export default function ServicesPage() {
           font-size: 0.9rem;
           line-height: 1.6;
           color: ${isDark ? '#adb5bd' : '#526070'};
+        }
+        .offer-meta {
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+          padding: 0.85rem 1rem;
+          border-radius: 16px;
+          background: ${isDark ? 'rgba(255, 255, 255, 0.06)' : 'rgba(69, 115, 223, 0.07)'};
+          border: 1px solid ${isDark ? 'rgba(255,255,255,0.08)' : 'rgba(69,115,223,0.1)'};
+        }
+        .offer-meta strong {
+          color: #ff9800;
+          font-size: 1.15rem;
+          line-height: 1.2;
+        }
+        .offer-meta span {
+          color: ${isDark ? '#cbd5e1' : '#526070'};
+          font-size: 0.78rem;
+          font-weight: 800;
         }
         .offer-card ul {
           margin: 0;

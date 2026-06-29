@@ -24,6 +24,9 @@ const Tagline = dynamic(() => import('../components/Tagline/Tagline'));
 const ServicesFrame = dynamic(() => import('../components/About-page-Services/ServicesFrame'), {
   loading: () => <LoadingAnimation size="medium" />,
 });
+const HomePricingPreview = dynamic(() => import('../components/Pricing/HomePricingPreview'), {
+  loading: () => <LoadingAnimation size="medium" />,
+});
 const HomeShippedPlatforms = dynamic(
   () => import('../components/HomeShippedPlatforms/HomeShippedPlatforms'),
   {
@@ -94,6 +97,7 @@ export default function HomePageClient() {
             <ServicesFrame />
           </section>
 
+          <HomePricingPreview />
           <HomeShippedPlatforms />
           <HomeTestimonials />
           {/* Contact Section */}

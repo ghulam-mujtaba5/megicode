@@ -90,6 +90,11 @@ const NewNavBar = () => {
             </Link>
           </li>
           <li>
+            <Link href="/pricing" className={themeStyles.navLink}>
+              Pricing
+            </Link>
+          </li>
+          <li>
             <Link href="/projects" className={themeStyles.navLink}>
               Case Studies
             </Link>

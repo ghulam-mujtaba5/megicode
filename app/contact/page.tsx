@@ -83,7 +83,7 @@ function FAQAccordion() {
     {
       question: 'What are your pricing models?',
       answer:
-        'We offer fixed-price contracts for well-scoped projects, time-and-materials for iterative development, and dedicated team retainers for ongoing work. A free consultation is always the first step — no commitments required.',
+        'We publish USD starting prices for roadmap, automation, clinic AI receptionist, SaaS MVP, platform, and support packages. Fixed-scope packages are quoted clearly, while larger builds use milestone pricing after scope is confirmed.',
       icon: <HiCurrencyDollar size={18} />,
     },
   ];
@@ -139,9 +139,16 @@ export default function ContactPage() {
     email: '',
     phone: '',
     company: '',
+    country: '',
     subject: '',
     message: '',
     service: '',
+    budget: '',
+    timeline: '',
+    stage: '',
+    hasRequirements: '',
+    needsNda: '',
+    timezone: '',
   });
 
   useEffect(() => {
@@ -210,6 +217,8 @@ export default function ContactPage() {
         return value.trim().length < 10 ? 'Message must be at least 10 characters' : '';
       case 'service':
         return !value ? 'Please select a service' : '';
+      case 'budget':
+        return !value ? 'Please select a budget range' : '';
       case 'phone':
         if (value && !/^\+?[0-9\s\-\(\)]{10,}$/.test(value.replace(/\s/g, '')))
           return 'Please enter a valid phone number';
@@ -221,7 +230,7 @@ export default function ContactPage() {
 
   const validateForm = () => {
     const newErrors: { [key: string]: string } = {};
-    ['name', 'email', 'subject', 'message', 'service'].forEach((field) => {
+    ['name', 'email', 'subject', 'message', 'service', 'budget'].forEach((field) => {
       const error = validateField(field, formData[field as keyof typeof formData]);
       if (error) newErrors[field] = error;
     });
@@ -256,10 +265,30 @@ export default function ContactPage() {
     setIsSubmitting(true);
     setSubmitError('');
     try {
+      const enrichedMessage = [
+        `Country: ${formData.country || 'Not provided'}`,
+        `Budget range: ${formData.budget || 'Not provided'}`,
+        `Timeline: ${formData.timeline || 'Not provided'}`,
+        `Project stage: ${formData.stage || 'Not provided'}`,
+        `Has designs/requirements: ${formData.hasRequirements || 'Not provided'}`,
+        `Needs NDA: ${formData.needsNda || 'Not provided'}`,
+        `Preferred meeting time zone: ${formData.timezone || 'Not provided'}`,
+        '',
+        formData.message,
+      ].join('\n');
+
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          company: formData.company,
+          service: formData.service,
+          subject: formData.subject,
+          message: enrichedMessage,
+        }),
       });
       if (response.ok) {
         setShowSuccess(true);
@@ -268,9 +297,16 @@ export default function ContactPage() {
           email: '',
           phone: '',
           company: '',
+          country: '',
           subject: '',
           message: '',
           service: '',
+          budget: '',
+          timeline: '',
+          stage: '',
+          hasRequirements: '',
+          needsNda: '',
+          timezone: '',
         });
         setErrors({});
         setTouched({});
@@ -495,6 +531,47 @@ export default function ContactPage() {
                   </div>
                 </div>
 
+                <div className={styles.formGrid}>
+                  <div className={styles.formGroup}>
+                    <div className={styles.floatingLabelGroup}>
+                      <input
+                        type="text"
+                        id="country"
+                        name="country"
+                        value={formData.country}
+                        onChange={handleInputChange}
+                        onBlur={handleBlur}
+                        className={styles.input}
+                        aria-label="Country"
+                        placeholder=" "
+                      />
+                      <label htmlFor="country" className={styles.floatingLabel}>
+                        Country
+                      </label>
+                    </div>
+                    <span className={styles.helperText}>Optional</span>
+                  </div>
+                  <div className={styles.formGroup}>
+                    <div className={styles.floatingLabelGroup}>
+                      <input
+                        type="text"
+                        id="timezone"
+                        name="timezone"
+                        value={formData.timezone}
+                        onChange={handleInputChange}
+                        onBlur={handleBlur}
+                        className={styles.input}
+                        aria-label="Preferred meeting time zone"
+                        placeholder=" "
+                      />
+                      <label htmlFor="timezone" className={styles.floatingLabel}>
+                        Preferred meeting time zone
+                      </label>
+                    </div>
+                    <span className={styles.helperText}>Optional</span>
+                  </div>
+                </div>
+
                 <div className={styles.formGroupFull}>
                   <div className={styles.floatingLabelGroup}>
                     <select
@@ -510,14 +587,12 @@ export default function ContactPage() {
                       <option value="" disabled hidden>
                         Select a service…
                       </option>
-                      <option value="ai-automation-agents">AI Automation &amp; Agents</option>
-                      <option value="ai-saas-mvp-development">AI SaaS / MVP Development</option>
-                      <option value="custom-web-platform">
-                        Custom Web App / Business Platform
-                      </option>
-                      <option value="clinic-booking-system">
-                        Clinic / Appointment / Booking System
-                      </option>
+                      <option value="MVP Roadmap">MVP Roadmap</option>
+                      <option value="AI Automation Setup">AI Automation Setup</option>
+                      <option value="Clinic AI Receptionist">Clinic AI Receptionist</option>
+                      <option value="AI SaaS MVP Build">AI SaaS MVP Build</option>
+                      <option value="Custom Business Platform">Custom Business Platform</option>
+                      <option value="Monthly Support / Retainer">Monthly Support / Retainer</option>
                       <option value="website-seo-leads">Website + SEO + Lead Generation</option>
                       <option value="ui-ux-product-design">UI/UX Product Design</option>
                       <option value="cloud-devops-deployment">Cloud / DevOps / Deployment</option>
@@ -535,6 +610,139 @@ export default function ContactPage() {
                   ) : (
                     <span className={styles.helperText}>Required</span>
                   )}
+                </div>
+
+                <div className={styles.formGrid}>
+                  <div className={styles.formGroup}>
+                    <div className={styles.floatingLabelGroup}>
+                      <select
+                        id="budget"
+                        name="budget"
+                        value={formData.budget}
+                        onChange={handleInputChange}
+                        onBlur={handleBlur}
+                        className={`${styles.input} ${errors.budget ? styles.inputError : ''}`}
+                        aria-label="Budget range"
+                        required
+                      >
+                        <option value="" disabled hidden>
+                          Select budget…
+                        </option>
+                        <option value="Under $500">Under $500</option>
+                        <option value="$500-$1,500">$500-$1,500</option>
+                        <option value="$1,500-$3,500">$1,500-$3,500</option>
+                        <option value="$3,500-$7,500">$3,500-$7,500</option>
+                        <option value="$7,500-$15,000">$7,500-$15,000</option>
+                        <option value="$15,000-$30,000">$15,000-$30,000</option>
+                        <option value="$30,000+">$30,000+</option>
+                        <option value="Not sure yet">Not sure yet</option>
+                      </select>
+                      <label htmlFor="budget" className={styles.floatingLabel}>
+                        Budget range *
+                      </label>
+                    </div>
+                    {errors.budget ? (
+                      <span className={styles.errorText}>{errors.budget}</span>
+                    ) : (
+                      <span className={styles.helperText}>Required</span>
+                    )}
+                  </div>
+                  <div className={styles.formGroup}>
+                    <div className={styles.floatingLabelGroup}>
+                      <select
+                        id="timeline"
+                        name="timeline"
+                        value={formData.timeline}
+                        onChange={handleInputChange}
+                        onBlur={handleBlur}
+                        className={styles.input}
+                        aria-label="Timeline"
+                      >
+                        <option value="">Select timeline…</option>
+                        <option value="ASAP">ASAP</option>
+                        <option value="2-4 weeks">2-4 weeks</option>
+                        <option value="1-3 months">1-3 months</option>
+                        <option value="3+ months">3+ months</option>
+                        <option value="Not sure yet">Not sure yet</option>
+                      </select>
+                      <label htmlFor="timeline" className={styles.floatingLabel}>
+                        Timeline
+                      </label>
+                    </div>
+                    <span className={styles.helperText}>Optional</span>
+                  </div>
+                </div>
+
+                <div className={styles.formGrid}>
+                  <div className={styles.formGroup}>
+                    <div className={styles.floatingLabelGroup}>
+                      <select
+                        id="stage"
+                        name="stage"
+                        value={formData.stage}
+                        onChange={handleInputChange}
+                        onBlur={handleBlur}
+                        className={styles.input}
+                        aria-label="Project stage"
+                      >
+                        <option value="">Select stage…</option>
+                        <option value="Idea only">Idea only</option>
+                        <option value="Requirements ready">Requirements ready</option>
+                        <option value="Designs ready">Designs ready</option>
+                        <option value="Existing product">Existing product</option>
+                        <option value="Need rescue or rebuild">Need rescue or rebuild</option>
+                      </select>
+                      <label htmlFor="stage" className={styles.floatingLabel}>
+                        Project stage
+                      </label>
+                    </div>
+                    <span className={styles.helperText}>Optional</span>
+                  </div>
+                  <div className={styles.formGroup}>
+                    <div className={styles.floatingLabelGroup}>
+                      <select
+                        id="hasRequirements"
+                        name="hasRequirements"
+                        value={formData.hasRequirements}
+                        onChange={handleInputChange}
+                        onBlur={handleBlur}
+                        className={styles.input}
+                        aria-label="Do you already have designs or requirements?"
+                      >
+                        <option value="">Select answer…</option>
+                        <option value="Yes">Yes</option>
+                        <option value="Partial">Partial</option>
+                        <option value="No">No</option>
+                      </select>
+                      <label htmlFor="hasRequirements" className={styles.floatingLabel}>
+                        Designs or requirements?
+                      </label>
+                    </div>
+                    <span className={styles.helperText}>Optional</span>
+                  </div>
+                </div>
+
+                <div className={styles.formGroupFull}>
+                  <div className={styles.floatingLabelGroup}>
+                    <select
+                      id="needsNda"
+                      name="needsNda"
+                      value={formData.needsNda}
+                      onChange={handleInputChange}
+                      onBlur={handleBlur}
+                      className={styles.input}
+                      aria-label="Need NDA?"
+                    >
+                      <option value="">Select answer…</option>
+                      <option value="Yes">Yes</option>
+                      <option value="No">No</option>
+                      <option value="Maybe later">Maybe later</option>
+                    </select>
+                    <label htmlFor="needsNda" className={styles.floatingLabel}>
+                      Need NDA?
+                    </label>
+                  </div>
+                  <span className={styles.helperText}>Optional</span>
                 </div>
 
                 <div className={styles.formGroupFull}>
