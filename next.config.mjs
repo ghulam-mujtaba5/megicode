@@ -112,6 +112,11 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      // Insights & articles aliases → canonical /article (301 SEO equity pass-through)
+      { source: '/insights', destination: '/article', permanent: true },
+      { source: '/insights/:path*', destination: '/article/:path*', permanent: true },
+      { source: '/articles', destination: '/article', permanent: true },
+      { source: '/articles/:path*', destination: '/article/:path*', permanent: true },
       // Common www subdomain mistypes & old URL patterns
       { source: '/home', destination: '/', permanent: true },
       { source: '/index', destination: '/', permanent: true },
