@@ -54,6 +54,30 @@
   width: 80%;
 }
 
+.navPricing {
+  color: #2d4fa2;
+  font-weight: 800;
+}
+
+.navCta {
+  color: #fff;
+  background: linear-gradient(135deg, #ff9800, #f97316);
+  border-radius: 999px;
+  padding: 0.58rem 1rem;
+  font-weight: 800;
+  box-shadow: 0 12px 24px rgba(249, 115, 22, 0.22);
+}
+
+.navCta:hover {
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 16px 30px rgba(249, 115, 22, 0.3);
+}
+
+.navCta::after {
+  display: none;
+}
+
 /* Neumorphic theme toggle on brand surface */
 .themeToggle {
   color: #4573df;

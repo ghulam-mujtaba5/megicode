@@ -15,10 +15,15 @@ const NavBar = () => {
     { id: 'home', label: 'Home', href: '/' },
     { id: 'about', label: 'About', href: '/about' },
     { id: 'services', label: 'Services', href: '/services' },
-    { id: 'pricing', label: 'Pricing', href: '/pricing' },
+    { id: 'pricing', label: 'Pricing', href: '/pricing', cta: 'secondary' },
     { id: 'projects', label: 'Case Studies', href: '/projects' },
     { id: 'article', label: 'Insights', href: '/article' },
-    { id: 'contact', label: 'Contact', href: '/contact' },
+    {
+      id: 'contact',
+      label: 'Book Free Fit Call',
+      href: '/contact?source=mobile-nav',
+      cta: 'primary',
+    },
     { id: 'reviews', label: 'Results', href: '/reviews' },
   ];
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -105,7 +110,13 @@ const NavBar = () => {
                   sections.map((section, index) => (
                     <motion.li
                       key={section.id}
-                      className={`${commonStyles.menuItem} ${themeStyles.menuItem}`}
+                      className={`${commonStyles.menuItem} ${themeStyles.menuItem} ${
+                        section.cta === 'primary'
+                          ? commonStyles.menuItemPrimary
+                          : section.cta === 'secondary'
+                            ? commonStyles.menuItemSecondary
+                            : ''
+                      }`}
                       onClick={() => handleNavigate(section.href)}
                       role="menuitem"
                       tabIndex={0}

@@ -90,7 +90,7 @@ const NewNavBar = () => {
             </Link>
           </li>
           <li>
-            <Link href="/pricing" className={themeStyles.navLink}>
+            <Link href="/pricing" className={`${themeStyles.navLink} ${themeStyles.navPricing}`}>
               Pricing
             </Link>
           </li>
@@ -105,8 +105,11 @@ const NewNavBar = () => {
             </Link>
           </li>
           <li>
-            <Link href="/contact" className={themeStyles.navLink}>
-              Contact
+            <Link
+              href="/contact?source=nav"
+              className={`${themeStyles.navLink} ${themeStyles.navCta}`}
+            >
+              Book Free Fit Call
             </Link>
           </li>
           <li>

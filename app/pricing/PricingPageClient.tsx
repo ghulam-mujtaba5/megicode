@@ -28,10 +28,37 @@ const costDrivers = [
 ];
 
 const proofStats = [
-  '15+ AI & software products built',
-  '5+ countries served',
-  '10+ startups and businesses partnered',
-  'Proof from The Aesthetics Place, CampusAxis, and Wajdan Digital Alchemy',
+  { value: '15+', label: 'AI & software products built' },
+  { value: '5+', label: 'countries served' },
+  { value: '10+', label: 'startups and businesses partnered' },
+  { value: 'Proof', label: 'The Aesthetics Place, CampusAxis, and Wajdan Digital Alchemy' },
+];
+
+const comparisonRows = [
+  {
+    feature: 'Best starting point',
+    starter: 'Roadmap or one workflow',
+    growth: 'Automation, clinic, MVP, or platform build',
+    advanced: 'Complex workflows, roles, data, or integrations',
+  },
+  {
+    feature: 'Scope style',
+    starter: 'Fixed and narrow',
+    growth: 'Fixed package with clear deliverables',
+    advanced: 'Milestone-based after scope review',
+  },
+  {
+    feature: 'Typical buyer',
+    starter: 'Founder validating scope',
+    growth: 'Business ready to implement',
+    advanced: 'Team replacing or scaling systems',
+  },
+  {
+    feature: 'Support',
+    starter: 'Handoff or light launch support',
+    growth: 'Launch support included',
+    advanced: 'Monthly support recommended',
+  },
 ];
 
 export default function PricingPageClient() {
@@ -82,10 +109,16 @@ export default function PricingPageClient() {
             </p>
             <div className="hero-actions">
               <Link className="primary-cta" href="/contact?source=pricing">
-                Book Free Fit Call
+                <span>Book Free Fit Call</span>
+                <span className="cta-icon" aria-hidden="true">
+                  -&gt;
+                </span>
               </Link>
               <a className="secondary-cta" href="#packages">
-                Compare Packages
+                <span>Compare Packages</span>
+                <span className="cta-icon" aria-hidden="true">
+                  -&gt;
+                </span>
               </a>
             </div>
             <p className="tool-note">
@@ -120,12 +153,16 @@ export default function PricingPageClient() {
                   <strong>{entry.price}</strong>
                   <p>{entry.bestFor}</p>
                 </div>
-                <ul>
-                  {entry.bullets.map((bullet) => (
-                    <li key={bullet}>{bullet}</li>
-                  ))}
-                </ul>
-                <Link href={entry.href}>{entry.cta}</Link>
+                <Link
+                  className="pricing-card-button"
+                  href={entry.href}
+                  aria-label={`${entry.cta}: ${entry.title}`}
+                >
+                  <span>{entry.cta}</span>
+                  <span className="pricing-card-button-icon" aria-hidden="true">
+                    -&gt;
+                  </span>
+                </Link>
               </article>
             ))}
           </div>
@@ -156,6 +193,10 @@ export default function PricingPageClient() {
           </div>
 
           <p className="category-summary">{activeCategory.summary}</p>
+          <div className="start-guidance">
+            <strong>Not sure where to start?</strong>
+            <span>Choose MVP Roadmap if the scope is unclear.</span>
+          </div>
 
           <div className="package-grid">
             {activeCategory.packages.map((item) => (
@@ -163,20 +204,114 @@ export default function PricingPageClient() {
                 className={`package-card ${item.featured ? 'featured' : ''}`}
                 key={item.name}
               >
-                {item.featured && <span className="popular-badge">Most Popular</span>}
+                {item.featured && (
+                  <span className="popular-badge">{item.featuredLabel ?? 'Most Popular'}</span>
+                )}
                 <h3>{item.name}</h3>
                 <p className="best-for">{item.bestFor}</p>
                 <strong className="price">{item.price}</strong>
-                <p className="timeline">Timeline: {item.timeline}</p>
+                <div className="package-meta" aria-label={`${item.name} delivery details`}>
+                  <span>
+                    <strong>Timeline</strong>
+                    {item.timeline}
+                  </span>
+                  <span>
+                    <strong>Support</strong>
+                    {item.support}
+                  </span>
+                </div>
                 <ul>
                   {item.includes.map((include) => (
                     <li key={include}>{include}</li>
                   ))}
                 </ul>
                 {item.note && <p className="package-note">{item.note}</p>}
-                <Link href={item.href}>{item.cta}</Link>
+                <Link
+                  className="pricing-card-button"
+                  href={item.href}
+                  aria-label={`${item.cta}: ${item.name}`}
+                >
+                  <span>{item.cta}</span>
+                  <span className="pricing-card-button-icon" aria-hidden="true">
+                    -&gt;
+                  </span>
+                </Link>
               </article>
             ))}
+          </div>
+        </section>
+
+        <section className="comparison-section" aria-labelledby="comparison-heading">
+          <div className="section-head">
+            <span className="eyebrow">Comparison</span>
+            <h2 id="comparison-heading">Choose the safest buying path.</h2>
+            <p>
+              Start with the smallest useful commitment when scope is unclear. Move into Growth or
+              Advanced once the workflow, product, and proof requirements are clear.
+            </p>
+          </div>
+          <div className="comparison-table" role="table" aria-label="Pricing path comparison">
+            <div className="comparison-row comparison-head" role="row">
+              <span role="columnheader">Feature</span>
+              <span role="columnheader">Starter</span>
+              <span role="columnheader">Growth</span>
+              <span role="columnheader">Advanced</span>
+            </div>
+            {comparisonRows.map((row) => (
+              <div className="comparison-row" role="row" key={row.feature}>
+                <span role="cell">{row.feature}</span>
+                <span role="cell">{row.starter}</span>
+                <span role="cell">{row.growth}</span>
+                <span role="cell">{row.advanced}</span>
+              </div>
+            ))}
+          </div>
+          <div className="comparison-cards" aria-label="Pricing path comparison">
+            {comparisonRows.map((row) => (
+              <details key={row.feature}>
+                <summary>{row.feature}</summary>
+                <div className="comparison-card-body">
+                  <p>
+                    <strong>Starter:</strong> {row.starter}
+                  </p>
+                  <p>
+                    <strong>Growth:</strong> {row.growth}
+                  </p>
+                  <p>
+                    <strong>Advanced:</strong> {row.advanced}
+                  </p>
+                </div>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        <section className="fit-section" aria-labelledby="fit-heading">
+          <div className="section-head">
+            <span className="eyebrow">Fit check</span>
+            <h2 id="fit-heading">A better fit for serious builds.</h2>
+            <p>
+              These guidelines keep the first call focused and help both sides avoid mismatched
+              expectations.
+            </p>
+          </div>
+          <div className="fit-grid">
+            <div className="fit-card fit-positive">
+              <h3>Megicode is a good fit if:</h3>
+              <ul>
+                <li>You want a real business system, not only a demo</li>
+                <li>You need AI, automation, SaaS, or custom platform work</li>
+                <li>You want clear scope and milestone-based delivery</li>
+              </ul>
+            </div>
+            <div className="fit-card fit-negative">
+              <h3>Not the best fit if:</h3>
+              <ul>
+                <li>You only need a $100 template website</li>
+                <li>You want unlimited scope without planning</li>
+                <li>You do not want to pay upfront or milestone payments</li>
+              </ul>
+            </div>
           </div>
         </section>
 
@@ -198,8 +333,21 @@ export default function PricingPageClient() {
 
         <section className="proof-strip" aria-label="Megicode proof">
           {proofStats.map((proof) => (
-            <span key={proof}>{proof}</span>
+            <div className="proof-item" key={`${proof.value}-${proof.label}`}>
+              <strong>{proof.value}</strong>
+              <span>{proof.label}</span>
+            </div>
           ))}
+        </section>
+
+        <section className="payment-section" aria-labelledby="payment-heading">
+          <span className="eyebrow">Payment clarity</span>
+          <h2 id="payment-heading">Simple terms before a proposal.</h2>
+          <div className="payment-grid">
+            <p>Roadmap packages are paid upfront.</p>
+            <p>Automation and clinic setup usually start with 60% upfront.</p>
+            <p>MVP and platform builds are milestone-based.</p>
+          </div>
         </section>
 
         <section className="faq-section" aria-labelledby="faq-heading">
@@ -224,7 +372,10 @@ export default function PricingPageClient() {
             goals, scope, and budget.
           </p>
           <Link className="primary-cta" href="/contact?source=pricing-final">
-            Book Free Fit Call
+            <span>Book Free Fit Call</span>
+            <span className="cta-icon" aria-hidden="true">
+              -&gt;
+            </span>
           </Link>
         </section>
       </main>
@@ -303,17 +454,32 @@ export default function PricingPageClient() {
           margin: 28px 0 14px;
         }
         .primary-cta,
-        .secondary-cta,
-        .entry-card a,
-        .package-card a {
+        .secondary-cta {
           display: inline-flex;
+          box-sizing: border-box;
+          min-width: 190px;
           min-height: 48px;
           align-items: center;
-          justify-content: center;
+          justify-content: space-between;
+          gap: 14px;
           border-radius: 999px;
+          border: 1px solid transparent;
           padding: 0 22px;
-          font-weight: 800;
+          font-weight: 900;
           text-decoration: none;
+          transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease,
+            background 0.2s ease,
+            border-color 0.2s ease,
+            color 0.2s ease;
+        }
+        .primary-cta:hover,
+        .primary-cta:focus-visible,
+        .secondary-cta:hover,
+        .secondary-cta:focus-visible {
+          transform: translateY(-1px);
+          outline: none;
         }
         .primary-cta {
           color: #fff;
@@ -324,6 +490,47 @@ export default function PricingPageClient() {
           color: ${isDark ? '#f8fafc' : '#1d2127'};
           border: 1px solid ${isDark ? 'rgba(255,255,255,0.16)' : 'rgba(15,23,42,0.12)'};
           background: ${isDark ? 'rgba(255,255,255,0.06)' : 'rgba(255,255,255,0.72)'};
+        }
+        .secondary-cta:hover,
+        .secondary-cta:focus-visible {
+          color: #fff;
+          border-color: rgba(255, 152, 0, 0.72);
+          background: linear-gradient(135deg, #ff9800, #f97316);
+          box-shadow: 0 18px 34px rgba(249, 115, 22, 0.24);
+        }
+        .cta-icon {
+          width: auto;
+          height: auto;
+          flex: 0 0 auto;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          color: currentColor;
+          background: transparent;
+          line-height: 1;
+          transition:
+            transform 0.2s ease,
+            color 0.2s ease;
+        }
+        .primary-cta span:first-child,
+        .secondary-cta span:first-child,
+        .pricing-card-button span:first-child {
+          min-width: 0;
+          overflow-wrap: anywhere;
+        }
+        .secondary-cta .cta-icon {
+          color: #ff9800;
+          background: transparent;
+        }
+        .primary-cta:hover .cta-icon,
+        .primary-cta:focus-visible .cta-icon,
+        .secondary-cta:hover .cta-icon,
+        .secondary-cta:focus-visible .cta-icon {
+          transform: translateX(2px);
+        }
+        .secondary-cta:hover .cta-icon,
+        .secondary-cta:focus-visible .cta-icon {
+          color: #fff;
         }
         .tool-note {
           max-width: 620px;
@@ -388,7 +595,10 @@ export default function PricingPageClient() {
         }
         .entry-section,
         .packages-section,
+        .comparison-section,
+        .fit-section,
         .drivers-section,
+        .payment-section,
         .faq-section,
         .final-cta {
           padding: 72px 0;
@@ -400,6 +610,7 @@ export default function PricingPageClient() {
         }
         .section-head h2,
         .drivers-copy h2,
+        .payment-section h2,
         .final-cta h2 {
           margin: 12px 0;
           font-size: clamp(1.8rem, 3.2vw, 2.8rem);
@@ -414,8 +625,12 @@ export default function PricingPageClient() {
         }
         .entry-card,
         .package-card,
+        .comparison-table,
+        .comparison-cards details,
+        .fit-card,
         .drivers-section,
         .proof-strip,
+        .payment-section,
         .faq-grid details,
         .final-cta {
           border: 1px solid ${isDark ? 'rgba(255,255,255,0.11)' : 'rgba(69,115,223,0.13)'};
@@ -427,11 +642,16 @@ export default function PricingPageClient() {
         .entry-card,
         .package-card {
           display: flex;
-          min-height: 350px;
           flex-direction: column;
           gap: 16px;
           border-radius: 22px;
           padding: 24px;
+        }
+        .entry-card {
+          min-height: 250px;
+        }
+        .package-card {
+          min-height: 430px;
         }
         .entry-card h3,
         .package-card h3 {
@@ -449,11 +669,31 @@ export default function PricingPageClient() {
         }
         .entry-card p,
         .best-for,
-        .timeline,
+        .package-meta,
         .package-note {
           color: ${isDark ? '#cbd5e1' : '#526070'};
           font-size: 0.92rem;
           line-height: 1.65;
+        }
+        .package-meta {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 10px;
+        }
+        .package-meta span {
+          display: grid;
+          gap: 3px;
+          border-radius: 14px;
+          padding: 12px;
+          color: ${isDark ? '#e2e8f0' : '#334155'};
+          background: ${isDark ? 'rgba(255,255,255,0.055)' : 'rgba(69,115,223,0.07)'};
+        }
+        .package-meta strong {
+          color: ${isDark ? '#c0d4ff' : '#2d4fa2'};
+          font-size: 0.72rem;
+          line-height: 1.2;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
         }
         .entry-card ul,
         .package-card ul {
@@ -475,10 +715,125 @@ export default function PricingPageClient() {
           color: #4573df;
           font-weight: 900;
         }
-        .entry-card a,
-        .package-card a {
+        .pricing-card-button {
+          display: inline-flex;
+          box-sizing: border-box;
+          width: 100%;
+          min-height: 46px;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+          border-radius: 999px;
+          border: 1px solid ${isDark ? 'rgba(255,255,255,0.14)' : 'rgba(15,23,42,0.12)'};
+          padding: 0 18px;
+          color: ${isDark ? '#f8fafc' : '#1d2127'};
+          background: ${isDark ? 'rgba(255,255,255,0.055)' : 'rgba(15,23,42,0.035)'};
+          font-size: 0.9rem;
+          font-weight: 900;
+          line-height: 1.2;
+          text-decoration: none;
+          transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease,
+            background 0.2s ease,
+            border-color 0.2s ease,
+            color 0.2s ease;
+        }
+        .pricing-card-button:hover,
+        .pricing-card-button:focus-visible {
+          transform: translateY(-1px);
+          border-color: rgba(255, 152, 0, 0.72);
           color: #fff;
-          background: linear-gradient(135deg, #4573df, #2d4fa2);
+          background: linear-gradient(135deg, #ff9800, #f97316);
+          box-shadow: 0 16px 30px rgba(249, 115, 22, 0.22);
+          outline: none;
+        }
+        .pricing-card-button:focus-visible {
+          box-shadow:
+            0 0 0 3px rgba(255, 152, 0, 0.22),
+            0 16px 30px rgba(249, 115, 22, 0.22);
+        }
+        .pricing-card-button-icon {
+          width: auto;
+          height: auto;
+          flex: 0 0 auto;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          color: #ff9800;
+          background: transparent;
+          font-size: 1rem;
+          line-height: 1;
+          transition:
+            transform 0.2s ease,
+            color 0.2s ease;
+        }
+        .pricing-card-button:hover .pricing-card-button-icon,
+        .pricing-card-button:focus-visible .pricing-card-button-icon {
+          transform: translateX(2px);
+          color: #fff;
+        }
+        .comparison-table {
+          overflow: hidden;
+          border-radius: 22px;
+        }
+        .comparison-cards {
+          display: none;
+        }
+        .comparison-cards details {
+          border-radius: 18px;
+          overflow: hidden;
+        }
+        .comparison-cards summary {
+          min-height: 56px;
+          padding: 16px 18px;
+          color: ${isDark ? '#f8fafc' : '#0f172a'};
+          cursor: pointer;
+          font-weight: 900;
+          line-height: 1.35;
+        }
+        .comparison-cards summary:focus-visible {
+          outline: 3px solid rgba(255, 152, 0, 0.26);
+          outline-offset: -3px;
+        }
+        .comparison-card-body {
+          display: grid;
+          gap: 10px;
+          padding: 0 18px 18px;
+        }
+        .comparison-card-body p {
+          margin: 0;
+          color: ${isDark ? '#cbd5e1' : '#526070'};
+          line-height: 1.55;
+        }
+        .comparison-card-body strong {
+          color: #4573df;
+        }
+        .comparison-row {
+          display: grid;
+          grid-template-columns: 1fr repeat(3, minmax(0, 1.05fr));
+          border-bottom: 1px solid ${isDark ? 'rgba(255,255,255,0.08)' : 'rgba(69,115,223,0.1)'};
+        }
+        .comparison-row:last-child {
+          border-bottom: 0;
+        }
+        .comparison-row span {
+          padding: 16px;
+          color: ${isDark ? '#cbd5e1' : '#526070'};
+          font-size: 0.92rem;
+          line-height: 1.5;
+          font-weight: 650;
+        }
+        .comparison-row span:first-child {
+          color: ${isDark ? '#f8fafc' : '#0f172a'};
+          font-weight: 900;
+        }
+        .comparison-head {
+          background: ${isDark ? 'rgba(69,115,223,0.16)' : 'rgba(69,115,223,0.08)'};
+        }
+        .comparison-head span {
+          color: ${isDark ? '#f8fafc' : '#1d2127'};
+          font-weight: 900;
         }
         .tab-list {
           display: flex;
@@ -508,10 +863,30 @@ export default function PricingPageClient() {
         }
         .category-summary {
           max-width: 820px;
-          margin: 22px auto 28px;
+          margin: 22px auto 16px;
           color: ${isDark ? '#cbd5e1' : '#526070'};
           text-align: center;
           line-height: 1.7;
+        }
+        .start-guidance {
+          display: flex;
+          flex-wrap: wrap;
+          width: fit-content;
+          max-width: 100%;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          margin: 0 auto 28px;
+          border-radius: 999px;
+          border: 1px solid ${isDark ? 'rgba(255,255,255,0.13)' : 'rgba(69,115,223,0.14)'};
+          padding: 10px 16px;
+          color: ${isDark ? '#e2e8f0' : '#334155'};
+          background: ${isDark ? 'rgba(255,255,255,0.055)' : 'rgba(255,255,255,0.76)'};
+          font-size: 0.9rem;
+          line-height: 1.4;
+        }
+        .start-guidance strong {
+          color: #ff9800;
         }
         .package-card {
           position: relative;
@@ -545,8 +920,7 @@ export default function PricingPageClient() {
           grid-template-columns: repeat(2, minmax(0, 1fr));
           gap: 12px;
         }
-        .drivers-grid span,
-        .proof-strip span {
+        .drivers-grid span {
           border-radius: 999px;
           padding: 12px 14px;
           color: ${isDark ? '#e2e8f0' : '#334155'};
@@ -555,13 +929,90 @@ export default function PricingPageClient() {
           font-size: 0.88rem;
         }
         .proof-strip {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 12px;
-          align-items: center;
-          justify-content: center;
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: 0;
+          overflow: hidden;
           border-radius: 24px;
+          padding: 0;
+        }
+        .proof-item {
+          display: grid;
+          align-content: start;
+          gap: 6px;
+          min-height: 132px;
           padding: 24px;
+          border-right: 1px solid ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(69,115,223,0.1)'};
+        }
+        .proof-item:last-child {
+          border-right: 0;
+        }
+        .proof-item strong {
+          color: #ff9800;
+          font-size: 1.45rem;
+          line-height: 1;
+        }
+        .proof-item span {
+          color: ${isDark ? '#e2e8f0' : '#334155'};
+          font-size: 0.92rem;
+          font-weight: 800;
+          line-height: 1.45;
+        }
+        .payment-section {
+          border-radius: 26px;
+          padding: 38px;
+        }
+        .payment-grid {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 14px;
+          margin-top: 22px;
+        }
+        .payment-grid p {
+          margin: 0;
+          border-radius: 18px;
+          padding: 18px;
+          color: ${isDark ? '#e2e8f0' : '#334155'};
+          background: ${isDark ? 'rgba(255,255,255,0.055)' : 'rgba(69,115,223,0.07)'};
+          font-weight: 800;
+          line-height: 1.55;
+        }
+        .fit-grid {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 18px;
+        }
+        .fit-card {
+          border-radius: 24px;
+          padding: 28px;
+        }
+        .fit-card h3 {
+          margin: 0 0 18px;
+          font-size: 1.12rem;
+        }
+        .fit-card ul {
+          display: grid;
+          gap: 12px;
+          margin: 0;
+          padding: 0;
+          list-style: none;
+        }
+        .fit-card li {
+          color: ${isDark ? '#e2e8f0' : '#334155'};
+          line-height: 1.55;
+        }
+        .fit-positive li::before,
+        .fit-negative li::before {
+          margin-right: 9px;
+          font-weight: 900;
+        }
+        .fit-positive li::before {
+          content: '✓';
+          color: #4573df;
+        }
+        .fit-negative li::before {
+          content: '✕';
+          color: #ff9800;
         }
         .faq-grid {
           display: grid;
@@ -569,14 +1020,29 @@ export default function PricingPageClient() {
           gap: 14px;
         }
         .faq-grid details {
-          border-radius: 18px;
-          padding: 18px 20px;
+          border-radius: 20px;
+          padding: 0;
+          overflow: hidden;
         }
         .faq-grid summary {
+          min-height: 58px;
+          padding: 18px 20px;
           cursor: pointer;
           font-weight: 900;
+          line-height: 1.35;
+          list-style-position: inside;
+        }
+        .faq-grid details[open] summary {
+          color: #ff9800;
+          background: ${isDark ? 'rgba(255,255,255,0.045)' : 'rgba(255,152,0,0.08)'};
+        }
+        .faq-grid summary:focus-visible {
+          outline: 3px solid rgba(255, 152, 0, 0.26);
+          outline-offset: -3px;
         }
         .faq-grid p {
+          margin: 0;
+          padding: 0 20px 20px;
           color: ${isDark ? '#cbd5e1' : '#526070'};
           line-height: 1.65;
         }
@@ -612,6 +1078,17 @@ export default function PricingPageClient() {
           .package-grid {
             grid-template-columns: repeat(2, minmax(0, 1fr));
           }
+          .proof-strip,
+          .payment-grid,
+          .fit-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+          .proof-item:nth-child(2) {
+            border-right: 0;
+          }
+          .proof-item:nth-child(-n + 2) {
+            border-bottom: 1px solid ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(69,115,223,0.1)'};
+          }
         }
         @media (max-width: 680px) {
           .pricing-main {
@@ -622,7 +1099,10 @@ export default function PricingPageClient() {
           }
           .entry-section,
           .packages-section,
+          .comparison-section,
+          .fit-section,
           .drivers-section,
+          .payment-section,
           .faq-section,
           .final-cta {
             padding: 46px 0;
@@ -630,24 +1110,210 @@ export default function PricingPageClient() {
           .hero-actions {
             flex-direction: column;
           }
+          .primary-cta,
+          .secondary-cta,
+          .pricing-card-button {
+            width: 100%;
+          }
           .entry-grid,
           .package-grid,
           .faq-grid,
-          .drivers-grid {
+          .drivers-grid,
+          .payment-grid,
+          .fit-grid {
             grid-template-columns: 1fr;
+          }
+          .comparison-table {
+            display: none;
+          }
+          .comparison-cards {
+            display: grid;
+            gap: 12px;
           }
           .entry-card,
           .package-card {
             min-height: auto;
           }
+          .package-meta {
+            grid-template-columns: 1fr;
+          }
           .package-card.featured {
             transform: none;
+          }
+          .start-guidance {
+            width: 100%;
+            border-radius: 18px;
+            text-align: center;
+          }
+          .proof-strip {
+            grid-template-columns: 1fr;
+          }
+          .proof-item,
+          .proof-item:nth-child(2) {
+            border-right: 0;
+          }
+          .proof-item {
+            min-height: auto;
+            border-bottom: 1px solid ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(69,115,223,0.1)'};
+          }
+          .proof-item:last-child {
+            border-bottom: 0;
+          }
+          .payment-section,
+          .drivers-section {
+            padding: 24px;
           }
           .pricing-stack {
             min-height: 310px;
           }
           .stack-card {
             padding: 18px;
+          }
+        }
+      `}</style>
+      <style jsx global>{`
+        .pricing-page .primary-cta,
+        .pricing-page .secondary-cta {
+          display: inline-flex;
+          box-sizing: border-box;
+          min-width: 190px;
+          min-height: 48px;
+          align-items: center;
+          justify-content: space-between;
+          gap: 14px;
+          border-radius: 999px;
+          border: 1px solid transparent;
+          padding: 0 22px;
+          font-weight: 900;
+          text-decoration: none;
+          transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease,
+            background 0.2s ease,
+            border-color 0.2s ease,
+            color 0.2s ease;
+        }
+        .pricing-page .primary-cta:hover,
+        .pricing-page .primary-cta:focus-visible,
+        .pricing-page .secondary-cta:hover,
+        .pricing-page .secondary-cta:focus-visible {
+          transform: translateY(-1px);
+          outline: none;
+        }
+        .pricing-page .primary-cta {
+          color: #fff;
+          background: linear-gradient(135deg, #ff9800, #f97316);
+          box-shadow: 0 18px 34px rgba(249, 115, 22, 0.25);
+        }
+        .pricing-page .secondary-cta {
+          color: ${isDark ? '#f8fafc' : '#1d2127'};
+          border: 1px solid ${isDark ? 'rgba(255,255,255,0.16)' : 'rgba(15,23,42,0.12)'};
+          background: ${isDark ? 'rgba(255,255,255,0.06)' : 'rgba(255,255,255,0.72)'};
+        }
+        .pricing-page .secondary-cta:hover,
+        .pricing-page .secondary-cta:focus-visible {
+          color: #fff;
+          border-color: rgba(255, 152, 0, 0.72);
+          background: linear-gradient(135deg, #ff9800, #f97316);
+          box-shadow: 0 18px 34px rgba(249, 115, 22, 0.24);
+        }
+        .pricing-page .cta-icon {
+          width: auto;
+          height: auto;
+          flex: 0 0 auto;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          color: currentColor;
+          background: transparent;
+          line-height: 1;
+          transition:
+            transform 0.2s ease,
+            color 0.2s ease;
+        }
+        .pricing-page .primary-cta span:first-child,
+        .pricing-page .secondary-cta span:first-child,
+        .pricing-page .pricing-card-button span:first-child {
+          min-width: 0;
+          overflow-wrap: anywhere;
+        }
+        .pricing-page .secondary-cta .cta-icon {
+          color: #ff9800;
+          background: transparent;
+        }
+        .pricing-page .primary-cta:hover .cta-icon,
+        .pricing-page .primary-cta:focus-visible .cta-icon,
+        .pricing-page .secondary-cta:hover .cta-icon,
+        .pricing-page .secondary-cta:focus-visible .cta-icon {
+          transform: translateX(2px);
+        }
+        .pricing-page .secondary-cta:hover .cta-icon,
+        .pricing-page .secondary-cta:focus-visible .cta-icon {
+          color: #fff;
+        }
+        .pricing-page .pricing-card-button {
+          display: inline-flex;
+          box-sizing: border-box;
+          width: 100%;
+          min-height: 46px;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+          border-radius: 999px;
+          border: 1px solid ${isDark ? 'rgba(255,255,255,0.14)' : 'rgba(15,23,42,0.12)'};
+          padding: 0 18px;
+          color: ${isDark ? '#f8fafc' : '#1d2127'};
+          background: ${isDark ? 'rgba(255,255,255,0.055)' : 'rgba(15,23,42,0.035)'};
+          font-size: 0.9rem;
+          font-weight: 900;
+          line-height: 1.2;
+          text-decoration: none;
+          transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease,
+            background 0.2s ease,
+            border-color 0.2s ease,
+            color 0.2s ease;
+        }
+        .pricing-page .pricing-card-button:hover,
+        .pricing-page .pricing-card-button:focus-visible {
+          transform: translateY(-1px);
+          border-color: rgba(255, 152, 0, 0.72);
+          color: #fff;
+          background: linear-gradient(135deg, #ff9800, #f97316);
+          box-shadow: 0 16px 30px rgba(249, 115, 22, 0.22);
+          outline: none;
+        }
+        .pricing-page .pricing-card-button:focus-visible {
+          box-shadow:
+            0 0 0 3px rgba(255, 152, 0, 0.22),
+            0 16px 30px rgba(249, 115, 22, 0.22);
+        }
+        .pricing-page .pricing-card-button-icon {
+          width: auto;
+          height: auto;
+          flex: 0 0 auto;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          color: #ff9800;
+          background: transparent;
+          font-size: 1rem;
+          line-height: 1;
+          transition:
+            transform 0.2s ease,
+            color 0.2s ease;
+        }
+        .pricing-page .pricing-card-button:hover .pricing-card-button-icon,
+        .pricing-page .pricing-card-button:focus-visible .pricing-card-button-icon {
+          transform: translateX(2px);
+          color: #fff;
+        }
+        @media (max-width: 680px) {
+          .pricing-page .primary-cta,
+          .pricing-page .secondary-cta,
+          .pricing-page .pricing-card-button {
+            width: 100%;
           }
         }
       `}</style>

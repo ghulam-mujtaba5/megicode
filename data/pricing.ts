@@ -4,10 +4,12 @@ export type PricingPackage = {
   price: string;
   timeline: string;
   includes: string[];
+  support: string;
   note?: string;
   cta: string;
   href: string;
   featured?: boolean;
+  featuredLabel?: string;
 };
 
 export type PricingCategory = {
@@ -21,40 +23,36 @@ export const pricingEntrypoints = [
   {
     title: 'MVP Roadmap',
     price: 'From $400',
-    bestFor: 'Founders who need scope, architecture, timeline, and budget clarity before build.',
-    bullets: ['Feature scope', 'Tech architecture', 'Build plan'],
-    cta: 'Start With Roadmap',
+    bestFor: 'Clarify scope before you build.',
+    cta: 'View Roadmap',
     href: '/contact?service=mvp-roadmap',
   },
   {
     title: 'AI Automation',
     price: 'From $900',
-    bestFor: 'Teams losing leads, replies, bookings, follow-ups, or reporting to manual work.',
-    bullets: ['Workflow mapping', 'Tool integrations', 'Launch handoff'],
+    bestFor: 'Automate leads, replies, bookings, or reports.',
     cta: 'Automate Workflow',
     href: '/services/ai-automation-agents',
   },
   {
     title: 'Clinic AI Receptionist',
     price: 'From $1,250 setup',
-    bestFor: 'Clinics that need faster inquiry capture, booking, reminders, and staff handoff.',
-    bullets: ['Patient intake logic', 'Booking flow', 'Support plans'],
+    supportText: 'Support from $150/mo',
+    bestFor: 'Capture inquiries, bookings, reminders, and staff handoff.',
     cta: 'Automate Clinic Bookings',
     href: '/contact?service=clinic-ai-receptionist',
   },
   {
     title: 'AI SaaS MVP',
     price: 'From $4,500',
-    bestFor: 'Founders ready to build a focused AI product with auth, dashboard, and launch setup.',
-    bullets: ['UX and build', 'AI features', 'Deployment'],
+    bestFor: 'Build a focused AI product with launch setup.',
     cta: 'Plan My MVP',
     href: '/services/ai-saas-mvp-development',
   },
   {
     title: 'Custom Platform',
     price: 'From $3,500',
-    bestFor: 'Businesses replacing spreadsheets, disconnected tools, and manual operations.',
-    bullets: ['Admin portals', 'CRM or booking', 'Dashboards'],
+    bestFor: 'Replace spreadsheets and disconnected tools.',
     cta: 'Build My Platform',
     href: '/services/custom-web-development',
   },
@@ -73,6 +71,7 @@ export const pricingCategories: PricingCategory[] = [
         price: '$400',
         timeline: '5-7 business days',
         includes: ['Core feature scope', 'Recommended stack', 'Timeline and budget logic'],
+        support: 'One handoff review included',
         note: '100% upfront.',
         cta: 'Start With Roadmap',
         href: '/contact?service=mvp-roadmap-basic',
@@ -87,10 +86,12 @@ export const pricingCategories: PricingCategory[] = [
           'User flow and milestones',
           'Build estimate and launch plan',
         ],
+        support: 'One revision pass and handoff review included',
         note: '100% upfront.',
         cta: 'Plan My MVP',
         href: '/contact?service=mvp-roadmap-advanced',
         featured: true,
+        featuredLabel: 'Recommended',
       },
     ],
   },
@@ -106,6 +107,7 @@ export const pricingCategories: PricingCategory[] = [
         price: '$900',
         timeline: '1-2 weeks',
         includes: ['1 automated workflow', 'Core integration', 'Testing and handoff'],
+        support: '7-day launch support',
         note: 'Tool and API costs billed separately.',
         cta: 'Automate Workflow',
         href: '/contact?service=automation-starter',
@@ -118,8 +120,9 @@ export const pricingCategories: PricingCategory[] = [
         includes: [
           '2-3 automated workflows',
           'CRM, form, email, or WhatsApp logic',
-          '14-day launch support',
+          'Testing and launch handoff',
         ],
+        support: '14-day support',
         note: 'Tool and API costs billed separately.',
         cta: 'See What We Can Automate',
         href: '/contact?service=automation-growth',
@@ -131,6 +134,7 @@ export const pricingCategories: PricingCategory[] = [
         price: '$3,200',
         timeline: '3-5 weeks',
         includes: ['4-6 workflows', 'Advanced branching', 'Reporting and team handoff'],
+        support: '21-day launch support',
         note: 'Tool and API costs billed separately.',
         cta: 'Scope Advanced Automation',
         href: '/contact?service=automation-advanced',
@@ -149,6 +153,7 @@ export const pricingCategories: PricingCategory[] = [
         price: '$1,250 setup + $150/mo',
         timeline: '2-3 weeks',
         includes: ['Intake script', 'Booking handoff', 'Basic support'],
+        support: 'Monthly support from $150/mo',
         note: 'Telephony, WhatsApp, and AI usage billed separately.',
         cta: 'Automate Clinic Bookings',
         href: '/contact?service=clinic-starter',
@@ -160,6 +165,7 @@ export const pricingCategories: PricingCategory[] = [
         price: '$2,250 setup + $350/mo',
         timeline: '2-4 weeks',
         includes: ['Booking flow', 'Reminders and routing', 'Reporting basics'],
+        support: 'Monthly support from $350/mo',
         note: 'Telephony, WhatsApp, and AI usage billed separately.',
         cta: 'Choose Clinic Growth',
         href: '/contact?service=clinic-growth',
@@ -171,6 +177,7 @@ export const pricingCategories: PricingCategory[] = [
         price: '$3,750 setup + $650/mo',
         timeline: '3-5 weeks',
         includes: ['Advanced intake logic', 'Multi-channel handoff', 'Managed support'],
+        support: 'Monthly support from $650/mo',
         note: 'Telephony, WhatsApp, and AI usage billed separately.',
         cta: 'Scope Clinic Premium',
         href: '/contact?service=clinic-premium',
@@ -189,6 +196,7 @@ export const pricingCategories: PricingCategory[] = [
         price: 'From $4,500',
         timeline: '4-8 weeks',
         includes: ['Core product flow', 'Auth and dashboard', 'Deployment'],
+        support: '14-day launch support',
         note: 'Third-party services billed separately.',
         cta: 'Plan My MVP',
         href: '/contact?service=lean-ai-saas-mvp',
@@ -199,6 +207,7 @@ export const pricingCategories: PricingCategory[] = [
         price: '$6,500-$12,000',
         timeline: '6-10 weeks',
         includes: ['UX and development', 'AI feature integration', 'Admin and launch support'],
+        support: '21-day launch support',
         note: 'Third-party services billed separately.',
         cta: 'Start Core MVP',
         href: '/contact?service=core-ai-saas-mvp',
@@ -210,6 +219,7 @@ export const pricingCategories: PricingCategory[] = [
         price: '$12,000-$22,000+',
         timeline: '8-14+ weeks',
         includes: ['Advanced architecture', 'Complex integrations', 'Scale-ready launch plan'],
+        support: '30-day launch support',
         note: 'Third-party services billed separately.',
         cta: 'Scope Advanced MVP',
         href: '/contact?service=advanced-ai-saas-mvp',
@@ -227,6 +237,7 @@ export const pricingCategories: PricingCategory[] = [
         price: 'From $3,500',
         timeline: '4-8 weeks',
         includes: ['Core portal', 'Admin basics', 'Launch setup'],
+        support: '14-day launch support',
         note: 'Hosting and paid tools billed separately.',
         cta: 'Build My Platform',
         href: '/contact?service=starter-business-platform',
@@ -237,6 +248,7 @@ export const pricingCategories: PricingCategory[] = [
         price: '$5,500-$11,000',
         timeline: '6-10 weeks',
         includes: ['User roles', 'Integrations', 'Dashboards and workflows'],
+        support: '21-day launch support',
         note: 'Hosting and paid tools billed separately.',
         cta: 'Start Growth Platform',
         href: '/contact?service=growth-business-platform',
@@ -248,6 +260,7 @@ export const pricingCategories: PricingCategory[] = [
         price: '$11,000-$20,000+',
         timeline: '8-14+ weeks',
         includes: ['Advanced workflows', 'API integrations', 'Reporting and scale support'],
+        support: '30-day launch support',
         note: 'Hosting and paid tools billed separately.',
         cta: 'Scope Advanced Platform',
         href: '/contact?service=advanced-business-platform',
@@ -266,6 +279,7 @@ export const pricingCategories: PricingCategory[] = [
         price: '$200/mo',
         timeline: 'Ongoing',
         includes: ['Bug fixes', 'Minor updates', 'Monthly check-in'],
+        support: 'Standard monthly support',
         note: 'Billed monthly in advance.',
         cta: 'Plan Launch Care',
         href: '/contact?service=launch-care',
@@ -276,6 +290,7 @@ export const pricingCategories: PricingCategory[] = [
         price: '$450/mo',
         timeline: 'Ongoing',
         includes: ['Priority improvements', 'Automation support', 'Performance review'],
+        support: 'Priority monthly support',
         note: 'Billed monthly in advance.',
         cta: 'Choose Growth Support',
         href: '/contact?service=growth-support',
@@ -287,6 +302,7 @@ export const pricingCategories: PricingCategory[] = [
         price: '$900+/mo',
         timeline: 'Ongoing',
         includes: ['Product planning', 'Feature delivery', 'Technical guidance'],
+        support: 'Partner-level monthly support',
         note: 'Billed monthly in advance.',
         cta: 'Discuss Product Partner',
         href: '/contact?service=product-partner',
@@ -296,16 +312,6 @@ export const pricingCategories: PricingCategory[] = [
 ];
 
 export const pricingFaqs = [
-  {
-    question: 'Do you charge hourly or fixed price?',
-    answer:
-      'We use fixed prices for clear packages and milestone pricing for larger builds. Hourly estimates stay internal so buyers can focus on scope, outcomes, and delivery risk.',
-  },
-  {
-    question: 'Are hosting, WhatsApp, telephony, and AI usage included?',
-    answer:
-      'No. Third-party tools, hosting, telephony, WhatsApp, model/API usage, and paid software licenses are billed separately at provider rates.',
-  },
   {
     question: 'What if I am not ready to build yet?',
     answer:
@@ -324,6 +330,31 @@ export const pricingFaqs = [
   {
     question: 'How do payments work?',
     answer:
-      'Small roadmap packages are paid upfront. Automation and clinic setups usually use upfront plus handoff payments. Larger builds use milestone payments.',
+      'Roadmap packages are paid upfront. Automation and clinic setup usually start with 60% upfront. MVP and platform builds are milestone-based.',
+  },
+  {
+    question: 'Are hosting, WhatsApp, and AI usage included?',
+    answer:
+      'No. Hosting, WhatsApp, telephony, AI API usage, and paid software licenses are billed separately at provider rates.',
+  },
+  {
+    question: 'Are third-party tools included?',
+    answer:
+      "No. Megicode's pricing covers strategy, design, implementation, testing, handoff, and support. Hosting, WhatsApp/telephony, AI API usage, and paid software tools are billed separately.",
+  },
+  {
+    question: 'Can pricing change after the quote?',
+    answer:
+      'Only if the scope changes. Once scope, milestones, and deliverables are agreed, pricing stays tied to that approved scope.',
+  },
+  {
+    question: 'What happens after launch?',
+    answer:
+      'You receive handoff, launch support, and the option to continue with monthly care for improvements, monitoring, and support.',
+  },
+  {
+    question: 'Can you sign an NDA?',
+    answer:
+      'Yes. We can sign a reasonable NDA before deeper product, workflow, or customer data is shared.',
   },
 ];

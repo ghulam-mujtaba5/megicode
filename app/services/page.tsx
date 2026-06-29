@@ -683,13 +683,17 @@ export default function ServicesPage() {
           margin-right: 0.45rem;
         }
         .offer-cta {
-          width: fit-content;
+          width: 100%;
           display: inline-flex;
           align-items: center;
+          justify-content: center;
+          min-height: 46px;
           padding: 0.68rem 1rem;
           border-radius: 999px;
           font-size: 0.82rem;
           font-weight: 800;
+          line-height: 1.2;
+          text-align: center;
           text-decoration: none;
         }
         .offer-cta-light {
