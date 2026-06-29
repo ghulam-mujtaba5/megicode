@@ -49,8 +49,8 @@ const AboutStats = () => {
   const stats = [
     {
       iconSrc: '/icons/about-stats/software-development.png',
-      number: '15+',
-      label: 'AI & Software Products Built',
+      number: '15K+',
+      label: 'Active Users Across Our Platforms',
     },
     {
       iconSrc: '/icons/about-stats/global-reach.png',

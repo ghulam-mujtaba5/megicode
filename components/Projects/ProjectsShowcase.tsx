@@ -1,5 +1,4 @@
 'use client';
-import React from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -47,37 +46,11 @@ export interface Project {
 const ProjectsShowcase = () => {
   const { theme } = useTheme();
   const themeStyles = theme === 'dark' ? darkStyles : lightStyles;
-  const [activeCategory, setActiveCategory] = React.useState<string>('all');
-  const categories = [
-    { key: 'all', label: 'All' },
-    { key: 'uiux', label: 'UI/UX' },
-    { key: 'mobile', label: 'Mobile' },
-    { key: 'desktop', label: 'Desktop' },
-    { key: 'web', label: 'Web' },
-    { key: 'ai', label: 'AI' },
-    { key: 'data-engineering', label: 'Data Engineering' },
-  ];
-
-  const filteredProjects =
-    activeCategory === 'all'
-      ? projects
-      : projects.filter((project) => project.category === activeCategory);
 
   return (
     <section className={`${styles.showcaseSection} ${themeStyles.showcaseSection}`}>
-      <div className={styles.categoryFilter}>
-        {categories.map(({ key, label }) => (
-          <button
-            key={key}
-            className={`${styles.filterButton} ${themeStyles.filterButton} ${activeCategory === key ? styles.activeFilter : ''}`}
-            onClick={() => setActiveCategory(key)}
-          >
-            {label}
-          </button>
-        ))}
-      </div>
       <div className={styles.projectsGrid}>
-        {filteredProjects.map((project) => (
+        {projects.map((project) => (
           <Link
             key={project.slug}
             href={`/projects/${project.slug}`}
