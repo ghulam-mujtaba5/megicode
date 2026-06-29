@@ -17,21 +17,69 @@ import NavBarMobile from '@/components/NavBar_Mobile/NavBar-mobile';
 import Breadcrumbs from '@/components/SEO/Breadcrumbs';
 
 const costDrivers = [
-  'Number of workflows',
-  'AI complexity',
-  'Integrations',
-  'Dashboard or admin needs',
-  'User roles',
-  'Data migration',
-  'WhatsApp, telephony, or API usage',
-  'Support level',
+  {
+    label: 'Workflow depth',
+    detail: 'Number of workflows, branches, approvals, and handoffs.',
+  },
+  {
+    label: 'AI complexity',
+    detail: 'Prompt logic, agents, memory, retrieval, and evaluation needs.',
+  },
+  {
+    label: 'Integrations',
+    detail: 'CRM, forms, email, WhatsApp, telephony, payments, or APIs.',
+  },
+  {
+    label: 'Product surface',
+    detail: 'Dashboards, admin panels, user roles, reporting, and portals.',
+  },
+  {
+    label: 'Data readiness',
+    detail: 'Migration, cleanup, permissions, imports, and existing tools.',
+  },
+  {
+    label: 'Support level',
+    detail: 'Launch care, monitoring, improvements, and managed support.',
+  },
+];
+
+const paymentTerms = [
+  {
+    title: 'Roadmap packages',
+    detail: 'Paid upfront before the planning sprint starts.',
+  },
+  {
+    title: 'Automation and clinic setup',
+    detail: 'Usually 60% upfront and 40% before handoff.',
+  },
+  {
+    title: 'MVP and platform builds',
+    detail: 'Milestone-based after scope, deliverables, and timeline are approved.',
+  },
 ];
 
 const proofStats = [
   { value: '15+', label: 'AI & software products built' },
   { value: '5+', label: 'countries served' },
   { value: '10+', label: 'startups and businesses partnered' },
-  { value: 'Proof', label: 'The Aesthetics Place, CampusAxis, and Wajdan Digital Alchemy' },
+];
+
+const proofWork = [
+  {
+    name: 'The Aesthetics Place',
+    summary:
+      'Clinic website, WhatsApp booking, consultation flow, patient records, billing, and staff operations.',
+  },
+  {
+    name: 'CampusAxis',
+    summary:
+      'Student platform with resources, calculators, reviews, community, dashboards, and role-based workflows.',
+  },
+  {
+    name: 'Wajdan Digital Alchemy',
+    summary:
+      'Conversion-focused agency website with funnel narrative, proof, pricing, and booking flow.',
+  },
 ];
 
 const comparisonRows = [
@@ -111,13 +159,13 @@ export default function PricingPageClient() {
               <Link className="primary-cta" href="/contact?source=pricing">
                 <span>Book Free Fit Call</span>
                 <span className="cta-icon" aria-hidden="true">
-                  -&gt;
+                  →
                 </span>
               </Link>
               <a className="secondary-cta" href="#packages">
                 <span>Compare Packages</span>
                 <span className="cta-icon" aria-hidden="true">
-                  -&gt;
+                  →
                 </span>
               </a>
             </div>
@@ -160,7 +208,7 @@ export default function PricingPageClient() {
                 >
                   <span>{entry.cta}</span>
                   <span className="pricing-card-button-icon" aria-hidden="true">
-                    -&gt;
+                    →
                   </span>
                 </Link>
               </article>
@@ -233,7 +281,7 @@ export default function PricingPageClient() {
                 >
                   <span>{item.cta}</span>
                   <span className="pricing-card-button-icon" aria-hidden="true">
-                    -&gt;
+                    →
                   </span>
                 </Link>
               </article>
@@ -326,27 +374,74 @@ export default function PricingPageClient() {
           </div>
           <div className="drivers-grid">
             {costDrivers.map((driver) => (
-              <span key={driver}>{driver}</span>
+              <article key={driver.label}>
+                <span aria-hidden="true" />
+                <div>
+                  <h3>{driver.label}</h3>
+                  <p>{driver.detail}</p>
+                </div>
+              </article>
             ))}
           </div>
         </section>
 
-        <section className="proof-strip" aria-label="Megicode proof">
-          {proofStats.map((proof) => (
-            <div className="proof-item" key={`${proof.value}-${proof.label}`}>
-              <strong>{proof.value}</strong>
-              <span>{proof.label}</span>
+        <section className="proof-section" aria-labelledby="pricing-proof-heading">
+          <div className="proof-copy">
+            <span className="eyebrow">Proof behind the pricing</span>
+            <h2 id="pricing-proof-heading">Real platforms behind the starting prices.</h2>
+            <p>
+              Pricing feels clearer when buyers can see the type of systems Megicode has already
+              shipped across clinics, student platforms, and conversion-focused business websites.
+            </p>
+            <div className="proof-actions">
+              <Link className="secondary-cta" href="/projects">
+                <span>View Case Studies</span>
+                <span className="cta-icon" aria-hidden="true">
+                  →
+                </span>
+              </Link>
+              <Link className="secondary-cta" href="/services">
+                <span>See Services</span>
+                <span className="cta-icon" aria-hidden="true">
+                  →
+                </span>
+              </Link>
             </div>
-          ))}
+          </div>
+          <div className="proof-panel">
+            <div className="proof-metrics" aria-label="Megicode proof metrics">
+              {proofStats.map((proof) => (
+                <div className="proof-item" key={`${proof.value}-${proof.label}`}>
+                  <strong>{proof.value}</strong>
+                  <span>{proof.label}</span>
+                </div>
+              ))}
+            </div>
+            <div className="proof-work">
+              {proofWork.map((item) => (
+                <article key={item.name}>
+                  <h3>{item.name}</h3>
+                  <p>{item.summary}</p>
+                </article>
+              ))}
+            </div>
+          </div>
         </section>
 
         <section className="payment-section" aria-labelledby="payment-heading">
-          <span className="eyebrow">Payment clarity</span>
-          <h2 id="payment-heading">Simple terms before a proposal.</h2>
+          <div className="payment-copy">
+            <span className="eyebrow">Payment clarity</span>
+            <h2 id="payment-heading">Simple terms before a proposal.</h2>
+            <p>Final payment structure is confirmed in the proposal before work starts.</p>
+          </div>
           <div className="payment-grid">
-            <p>Roadmap packages are paid upfront.</p>
-            <p>Automation and clinic setup usually start with 60% upfront.</p>
-            <p>MVP and platform builds are milestone-based.</p>
+            {paymentTerms.map((term, index) => (
+              <article key={term.title}>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <h3>{term.title}</h3>
+                <p>{term.detail}</p>
+              </article>
+            ))}
           </div>
         </section>
 
@@ -374,7 +469,7 @@ export default function PricingPageClient() {
           <Link className="primary-cta" href="/contact?source=pricing-final">
             <span>Book Free Fit Call</span>
             <span className="cta-icon" aria-hidden="true">
-              -&gt;
+              →
             </span>
           </Link>
         </section>
@@ -598,6 +693,7 @@ export default function PricingPageClient() {
         .comparison-section,
         .fit-section,
         .drivers-section,
+        .proof-section,
         .payment-section,
         .faq-section,
         .final-cta {
@@ -610,6 +706,7 @@ export default function PricingPageClient() {
         }
         .section-head h2,
         .drivers-copy h2,
+        .proof-copy h2,
         .payment-section h2,
         .final-cta h2 {
           margin: 12px 0;
@@ -629,7 +726,7 @@ export default function PricingPageClient() {
         .comparison-cards details,
         .fit-card,
         .drivers-section,
-        .proof-strip,
+        .proof-section,
         .payment-section,
         .faq-grid details,
         .final-cta {
@@ -909,40 +1006,112 @@ export default function PricingPageClient() {
         }
         .drivers-section {
           display: grid;
-          grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+          grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
           gap: 32px;
           align-items: center;
           border-radius: 26px;
           padding: 38px;
+          overflow: hidden;
+          position: relative;
+        }
+        .drivers-section::after {
+          content: '';
+          position: absolute;
+          width: 220px;
+          height: 220px;
+          right: -90px;
+          top: -90px;
+          border-radius: 999px;
+          background: rgba(255, 152, 0, 0.1);
+          pointer-events: none;
         }
         .drivers-grid {
           display: grid;
           grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 12px;
+          gap: 14px;
+          position: relative;
+          z-index: 1;
         }
-        .drivers-grid span {
-          border-radius: 999px;
-          padding: 12px 14px;
-          color: ${isDark ? '#e2e8f0' : '#334155'};
-          background: ${isDark ? 'rgba(255,255,255,0.06)' : 'rgba(69,115,223,0.07)'};
-          font-weight: 800;
-          font-size: 0.88rem;
-        }
-        .proof-strip {
+        .drivers-grid article {
           display: grid;
-          grid-template-columns: repeat(4, minmax(0, 1fr));
-          gap: 0;
+          grid-template-columns: 38px minmax(0, 1fr);
+          gap: 12px;
+          min-height: 126px;
+          border-radius: 20px;
+          border: 1px solid ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(69,115,223,0.12)'};
+          padding: 18px;
+          color: ${isDark ? '#e2e8f0' : '#334155'};
+          background: ${isDark ? 'rgba(15,23,42,0.34)' : 'rgba(255,255,255,0.68)'};
+          box-shadow: ${isDark
+            ? 'inset 0 1px 0 rgba(255,255,255,0.04)'
+            : '0 12px 24px rgba(69,115,223,0.06)'};
+        }
+        .drivers-grid article > span {
+          width: 38px;
+          height: 38px;
+          display: inline-flex;
+          border-radius: 14px;
+          background:
+            linear-gradient(135deg, rgba(255, 152, 0, 0.95), rgba(249, 115, 22, 0.9)), #ff9800;
+          box-shadow: 0 12px 22px rgba(249, 115, 22, 0.22);
+        }
+        .drivers-grid article > span::after {
+          content: '';
+          width: 16px;
+          height: 16px;
+          margin: auto;
+          border-radius: 5px;
+          border: 2px solid rgba(255, 255, 255, 0.9);
+        }
+        .drivers-grid h3 {
+          margin: 0 0 6px;
+          color: ${isDark ? '#f8fafc' : '#0f172a'};
+          font-size: 0.98rem;
+          line-height: 1.3;
+        }
+        .drivers-grid p {
+          margin: 0;
+          color: ${isDark ? '#cbd5e1' : '#526070'};
+          font-size: 0.9rem;
+          line-height: 1.55;
+        }
+        .proof-section {
+          display: grid;
+          grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+          gap: 34px;
+          align-items: start;
+          border-radius: 26px;
+          padding: 38px;
+        }
+        .proof-copy p {
+          color: ${isDark ? '#cbd5e1' : '#526070'};
+          line-height: 1.75;
+        }
+        .proof-actions {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 12px;
+          margin-top: 22px;
+        }
+        .proof-panel {
+          display: grid;
+          gap: 16px;
+        }
+        .proof-metrics {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
           overflow: hidden;
-          border-radius: 24px;
-          padding: 0;
+          border-radius: 20px;
+          border: 1px solid ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(69,115,223,0.1)'};
         }
         .proof-item {
           display: grid;
           align-content: start;
           gap: 6px;
-          min-height: 132px;
-          padding: 24px;
+          min-height: 118px;
+          padding: 22px;
           border-right: 1px solid ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(69,115,223,0.1)'};
+          background: ${isDark ? 'rgba(255,255,255,0.04)' : 'rgba(69,115,223,0.055)'};
         }
         .proof-item:last-child {
           border-right: 0;
@@ -958,23 +1127,71 @@ export default function PricingPageClient() {
           font-weight: 800;
           line-height: 1.45;
         }
+        .proof-work {
+          display: grid;
+          gap: 12px;
+        }
+        .proof-work article {
+          border-radius: 18px;
+          padding: 18px;
+          background: ${isDark ? 'rgba(15,23,42,0.38)' : 'rgba(255,255,255,0.68)'};
+          border: 1px solid ${isDark ? 'rgba(255,255,255,0.09)' : 'rgba(69,115,223,0.1)'};
+        }
+        .proof-work h3 {
+          margin: 0 0 8px;
+          color: ${isDark ? '#f8fafc' : '#0f172a'};
+          font-size: 1rem;
+          line-height: 1.3;
+        }
+        .proof-work p {
+          margin: 0;
+          color: ${isDark ? '#cbd5e1' : '#526070'};
+          line-height: 1.65;
+        }
         .payment-section {
+          display: grid;
+          grid-template-columns: minmax(0, 0.62fr) minmax(0, 1.38fr);
+          gap: 28px;
+          align-items: center;
           border-radius: 26px;
           padding: 38px;
+        }
+        .payment-copy p {
+          margin: 0;
+          color: ${isDark ? '#cbd5e1' : '#526070'};
+          line-height: 1.7;
         }
         .payment-grid {
           display: grid;
           grid-template-columns: repeat(3, minmax(0, 1fr));
           gap: 14px;
-          margin-top: 22px;
+        }
+        .payment-grid article {
+          margin: 0;
+          min-height: 168px;
+          border-radius: 22px;
+          border: 1px solid ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(69,115,223,0.12)'};
+          padding: 20px;
+          color: ${isDark ? '#e2e8f0' : '#334155'};
+          background: ${isDark ? 'rgba(15,23,42,0.34)' : 'rgba(255,255,255,0.68)'};
+        }
+        .payment-grid article > span {
+          display: inline-flex;
+          margin-bottom: 18px;
+          color: #ff9800;
+          font-size: 0.78rem;
+          font-weight: 900;
+          letter-spacing: 0.12em;
+        }
+        .payment-grid h3 {
+          margin: 0 0 10px;
+          color: ${isDark ? '#f8fafc' : '#0f172a'};
+          font-size: 1rem;
+          line-height: 1.35;
         }
         .payment-grid p {
           margin: 0;
-          border-radius: 18px;
-          padding: 18px;
-          color: ${isDark ? '#e2e8f0' : '#334155'};
-          background: ${isDark ? 'rgba(255,255,255,0.055)' : 'rgba(69,115,223,0.07)'};
-          font-weight: 800;
+          color: ${isDark ? '#cbd5e1' : '#526070'};
           line-height: 1.55;
         }
         .fit-grid {
@@ -1053,7 +1270,9 @@ export default function PricingPageClient() {
         }
         @media (max-width: 980px) {
           .pricing-hero,
-          .drivers-section {
+          .drivers-section,
+          .proof-section,
+          .payment-section {
             grid-template-columns: 1fr;
           }
           .pricing-stack {
@@ -1078,7 +1297,7 @@ export default function PricingPageClient() {
           .package-grid {
             grid-template-columns: repeat(2, minmax(0, 1fr));
           }
-          .proof-strip,
+          .proof-metrics,
           .payment-grid,
           .fit-grid {
             grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1102,6 +1321,7 @@ export default function PricingPageClient() {
           .comparison-section,
           .fit-section,
           .drivers-section,
+          .proof-section,
           .payment-section,
           .faq-section,
           .final-cta {
@@ -1145,7 +1365,7 @@ export default function PricingPageClient() {
             border-radius: 18px;
             text-align: center;
           }
-          .proof-strip {
+          .proof-metrics {
             grid-template-columns: 1fr;
           }
           .proof-item,
@@ -1160,8 +1380,13 @@ export default function PricingPageClient() {
             border-bottom: 0;
           }
           .payment-section,
-          .drivers-section {
+          .drivers-section,
+          .proof-section {
             padding: 24px;
+          }
+          .drivers-grid article,
+          .payment-grid article {
+            min-height: auto;
           }
           .pricing-stack {
             min-height: 310px;

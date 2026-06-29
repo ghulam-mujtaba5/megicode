@@ -1,13 +1,15 @@
-"use client";
+'use client';
 import React from 'react';
-import { useTheme } from '../../context/ThemeContext';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { useCalendlyModal } from '../CalendlyModal';
-import styles from './welcomeLight.module.css';
-import darkStyles from './welcomeDark.module.css';
-import commonStyles from './welcomeCommon.module.css';
 
+import Link from 'next/link';
+
+import { motion } from 'framer-motion';
+
+import { useTheme } from '../../context/ThemeContext';
+import { useCalendlyModal } from '../CalendlyModal';
+import commonStyles from './welcomeCommon.module.css';
+import darkStyles from './welcomeDark.module.css';
+import styles from './welcomeLight.module.css';
 
 const Frame = () => {
   const { theme } = useTheme();
@@ -89,17 +91,16 @@ const Frame = () => {
             onClick={openCalendly}
             className={`${commonStyles.heroPrimary} ${themeStyles.heroPrimary}`}
           >
-            Start a Project
+            Book Free Fit Call →
           </button>
           <Link
-            href="/services"
+            href="/pricing"
             className={`${commonStyles.heroSecondary} ${themeStyles.heroSecondary}`}
           >
-            Our Services
+            View Pricing →
           </Link>
         </motion.div>
         {calendlyModal}
-
       </motion.div>
     </section>
   );

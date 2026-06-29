@@ -1,52 +1,44 @@
 .footerBackground {
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 80px;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
 }
 
 .copyrightIcon {
-    position: absolute;
-    height: 32%;
-    top: 40%;
-    left: 57px;
-    max-height: 100%;
-    width: 32px;
-    overflow: hidden;
+  height: 18px;
+  width: 32px;
+  flex: 0 0 auto;
 }
 
 .copyrightLabel {
-    margin: 0;
-    position: absolute;
-    height: 44%;
-    top: 27%;
-    left: 96px;
-    font-size: inherit;
-    line-height: 182.02%;
-    font-weight: 400;
-    font-family: inherit;
-    display: inline-block;
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  font-weight: 400;
+  font-family: inherit;
 }
-
-
 
 .linkedinIcon,
 .instagramIcon,
 .githubIcon {
-    position: absolute;
-    height: 24%;
-    top: 39%;
-    max-height: 100%;
-    width: 22.4px;
-    cursor: pointer;
-    transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s cubic-bezier(0.4,0,0.2,1), filter 0.3s cubic-bezier(0.4,0,0.2,1);
-    outline: none;
-    will-change: transform, box-shadow, filter;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  background: rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+  transition:
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    filter 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+  will-change: transform, box-shadow, filter;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
 }
 
 .linkedinIcon:hover,
@@ -55,108 +47,202 @@
 .linkedinIcon:focus,
 .instagramIcon:focus,
 .githubIcon:focus {
-    transform: scale(1.13) rotate(-4deg);
-    box-shadow: 0 4px 18px 0 #4573df55, 0 0 0 2px #4573df;
-    filter: brightness(1.13) drop-shadow(0 0 4px #4573df);
-    outline: 2px solid #4573df;
-    z-index: 2;
-}
-
-.linkedinIcon {
-    right: 60px;
-}
-
-.githubIcon {
-    right: 100px; /* Changed from 140px to 100px */
-}
-
-.instagramIcon {
-    right: 140px; /* Changed from 100px to 140px */
+  transform: translateY(-2px);
+  box-shadow:
+    0 12px 24px rgba(69, 115, 223, 0.2),
+    0 0 0 2px rgba(69, 115, 223, 0.5);
+  filter: brightness(1.13) drop-shadow(0 0 4px #4573df);
+  outline: none;
+  z-index: 2;
 }
 
 .internalPortalLink {
-    position: absolute;
-    top: 39%;
-    right: 180px;
-    font-size: 13px;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    opacity: 0.7;
-    transition: opacity 0.3s ease, transform 0.2s ease;
-    cursor: pointer;
+  font-size: 13px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  opacity: 0.7;
+  transition:
+    opacity 0.3s ease,
+    transform 0.2s ease;
+  cursor: pointer;
 }
 
 .footerFrame {
-    position: relative;
-    width: 100%;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    /* padding: 0 20px; */
-    box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  min-height: 320px;
+  display: grid;
+  gap: 28px;
+  padding: 48px 56px 26px;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .footer {
-    width: 100%;
-    position: relative;
-    margin: 0 !important;
-    text-align: left;
-    font-size: 24px;
-    font-family: 'Open Sans';
+  width: 100%;
+  position: relative;
+  margin: 0 !important;
+  text-align: left;
+  font-size: 16px;
+  font-family: 'Open Sans';
+}
+
+.footerContent,
+.footerBottom {
+  position: relative;
+  z-index: 1;
+}
+
+.footerContent {
+  display: grid;
+  grid-template-columns: minmax(220px, 1.4fr) repeat(3, minmax(160px, 0.7fr));
+  gap: 32px;
+  max-width: 1240px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.footerBrand,
+.footerNav,
+.footerContact {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+}
+
+.footerLogoLink {
+  display: inline-flex;
+  width: fit-content;
+  border-radius: 12px;
+  outline-offset: 4px;
+}
+
+.footerLogoLink:focus-visible {
+  outline: 2px solid #ff9800;
+}
+
+.footerLogo {
+  width: min(190px, 100%);
+  height: auto;
+  object-fit: contain;
+}
+
+.footerNav strong,
+.footerContact strong {
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.footerBrand p {
+  max-width: 360px;
+  margin: 0;
+  line-height: 1.65;
+  opacity: 0.78;
+}
+
+.footerNav a,
+.footerContact a {
+  color: inherit;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  text-decoration: none;
+  opacity: 0.76;
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.footerSocial {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.footerNav a:hover,
+.footerNav a:focus-visible,
+.footerContact a:hover,
+.footerContact a:focus-visible {
+  color: #ff9800;
+  opacity: 1;
+  transform: translateX(2px);
+  outline: none;
+}
+
+.footerCta {
+  width: fit-content;
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0 18px;
+  color: #fff !important;
+  background: linear-gradient(135deg, #ff9800, #f97316);
+  box-shadow: 0 14px 28px rgba(249, 115, 22, 0.22);
+  font-weight: 900;
+  opacity: 1 !important;
+}
+
+.footerBottom {
+  display: flex;
+  max-width: 1240px;
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 22px;
+  border-top: 1px solid rgba(148, 163, 184, 0.22);
+  align-items: center;
+  gap: 14px;
+}
+
+.footerBottom .internalPortalLink {
+  margin-left: auto;
 }
 
 /* Media query for small screens */
+@media (max-width: 900px) {
+  .footerFrame {
+    padding: 38px 24px 24px;
+  }
+
+  .footerContent {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 576px) {
-    .footerBackground {
-        height: 65px;
-    }
+  .footerBackground {
+    height: 100%;
+  }
 
-    .footerFrame {
-        height: 65px;
-        padding: 0;
-    }
+  .footerFrame {
+    min-height: 0;
+    padding: 34px 20px 22px;
+  }
 
-    .copyrightIcon {
-        height: 38.46%;
-        top: 32.31%;
-        left: 21px;
-        width: 25px;
-    }
+  .copyrightIcon {
+    width: 22px;
+    height: 16px;
+  }
 
-    .copyrightLabel {
-        height: 38.46%;
-        top: 32.31%;
-        left: 51px;
-        font-size: 12px;
-        width: 57%;
-        display: flex;
-        align-items: center;
-    }
+  .copyrightLabel {
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+  }
 
-    .linkedinIcon {
-        height: 36.92%;
-        top: 32.31%;
-        right: 25px;
-        width: 22.4px;
-    }
+  .footerContent {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
 
-    .instagramIcon {
-        height: 36.92%;
-        top: 32.31%;
-        right: 85px; /* Adjusted for responsiveness */
-        width: 22.4px;
-    }
+  .footerBottom {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
 
-    .githubIcon {
-        height: 36.92%;
-        top: 32.31%;
-        right: 55px; /* Adjusted for responsiveness */
-        width: 22.4px;
-    }
-
-    .internalPortalLink {
-        display: none;
-    }
+  .footerBottom .internalPortalLink {
+    display: none;
+  }
 }

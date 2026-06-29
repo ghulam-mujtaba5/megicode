@@ -187,10 +187,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const navJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'SiteNavigationElement',
-    name: ['About', 'Services', 'Case Studies', 'Insights', 'Results', 'Contact', 'Privacy Policy'],
+    name: [
+      'About',
+      'Services',
+      'Pricing',
+      'Case Studies',
+      'Insights',
+      'Results',
+      'Contact',
+      'Privacy Policy',
+    ],
     url: [
       'https://www.megicode.com/about',
       'https://www.megicode.com/services',
+      canonicalUrl('/pricing'),
       canonicalUrl('/projects'),
       canonicalUrl('/article'),
       canonicalUrl('/reviews'),

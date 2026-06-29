@@ -43,7 +43,7 @@ export default function HomePricingPreview() {
               >
                 <span>{entry.cta}</span>
                 <span className="card-button-icon" aria-hidden="true">
-                  -&gt;
+                  →
                 </span>
               </Link>
             </article>
@@ -54,7 +54,7 @@ export default function HomePricingPreview() {
           <Link className="section-button section-button-primary" href="/pricing">
             <span>View Pricing</span>
             <span className="section-button-icon" aria-hidden="true">
-              -&gt;
+              →
             </span>
           </Link>
           <Link
@@ -63,7 +63,7 @@ export default function HomePricingPreview() {
           >
             <span>Book Free Fit Call</span>
             <span className="section-button-icon" aria-hidden="true">
-              -&gt;
+              →
             </span>
           </Link>
         </div>

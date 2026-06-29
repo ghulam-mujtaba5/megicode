@@ -43,6 +43,35 @@ export interface Project {
   overview?: string;
 }
 
+const projectOfferMap: Record<
+  string,
+  {
+    text: string;
+    primaryLabel: string;
+    primaryHref: string;
+    secondaryLabel?: string;
+    secondaryHref?: string;
+  }
+> = {
+  'aesthetics-clinic-platform': {
+    text: 'Want a similar clinic booking or operations system? Clinic AI Receptionist starts at $1,250 setup, and full clinic platforms start from $3,500.',
+    primaryLabel: 'View Clinic Packages',
+    primaryHref: '/pricing#packages',
+    secondaryLabel: 'Book Fit Call',
+    secondaryHref: '/contact?service=clinic-ai-receptionist',
+  },
+  'campusaxis-university-portal': {
+    text: 'Need a platform with dashboards, resources, roles, and user workflows? Custom platforms start from $3,500.',
+    primaryLabel: 'View Platform Packages',
+    primaryHref: '/pricing#packages',
+  },
+  'wajdan-growth-system-website': {
+    text: 'Need a conversion-focused website or funnel system? Start with a scope review before the build.',
+    primaryLabel: 'Discuss My Website',
+    primaryHref: '/contact?service=conversion-website',
+  },
+};
+
 const ProjectsShowcase = () => {
   const { theme } = useTheme();
   const themeStyles = theme === 'dark' ? darkStyles : lightStyles;
@@ -50,25 +79,25 @@ const ProjectsShowcase = () => {
   return (
     <section className={`${styles.showcaseSection} ${themeStyles.showcaseSection}`}>
       <div className={styles.projectsGrid}>
-        {projects.map((project) => (
-          <Link
-            key={project.slug}
-            href={`/projects/${project.slug}`}
-            className={styles.projectCardLink}
-          >
-            <div
+        {projects.map((project) => {
+          const offer = projectOfferMap[project.slug];
+
+          return (
+            <article
+              key={project.slug}
               className={`${styles.projectCard} ${themeStyles.projectCard}`}
-              tabIndex={0}
-              aria-label={`View details for ${project.title}`}
+              aria-label={`Case study for ${project.title}`}
             >
               <div className={styles.imageContainer}>
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  width={400}
-                  height={300}
-                  className={styles.projectImage}
-                />
+                <Link href={`/projects/${project.slug}`} className={styles.imageLink}>
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    width={400}
+                    height={300}
+                    className={styles.projectImage}
+                  />
+                </Link>
                 <div className={styles.cardBadges}>
                   {project.liveUrl && <span className={styles.liveBadge}>🟢 Live</span>}
                   {project.slug === 'campusaxis-university-portal' && (
@@ -77,9 +106,11 @@ const ProjectsShowcase = () => {
                 </div>
               </div>
               <div className={styles.projectContent}>
-                <h3 className={`${styles.projectTitle} ${themeStyles.projectTitle}`}>
-                  {project.title}
-                </h3>
+                <Link href={`/projects/${project.slug}`} className={styles.titleLink}>
+                  <h3 className={`${styles.projectTitle} ${themeStyles.projectTitle}`}>
+                    {project.title}
+                  </h3>
+                </Link>
                 <p className={`${styles.projectDescription} ${themeStyles.projectDescription}`}>
                   {project.description}
                 </p>
@@ -90,10 +121,28 @@ const ProjectsShowcase = () => {
                     </span>
                   ))}
                 </div>
+                {offer && (
+                  <div className={styles.offerBox}>
+                    <p>{offer.text}</p>
+                    <div className={styles.offerActions}>
+                      <Link href={offer.primaryHref} className={styles.offerPrimary}>
+                        {offer.primaryLabel} →
+                      </Link>
+                      {offer.secondaryHref && offer.secondaryLabel && (
+                        <Link href={offer.secondaryHref} className={styles.offerSecondary}>
+                          {offer.secondaryLabel} →
+                        </Link>
+                      )}
+                    </div>
+                  </div>
+                )}
                 <div className={styles.cardFooter}>
-                  <span className={`${styles.detailLink} ${themeStyles.detailLink}`}>
+                  <Link
+                    href={`/projects/${project.slug}`}
+                    className={`${styles.detailLink} ${themeStyles.detailLink}`}
+                  >
                     View Case Study →
-                  </span>
+                  </Link>
                   {project.liveUrl && (
                     <span className={styles.liveUrlText}>
                       {project.liveUrl.replace('https://', '').replace('http://', '')}
@@ -101,9 +150,9 @@ const ProjectsShowcase = () => {
                   )}
                 </div>
               </div>
-            </div>
-          </Link>
-        ))}
+            </article>
+          );
+        })}
       </div>
     </section>
   );
