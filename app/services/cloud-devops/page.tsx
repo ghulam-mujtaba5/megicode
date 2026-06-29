@@ -42,7 +42,6 @@ import {
   ServiceFAQs,
   ServicePersonalizationPanel,
   ServiceProofStrip,
-  ServiceRecommendationPanel,
   ServiceUsabilityBlocks,
 } from '../ServiceDetailSections';
 import servicePageCopy from '../servicePageCopy';
@@ -478,8 +477,6 @@ export default function CloudDevOpsPage() {
             })}
           </div>
         </section>
-
-        <ServiceRecommendationPanel currentSlug="cloud-devops" theme={theme} />
         <ServiceConversionPanel
           copy={serviceCopy}
           primaryCta={serviceCopy.primaryCta}

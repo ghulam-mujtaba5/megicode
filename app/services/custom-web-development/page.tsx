@@ -35,7 +35,6 @@ import {
   ServiceFAQs,
   ServicePersonalizationPanel,
   ServiceProofStrip,
-  ServiceRecommendationPanel,
   ServiceUsabilityBlocks,
 } from '../ServiceDetailSections';
 import servicePageCopy from '../servicePageCopy';
@@ -466,8 +465,6 @@ export default function WebDevelopmentDetailPage() {
             })}
           </div>
         </section>
-
-        <ServiceRecommendationPanel currentSlug="custom-web-development" theme={theme} />
         <ServiceConversionPanel
           copy={serviceCopy}
           primaryCta={serviceCopy.primaryCta}

@@ -35,7 +35,6 @@ import {
   ServiceFAQs,
   ServicePersonalizationPanel,
   ServiceProofStrip,
-  ServiceRecommendationPanel,
   ServiceUsabilityBlocks,
 } from '../ServiceDetailSections';
 import servicePageCopy from '../servicePageCopy';
@@ -468,8 +467,6 @@ export default function DataAnalyticsDetailPage() {
             })}
           </div>
         </section>
-
-        <ServiceRecommendationPanel currentSlug="data-analytics" theme={theme} />
         <ServiceConversionPanel
           copy={serviceCopy}
           primaryCta={serviceCopy.primaryCta}

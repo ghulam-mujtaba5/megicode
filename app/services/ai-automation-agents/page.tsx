@@ -38,7 +38,6 @@ import {
   ServiceFAQs,
   ServicePersonalizationPanel,
   ServiceProofStrip,
-  ServiceRecommendationPanel,
   ServiceUsabilityBlocks,
 } from '../ServiceDetailSections';
 import servicePageCopy from '../servicePageCopy';
@@ -436,8 +435,6 @@ export default function AutomationIntegrationPage() {
             })}
           </div>
         </section>
-
-        <ServiceRecommendationPanel currentSlug="ai-automation-agents" theme={theme} />
         <ServiceConversionPanel
           copy={serviceCopy}
           primaryCta={serviceCopy.primaryCta}

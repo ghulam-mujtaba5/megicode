@@ -140,20 +140,23 @@
 }
 
 .menuItemPrimary {
-  color: #fff;
-  background: linear-gradient(135deg, #ff9800, #f97316);
-  box-shadow: 0 12px 24px rgba(249, 115, 22, 0.26);
+  color: #f8fafc;
+  background: rgba(29, 33, 39, 0.9);
+  border: 1px solid rgba(255, 152, 0, 0.72);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
 .menuItemSecondary {
-  color: #fff;
-  background: linear-gradient(135deg, #4573df, #2d4fa2);
-  box-shadow: 0 12px 24px rgba(69, 115, 223, 0.22);
+  color: #c0d4ff;
+  background: rgba(69, 115, 223, 0.1);
+  border: 1px solid rgba(69, 115, 223, 0.24);
+  box-shadow: none;
 }
 
 /* Menu item hover effect */
 .menuItem:hover {
-  background-color: #a9b1b5;
+  background-color: rgba(255, 152, 0, 0.12);
+  color: #fff;
 }
 
 /* Open state styles */

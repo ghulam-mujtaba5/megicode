@@ -82,12 +82,12 @@ const ServicesHero = () => {
             className={`${commonStyles.title} ${themeStyles.title}`}
             variants={titleVariants}
           >
-            What Megicode builds —{' '}
+            Choose the right build path{' '}
             <motion.span
               className={`${commonStyles.highlight} ${themeStyles.highlight}`}
               variants={highlightVariants}
             >
-              and what each service is for
+              for your business
             </motion.span>
           </motion.h1>
 
@@ -95,8 +95,8 @@ const ServicesHero = () => {
             className={`${commonStyles.subtitle} ${themeStyles.subtitle}`}
             variants={titleVariants}
           >
-            Three core services — AI automation, AI product builds, and custom business platforms —
-            plus six supporting capabilities. Pick by the outcome your team needs.
+            Start with the outcome you need: automate manual work, launch an AI product, or build a
+            custom platform for operations.
           </motion.p>
         </motion.div>
       </div>

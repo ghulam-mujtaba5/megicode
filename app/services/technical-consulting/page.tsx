@@ -36,7 +36,6 @@ import {
   ServiceFAQs,
   ServicePersonalizationPanel,
   ServiceProofStrip,
-  ServiceRecommendationPanel,
   ServiceUsabilityBlocks,
 } from '../ServiceDetailSections';
 import servicePageCopy from '../servicePageCopy';
@@ -467,8 +466,6 @@ export default function ITConsultingSupportPage() {
             })}
           </div>
         </section>
-
-        <ServiceRecommendationPanel currentSlug="technical-consulting" theme={theme} />
         <ServiceConversionPanel
           copy={serviceCopy}
           primaryCta={serviceCopy.primaryCta}

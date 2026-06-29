@@ -36,7 +36,6 @@ import {
   ServiceFAQs,
   ServicePersonalizationPanel,
   ServiceProofStrip,
-  ServiceRecommendationPanel,
   ServiceUsabilityBlocks,
 } from '../ServiceDetailSections';
 import servicePageCopy from '../servicePageCopy';
@@ -633,8 +632,6 @@ export default function UIUXProductDesignDetailPage() {
             })}
           </div>
         </section>
-
-        <ServiceRecommendationPanel currentSlug="ui-ux-design" theme={theme} />
         <ServiceConversionPanel
           copy={serviceCopy}
           primaryCta={serviceCopy.primaryCta}

@@ -75,16 +75,6 @@ const NewNavBar = () => {
         </div>
         <ul className={styles.navLinks}>
           <li>
-            <Link href="/" className={themeStyles.navLink}>
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link href="/about" className={themeStyles.navLink}>
-              About
-            </Link>
-          </li>
-          <li>
             <Link href="/services" className={themeStyles.navLink}>
               Services
             </Link>
@@ -109,12 +99,7 @@ const NewNavBar = () => {
               href="/contact?source=nav"
               className={`${themeStyles.navLink} ${themeStyles.navCta}`}
             >
-              Book Free Fit Call
-            </Link>
-          </li>
-          <li>
-            <Link href="/reviews" className={themeStyles.navLink}>
-              Results
+              Book Fit Call
             </Link>
           </li>
           <li>

@@ -140,7 +140,6 @@ export default function ContactPage() {
     phone: '',
     company: '',
     country: '',
-    subject: '',
     message: '',
     service: '',
     budget: '',
@@ -211,8 +210,6 @@ export default function ContactPage() {
         return !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
           ? 'Please enter a valid email address'
           : '';
-      case 'subject':
-        return value.trim().length < 3 ? 'Subject must be at least 3 characters' : '';
       case 'message':
         return value.trim().length < 10 ? 'Message must be at least 10 characters' : '';
       case 'service':
@@ -230,7 +227,7 @@ export default function ContactPage() {
 
   const validateForm = () => {
     const newErrors: { [key: string]: string } = {};
-    ['name', 'email', 'subject', 'message', 'service', 'budget'].forEach((field) => {
+    ['name', 'email', 'message', 'service', 'budget'].forEach((field) => {
       const error = validateField(field, formData[field as keyof typeof formData]);
       if (error) newErrors[field] = error;
     });
@@ -286,7 +283,7 @@ export default function ContactPage() {
           phone: formData.phone,
           company: formData.company,
           service: formData.service,
-          subject: formData.subject,
+          subject: `${formData.service || 'Project fit review'} inquiry`,
           message: enrichedMessage,
         }),
       });
@@ -298,7 +295,6 @@ export default function ContactPage() {
           phone: '',
           company: '',
           country: '',
-          subject: '',
           message: '',
           service: '',
           budget: '',
@@ -365,26 +361,13 @@ export default function ContactPage() {
 
         {/* ── Hero ── */}
         <section className={styles.heroSection} ref={heroRef}>
-          <div className={styles.heroLottie}>
-            <LottiePlayer
-              src="/lottie/12_customer_support_agent.json"
-              loop
-              autoplay
-              pauseWhenHidden
-              speed={0.8}
-              style={{ width: 84, height: 84 }}
-              ariaLabel="Animated contact illustration"
-            />
-          </div>
           <span className={styles.heroEyebrow}>Get In Touch</span>
           <h1 ref={titleRef} className={styles.heroTitle}>
-            Let&apos;s Build
-            <br />
-            Something Great
+            Tell us what you want to build
           </h1>
           <p className={styles.heroDescription}>
-            Tell us about your project and we&apos;ll get back to you within 24 hours with a free
-            consultation and a clear plan forward.
+            Share your goal, current problem, and timeline. We&apos;ll reply within one business day
+            with the best next step.
           </p>
           <div className={styles.trustBar}>
             <div className={styles.trustItem}>
@@ -399,7 +382,7 @@ export default function ContactPage() {
             <div className={styles.trustDot} aria-hidden="true" />
             <div className={styles.trustItem}>
               <HiChatBubbleLeftRight size={15} aria-hidden="true" />
-              <span>Free Consultation</span>
+              <span>Free Fit Call</span>
             </div>
           </div>
           <div ref={accentRef} className={styles.heroAccent} />
@@ -416,8 +399,8 @@ export default function ContactPage() {
                   <HiEnvelope size={22} />
                 </div>
                 <div>
-                  <h2 className={styles.formTitle}>Send us a Message</h2>
-                  <p className={styles.formSubtitle}>We&apos;ll get back to you within 24 hours</p>
+                  <h2 className={styles.formTitle}>Start a fit review</h2>
+                  <p className={styles.formSubtitle}>Tell us the goal, budget, and timeline</p>
                 </div>
               </div>
 
@@ -587,19 +570,10 @@ export default function ContactPage() {
                       <option value="" disabled hidden>
                         Select a service…
                       </option>
-                      <option value="MVP Roadmap">MVP Roadmap</option>
-                      <option value="AI Automation Setup">AI Automation Setup</option>
-                      <option value="Clinic AI Receptionist">Clinic AI Receptionist</option>
-                      <option value="AI SaaS MVP Build">AI SaaS MVP Build</option>
-                      <option value="Custom Business Platform">Custom Business Platform</option>
-                      <option value="Monthly Support / Retainer">Monthly Support / Retainer</option>
-                      <option value="website-seo-leads">Website + SEO + Lead Generation</option>
-                      <option value="ui-ux-product-design">UI/UX Product Design</option>
-                      <option value="cloud-devops-deployment">Cloud / DevOps / Deployment</option>
-                      <option value="technical-consulting-roadmap">
-                        Technical Consulting / Roadmap
-                      </option>
-                      <option value="not-sure-yet">Not sure yet</option>
+                      <option value="AI Automation">AI Automation</option>
+                      <option value="AI SaaS / MVP">AI SaaS / MVP</option>
+                      <option value="Custom Platform">Custom Platform</option>
+                      <option value="Not sure yet">Not sure yet</option>
                     </select>
                     <label htmlFor="service" className={styles.floatingLabel}>
                       Service Interest *
@@ -747,31 +721,6 @@ export default function ContactPage() {
 
                 <div className={styles.formGroupFull}>
                   <div className={styles.floatingLabelGroup}>
-                    <input
-                      type="text"
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleInputChange}
-                      onBlur={handleBlur}
-                      className={`${styles.input} ${errors.subject ? styles.inputError : ''}`}
-                      required
-                      aria-label="Message subject"
-                      placeholder=" "
-                    />
-                    <label htmlFor="subject" className={styles.floatingLabel}>
-                      Subject *
-                    </label>
-                  </div>
-                  {errors.subject ? (
-                    <span className={styles.errorText}>{errors.subject}</span>
-                  ) : (
-                    <span className={styles.helperText}>Required</span>
-                  )}
-                </div>
-
-                <div className={styles.formGroupFull}>
-                  <div className={styles.floatingLabelGroup}>
                     <textarea
                       id="message"
                       name="message"
@@ -878,8 +827,8 @@ export default function ContactPage() {
                 <h4>Follow Us</h4>
                 <div className={styles.socialLinks}>
                   <a
-                    href="https://www.linkedin.com/company/megicode"
-                    className={`${styles.socialLink} ${styles.linkedinLink}`}
+                    href={linkedinUrl}
+                    className={styles.socialLink}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="LinkedIn"
@@ -887,8 +836,8 @@ export default function ContactPage() {
                     <FaLinkedin />
                   </a>
                   <a
-                    href="https://github.com/megicodes"
-                    className={`${styles.socialLink} ${styles.githubLink}`}
+                    href={githubUrl}
+                    className={styles.socialLink}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="GitHub"
@@ -896,8 +845,8 @@ export default function ContactPage() {
                     <FaGithub />
                   </a>
                   <a
-                    href="https://www.instagram.com/megicode/"
-                    className={`${styles.socialLink} ${styles.instagramLink}`}
+                    href={instagramUrl}
+                    className={styles.socialLink}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Instagram"

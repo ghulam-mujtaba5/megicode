@@ -89,9 +89,9 @@ const Footer = ({
             variants={iconVariants}
           >
             <strong>Company</strong>
-            <Link href="/projects">Case Studies</Link>
-            <Link href="/article">Insights</Link>
+            <Link href="/about">About</Link>
             <Link href="/contact?source=footer">Contact</Link>
+            <Link href="/careers">Careers</Link>
             <Link href="/privacy-policy">Privacy</Link>
           </motion.nav>
 

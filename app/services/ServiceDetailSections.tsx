@@ -68,44 +68,14 @@ const bestSellingSlugs = [
   'custom-web-development',
 ];
 
-const recommendationMap: Record<string, string[]> = {
-  'ai-automation-agents': ['ai-saas-mvp-development', 'custom-web-development', 'data-analytics'],
-  'ai-saas-mvp-development': ['ai-automation-agents', 'ui-ux-design', 'cloud-devops'],
-  'custom-web-development': ['ai-automation-agents', 'data-analytics', 'cloud-devops'],
-  'ui-ux-design': ['custom-web-development', 'ai-saas-mvp-development', 'growth-marketing-seo'],
-  'cloud-devops': ['custom-web-development', 'ai-saas-mvp-development', 'technical-consulting'],
-  'mobile-app-development': ['ui-ux-design', 'custom-web-development', 'cloud-devops'],
-  'data-analytics': ['ai-automation-agents', 'custom-web-development', 'technical-consulting'],
-  'growth-marketing-seo': ['ui-ux-design', 'custom-web-development', 'data-analytics'],
-  'technical-consulting': ['ai-saas-mvp-development', 'custom-web-development', 'cloud-devops'],
-};
-
 function getServiceBySlug(slug: string) {
   return serviceCatalog.find((service) => service.slug === slug);
-}
-
-function getRecommendedSlugs(currentSlug: string, history: string[], sourceHint: string) {
-  const hinted = /chatbot|automation|whatsapp|lead|booking/i.test(sourceHint)
-    ? ['ai-automation-agents', 'custom-web-development', 'data-analytics']
-    : /seo|growth|traffic|content/i.test(sourceHint)
-      ? ['growth-marketing-seo', 'ui-ux-design', 'data-analytics']
-      : /mobile|ios|android/i.test(sourceHint)
-        ? ['mobile-app-development', 'ui-ux-design', 'cloud-devops']
-        : /dashboard|analytics|data|bi/i.test(sourceHint)
-          ? ['data-analytics', 'ai-automation-agents', 'custom-web-development']
-          : [];
-
-  return [...hinted, ...(recommendationMap[currentSlug] || []), ...history]
-    .filter((slug) => slug !== currentSlug)
-    .filter((slug, index, list) => list.indexOf(slug) === index)
-    .slice(0, 3);
 }
 
 function useVisitorContext(currentSlug: string) {
   const [isReturning, setIsReturning] = React.useState(false);
   const [viewedSlugs, setViewedSlugs] = React.useState<string[]>([]);
   const [localTime, setLocalTime] = React.useState('');
-  const [sourceHint, setSourceHint] = React.useState('');
 
   React.useEffect(() => {
     const formatTime = () => {
@@ -137,13 +107,12 @@ function useVisitorContext(currentSlug: string) {
     window.setTimeout(() => {
       setIsReturning(hasVisited);
       setViewedSlugs(previous.filter((slug) => slug !== currentSlug).slice(0, 3));
-      setSourceHint(`${document.referrer} ${window.location.pathname}`.toLowerCase());
     }, 0);
 
     return () => window.clearInterval(interval);
   }, [currentSlug]);
 
-  return { isReturning, viewedSlugs, localTime, sourceHint };
+  return { isReturning, viewedSlugs, localTime };
 }
 
 export function OurProcess({
@@ -600,12 +569,13 @@ export function ServicePersonalizationPanel({
               border: 0,
               borderRadius: 999,
               padding: '0.9rem 1.35rem',
-              background: 'linear-gradient(135deg, #ff9800, #f97316)',
-              color: '#ffffff',
+              background: isDark ? 'rgba(255,255,255,0.055)' : 'rgba(255,255,255,0.82)',
+              border: '1px solid rgba(255, 152, 0, 0.72)',
+              color: isDark ? '#f8fafc' : '#1d2127',
               fontWeight: 800,
               fontSize: '0.98rem',
               cursor: 'pointer',
-              boxShadow: '0 14px 30px rgba(249,115,22,0.28)',
+              boxShadow: isDark ? '0 14px 30px rgba(0,0,0,0.2)' : '0 14px 30px rgba(15,23,42,0.1)',
               width: 'fit-content',
             }}
           >
@@ -705,10 +675,10 @@ export function ServiceConversionPanel({
           type="button"
           onClick={onConsultationClick}
           style={{
-            border: 0,
+            border: '1px solid rgba(255, 152, 0, 0.72)',
             borderRadius: 999,
             padding: '0.95rem 1.45rem',
-            background: '#ff9800',
+            background: 'rgba(255,255,255,0.08)',
             color: '#ffffff',
             fontWeight: 850,
             fontSize: '0.98rem',
@@ -718,104 +688,6 @@ export function ServiceConversionPanel({
         >
           {primaryCta}
         </button>
-      </div>
-    </section>
-  );
-}
-
-export function ServiceRecommendationPanel({
-  currentSlug,
-  theme,
-}: {
-  currentSlug: string;
-  theme?: string;
-}) {
-  const { viewedSlugs, sourceHint } = useVisitorContext(currentSlug);
-  const isDark = theme === 'dark';
-  const heading = isDark ? '#f8fafc' : '#1d2127';
-  const text = isDark ? '#dbe6fb' : '#334155';
-  const recommended = getRecommendedSlugs(currentSlug, viewedSlugs, sourceHint)
-    .map(getServiceBySlug)
-    .filter(Boolean);
-
-  return (
-    <section
-      aria-labelledby="smart-recommendations-title"
-      style={{
-        margin: '3rem 0',
-        display: 'grid',
-        gap: '1rem',
-      }}
-    >
-      <div>
-        <p
-          style={{
-            margin: '0 0 0.45rem',
-            color: '#4573df',
-            fontWeight: 850,
-            letterSpacing: '0.08em',
-            textTransform: 'uppercase',
-            fontSize: '0.8rem',
-          }}
-        >
-          Recommended next
-        </p>
-        <h2
-          id="smart-recommendations-title"
-          style={{
-            margin: 0,
-            color: heading,
-            fontSize: 'clamp(1.45rem, 2.2vw, 2rem)',
-            lineHeight: 1.2,
-            letterSpacing: 0,
-          }}
-        >
-          Services that usually pair well with this goal
-        </h2>
-      </div>
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))',
-          gap: '1rem',
-        }}
-      >
-        {recommended.map(
-          (service) =>
-            service && (
-              <Link
-                key={service.slug}
-                href={service.href}
-                style={{
-                  border: isDark
-                    ? '1px solid rgba(123,160,255,0.22)'
-                    : '1px solid rgba(69,115,223,0.16)',
-                  borderRadius: 18,
-                  padding: '1.1rem',
-                  background: isDark ? 'rgba(36,41,54,0.9)' : 'rgba(255,255,255,0.9)',
-                  boxShadow: isDark
-                    ? '0 14px 34px rgba(0,0,0,0.16)'
-                    : '0 14px 34px rgba(69,115,223,0.07)',
-                  textDecoration: 'none',
-                }}
-              >
-                <h3
-                  style={{
-                    margin: '0 0 0.45rem',
-                    color: heading,
-                    fontSize: '1.02rem',
-                    lineHeight: 1.3,
-                    letterSpacing: 0,
-                  }}
-                >
-                  {service.title}
-                </h3>
-                <p style={{ margin: 0, color: text, lineHeight: 1.55, fontWeight: 600 }}>
-                  {service.summary}
-                </p>
-              </Link>
-            )
-        )}
       </div>
     </section>
   );

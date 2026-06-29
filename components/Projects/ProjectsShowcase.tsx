@@ -72,6 +72,15 @@ const projectOfferMap: Record<
   },
 };
 
+const projectCardSummaries: Record<string, string> = {
+  'aesthetics-clinic-platform':
+    'Clinic website and operations platform covering booking, patient flow, records, billing, and staff handoff.',
+  'campusaxis-university-portal':
+    'Student platform with study resources, calculators, reviews, dashboards, and community workflows.',
+  'wajdan-growth-system-website':
+    'Conversion-focused agency website with funnel narrative, proof, pricing, and booking flow.',
+};
+
 const ProjectsShowcase = () => {
   const { theme } = useTheme();
   const themeStyles = theme === 'dark' ? darkStyles : lightStyles;
@@ -112,7 +121,7 @@ const ProjectsShowcase = () => {
                   </h3>
                 </Link>
                 <p className={`${styles.projectDescription} ${themeStyles.projectDescription}`}>
-                  {project.description}
+                  {projectCardSummaries[project.slug] ?? project.description}
                 </p>
                 <div className={styles.technologies}>
                   {project.techStack.map((tech, index) => (

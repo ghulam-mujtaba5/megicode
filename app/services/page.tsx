@@ -85,174 +85,33 @@ const coreServices = [
 const supportingServices = [
   {
     slug: 'ui-ux-design',
-    badge: 'UX clarity',
-    title: 'UI/UX Product Design',
-    description:
-      'Design interfaces users understand and trust, from product flows to high-fidelity SaaS and platform screens.',
-    features: [
-      'Product Flow Design',
-      'High-Fidelity Prototyping',
-      'Design Systems',
-      'Usability Review',
-    ],
-    techs: ['Figma', 'Framer', 'Storybook', 'Adobe XD'],
-    ctaText: 'Improve My UX',
+    title: 'UI/UX',
     href: '/services/ui-ux-design',
-    bestFor: 'Products and websites that need clearer user flow and trust',
-    result: 'Make your offer easier to understand, navigate, and buy.',
-    path: ['Audit flow', 'Redesign UI', 'Test clarity'],
   },
   {
     slug: 'cloud-devops',
-    badge: 'Launch stability',
-    title: 'Cloud & DevOps',
-    description:
-      'Launch faster with stable deployment, infrastructure, CI/CD, monitoring, and release workflows.',
-    features: [
-      'Cloud Architecture Setup',
-      'CI/CD Pipeline Automation',
-      'Auto-Scaling & Cost Optimization',
-      'Security & Compliance',
-    ],
-    techs: ['AWS', 'Vercel', 'Docker', 'GitHub Actions', 'Terraform'],
-    ctaText: 'Prepare My Launch',
+    title: 'DevOps',
     href: '/services/cloud-devops',
-    bestFor: 'Teams preparing for launch, scale, or cleaner deployments',
-    result: 'Ship with stable infrastructure, CI/CD, monitoring, and fewer launch surprises.',
-    path: ['Plan infra', 'Automate CI', 'Monitor'],
   },
   {
     slug: 'mobile-app-development',
-    badge: 'Mobile experience',
-    title: 'Mobile App Development',
-    description:
-      'Bring your platform to iOS and Android with cross-platform apps that connect to your product backend.',
-    features: [
-      'React Native & Flutter Apps',
-      'iOS & Android Delivery',
-      'Push Notifications',
-      'App Store Readiness',
-    ],
-    techs: ['React Native', 'Flutter', 'Firebase', 'Node.js', 'TypeScript'],
-    ctaText: 'Discuss Mobile App',
+    title: 'Mobile Apps',
     href: '/services/mobile-app-development',
-    bestFor: 'Platforms that need customer or staff access on phones',
-    result: 'Extend your product into iOS and Android without rebuilding the whole backend.',
-    path: ['Define app', 'Build mobile', 'Store ready'],
   },
   {
     slug: 'data-analytics',
-    badge: 'Data clarity',
-    title: 'Data Analytics & BI',
-    description:
-      'Turn scattered data into clear dashboards, reports, and business intelligence your team can act on.',
-    features: [
-      'Business Dashboards',
-      'Analytics Integrations',
-      'Reporting Views',
-      'Data Pipeline Automation',
-    ],
-    techs: ['Python', 'OpenAI', 'Power BI', 'SQL', 'Pandas'],
-    ctaText: 'Build My Dashboard',
+    title: 'Data Dashboards',
     href: '/services/data-analytics',
-    bestFor: 'Teams making decisions from messy sheets, tools, and reports',
-    result: 'Turn scattered data into dashboards and views leadership can trust.',
-    path: ['Clean data', 'Model KPIs', 'Dashboard'],
   },
   {
     slug: 'growth-marketing-seo',
-    badge: 'Growth system',
-    title: 'Growth Marketing & SEO',
-    description:
-      'Improve organic visibility, technical SEO, content strategy, and conversion tracking for SaaS, AI products, and business platforms.',
-    features: [
-      'Technical SEO Audits',
-      'Content Growth Strategy',
-      'Analytics & Conversion Tracking',
-      'Paid Campaign Support',
-    ],
-    techs: ['Google Analytics', 'SEMrush', 'Ahrefs', 'Google Ads', 'HubSpot'],
-    ctaText: 'Grow My Traffic',
+    title: 'SEO',
     href: '/services/growth-marketing-seo',
-    bestFor: 'SaaS, AI, and service brands that need better qualified traffic',
-    result: 'Improve search visibility, tracking, content direction, and conversion signals.',
-    path: ['Audit funnel', 'Fix SEO', 'Track growth'],
   },
   {
     slug: 'technical-consulting',
-    badge: 'CTO guidance',
     title: 'Technical Consulting',
-    description:
-      'CTO-level tech strategy, architecture decisions, and investor-ready technical due diligence.',
-    features: [
-      'CTO-Level Tech Strategy',
-      'Architecture & Stack Selection',
-      'Product Roadmap Planning',
-      'Investor-Ready Due Diligence',
-    ],
-    techs: ['Architecture', 'Agile', 'Team Management', 'Roadmapping'],
-    ctaText: 'Get Roadmap',
     href: '/services/technical-consulting',
-    bestFor: 'Non-technical founders needing product and architecture decisions',
-    result: 'Get a clearer roadmap before spending heavily on the wrong build.',
-    path: ['Review idea', 'Choose stack', 'Plan build'],
-  },
-];
-
-const offerPackages = [
-  {
-    name: 'MVP Roadmap',
-    price: 'From $400',
-    timeline: '5-10 business days',
-    fit: 'Founders who need scope, architecture, timeline, and budget clarity before build.',
-    includes: ['Feature scope', 'Tech architecture', 'Timeline and budget logic'],
-    cta: 'Start With Roadmap',
-    href: '/pricing#packages',
-  },
-  {
-    name: 'AI Automation Setup',
-    price: 'From $900',
-    timeline: '1-5 weeks',
-    fit: 'Teams losing leads, replies, bookings, follow-ups, or reporting to manual work.',
-    includes: ['Workflow mapping', 'AI automation', 'CRM, form, email, or WhatsApp logic'],
-    cta: 'Automate Workflow',
-    href: '/pricing#packages',
-  },
-  {
-    name: 'Clinic AI Receptionist',
-    price: 'From $1,250 setup + $150/mo',
-    timeline: '2-5 weeks',
-    fit: 'Clinics that need faster inquiry capture, booking, reminders, and staff handoff.',
-    includes: ['Patient intake logic', 'Booking flow', 'Reminder and routing setup'],
-    cta: 'View Clinic Packages',
-    href: '/pricing#packages',
-  },
-  {
-    name: 'AI SaaS MVP Build',
-    price: 'From $4,500',
-    timeline: '4-14+ weeks',
-    fit: 'Founders ready to build a focused AI product with auth, dashboard, and launch setup.',
-    includes: ['UX and development', 'AI features', 'Deployment and launch support'],
-    cta: 'Plan My MVP',
-    href: '/pricing#packages',
-  },
-  {
-    name: 'Custom Business Platform',
-    price: 'From $3,500',
-    timeline: '4-14+ weeks',
-    fit: 'Businesses replacing spreadsheets, disconnected tools, and manual operations.',
-    includes: ['Admin portals', 'Booking or CRM systems', 'Dashboards and integrations'],
-    cta: 'Build My Platform',
-    href: '/pricing#packages',
-  },
-  {
-    name: 'Monthly Support / Retainer',
-    price: 'From $200/mo',
-    timeline: 'Ongoing',
-    fit: 'You already have a product and need steady improvements after launch.',
-    includes: ['Feature updates', 'Monitoring and fixes', 'Growth and automation support'],
-    cta: 'Plan Ongoing Support',
-    href: '/pricing#packages',
   },
 ];
 
@@ -306,7 +165,7 @@ export default function ServicesPage() {
             overflow: 'hidden',
           }}
         >
-          Our Services
+          Choose the right build path for your business
         </h1>
 
         <div style={{ maxWidth: '1320px', margin: '20px auto 0', padding: '0 2rem' }}>
@@ -358,44 +217,35 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        {/* ── Supporting Capabilities ───────────────────────────────────────── */}
         <section
           className="services-section supporting-section"
           aria-labelledby="supporting-heading"
         >
           <header className="section-head">
             <span className={`eyebrow ${isDark ? 'eyebrow-dark' : 'eyebrow-light'}`}>
-              Supporting Capabilities
+              Supporting work
             </span>
             <h2
               id="supporting-heading"
               className={`section-title ${isDark ? 'title-dark' : 'title-light'}`}
             >
-              Supporting Capabilities
+              Added when the build needs it.
             </h2>
             <p className={`section-sub ${isDark ? 'sub-dark' : 'sub-light'}`}>
-              Specialist capabilities that support the core product, automation, and platform work.
+              These capabilities support the core AI, MVP, and platform work without competing with
+              the main buying paths.
             </p>
           </header>
 
-          <div className="services-grid">
-            {supportingServices.map((service, idx) => (
-              <ServiceCard
+          <div className="supporting-chip-grid">
+            {supportingServices.map((service) => (
+              <a
                 key={service.slug}
-                slug={service.slug}
-                title={service.title}
-                description={service.description}
-                features={service.features}
-                techs={service.techs}
-                ctaText={service.ctaText}
                 href={service.href}
-                badge={service.badge}
-                bestFor={service.bestFor}
-                result={service.result}
-                path={service.path}
-                delay={idx * 0.08}
-                index={idx + coreServices.length}
-              />
+                className={`supporting-chip ${isDark ? 'supporting-chip-dark' : 'supporting-chip-light'}`}
+              >
+                {service.title}
+              </a>
             ))}
           </div>
 
@@ -403,58 +253,9 @@ export default function ServicesPage() {
             Need mobile apps, UX design, cloud setup, data, SEO, or roadmap support? These are
             available as part of complete product delivery.
           </p>
-        </section>
-
-        <section className="offers-section" aria-labelledby="offers-heading">
-          <header className="section-head">
-            <span className={`eyebrow ${isDark ? 'eyebrow-dark' : 'eyebrow-light'}`}>
-              Offer models
-            </span>
-            <h2
-              id="offers-heading"
-              className={`section-title ${isDark ? 'title-dark' : 'title-light'}`}
-            >
-              Productized ways to work with Megicode.
-            </h2>
-            <p className={`section-sub ${isDark ? 'sub-dark' : 'sub-light'}`}>
-              Pick a starting model based on risk: roadmap first, automation first, clinic booking
-              first, full MVP build, custom platform, or monthly support.
-            </p>
-          </header>
-
-          <div className="offers-grid">
-            {offerPackages.map((offer, index) => (
-              <article
-                key={offer.name}
-                className={`offer-card ${isDark ? 'offer-card-dark' : 'offer-card-light'}`}
-              >
-                <div className="offer-top">
-                  <span
-                    className={`offer-index ${isDark ? 'offer-index-dark' : 'offer-index-light'}`}
-                  >
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
-                  <h3>{offer.name}</h3>
-                </div>
-                <div className="offer-meta">
-                  <strong>{offer.price}</strong>
-                  <span>{offer.timeline}</span>
-                </div>
-                <p>{offer.fit}</p>
-                <ul>
-                  {offer.includes.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-                <a
-                  href={offer.href}
-                  className={`offer-cta ${isDark ? 'offer-cta-dark' : 'offer-cta-light'}`}
-                >
-                  {offer.cta}
-                </a>
-              </article>
-            ))}
-          </div>
+          <a href="/pricing" className="services-pricing-cta">
+            Compare packages and starting prices →
+          </a>
         </section>
       </main>
 
@@ -468,12 +269,7 @@ export default function ServicesPage() {
         }
         .supporting-section {
           padding-top: 2.75rem;
-          padding-bottom: 2rem;
-        }
-        .offers-section {
-          max-width: 1320px;
-          margin: 0 auto;
-          padding: 2rem 2rem 5.5rem;
+          padding-bottom: 5.5rem;
         }
 
         /* ── Section header ── */
@@ -566,145 +362,79 @@ export default function ServicesPage() {
           border-radius: 18px;
         }
 
-        .offers-grid {
+        .supporting-chip-grid {
           display: grid;
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-          gap: 1rem;
+          grid-template-columns: repeat(6, minmax(0, 1fr));
+          gap: 0.8rem;
+          max-width: 1120px;
+          margin: 0 auto;
         }
-        .offer-card {
-          position: relative;
-          overflow: hidden;
-          min-height: 310px;
-          padding: 1.35rem;
-          border-radius: 22px;
-          display: flex;
-          flex-direction: column;
-          gap: 1rem;
-          box-sizing: border-box;
-        }
-        .offer-card::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          pointer-events: none;
-          background:
-            linear-gradient(135deg, rgba(69, 115, 223, 0.09), transparent 52%),
-            radial-gradient(circle at 12% 12%, rgba(255, 152, 0, 0.12), transparent 34%);
-        }
-        .offer-card > * {
-          position: relative;
-          z-index: 1;
-        }
-        .offer-card-light {
-          background: rgba(255, 255, 255, 0.84);
-          border: 1px solid rgba(69, 115, 223, 0.13);
-          box-shadow: 0 14px 34px rgba(69, 115, 223, 0.08);
-        }
-        .offer-card-dark {
-          background: #262b34;
-          border: 1px solid #3e444c;
-          box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
-        }
-        .offer-top {
-          display: flex;
-          align-items: flex-start;
-          gap: 0.75rem;
-        }
-        .offer-index {
-          width: 38px;
-          height: 38px;
-          border-radius: 999px;
+        .supporting-chip {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          flex-shrink: 0;
-          font-size: 0.8rem;
-          font-weight: 800;
-        }
-        .offer-index-light {
-          color: #4573df;
-          background: rgba(69, 115, 223, 0.09);
-          border: 1px solid rgba(69, 115, 223, 0.14);
-        }
-        .offer-index-dark {
-          color: #c0d4ff;
-          background: rgba(69, 115, 223, 0.14);
-          border: 1px solid rgba(69, 115, 223, 0.22);
-        }
-        .offer-card h3 {
-          margin: 0;
-          font-size: 1.08rem;
-          line-height: 1.25;
-          color: ${isDark ? '#eaf6ff' : '#0f172a'};
-        }
-        .offer-card p {
-          margin: 0;
+          min-height: 48px;
+          border-radius: 999px;
+          padding: 0.75rem 1rem;
           font-size: 0.9rem;
-          line-height: 1.6;
-          color: ${isDark ? '#adb5bd' : '#526070'};
-        }
-        .offer-meta {
-          display: flex;
-          flex-direction: column;
-          gap: 0.25rem;
-          padding: 0.85rem 1rem;
-          border-radius: 16px;
-          background: ${isDark ? 'rgba(255, 255, 255, 0.06)' : 'rgba(69, 115, 223, 0.07)'};
-          border: 1px solid ${isDark ? 'rgba(255,255,255,0.08)' : 'rgba(69,115,223,0.1)'};
-        }
-        .offer-meta strong {
-          color: #ff9800;
-          font-size: 1.15rem;
-          line-height: 1.2;
-        }
-        .offer-meta span {
-          color: ${isDark ? '#cbd5e1' : '#526070'};
-          font-size: 0.78rem;
           font-weight: 800;
-        }
-        .offer-card ul {
-          margin: 0;
-          padding: 0;
-          list-style: none;
-          display: flex;
-          flex-direction: column;
-          gap: 0.55rem;
-          flex: 1;
-        }
-        .offer-card li {
-          font-size: 0.82rem;
-          line-height: 1.45;
-          color: ${isDark ? '#d7dde5' : '#334155'};
-        }
-        .offer-card li::before {
-          content: '✓';
-          color: #4573df;
-          font-weight: 800;
-          margin-right: 0.45rem;
-        }
-        .offer-cta {
-          width: 100%;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          min-height: 46px;
-          padding: 0.68rem 1rem;
-          border-radius: 999px;
-          font-size: 0.82rem;
-          font-weight: 800;
-          line-height: 1.2;
+          line-height: 1.25;
           text-align: center;
           text-decoration: none;
+          transition:
+            transform 0.2s ease,
+            border-color 0.2s ease,
+            background 0.2s ease,
+            color 0.2s ease;
         }
-        .offer-cta-light {
-          color: #ffffff;
-          background: linear-gradient(135deg, #4573df, #2d4fa2);
-          box-shadow: 0 12px 24px rgba(69, 115, 223, 0.22);
+        .supporting-chip:hover,
+        .supporting-chip:focus-visible {
+          transform: translateY(-2px);
+          outline: none;
         }
-        .offer-cta-dark {
-          color: #ffffff;
-          background: linear-gradient(135deg, #4573df, #2d4fa2);
-          box-shadow: 0 12px 24px rgba(69, 115, 223, 0.28);
+        .supporting-chip-light {
+          color: #2d4fa2;
+          background: rgba(69, 115, 223, 0.07);
+          border: 1px solid rgba(69, 115, 223, 0.14);
+        }
+        .supporting-chip-dark {
+          color: #c0d4ff;
+          background: rgba(255, 255, 255, 0.055);
+          border: 1px solid rgba(255, 255, 255, 0.11);
+        }
+        .supporting-chip-light:hover,
+        .supporting-chip-light:focus-visible,
+        .supporting-chip-dark:hover,
+        .supporting-chip-dark:focus-visible {
+          color: #ff9800;
+          border-color: rgba(255, 152, 0, 0.72);
+          background: rgba(255, 152, 0, 0.12);
+        }
+        .services-pricing-cta {
+          width: fit-content;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 48px;
+          margin: 2rem auto 0;
+          padding: 0 22px;
+          border-radius: 999px;
+          color: ${isDark ? '#f8fafc' : '#1d2127'};
+          border: 1px solid rgba(255, 152, 0, 0.72);
+          background: ${isDark ? 'rgba(255,255,255,0.055)' : 'rgba(255,255,255,0.78)'};
+          box-shadow: ${isDark
+            ? '0 14px 30px rgba(0,0,0,0.18)'
+            : '0 14px 30px rgba(15,23,42,0.08)'};
+          font-weight: 900;
+          text-decoration: none;
+        }
+        .services-pricing-cta:hover,
+        .services-pricing-cta:focus-visible {
+          color: #ff9800;
+          border-color: rgba(255, 152, 0, 0.92);
+          background: rgba(255, 152, 0, 0.14);
+          box-shadow: 0 16px 30px rgba(249, 115, 22, 0.16);
+          outline: none;
         }
         .note-light {
           color: #526070;
@@ -723,8 +453,8 @@ export default function ServicesPage() {
             grid-template-columns: 1fr 1fr;
             gap: 1.25rem;
           }
-          .offers-grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+          .supporting-chip-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
           }
         }
         @media (max-width: 640px) {
@@ -737,11 +467,8 @@ export default function ServicesPage() {
           .services-grid {
             grid-template-columns: 1fr;
           }
-          .offers-section {
-            padding: 1.5rem 1rem 3.5rem;
-          }
-          .offers-grid {
-            grid-template-columns: 1fr;
+          .supporting-chip-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
           }
         }
       `}</style>

@@ -20,8 +20,8 @@ export default function HomePricingPreview() {
           <span>Clear starting points</span>
           <h2 id="home-pricing-heading">Clear ways to start without guessing the budget</h2>
           <p>
-            Start small with a roadmap or automation package, then scale into a full MVP or custom
-            platform when the scope is clear.
+            Choose the first package that matches your scope: roadmap, automation, clinic setup, AI
+            MVP, or custom platform.
           </p>
         </div>
 
@@ -61,7 +61,7 @@ export default function HomePricingPreview() {
             className="section-button section-button-secondary"
             href="/contact?source=home-pricing"
           >
-            <span>Book Free Fit Call</span>
+            <span>Book Fit Call</span>
             <span className="section-button-icon" aria-hidden="true">
               →
             </span>
@@ -192,9 +192,9 @@ export default function HomePricingPreview() {
         .card-button:focus-visible {
           transform: translateY(-1px);
           border-color: rgba(255, 152, 0, 0.72);
-          color: #fff;
-          background: linear-gradient(135deg, #ff9800, #f97316);
-          box-shadow: 0 16px 30px rgba(249, 115, 22, 0.22);
+          color: #ff9800;
+          background: rgba(255, 152, 0, 0.12);
+          box-shadow: 0 16px 30px rgba(249, 115, 22, 0.14);
           outline: none;
         }
         .card-button:focus-visible {
@@ -225,7 +225,7 @@ export default function HomePricingPreview() {
         .card-button:hover .card-button-icon,
         .card-button:focus-visible .card-button-icon {
           transform: translateX(2px);
-          color: #fff;
+          color: #ff9800;
         }
         .preview-actions {
           display: flex;
@@ -258,21 +258,26 @@ export default function HomePricingPreview() {
           outline: none;
         }
         .section-button-primary {
-          color: #fff;
-          background: linear-gradient(135deg, #ff9800, #f97316);
-          box-shadow: 0 16px 34px rgba(249, 115, 22, 0.24);
+          color: ${isDark ? '#f8fafc' : '#1d2127'};
+          border-color: rgba(255, 152, 0, 0.72);
+          background: ${isDark ? 'rgba(255,255,255,0.055)' : 'rgba(255,255,255,0.78)'};
+          box-shadow: ${isDark
+            ? '0 14px 30px rgba(0,0,0,0.18)'
+            : '0 14px 30px rgba(15,23,42,0.08)'};
         }
         .section-button-secondary {
           color: ${isDark ? '#f8fafc' : '#1d2127'};
           border-color: ${isDark ? 'rgba(255,255,255,0.16)' : 'rgba(15,23,42,0.14)'};
           background: ${isDark ? 'rgba(255,255,255,0.06)' : 'rgba(255,255,255,0.7)'};
         }
+        .section-button-primary:hover,
+        .section-button-primary:focus-visible,
         .section-button-secondary:hover,
         .section-button-secondary:focus-visible {
-          color: #fff;
+          color: #ff9800;
           border-color: rgba(255, 152, 0, 0.72);
-          background: linear-gradient(135deg, #ff9800, #f97316);
-          box-shadow: 0 16px 34px rgba(249, 115, 22, 0.24);
+          background: rgba(255, 152, 0, 0.14);
+          box-shadow: 0 16px 34px rgba(249, 115, 22, 0.16);
         }
         .section-button-icon {
           width: auto;
@@ -296,9 +301,11 @@ export default function HomePricingPreview() {
         .section-button:focus-visible .section-button-icon {
           transform: translateX(2px);
         }
+        .section-button-primary:hover .section-button-icon,
+        .section-button-primary:focus-visible .section-button-icon,
         .section-button-secondary:hover .section-button-icon,
         .section-button-secondary:focus-visible .section-button-icon {
-          color: #fff;
+          color: #ff9800;
         }
         @media (max-width: 1120px) {
           .preview-grid {
@@ -355,9 +362,9 @@ export default function HomePricingPreview() {
         .pricing-preview .card-button:focus-visible {
           transform: translateY(-1px);
           border-color: rgba(255, 152, 0, 0.72);
-          color: #fff;
-          background: linear-gradient(135deg, #ff9800, #f97316);
-          box-shadow: 0 16px 30px rgba(249, 115, 22, 0.22);
+          color: #ff9800;
+          background: rgba(255, 152, 0, 0.12);
+          box-shadow: 0 16px 30px rgba(249, 115, 22, 0.14);
           outline: none;
         }
         .pricing-preview .card-button:focus-visible {
@@ -388,7 +395,7 @@ export default function HomePricingPreview() {
         .pricing-preview .card-button:hover .card-button-icon,
         .pricing-preview .card-button:focus-visible .card-button-icon {
           transform: translateX(2px);
-          color: #fff;
+          color: #ff9800;
         }
         .pricing-preview .section-button {
           display: inline-flex;
@@ -414,21 +421,26 @@ export default function HomePricingPreview() {
           outline: none;
         }
         .pricing-preview .section-button-primary {
-          color: #fff;
-          background: linear-gradient(135deg, #ff9800, #f97316);
-          box-shadow: 0 16px 34px rgba(249, 115, 22, 0.24);
+          color: ${isDark ? '#f8fafc' : '#1d2127'};
+          border-color: rgba(255, 152, 0, 0.72);
+          background: ${isDark ? 'rgba(255,255,255,0.055)' : 'rgba(255,255,255,0.78)'};
+          box-shadow: ${isDark
+            ? '0 14px 30px rgba(0,0,0,0.18)'
+            : '0 14px 30px rgba(15,23,42,0.08)'};
         }
         .pricing-preview .section-button-secondary {
           color: ${isDark ? '#f8fafc' : '#1d2127'};
           border-color: ${isDark ? 'rgba(255,255,255,0.16)' : 'rgba(15,23,42,0.14)'};
           background: ${isDark ? 'rgba(255,255,255,0.06)' : 'rgba(255,255,255,0.7)'};
         }
+        .pricing-preview .section-button-primary:hover,
+        .pricing-preview .section-button-primary:focus-visible,
         .pricing-preview .section-button-secondary:hover,
         .pricing-preview .section-button-secondary:focus-visible {
-          color: #fff;
+          color: #ff9800;
           border-color: rgba(255, 152, 0, 0.72);
-          background: linear-gradient(135deg, #ff9800, #f97316);
-          box-shadow: 0 16px 34px rgba(249, 115, 22, 0.24);
+          background: rgba(255, 152, 0, 0.14);
+          box-shadow: 0 16px 34px rgba(249, 115, 22, 0.16);
         }
         .pricing-preview .section-button-icon {
           width: auto;
@@ -452,9 +464,11 @@ export default function HomePricingPreview() {
         .pricing-preview .section-button:focus-visible .section-button-icon {
           transform: translateX(2px);
         }
+        .pricing-preview .section-button-primary:hover .section-button-icon,
+        .pricing-preview .section-button-primary:focus-visible .section-button-icon,
         .pricing-preview .section-button-secondary:hover .section-button-icon,
         .pricing-preview .section-button-secondary:focus-visible .section-button-icon {
-          color: #fff;
+          color: #ff9800;
         }
         @media (max-width: 720px) {
           .pricing-preview .section-button {

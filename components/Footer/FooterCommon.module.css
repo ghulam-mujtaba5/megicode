@@ -178,11 +178,20 @@
   align-items: center;
   border-radius: 999px;
   padding: 0 18px;
-  color: #fff !important;
-  background: linear-gradient(135deg, #ff9800, #f97316);
-  box-shadow: 0 14px 28px rgba(249, 115, 22, 0.22);
+  color: #f8fafc !important;
+  border: 1px solid rgba(255, 152, 0, 0.66);
+  background: rgba(255, 255, 255, 0.055);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.18);
   font-weight: 900;
   opacity: 1 !important;
+}
+
+.footerCta:hover,
+.footerCta:focus-visible {
+  color: #ff9800 !important;
+  border-color: rgba(255, 152, 0, 0.9);
+  background: rgba(255, 152, 0, 0.1);
+  box-shadow: 0 14px 28px rgba(249, 115, 22, 0.14);
 }
 
 .footerBottom {

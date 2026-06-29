@@ -16,33 +16,6 @@ import NewNavBar from '@/components/NavBar_Desktop_Company/NewNavBar';
 import NavBarMobile from '@/components/NavBar_Mobile/NavBar-mobile';
 import Breadcrumbs from '@/components/SEO/Breadcrumbs';
 
-const costDrivers = [
-  {
-    label: 'Workflow depth',
-    detail: 'Number of workflows, branches, approvals, and handoffs.',
-  },
-  {
-    label: 'AI complexity',
-    detail: 'Prompt logic, agents, memory, retrieval, and evaluation needs.',
-  },
-  {
-    label: 'Integrations',
-    detail: 'CRM, forms, email, WhatsApp, telephony, payments, or APIs.',
-  },
-  {
-    label: 'Product surface',
-    detail: 'Dashboards, admin panels, user roles, reporting, and portals.',
-  },
-  {
-    label: 'Data readiness',
-    detail: 'Migration, cleanup, permissions, imports, and existing tools.',
-  },
-  {
-    label: 'Support level',
-    detail: 'Launch care, monitoring, improvements, and managed support.',
-  },
-];
-
 const paymentTerms = [
   {
     title: 'Roadmap packages',
@@ -55,30 +28,6 @@ const paymentTerms = [
   {
     title: 'MVP and platform builds',
     detail: 'Milestone-based after scope, deliverables, and timeline are approved.',
-  },
-];
-
-const proofStats = [
-  { value: '15+', label: 'AI & software products built' },
-  { value: '5+', label: 'countries served' },
-  { value: '10+', label: 'startups and businesses partnered' },
-];
-
-const proofWork = [
-  {
-    name: 'The Aesthetics Place',
-    summary:
-      'Clinic website, WhatsApp booking, consultation flow, patient records, billing, and staff operations.',
-  },
-  {
-    name: 'CampusAxis',
-    summary:
-      'Student platform with resources, calculators, reviews, community, dashboards, and role-based workflows.',
-  },
-  {
-    name: 'Wajdan Digital Alchemy',
-    summary:
-      'Conversion-focused agency website with funnel narrative, proof, pricing, and booking flow.',
   },
 ];
 
@@ -157,7 +106,7 @@ export default function PricingPageClient() {
             </p>
             <div className="hero-actions">
               <Link className="primary-cta" href="/contact?source=pricing">
-                <span>Book Free Fit Call</span>
+                <span>Book Fit Call</span>
                 <span className="cta-icon" aria-hidden="true">
                   →
                 </span>
@@ -181,37 +130,6 @@ export default function PricingPageClient() {
                 <span>{entry.title}</span>
                 <strong>{entry.price}</strong>
               </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="entry-section" aria-labelledby="entry-heading">
-          <div className="section-head">
-            <span className="eyebrow">Choose how to start</span>
-            <h2 id="entry-heading">Start small, then scale when the scope is clear.</h2>
-            <p>
-              Use these five entry points to self-qualify quickly without reading a giant proposal.
-            </p>
-          </div>
-          <div className="entry-grid">
-            {pricingEntrypoints.map((entry) => (
-              <article className="entry-card" key={entry.title}>
-                <div>
-                  <h3>{entry.title}</h3>
-                  <strong>{entry.price}</strong>
-                  <p>{entry.bestFor}</p>
-                </div>
-                <Link
-                  className="pricing-card-button"
-                  href={entry.href}
-                  aria-label={`${entry.cta}: ${entry.title}`}
-                >
-                  <span>{entry.cta}</span>
-                  <span className="pricing-card-button-icon" aria-hidden="true">
-                    →
-                  </span>
-                </Link>
-              </article>
             ))}
           </div>
         </section>
@@ -363,71 +281,6 @@ export default function PricingPageClient() {
           </div>
         </section>
 
-        <section className="drivers-section" aria-labelledby="drivers-heading">
-          <div className="drivers-copy">
-            <span className="eyebrow">Cost drivers</span>
-            <h2 id="drivers-heading">What affects final project price?</h2>
-            <p>
-              Public prices give buyers a clear starting point. Final scope depends on the actual
-              product, workflow depth, integrations, and support needs.
-            </p>
-          </div>
-          <div className="drivers-grid">
-            {costDrivers.map((driver) => (
-              <article key={driver.label}>
-                <span aria-hidden="true" />
-                <div>
-                  <h3>{driver.label}</h3>
-                  <p>{driver.detail}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="proof-section" aria-labelledby="pricing-proof-heading">
-          <div className="proof-copy">
-            <span className="eyebrow">Proof behind the pricing</span>
-            <h2 id="pricing-proof-heading">Real platforms behind the starting prices.</h2>
-            <p>
-              Pricing feels clearer when buyers can see the type of systems Megicode has already
-              shipped across clinics, student platforms, and conversion-focused business websites.
-            </p>
-            <div className="proof-actions">
-              <Link className="secondary-cta" href="/projects">
-                <span>View Case Studies</span>
-                <span className="cta-icon" aria-hidden="true">
-                  →
-                </span>
-              </Link>
-              <Link className="secondary-cta" href="/services">
-                <span>See Services</span>
-                <span className="cta-icon" aria-hidden="true">
-                  →
-                </span>
-              </Link>
-            </div>
-          </div>
-          <div className="proof-panel">
-            <div className="proof-metrics" aria-label="Megicode proof metrics">
-              {proofStats.map((proof) => (
-                <div className="proof-item" key={`${proof.value}-${proof.label}`}>
-                  <strong>{proof.value}</strong>
-                  <span>{proof.label}</span>
-                </div>
-              ))}
-            </div>
-            <div className="proof-work">
-              {proofWork.map((item) => (
-                <article key={item.name}>
-                  <h3>{item.name}</h3>
-                  <p>{item.summary}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
         <section className="payment-section" aria-labelledby="payment-heading">
           <div className="payment-copy">
             <span className="eyebrow">Payment clarity</span>
@@ -467,7 +320,7 @@ export default function PricingPageClient() {
             goals, scope, and budget.
           </p>
           <Link className="primary-cta" href="/contact?source=pricing-final">
-            <span>Book Free Fit Call</span>
+            <span>Book Fit Call</span>
             <span className="cta-icon" aria-hidden="true">
               →
             </span>
@@ -577,21 +430,26 @@ export default function PricingPageClient() {
           outline: none;
         }
         .primary-cta {
-          color: #fff;
-          background: linear-gradient(135deg, #ff9800, #f97316);
-          box-shadow: 0 18px 34px rgba(249, 115, 22, 0.25);
+          color: ${isDark ? '#f8fafc' : '#1d2127'};
+          border-color: rgba(255, 152, 0, 0.72);
+          background: ${isDark ? 'rgba(255,255,255,0.055)' : 'rgba(255,255,255,0.78)'};
+          box-shadow: ${isDark
+            ? '0 14px 30px rgba(0,0,0,0.18)'
+            : '0 14px 30px rgba(15,23,42,0.08)'};
         }
         .secondary-cta {
           color: ${isDark ? '#f8fafc' : '#1d2127'};
           border: 1px solid ${isDark ? 'rgba(255,255,255,0.16)' : 'rgba(15,23,42,0.12)'};
           background: ${isDark ? 'rgba(255,255,255,0.06)' : 'rgba(255,255,255,0.72)'};
         }
+        .primary-cta:hover,
+        .primary-cta:focus-visible,
         .secondary-cta:hover,
         .secondary-cta:focus-visible {
-          color: #fff;
+          color: #ff9800;
           border-color: rgba(255, 152, 0, 0.72);
-          background: linear-gradient(135deg, #ff9800, #f97316);
-          box-shadow: 0 18px 34px rgba(249, 115, 22, 0.24);
+          background: rgba(255, 152, 0, 0.14);
+          box-shadow: 0 18px 34px rgba(249, 115, 22, 0.16);
         }
         .cta-icon {
           width: auto;
@@ -623,9 +481,11 @@ export default function PricingPageClient() {
         .secondary-cta:focus-visible .cta-icon {
           transform: translateX(2px);
         }
+        .primary-cta:hover .cta-icon,
+        .primary-cta:focus-visible .cta-icon,
         .secondary-cta:hover .cta-icon,
         .secondary-cta:focus-visible .cta-icon {
-          color: #fff;
+          color: #ff9800;
         }
         .tool-note {
           max-width: 620px;
@@ -840,9 +700,9 @@ export default function PricingPageClient() {
         .pricing-card-button:focus-visible {
           transform: translateY(-1px);
           border-color: rgba(255, 152, 0, 0.72);
-          color: #fff;
-          background: linear-gradient(135deg, #ff9800, #f97316);
-          box-shadow: 0 16px 30px rgba(249, 115, 22, 0.22);
+          color: #ff9800;
+          background: rgba(255, 152, 0, 0.12);
+          box-shadow: 0 16px 30px rgba(249, 115, 22, 0.14);
           outline: none;
         }
         .pricing-card-button:focus-visible {
@@ -868,7 +728,7 @@ export default function PricingPageClient() {
         .pricing-card-button:hover .pricing-card-button-icon,
         .pricing-card-button:focus-visible .pricing-card-button-icon {
           transform: translateX(2px);
-          color: #fff;
+          color: #ff9800;
         }
         .comparison-table {
           overflow: hidden;
@@ -999,8 +859,9 @@ export default function PricingPageClient() {
           width: fit-content;
           border-radius: 999px;
           padding: 5px 12px;
-          color: #fff;
-          background: linear-gradient(135deg, #ff9800, #f97316);
+          color: #ff9800;
+          border: 1px solid rgba(255, 152, 0, 0.6);
+          background: rgba(255, 152, 0, 0.1);
           font-size: 0.76rem;
           font-weight: 900;
         }
@@ -1426,21 +1287,26 @@ export default function PricingPageClient() {
           outline: none;
         }
         .pricing-page .primary-cta {
-          color: #fff;
-          background: linear-gradient(135deg, #ff9800, #f97316);
-          box-shadow: 0 18px 34px rgba(249, 115, 22, 0.25);
+          color: ${isDark ? '#f8fafc' : '#1d2127'};
+          border-color: rgba(255, 152, 0, 0.72);
+          background: ${isDark ? 'rgba(255,255,255,0.055)' : 'rgba(255,255,255,0.78)'};
+          box-shadow: ${isDark
+            ? '0 14px 30px rgba(0,0,0,0.18)'
+            : '0 14px 30px rgba(15,23,42,0.08)'};
         }
         .pricing-page .secondary-cta {
           color: ${isDark ? '#f8fafc' : '#1d2127'};
           border: 1px solid ${isDark ? 'rgba(255,255,255,0.16)' : 'rgba(15,23,42,0.12)'};
           background: ${isDark ? 'rgba(255,255,255,0.06)' : 'rgba(255,255,255,0.72)'};
         }
+        .pricing-page .primary-cta:hover,
+        .pricing-page .primary-cta:focus-visible,
         .pricing-page .secondary-cta:hover,
         .pricing-page .secondary-cta:focus-visible {
-          color: #fff;
+          color: #ff9800;
           border-color: rgba(255, 152, 0, 0.72);
-          background: linear-gradient(135deg, #ff9800, #f97316);
-          box-shadow: 0 18px 34px rgba(249, 115, 22, 0.24);
+          background: rgba(255, 152, 0, 0.14);
+          box-shadow: 0 18px 34px rgba(249, 115, 22, 0.16);
         }
         .pricing-page .cta-icon {
           width: auto;
@@ -1472,9 +1338,11 @@ export default function PricingPageClient() {
         .pricing-page .secondary-cta:focus-visible .cta-icon {
           transform: translateX(2px);
         }
+        .pricing-page .primary-cta:hover .cta-icon,
+        .pricing-page .primary-cta:focus-visible .cta-icon,
         .pricing-page .secondary-cta:hover .cta-icon,
         .pricing-page .secondary-cta:focus-visible .cta-icon {
-          color: #fff;
+          color: #ff9800;
         }
         .pricing-page .pricing-card-button {
           display: inline-flex;
@@ -1504,9 +1372,9 @@ export default function PricingPageClient() {
         .pricing-page .pricing-card-button:focus-visible {
           transform: translateY(-1px);
           border-color: rgba(255, 152, 0, 0.72);
-          color: #fff;
-          background: linear-gradient(135deg, #ff9800, #f97316);
-          box-shadow: 0 16px 30px rgba(249, 115, 22, 0.22);
+          color: #ff9800;
+          background: rgba(255, 152, 0, 0.12);
+          box-shadow: 0 16px 30px rgba(249, 115, 22, 0.14);
           outline: none;
         }
         .pricing-page .pricing-card-button:focus-visible {
@@ -1532,7 +1400,7 @@ export default function PricingPageClient() {
         .pricing-page .pricing-card-button:hover .pricing-card-button-icon,
         .pricing-page .pricing-card-button:focus-visible .pricing-card-button-icon {
           transform: translateX(2px);
-          color: #fff;
+          color: #ff9800;
         }
         @media (max-width: 680px) {
           .pricing-page .primary-cta,

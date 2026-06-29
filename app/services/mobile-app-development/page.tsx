@@ -45,7 +45,6 @@ import {
   ServiceFAQs,
   ServicePersonalizationPanel,
   ServiceProofStrip,
-  ServiceRecommendationPanel,
   ServiceUsabilityBlocks,
 } from '../ServiceDetailSections';
 import servicePageCopy from '../servicePageCopy';
@@ -480,8 +479,6 @@ export default function MobileAppSolutionsPage() {
             })}
           </div>
         </section>
-
-        <ServiceRecommendationPanel currentSlug="mobile-app-development" theme={theme} />
         <ServiceConversionPanel
           copy={serviceCopy}
           primaryCta={serviceCopy.primaryCta}

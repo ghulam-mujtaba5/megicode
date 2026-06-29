@@ -333,11 +333,6 @@ export const pricingFaqs = [
       'Roadmap packages are paid upfront. Automation and clinic setup usually start with 60% upfront. MVP and platform builds are milestone-based.',
   },
   {
-    question: 'Are hosting, WhatsApp, and AI usage included?',
-    answer:
-      'No. Hosting, WhatsApp, telephony, AI API usage, and paid software licenses are billed separately at provider rates.',
-  },
-  {
     question: 'Are third-party tools included?',
     answer:
       "No. Megicode's pricing covers strategy, design, implementation, testing, handoff, and support. Hosting, WhatsApp/telephony, AI API usage, and paid software tools are billed separately.",
