@@ -117,14 +117,16 @@ export default function CareersPage() {
                   alignItems: 'center',
                   borderRadius: 999,
                   padding: '0 22px',
-                  color: isDark ? '#f8fafc' : '#1d2127',
+                  color: theme === 'dark' ? '#f8fafc' : '#1d2127',
                   border: '1px solid rgba(255, 152, 0, 0.72)',
-                  background: isDark ? 'rgba(255,255,255,0.055)' : 'rgba(255,255,255,0.78)',
+                  background:
+                    theme === 'dark' ? 'rgba(255,255,255,0.055)' : 'rgba(255,255,255,0.78)',
                   fontWeight: 900,
                   textDecoration: 'none',
-                  boxShadow: isDark
-                    ? '0 14px 30px rgba(0,0,0,0.18)'
-                    : '0 14px 30px rgba(15,23,42,0.08)',
+                  boxShadow:
+                    theme === 'dark'
+                      ? '0 14px 30px rgba(0,0,0,0.18)'
+                      : '0 14px 30px rgba(15,23,42,0.08)',
                 }}
               >
                 Send your profile →
