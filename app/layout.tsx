@@ -53,10 +53,10 @@ export const metadata = {
   },
   icons: {
     icon: [
-      // Theme-aware favicons (both map to PWA icon)
-      { url: LOGO_MAIN_LIGHT, media: '(prefers-color-scheme: light)', type: 'image/svg+xml' },
-      { url: LOGO_MAIN_DARK, media: '(prefers-color-scheme: dark)', type: 'image/svg+xml' },
-      // Canonical svg + fallbacks
+      // Theme-aware favicons (3D PNG mark)
+      { url: LOGO_MAIN_LIGHT, media: '(prefers-color-scheme: light)', type: 'image/png' },
+      { url: LOGO_MAIN_DARK, media: '(prefers-color-scheme: dark)', type: 'image/png' },
+      // Canonical svg wrapper + PNG fallbacks
       { url: '/favicon.svg', type: 'image/svg+xml' },
       { url: '/meta/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
       { url: '/meta/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
@@ -202,17 +202,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Dynamic favicons for light/dark mode using user's transparent logo variants */}
+        {/* Dynamic favicons for light/dark mode using new 3D logo mark */}
         <link
           rel="icon"
-          href={PWA_ICON}
-          type="image/svg+xml"
+          href={LOGO_MAIN_LIGHT}
+          type="image/png"
           media="(prefers-color-scheme: light)"
         />
         <link
           rel="icon"
-          href={PWA_ICON}
-          type="image/svg+xml"
+          href={LOGO_MAIN_DARK}
+          type="image/png"
           media="(prefers-color-scheme: dark)"
         />
         <script

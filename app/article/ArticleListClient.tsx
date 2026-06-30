@@ -2,6 +2,7 @@
 
 import React, { useMemo, useState } from 'react';
 
+import Image from 'next/image';
 import Link from 'next/link';
 
 import { SITE_SOCIAL, getCopyrightText } from '@/lib/constants';
@@ -125,13 +126,35 @@ const ArticleListClient = ({ initialArticles }: ArticleListClientProps) => {
 
       <main id="main-content" className={styles.mainContent}>
         <section className={styles.hero}>
-          <span className={styles.eyebrow}>Megicode Insights</span>
-          <h1 className={styles.title}>Build smarter products, platforms, and automations.</h1>
-          <p className={styles.subtitle}>
-            Executive-level guides on AI product development, SaaS engineering, automation, cloud,
-            and growth — written for founders and operators who want practical clarity before they
-            build.
-          </p>
+          <div className={styles.heroSplit}>
+            <div className={styles.heroText}>
+              <span className={styles.eyebrow}>Megicode Insights</span>
+              <h1 className={styles.title}>Build smarter products, platforms, and automations.</h1>
+              <p className={styles.subtitle}>
+                Executive-level guides on AI product development, SaaS engineering, automation,
+                cloud, and growth — written for founders and operators who want practical clarity
+                before they build.
+              </p>
+            </div>
+            <div className={styles.heroVisual} aria-hidden="true">
+              <picture>
+                <source
+                  srcSet="/images/assets/insights@2x.webp 1.5x, /images/assets/insights.webp 1x"
+                  type="image/webp"
+                />
+                <source srcSet="/images/assets/insights.png" type="image/png" />
+                <Image
+                  src="/images/assets/insights.webp"
+                  alt=""
+                  width={400}
+                  height={380}
+                  priority
+                  className={styles.heroImage}
+                  sizes="(max-width: 900px) 0px, 400px"
+                />
+              </picture>
+            </div>
+          </div>
 
           <div className={styles.controls}>
             <div className={styles.searchWrap}>

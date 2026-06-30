@@ -656,7 +656,7 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
               filter={`url(#coreGlowFilter-${uid})`}
             />
             <image
-              href="/logo-icon.svg"
+              href="/logo-icon.png"
               x={-CORE_RADIUS * 0.78}
               y={-CORE_RADIUS * 0.78}
               width={CORE_RADIUS * 1.56}

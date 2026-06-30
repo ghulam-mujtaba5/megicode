@@ -1,18 +1,38 @@
 .heroSection {
-  /* Background color now handled by parent container */
   background-color: transparent;
 }
 
+.eyebrow {
+  background: rgba(69, 115, 223, 0.08);
+  color: #4573df;
+  border: 1px solid rgba(69, 115, 223, 0.2);
+}
+
 .title {
-  color: #1e293b;
+  color: #0f172a;
+}
+
+.accent {
+  background: linear-gradient(135deg, #4573df, #3b82f6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .subtitle {
-  color: #475569;
+  color: #334155;
 }
 
 .description {
   color: #64748b;
+}
+
+.stat {
+  color: #0f172a;
+}
+
+.statDivider {
+  background: #cbd5e1;
 }
 
 .heroPattern {

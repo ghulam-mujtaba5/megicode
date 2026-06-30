@@ -1,21 +1,19 @@
 // Centralized logo paths for the project
 export const PWA_ICON = '/meta/megicode-logo1.svg';
 
-// Theme-specific logos for light and dark modes
-export const LOGO_MAIN_LIGHT = '/logo-main-light.svg';
-export const LOGO_MAIN_DARK = '/logo-main-dark.svg';
+// Theme-specific logos for light and dark modes (3D PNG mark)
+export const LOGO_MAIN_LIGHT = '/logo-main-light.png';
+export const LOGO_MAIN_DARK = '/logo-main-dark.png';
 export const LOGO_NAVBAR_LIGHT = '/logo-navbar-light.svg';
 export const LOGO_NAVBAR_DARK = '/logo-navbar-dark.svg';
 // Use the icon-only mark (the 'M' logo) for compact spots like loaders and favicons
-export const LOGO_ICON = '/logo-icon.svg';
+export const LOGO_ICON = '/logo-icon.png';
 export const LOGO_LEGACY = '/logo-legacy.svg';
 
-export default {
-  LOGO_MAIN_LIGHT,
-  LOGO_MAIN_DARK,
-  LOGO_NAVBAR_LIGHT,
-  LOGO_NAVBAR_DARK,
-  LOGO_ICON,
-  LOGO_LEGACY,
-  PWA_ICON,
-};
+// Brand logos for shipped products
+export const LOGO_CAMPUSAXIS = '/images/logos/campusaxis-logo.png';
+export const LOGO_PAKUNI = '/images/logos/pakuni-logo.png';
+export const LOGO_MEGILANCE_LIGHT = '/images/logos/megilance-logo-light.png';
+export const LOGO_MEGILANCE_DARK = '/images/logos/megilance-logo-dark.png';
+export const LOGO_GM_LIGHT = '/images/logos/gm-logo-light.png';
+export const LOGO_GM_DARK = '/images/logos/gm-logo-dark.png';
