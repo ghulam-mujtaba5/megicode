@@ -3,7 +3,6 @@
   color: #000;
 }
 
-
 .menuIcon:nth-child(1) {
   background: #000;
 }
@@ -17,7 +16,7 @@
 }
 
 .menuContainer {
-  background-color: rgba(232, 235, 238, 0.85);
+  background-color: rgba(245, 247, 250, 0.94);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }

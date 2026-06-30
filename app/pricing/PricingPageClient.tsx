@@ -352,7 +352,12 @@ export default function PricingPageClient() {
         .pricing-main {
           width: min(1240px, calc(100% - 32px));
           margin: 0 auto;
-          padding: 18px 0 80px;
+          padding: 90px 0 80px;
+        }
+        @media (max-width: 768px) {
+          .pricing-main {
+            padding-top: 18px;
+          }
         }
         .breadcrumb-wrap {
           margin: 6px 0 24px;

@@ -60,7 +60,7 @@ const Footer = ({
           <motion.div className={commonStyles.footerBrand} variants={iconVariants}>
             <Link href="/" className={commonStyles.footerLogoLink} aria-label="Megicode home">
               <Image
-                src={theme === 'dark' ? '/logo-main-dark.png' : '/logo-main-light.png'}
+                src={theme === 'dark' ? '/logo-navbar-dark.png' : '/logo-navbar-light.png'}
                 alt="Megicode"
                 width={56}
                 height={56}
@@ -90,6 +90,7 @@ const Footer = ({
           >
             <strong>Company</strong>
             <Link href="/about">About</Link>
+            <Link href="/reviews">Reviews</Link>
             <Link href="/contact?source=footer">Contact</Link>
             <Link href="/careers">Careers</Link>
             <Link href="/privacy-policy">Privacy</Link>

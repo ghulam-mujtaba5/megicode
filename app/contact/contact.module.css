@@ -804,19 +804,6 @@
     max-width: 100% !important;
     overflow: hidden;
   }
-  .socialLinks {
-    flex-direction: row;
-    gap: 0.75rem;
-    padding: 0;
-  }
-  .socialLink {
-    border-radius: 50%;
-    font-size: 1.1rem;
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    justify-content: center;
-  }
   .faqSection {
     padding: 2rem 1rem 1.5rem 1rem;
   }
@@ -985,50 +972,6 @@
   .formTitle {
     font-size: 1.4rem;
   }
-}
-
-/* Social Links */
-.socialSection h4 {
-  font-size: 1.125rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  color: var(--text-color);
-}
-
-.socialLinks {
-  display: flex;
-  gap: 0.65rem;
-  flex-wrap: wrap;
-}
-
-.socialLink {
-  padding: 0;
-  border-radius: 50%;
-  color: var(--text-color);
-  text-decoration: none;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease,
-    border-color 0.3s ease,
-    background 0.3s ease,
-    color 0.3s ease;
-  font-weight: 500;
-  font-size: 1.1rem;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(148, 163, 184, 0.24);
-  background: rgba(255, 255, 255, 0.055);
-}
-
-.socialLink:hover {
-  transform: translateY(-2px);
-  color: #ff9800;
-  border-color: rgba(255, 152, 0, 0.58);
-  background: rgba(255, 152, 0, 0.1);
-  box-shadow: 0 10px 24px rgba(249, 115, 22, 0.14);
 }
 
 /* FAQ Section */
@@ -1418,11 +1361,6 @@
 
   .submitButton {
     padding: 1rem;
-  }
-
-  .socialLinks {
-    flex-direction: column;
-    gap: 0.5rem;
   }
 
   .mapPlaceholder {

@@ -4,8 +4,8 @@ export const PWA_ICON = '/meta/megicode-logo1.svg';
 // Theme-specific logos for light and dark modes (3D PNG mark)
 export const LOGO_MAIN_LIGHT = '/logo-main-light.png';
 export const LOGO_MAIN_DARK = '/logo-main-dark.png';
-export const LOGO_NAVBAR_LIGHT = '/logo-navbar-light.svg';
-export const LOGO_NAVBAR_DARK = '/logo-navbar-dark.svg';
+export const LOGO_NAVBAR_LIGHT = '/logo-navbar-light.png';
+export const LOGO_NAVBAR_DARK = '/logo-navbar-dark.png';
 // Use the icon-only mark (the 'M' logo) for compact spots like loaders and favicons
 export const LOGO_ICON = '/logo-icon.png';
 export const LOGO_LEGACY = '/logo-legacy.svg';

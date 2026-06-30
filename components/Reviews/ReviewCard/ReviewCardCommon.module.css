@@ -17,17 +17,19 @@
 }
 
 .iconWrap {
-  width: 3rem;
+  width: 4.25rem;
   height: 3rem;
   border-radius: 0.875rem;
   display: grid;
   place-items: center;
   flex: 0 0 auto;
+  padding: 0.45rem;
+  box-sizing: border-box;
 }
 
 .icon {
-  width: 2rem;
-  height: 2rem;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   display: block;
 }
@@ -134,13 +136,13 @@
   }
 
   .iconWrap {
-    width: 3.25rem;
+    width: 4.75rem;
     height: 3.25rem;
   }
 
   .icon {
-    width: 2.125rem;
-    height: 2.125rem;
+    width: 100%;
+    height: 100%;
   }
 
   .tagline {

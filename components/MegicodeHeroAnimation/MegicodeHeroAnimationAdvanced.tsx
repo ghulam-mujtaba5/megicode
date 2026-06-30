@@ -656,11 +656,11 @@ const MegicodeHeroAnimationAdvanced: React.FC = () => {
               filter={`url(#coreGlowFilter-${uid})`}
             />
             <image
-              href="/logo-icon.png"
-              x={-CORE_RADIUS * 0.78}
-              y={-CORE_RADIUS * 0.78}
-              width={CORE_RADIUS * 1.56}
-              height={CORE_RADIUS * 1.56}
+              href="/logo-navbar-dark.png"
+              x={-CORE_RADIUS * 0.9}
+              y={-CORE_RADIUS * 0.5}
+              width={CORE_RADIUS * 1.8}
+              height={CORE_RADIUS}
               preserveAspectRatio="xMidYMid meet"
               style={{ pointerEvents: 'none' }}
             />

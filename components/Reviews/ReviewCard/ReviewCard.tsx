@@ -15,6 +15,7 @@ interface ReviewCardProps {
   company: string;
   tagline: string;
   icon: string;
+  iconDark?: string;
   image?: string;
   review: string;
   rating: number;
@@ -25,12 +26,14 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
   company,
   tagline,
   icon,
+  iconDark,
   image,
   review,
   rating,
 }) => {
   const { theme } = useTheme();
   const themeStyles = theme === 'dark' ? darkStyles : lightStyles;
+  const iconSrc = theme === 'dark' && iconDark ? iconDark : icon;
 
   const cardVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -54,7 +57,7 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
     >
       <div className={`${commonStyles.cardHeader} ${themeStyles.cardHeader}`}>
         <div className={`${commonStyles.iconWrap} ${themeStyles.iconWrap}`} aria-hidden="true">
-          <Image src={icon} alt="" width={48} height={48} className={commonStyles.icon} />
+          <Image src={iconSrc} alt="" width={96} height={64} className={commonStyles.icon} />
         </div>
         <div className={commonStyles.headerCopy}>
           <p className={`${commonStyles.tagline} ${themeStyles.tagline}`}>{tagline}</p>

@@ -1,10 +1,12 @@
-"use client";
+'use client';
 
-import { useEffect, useState, useRef } from "react";
-import styles from "./LoadingAnimation.module.css";
+import { useRef, useState } from 'react';
+
 import Image from 'next/image';
-import { LOGO_ICON } from '@/lib/logo';
-import { useTheme } from "@/context/ThemeContext";
+
+import { useTheme } from '@/context/ThemeContext';
+
+import styles from './LoadingAnimation.module.css';
 
 interface LoadingAnimationProps {
   size?: 'small' | 'medium' | 'large';
@@ -39,58 +41,45 @@ export const LoadingAnimation = ({
   showLogo = true,
   inline = false,
   progress,
-  message
+  message,
 }: LoadingAnimationProps) => {
   const { theme } = useTheme();
   const animationRef = useRef<HTMLDivElement>(null);
-  const [particles, setParticles] = useState<AnimationParticle[]>([]);
-  const [progressDisplay, setProgressDisplay] = useState(0);
 
-  useEffect(() => {
-    if (typeof progress === 'number') {
-      const targetProgress = Math.min(100, Math.max(0, progress));
-      setProgressDisplay(targetProgress);
-    }
-  }, [progress]);
+  const progressDisplay = typeof progress === 'number' ? Math.min(100, Math.max(0, progress)) : 0;
 
-  // Calculate the CSS variable for progress
   const progressStyle = {
-    '--progress': `${progressDisplay}%`
+    '--progress': `${progressDisplay}%`,
   } as React.CSSProperties;
 
-  // Create particles with proper timing and positioning
-  useEffect(() => {
-    // Create a more sophisticated particle system with varying types and behaviors
+  const [particles] = useState<AnimationParticle[]>(() => {
     const particleCount = 20;
     const codeSymbols = ['<>', '/>', '{()}', '[]', '#!/', '=>', '{}'];
     const techWords = ['AI', 'ML', 'API', 'UI/UX', 'DEV', 'CODE'];
-    
-    const newParticles = Array.from({ length: particleCount }, (_, index) => {
+
+    return Array.from({ length: particleCount }, (_, index) => {
       const primaryColor = 'var(--md-primary)';
       const secondaryColor = 'var(--md-secondary)';
-      
-      // Create a sophisticated 3D distribution pattern
+
       const phi = Math.acos(-1 + (2 * index) / particleCount);
       const theta = Math.sqrt(particleCount * Math.PI) * phi;
-      
+
       const radius = 25 + Math.random() * 15;
-      const depth = Math.random() * 100;
-      
-      // Calculate 3D position
+
       const x = 50 + radius * Math.cos(theta) * Math.sin(phi);
       const y = 50 + radius * Math.sin(theta) * Math.sin(phi);
       const z = radius * Math.cos(phi);
-      
-      // Determine particle type
+
       const typeRand = Math.random();
-      const type: 'particle' | 'code' | 'tech' = typeRand > 0.7 ? 'code' : typeRand > 0.4 ? 'tech' : 'particle';
-      
-      // Generate content for code and tech particles
-      const content = type === 'code' 
-        ? codeSymbols[Math.floor(Math.random() * codeSymbols.length)]
-        : type === 'tech'
-          ? techWords[Math.floor(Math.random() * techWords.length)]
-          : undefined;
+      const type: 'particle' | 'code' | 'tech' =
+        typeRand > 0.7 ? 'code' : typeRand > 0.4 ? 'tech' : 'particle';
+
+      const content =
+        type === 'code'
+          ? codeSymbols[Math.floor(Math.random() * codeSymbols.length)]
+          : type === 'tech'
+            ? techWords[Math.floor(Math.random() * techWords.length)]
+            : undefined;
 
       return {
         id: index,
@@ -106,16 +95,14 @@ export const LoadingAnimation = ({
           blur: type === 'particle' ? `${0.5}px` : '0px',
           color: index % 3 === 0 ? primaryColor : secondaryColor,
           transform: `translateZ(${z}px) rotateX(${Math.random() * 360}deg) rotateY(${Math.random() * 360}deg)`,
-          zIndex: Math.floor(z)
-        }
+          zIndex: Math.floor(z),
+        },
       };
     });
-
-    setParticles(newParticles);
-  }, []);
+  });
 
   return (
-    <div 
+    <div
       className={`${styles.loadingContainer} ${styles[size]} ${fullscreen ? styles.fullscreen : ''} ${inline ? styles.inline : ''}`}
       ref={animationRef}
     >
@@ -134,7 +121,7 @@ export const LoadingAnimation = ({
                     height: particle.style.size,
                     filter: `blur(${particle.style.blur})`,
                     background: particle.style.color,
-                    zIndex: particle.style.zIndex
+                    zIndex: particle.style.zIndex,
                   }}
                 />
               );
@@ -147,7 +134,7 @@ export const LoadingAnimation = ({
                     ...particle.style,
                     transform: particle.style.transform,
                     color: particle.style.color,
-                    zIndex: particle.style.zIndex
+                    zIndex: particle.style.zIndex,
                   }}
                 >
                   {particle.content}
@@ -162,7 +149,7 @@ export const LoadingAnimation = ({
                     ...particle.style,
                     transform: particle.style.transform,
                     color: particle.style.color,
-                    zIndex: particle.style.zIndex
+                    zIndex: particle.style.zIndex,
                   }}
                 >
                   {particle.content}
@@ -173,10 +160,7 @@ export const LoadingAnimation = ({
         </div>
       )}
       <div className={styles.loadingWrapper}>
-        <div 
-          className={styles.progressRing}
-          style={progressStyle}
-        >
+        <div className={styles.progressRing} style={progressStyle}>
           <div className={`${styles.circle} ${styles.circle1}`}>
             <div className={styles.circleContent} />
           </div>
@@ -191,7 +175,7 @@ export const LoadingAnimation = ({
           <div className={styles.logo}>
             <div className={styles.logoGlow} />
             <Image
-              src={LOGO_ICON}
+              src={theme === 'dark' ? '/logo-navbar-dark.png' : '/logo-navbar-light.png'}
               alt="Megicode Logo"
               width={size === 'small' ? 20 : size === 'large' ? 60 : 40}
               height={size === 'small' ? 20 : size === 'large' ? 60 : 40}

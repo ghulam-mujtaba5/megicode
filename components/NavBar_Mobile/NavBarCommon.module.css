@@ -14,8 +14,8 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding: 18px 18px 8px 0;
-  min-height: 56px;
+  padding: 12px 14px 8px 0;
+  min-height: 46px;
   width: 100%;
   box-sizing: border-box;
 }
@@ -100,15 +100,15 @@
 /* Styles for the menu container */
 .menuContainer {
   position: absolute;
-  margin-top: 15px; /* for postion */
-  margin-right: 15px;
+  margin-top: 12px; /* for postion */
+  margin-right: 12px;
 
-  padding-top: 50px;
-  padding-bottom: 10px; /* f0r top and bottom empty space */
+  padding-top: 42px;
+  padding-bottom: 8px; /* f0r top and bottom empty space */
   top: 0;
   right: 0;
   height: auto;
-  width: min(260px, calc(100vw - 30px));
+  width: min(224px, calc(100vw - 24px));
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   overflow: hidden;
@@ -123,16 +123,17 @@
 
 /* Styles for individual menu items */
 .menuItem {
-  padding: 8px 20px;
+  padding: 7px 16px;
+  font-size: 0.96rem;
+  line-height: 1.35;
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
 }
 
-.menuItemPrimary,
-.menuItemSecondary {
-  margin: 8px 12px;
-  padding: 11px 14px;
+.menuItemPrimary {
+  margin: 7px 10px;
+  padding: 10px 12px;
   border-radius: 999px;
   text-align: center;
   font-weight: 800;
@@ -144,13 +145,6 @@
   background: rgba(29, 33, 39, 0.9);
   border: 1px solid rgba(255, 152, 0, 0.72);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-}
-
-.menuItemSecondary {
-  color: #c0d4ff;
-  background: rgba(69, 115, 223, 0.1);
-  border: 1px solid rgba(69, 115, 223, 0.24);
-  box-shadow: none;
 }
 
 /* Menu item hover effect */

@@ -12,8 +12,9 @@ import lightStyles from './NavBarMobileLight.module.css';
 
 const NavBar = () => {
   const sections = [
+    { id: 'about', label: 'About', href: '/about' },
     { id: 'services', label: 'Services', href: '/services' },
-    { id: 'pricing', label: 'Pricing', href: '/pricing', cta: 'secondary' },
+    { id: 'pricing', label: 'Pricing', href: '/pricing' },
     { id: 'projects', label: 'Case Studies', href: '/projects' },
     { id: 'article', label: 'Insights', href: '/article' },
     {
@@ -108,11 +109,7 @@ const NavBar = () => {
                     <motion.li
                       key={section.id}
                       className={`${commonStyles.menuItem} ${themeStyles.menuItem} ${
-                        section.cta === 'primary'
-                          ? commonStyles.menuItemPrimary
-                          : section.cta === 'secondary'
-                            ? commonStyles.menuItemSecondary
-                            : ''
+                        section.cta === 'primary' ? commonStyles.menuItemPrimary : ''
                       }`}
                       onClick={() => handleNavigate(section.href)}
                       role="menuitem"
