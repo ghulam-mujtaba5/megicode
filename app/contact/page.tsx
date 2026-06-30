@@ -1,9 +1,7 @@
 'use client';
 import React, { Suspense, useEffect, useRef, useState } from 'react';
-import { FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa';
 import {
   HiChatBubbleLeftRight,
-  HiCheckCircle,
   HiChevronRight,
   HiClock,
   HiCog6Tooth,
@@ -424,7 +422,6 @@ export default function ContactPage() {
 
               {showSuccess && (
                 <div className={styles.successMessage}>
-                  <HiCheckCircle size={22} aria-hidden="true" />
                   <span>Message sent — we&apos;ll be in touch soon.</span>
                 </div>
               )}
@@ -838,39 +835,6 @@ export default function ContactPage() {
                     <h4>Business Hours</h4>
                     <p>Mon – Fri, 9 AM – 6 PM PKT</p>
                   </div>
-                </div>
-              </div>
-
-              <div className={styles.socialSection}>
-                <h4>Follow Us</h4>
-                <div className={styles.socialLinks}>
-                  <a
-                    href={linkedinUrl}
-                    className={styles.socialLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="LinkedIn"
-                  >
-                    <FaLinkedin />
-                  </a>
-                  <a
-                    href={githubUrl}
-                    className={styles.socialLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="GitHub"
-                  >
-                    <FaGithub />
-                  </a>
-                  <a
-                    href={instagramUrl}
-                    className={styles.socialLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Instagram"
-                  >
-                    <FaInstagram />
-                  </a>
                 </div>
               </div>
             </div>
