@@ -387,23 +387,6 @@ export default function ContactPage() {
           <div ref={accentRef} className={styles.heroAccent} />
         </section>
 
-        {/* ── Process Illustration ── */}
-        <div style={{ display: 'flex', justifyContent: 'center', padding: '0 1.5rem 2rem' }}>
-          <Image
-            src="/images/contact-page.png"
-            alt="Send Message, Book Consultation, Get Clear Plan"
-            width={900}
-            height={420}
-            style={{
-              maxWidth: '100%',
-              height: 'auto',
-              borderRadius: '20px',
-              boxShadow: '0 8px 40px rgba(69,115,223,0.18)',
-            }}
-            priority={false}
-          />
-        </div>
-
         {/* ── Contact Grid ── */}
         <section className={styles.contactSection}>
           <div className={styles.contactGrid}>

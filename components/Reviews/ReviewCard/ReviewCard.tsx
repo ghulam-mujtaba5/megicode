@@ -57,7 +57,7 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
     >
       <div className={`${commonStyles.cardHeader} ${themeStyles.cardHeader}`}>
         <div className={`${commonStyles.iconWrap} ${themeStyles.iconWrap}`} aria-hidden="true">
-          <Image src={iconSrc} alt="" width={96} height={64} className={commonStyles.icon} />
+          <Image src={iconSrc} alt="" width={64} height={64} className={commonStyles.icon} />
         </div>
         <div className={commonStyles.headerCopy}>
           <p className={`${commonStyles.tagline} ${themeStyles.tagline}`}>{tagline}</p>
