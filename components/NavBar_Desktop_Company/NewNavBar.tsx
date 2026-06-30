@@ -67,25 +67,20 @@ const NewNavBar = () => {
             <Image
               src={logoSrc}
               alt="Megicode Logo"
-              width={48}
-              height={48}
+              width={150}
+              height={40}
               className={styles.logo}
             />
           </Link>
         </div>
         <ul className={styles.navLinks}>
           <li>
-            <Link href="/about" className={themeStyles.navLink}>
-              About
-            </Link>
-          </li>
-          <li>
             <Link href="/services" className={themeStyles.navLink}>
               Services
             </Link>
           </li>
           <li>
-            <Link href="/pricing" className={themeStyles.navLink}>
+            <Link href="/pricing" className={`${themeStyles.navLink} ${themeStyles.navPricing}`}>
               Pricing
             </Link>
           </li>

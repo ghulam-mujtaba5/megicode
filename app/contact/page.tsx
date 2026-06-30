@@ -837,6 +837,21 @@ export default function ContactPage() {
                   </div>
                 </div>
               </div>
+
+              {/* Illustration */}
+              <div className={styles.contactIllustration} aria-hidden="true">
+                <Suspense fallback={null}>
+                  <LottiePlayer
+                    src="/lottie/16_team_collaboration.json"
+                    loop
+                    style={{ width: '100%', maxWidth: 260, height: 180 }}
+                    ariaLabel="Team collaboration illustration"
+                  />
+                </Suspense>
+                <p className={styles.contactIllustrationText}>
+                  We reply within one business day — usually much faster.
+                </p>
+              </div>
             </div>
           </div>
         </section>

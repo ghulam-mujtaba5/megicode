@@ -1367,3 +1367,33 @@
     height: 250px;
   }
 }
+
+/* Contact illustration block */
+.contactIllustration {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.5rem;
+  padding: 1.25rem 1rem 0.75rem;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.container[data-theme='dark'] .contactIllustration {
+  background: rgba(69, 115, 223, 0.07);
+  border: 1px solid rgba(69, 115, 223, 0.12);
+}
+
+.container[data-theme='light'] .contactIllustration {
+  background: rgba(69, 115, 223, 0.04);
+  border: 1px solid rgba(69, 115, 223, 0.1);
+}
+
+.contactIllustrationText {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  margin: 0.5rem 0 0;
+  font-weight: 600;
+  opacity: 0.7;
+}

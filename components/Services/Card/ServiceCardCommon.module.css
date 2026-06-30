@@ -65,8 +65,8 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, #4573df 0%, #7ba0ff 50%, #4573df 100%);
-  background-size: 200% 100%;
+  background: linear-gradient(90deg, #4573df 0%, #ff9800 40%, #7ba0ff 70%, #4573df 100%);
+  background-size: 300% 100%;
   opacity: 0;
   transition: opacity 0.35s ease;
   z-index: 2;
@@ -130,15 +130,16 @@
 
 .headerRow {
   display: flex;
-  align-items: flex-start;
-  gap: 1rem;
+  align-items: center;
+  gap: 1.1rem;
 }
 
 .titleBlock {
   display: flex;
   flex-direction: column;
-  gap: 9px;
+  gap: 8px;
   min-width: 0;
+  flex: 1;
 }
 
 .title {
