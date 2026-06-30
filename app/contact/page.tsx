@@ -17,7 +17,6 @@ import {
 } from 'react-icons/hi2';
 
 import dynamic from 'next/dynamic';
-import Image from 'next/image';
 
 import { SITE_SOCIAL, getCopyrightText } from '@/lib/constants';
 
@@ -387,64 +386,6 @@ export default function ContactPage() {
             </div>
           </div>
           <div ref={accentRef} className={styles.heroAccent} />
-        </section>
-
-        {/* ── How It Works strip ── */}
-        <section className={styles.howItWorksSection} aria-label="How to get started">
-          <div className={styles.howItWorksInner}>
-            <div className={styles.howItWorksText}>
-              <span className={styles.howItWorksEyebrow}>Simple process</span>
-              <h2 className={styles.howItWorksTitle}>Three steps to get started</h2>
-              <p className={styles.howItWorksSubtitle}>
-                No long back-and-forth. Send us your goal, book a quick call, and leave with a clear
-                action plan — all within 48 hours.
-              </p>
-              <div className={styles.howItWorksSteps}>
-                {[
-                  {
-                    n: '01',
-                    label: 'Send a message',
-                    desc: 'Tell us your goal, budget, and timeline.',
-                  },
-                  {
-                    n: '02',
-                    label: 'Book a free call',
-                    desc: 'We schedule a 30-min video consultation.',
-                  },
-                  {
-                    n: '03',
-                    label: 'Get a clear plan',
-                    desc: 'Receive a scoped roadmap — no obligation.',
-                  },
-                ].map(({ n, label, desc }) => (
-                  <div key={n} className={styles.howItWorksStep}>
-                    <span className={styles.stepNum}>{n}</span>
-                    <div>
-                      <strong className={styles.stepLabel}>{label}</strong>
-                      <p className={styles.stepDesc}>{desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className={styles.howItWorksVisual} aria-hidden="true">
-              <picture>
-                <source
-                  srcSet="/images/assets/contact-flow@2x.webp 1.5x, /images/assets/contact-flow.webp 1x"
-                  type="image/webp"
-                />
-                <source srcSet="/images/assets/contact-flow.png" type="image/png" />
-                <Image
-                  src="/images/assets/contact-flow.webp"
-                  alt=""
-                  width={460}
-                  height={340}
-                  className={styles.howItWorksImage}
-                  sizes="(max-width: 900px) 90vw, 460px"
-                />
-              </picture>
-            </div>
-          </div>
         </section>
 
         {/* ── Contact Grid ── */}

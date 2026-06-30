@@ -4,18 +4,9 @@
   z-index: 1;
 }
 
-.eyebrow {
-  background: rgba(69, 115, 223, 0.15);
-  color: #6d8dff;
-  border: 1px solid rgba(69, 115, 223, 0.25);
-}
-
 .title {
   color: #ffffff;
-}
-
-.accent {
-  background: linear-gradient(135deg, #6d8dff, #93c5fd);
+  background: linear-gradient(135deg, #4573df, #6d8dff);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -26,15 +17,7 @@
 }
 
 .description {
-  color: #8d939a;
-}
-
-.stat {
-  color: #fff;
-}
-
-.statDivider {
-  background: #4573df;
+  color: #aeb4bc;
 }
 
 .heroPattern {

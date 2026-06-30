@@ -14,12 +14,12 @@ const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.08 },
+    transition: { staggerChildren: 0.2, delayChildren: 0.1 },
   },
 };
 
 const itemVariants = {
-  hidden: { y: 22, opacity: 0 },
+  hidden: { y: 20, opacity: 0 },
   visible: { y: 0, opacity: 1, transition: { duration: 0.5, ease: easeOut } },
 };
 
@@ -35,7 +35,6 @@ const ReviewsHero: React.FC = () => {
       variants={containerVariants}
     >
       <div className={commonStyles.heroInner}>
-        {/* Text column */}
         <div className={commonStyles.heroContent}>
           <motion.h1
             className={`${commonStyles.title} ${themeStyles.title}`}
@@ -48,35 +47,11 @@ const ReviewsHero: React.FC = () => {
             className={`${commonStyles.subtitle} ${themeStyles.subtitle}`}
             variants={itemVariants}
           >
-            Real outcomes from real clients who trusted Megicode with their vision. Every project
-            here is a platform that&apos;s live, used, and proven.
+            Discover what our clients say about their experience working with Megicode. Real stories
+            from real clients who trusted us with their vision.
           </motion.p>
-
-          <motion.div className={commonStyles.statsRow} variants={itemVariants}>
-            <div className={commonStyles.statItem}>
-              <span className={commonStyles.statValue}>5★</span>
-              <span className={`${commonStyles.statLabel} ${themeStyles.statLabel}`}>
-                Average rating
-              </span>
-            </div>
-            <div className={`${commonStyles.statDivider} ${themeStyles.statDivider}`} />
-            <div className={commonStyles.statItem}>
-              <span className={commonStyles.statValue}>100%</span>
-              <span className={`${commonStyles.statLabel} ${themeStyles.statLabel}`}>
-                Satisfaction
-              </span>
-            </div>
-            <div className={`${commonStyles.statDivider} ${themeStyles.statDivider}`} />
-            <div className={commonStyles.statItem}>
-              <span className={commonStyles.statValue}>3+</span>
-              <span className={`${commonStyles.statLabel} ${themeStyles.statLabel}`}>
-                Live platforms
-              </span>
-            </div>
-          </motion.div>
         </div>
 
-        {/* Illustration column */}
         <motion.div className={commonStyles.heroVisual} variants={itemVariants} aria-hidden="true">
           <picture>
             <source
