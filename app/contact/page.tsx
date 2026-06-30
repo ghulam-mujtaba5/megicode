@@ -839,18 +839,15 @@ export default function ContactPage() {
               </div>
 
               {/* Illustration */}
-              <div className={styles.contactIllustration} aria-hidden="true">
-                <Suspense fallback={null}>
-                  <LottiePlayer
-                    src="/lottie/16_team_collaboration.json"
-                    loop
-                    style={{ width: '100%', maxWidth: 260, height: 180 }}
-                    ariaLabel="Team collaboration illustration"
-                  />
-                </Suspense>
-                <p className={styles.contactIllustrationText}>
-                  We reply within one business day — usually much faster.
-                </p>
+              <div className={styles.contactIllustration}>
+                <Image
+                  src="/images/assets/contact-flow.webp"
+                  alt="Send Message, Book Consultation, Get Clear Plan"
+                  width={380}
+                  height={200}
+                  style={{ width: '100%', height: 'auto', borderRadius: 12 }}
+                  priority={false}
+                />
               </div>
             </div>
           </div>

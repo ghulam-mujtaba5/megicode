@@ -67,9 +67,10 @@ const NewNavBar = () => {
             <Image
               src={logoSrc}
               alt="Megicode Logo"
-              width={150}
-              height={40}
+              width={170}
+              height={42}
               className={styles.logo}
+              unoptimized
             />
           </Link>
         </div>
