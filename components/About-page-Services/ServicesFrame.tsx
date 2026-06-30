@@ -31,6 +31,7 @@ import { motion } from 'framer-motion';
 
 import { useTheme } from '../../context/ThemeContext';
 import { type ServiceIllusType, ServiceIllustration } from '../IconSystem/ServiceIllustrations';
+import ServiceIcon from '../Services/Card/ServiceIcon';
 import lightStyles from './ServicesFrame.module.css';
 import commonStyles from './ServicesFrameCommon.module.css';
 import darkStyles from './ServicesFrameDark.module.css';
@@ -48,15 +49,17 @@ interface TechItem {
 
 interface ServiceItem {
   id: string;
+  /** Service slug used to resolve the animated ServiceIcon */
+  slug?: string;
   /** Pre-resolved CSS Module class string for grid position */
   gridClass: string;
   /** AI card only: full blue gradient treatment */
   featured?: true;
   /** Automation card: wide (2-col) glass card with description */
   isWide?: true;
-  /** Branded SVG icon path (served from /public) */
+  /** @deprecated kept for fallback — ServiceIcon uses PNG from slug */
   svgSrc: string;
-  /** Dark-mode variant of the branded SVG (optional) */
+  /** @deprecated dark-mode SVG variant */
   svgSrcDark?: string;
   title: string;
   tagline: string;
@@ -76,6 +79,7 @@ interface ServiceItem {
 const SERVICES: ServiceItem[] = [
   {
     id: 'automation',
+    slug: 'ai-automation-agents',
     gridClass: commonStyles.posAI,
     featured: true,
     illusType: 'automation' as ServiceIllusType,
@@ -95,6 +99,7 @@ const SERVICES: ServiceItem[] = [
   },
   {
     id: 'ai-saas',
+    slug: 'ai-saas-mvp-development',
     gridClass: commonStyles.posSaaS,
     illusType: 'ai' as ServiceIllusType,
     svgSrc: '/Ai%20icon.svg',
@@ -110,6 +115,7 @@ const SERVICES: ServiceItem[] = [
   },
   {
     id: 'web',
+    slug: 'custom-web-development',
     gridClass: commonStyles.posMobile,
     illusType: 'web' as ServiceIllusType,
     svgSrc: '/web%20app%20icon.svg',
@@ -125,6 +131,7 @@ const SERVICES: ServiceItem[] = [
   },
   {
     id: 'uiux',
+    slug: 'ui-ux-design',
     gridClass: commonStyles.posUIUX,
     illusType: 'uiux' as ServiceIllusType,
     svgSrc: '/Ui%26Ux-icon.svg',
@@ -140,6 +147,7 @@ const SERVICES: ServiceItem[] = [
   },
   {
     id: 'mobile',
+    slug: 'mobile-app-development',
     gridClass: commonStyles.posCloud,
     illusType: 'mobile' as ServiceIllusType,
     svgSrc: '/mobile%20app%20icon.svg',
@@ -156,6 +164,7 @@ const SERVICES: ServiceItem[] = [
   },
   {
     id: 'cloud',
+    slug: 'cloud-devops',
     gridClass: commonStyles.posData,
     illusType: 'cloud' as ServiceIllusType,
     svgSrc: '/devlopment-icon.svg',
@@ -171,6 +180,7 @@ const SERVICES: ServiceItem[] = [
   },
   {
     id: 'data',
+    slug: 'data-analytics',
     gridClass: commonStyles.posAuto,
     isWide: true,
     illusType: 'data' as ServiceIllusType,
@@ -189,6 +199,7 @@ const SERVICES: ServiceItem[] = [
   },
   {
     id: 'consulting',
+    slug: 'technical-consulting',
     gridClass: commonStyles.posConsult,
     illusType: 'consulting' as ServiceIllusType,
     svgSrc: '/it-consulting-support-icon.svg',
@@ -412,23 +423,13 @@ const ServicesFrame = () => {
         viewport={{ once: true, margin: '-60px' }}
         role="list"
       >
-        {SERVICES.map((service) => {
+        {SERVICES.map((service, index) => {
           const isFeatured = service.featured === true;
           const isWide = service.isWide === true;
           const hasDescription = Boolean(service.description);
 
           // Card theme class
           const cardTheme = isFeatured ? t.primaryCard : isWide ? t.secondaryCard : t.standardCard;
-
-          // Icon wrapper class
-          const iconWrapCls = isFeatured
-            ? commonStyles.iconWrapFeatured
-            : `${commonStyles.iconWrapStd} ${t.iconWrapStd}`;
-
-          // Resolve theme-aware SVG src
-          const iconSrc =
-            theme === 'dark' && service.svgSrcDark ? service.svgSrcDark : service.svgSrc;
-          const iconSize = isFeatured ? 28 : isWide ? 26 : 24;
 
           // Card inner: larger padding for featured/wide
           const innerCls = `${commonStyles.cardInner} ${isFeatured || isWide ? commonStyles.cardInnerLarge : ''}`;
@@ -447,20 +448,7 @@ const ServicesFrame = () => {
               >
                 {/* Icon row */}
                 <div className={commonStyles.iconRow}>
-                  <span className={iconWrapCls} aria-hidden="true">
-                    <Image
-                      src={iconSrc}
-                      alt=""
-                      width={iconSize}
-                      height={iconSize}
-                      unoptimized
-                      style={{
-                        display: 'block',
-                        filter:
-                          theme === 'dark' && !service.svgSrcDark ? 'brightness(1.2)' : undefined,
-                      }}
-                    />
-                  </span>
+                  <ServiceIcon slug={service.slug} index={index} />
                   {isFeatured && <span className={commonStyles.featuredBadge}>Core Service</span>}
                 </div>
 
