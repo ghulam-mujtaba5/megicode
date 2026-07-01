@@ -1,0 +1,30 @@
+export const clientReviews = [
+  {
+    name: 'Clinic Owner, The Aesthetics Place',
+    company: 'The Aesthetics Place - aestheticsplace.pk',
+    tagline: 'Clinic operations turned digital',
+    icon: '/images/logos/aesthetics-place-logo.jpg',
+    review:
+      'Megicode built our entire clinic platform from scratch - a professional website and a complete internal management system for appointments, patient records, and billing. The team understood our medical practice needs perfectly. Our online presence went from zero to a website that actually brings in new patients. The internal portal has made daily operations seamless for our staff. Truly exceptional work from start to finish.',
+    rating: 5,
+  },
+  {
+    name: 'Student user, CampusAxis',
+    company: 'CampusAxis - campusaxis.pk',
+    tagline: 'A daily-use student platform',
+    icon: '/images/logos/campusaxis-review-logo.webp',
+    review:
+      'CampusAxis is a lifesaver. Before this, I was juggling multiple WhatsApp groups and random websites just to find my timetable or past papers. Now everything is in one place - dashboard, discussions, campus news. The team at Megicode built something students actually need and use every day. Highly recommend checking it out.',
+    rating: 5,
+  },
+  {
+    name: 'Founder, Wajdan Digital Alchemy',
+    company: 'Wajdan Digital Alchemy',
+    tagline: 'A growth site that sells',
+    icon: '/images/logos/wajdan-logo-light.png',
+    iconDark: '/images/logos/wajdan-logo-dark.png',
+    review:
+      'Megicode built us a website that actually sells. It captures our entire system in a way prospects instantly understand, it is fast, it looks premium, and it turns our ad traffic into booked audits. As a growth agency, our own site has to convert - and this one does.',
+    rating: 5,
+  },
+] as const;

@@ -83,7 +83,7 @@ export async function generateMetadata({
     };
   }
 
-  const pageUrl = `${SITE}/article/${article.slug || id}`;
+  const pageUrl = `${SITE}/insights/${article.slug || id}`;
   const imageUrl = absoluteUrl(article.coverImage);
   const description =
     article.seoDescription || article.excerpt || article.title || 'Read this article on Megicode.';
@@ -131,14 +131,14 @@ const ArticleDetailPage = async ({ params }: { params: Promise<{ id: string }> }
   const updatedDate = formatDate(article.updatedAt);
   const headings = extractHeadings(article.contentHtml || '');
   const related = await getRelatedPosts(article.slug || id, category, 3).catch(() => []);
-  const pageUrl = `${SITE}/article/${article.slug || id}`;
+  const pageUrl = `${SITE}/insights/${article.slug || id}`;
 
   const { linkedinUrl, instagramUrl, githubUrl } = SITE_SOCIAL;
   const copyrightText = getCopyrightText();
 
   const breadcrumbs = [
     { name: 'Home', url: SITE },
-    { name: 'Articles', url: `${SITE}/article` },
+    { name: 'Insights', url: `${SITE}/insights` },
     { name: article.title, url: pageUrl },
   ];
 
@@ -162,7 +162,7 @@ const ArticleDetailPage = async ({ params }: { params: Promise<{ id: string }> }
           <nav className={styles.breadcrumb} aria-label="Breadcrumb">
             <Link href="/">Home</Link>
             <span aria-hidden="true">/</span>
-            <Link href="/article">Articles</Link>
+            <Link href="/insights">Insights</Link>
             <span aria-hidden="true">/</span>
             <span className={styles.breadcrumbCurrent}>{category}</span>
           </nav>
@@ -270,7 +270,7 @@ const ArticleDetailPage = async ({ params }: { params: Promise<{ id: string }> }
                 {related.map((post) => (
                   <Link
                     key={post.id}
-                    href={`/article/${post.slug || post.id}`}
+                    href={`/insights/${post.slug || post.id}`}
                     className={styles.relatedCard}
                   >
                     <div className={styles.relatedImage}>

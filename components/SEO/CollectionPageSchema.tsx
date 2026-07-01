@@ -28,11 +28,11 @@ const CollectionPageSchema: React.FC<CollectionPageSchemaProps> = ({ articles })
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    '@id': 'https://www.megicode.com/article#collection',
+    '@id': 'https://www.megicode.com/insights#collection',
     name: 'Megicode Insights — AI, SaaS & Engineering Articles',
     description:
       'Executive-level guides on AI product development, SaaS engineering, automation, cloud, and growth — written for founders and operators who want practical clarity before they build.',
-    url: 'https://www.megicode.com/article',
+    url: 'https://www.megicode.com/insights',
     inLanguage: 'en-US',
     isPartOf: {
       '@type': 'WebSite',
@@ -54,11 +54,11 @@ const CollectionPageSchema: React.FC<CollectionPageSchemaProps> = ({ articles })
       const slug = article.slug || article._id || article.id || '';
       return {
         '@type': 'Article',
-        '@id': `https://www.megicode.com/article/${slug}`,
+        '@id': `https://www.megicode.com/insights/${slug}`,
         name: article.title,
         headline: article.title,
         description: article.excerpt || article.summary || '',
-        url: `https://www.megicode.com/article/${slug}`,
+        url: `https://www.megicode.com/insights/${slug}`,
         datePublished: article.publishedAt || article.createdAt,
         dateModified: article.updatedAt || article.publishedAt || article.createdAt,
         articleSection: article.categories?.[0] || 'Megicode Insights',

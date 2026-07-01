@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     title: 'Megicode Insights — AI, SaaS & Engineering Articles',
     description:
       'Executive guides on AI product development, SaaS engineering, automation, cloud, and growth — written for founders and operators.',
-    url: 'https://www.megicode.com/article',
+    url: 'https://www.megicode.com/insights',
     type: 'website',
     siteName: 'Megicode',
     images: [
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     images: ['https://www.megicode.com/meta/default-og.jpg'],
   },
   alternates: {
-    canonical: 'https://www.megicode.com/article',
+    canonical: 'https://www.megicode.com/insights',
   },
 };
 

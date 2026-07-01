@@ -219,7 +219,9 @@ const BUYER_SITUATIONS = [
   {
     number: '01',
     badge: 'Lead automation',
-    iconSrc: '/ds%26ai-icon.svg',
+    iconSrc: '/service-icons/ai-automation.png',
+    accent: '#4573df',
+    accentRgb: '69, 115, 223',
     problem: 'I am losing leads or wasting time manually',
     outcome: 'AI agents, instant replies, booking flows, follow-ups, and workflow automation.',
     result: 'Stop late replies and manual handoffs',
@@ -228,7 +230,9 @@ const BUYER_SITUATIONS = [
   {
     number: '02',
     badge: 'AI product build',
-    iconSrc: '/Ai%20icon.svg',
+    iconSrc: '/service-icons/ai-saas-mvp.png',
+    accent: '#2d4fa2',
+    accentRgb: '45, 79, 162',
     problem: 'I have an AI product or SaaS idea',
     outcome: 'MVP roadmap, product architecture, LLM features, dashboard, and launch support.',
     result: 'Move from idea to a buildable product',
@@ -237,7 +241,9 @@ const BUYER_SITUATIONS = [
   {
     number: '03',
     badge: 'Business platform',
-    iconSrc: '/web%20app%20icon.svg',
+    iconSrc: '/service-icons/custom-web.png',
+    accent: '#ff9800',
+    accentRgb: '255, 152, 0',
     problem: 'My business needs a custom portal or dashboard',
     outcome: 'Web apps, CRMs, booking systems, internal tools, client portals, and reports.',
     result: 'Replace scattered tools with one system',
@@ -246,7 +252,9 @@ const BUYER_SITUATIONS = [
   {
     number: '04',
     badge: 'Roadmap clarity',
-    iconSrc: '/it-consulting-support-icon.svg',
+    iconSrc: '/service-icons/consulting.png',
+    accent: '#0f9f8c',
+    accentRgb: '15, 159, 140',
     problem: 'I am not sure what to build first',
     outcome:
       'Technical roadmap, stack decision, risk review, and build plan before spending heavily.',
@@ -372,12 +380,25 @@ const ServicesFrame = () => {
             key={item.problem}
             variants={cardIn}
             className={`${commonStyles.situationCard} ${t.situationCard}`}
-            style={{ '--situation-index': index } as React.CSSProperties}
+            style={
+              {
+                '--situation-index': index,
+                '--situation-accent': item.accent,
+                '--situation-accent-rgb': item.accentRgb,
+              } as React.CSSProperties
+            }
           >
             <Link href={item.href} className={commonStyles.situationLink}>
               <span className={commonStyles.situationTopline}>
                 <span className={`${commonStyles.situationIcon} ${t.situationIcon}`}>
-                  <Image src={item.iconSrc} alt="" width={32} height={32} unoptimized />
+                  <Image
+                    src={item.iconSrc}
+                    alt=""
+                    width={36}
+                    height={36}
+                    className={commonStyles.situationIconImage}
+                    unoptimized
+                  />
                 </span>
                 <span className={`${commonStyles.situationNumber} ${t.situationNumber}`}>
                   {item.number}

@@ -8,15 +8,25 @@ export function proxy(request: NextRequest) {
   const url = request.nextUrl.clone();
   const host = request.headers.get('host') || '';
 
-  if (host && host !== CANONICAL_HOST && !host.startsWith('localhost') && !host.includes('vercel.app')) {
-    return NextResponse.redirect(
-      `${CANONICAL_ORIGIN}${url.pathname}${url.search}`,
-      301
-    );
+  const isLocalHost =
+    host.startsWith('localhost') ||
+    host.startsWith('127.0.0.1') ||
+    host.startsWith('[::1]') ||
+    url.hostname === 'localhost' ||
+    url.hostname === '127.0.0.1' ||
+    url.hostname === '::1';
+
+  if (host && host !== CANONICAL_HOST && !isLocalHost && !host.includes('vercel.app')) {
+    return NextResponse.redirect(`${CANONICAL_ORIGIN}${url.pathname}${url.search}`, 301);
   }
 
   if (url.pathname !== '/' && url.pathname.endsWith('/')) {
     url.pathname = url.pathname.replace(/\/+$/, '');
+    return NextResponse.redirect(url, 301);
+  }
+
+  if (url.pathname === '/article' || url.pathname.startsWith('/article/')) {
+    url.pathname = url.pathname.replace(/^\/article/, '/insights');
     return NextResponse.redirect(url, 301);
   }
 

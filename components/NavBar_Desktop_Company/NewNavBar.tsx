@@ -91,7 +91,7 @@ const NewNavBar = () => {
             </Link>
           </li>
           <li>
-            <Link href="/article" className={themeStyles.navLink}>
+            <Link href="/insights" className={themeStyles.navLink}>
               Insights
             </Link>
           </li>

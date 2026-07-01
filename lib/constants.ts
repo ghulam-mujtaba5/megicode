@@ -23,7 +23,7 @@ export const NAV_SECTIONS = [
   { id: 'about', label: 'About', href: '/about' },
   { id: 'services', label: 'Services', href: '/services' },
   { id: 'projects', label: 'Projects', href: '/projects' },
-  { id: 'article', label: 'Article', href: '/article' },
+  { id: 'insights', label: 'Insights', href: '/insights' },
   { id: 'contact', label: 'Contact', href: '/contact' },
   { id: 'reviews', label: 'Reviews', href: '/reviews' },
 ] as const;

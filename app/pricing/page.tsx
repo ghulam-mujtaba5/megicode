@@ -1,3 +1,7 @@
+import { pricingFaqs } from '@/data/pricing';
+
+import { breadcrumbJsonLd, faqJsonLd } from '@/lib/metadata';
+
 import PricingPageClient from './PricingPageClient';
 
 export const metadata = {
@@ -40,5 +44,28 @@ export const metadata = {
 };
 
 export default function PricingPage() {
-  return <PricingPageClient />;
+  const breadcrumb = breadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Pricing', path: '/pricing' },
+  ]);
+  const faq = faqJsonLd(
+    pricingFaqs.map((item) => ({
+      question: item.question,
+      answer: item.answer,
+    }))
+  );
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faq) }}
+      />
+      <PricingPageClient />
+    </>
+  );
 }

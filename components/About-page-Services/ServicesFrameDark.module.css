@@ -30,39 +30,47 @@
 
 .situationCard {
   background: #262b34;
-  border: 1.5px solid #3e444c;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  border: 1.5px solid rgba(var(--situation-accent-rgb), 0.34);
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.02);
 }
 
 .situationCard::before {
   background:
-    linear-gradient(135deg, rgba(69, 115, 223, 0.12), transparent 48%),
-    radial-gradient(circle at 18% 12%, rgba(69, 115, 223, 0.22), transparent 34%);
+    linear-gradient(135deg, rgba(var(--situation-accent-rgb), 0.12), transparent 48%),
+    radial-gradient(circle at 18% 12%, rgba(var(--situation-accent-rgb), 0.2), transparent 34%);
 }
 
 .situationCard::after {
-  background: linear-gradient(135deg, #4573df, #2d4fa2);
+  background: var(--situation-accent);
 }
 
 .situationCard:hover {
-  border-color: rgba(69, 115, 223, 0.54);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.32);
+  border-color: rgba(var(--situation-accent-rgb), 0.58);
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.32),
+    0 0 24px rgba(var(--situation-accent-rgb), 0.08);
 }
 
 .situationIcon {
-  background: rgba(69, 115, 223, 0.14);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  background: rgba(var(--situation-accent-rgb), 0.14);
+  border: 1px solid rgba(var(--situation-accent-rgb), 0.24);
+  box-shadow:
+    0 10px 22px rgba(0, 0, 0, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 .situationNumber {
-  color: #c0d4ff;
-  background: rgba(69, 115, 223, 0.14);
+  color: color-mix(in srgb, var(--situation-accent) 42%, #ffffff);
+  background: rgba(var(--situation-accent-rgb), 0.14);
+  border: 1px solid rgba(var(--situation-accent-rgb), 0.22);
 }
 
 .situationBadge {
-  color: #c0d4ff;
-  background: rgba(69, 115, 223, 0.12);
-  border: 1px solid rgba(69, 115, 223, 0.2);
+  color: color-mix(in srgb, var(--situation-accent) 46%, #ffffff);
+  background: rgba(var(--situation-accent-rgb), 0.12);
+  border: 1px solid rgba(var(--situation-accent-rgb), 0.22);
 }
 
 .situationTitle {
@@ -74,13 +82,13 @@
 }
 
 .situationResult {
-  color: #d7e4ff;
-  background: rgba(69, 115, 223, 0.12);
-  border: 1px solid rgba(69, 115, 223, 0.22);
+  color: color-mix(in srgb, var(--situation-accent) 36%, #ffffff);
+  background: rgba(var(--situation-accent-rgb), 0.12);
+  border: 1px solid rgba(var(--situation-accent-rgb), 0.24);
 }
 
 .situationCta {
-  color: #8fb0ff;
+  color: color-mix(in srgb, var(--situation-accent) 48%, #ffffff);
 }
 
 /* ─── Primary featured card (AI) — visible navy, clearly separates from #1d2127 page bg ─ */

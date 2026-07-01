@@ -11,7 +11,7 @@ const SITE = 'https://www.megicode.com';
 
 const breadcrumbs = [
   { name: 'Home', url: SITE },
-  { name: 'Insights', url: `${SITE}/article` },
+  { name: 'Insights', url: `${SITE}/insights` },
 ];
 
 export default async function ArticlePage() {

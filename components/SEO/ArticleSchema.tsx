@@ -37,7 +37,7 @@ function absoluteUrl(pathOrUrl?: string) {
 }
 
 const ArticleSchema: React.FC<ArticleSchemaProps> = ({ article }) => {
-  const pageUrl = `https://www.megicode.com/article/${article.slug || article.id}`;
+  const pageUrl = `https://www.megicode.com/insights/${article.slug || article.id}`;
   const imageUrl = absoluteUrl(
     article.heroImage?.sizes?.medium?.url ||
       article.heroImage?.url ||

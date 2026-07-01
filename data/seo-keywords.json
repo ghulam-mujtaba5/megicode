@@ -267,7 +267,7 @@
         "spokes": [
           "/projects/aesthetics-clinic-platform",
           "/projects/campusaxis-university-portal",
-          "/article"
+          "/insights"
         ]
       },
       {
@@ -276,23 +276,23 @@
         "spokes": [
           "/projects/ai-hr-attrition-predictor",
           "/projects/predictive-pricing-nyc-taxi",
-          "/article"
+          "/insights"
         ]
       },
       {
         "name": "UI/UX Design",
         "url": "/services/ui-ux-design",
-        "spokes": ["/projects/fintech-uiux-revamp", "/article"]
+        "spokes": ["/projects/fintech-uiux-revamp", "/insights"]
       },
       {
         "name": "Data Analytics",
         "url": "/services/data-analytics",
-        "spokes": ["/projects/market-trends-dashboard", "/article"]
+        "spokes": ["/projects/market-trends-dashboard", "/insights"]
       },
       {
         "name": "Mobile Development",
         "url": "/services/mobile-app-development",
-        "spokes": ["/projects/mobile-expense-tracker", "/article"]
+        "spokes": ["/projects/mobile-expense-tracker", "/insights"]
       }
     ],
     "hubPage": "/services",

@@ -31,8 +31,7 @@ interface AnimationParticle {
     transform: string;
     zIndex: number;
   };
-  type: 'particle' | 'code' | 'tech';
-  content?: string;
+  type: 'particle';
 }
 
 export const LoadingAnimation = ({
@@ -54,8 +53,6 @@ export const LoadingAnimation = ({
 
   const [particles] = useState<AnimationParticle[]>(() => {
     const particleCount = 20;
-    const codeSymbols = ['<>', '/>', '{()}', '[]', '#!/', '=>', '{}'];
-    const techWords = ['AI', 'ML', 'API', 'UI/UX', 'DEV', 'CODE'];
 
     return Array.from({ length: particleCount }, (_, index) => {
       const primaryColor = 'var(--md-primary)';
@@ -70,29 +67,17 @@ export const LoadingAnimation = ({
       const y = 50 + radius * Math.sin(theta) * Math.sin(phi);
       const z = radius * Math.cos(phi);
 
-      const typeRand = Math.random();
-      const type: 'particle' | 'code' | 'tech' =
-        typeRand > 0.7 ? 'code' : typeRand > 0.4 ? 'tech' : 'particle';
-
-      const content =
-        type === 'code'
-          ? codeSymbols[Math.floor(Math.random() * codeSymbols.length)]
-          : type === 'tech'
-            ? techWords[Math.floor(Math.random() * techWords.length)]
-            : undefined;
-
       return {
         id: index,
-        type,
-        content,
+        type: 'particle',
         style: {
           top: `${y}%`,
           left: `${x}%`,
           animationDelay: `${index * 0.2}s`,
           scale: 0.6 + Math.random() * 0.4,
           opacity: 0.7 + Math.random() * 0.3,
-          size: type === 'particle' ? `${3 + Math.random() * 2}px` : 'auto',
-          blur: type === 'particle' ? `${0.5}px` : '0px',
+          size: `${3 + Math.random() * 2}px`,
+          blur: `${0.5}px`,
           color: index % 3 === 0 ? primaryColor : secondaryColor,
           transform: `translateZ(${z}px) rotateX(${Math.random() * 360}deg) rotateY(${Math.random() * 360}deg)`,
           zIndex: Math.floor(z),
@@ -125,37 +110,8 @@ export const LoadingAnimation = ({
                   }}
                 />
               );
-            } else if (particle.type === 'code') {
-              return (
-                <div
-                  key={particle.id}
-                  className={`${styles.codeParticle} ${theme === 'dark' ? styles.darkTheme : ''}`}
-                  style={{
-                    ...particle.style,
-                    transform: particle.style.transform,
-                    color: particle.style.color,
-                    zIndex: particle.style.zIndex,
-                  }}
-                >
-                  {particle.content}
-                </div>
-              );
-            } else {
-              return (
-                <div
-                  key={particle.id}
-                  className={`${styles.techParticle} ${theme === 'dark' ? styles.darkTheme : ''}`}
-                  style={{
-                    ...particle.style,
-                    transform: particle.style.transform,
-                    color: particle.style.color,
-                    zIndex: particle.style.zIndex,
-                  }}
-                >
-                  {particle.content}
-                </div>
-              );
             }
+            return null;
           })}
         </div>
       )}

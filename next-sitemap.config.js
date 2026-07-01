@@ -13,7 +13,8 @@ const config = {
     '/api/*',
     '/api',
     '/case-studies',
-    '/insights',
+    '/article',
+    '/article/*',
     '/articles',
     '/results',
     '/error',
@@ -49,7 +50,7 @@ const config = {
       { loc: '/services', changefreq: 'weekly', priority: 0.9 },
       { loc: '/about', changefreq: 'monthly', priority: 0.8 },
       { loc: '/projects', changefreq: 'monthly', priority: 0.8 },
-      { loc: '/article', changefreq: 'weekly', priority: 0.8 },
+      { loc: '/insights', changefreq: 'weekly', priority: 0.8 },
       { loc: '/contact', changefreq: 'monthly', priority: 0.7 },
       { loc: '/careers', changefreq: 'monthly', priority: 0.7 },
       { loc: '/reviews', changefreq: 'monthly', priority: 0.6 },
@@ -123,7 +124,7 @@ const config = {
           articlePages = posts
             .filter((p) => p.slug)
             .map((p) => ({
-              loc: `/article/${p.slug}`,
+              loc: `/insights/${p.slug}`,
               changefreq: 'weekly',
               priority: 0.8,
               lastmod: new Date(p.updatedAt || p.publishedAt || Date.now()).toISOString(),
@@ -151,7 +152,8 @@ const config = {
       path.startsWith('/megicode') ||
       path.startsWith('/api') ||
       path === '/case-studies' ||
-      path === '/insights' ||
+      path === '/article' ||
+      path.startsWith('/article/') ||
       path === '/articles' ||
       path === '/results' ||
       path.includes('/error') ||
@@ -179,7 +181,7 @@ const config = {
     } else if (path === '/contact' || path === '/careers') {
       priority = 0.7;
       changefreq = 'monthly';
-    } else if (path === '/article' || path.startsWith('/article/')) {
+    } else if (path === '/insights' || path.startsWith('/insights/')) {
       priority = 0.8;
       changefreq = 'weekly';
     } else if (path === '/reviews') {

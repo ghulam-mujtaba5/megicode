@@ -40,7 +40,7 @@ interface ArticleListClientProps {
 const ALL = 'All';
 
 function articleUrl(article: Article) {
-  return `/article/${article.slug || article._id || article.id}`;
+  return `/insights/${article.slug || article._id || article.id}`;
 }
 
 function articlePreview(article: Article) {

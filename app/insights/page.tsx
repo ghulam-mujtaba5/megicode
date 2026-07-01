@@ -1,5 +1,3 @@
-import { permanentRedirect } from 'next/navigation';
+export const revalidate = 300;
 
-export default function InsightsAliasPage() {
-  permanentRedirect('/article');
-}
+export { default } from '../article/page';

@@ -1,10 +1,13 @@
 'use client';
 
-import Link from 'next/link';
+/* eslint-disable @next/next/no-img-element */
 import { useEffect, useMemo, useState } from 'react';
 
-import { RichTextEditor } from '@/components/RichTextEditor/RichTextEditor';
+import Link from 'next/link';
+
 import type { BlogPost, BlogPostInput, BlogStatus } from '@/lib/blog/types';
+
+import { RichTextEditor } from '@/components/RichTextEditor/RichTextEditor';
 
 import styles from './blog.module.css';
 
@@ -25,7 +28,10 @@ const emptyForm: BlogPostInput = {
 };
 
 function stripHtml(html: string) {
-  return html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  return html
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
 function formatDate(value?: string | null) {
@@ -56,14 +62,35 @@ export default function BlogManagerClient() {
   }
 
   useEffect(() => {
-    loadPosts().catch((error) => {
-      setMessage(error.message);
-      setLoading(false);
-    });
+    let isMounted = true;
+
+    async function fetchInitialPosts() {
+      try {
+        const res = await fetch('/api/internal/blog', { cache: 'no-store' });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Failed to load posts');
+        if (!isMounted) return;
+        setPosts(data.posts || []);
+      } catch (error) {
+        if (isMounted) setMessage(error instanceof Error ? error.message : 'Failed to load posts');
+      } finally {
+        if (isMounted) setLoading(false);
+      }
+    }
+
+    void fetchInitialPosts();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const previewText = useMemo(() => {
-    return form.excerpt?.trim() || stripHtml(form.contentHtml).slice(0, 180) || 'Your post preview will appear here.';
+    return (
+      form.excerpt?.trim() ||
+      stripHtml(form.contentHtml).slice(0, 180) ||
+      'Your post preview will appear here.'
+    );
   }, [form.contentHtml, form.excerpt]);
 
   function updateField<K extends keyof BlogPostInput>(key: K, value: BlogPostInput[K]) {
@@ -124,11 +151,14 @@ export default function BlogManagerClient() {
     setMessage('');
     try {
       const payload = { ...form, status };
-      const res = await fetch(editingId ? `/api/internal/blog/${editingId}` : '/api/internal/blog', {
-        method: editingId ? 'PUT' : 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
+      const res = await fetch(
+        editingId ? `/api/internal/blog/${editingId}` : '/api/internal/blog',
+        {
+          method: editingId ? 'PUT' : 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        }
+      );
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Failed to save post');
       setMessage(status === 'published' ? 'Post published.' : 'Draft saved.');
@@ -182,7 +212,7 @@ export default function BlogManagerClient() {
           <h1>Blog CMS</h1>
           <p>Manage Megicode blog posts from the portal with MongoDB storage.</p>
         </div>
-        <Link href="/article" className={styles.secondaryButton} target="_blank">
+        <Link href="/insights" className={styles.secondaryButton} target="_blank">
           View blog
         </Link>
       </header>
@@ -242,7 +272,11 @@ export default function BlogManagerClient() {
                 disabled={uploading}
                 style={{ padding: '0.5rem 0' }}
               />
-              {uploading && <span style={{ fontSize: '0.8rem', color: 'var(--int-primary)' }}>Uploading &amp; converting to WebP...</span>}
+              {uploading && (
+                <span style={{ fontSize: '0.8rem', color: 'var(--int-primary)' }}>
+                  Uploading &amp; converting to WebP...
+                </span>
+              )}
             </label>
             <label>
               Cover image alt
@@ -256,7 +290,9 @@ export default function BlogManagerClient() {
               Cover fit
               <select
                 value={form.coverImageFit || 'cover'}
-                onChange={(event) => updateField('coverImageFit', event.target.value as BlogPostInput['coverImageFit'])}
+                onChange={(event) =>
+                  updateField('coverImageFit', event.target.value as BlogPostInput['coverImageFit'])
+                }
               >
                 <option value="cover">Cover</option>
                 <option value="contain">Contain</option>
@@ -272,7 +308,10 @@ export default function BlogManagerClient() {
                 onChange={(event) =>
                   updateField(
                     'tags',
-                    event.target.value.split(',').map((item) => item.trim()).filter(Boolean)
+                    event.target.value
+                      .split(',')
+                      .map((item) => item.trim())
+                      .filter(Boolean)
                   )
                 }
                 placeholder="Next.js, SEO, CMS"
@@ -285,7 +324,10 @@ export default function BlogManagerClient() {
                 onChange={(event) =>
                   updateField(
                     'categories',
-                    event.target.value.split(',').map((item) => item.trim()).filter(Boolean)
+                    event.target.value
+                      .split(',')
+                      .map((item) => item.trim())
+                      .filter(Boolean)
                   )
                 }
                 placeholder="Engineering, Growth"
@@ -333,10 +375,20 @@ export default function BlogManagerClient() {
           </details>
 
           <div className={styles.actions}>
-            <button type="button" onClick={() => savePost('draft')} disabled={saving} className={styles.secondaryButton}>
+            <button
+              type="button"
+              onClick={() => savePost('draft')}
+              disabled={saving}
+              className={styles.secondaryButton}
+            >
               Save draft
             </button>
-            <button type="button" onClick={() => savePost('published')} disabled={saving} className={styles.primaryButton}>
+            <button
+              type="button"
+              onClick={() => savePost('published')}
+              disabled={saving}
+              className={styles.primaryButton}
+            >
               Publish
             </button>
           </div>
@@ -356,17 +408,23 @@ export default function BlogManagerClient() {
               <span className={styles.statusBadge}>{form.status}</span>
               {Boolean(form.categories?.length) && (
                 <div className={styles.chipRow}>
-                  {form.categories?.map((category) => <span key={category}>{category}</span>)}
+                  {form.categories?.map((category) => (
+                    <span key={category}>{category}</span>
+                  ))}
                 </div>
               )}
               <h3>{form.title || 'Article title'}</h3>
               <p>{previewText}</p>
               {Boolean(form.tags?.length) && (
                 <div className={styles.tagRow}>
-                  {form.tags?.slice(0, 4).map((tag) => <span key={tag}>#{tag}</span>)}
+                  {form.tags?.slice(0, 4).map((tag) => (
+                    <span key={tag}>#{tag}</span>
+                  ))}
                 </div>
               )}
-              <small>{form.authorName || 'Megicode Team'} - {formatDate(form.publishedAt)}</small>
+              <small>
+                {form.authorName || 'Megicode Team'} - {formatDate(form.publishedAt)}
+              </small>
             </div>
           </article>
 
@@ -385,18 +443,26 @@ export default function BlogManagerClient() {
                         <img
                           src={post.coverImage}
                           alt={post.coverImageAlt || ''}
-                          style={{ width: 56, height: 42, objectFit: 'cover', borderRadius: 4, flexShrink: 0 }}
+                          style={{
+                            width: 56,
+                            height: 42,
+                            objectFit: 'cover',
+                            borderRadius: 4,
+                            flexShrink: 0,
+                          }}
                         />
                       )}
                       <div>
                         <strong>{post.title}</strong>
-                        <span>{post.status} - {formatDate(post.publishedAt || post.updatedAt)}</span>
+                        <span>
+                          {post.status} - {formatDate(post.publishedAt || post.updatedAt)}
+                        </span>
                       </div>
                     </div>
                   </button>
                   <div className={styles.postActions}>
                     {post.status === 'published' && (
-                      <Link href={`/article/${post.slug}`} target="_blank">
+                      <Link href={`/insights/${post.slug}`} target="_blank">
                         Open
                       </Link>
                     )}

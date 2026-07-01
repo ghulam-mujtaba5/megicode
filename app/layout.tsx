@@ -193,7 +193,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       'https://www.megicode.com/services',
       canonicalUrl('/pricing'),
       canonicalUrl('/projects'),
-      canonicalUrl('/article'),
+      canonicalUrl('/insights'),
       'https://www.megicode.com/contact',
       'https://www.megicode.com/privacy-policy',
     ],
