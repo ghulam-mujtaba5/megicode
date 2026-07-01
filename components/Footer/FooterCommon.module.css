@@ -6,12 +6,6 @@
   z-index: 0;
 }
 
-.copyrightIcon {
-  height: 18px;
-  width: 32px;
-  flex: 0 0 auto;
-}
-
 .copyrightLabel {
   margin: 0;
   font-size: 0.9rem;
@@ -230,11 +224,6 @@
     padding: 34px 20px 22px;
   }
 
-  .copyrightIcon {
-    width: 22px;
-    height: 16px;
-  }
-
   .copyrightLabel {
     font-size: 12px;
     display: flex;
@@ -242,8 +231,13 @@
   }
 
   .footerContent {
-    grid-template-columns: 1fr;
-    gap: 24px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 26px 20px;
+  }
+
+  .footerBrand,
+  .footerContact {
+    grid-column: 1 / -1;
   }
 
   .footerBottom {

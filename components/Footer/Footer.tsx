@@ -159,12 +159,6 @@ const Footer = ({
         </motion.div>
 
         <div className={commonStyles.footerBottom}>
-          <motion.img
-            className={commonStyles.copyrightIcon}
-            alt=""
-            src={theme === 'dark' ? '/CopyrightDark.svg' : '/copyright-icon.svg'}
-            variants={iconVariants}
-          />
           <motion.p className={commonStyles.copyrightLabel} variants={iconVariants}>
             {copyrightText}
           </motion.p>

@@ -1,130 +1,86 @@
-
-.contactSection {
-
-    color: #fff;
- 
+.section {
+  background: #1d2127;
 }
 
-/* Absolute Positioned Components */
-.contactFormBackground {
-  
-    background-color: #272b32;
-  
+.eyebrow {
+  color: #c0d4ff;
+  background: rgba(69, 115, 223, 0.12);
+  border: 1px solid #3e444c;
 }
 
-.nameInput,
-.emailInput,
-.messageInput {
-    border: 1px solid #3e444c;
-    background-color: #2c323a;
-    color: #e0e6ed;
+.title {
+  color: #eaf6ff;
 }
 
-.nameInput::placeholder,
-.emailInput::placeholder,
-.messageInput::placeholder {
-    color: #6b7280;
+.subtitle {
+  color: #adb5bd;
 }
 
-.sendButtonBorder {
-    background-color: #4573df;
+.formCard,
+.infoCard {
+  background: #262b34;
+  border: 1px solid #3e444c;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
 }
 
-.sendLabel {
-    color: #fff;
+.label {
+  color: #d7dde5;
 }
 
-.sendButton {
-    color: #fff;
-    background-color: #4573df;
-    box-shadow: 0 2px 8px rgba(69, 115, 223, 0.22);
+.input {
+  background: #2c323a;
+  border: 1px solid #3e444c;
+  color: #e0e6ed;
 }
 
-.sendButton:hover {
-    background-color: #2d4fa2;
-    border: none;
-}
-
-.darkModeButton {
-    color: #fff;
-  
-  }
-
-.darkModeButtonBorder {
-    
-    box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.13);
-
-    background-color: #1d2127;
-}
-
-
-.buttonState {
-    position: absolute;
-    height: 34.09%;
-    width: 22.45%;
-    top: 31.82%;
-    right: 8.16%;
-    bottom: 34.09%;
-    left: 69.39%;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16) inset;
-    border-radius: 10.5px;
-    background-color: #f5f5f5;
-}
-
-.buttonState1 {
-    position: absolute;
-    height: 38.64%;
-    width: 10.88%;
-    top: 29.55%;
-    right: 8.16%;
-    bottom: 31.82%;
-    left: 80.95%;
-    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.21) inset, 0px 0px 3px rgba(0, 0, 0, 0.31);
-    border-radius: 50%;
-    background-color: #00c7bb;
-}
-
-.successMessage {
-    color: #34a853;
+.input::placeholder {
+  color: #6b7280;
 }
 
 .errorMessage {
-    color: #e81123;
+  color: #ff8a80;
 }
-  
-/* Media query for screens of width 430px and height 932px */
-@media (max-width: 768px)  {
-    .contactSection {
-       
-      
-        background-color: #272c34;
-       
-    }
-     
-    /* Adjust contact form for mobile */
-    .contactForm {
 
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.4); /* Shadow effect for dark screens */
-        background-color: #272c34;
-      
-    }
+.sendButton {
+  color: #fff;
+  background: linear-gradient(135deg, #4573df, #2d4fa2);
+  box-shadow: 0 14px 32px rgba(69, 115, 223, 0.24);
+}
 
-    .nameInput,
-    .emailInput,
-    .messageInput {
-        border: 1px solid #3e444c;
-        background-color: #2c323a;
-        color: #e0e6ed;
-    }
+.sendButton:hover:not(:disabled) {
+  box-shadow: 0 18px 40px rgba(69, 115, 223, 0.34);
+}
 
-    .sendButton {
-        background-color: #4573df;
-        color: #fff;
-    }
+.infoTitle {
+  color: #ffffff;
+}
 
-    .sendButton:hover {
-        background-color: #2d4fa2;
-    }
- 
+.infoSubtitle {
+  color: #adb5bd;
+}
 
+.infoIcon {
+  color: #c0d4ff;
+  background: rgba(69, 115, 223, 0.14);
+}
+
+.infoLink {
+  color: #c0d4ff;
+}
+
+.infoLink:hover {
+  color: #ffffff;
+}
+
+.infoText {
+  color: #adb5bd;
+}
+
+.ctaLink {
+  color: #ffb74d;
+  border-top: 1px solid #3e444c;
+}
+
+.ctaLink:hover {
+  color: #ffcc80;
 }

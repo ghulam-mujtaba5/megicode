@@ -36,7 +36,7 @@ const HomeShippedPlatforms = dynamic(
 const HomeTestimonials = dynamic(() => import('../components/HomeTestimonials/HomeTestimonials'), {
   loading: () => <LoadingAnimation size="medium" />,
 });
-const ContactSection = dynamic(() => import('../components/Contact/ConatctUs'), {
+const ContactSection = dynamic(() => import('../components/Contact/ContactUs'), {
   loading: () => <LoadingAnimation size="medium" />,
 });
 
