@@ -19,7 +19,7 @@ const NavBar = () => {
     { id: 'insights', label: 'Insights', href: '/insights' },
     {
       id: 'contact',
-      label: 'Book Fit Call',
+      label: 'Start Your Project',
       href: '/contact?source=mobile-nav',
       cta: 'primary',
     },

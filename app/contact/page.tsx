@@ -381,7 +381,7 @@ export default function ContactPage() {
             <div className={styles.trustDot} aria-hidden="true" />
             <div className={styles.trustItem}>
               <HiChatBubbleLeftRight size={15} aria-hidden="true" />
-              <span>Free Fit Call</span>
+              <span>Free Intro Call</span>
             </div>
           </div>
           <div ref={accentRef} className={styles.heroAccent} />

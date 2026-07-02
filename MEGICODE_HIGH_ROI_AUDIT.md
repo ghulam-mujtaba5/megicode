@@ -89,6 +89,15 @@ Secondary impression: a few trust details undercut the honest-proof strategy —
 - Consider linking each HomeProof stat to its evidence.
 - Named-permission testimonials: ask the clinic and Wajdan founder for a first name + title — one real name is worth three anonymous cards.
 
+## 6b. Design/UX polish pass (round 4 — implemented)
+
+- ✅ **Global keyboard focus ring**: 20+ component CSS files suppress `outline: none`; added a consistent brand-blue `:focus-visible` ring for links, buttons, inputs, and role=button elements in `styles/global.css`.
+- ✅ **Button cursor**: no global `button { cursor: pointer }` existed — the hero's primary CTA showed a default arrow cursor. Fixed globally, plus `not-allowed` on disabled.
+- ✅ **Reduced motion**: Framer Motion animations (used on every section) now respect `prefers-reduced-motion` via `MotionConfig reducedMotion="user"` in `app/providers.tsx`; CSS animations already had media-query handling.
+- ✅ **Dark-mode hero eyebrow contrast**: #6b7280 on dark failed WCAG AA (~3.4:1) → #94a3b8 (~6:1).
+- ✅ **Tagline line-length**: new longer copy had no max-width at 2.25rem — constrained to 820px with `text-wrap: balance`.
+- ✅ **CTA language unified**: "Book Fit Call" jargon removed from desktop nav, mobile nav, pricing page (×2), projects showcase, contact trust strip → "Start Your Project" / "Book an Intro Call" / "Free Intro Call".
+
 ## 7. Current conversion weaknesses
 
 - Value proposition invisible above the fold (fixed this pass).

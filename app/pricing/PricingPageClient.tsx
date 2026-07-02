@@ -106,7 +106,7 @@ export default function PricingPageClient() {
             </p>
             <div className="hero-actions">
               <Link className="primary-cta" href="/contact?source=pricing">
-                <span>Book Fit Call</span>
+                <span>Book an Intro Call</span>
                 <span className="cta-icon" aria-hidden="true">
                   →
                 </span>
@@ -316,11 +316,11 @@ export default function PricingPageClient() {
         <section className="final-cta" aria-labelledby="final-pricing-cta">
           <h2 id="final-pricing-cta">Not sure which package fits?</h2>
           <p>
-            Book a free fit call and we&apos;ll recommend the safest starting point based on your
+            Book a free intro call and we&apos;ll recommend the safest starting point based on your
             goals, scope, and budget.
           </p>
           <Link className="primary-cta" href="/contact?source=pricing-final">
-            <span>Book Fit Call</span>
+            <span>Book an Intro Call</span>
             <span className="cta-icon" aria-hidden="true">
               →
             </span>

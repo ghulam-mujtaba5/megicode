@@ -100,7 +100,7 @@ const NewNavBar = () => {
               href="/contact?source=nav"
               className={`${themeStyles.navLink} ${themeStyles.navCta}`}
             >
-              Book Fit Call
+              Start Your Project
             </Link>
           </li>
           <li>

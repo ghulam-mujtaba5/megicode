@@ -57,7 +57,7 @@ const projectOfferMap: Record<
     text: 'Want a similar clinic booking or operations system? Clinic AI Receptionist starts at $1,250 setup, and full clinic platforms start from $3,500.',
     primaryLabel: 'View Clinic Packages',
     primaryHref: '/pricing#packages',
-    secondaryLabel: 'Book Fit Call',
+    secondaryLabel: 'Book an Intro Call',
     secondaryHref: '/contact?service=clinic-ai-receptionist',
   },
   'campusaxis-university-portal': {
