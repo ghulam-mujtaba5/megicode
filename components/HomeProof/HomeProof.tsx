@@ -3,6 +3,7 @@
 import React from 'react';
 
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { useTheme } from '../../context/ThemeContext';
 import commonStyles from './HomeProofCommon.module.css';
@@ -58,6 +59,14 @@ export default function HomeProof() {
             </span>
           </div>
         ))}
+      </div>
+      <div className={commonStyles.evidenceRow}>
+        <Link
+          href="/projects"
+          className={`${commonStyles.evidenceLink} ${themeStyles.evidenceLink}`}
+        >
+          See the work behind these numbers →
+        </Link>
       </div>
     </section>
   );

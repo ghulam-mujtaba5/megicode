@@ -202,19 +202,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Dynamic favicons for light/dark mode using new 3D logo mark */}
-        <link
-          rel="icon"
-          href={LOGO_MAIN_LIGHT}
-          type="image/png"
-          media="(prefers-color-scheme: light)"
-        />
-        <link
-          rel="icon"
-          href={LOGO_MAIN_DARK}
-          type="image/png"
-          media="(prefers-color-scheme: dark)"
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}

@@ -24,10 +24,10 @@ const AboutIntro: React.FC = () => {
         >
           <h2 className={themeStyles['whoWeAre h2']}>Who We Are</h2>
           <p className={themeStyles['whoWeAre p']}>
-            At Megicode, we are a next-generation technology company specializing in cutting-edge
-            solutions in AI, ML, software development, and web applications. Our goal is to
-            revolutionize the way businesses operate by building smart, scalable, and secure systems
-            tailored to each client&apos;s needs.
+            Megicode is a software company based in Lahore, working with clients locally and
+            internationally. We build AI products, business platforms, websites, and automation —
+            and we stay involved from the first roadmap conversation through launch and support.
+            Small team, senior work, direct communication.
           </p>
         </motion.div>
 
@@ -158,8 +158,9 @@ const AboutIntro: React.FC = () => {
               <h3 className={themeStyles['mission h3']}>Our Mission</h3>
             </div>
             <p className={themeStyles['mission p']}>
-              We deliver excellence in every project—building intelligent, scalable solutions that
-              create lasting value for our clients, teams, and the global digital ecosystem.
+              Build software that changes how a business actually runs — more booked leads, less
+              manual work, clearer decisions — and deliver it fast enough that clients see results
+              in weeks, not quarters.
             </p>
           </motion.div>
 
@@ -295,8 +296,8 @@ const AboutIntro: React.FC = () => {
               <h3 className={themeStyles['vision h3']}>Our Vision</h3>
             </div>
             <p className={themeStyles['vision p']}>
-              To set the ideal standard of quality and innovation in business and technology,
-              shaping a better digital world.
+              Become the software partner growing businesses recommend to each other — trusted for
+              honest scoping, quality delivery, and products that keep working long after launch.
             </p>
           </motion.div>
         </div>

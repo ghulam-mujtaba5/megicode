@@ -1,9 +1,11 @@
-"use client";
+'use client';
 import React from 'react';
+
 import { motion } from 'framer-motion';
-import styles from './Tagline.module.css';
+
 import { useTheme } from '../../context/ThemeContext';
 import { fadeInUp } from '../../utils/animations';
+import styles from './Tagline.module.css';
 
 const Tagline = () => {
   const { theme } = useTheme();
@@ -16,7 +18,8 @@ const Tagline = () => {
         whileInView="visible"
         viewport={{ once: true, amount: 0.5 }}
       >
-        If You Can <span className={styles.highlight}>Imagine</span> It, We Can <span className={styles.highlight}>Build</span> It
+        One team that takes your product from <span className={styles.highlight}>idea</span> to{' '}
+        <span className={styles.highlight}>launch</span> — and stays after it ships
       </motion.h2>
     </section>
   );

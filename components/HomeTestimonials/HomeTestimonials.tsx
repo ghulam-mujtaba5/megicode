@@ -17,7 +17,7 @@ const testimonials = [
     icon: '/images/logos/aesthetics-place-logo.jpg',
     review:
       'Megicode transformed our clinic operations completely. We went from paper files and WhatsApp chaos to a professional website that brings in new patients and an internal system that manages everything.',
-    name: 'Dr. Owner',
+    name: 'Clinic Owner',
     company: 'The Aesthetics Place',
     rating: 5 as const,
   },
@@ -26,8 +26,8 @@ const testimonials = [
     icon: '/images/logos/campusaxis-review-logo.webp',
     review:
       'CampusAxis changed my university experience. Past papers, GPA calculator, faculty reviews, timetable, everything I need is in one place and it takes seconds to find.',
-    name: 'CampusAxis User',
-    company: 'University Student Platform',
+    name: 'Student User',
+    company: 'CampusAxis — University Platform',
     rating: 5 as const,
   },
   {

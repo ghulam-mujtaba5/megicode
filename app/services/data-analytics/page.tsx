@@ -277,10 +277,10 @@ export default function DataAnalyticsDetailPage() {
               Overview
             </h2>
             <p className={`${commonStyles.overviewDesc} ${themeStyles.overviewDesc}`}>
-              We build end-to-end data pipelines, interactive dashboards, and predictive models that
-              turn raw data into strategic advantage. From data warehousing to real-time BI
-              reporting with tools like Power BI and Tableau, we empower your team to make
-              confident, data-driven decisions.
+              We build data pipelines, interactive dashboards, and predictive models that pull your
+              scattered business data into one clear view. From data warehousing to real-time BI
+              reporting with tools like Power BI and Tableau, your team gets numbers it can trust —
+              and decisions stop depending on guesswork.
             </p>
           </div>
           <div className={commonStyles.overviewImageBlock}>

@@ -19,7 +19,7 @@ const Frame = () => {
   return (
     <section
       className={`${commonStyles.container} ${theme === 'dark' ? darkStyles.darkContainer : styles.container}`}
-      aria-label="Welcome to Megicode — Software Design & Development"
+      aria-label="Megicode — AI-powered software, websites, and automation"
     >
       <motion.div
         className={`${commonStyles.textContainer} ${themeStyles.textContainer}`}
@@ -28,14 +28,14 @@ const Frame = () => {
         transition={{ duration: 0.5 }}
       >
         <h1 className={commonStyles.heroHeading}>
-          {/* "Welcome to" \u2014 small eyebrow label */}
+          {/* Eyebrow \u2014 concrete descriptor above the brand name */}
           <motion.span
             className={`${commonStyles.welcomeEyebrow} ${themeStyles.welcomeEyebrow}`}
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] as const }}
           >
-            Welcome to
+            Software Development Company
           </motion.span>
 
           {/* Brand name on its own line */}
@@ -68,16 +68,28 @@ const Frame = () => {
               code
             </motion.span>
           </span>
+
+          {/* Value-proposition headline — the actual SEO/conversion h1 text */}
+          <motion.span
+            className={`${commonStyles.heroHeadline} ${themeStyles.heroHeadline}`}
+            initial={{ opacity: 0, y: 14, filter: 'blur(4px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 0.55, delay: 1.15, ease: [0.25, 0.1, 0.25, 1] as const }}
+          >
+            AI-Powered Software, Websites &amp; Automation Built for Real Business Growth
+          </motion.span>
         </h1>
 
-        {/* Subtitle */}
+        {/* Subheadline — who it's for and what they get */}
         <motion.p
           className={`${commonStyles.paragraph} ${themeStyles.paragraph}`}
           initial={{ opacity: 0, y: 14, filter: 'blur(4px)' }}
           animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-          transition={{ duration: 0.55, delay: 1.4, ease: [0.25, 0.1, 0.25, 1] as const }}
+          transition={{ duration: 0.55, delay: 1.45, ease: [0.25, 0.1, 0.25, 1] as const }}
         >
-          Elevate Your Business with AI-Driven Innovation
+          We help startups, service businesses, and growing companies launch high-converting
+          websites, AI SaaS MVPs, workflow automation, chatbots, and custom dashboards — software
+          that saves time and wins more customers.
         </motion.p>
 
         {/* Hero CTAs */}
@@ -91,13 +103,13 @@ const Frame = () => {
             onClick={openCalendly}
             className={`${commonStyles.heroPrimary} ${themeStyles.heroPrimary}`}
           >
-            Book Free Fit Call →
+            Start Your Project →
           </button>
           <Link
-            href="/pricing"
+            href="/projects"
             className={`${commonStyles.heroSecondary} ${themeStyles.heroSecondary}`}
           >
-            View Pricing →
+            View Our Work →
           </Link>
         </motion.div>
         {calendlyModal}

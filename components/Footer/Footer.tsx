@@ -90,7 +90,9 @@ const Footer = ({
           >
             <strong>Company</strong>
             <Link href="/about">About</Link>
+            <Link href="/projects">Our Work</Link>
             <Link href="/reviews">Reviews</Link>
+            <Link href="/insights">Insights</Link>
             <Link href="/contact?source=footer">Contact</Link>
             <Link href="/careers">Careers</Link>
             <Link href="/privacy-policy">Privacy</Link>
@@ -99,7 +101,7 @@ const Footer = ({
           <motion.div className={commonStyles.footerContact} variants={iconVariants}>
             <strong>Start here</strong>
             <Link className={commonStyles.footerCta} href="/contact?source=footer">
-              Book Free Fit Call →
+              Start Your Project →
             </Link>
             <a href="mailto:contact@megicode.com">contact@megicode.com</a>
             <div className={commonStyles.footerSocial} aria-label="Megicode social links">

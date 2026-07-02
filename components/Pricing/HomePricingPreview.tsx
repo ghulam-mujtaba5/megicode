@@ -61,7 +61,7 @@ export default function HomePricingPreview() {
             className="section-button section-button-secondary"
             href="/contact?source=home-pricing"
           >
-            <span>Book Fit Call</span>
+            <span>Book an Intro Call</span>
             <span className="section-button-icon" aria-hidden="true">
               →
             </span>

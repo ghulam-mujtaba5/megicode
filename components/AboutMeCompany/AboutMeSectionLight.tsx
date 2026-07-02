@@ -1,13 +1,14 @@
-
-"use client";
+'use client';
 import React, { useMemo } from 'react';
-import { useTheme } from '../../context/ThemeContext';
-import { motion } from 'framer-motion';
 import { HiArrowRight } from 'react-icons/hi2';
-import { fadeInUp, fadeInDown, staggerContainer } from '../../utils/animations';
+
+import { motion } from 'framer-motion';
+
+import { useTheme } from '../../context/ThemeContext';
+import { fadeInDown, fadeInUp, staggerContainer } from '../../utils/animations';
 import commonStyles from './AboutMeSectionCommon.module.css';
-import lightStyles from './AboutMeSectionLight.module.css';
 import darkStyles from './AboutMeSectionDark.module.css';
+import lightStyles from './AboutMeSectionLight.module.css';
 
 const AboutMeSection = () => {
   const { theme } = useTheme();
@@ -16,22 +17,12 @@ const AboutMeSection = () => {
 
   const containerClass = useMemo(
     () => `${commonStyles.container} ${themeStyles.container}`,
-    [theme, themeStyles.container]
+    [themeStyles.container]
   );
 
   const sectionClass = useMemo(
     () => `${commonStyles.aboutMeSection} ${themeStyles.aboutMeSection}`,
-    [theme, themeStyles.aboutMeSection]
-  );
-
-  const titleClass = useMemo(
-    () => `${commonStyles.title} ${themeStyles.title}`,
-    [theme, themeStyles.title]
-  );
-
-  const descriptionClass = useMemo(
-    () => `${commonStyles.description} ${themeStyles.description}`,
-    [theme, themeStyles.description]
+    [themeStyles.aboutMeSection]
   );
 
   return (
@@ -45,10 +36,7 @@ const AboutMeSection = () => {
         role="region"
         aria-labelledby="aboutus-heading"
       >
-        <motion.div 
-          className={sectionClass}
-          variants={staggerContainer}
-        >
+        <motion.div className={sectionClass} variants={staggerContainer}>
           <div className={`${commonStyles.accentBar} ${themeStyles.accentBar}`} />
           <motion.h2
             id="aboutus-heading"
@@ -68,10 +56,16 @@ const AboutMeSection = () => {
             variants={fadeInUp}
           >
             <p className={`${commonStyles.aboutDescription} ${themeStyles.aboutDescription}`}>
-              Megicode is an AI-focused software company that partners with startups, non-technical founders, and growing businesses to build intelligent products. We handle the tech — from AI-powered MVPs to production-ready SaaS platforms — so you can focus on your vision.
+              Megicode is a software company that partners with startups, non-technical founders,
+              and growing businesses to build AI products, websites, and business platforms. We
+              handle the tech — roadmap, design, build, launch, and support — so you can focus on
+              customers.
             </p>
-            <p className={`${commonStyles.missionStatement} ${themeStyles.missionStatement} ${themeStyles['mission-gradient']}`}>
-              Our mission is to be the technical co-founder every startup deserves — delivering AI-powered software, strategic CTO-level guidance, and automation that gives small teams an unfair advantage.
+            <p
+              className={`${commonStyles.missionStatement} ${themeStyles.missionStatement} ${themeStyles['mission-gradient']}`}
+            >
+              We work like a technical co-founder: clear scope before code, honest trade-off advice,
+              working software shipped in weeks, and a team that stays accountable after launch.
             </p>
           </motion.div>
 

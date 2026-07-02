@@ -89,3 +89,17 @@ test-results/
 **/trace/**
 *.zip
 *.webm
+
+# Local secrets — never commit
+token.txt
+ts-baseline.log
+
+# Local build/debug artifacts
+build-*.txt
+deploy-log.txt
+ts-check*.txt
+ts-errors.log
+tmp-*.log
+temp_coverage/
+temp_performance/
+megicode-financial-export-*.xlsx

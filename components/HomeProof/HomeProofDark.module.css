@@ -37,3 +37,11 @@
 .note {
   color: #9aa4b2;
 }
+
+.evidenceLink {
+  color: #8fb0f5;
+}
+
+.evidenceLink:hover {
+  color: #c0d4ff;
+}

@@ -68,34 +68,37 @@ const CoreValues = () => {
     {
       title: 'Innovation',
       description:
-        'Pioneering breakthrough solutions with cutting-edge AI and advanced technologies to transform businesses.',
+        'We use AI where it earns its place — automating real work and adding product features that users actually need.',
       iconSrc: '/icons/core-values/innovation.png',
     },
     {
       title: 'Excellence',
       description:
-        'Delivering exceptional quality through robust, scalable, and secure software solutions.',
+        'Code you can maintain, systems that stay up, and details finished properly — because you will live with this software for years.',
       iconSrc: '/icons/core-values/excellence.png',
     },
     {
       title: 'Collaboration',
       description:
-        'Building strong partnerships with clients through transparent communication and shared success.',
+        'You talk directly to the people building your product. Weekly progress you can see, no account-manager buffer.',
       iconSrc: '/icons/core-values/collaboration.png',
     },
     {
       title: 'Growth',
-      description: 'Continuously evolving and adapting to drive measurable business outcomes.',
+      description:
+        'We measure our work by your outcomes: leads captured, hours saved, users active — not features shipped.',
       iconSrc: '/icons/core-values/growth.png',
     },
     {
       title: 'Client Focus',
-      description: 'Understanding and exceeding client expectations with tailored solutions.',
+      description:
+        'We scope around your budget and business stage, and tell you when something is not worth building yet.',
       iconSrc: '/icons/core-values/client-focus.png',
     },
     {
       title: 'Integrity',
-      description: 'Operating with unwavering commitment to ethical practices and transparency.',
+      description:
+        'Honest timelines, transparent pricing, and your code in your own repositories from day one.',
       iconSrc: '/icons/core-values/integrity.png',
     },
   ];
@@ -106,8 +109,7 @@ const CoreValues = () => {
         <motion.div className={commonStyles.header} variants={fadeInUp}>
           <h2 className={`${commonStyles.title} ${themeStyles.title}`}>Our Core Values</h2>
           <p className={`${commonStyles.subtitle} ${themeStyles.subtitle}`}>
-            Guided by innovation and excellence, we deliver transformative solutions that drive
-            success.
+            How we work when we build your product — the standards behind every project.
           </p>
         </motion.div>
 

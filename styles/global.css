@@ -27,6 +27,26 @@
   top: 0;
 }
 
+/* Buttons always signal interactivity */
+button {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: not-allowed;
+}
+
+/* Consistent keyboard focus ring — brand blue, visible on light and dark surfaces */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[role='button']:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid rgba(69, 115, 223, 0.75);
+  outline-offset: 2px;
+}
+
 /* Universal box-sizing and reset */
 html,
 body {
