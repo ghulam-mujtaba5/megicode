@@ -66,7 +66,7 @@ export const projects: Project[] = [
     ],
     liveUrl: 'https://aestheticsplace.pk',
     testimonial:
-      "Megicode transformed our clinic operations completely. We went from paper files and WhatsApp chaos to a professional website that brings in new patients and an internal system that manages everything — appointments, records, billing. Our staff adapted quickly, and patients love the professional experience. It's the best investment we've made for the clinic. — Clinic Owner, The Aesthetics Place, Sheikhupura",
+      'Megicode helped us move Aesthetics Place from a mostly offline clinic setup to a proper digital clinic experience. Before this, our online presence, appointment handling, patient records, and billing process were not connected in one system. They built a professional website for our services and also developed an internal portal for appointments, records, invoices, staff roles, and daily clinic operations. What I appreciated most was that they understood the healthcare side, not just the design side. — Dr. Qandeel Sardar, Founder & CEO, Aesthetics Place',
     metrics: {
       'Online Presence': '0 → Full Website + Internal Portal',
       'Services Showcased': '7 Aesthetic Treatments',
@@ -212,7 +212,7 @@ export const projects: Project[] = [
     techStack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Vercel'],
     liveUrl: 'https://wajdan.co',
     testimonial:
-      "Megicode built us a website that actually sells. It captures our entire system in a way prospects instantly understand, it's fast, it looks premium, and it turns our ad traffic into booked audits. As a growth agency our own site has to convert — and this one does. — Founder, Wajdan Digital Alchemy",
+      'Megicode did not build WAJDAN a simple agency website. They helped us turn our growth system into a clear, conversion-focused online experience. Our offer, funnel logic, automation process, results story, pricing, and booking flow are now explained in a way that a cold visitor can understand quickly. As a growth agency, our own website has to prove that we understand conversion. — M. Wajahat Ali, Co-Founder, Wajdan Digital Alchemy',
     metrics: {
       'Web Presence': '0 → High‑Converting Sales Site',
       'Built With': 'Next.js (Mobile‑First)',

@@ -15,10 +15,11 @@ const testimonials = [
   {
     tagline: 'Operations proof',
     icon: '/images/logos/aesthetics-place-logo.jpg',
+    image: '/images/team/dr-qandeel-sardar.webp',
     review:
-      'Megicode transformed our clinic operations completely. We went from paper files and WhatsApp chaos to a professional website that brings in new patients and an internal system that manages everything.',
-    name: 'Clinic Owner',
-    company: 'The Aesthetics Place',
+      'Megicode helped us move from scattered offline operations to a proper digital clinic experience — a professional website, consultation booking, WhatsApp flow, patient records, billing, and staff roles in one system.',
+    name: 'Dr. Qandeel Sardar',
+    company: 'Founder & CEO, Aesthetics Place',
     rating: 5 as const,
   },
   {
@@ -34,10 +35,11 @@ const testimonials = [
     tagline: 'Conversion proof',
     icon: '/images/logos/wajdan-logo-light.png',
     iconDark: '/images/logos/wajdan-logo-dark.png',
+    image: '/images/team/wajahat-ali.webp',
     review:
-      'Megicode built us a website that actually sells. It captures our entire system in a way prospects instantly understand, looks premium, and turns ad traffic into booked audits.',
-    name: 'Founder',
-    company: 'Wajdan Digital Alchemy',
+      'Megicode turned our growth system into a conversion-focused website. The site now explains our offer, funnel, automation, proof, pricing, and booking flow in a way cold visitors can understand and act on.',
+    name: 'M. Wajahat Ali',
+    company: 'Co-Founder, Wajdan Digital Alchemy',
     rating: 5 as const,
   },
 ];
