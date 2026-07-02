@@ -1,5 +1,0 @@
-
-> build
-> next build --no-lint
-
- ÔÜá Linting is disabled.
