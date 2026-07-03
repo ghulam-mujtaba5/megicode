@@ -16,7 +16,7 @@ buyer_psychology_angle: 'launch confidence and operational readiness'
 conversion_goal: 'Generate qualified discovery calls for MegiCode services'
 recommended_cta: 'Book a Pre-Launch SaaS Audit with MegiCode'
 recommended_internal_links:
-  ['/services/saas-web-platform-development', '/services', '/projects', '/contact']
+  ['/services/custom-web-development', '/services', '/projects', '/contact']
 recommended_image: '/images/blog/saas-launch-checklist-before-going-live.png'
 image_alt_text: 'MegiCode blog illustration for SaaS Launch Checklist: What to Test Before Going Live'
 editorial_status: 'executive SEO upgrade - ready for editorial review'
@@ -171,7 +171,7 @@ That is the difference between hiring a developer and working with a product-foc
 
 Use these links naturally inside the article body and CTA sections:
 
-- `/services/saas-web-platform-development`
+- `/services/custom-web-development`
 - `/services`
 - `/projects`
 - `/contact`

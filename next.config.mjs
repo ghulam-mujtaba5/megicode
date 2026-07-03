@@ -128,6 +128,19 @@ const nextConfig = {
       { source: '/services/ui-ux-product-design', destination: '/services/ui-ux-design', permanent: true },
       { source: '/services/data-analytics-bi', destination: '/services/data-analytics', permanent: true },
       { source: '/services/it-consulting-support', destination: '/services/technical-consulting', permanent: true },
+      // Obsolete crawler-spotted slugs yielding 404s
+      { source: '/services/saas-web-platform-development', destination: '/services/custom-web-development', permanent: true },
+      { source: '/services/seo-growth-marketing', destination: '/services/growth-marketing-seo', permanent: true },
+      // High-intent service URL aliases (SEO & CRO)
+      { source: '/services/ai-automation', destination: '/services/ai-automation-agents', permanent: true },
+      { source: '/services/ai-agents', destination: '/services/ai-automation-agents', permanent: true },
+      { source: '/services/ai-chatbots', destination: '/services/ai-automation-agents', permanent: true },
+      { source: '/services/custom-web-app-development', destination: '/services/custom-web-development', permanent: true },
+      { source: '/services/business-automation', destination: '/services/ai-automation-agents', permanent: true },
+      { source: '/services/clinic-management-software', destination: '/services/custom-web-development', permanent: true },
+      { source: '/services/dashboard-development', destination: '/services/data-analytics', permanent: true },
+      { source: '/services/api-integrations', destination: '/services/ai-automation-agents', permanent: true },
+      { source: '/services/seo-ready-websites', destination: '/services/growth-marketing-seo', permanent: true },
     ];
   },
 };

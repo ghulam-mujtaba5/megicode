@@ -82,12 +82,6 @@ const config = {
       'aesthetics-clinic-platform',
       'campusaxis-university-portal',
       'wajdan-growth-system-website',
-      'fintech-uiux-revamp',
-      'desktop-pos-javafx',
-      'mobile-expense-tracker',
-      'ai-hr-attrition-predictor',
-      'predictive-pricing-nyc-taxi',
-      'market-trends-dashboard',
     ];
 
     const projectPages = projectSlugs.map((slug) => ({

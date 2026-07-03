@@ -17,7 +17,7 @@ buyer_psychology_angle: 'clarity and speed to market'
 conversion_goal: 'Generate qualified discovery calls for MegiCode services'
 recommended_cta: 'Book a MVP Scope Workshop with MegiCode'
 recommended_internal_links:
-  ['/services/saas-web-platform-development', '/services', '/projects', '/contact']
+  ['/services/custom-web-development', '/services', '/projects', '/contact']
 recommended_image: '/images/blog/startup-mvp-scope-what-to-build-first.png'
 image_alt_text: 'MegiCode blog illustration for Startup MVP Scope: Decide What to Build First'
 editorial_status: 'executive SEO upgrade - ready for editorial review'
@@ -172,7 +172,7 @@ That is the difference between hiring a developer and working with a product-foc
 
 Use these links naturally inside the article body and CTA sections:
 
-- `/services/saas-web-platform-development`
+- `/services/custom-web-development`
 - `/services`
 - `/projects`
 - `/contact`

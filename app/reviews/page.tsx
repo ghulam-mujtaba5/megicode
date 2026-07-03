@@ -43,17 +43,6 @@ export default function ReviewsPage() {
       </nav>
 
       <main id="main-content" className="relative" aria-label="Reviews Main Content">
-        <h1
-          style={{
-            position: 'absolute',
-            left: '-9999px',
-            width: '1px',
-            height: '1px',
-            overflow: 'hidden',
-          }}
-        >
-          Reviews & Testimonials
-        </h1>
         <Suspense fallback={<LoadingAnimation size="medium" />}>
           <ReviewsHero />
           <ReviewsGrid />

@@ -224,7 +224,8 @@ function blocksToHtml(md: string) {
 
 // Parse YAML-ish frontmatter (handles scalars + simple inline arrays)
 function parseFrontmatter(raw: string) {
-  const m = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
+  const normalized = raw.replace(/\r\n/g, '\n');
+  const m = normalized.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
   if (!m) return { data: {} as Record<string, unknown>, body: raw };
   const data: Record<string, unknown> = {};
   for (const line of m[1].split('\n')) {

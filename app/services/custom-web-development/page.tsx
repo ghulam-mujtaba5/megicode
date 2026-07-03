@@ -14,7 +14,16 @@ import {
 } from 'react-icons/fa';
 // Import additional icons we'll need
 import { RiPriceTag3Fill, RiTeamFill, RiTimeFill } from 'react-icons/ri';
-import { SiDocker, SiNextdotjs, SiNodedotjs, SiReact, SiSpringboot } from 'react-icons/si';
+import {
+  SiDocker,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiPostgresql,
+  SiReact,
+  SiSpringboot,
+  SiStripe,
+  SiTypescript,
+} from 'react-icons/si';
 
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
@@ -432,6 +441,18 @@ export default function WebDevelopmentDetailPage() {
                 case 'docker':
                   Icon = SiDocker;
                   color = '#2496ED';
+                  break;
+                case 'typescript':
+                  Icon = SiTypescript;
+                  color = '#3178C6';
+                  break;
+                case 'postgresql':
+                  Icon = SiPostgresql;
+                  color = '#336791';
+                  break;
+                case 'stripe':
+                  Icon = SiStripe;
+                  color = '#635BFF';
                   break;
                 default:
                   Icon = null;

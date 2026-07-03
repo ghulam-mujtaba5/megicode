@@ -17,7 +17,7 @@ buyer_psychology_angle: 'revenue confidence'
 conversion_goal: 'Generate qualified discovery calls for MegiCode services'
 recommended_cta: 'Book a SaaS Billing Flow Map with MegiCode'
 recommended_internal_links:
-  ['/services/saas-web-platform-development', '/services', '/projects', '/contact']
+  ['/services/custom-web-development', '/services', '/projects', '/contact']
 recommended_image: '/images/blog/saas-subscription-payments-plan-before-development.png'
 image_alt_text: 'MegiCode blog illustration for SaaS Subscription Payments: What to Plan Before Development'
 editorial_status: 'executive SEO upgrade - ready for editorial review'
@@ -172,7 +172,7 @@ That is the difference between hiring a developer and working with a product-foc
 
 Use these links naturally inside the article body and CTA sections:
 
-- `/services/saas-web-platform-development`
+- `/services/custom-web-development`
 - `/services`
 - `/projects`
 - `/contact`

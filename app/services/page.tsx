@@ -156,18 +156,6 @@ export default function ServicesPage() {
       </nav>
 
       <main id="main-content" aria-label="Services Main Content">
-        <h1
-          style={{
-            position: 'absolute',
-            left: '-9999px',
-            width: '1px',
-            height: '1px',
-            overflow: 'hidden',
-          }}
-        >
-          Choose the right build path for your business
-        </h1>
-
         <div style={{ maxWidth: '1320px', margin: '20px auto 0', padding: '0 2rem' }}>
           <Breadcrumbs theme={theme as 'light' | 'dark'} />
         </div>

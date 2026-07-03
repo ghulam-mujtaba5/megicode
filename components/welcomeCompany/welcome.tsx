@@ -28,19 +28,19 @@ const Frame = () => {
         transition={{ duration: 0.5 }}
       >
         <h1 className={commonStyles.heroHeading}>
-          {/* Eyebrow \u2014 concrete descriptor above the brand name */}
+          {/* Eyebrow — concrete descriptor above the brand name */}
           <motion.span
             className={`${commonStyles.welcomeEyebrow} ${themeStyles.welcomeEyebrow}`}
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] as const }}
           >
-            Software Development Company
+            AI Automation &amp; Custom Software Systems
           </motion.span>
 
           {/* Brand name on its own line */}
           <span className={commonStyles.brandLine}>
-            {/* "Megi" \u2014 white (dark) / dark navy (light) */}
+            {/* "Megi" — white (dark) / dark navy (light) */}
             <motion.span
               className={`${commonStyles.brandMegi} ${themeStyles.brandMegi}`}
               initial={{ opacity: 0, y: 22, scale: 0.88, filter: 'blur(10px)' }}
@@ -57,7 +57,7 @@ const Frame = () => {
                 aria-hidden="true"
               />
             </motion.span>
-            {/* "code" \u2014 brand blue always */}
+            {/* "code" — brand blue always */}
             <motion.span
               className={`${commonStyles.brandCode} ${themeStyles.brandCode}`}
               initial={{ opacity: 0, y: 22, scale: 0.88, filter: 'blur(10px)' }}
@@ -76,7 +76,8 @@ const Frame = () => {
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ duration: 0.55, delay: 1.15, ease: [0.25, 0.1, 0.25, 1] as const }}
           >
-            AI-Powered Software, Websites &amp; Automation Built for Real Business Growth
+            AI Automation and Software Systems for Startups, Clinics, Agencies, and Growing
+            Businesses
           </motion.span>
         </h1>
 
@@ -87,9 +88,9 @@ const Frame = () => {
           animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           transition={{ duration: 0.55, delay: 1.45, ease: [0.25, 0.1, 0.25, 1] as const }}
         >
-          We help startups, service businesses, and growing companies launch high-converting
-          websites, AI SaaS MVPs, workflow automation, chatbots, and custom dashboards — software
-          that saves time and wins more customers.
+          We design and build AI agents, SaaS MVPs, clinic software, custom booking platforms,
+          dashboards, and automated workflows — custom software that saves hours every week and
+          drives real revenue growth.
         </motion.p>
 
         {/* Hero CTAs */}

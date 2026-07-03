@@ -22,8 +22,10 @@ import {
   SiFirebase,
   SiFlutter,
   SiKotlin,
+  SiNodedotjs,
   SiReact,
   SiSwift,
+  SiTypescript,
 } from 'react-icons/si';
 
 import dynamic from 'next/dynamic';
@@ -446,6 +448,14 @@ export default function MobileAppSolutionsPage() {
                 case 'android':
                   Icon = SiAndroid;
                   color = '#3DDC84';
+                  break;
+                case 'node.js':
+                  Icon = SiNodedotjs;
+                  color = '#339933';
+                  break;
+                case 'typescript':
+                  Icon = SiTypescript;
+                  color = '#3178C6';
                   break;
                 default:
                   Icon = null;

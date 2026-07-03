@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 export const SITE_URL = 'https://www.megicode.com';
 export const SITE_NAME = 'Megicode';
 export const DEFAULT_OG_IMAGE = '/meta/og-image.png';
-export const SERVICES_OG_IMAGE = '/meta/services-og.png';
+export const SERVICES_OG_IMAGE = '/meta/og-image.png';
 
 /** Complete list of official social & professional profiles for sameAs */
 export const SOCIAL_PROFILES = [

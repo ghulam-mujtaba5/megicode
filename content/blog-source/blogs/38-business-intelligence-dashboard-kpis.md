@@ -16,7 +16,7 @@ buyer_psychology_angle: 'executive clarity'
 conversion_goal: 'Generate qualified discovery calls for MegiCode services'
 recommended_cta: 'Book a KPI Dashboard Workshop with MegiCode'
 recommended_internal_links:
-  ['/services/cloud-devops', '/services/seo-growth-marketing', '/services/ui-ux-design', '/contact']
+  ['/services/cloud-devops', '/services/growth-marketing-seo', '/services/ui-ux-design', '/contact']
 recommended_image: '/images/blog/business-intelligence-dashboard-kpis.png'
 image_alt_text: 'MegiCode blog illustration for Business Intelligence Dashboard: Design KPIs That Matter'
 editorial_status: 'executive SEO upgrade - ready for editorial review'
@@ -172,7 +172,7 @@ That is the difference between hiring a developer and working with a product-foc
 Use these links naturally inside the article body and CTA sections:
 
 - `/services/cloud-devops`
-- `/services/seo-growth-marketing`
+- `/services/growth-marketing-seo`
 - `/services/ui-ux-design`
 - `/contact`
 
