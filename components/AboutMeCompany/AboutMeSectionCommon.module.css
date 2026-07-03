@@ -1,136 +1,152 @@
 .cardSurface {
-    box-sizing: border-box;
-    background: var(--md-surface, #fff);
-    border-radius: 18px;
-    padding: 3.5rem 2.5rem;
-    margin: 3rem auto 2rem auto;
-    width: min(100% - 2rem, 1080px);
-    transition: box-shadow 0.3s;
+  box-sizing: border-box;
+  background: var(--md-surface, #fff);
+  border-radius: 18px;
+  padding: 3.5rem 2.5rem;
+  margin: 3rem auto 2rem auto;
+  width: min(100% - 2rem, 1080px);
+  transition: box-shadow 0.3s;
 }
 
 @media (max-width: 1100px) {
-    .cardSurface {
-        padding: 2rem 1.1rem;
-    }
+  .cardSurface {
+    padding: 2rem 1.1rem;
+  }
 }
 
 @media (max-width: 768px) {
-    .cardSurface {
-        padding: 1.2rem 0.8rem;
-        margin-top: 1.2rem;
-        margin-bottom: 1.2rem;
-        border-radius: 13px;
-    }
-    .title {
-        font-size: 1.5rem;
-    }
-    .subtitle {
-        font-size: 1rem;
-    }
-    .description {
-        font-size: 0.98rem;
-    }
-    .missionStatement {
-        font-size: 1rem;
-    }
+  .cardSurface {
+    padding: 1.2rem 0.8rem;
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
+    border-radius: 13px;
+  }
+  .title {
+    font-size: 1.5rem;
+  }
+  .subtitle {
+    font-size: 1rem;
+  }
+  .description {
+    font-size: 0.98rem;
+  }
+  .missionStatement {
+    font-size: 1rem;
+  }
 }
 
 @media (max-width: 480px) {
-    .cardSurface {
-        padding: 1rem 0.8rem;
-        border-radius: 9px;
-    }
-    .title {
-        font-size: 1.14rem;
-    }
-    .subtitle {
-        font-size: 0.95rem;
-    }
-    .description {
-        font-size: 0.93rem;
-    }
-    .missionStatement {
-        font-size: 0.95rem;
-    }
+  .cardSurface {
+    padding: 1rem 0.8rem;
+    border-radius: 9px;
+  }
+  .title {
+    font-size: 1.14rem;
+  }
+  .subtitle {
+    font-size: 0.95rem;
+  }
+  .description {
+    font-size: 0.93rem;
+  }
+  .missionStatement {
+    font-size: 0.95rem;
+  }
 }
 
 .title {
-    font-weight: 600;
+  font-weight: 600;
 }
 
-
-.cardSurface:focus-within, .cardSurface:hover {
-
+.cardSurface:focus-within,
+.cardSurface:hover {
 }
 
 .accentBar {
-    width: 56px;
-    height: 5px;
-    background: #4573df;
-    border-radius: 4px;
-    margin-bottom: 1.5rem;
+  width: 56px;
+  height: 5px;
+  background: #4573df;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
 }
 
 .container {
-    position: relative;
+  position: relative;
 }
 
 .aboutMeSection {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 0 20px;
-    text-align: left;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: left;
 }
 
 .title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 0.7rem;
-    color: var(--md-on-background, #1a202c);
-    font-family: 'Open Sans', Arial, sans-serif;
-    letter-spacing: -0.02em;
-    text-align: left;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  color: var(--md-on-background, #1a202c);
+  font-family: var(--font-body), Arial, sans-serif;
+  letter-spacing: -0.02em;
+  text-align: left;
 }
 
 .subtitle {
-    font-size: 1.35rem;
-    font-weight: 600;
-    margin-bottom: 2.2rem;
-    letter-spacing: 0.01em;
-    font-family: 'Open Sans', Arial, sans-serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-bottom: 2.2rem;
+  letter-spacing: 0.01em;
+  font-family: var(--font-body), Arial, sans-serif;
 }
 
 .description {
-    font-size: 1.16rem;
-    line-height: 1.65;
-    color: var(--md-on-background, #23272f);
-    font-family: 'Open Sans', 'Poppins', Arial, sans-serif;
-    text-align: left;
+  font-size: 1.16rem;
+  line-height: 1.65;
+  color: var(--md-on-background, #23272f);
+  font-family: var(--font-body), var(--font-display), Arial, sans-serif;
+  text-align: left;
 }
 
 .description p {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .aboutDescription {
-    color: var(--md-on-background, #23272f);
-    font-weight: 500;
+  color: var(--md-on-background, #23272f);
+  font-weight: 500;
 }
 
 .missionStatement {
-    font-weight: 600;
-    margin-top: 2.5rem;
-    padding-top: 1.2rem;
-    font-size: 1.13rem;
-    letter-spacing: 0.01em;
-    font-family: 'Open Sans', Arial, sans-serif;
+  font-weight: 600;
+  margin-top: 2.5rem;
+  padding-top: 1.2rem;
+  font-size: 1.13rem;
+  letter-spacing: 0.01em;
+  font-family: var(--font-body), Arial, sans-serif;
+}
+
+/* Closing line — the former standalone Tagline section, merged here (plan §3, homepage order) */
+.closingLine {
+  margin-top: 1.6rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--line-blueprint, #dce5f6);
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(1.15rem, 2vw, 1.35rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+  color: var(--ink, #23272f);
+}
+
+.closingHighlight {
+  color: var(--brand-blue, #4573df);
 }
 
 .learnMore {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: var(--font-body), sans-serif;
   font-size: 0.875rem;
   font-weight: 600;
   text-decoration: none;
@@ -138,7 +154,9 @@
   padding: 8px 18px;
   border-radius: 100px;
   width: fit-content;
-  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), background 0.22s ease;
+  transition:
+    transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.22s ease;
 }
 .learnMore:hover {
   transform: translateX(3px);
@@ -146,42 +164,40 @@
 
 /* Responsive styles */
 @media (max-width: 768px) {
-    .container {
-        padding: 60px 0;
-    }
+  .container {
+    padding: 60px 0;
+  }
 
-    .title {
-        font-size: 2rem;
-    }
+  .title {
+    font-size: 2rem;
+  }
 
-    .subtitle {
-        font-size: 1.125rem;
-    }
+  .subtitle {
+    font-size: 1.125rem;
+  }
 
-    .description {
-        font-size: 1rem;
-    }
+  .description {
+    font-size: 1rem;
+  }
 }
 
 @media (max-width: 576px) {
-    .container {
-        padding: 40px 0;
-       
-    }
+  .container {
+    padding: 40px 0;
+  }
 
-    .title {
-        font-size: 22px;
-        margin-bottom: 10px;
-        padding-left: 2%;
-    }
+  .title {
+    font-size: 22px;
+    margin-bottom: 10px;
+    padding-left: 2%;
+  }
 
-    .description {
-        font-size: 18px;
-        text-align: justify;
-    }
+  .description {
+    font-size: 18px;
+    text-align: justify;
+  }
 
-    .aboutMeSection {
-        padding: 25px 25px;
-       
-    }
+  .aboutMeSection {
+    padding: 25px 25px;
+  }
 }

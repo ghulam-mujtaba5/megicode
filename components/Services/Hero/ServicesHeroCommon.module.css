@@ -25,10 +25,47 @@
   z-index: 1;
 }
 
+.heroGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 2rem;
+}
+
 .content {
-  max-width: 800px;
+  max-width: 560px;
+  text-align: left;
+}
+
+/* Re-home the constellation: in-flow inside the grid instead of
+   its default absolute hero positioning */
+.visualWrap {
+  position: relative;
+  min-width: 0;
+}
+
+.visualWrap > div {
+  position: relative;
+  right: auto;
+  top: auto;
+  transform: none;
+  width: 100%;
+  min-width: 0;
+  max-width: 620px;
   margin: 0 auto;
-  text-align: center;
+}
+
+@media (max-width: 1024px) {
+  .heroGrid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .content {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
 }
 
 .title {

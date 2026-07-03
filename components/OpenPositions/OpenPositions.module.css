@@ -8,7 +8,7 @@
   transition: background 0.3s;
 }
 .heading {
-  font-family: 'Poppins', 'Open Sans', Arial, sans-serif;
+  font-family: var(--font-display), var(--font-body), Arial, sans-serif;
   font-size: 2rem;
   font-weight: 700;
   color: var(--heading-color);
@@ -26,23 +26,32 @@
 .positionCard {
   background: var(--card-bg);
   border-radius: 1rem;
-  box-shadow: 0 1px 3px rgba(60,60,60,0.09), 0 1px 2px rgba(60,60,60,0.13);
+  box-shadow:
+    0 1px 3px rgba(60, 60, 60, 0.09),
+    0 1px 2px rgba(60, 60, 60, 0.13);
   padding: 2rem 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  transition: box-shadow 0.2s, transform 0.2s, background 0.3s;
+  transition:
+    box-shadow 0.2s,
+    transform 0.2s,
+    background 0.3s;
   border: 1.5px solid var(--card-border);
 }
 
 .darkTheme .positionCard {
   /* Add a subtle dark gradient overlay for depth */
   background: linear-gradient(135deg, rgba(35, 41, 54, 0.98) 0%, rgba(27, 35, 48, 0.97) 100%);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.20), 0 1px 2px rgba(60,60,60,0.13);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.2),
+    0 1px 2px rgba(60, 60, 60, 0.13);
   border: 1.5px solid var(--card-border);
 }
 .positionCard:hover {
-  box-shadow: 0 6px 16px rgba(69,115,223,0.13), 0 3px 6px rgba(60,60,60,0.13);
+  box-shadow:
+    0 6px 16px rgba(69, 115, 223, 0.13),
+    0 3px 6px rgba(60, 60, 60, 0.13);
   transform: translateY(-3px) scale(1.03);
   background: var(--card-hover-bg);
   border-color: var(--brand-blue);
@@ -87,15 +96,23 @@
   font-weight: 600;
   cursor: pointer;
   text-decoration: none;
-  box-shadow: 0 1px 3px rgba(60,60,60,0.12), 0 1px 2px rgba(60,60,60,0.24);
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  box-shadow:
+    0 1px 3px rgba(60, 60, 60, 0.12),
+    0 1px 2px rgba(60, 60, 60, 0.24);
+  transition:
+    background 0.2s,
+    color 0.2s,
+    box-shadow 0.2s;
   margin-top: 0.5rem;
   outline: none;
 }
-.applyBtn:hover, .applyBtn:focus {
+.applyBtn:hover,
+.applyBtn:focus {
   background: var(--button-hover-bg);
   color: var(--button-text);
-  box-shadow: 0 4px 16px rgba(69,115,223,0.18), 0 3px 6px rgba(60,60,60,0.13);
+  box-shadow:
+    0 4px 16px rgba(69, 115, 223, 0.18),
+    0 3px 6px rgba(60, 60, 60, 0.13);
 }
 /* .applyBtn:hover handled above with variable-based styling */
 @media (max-width: 700px) {

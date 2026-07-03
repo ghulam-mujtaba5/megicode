@@ -1,0 +1,327 @@
+/* Pipeline hero — "a lead flows through your system" product diagram (plan §3.1).
+   Desktop: absolute on the right of the welcome text, vertically centered.
+   Tablet/Mobile: flows in-document at a contained scale.
+   Canvas space is 720×480 (1.5:1); cards are placed in % of that space. */
+
+.canvas {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48vw;
+  min-width: 520px;
+  max-width: 720px;
+  aspect-ratio: 1.5 / 1;
+  z-index: 1;
+  overflow: visible;
+  user-select: none;
+}
+
+.wires {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.wirePath {
+  fill: none;
+  stroke: var(--line-blueprint-strong, #b8c9ee);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+.pulseDot {
+  fill: var(--brand-blue, #4573df);
+}
+
+/* ── Cards ── */
+.card {
+  position: absolute;
+  box-sizing: border-box;
+  border-radius: 14px;
+  border: 1px solid var(--line-blueprint, #dce5f6);
+  background: var(--surface-card, #fff);
+  box-shadow: var(--shadow-card);
+  padding: 13px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.cardTitle {
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--ink, #23272f);
+  line-height: 1.2;
+}
+
+.cardMeta {
+  margin-left: auto;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.64rem;
+  font-weight: 500;
+  color: var(--ink-soft, #526070);
+}
+
+.cardBody {
+  font-size: 0.72rem;
+  line-height: 1.45;
+  color: var(--ink-soft, #526070);
+}
+
+.monoLine {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--ink-soft, #526070);
+}
+
+/* Live/status dots */
+.dotLive {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: #22a06b;
+  box-shadow: 0 0 0 0 rgba(34, 160, 107, 0.4);
+  animation: livePing 2.4s ease-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes livePing {
+  0% {
+    box-shadow: 0 0 0 0 rgba(34, 160, 107, 0.35);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(34, 160, 107, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 160, 107, 0);
+  }
+}
+
+.checkDot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: var(--brand-blue, #4573df);
+  color: #fff;
+  flex-shrink: 0;
+}
+
+/* ── The magic box — Megicode core ── */
+.coreWrap {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Ambient halo behind the box — breathes once per pulse cycle,
+   peaking at the cycle midpoint when the brief "arrives" */
+.coreGlow {
+  position: absolute;
+  top: -34px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 150px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(69, 115, 223, 0.22) 0%, transparent 68%);
+  animation: coreBreath 5.6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes coreBreath {
+  0%,
+  30% {
+    opacity: 0.45;
+    transform: translateX(-50%) scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.12);
+  }
+  70%,
+  100% {
+    opacity: 0.45;
+    transform: translateX(-50%) scale(0.9);
+  }
+}
+
+.coreBox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 20px;
+  background: var(--surface-card, #fff);
+  border: 1px solid var(--line-blueprint, #dce5f6);
+  box-shadow:
+    var(--shadow-card),
+    0 0 0 0 rgba(69, 115, 223, 0.25);
+  animation: coreFlash 5.6s ease-in-out infinite;
+}
+
+/* The box "receives" the brief at the cycle midpoint */
+@keyframes coreFlash {
+  0%,
+  42% {
+    box-shadow:
+      0 1px 2px rgba(35, 39, 47, 0.05),
+      0 12px 32px rgba(45, 79, 162, 0.1),
+      0 0 0 0 rgba(69, 115, 223, 0.3);
+  }
+  52% {
+    box-shadow:
+      0 1px 2px rgba(35, 39, 47, 0.05),
+      0 14px 38px rgba(45, 79, 162, 0.2),
+      0 0 0 10px rgba(69, 115, 223, 0);
+  }
+  100% {
+    box-shadow:
+      0 1px 2px rgba(35, 39, 47, 0.05),
+      0 12px 32px rgba(45, 79, 162, 0.1),
+      0 0 0 0 rgba(69, 115, 223, 0);
+  }
+}
+
+.coreLogo {
+  object-fit: contain;
+}
+
+.coreRing {
+  position: absolute;
+  inset: -8px;
+  border-radius: 26px;
+  border: 1.5px dashed rgba(69, 115, 223, 0.4);
+  animation: ringSpin 16s linear infinite;
+}
+
+@keyframes ringSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.agentLabel {
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--ink, #23272f);
+}
+
+.agentChips {
+  display: flex;
+  gap: 4px;
+}
+
+.agentChip {
+  border-radius: 999px;
+  padding: 2px 7px;
+  background: rgba(69, 115, 223, 0.09);
+  color: var(--brand-blue, #4573df);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.58rem;
+  font-weight: 500;
+}
+
+[data-theme='dark'] .agentChip {
+  background: rgba(69, 115, 223, 0.2);
+  color: #c0d4ff;
+}
+
+/* ── Analytics mini chart ── */
+.chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+  height: 42px;
+  padding-top: 2px;
+}
+
+.bar {
+  width: 12px;
+  border-radius: 4px 4px 2px 2px;
+  background: rgba(69, 115, 223, 0.28);
+  transform-origin: bottom;
+}
+
+.barHot {
+  background: var(--brand-blue, #4573df);
+}
+
+.chartCaption {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--brand-primary-dark, #2d4fa2);
+}
+
+[data-theme='dark'] .chartCaption {
+  color: #9db8f5;
+}
+
+/* ── Responsive: flow inline below the welcome text ── */
+@media (max-width: 1280px) {
+  .canvas {
+    width: 46vw;
+    min-width: 470px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .canvas {
+    position: relative;
+    right: auto;
+    top: auto;
+    transform: none;
+    width: 100%;
+    min-width: 0;
+    max-width: 560px;
+    margin: 18px auto 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .canvas {
+    max-width: 400px;
+    margin: 8px auto 14px;
+  }
+
+  .card {
+    padding: 10px 11px;
+  }
+
+  .cardBody {
+    display: none;
+  }
+}
+
+/* Reduced motion: static diagram, no pulses, glow, or spin */
+@media (prefers-reduced-motion: reduce) {
+  .dotLive,
+  .coreRing,
+  .coreGlow,
+  .coreBox {
+    animation: none;
+  }
+
+  .pulseDot {
+    display: none;
+  }
+}

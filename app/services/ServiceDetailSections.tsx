@@ -374,7 +374,7 @@ export function ServiceProofStrip({ proof, theme }: { proof: string; theme?: str
               gap: '0.45rem',
               color: '#4573df',
               fontSize: '0.76rem',
-              fontWeight: 900,
+              fontWeight: 800,
               letterSpacing: '0.08em',
               textTransform: 'uppercase',
               padding: '0.42rem 0.72rem',
@@ -449,7 +449,7 @@ export function ServiceProofStrip({ proof, theme }: { proof: string; theme?: str
                   justifyContent: 'center',
                   color: '#ffffff',
                   background: index === 1 ? '#2d4fa2' : '#4573df',
-                  fontWeight: 900,
+                  fontWeight: 800,
                   fontSize: '0.78rem',
                   marginBottom: '0.75rem',
                 }}

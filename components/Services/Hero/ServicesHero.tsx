@@ -4,6 +4,7 @@ import React from 'react';
 import { easeOut, motion } from 'framer-motion';
 
 import { useTheme } from '../../../context/ThemeContext';
+import MegicodeHeroAnimationAdvanced from '../../MegicodeHeroAnimation/MegicodeHeroAnimationAdvanced';
 import commonStyles from './ServicesHeroCommon.module.css';
 import darkStyles from './ServicesHeroDark.module.css';
 import lightStyles from './ServicesHeroLight.module.css';
@@ -72,33 +73,40 @@ const ServicesHero = () => {
       />
 
       <div className={commonStyles.container}>
-        <motion.div
-          className={commonStyles.content}
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <motion.h1
-            className={`${commonStyles.title} ${themeStyles.title}`}
-            variants={titleVariants}
+        <div className={commonStyles.heroGrid}>
+          <motion.div
+            className={commonStyles.content}
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
           >
-            Choose the right build path{' '}
-            <motion.span
-              className={`${commonStyles.highlight} ${themeStyles.highlight}`}
-              variants={highlightVariants}
+            <motion.h1
+              className={`${commonStyles.title} ${themeStyles.title}`}
+              variants={titleVariants}
             >
-              for your business
-            </motion.span>
-          </motion.h1>
+              Choose the right build path{' '}
+              <motion.span
+                className={`${commonStyles.highlight} ${themeStyles.highlight}`}
+                variants={highlightVariants}
+              >
+                for your business
+              </motion.span>
+            </motion.h1>
 
-          <motion.p
-            className={`${commonStyles.subtitle} ${themeStyles.subtitle}`}
-            variants={titleVariants}
-          >
-            Start with the outcome you need: automate manual work, launch an AI product, or build a
-            custom platform for operations.
-          </motion.p>
-        </motion.div>
+            <motion.p
+              className={`${commonStyles.subtitle} ${themeStyles.subtitle}`}
+              variants={titleVariants}
+            >
+              Start with the outcome you need: automate manual work, launch an AI product, or build
+              a custom platform for operations.
+            </motion.p>
+          </motion.div>
+
+          {/* Every service, orbiting one core — the full-capability map */}
+          <div className={commonStyles.visualWrap}>
+            <MegicodeHeroAnimationAdvanced />
+          </div>
+        </div>
       </div>
     </section>
   );

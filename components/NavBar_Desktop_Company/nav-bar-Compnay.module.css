@@ -15,8 +15,10 @@
   margin-right: 24px;
   margin-left: 8px;
   vertical-align: middle;
-  filter: drop-shadow(0 2px 8px rgba(69,115,223,0.25));
-  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), filter 0.3s cubic-bezier(0.4,0,0.2,1);
+  filter: drop-shadow(0 2px 8px rgba(69, 115, 223, 0.25));
+  transition:
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    filter 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform, filter;
   animation: logoFloat 5s ease-in-out infinite;
 }
@@ -28,11 +30,16 @@
 }
 
 @keyframes logoFloat {
-  0%   { transform: translateY(0) scale(1); }
-  50%  { transform: translateY(-3px) scale(1.02); }
-  100% { transform: translateY(0) scale(1); }
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-3px) scale(1.02);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
 }
-
 
 /* Tagline under logo (if present in SVG) */
 .navbarLogoTagline {
@@ -43,7 +50,7 @@
   letter-spacing: 0.04em;
   margin-top: -4px;
   margin-left: 2px;
-  font-family: 'Open Sans', 'Manrope', sans-serif;
+  font-family: var(--font-body), var(--font-display), sans-serif;
 }
 
 @media (max-width: 1100px) {
@@ -71,7 +78,9 @@
   display: flex;
   align-items: center;
   min-height: 56px;
-  transition: filter 0.3s cubic-bezier(0.4,0,0.2,1), transform 0.3s cubic-bezier(0.4,0,0.2,1);
+  transition:
+    filter 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .logoAnimation:focus-within,
@@ -82,17 +91,19 @@
   outline: none;
   background: none;
   border-radius: 0;
-  transition: filter 0.3s cubic-bezier(0.4,0,0.2,1), transform 0.3s cubic-bezier(0.4,0,0.2,1);
+  transition:
+    filter 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .logoAnimation:hover .crystal-shine,
 .logoAnimation:focus .crystal-shine {
   left: 120%;
-  transition: left 0.5s cubic-bezier(0.4,0,0.2,1);
+  transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .logoAnimation .crystal-shine {
-  transition: left 0.5s cubic-bezier(0.4,0,0.2,1);
+  transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .logoAnimation:focus-visible {
@@ -101,16 +112,16 @@
 }
 
 .logoAnimation .crystal-shine {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: -60%;
   width: 60%;
   height: 100%;
-  background: linear-gradient(120deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.08) 100%);
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.08) 100%);
   transform: skewX(-24deg);
   pointer-events: none;
-  transition: left 0.7s cubic-bezier(0.4,0,0.2,1);
+  transition: left 0.7s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 2;
 }
 
@@ -127,16 +138,16 @@
 
 /* Crystal shine effect */
 .logoAnimation .crystal-shine {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: -60%;
   width: 60%;
   height: 100%;
-  background: linear-gradient(120deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.08) 100%);
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.08) 100%);
   transform: skewX(-24deg);
   pointer-events: none;
-  transition: left 0.7s cubic-bezier(0.4,0,0.2,1);
+  transition: left 0.7s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 2;
 }
 
@@ -155,7 +166,7 @@
   font-size: 20px;
   letter-spacing: -0.01em;
   display: inline-block;
-  font-family: "Open Sans";
+  font-family: var(--font-body);
   text-align: left;
   min-width: 59px;
 }
@@ -235,7 +246,6 @@
   width: 40px;
   height: 40px;
   position: relative;
-  
 }
 
 /* Styles for the Logo button container */
@@ -254,13 +264,16 @@
   box-sizing: border-box;
   transition: transform 0.3s ease; /* Add transition for smooth animation */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 0 5px #4573df, 0 0 10px #4573df, 0 0 15px #4573df;
+  box-shadow:
+    0 0 5px #4573df,
+    0 0 10px #4573df,
+    0 0 15px #4573df;
 }
 
 .logoHover {
   background-color: #33373c;
   transform: scale(1.03);
-  box-shadow:none;
+  box-shadow: none;
 }
 
 /* Styles for the Name animation icon */
@@ -269,7 +282,6 @@
   width: 140px;
   position: relative;
   transition: opacity 0.3s ease; /* Smooth opacity transition */
-
 }
 
 /* Styles for the Logo and Name animation container */
@@ -281,7 +293,7 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  /* width: 250px;  *//*make all uton stick ot places when hoverred*/ 
+  /* width: 250px;  */ /*make all uton stick ot places when hoverred*/
 }
 
 /* Additional styles for the Logo and Name animation container */
@@ -295,33 +307,32 @@
 .typo:hover .nameIcon {
   opacity: 1;
   transform: scale(1.08) rotate(-1deg);
-  filter: drop-shadow(0 2px 16px #4573df55) drop-shadow(0 0px 32px #CFE8EF44);
+  filter: drop-shadow(0 2px 16px #4573df55) drop-shadow(0 0px 32px #cfe8ef44);
   background: linear-gradient(90deg, #2d4fa2 0%, #4573df 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   text-fill-color: transparent;
   position: relative;
-  transition: 
-    background 0.3s cubic-bezier(0.4,0,0.2,1),
-    filter 0.3s cubic-bezier(0.4,0,0.2,1),
-    transform 0.25s cubic-bezier(0.4,0,0.2,1);
+  transition:
+    background 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    filter 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .typo:hover .nameIcon::before {
-  content: "";
+  content: '';
   position: absolute;
   left: -60%;
   top: 0;
   width: 60%;
   height: 100%;
-  background: linear-gradient(120deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.08) 100%);
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.08) 100%);
   transform: skewX(-24deg);
-  transition: left 0.5s cubic-bezier(0.4,0,0.2,1);
+  transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
   z-index: 2;
 }
-
 
 /* Styles for the Resume section text */
 .resumeText {
@@ -391,7 +402,7 @@
 /* Styles for the header container */
 .header {
   flex: 1;
- 
+
   border-radius: 50px;
   background-color: #1d2127;
   border: 1px solid #fff;
@@ -405,14 +416,12 @@
   text-align: left;
   font-size: 20px;
   color: #fff;
-  font-family: "Open Sans";
+  font-family: var(--font-body);
   margin: 0 20px; /* Add margin */
 }
-.alternativeNameIcon{
-
+.alternativeNameIcon {
   width: 200px;
   position: relative;
-
 }
 /* Media query for smaller screens */
 @media screen and (max-width: 768px) {

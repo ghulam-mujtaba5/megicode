@@ -220,7 +220,7 @@
   place-items: center;
   color: #fff;
   font-size: 5rem;
-  font-weight: 900;
+  font-weight: 800;
 }
 
 /* Layout: TOC + content */
@@ -628,7 +628,7 @@
   background: linear-gradient(145deg, #1c3163, #111f45);
   color: #bfdbfe;
   font-size: 2rem;
-  font-weight: 900;
+  font-weight: 800;
 }
 
 .relatedImage img {

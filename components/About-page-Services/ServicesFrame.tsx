@@ -253,8 +253,8 @@ const BUYER_SITUATIONS = [
     number: '04',
     badge: 'Roadmap clarity',
     iconSrc: '/service-icons/consulting.png',
-    accent: '#0f9f8c',
-    accentRgb: '15, 159, 140',
+    accent: '#4573df',
+    accentRgb: '69, 115, 223',
     problem: 'I am not sure what to build first',
     outcome:
       'Technical roadmap, stack decision, risk review, and build plan before spending heavily.',

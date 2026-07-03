@@ -57,6 +57,29 @@
   line-height: 1.7;
 }
 
+/* Trust chips — mono pills under the section header (plan §3.7) */
+.trustChips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.trustChip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 5px 12px;
+  border: 1px solid var(--line-blueprint, #dce5f6);
+  background: var(--surface-raised, #fbfcfe);
+  color: var(--ink-soft, #526070);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
 .grid {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
@@ -82,7 +105,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #4573df, #2d4fa2, #ff9800);
+  background: linear-gradient(90deg, #4573df, #2d4fa2);
 }
 
 .formGroup {

@@ -338,7 +338,7 @@ export default function PricingPageClient() {
       <style jsx>{`
         .pricing-page {
           min-height: 100vh;
-          font-family: 'Open Sans', sans-serif;
+          font-family: var(--font-body), sans-serif;
           overflow-x: hidden;
         }
         .pricing-light {
@@ -418,7 +418,7 @@ export default function PricingPageClient() {
           border-radius: 999px;
           border: 1px solid transparent;
           padding: 0 22px;
-          font-weight: 900;
+          font-weight: 800;
           text-decoration: none;
           transition:
             transform 0.2s ease,
@@ -675,7 +675,7 @@ export default function PricingPageClient() {
           content: '✓';
           margin-right: 8px;
           color: #4573df;
-          font-weight: 900;
+          font-weight: 800;
         }
         .pricing-card-button {
           display: inline-flex;
@@ -691,7 +691,7 @@ export default function PricingPageClient() {
           color: ${isDark ? '#f8fafc' : '#1d2127'};
           background: ${isDark ? 'rgba(255,255,255,0.055)' : 'rgba(15,23,42,0.035)'};
           font-size: 0.9rem;
-          font-weight: 900;
+          font-weight: 800;
           line-height: 1.2;
           text-decoration: none;
           transition:
@@ -751,7 +751,7 @@ export default function PricingPageClient() {
           padding: 16px 18px;
           color: ${isDark ? '#f8fafc' : '#0f172a'};
           cursor: pointer;
-          font-weight: 900;
+          font-weight: 800;
           line-height: 1.35;
         }
         .comparison-cards summary:focus-visible {
@@ -788,14 +788,14 @@ export default function PricingPageClient() {
         }
         .comparison-row span:first-child {
           color: ${isDark ? '#f8fafc' : '#0f172a'};
-          font-weight: 900;
+          font-weight: 800;
         }
         .comparison-head {
           background: ${isDark ? 'rgba(69,115,223,0.16)' : 'rgba(69,115,223,0.08)'};
         }
         .comparison-head span {
           color: ${isDark ? '#f8fafc' : '#1d2127'};
-          font-weight: 900;
+          font-weight: 800;
         }
         .tab-list {
           display: flex;
@@ -868,7 +868,7 @@ export default function PricingPageClient() {
           border: 1px solid rgba(255, 152, 0, 0.6);
           background: rgba(255, 152, 0, 0.1);
           font-size: 0.76rem;
-          font-weight: 900;
+          font-weight: 800;
         }
         .drivers-section {
           display: grid;
@@ -1046,7 +1046,7 @@ export default function PricingPageClient() {
           margin-bottom: 18px;
           color: #ff9800;
           font-size: 0.78rem;
-          font-weight: 900;
+          font-weight: 800;
           letter-spacing: 0.12em;
         }
         .payment-grid h3 {
@@ -1087,7 +1087,7 @@ export default function PricingPageClient() {
         .fit-positive li::before,
         .fit-negative li::before {
           margin-right: 9px;
-          font-weight: 900;
+          font-weight: 800;
         }
         .fit-positive li::before {
           content: '✓';
@@ -1111,7 +1111,7 @@ export default function PricingPageClient() {
           min-height: 58px;
           padding: 18px 20px;
           cursor: pointer;
-          font-weight: 900;
+          font-weight: 800;
           line-height: 1.35;
           list-style-position: inside;
         }
@@ -1275,7 +1275,7 @@ export default function PricingPageClient() {
           border-radius: 999px;
           border: 1px solid transparent;
           padding: 0 22px;
-          font-weight: 900;
+          font-weight: 800;
           text-decoration: none;
           transition:
             transform 0.2s ease,
@@ -1363,7 +1363,7 @@ export default function PricingPageClient() {
           color: ${isDark ? '#f8fafc' : '#1d2127'};
           background: ${isDark ? 'rgba(255,255,255,0.055)' : 'rgba(15,23,42,0.035)'};
           font-size: 0.9rem;
-          font-weight: 900;
+          font-weight: 800;
           line-height: 1.2;
           text-decoration: none;
           transition:

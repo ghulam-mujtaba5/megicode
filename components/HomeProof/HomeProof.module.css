@@ -1,0 +1,104 @@
+/* Proof rail — one bordered strip on the pipeline, not floating stat cards (plan §3.2) */
+
+.section {
+  width: 100%;
+  padding: 0 1.25rem;
+  margin-top: -0.5rem;
+}
+
+.rail {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: min(1080px, 100%);
+  margin: 0 auto;
+  border: 1px solid var(--line-blueprint, #dce5f6);
+  border-radius: 20px;
+  background: var(--surface-card, #fff);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 26px 28px;
+}
+
+.item + .item {
+  border-left: 1px solid var(--line-blueprint, #dce5f6);
+}
+
+.value {
+  font-family: var(--font-mono), monospace;
+  font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--brand-primary-dark, #2d4fa2);
+  font-variant-numeric: tabular-nums;
+}
+
+[data-theme='dark'] .value {
+  color: #9db8f5;
+}
+
+.label {
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.94rem;
+  font-weight: 700;
+  color: var(--ink, #23272f);
+  line-height: 1.35;
+}
+
+.note {
+  font-size: 0.8125rem;
+  color: var(--ink-soft, #526070);
+  line-height: 1.5;
+}
+
+.evidenceRow {
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+.evidenceLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--brand-blue, #4573df);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.evidenceLink:hover,
+.evidenceLink:focus-visible {
+  color: var(--brand-primary-dark, #2d4fa2);
+  border-bottom-color: currentColor;
+}
+
+[data-theme='dark'] .evidenceLink:hover,
+[data-theme='dark'] .evidenceLink:focus-visible {
+  color: #c0d4ff;
+}
+
+@media (max-width: 760px) {
+  .rail {
+    grid-template-columns: 1fr;
+  }
+
+  .item {
+    padding: 20px 22px;
+  }
+
+  .item + .item {
+    border-left: none;
+    border-top: 1px solid var(--line-blueprint, #dce5f6);
+  }
+}

@@ -8,8 +8,10 @@
   align-items: center;
   padding: 120px 32px 64px;
   box-sizing: border-box;
-  font-family: 'Segoe UI', 'Inter', Arial, sans-serif;
-  transition: background 0.3s, color 0.3s;
+  font-family: 'Segoe UI', var(--font-body), Arial, sans-serif;
+  transition:
+    background 0.3s,
+    color 0.3s;
 }
 
 .heroSection {
@@ -39,7 +41,11 @@
   border-radius: 20px;
   margin-bottom: 28px;
   padding: 36px 32px 28px;
-  transition: background 0.3s, color 0.3s, box-shadow 0.3s, border-color 0.3s;
+  transition:
+    background 0.3s,
+    color 0.3s,
+    box-shadow 0.3s,
+    border-color 0.3s;
 }
 
 .subheading {

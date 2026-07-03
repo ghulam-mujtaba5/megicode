@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Inter, JetBrains_Mono, Manrope } from 'next/font/google';
+
 import { LOGO_MAIN_DARK, LOGO_MAIN_LIGHT, PWA_ICON } from '@/lib/logo';
 import { SOCIAL_PROFILES, canonicalUrl, professionalServiceJsonLd } from '@/lib/metadata';
 
@@ -13,6 +15,27 @@ import { Providers } from './providers';
 if (process.env.NODE_ENV !== 'production' && typeof window !== 'undefined') {
   void import('../utils/axe-a11y');
 }
+
+// Site typography — self-hosted via next/font (no render-blocking @imports, no FOUT).
+// Display: Manrope · Body: Inter · Data/metrics: JetBrains Mono
+const manrope = Manrope({
+  subsets: ['latin'],
+  weight: ['500', '600', '700', '800'],
+  variable: '--font-display',
+  display: 'swap',
+});
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-body',
+  display: 'swap',
+});
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['500', '600'],
+  variable: '--font-mono',
+  display: 'swap',
+});
 
 export const viewport = {
   width: 'device-width',
@@ -200,7 +223,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   };
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${manrope.variable} ${inter.variable} ${jetbrainsMono.variable}`}
+    >
       <head>
         <script
           type="application/ld+json"

@@ -3,7 +3,7 @@
   max-width: 960px;
   margin: 0 auto 4rem auto;
   padding: 0 1rem;
-  font-family: var(--megicode-font-family, 'Inter', 'Open Sans', sans-serif);
+  font-family: var(--megicode-font-family, var(--font-body), var(--font-body), sans-serif);
 }
 
 /* ===== HERO SECTION ===== */
@@ -60,7 +60,7 @@
   line-height: 1.15;
   letter-spacing: -1.5px;
   margin: 0 0 1rem 0;
-  font-family: 'Poppins', 'Open Sans', Arial, sans-serif;
+  font-family: var(--font-display), var(--font-body), Arial, sans-serif;
 }
 
 .heroOverview {
@@ -209,7 +209,7 @@
   font-weight: 700;
   letter-spacing: -0.5px;
   margin: 0;
-  font-family: 'Poppins', 'Open Sans', Arial, sans-serif;
+  font-family: var(--font-display), var(--font-body), Arial, sans-serif;
 }
 
 .sectionText {
@@ -473,7 +473,7 @@
   font-weight: 800;
   margin: 0 0 0.75rem 0;
   letter-spacing: -0.5px;
-  font-family: 'Poppins', 'Open Sans', Arial, sans-serif;
+  font-family: var(--font-display), var(--font-body), Arial, sans-serif;
 }
 
 .ctaText {

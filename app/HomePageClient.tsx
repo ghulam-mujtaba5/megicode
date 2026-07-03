@@ -1,5 +1,5 @@
 'use client';
-import React, { useCallback } from 'react';
+import React from 'react';
 
 import dynamic from 'next/dynamic';
 
@@ -8,9 +8,9 @@ import { CONTACT_EMAIL, SITE_SOCIAL, getCopyrightText } from '@/lib/constants';
 import LoadingAnimation from '@/components/LoadingAnimation/LoadingAnimation';
 
 import Footer from '../components/Footer/Footer';
-import ThemeToggleIcon from '../components/Icon/sbicon';
 import NewNavBar from '../components/NavBar_Desktop_Company/NewNavBar';
 import NavBarMobile from '../components/NavBar_Mobile/NavBar-mobile';
+import PipelineDivider from '../components/Pipeline/PipelineDivider';
 import WelcomeFrame from '../components/welcomeCompany/welcome';
 import { useTheme } from '../context/ThemeContext';
 import MegicodeHeroAnimationAdvancedClient from './megicode/MegicodeHeroAnimationAdvancedClient';
@@ -20,7 +20,6 @@ const AboutMeSection = dynamic(() => import('../components/AboutMeCompany/AboutM
   loading: () => <LoadingAnimation size="medium" />,
 });
 const HomeProof = dynamic(() => import('../components/HomeProof/HomeProof'));
-const Tagline = dynamic(() => import('../components/Tagline/Tagline'));
 const ServicesFrame = dynamic(() => import('../components/About-page-Services/ServicesFrame'), {
   loading: () => <LoadingAnimation size="medium" />,
 });
@@ -39,13 +38,10 @@ const HomeTestimonials = dynamic(() => import('../components/HomeTestimonials/Ho
 const ContactSection = dynamic(() => import('../components/Contact/ContactUs'), {
   loading: () => <LoadingAnimation size="medium" />,
 });
+const StickyCta = dynamic(() => import('../components/StickyCta/StickyCta'));
 
 export default function HomePageClient() {
-  const { theme, toggleTheme } = useTheme();
-
-  const onDarkModeButtonContainerClick = useCallback(() => {
-    if (toggleTheme) toggleTheme();
-  }, [toggleTheme]);
+  const { theme } = useTheme();
 
   const { linkedinUrl, instagramUrl, githubUrl } = SITE_SOCIAL;
   const copyrightText = getCopyrightText();
@@ -54,22 +50,6 @@ export default function HomePageClient() {
   return (
     <>
       <div className={`page-container ${theme}`}>
-        {/* Theme Toggle Icon - match services page style */}
-        <div
-          id="theme-toggle"
-          role="button"
-          tabIndex={0}
-          aria-label="Toggle theme"
-          onClick={onDarkModeButtonContainerClick}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              onDarkModeButtonContainerClick();
-            }
-          }}
-        >
-          <ThemeToggleIcon />
-        </div>
         <main id="main-content" className="main-content">
           <NewNavBar />
           <NavBarMobile />
@@ -83,12 +63,8 @@ export default function HomePageClient() {
             <MegicodeHeroAnimationAdvancedClient />
           </section>
           <HomeProof />
-          {/* About Me Section */}
-          <section id="about-section" aria-labelledby="about-heading" className="content-section">
-            <AboutMeSection />
-          </section>
-          <Tagline />
-          {/* Services Frame */}
+          <PipelineDivider />
+          {/* Services Frame — buyers self-select before meeting the team */}
           <section
             id="services-section"
             aria-labelledby="services-heading"
@@ -97,9 +73,15 @@ export default function HomePageClient() {
             <ServicesFrame />
           </section>
 
-          <HomePricingPreview />
           <HomeShippedPlatforms />
+          <PipelineDivider />
+          <HomePricingPreview />
           <HomeTestimonials />
+          <PipelineDivider />
+          {/* About Section — team story after the proof; closes with the merged tagline */}
+          <section id="about-section" aria-labelledby="about-heading" className="content-section">
+            <AboutMeSection />
+          </section>
           {/* Contact Section */}
           <section
             id="contact-section"
@@ -115,6 +97,7 @@ export default function HomePageClient() {
             githubUrl={githubUrl}
             copyrightText={copyrightText}
           />
+          <StickyCta />
         </main>
       </div>
     </>

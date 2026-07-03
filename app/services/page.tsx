@@ -273,7 +273,7 @@ export default function ServicesPage() {
         .eyebrow {
           display: inline-flex;
           align-items: center;
-          font-family: 'Open Sans', sans-serif;
+          font-family: var(--font-body), sans-serif;
           font-size: 11px;
           font-weight: 700;
           letter-spacing: 0.14em;
@@ -291,7 +291,7 @@ export default function ServicesPage() {
         }
 
         .section-title {
-          font-family: 'Open Sans', sans-serif;
+          font-family: var(--font-body), sans-serif;
           font-size: clamp(1.75rem, 3vw, 2.5rem);
           font-weight: 700;
           line-height: 1.2;
@@ -313,7 +313,7 @@ export default function ServicesPage() {
         }
 
         .section-sub {
-          font-family: 'Open Sans', sans-serif;
+          font-family: var(--font-body), sans-serif;
           font-size: 1rem;
           line-height: 1.7;
           max-width: 480px;
@@ -340,7 +340,7 @@ export default function ServicesPage() {
 
         /* ── Delivery note ── */
         .delivery-note {
-          font-family: 'Open Sans', sans-serif;
+          font-family: var(--font-body), sans-serif;
           font-size: 0.9rem;
           line-height: 1.6;
           text-align: center;
@@ -413,7 +413,7 @@ export default function ServicesPage() {
           box-shadow: ${isDark
             ? '0 14px 30px rgba(0,0,0,0.18)'
             : '0 14px 30px rgba(15,23,42,0.08)'};
-          font-weight: 900;
+          font-weight: 800;
           text-decoration: none;
         }
         .services-pricing-cta:hover,

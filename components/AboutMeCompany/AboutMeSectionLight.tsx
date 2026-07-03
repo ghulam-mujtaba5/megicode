@@ -69,6 +69,13 @@ const AboutMeSection = () => {
             </p>
           </motion.div>
 
+          <motion.p className={commonStyles.closingLine} variants={fadeInUp}>
+            One team that takes your product from{' '}
+            <span className={commonStyles.closingHighlight}>idea</span> to{' '}
+            <span className={commonStyles.closingHighlight}>launch</span> — and stays after it
+            ships.
+          </motion.p>
+
           {/* Explicit click affordance */}
           <motion.a
             href="/about"

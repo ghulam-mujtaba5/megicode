@@ -11,6 +11,8 @@ import commonStyles from './welcomeCommon.module.css';
 import darkStyles from './welcomeDark.module.css';
 import styles from './welcomeLight.module.css';
 
+const EASE = [0.22, 1, 0.36, 1] as const;
+
 const Frame = () => {
   const { theme } = useTheme();
   const themeStyles = theme === 'dark' ? darkStyles : styles;
@@ -19,100 +21,78 @@ const Frame = () => {
   return (
     <section
       className={`${commonStyles.container} ${theme === 'dark' ? darkStyles.darkContainer : styles.container}`}
-      aria-label="Megicode — AI-powered software, websites, and automation"
+      aria-label="Megicode — AI software, automation, and SaaS MVPs for growing businesses"
     >
       <motion.div
         className={`${commonStyles.textContainer} ${themeStyles.textContainer}`}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.35 }}
       >
         <h1 className={commonStyles.heroHeading}>
-          {/* Eyebrow — concrete descriptor above the brand name */}
+          {/* Eyebrow — who we are, where we work */}
           <motion.span
             className={`${commonStyles.welcomeEyebrow} ${themeStyles.welcomeEyebrow}`}
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] as const }}
+            transition={{ duration: 0.45, delay: 0.05, ease: EASE }}
           >
-            AI Automation &amp; Custom Software Systems
+            AI Product Studio — Lahore, serving global clients
           </motion.span>
 
-          {/* Brand name on its own line */}
-          <span className={commonStyles.brandLine}>
-            {/* "Megi" — white (dark) / dark navy (light) */}
-            <motion.span
-              className={`${commonStyles.brandMegi} ${themeStyles.brandMegi}`}
-              initial={{ opacity: 0, y: 22, scale: 0.88, filter: 'blur(10px)' }}
-              animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
-              transition={{ duration: 0.55, delay: 0.55, ease: [0.16, 1, 0.3, 1] as const }}
-              style={{ display: 'inline-block', position: 'relative' }}
-            >
-              Megi
-              <motion.span
-                className={commonStyles.shimmer}
-                initial={{ left: '-100%' }}
-                animate={{ left: '200%' }}
-                transition={{ duration: 1.1, delay: 1.5, ease: 'easeInOut' }}
-                aria-hidden="true"
-              />
-            </motion.span>
-            {/* "code" — brand blue always */}
-            <motion.span
-              className={`${commonStyles.brandCode} ${themeStyles.brandCode}`}
-              initial={{ opacity: 0, y: 22, scale: 0.88, filter: 'blur(10px)' }}
-              animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
-              transition={{ duration: 0.55, delay: 0.7, ease: [0.16, 1, 0.3, 1] as const }}
-              style={{ display: 'inline-block' }}
-            >
-              code
-            </motion.span>
-          </span>
-
-          {/* Value-proposition headline — the actual SEO/conversion h1 text */}
+          {/* Outcome-first headline — the conversion h1 */}
           <motion.span
-            className={`${commonStyles.heroHeadline} ${themeStyles.heroHeadline}`}
-            initial={{ opacity: 0, y: 14, filter: 'blur(4px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            transition={{ duration: 0.55, delay: 1.15, ease: [0.25, 0.1, 0.25, 1] as const }}
+            className={`${commonStyles.heroTitle} ${themeStyles.heroHeadline}`}
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.15, ease: EASE }}
           >
-            AI Automation and Software Systems for Startups, Clinics, Agencies, and Growing
-            Businesses
+            AI software, automation &amp; SaaS MVPs{' '}
+            <span className={commonStyles.heroTitleAccent}>built for real business growth</span>
           </motion.span>
         </h1>
 
         {/* Subheadline — who it's for and what they get */}
         <motion.p
           className={`${commonStyles.paragraph} ${themeStyles.paragraph}`}
-          initial={{ opacity: 0, y: 14, filter: 'blur(4px)' }}
-          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-          transition={{ duration: 0.55, delay: 1.45, ease: [0.25, 0.1, 0.25, 1] as const }}
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3, ease: EASE }}
         >
-          We design and build AI agents, SaaS MVPs, clinic software, custom booking platforms,
-          dashboards, and automated workflows — custom software that saves hours every week and
-          drives real revenue growth.
+          Megicode helps founders, clinics, agencies, and growing businesses turn ideas, workflows,
+          and operations into launch-ready AI products, automation systems, and custom platforms.
         </motion.p>
 
-        {/* Hero CTAs */}
+        {/* Hero CTAs — interactive well under one second */}
         <motion.div
           className={commonStyles.heroActions}
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 2.0, ease: [0.25, 0.1, 0.25, 1] }}
+          transition={{ duration: 0.45, delay: 0.45, ease: EASE }}
         >
           <button
             onClick={openCalendly}
             className={`${commonStyles.heroPrimary} ${themeStyles.heroPrimary}`}
           >
-            Start Your Project →
+            Book a Free Fit Call →
           </button>
           <Link
             href="/projects"
             className={`${commonStyles.heroSecondary} ${themeStyles.heroSecondary}`}
           >
-            View Our Work →
+            View Case Studies →
           </Link>
         </motion.div>
+
+        {/* Micro-proof line — measured, not marketed */}
+        <motion.p
+          className={commonStyles.microProof}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.6, ease: EASE }}
+        >
+          15+ products shipped · 5+ countries · replies within 24h
+        </motion.p>
         {calendlyModal}
       </motion.div>
     </section>

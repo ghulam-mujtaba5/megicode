@@ -1,41 +1,53 @@
 /* Animation classes for [data-animate] attributes */
-[data-animate="fade-in"] {
+[data-animate='fade-in'] {
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+  transition:
+    opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
-[data-animate="fade-in"].in-view {
+[data-animate='fade-in'].in-view {
   opacity: 1;
   transform: none;
 }
 
-[data-animate="slide-left"] {
+[data-animate='slide-left'] {
   opacity: 0;
   transform: translateX(-32px);
-  transition: opacity 0.7s, transform 0.7s;
+  transition:
+    opacity 0.7s,
+    transform 0.7s;
 }
-[data-animate="slide-left"].in-view {
+[data-animate='slide-left'].in-view {
   opacity: 1;
   transform: none;
 }
 
-[data-animate="cta-bounce"]:hover {
+[data-animate='cta-bounce']:hover {
   animation: bounce 0.5s;
 }
 @keyframes bounce {
-  0% { transform: scale(1);}
-  30% { transform: scale(1.08);}
-  60% { transform: scale(0.96);}
-  100% { transform: scale(1);}
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.08);
+  }
+  60% {
+    transform: scale(0.96);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 .serviceDetail {
   background: #fff;
   border-radius: 16px;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
   padding: 2.5rem 1.5rem;
   margin: 2rem auto;
   max-width: 900px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body), sans-serif;
 }
 
 .heroSection {
@@ -73,7 +85,8 @@
   font-weight: 600;
 }
 
-.section ul, .section ol {
+.section ul,
+.section ol {
   margin: 0 0 0 1.2rem;
   padding: 0;
   color: #333;

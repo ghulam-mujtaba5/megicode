@@ -35,7 +35,7 @@ const platforms = [
     href: '/projects/campusaxis-university-portal',
     stats: ['13K users', '24K views', '72K events'],
     proofImage: {
-      src: '/Screenshot (1527).png',
+      src: '/projects/campusaxis-analytics-proof.webp',
       alt: 'Google Analytics dashboard for CampusAxis showing 13K users, 24K views, 13K active users, and 72K events.',
     },
   },

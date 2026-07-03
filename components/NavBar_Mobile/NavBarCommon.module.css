@@ -23,7 +23,7 @@
   position: absolute;
   top: 0px;
   right: 0px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: var(--font-body), sans-serif;
   display: none; /* Initially hide the navbar */
   font-size: 22px;
 }

@@ -353,7 +353,7 @@
 }
 .overviewTitle {
   font-size: 1.65rem;
-  font-weight: 900;
+  font-weight: 800;
   margin-bottom: 20px;
   letter-spacing: 0.13px;
   line-height: 1.1;
@@ -384,7 +384,7 @@
 }
 .whyTitle {
   font-size: 1.38rem;
-  font-weight: 900;
+  font-weight: 800;
   margin-bottom: 26px;
   letter-spacing: 0.14px;
   line-height: 1.1;
@@ -447,7 +447,7 @@
 }
 .processTitle {
   font-size: 1.38rem;
-  font-weight: 900;
+  font-weight: 800;
   color: #7ba0ff;
   margin-bottom: 36px;
   letter-spacing: 0.14px;
@@ -513,7 +513,7 @@
   transform: translateX(100%);
 }
 .processStepTitle {
-  font-weight: 900;
+  font-weight: 800;
   font-size: 1.08rem;
   color: #7ba0ff;
   margin-bottom: 6px;
@@ -544,7 +544,7 @@
 }
 .featuresTitle {
   font-size: 1.38rem;
-  font-weight: 900;
+  font-weight: 800;
   color: #4573df;
   margin-bottom: 26px;
   letter-spacing: 0.14px;
@@ -649,7 +649,7 @@
 }
 .techTitle {
   font-size: 1.28rem;
-  font-weight: 900;
+  font-weight: 800;
   color: #4573df;
   margin-bottom: 26px;
   letter-spacing: 0.14px;
@@ -1215,7 +1215,7 @@
   max-width: 1320px;
   margin: auto;
   padding: 0;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body), sans-serif;
   background: none;
   border-radius: 0;
   box-shadow: none;
@@ -1346,7 +1346,7 @@
 }
 .heroTitle {
   font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 900;
+  font-weight: 800;
   color: var(--text-light);
   margin-bottom: 1.5rem;
   letter-spacing: -0.02em;
@@ -1575,7 +1575,7 @@
 .ctaBtnMain {
   background: rgba(36, 41, 54, 0.98);
   color: #7ba0ff;
-  font-weight: 900;
+  font-weight: 800;
   font-size: 1.28rem;
   border-radius: 22px;
   padding: 1.25rem 3.3rem;

@@ -1,7 +1,8 @@
-"use client";
-import React from "react";
-import MegicodeHeroAnimationAdvanced from '../../components/MegicodeHeroAnimation/MegicodeHeroAnimationAdvanced';
+'use client';
+import React from 'react';
+
+import PipelineHero from '../../components/MegicodeHeroAnimation/PipelineHero';
 
 export default function MegicodeHeroAnimationAdvancedClient() {
-  return <MegicodeHeroAnimationAdvanced />;
+  return <PipelineHero />;
 }

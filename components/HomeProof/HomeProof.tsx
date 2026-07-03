@@ -1,70 +1,79 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
-import Image from 'next/image';
 import Link from 'next/link';
 
-import { useTheme } from '../../context/ThemeContext';
-import commonStyles from './HomeProofCommon.module.css';
-import darkStyles from './HomeProofDark.module.css';
-import lightStyles from './HomeProofLight.module.css';
+import { useInView, useReducedMotion } from 'framer-motion';
+
+import styles from './HomeProof.module.css';
 
 const proofItems = [
   {
-    iconSrc: '/icons/about-stats/software-development.png',
-    value: '15+',
+    target: 15,
+    suffix: '+',
     label: 'AI & software products built',
     note: 'Real product delivery, not demo screens',
   },
   {
-    iconSrc: '/icons/about-stats/global-reach.png',
-    value: '5+',
+    target: 5,
+    suffix: '+',
     label: 'countries served',
     note: 'Remote-ready delivery for global clients',
   },
   {
-    iconSrc: '/icons/about-stats/partnerships.png',
-    value: '10+',
+    target: 10,
+    suffix: '+',
     label: 'startups & businesses partnered',
     note: 'Founder-friendly software and automation',
   },
 ];
 
-export default function HomeProof() {
-  const { theme } = useTheme();
-  const themeStyles = theme === 'dark' ? darkStyles : lightStyles;
+/** Counts from 0 to `target` once when scrolled into view; static under reduced motion. */
+function CountUpValue({ target, suffix }: { target: number; suffix: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-40px' });
+  const reduceMotion = useReducedMotion();
+  const [display, setDisplay] = useState(reduceMotion ? target : 0);
+
+  useEffect(() => {
+    if (!inView) return;
+    const duration = reduceMotion ? 0 : 500;
+    const start = performance.now();
+    let frame: number;
+    const tick = (now: number) => {
+      const progress = duration === 0 ? 1 : Math.min((now - start) / duration, 1);
+      // ease-out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setDisplay(Math.round(eased * target));
+      if (progress < 1) frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [inView, reduceMotion, target]);
 
   return (
-    <section
-      className={`${commonStyles.section} ${themeStyles.section}`}
-      aria-label="Megicode proof"
-    >
-      <div className={commonStyles.container}>
-        {proofItems.map(({ iconSrc, value, label, note }) => (
-          <div key={label} className={`${commonStyles.item} ${themeStyles.item}`}>
-            <span className={`${commonStyles.icon} ${themeStyles.icon}`} aria-hidden="true">
-              <Image
-                src={iconSrc}
-                alt=""
-                width={72}
-                height={72}
-                className={commonStyles.iconImage}
-              />
-            </span>
-            <span className={commonStyles.copy}>
-              <span className={`${commonStyles.value} ${themeStyles.value}`}>{value}</span>
-              <span className={`${commonStyles.label} ${themeStyles.label}`}>{label}</span>
-              <span className={`${commonStyles.note} ${themeStyles.note}`}>{note}</span>
-            </span>
+    <span ref={ref} className={styles.value} aria-label={`${target}${suffix}`}>
+      {display}
+      {suffix}
+    </span>
+  );
+}
+
+export default function HomeProof() {
+  return (
+    <section className={styles.section} aria-label="Megicode proof">
+      <div className={styles.rail}>
+        {proofItems.map(({ target, suffix, label, note }) => (
+          <div key={label} className={styles.item}>
+            <CountUpValue target={target} suffix={suffix} />
+            <span className={styles.label}>{label}</span>
+            <span className={styles.note}>{note}</span>
           </div>
         ))}
       </div>
-      <div className={commonStyles.evidenceRow}>
-        <Link
-          href="/projects"
-          className={`${commonStyles.evidenceLink} ${themeStyles.evidenceLink}`}
-        >
+      <div className={styles.evidenceRow}>
+        <Link href="/projects" className={styles.evidenceLink}>
           See the work behind these numbers →
         </Link>
       </div>

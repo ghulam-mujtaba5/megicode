@@ -1,0 +1,74 @@
+/* Mobile sticky conversion bar — hidden on desktop, slides in after the hero (plan §6) */
+
+.bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 90;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 56px;
+  padding: 8px 16px calc(8px + env(safe-area-inset-bottom));
+  background: color-mix(in srgb, var(--surface-card, #fff) 92%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid var(--line-blueprint, #dce5f6);
+  transform: translateY(110%);
+  visibility: hidden;
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0.35s;
+}
+
+.shown {
+  transform: translateY(0);
+  visibility: visible;
+}
+
+.anchor {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ink-soft, #526070);
+  white-space: nowrap;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 20px;
+  border-radius: 100px;
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  color: #ffffff;
+  background: linear-gradient(135deg, #5a87e8 0%, #4573df 100%);
+  box-shadow:
+    0 3px 0 #2d4fa2,
+    0 6px 16px rgba(69, 115, 223, 0.35);
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.button:active {
+  transform: translateY(2px);
+  box-shadow:
+    0 1px 0 #2d4fa2,
+    0 3px 8px rgba(69, 115, 223, 0.25);
+}
+
+[data-theme='dark'] .bar {
+  background: color-mix(in srgb, var(--surface-card, #1d222b) 92%, transparent);
+}
+
+@media (max-width: 900px) {
+  .bar {
+    display: flex;
+  }
+}

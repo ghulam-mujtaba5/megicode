@@ -121,7 +121,7 @@ export default function CareersPage() {
                   border: '1px solid rgba(255, 152, 0, 0.72)',
                   background:
                     theme === 'dark' ? 'rgba(255,255,255,0.055)' : 'rgba(255,255,255,0.78)',
-                  fontWeight: 900,
+                  fontWeight: 800,
                   textDecoration: 'none',
                   boxShadow:
                     theme === 'dark'

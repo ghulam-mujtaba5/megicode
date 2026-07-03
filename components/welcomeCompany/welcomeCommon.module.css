@@ -30,7 +30,7 @@
 
 /* "Welcome to" — small eyebrow above the brand name */
 .welcomeEyebrow {
-  font-family: 'Open Sans', sans-serif;
+  font-family: var(--font-body), sans-serif;
   font-size: clamp(0.875rem, 1.4vw, 1.125rem);
   font-weight: 500;
   letter-spacing: 0.06em;
@@ -48,7 +48,7 @@
 
 /* "Megi" — Poppins semi-bold, color from theme */
 .brandMegi {
-  font-family: 'Poppins', 'Open Sans', sans-serif;
+  font-family: var(--font-display), var(--font-body), sans-serif;
   font-size: clamp(2.4rem, 5vw, 3.75rem);
   font-weight: 600;
   letter-spacing: -0.01em;
@@ -57,7 +57,7 @@
 
 /* "code" — Poppins semi-bold, always brand blue */
 .brandCode {
-  font-family: 'Poppins', 'Open Sans', sans-serif;
+  font-family: var(--font-display), var(--font-body), sans-serif;
   font-size: clamp(2.4rem, 5vw, 3.75rem);
   font-weight: 600;
   letter-spacing: -0.01em;
@@ -65,10 +65,36 @@
   color: #4573df;
 }
 
+/* Outcome-first headline — the main h1 text (plan §3.1) */
+.heroTitle {
+  display: block;
+  font-family: var(--font-display), var(--font-body), sans-serif;
+  font-size: clamp(2.2rem, 4.4vw, 3.4rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  margin-top: 12px;
+  max-width: 640px;
+}
+
+.heroTitleAccent {
+  color: #4573df;
+}
+
+/* Micro-proof line beneath the CTAs — mono, measured not marketed */
+.microProof {
+  margin: 1.1rem 0 0;
+  font-family: var(--font-mono), 'Courier New', monospace;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--ink-soft, #526070);
+}
+
 /* Value-proposition headline — sits inside the h1, below the brand line */
 .heroHeadline {
   display: block;
-  font-family: 'Poppins', 'Open Sans', sans-serif;
+  font-family: var(--font-display), var(--font-body), sans-serif;
   font-size: clamp(1.25rem, 2.2vw, 1.75rem);
   font-weight: 600;
   letter-spacing: -0.01em;
@@ -80,7 +106,7 @@
 .paragraph {
   font-size: clamp(1rem, 1.6vw, 1.15rem);
   font-weight: 400;
-  font-family: 'Open Sans', sans-serif;
+  font-family: var(--font-body), sans-serif;
   line-height: 1.65;
   margin: 1rem 0 0;
   padding-bottom: 0;
@@ -92,7 +118,7 @@
   margin-top: 1.4rem;
   font-size: clamp(1rem, 2.2vw, 1.4rem);
   font-weight: 600;
-  font-family: 'Open Sans', sans-serif;
+  font-family: var(--font-body), sans-serif;
   letter-spacing: 0.01em;
   line-height: 1.4;
   position: relative;
@@ -139,7 +165,7 @@
 .heroSecondary {
   display: inline-flex;
   align-items: center;
-  font-family: 'Open Sans', sans-serif;
+  font-family: var(--font-body), sans-serif;
   font-size: 0.9375rem;
   font-weight: 600;
   padding: 12px 26px;
@@ -222,13 +248,22 @@
     max-width: 100%;
   }
 
-  .heroHeadline {
+  .heroHeadline,
+  .heroTitle,
+  .microProof {
     text-align: center;
     max-width: 100%;
   }
 
   .heroActions {
     justify-content: center;
+  }
+
+  .heroPrimary,
+  .heroSecondary {
+    width: 100%;
+    justify-content: center;
+    min-height: 50px;
   }
 
   .heroHeading {

@@ -1,48 +1,52 @@
-'use client';
-
 import Link from 'next/link';
 
 import { pricingEntrypoints } from '@/data/pricing';
 
-import { useTheme } from '@/context/ThemeContext';
+import styles from './HomePricingPreview.module.css';
+
+const REASSURANCE_CHIPS = [
+  'Start small when scope is unclear',
+  'Fixed-scope entry packages',
+  'Milestone-based larger builds',
+  'Third-party tools billed separately',
+];
 
 export default function HomePricingPreview() {
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
-
   return (
-    <section
-      className={`pricing-preview ${isDark ? 'dark' : 'light'}`}
-      aria-labelledby="home-pricing-heading"
-    >
-      <div className="pricing-preview-inner">
-        <div className="section-head">
-          <span>Clear starting points</span>
-          <h2 id="home-pricing-heading">Clear ways to start without guessing the budget</h2>
-          <p>
+    <section className={styles.section} aria-labelledby="home-pricing-heading">
+      <div className={styles.inner}>
+        <div className={styles.head}>
+          <span className={styles.eyebrow}>Clear starting points</span>
+          <h2 id="home-pricing-heading" className={styles.title}>
+            Clear ways to start without guessing the budget
+          </h2>
+          <p className={styles.sub}>
             Choose the first package that matches your scope: roadmap, automation, clinic setup, AI
             MVP, or custom platform.
           </p>
         </div>
 
-        <div className="preview-grid">
+        <div className={styles.grid}>
           {pricingEntrypoints.map((entry) => (
-            <article className="preview-card" key={entry.title}>
+            <article className={styles.card} key={entry.title}>
+              {'badge' in entry && entry.badge && (
+                <span className={styles.badge}>{entry.badge}</span>
+              )}
               <div>
-                <h3>{entry.title}</h3>
-                <strong>{entry.price}</strong>
+                <h3 className={styles.cardName}>{entry.title}</h3>
+                <strong className={styles.price}>{entry.price}</strong>
                 {'supportText' in entry && entry.supportText && (
-                  <span className="support-line">{entry.supportText}</span>
+                  <span className={styles.supportLine}>{entry.supportText}</span>
                 )}
-                <p>{entry.bestFor}</p>
+                <p className={styles.bestFor}>{entry.bestFor}</p>
               </div>
               <Link
-                className="card-button"
+                className={styles.cardButton}
                 href={entry.href}
                 aria-label={`${entry.cta}: ${entry.title}`}
               >
                 <span>{entry.cta}</span>
-                <span className="card-button-icon" aria-hidden="true">
+                <span className={styles.cardButtonIcon} aria-hidden="true">
                   →
                 </span>
               </Link>
@@ -50,432 +54,32 @@ export default function HomePricingPreview() {
           ))}
         </div>
 
-        <div className="preview-actions">
-          <Link className="section-button section-button-primary" href="/pricing">
-            <span>View Pricing</span>
-            <span className="section-button-icon" aria-hidden="true">
+        <div className={styles.chips} aria-label="How Megicode pricing works">
+          {REASSURANCE_CHIPS.map((chip) => (
+            <span key={chip} className={styles.chip}>
+              {chip}
+            </span>
+          ))}
+        </div>
+
+        <div className={styles.actions}>
+          <Link className={`${styles.button} ${styles.buttonPrimary}`} href="/pricing">
+            <span>Compare Packages</span>
+            <span className={styles.buttonIcon} aria-hidden="true">
               →
             </span>
           </Link>
           <Link
-            className="section-button section-button-secondary"
+            className={`${styles.button} ${styles.buttonSecondary}`}
             href="/contact?source=home-pricing"
           >
-            <span>Book an Intro Call</span>
-            <span className="section-button-icon" aria-hidden="true">
+            <span>Book a Fit Call</span>
+            <span className={styles.buttonIcon} aria-hidden="true">
               →
             </span>
           </Link>
         </div>
       </div>
-
-      <style jsx>{`
-        .pricing-preview {
-          box-sizing: border-box;
-          width: 100%;
-          padding: 5rem 1.25rem;
-          font-family: 'Open Sans', sans-serif;
-        }
-        .pricing-preview-inner {
-          width: min(1180px, calc(100vw - 64px));
-          margin: 0 auto;
-        }
-        .section-head {
-          max-width: 780px;
-          margin: 0 auto 2rem;
-          text-align: center;
-        }
-        .section-head span {
-          display: inline-flex;
-          border-radius: 999px;
-          padding: 6px 14px;
-          background: ${isDark ? 'rgba(69, 115, 223, 0.18)' : 'rgba(69, 115, 223, 0.1)'};
-          color: ${isDark ? '#c0d4ff' : '#4573df'};
-          font-size: 0.72rem;
-          font-weight: 800;
-          text-transform: uppercase;
-          letter-spacing: 0.12em;
-        }
-        .section-head h2 {
-          margin: 12px 0;
-          color: ${isDark ? '#f8fafc' : '#111827'};
-          font-size: clamp(1.8rem, 3.2vw, 2.65rem);
-          line-height: 1.15;
-          letter-spacing: 0;
-        }
-        .section-head p {
-          margin: 0;
-          color: ${isDark ? '#cbd5e1' : '#526070'};
-          line-height: 1.75;
-        }
-        .preview-grid {
-          display: grid;
-          grid-template-columns: repeat(5, minmax(0, 1fr));
-          gap: 20px;
-        }
-        .preview-card {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          gap: 18px;
-          min-height: 280px;
-          border-radius: 20px;
-          padding: 24px;
-          border: 1px solid ${isDark ? 'rgba(255,255,255,0.11)' : 'rgba(69,115,223,0.13)'};
-          background: ${isDark ? '#252b34' : 'rgba(255,255,255,0.84)'};
-          box-shadow: ${isDark
-            ? '0 18px 42px rgba(0,0,0,0.22)'
-            : '0 18px 42px rgba(69,115,223,0.08)'};
-          transition:
-            transform 0.22s ease,
-            box-shadow 0.22s ease,
-            border-color 0.22s ease;
-        }
-        .preview-card:hover {
-          transform: translateY(-4px);
-          border-color: ${isDark ? 'rgba(123,160,255,0.28)' : 'rgba(69,115,223,0.24)'};
-          box-shadow: ${isDark
-            ? '0 24px 52px rgba(0,0,0,0.28)'
-            : '0 24px 52px rgba(69,115,223,0.13)'};
-        }
-        .preview-card h3 {
-          margin: 0 0 10px;
-          color: ${isDark ? '#f8fafc' : '#111827'};
-          font-size: 1rem;
-          line-height: 1.3;
-        }
-        .preview-card strong {
-          display: block;
-          color: #ff9800;
-          font-size: 1.22rem;
-          line-height: 1.2;
-        }
-        .support-line {
-          display: block;
-          margin-top: 6px;
-          color: ${isDark ? '#c0d4ff' : '#2d4fa2'};
-          font-size: 0.8rem;
-          font-weight: 900;
-          line-height: 1.25;
-        }
-        .preview-card p {
-          margin: 14px 0 0;
-          color: ${isDark ? '#cbd5e1' : '#526070'};
-          font-size: 0.86rem;
-          line-height: 1.62;
-        }
-        .card-button {
-          display: inline-flex;
-          box-sizing: border-box;
-          width: 100%;
-          min-height: 46px;
-          align-items: center;
-          justify-content: space-between;
-          gap: 12px;
-          border-radius: 999px;
-          border: 1px solid ${isDark ? 'rgba(255,255,255,0.14)' : 'rgba(15,23,42,0.12)'};
-          padding: 0 18px;
-          color: ${isDark ? '#f8fafc' : '#1d2127'};
-          background: ${isDark ? 'rgba(255,255,255,0.055)' : 'rgba(15,23,42,0.035)'};
-          font-size: 0.86rem;
-          font-weight: 900;
-          line-height: 1.2;
-          text-decoration: none;
-          transition:
-            transform 0.2s ease,
-            box-shadow 0.2s ease,
-            background 0.2s ease,
-            border-color 0.2s ease,
-            color 0.2s ease;
-        }
-        .card-button:hover,
-        .card-button:focus-visible {
-          transform: translateY(-1px);
-          border-color: rgba(255, 152, 0, 0.72);
-          color: #ff9800;
-          background: rgba(255, 152, 0, 0.12);
-          box-shadow: 0 16px 30px rgba(249, 115, 22, 0.14);
-          outline: none;
-        }
-        .card-button:focus-visible {
-          box-shadow:
-            0 0 0 3px rgba(255, 152, 0, 0.22),
-            0 16px 30px rgba(249, 115, 22, 0.22);
-        }
-        .card-button-icon {
-          width: auto;
-          height: auto;
-          flex: 0 0 auto;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          color: #ff9800;
-          background: transparent;
-          font-size: 1rem;
-          line-height: 1;
-          transition:
-            transform 0.2s ease,
-            color 0.2s ease;
-        }
-        .card-button span:first-child,
-        .section-button span:first-child {
-          min-width: 0;
-          overflow-wrap: anywhere;
-        }
-        .card-button:hover .card-button-icon,
-        .card-button:focus-visible .card-button-icon {
-          transform: translateX(2px);
-          color: #ff9800;
-        }
-        .preview-actions {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 12px;
-          margin-top: 2rem;
-        }
-        .section-button {
-          display: inline-flex;
-          box-sizing: border-box;
-          min-height: 48px;
-          align-items: center;
-          justify-content: space-between;
-          gap: 14px;
-          border-radius: 999px;
-          border: 1px solid transparent;
-          padding: 0 22px;
-          font-weight: 900;
-          text-decoration: none;
-          transition:
-            transform 0.2s ease,
-            box-shadow 0.2s ease,
-            background 0.2s ease,
-            border-color 0.2s ease;
-        }
-        .section-button:hover,
-        .section-button:focus-visible {
-          transform: translateY(-1px);
-          outline: none;
-        }
-        .section-button-primary {
-          color: ${isDark ? '#f8fafc' : '#1d2127'};
-          border-color: rgba(255, 152, 0, 0.72);
-          background: ${isDark ? 'rgba(255,255,255,0.055)' : 'rgba(255,255,255,0.78)'};
-          box-shadow: ${isDark
-            ? '0 14px 30px rgba(0,0,0,0.18)'
-            : '0 14px 30px rgba(15,23,42,0.08)'};
-        }
-        .section-button-secondary {
-          color: ${isDark ? '#f8fafc' : '#1d2127'};
-          border-color: ${isDark ? 'rgba(255,255,255,0.16)' : 'rgba(15,23,42,0.14)'};
-          background: ${isDark ? 'rgba(255,255,255,0.06)' : 'rgba(255,255,255,0.7)'};
-        }
-        .section-button-primary:hover,
-        .section-button-primary:focus-visible,
-        .section-button-secondary:hover,
-        .section-button-secondary:focus-visible {
-          color: #ff9800;
-          border-color: rgba(255, 152, 0, 0.72);
-          background: rgba(255, 152, 0, 0.14);
-          box-shadow: 0 16px 34px rgba(249, 115, 22, 0.16);
-        }
-        .section-button-icon {
-          width: auto;
-          height: auto;
-          flex: 0 0 auto;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          color: currentColor;
-          background: transparent;
-          line-height: 1;
-          transition:
-            transform 0.2s ease,
-            color 0.2s ease;
-        }
-        .section-button-secondary .section-button-icon {
-          color: #ff9800;
-          background: transparent;
-        }
-        .section-button:hover .section-button-icon,
-        .section-button:focus-visible .section-button-icon {
-          transform: translateX(2px);
-        }
-        .section-button-primary:hover .section-button-icon,
-        .section-button-primary:focus-visible .section-button-icon,
-        .section-button-secondary:hover .section-button-icon,
-        .section-button-secondary:focus-visible .section-button-icon {
-          color: #ff9800;
-        }
-        @media (max-width: 1120px) {
-          .preview-grid {
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-          }
-        }
-        @media (max-width: 720px) {
-          .pricing-preview {
-            padding: 3.5rem 1rem;
-          }
-          .pricing-preview-inner {
-            width: min(100%, calc(100vw - 32px));
-          }
-          .preview-grid {
-            grid-template-columns: 1fr;
-          }
-          .preview-card {
-            min-height: auto;
-          }
-          .preview-actions {
-            flex-direction: column;
-          }
-          .section-button {
-            width: 100%;
-          }
-        }
-      `}</style>
-      <style jsx global>{`
-        .pricing-preview .card-button {
-          display: inline-flex;
-          box-sizing: border-box;
-          width: 100%;
-          min-height: 46px;
-          align-items: center;
-          justify-content: space-between;
-          gap: 12px;
-          border-radius: 999px;
-          border: 1px solid ${isDark ? 'rgba(255,255,255,0.14)' : 'rgba(15,23,42,0.12)'};
-          padding: 0 18px;
-          color: ${isDark ? '#f8fafc' : '#1d2127'};
-          background: ${isDark ? 'rgba(255,255,255,0.055)' : 'rgba(15,23,42,0.035)'};
-          font-size: 0.86rem;
-          font-weight: 900;
-          line-height: 1.2;
-          text-decoration: none;
-          transition:
-            transform 0.2s ease,
-            box-shadow 0.2s ease,
-            background 0.2s ease,
-            border-color 0.2s ease,
-            color 0.2s ease;
-        }
-        .pricing-preview .card-button:hover,
-        .pricing-preview .card-button:focus-visible {
-          transform: translateY(-1px);
-          border-color: rgba(255, 152, 0, 0.72);
-          color: #ff9800;
-          background: rgba(255, 152, 0, 0.12);
-          box-shadow: 0 16px 30px rgba(249, 115, 22, 0.14);
-          outline: none;
-        }
-        .pricing-preview .card-button:focus-visible {
-          box-shadow:
-            0 0 0 3px rgba(255, 152, 0, 0.22),
-            0 16px 30px rgba(249, 115, 22, 0.22);
-        }
-        .pricing-preview .card-button-icon {
-          width: auto;
-          height: auto;
-          flex: 0 0 auto;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          color: #ff9800;
-          background: transparent;
-          font-size: 1rem;
-          line-height: 1;
-          transition:
-            transform 0.2s ease,
-            color 0.2s ease;
-        }
-        .pricing-preview .card-button span:first-child,
-        .pricing-preview .section-button span:first-child {
-          min-width: 0;
-          overflow-wrap: anywhere;
-        }
-        .pricing-preview .card-button:hover .card-button-icon,
-        .pricing-preview .card-button:focus-visible .card-button-icon {
-          transform: translateX(2px);
-          color: #ff9800;
-        }
-        .pricing-preview .section-button {
-          display: inline-flex;
-          box-sizing: border-box;
-          min-height: 48px;
-          align-items: center;
-          justify-content: space-between;
-          gap: 14px;
-          border-radius: 999px;
-          border: 1px solid transparent;
-          padding: 0 22px;
-          font-weight: 900;
-          text-decoration: none;
-          transition:
-            transform 0.2s ease,
-            box-shadow 0.2s ease,
-            background 0.2s ease,
-            border-color 0.2s ease;
-        }
-        .pricing-preview .section-button:hover,
-        .pricing-preview .section-button:focus-visible {
-          transform: translateY(-1px);
-          outline: none;
-        }
-        .pricing-preview .section-button-primary {
-          color: ${isDark ? '#f8fafc' : '#1d2127'};
-          border-color: rgba(255, 152, 0, 0.72);
-          background: ${isDark ? 'rgba(255,255,255,0.055)' : 'rgba(255,255,255,0.78)'};
-          box-shadow: ${isDark
-            ? '0 14px 30px rgba(0,0,0,0.18)'
-            : '0 14px 30px rgba(15,23,42,0.08)'};
-        }
-        .pricing-preview .section-button-secondary {
-          color: ${isDark ? '#f8fafc' : '#1d2127'};
-          border-color: ${isDark ? 'rgba(255,255,255,0.16)' : 'rgba(15,23,42,0.14)'};
-          background: ${isDark ? 'rgba(255,255,255,0.06)' : 'rgba(255,255,255,0.7)'};
-        }
-        .pricing-preview .section-button-primary:hover,
-        .pricing-preview .section-button-primary:focus-visible,
-        .pricing-preview .section-button-secondary:hover,
-        .pricing-preview .section-button-secondary:focus-visible {
-          color: #ff9800;
-          border-color: rgba(255, 152, 0, 0.72);
-          background: rgba(255, 152, 0, 0.14);
-          box-shadow: 0 16px 34px rgba(249, 115, 22, 0.16);
-        }
-        .pricing-preview .section-button-icon {
-          width: auto;
-          height: auto;
-          flex: 0 0 auto;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          color: currentColor;
-          background: transparent;
-          line-height: 1;
-          transition:
-            transform 0.2s ease,
-            color 0.2s ease;
-        }
-        .pricing-preview .section-button-secondary .section-button-icon {
-          color: #ff9800;
-          background: transparent;
-        }
-        .pricing-preview .section-button:hover .section-button-icon,
-        .pricing-preview .section-button:focus-visible .section-button-icon {
-          transform: translateX(2px);
-        }
-        .pricing-preview .section-button-primary:hover .section-button-icon,
-        .pricing-preview .section-button-primary:focus-visible .section-button-icon,
-        .pricing-preview .section-button-secondary:hover .section-button-icon,
-        .pricing-preview .section-button-secondary:focus-visible .section-button-icon {
-          color: #ff9800;
-        }
-        @media (max-width: 720px) {
-          .pricing-preview .section-button {
-            width: 100%;
-          }
-        }
-      `}</style>
     </section>
   );
 }

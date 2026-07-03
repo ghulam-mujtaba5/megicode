@@ -13,7 +13,7 @@
 .filterButton {
   padding: 0.5rem 1.5rem;
   border-radius: 9999px;
-  font-family: 'Poppins', 'Open Sans', Arial, sans-serif;
+  font-family: var(--font-display), var(--font-body), Arial, sans-serif;
   font-weight: 600;
   font-size: 1rem;
   color: #4573df;
@@ -74,7 +74,7 @@
   flex-direction: column;
   background: var(--background, #fff);
   box-shadow: 0 2px 12px rgba(60, 60, 60, 0.06);
-  font-family: 'Open Sans', Arial, sans-serif;
+  font-family: var(--font-body), Arial, sans-serif;
 }
 
 .projectCard:hover,
@@ -112,7 +112,7 @@
 
 .projectTitle {
   font-size: 1.25rem;
-  font-family: 'Open Sans', Arial, sans-serif;
+  font-family: var(--font-body), Arial, sans-serif;
   font-weight: 700;
   margin-bottom: 0.75rem;
   color: #4573df;
@@ -127,7 +127,7 @@
 
 .projectDescription {
   font-size: 1rem;
-  font-family: 'Open Sans', Arial, sans-serif;
+  font-family: var(--font-body), Arial, sans-serif;
   line-height: 1.6;
   margin-bottom: 1rem;
   color: #23272f;
@@ -145,7 +145,7 @@
   padding: 0.25rem 0.75rem;
   border-radius: 9999px;
   font-size: 0.85rem;
-  font-family: 'Inter', Arial, sans-serif;
+  font-family: var(--font-body), Arial, sans-serif;
   font-weight: 500;
   background: #f5f7fa;
   color: #2d4fa2;
@@ -156,7 +156,7 @@
 .detailLink {
   display: inline-block;
   margin-top: 0.5rem;
-  font-family: 'Poppins', Arial, sans-serif;
+  font-family: var(--font-display), Arial, sans-serif;
   font-size: 1.05rem;
   font-weight: 600;
   color: #4573df;
@@ -288,7 +288,7 @@
   font-size: 0.82rem;
   font-weight: 500;
   color: #10b981;
-  font-family: 'Inter', monospace;
+  font-family: var(--font-body), monospace;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

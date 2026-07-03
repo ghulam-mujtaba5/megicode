@@ -17,7 +17,6 @@ import { motion, useAnimation } from 'framer-motion';
 import { CONTACT_EMAIL } from '@/lib/constants';
 
 import { useTheme } from '../../context/ThemeContext';
-import PlexusCanvas from '../Backgrounds/PlexusCanvas';
 import commonStyles from './ContactUsCommon.module.css';
 import darkStyles from './ContactUsDark.module.css';
 import lightStyles from './ContactUsLight.module.css';
@@ -147,10 +146,6 @@ const ContactSection = ({ email = CONTACT_EMAIL }) => {
     <>
       <SuccessToast show={showSuccess} onClose={() => setShowSuccess(false)} />
       <section className={`${commonStyles.section} ${themeStyles.section}`}>
-        <div className={commonStyles.backgroundLayer}>
-          <PlexusCanvas maxNodes={100} maxDistance={120} speed={0.15} />
-        </div>
-
         <div className={commonStyles.inner}>
           <div className={commonStyles.header}>
             <span className={`${commonStyles.eyebrow} ${themeStyles.eyebrow}`}>
@@ -164,6 +159,19 @@ const ContactSection = ({ email = CONTACT_EMAIL }) => {
               Send us a quick message and we&apos;ll reply within one business day. Need to share
               budget, timeline, or full requirements? Use our detailed project brief instead.
             </p>
+            <div className={commonStyles.trustChips} aria-label="Working with Megicode">
+              {[
+                '24h response',
+                'Free intro call',
+                'NDA available',
+                'Remote-first',
+                'Lahore-based, global clients',
+              ].map((chip) => (
+                <span key={chip} className={commonStyles.trustChip}>
+                  {chip}
+                </span>
+              ))}
+            </div>
           </div>
 
           <div className={commonStyles.grid}>

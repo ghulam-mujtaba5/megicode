@@ -30,6 +30,7 @@ export const pricingEntrypoints = [
   {
     title: 'AI Automation',
     price: 'From $900',
+    badge: 'Most booked',
     bestFor: 'Automate leads, replies, bookings, or reports.',
     cta: 'Automate Workflow',
     href: '/services/ai-automation-agents',

@@ -1,0 +1,588 @@
+- generic [active] [ref=e1]:
+  - link "Skip to main content" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - main [ref=e5]:
+    - navigation [ref=e6]:
+      - generic [ref=e7]:
+        - link "Megicode Logo" [ref=e9] [cursor=pointer]:
+          - /url: /
+          - img "Megicode Logo" [ref=e10]
+        - list [ref=e11]:
+          - listitem [ref=e12]:
+            - link "Services" [ref=e13] [cursor=pointer]:
+              - /url: /services
+          - listitem [ref=e14]:
+            - link "Pricing" [ref=e15] [cursor=pointer]:
+              - /url: /pricing
+          - listitem [ref=e16]:
+            - link "Case Studies" [ref=e17] [cursor=pointer]:
+              - /url: /projects
+          - listitem [ref=e18]:
+            - link "Insights" [ref=e19] [cursor=pointer]:
+              - /url: /insights
+          - listitem [ref=e20]:
+            - link "Start Your Project" [ref=e21] [cursor=pointer]:
+              - /url: /contact?source=nav
+          - listitem [ref=e22]:
+            - button "Switch to dark mode" [ref=e23] [cursor=pointer]:
+              - img [ref=e24]
+    - region [ref=e26]:
+      - region "Megicode — AI software, automation, and SaaS MVPs for growing businesses" [ref=e27]:
+        - generic [ref=e28]:
+          - heading "AI Product Studio — Lahore, serving global clients AI software, automation & SaaS MVPs built for real business growth" [level=1] [ref=e29]:
+            - generic [ref=e30]: AI Product Studio — Lahore, serving global clients
+            - generic [ref=e31]: AI software, automation & SaaS MVPs built for real business growth
+          - paragraph [ref=e32]: Megicode helps founders, clinics, agencies, and growing businesses turn ideas, workflows, and operations into launch-ready AI products, automation systems, and custom platforms.
+          - generic [ref=e33]:
+            - button "Book a Free Fit Call →" [ref=e34] [cursor=pointer]
+            - link "View Case Studies →" [ref=e35] [cursor=pointer]:
+              - /url: /projects
+          - paragraph [ref=e36]: 15+ products shipped · 5+ countries · replies within 24h
+      - generic [ref=e37]:
+        - img [ref=e38]
+        - generic [ref=e48]:
+          - generic [ref=e49]:
+            - generic [ref=e51]: Your idea
+            - generic [ref=e52]: brief
+          - generic [ref=e53]: “We need bookings, payments, and an AI assistant.”
+        - generic [ref=e54]:
+          - generic [ref=e57]: Megicode
+          - generic [ref=e58]:
+            - generic [ref=e59]: design
+            - generic [ref=e60]: build
+            - generic [ref=e61]: automate
+        - generic [ref=e63]:
+          - generic [ref=e64]:
+            - img [ref=e66]
+            - generic [ref=e68]: SaaS MVP launched
+          - generic [ref=e69]: auth · payments · AI layer
+        - generic [ref=e71]:
+          - generic [ref=e72]:
+            - img [ref=e74]
+            - generic [ref=e76]: Booking automated
+          - generic [ref=e77]: WhatsApp · Fri 10:30 · reminder
+        - generic [ref=e79]:
+          - generic [ref=e80]:
+            - generic [ref=e81]: Scale
+            - generic [ref=e82]: live
+          - generic [ref=e84]: +38% booked revenue
+    - region "Megicode proof" [ref=e85]:
+      - generic [ref=e86]:
+        - generic [ref=e87]:
+          - generic "15+" [ref=e88]: 0+
+          - generic [ref=e89]: AI & software products built
+          - generic [ref=e90]: Real product delivery, not demo screens
+        - generic [ref=e91]:
+          - generic "5+" [ref=e92]: 0+
+          - generic [ref=e93]: countries served
+          - generic [ref=e94]: Remote-ready delivery for global clients
+        - generic [ref=e95]:
+          - generic "10+" [ref=e96]: 0+
+          - generic [ref=e97]: startups & businesses partnered
+          - generic [ref=e98]: Founder-friendly software and automation
+      - link "See the work behind these numbers →" [ref=e100] [cursor=pointer]:
+        - /url: /projects
+    - region "What do you need help with? Choose by business outcome." [ref=e105]:
+      - region "What do you need help with? Choose by business outcome." [ref=e106]:
+        - generic [ref=e107]:
+          - generic [ref=e108]: Services
+          - heading "What do you need help with? Choose by business outcome." [level=2] [ref=e115]:
+            - text: What do you need help with?
+            - generic [ref=e116]: Choose by business outcome.
+          - paragraph [ref=e117]: Start from the problem your buyer, team, or founder is feeling today, then move into the right Megicode service path.
+        - generic "Service selection by buyer situation" [ref=e118]:
+          - article [ref=e119]:
+            - link "01 Lead automation I am losing leads or wasting time manually AI agents, instant replies, booking flows, follow-ups, and workflow automation. Stop late replies and manual handoffs Match this service" [ref=e120] [cursor=pointer]:
+              - /url: /services/ai-automation-agents
+              - generic [ref=e123]: "01"
+              - generic [ref=e124]: Lead automation
+              - generic [ref=e125]:
+                - heading "I am losing leads or wasting time manually" [level=3] [ref=e126]
+                - paragraph [ref=e127]: AI agents, instant replies, booking flows, follow-ups, and workflow automation.
+              - generic [ref=e128]: Stop late replies and manual handoffs
+              - generic [ref=e129]:
+                - text: Match this service
+                - img [ref=e130]
+          - article [ref=e132]:
+            - link "02 AI product build I have an AI product or SaaS idea MVP roadmap, product architecture, LLM features, dashboard, and launch support. Move from idea to a buildable product Match this service" [ref=e133] [cursor=pointer]:
+              - /url: /services/ai-saas-mvp-development
+              - generic [ref=e136]: "02"
+              - generic [ref=e137]: AI product build
+              - generic [ref=e138]:
+                - heading "I have an AI product or SaaS idea" [level=3] [ref=e139]
+                - paragraph [ref=e140]: MVP roadmap, product architecture, LLM features, dashboard, and launch support.
+              - generic [ref=e141]: Move from idea to a buildable product
+              - generic [ref=e142]:
+                - text: Match this service
+                - img [ref=e143]
+          - article [ref=e145]:
+            - link "03 Business platform My business needs a custom portal or dashboard Web apps, CRMs, booking systems, internal tools, client portals, and reports. Replace scattered tools with one system Match this service" [ref=e146] [cursor=pointer]:
+              - /url: /services/custom-web-development
+              - generic [ref=e149]: "03"
+              - generic [ref=e150]: Business platform
+              - generic [ref=e151]:
+                - heading "My business needs a custom portal or dashboard" [level=3] [ref=e152]
+                - paragraph [ref=e153]: Web apps, CRMs, booking systems, internal tools, client portals, and reports.
+              - generic [ref=e154]: Replace scattered tools with one system
+              - generic [ref=e155]:
+                - text: Match this service
+                - img [ref=e156]
+          - article [ref=e158]:
+            - link "04 Roadmap clarity I am not sure what to build first Technical roadmap, stack decision, risk review, and build plan before spending heavily. Choose the right first move before committing budget Match this service" [ref=e159] [cursor=pointer]:
+              - /url: /services/technical-consulting
+              - generic [ref=e162]: "04"
+              - generic [ref=e163]: Roadmap clarity
+              - generic [ref=e164]:
+                - heading "I am not sure what to build first" [level=3] [ref=e165]
+                - paragraph [ref=e166]: Technical roadmap, stack decision, risk review, and build plan before spending heavily.
+              - generic [ref=e167]: Choose the right first move before committing budget
+              - generic [ref=e168]:
+                - text: Match this service
+                - img [ref=e169]
+        - list [ref=e173]:
+          - listitem [ref=e174]:
+            - link "Learn more about AI Automation & Agents" [ref=e175] [cursor=pointer]:
+              - /url: /services/ai-automation-agents
+              - generic [ref=e179]: Core Service
+              - generic [ref=e180]:
+                - heading "AI Automation & Agents" [level=3] [ref=e181]
+                - paragraph [ref=e182]: Automate leads, replies, bookings, and repetitive workflows.
+              - paragraph [ref=e183]: We build AI agents and workflow automation that handle lead capture, customer replies, bookings, reminders, and repetitive operations inside your existing business systems.
+              - generic [ref=e184]:
+                - generic "OpenAI" [ref=e185]:
+                  - img [ref=e186]
+                - generic "Python" [ref=e188]:
+                  - img [ref=e189]
+                - generic "Zapier" [ref=e191]:
+                  - img [ref=e192]
+                - generic "Node.js" [ref=e194]:
+                  - img [ref=e195]
+              - generic [ref=e197]:
+                - text: Automate My Leads
+                - img [ref=e198]
+          - listitem [ref=e200]:
+            - link "Learn more about AI SaaS & MVP Development" [ref=e201] [cursor=pointer]:
+              - /url: /services/ai-saas-mvp-development
+              - generic [ref=e205]:
+                - heading "AI SaaS & MVP Development" [level=3] [ref=e206]
+                - paragraph [ref=e207]: Turn your AI idea into a launch-ready product.
+              - generic [ref=e208]:
+                - generic "Next.js" [ref=e209]:
+                  - img [ref=e210]
+                - generic "OpenAI" [ref=e212]:
+                  - img [ref=e213]
+                - generic "TypeScript" [ref=e215]:
+                  - img [ref=e216]
+              - generic [ref=e218]:
+                - generic [ref=e219]: Plan My AI MVP
+                - img [ref=e220]
+          - listitem [ref=e222]:
+            - link "Learn more about Custom Web Apps & Business Platforms" [ref=e223] [cursor=pointer]:
+              - /url: /services/custom-web-development
+              - generic [ref=e227]:
+                - heading "Custom Web Apps & Business Platforms" [level=3] [ref=e228]
+                - paragraph [ref=e229]: Build dashboards, portals, CRMs, and booking systems for real operations.
+              - generic [ref=e230]:
+                - generic "Next.js" [ref=e231]:
+                  - img [ref=e232]
+                - generic "React" [ref=e234]:
+                  - img [ref=e235]
+                - generic "TypeScript" [ref=e237]:
+                  - img [ref=e238]
+              - generic [ref=e240]:
+                - generic [ref=e241]: Build My Platform
+                - img [ref=e242]
+          - listitem [ref=e244]:
+            - link "Learn more about UI/UX Product Design" [ref=e245] [cursor=pointer]:
+              - /url: /services/ui-ux-design
+              - generic [ref=e249]:
+                - heading "UI/UX Product Design" [level=3] [ref=e250]
+                - paragraph [ref=e251]: Design interfaces users understand and trust.
+              - generic [ref=e252]:
+                - generic "Figma" [ref=e253]:
+                  - img [ref=e254]
+                - generic "Adobe" [ref=e256]:
+                  - img [ref=e257]
+                - generic "Framer" [ref=e259]:
+                  - img [ref=e260]
+              - generic [ref=e262]:
+                - generic [ref=e263]: Improve My UX
+                - img [ref=e264]
+          - listitem [ref=e266]:
+            - link "Learn more about Mobile App Solutions" [ref=e267] [cursor=pointer]:
+              - /url: /services/mobile-app-development
+              - generic [ref=e271]:
+                - heading "Mobile App Solutions" [level=3] [ref=e272]
+                - paragraph [ref=e273]: Bring your platform to iOS and Android.
+              - generic [ref=e274]:
+                - generic "React Native" [ref=e275]:
+                  - img [ref=e276]
+                - generic "Flutter" [ref=e278]:
+                  - img [ref=e279]
+                - generic "Firebase" [ref=e281]:
+                  - img [ref=e282]
+              - generic [ref=e284]:
+                - generic [ref=e285]: Discuss Mobile App
+                - img [ref=e286]
+          - listitem [ref=e288]:
+            - link "Learn more about Cloud & DevOps" [ref=e289] [cursor=pointer]:
+              - /url: /services/cloud-devops
+              - generic [ref=e293]:
+                - heading "Cloud & DevOps" [level=3] [ref=e294]
+                - paragraph [ref=e295]: Launch faster with stable deployment and infrastructure.
+              - generic [ref=e296]:
+                - generic "AWS" [ref=e297]:
+                  - img [ref=e298]
+                - generic "Docker" [ref=e300]:
+                  - img [ref=e301]
+                - generic "Kubernetes" [ref=e303]:
+                  - img [ref=e304]
+              - generic [ref=e306]:
+                - generic [ref=e307]: Prepare My Launch
+                - img [ref=e308]
+          - listitem [ref=e310]:
+            - link "Learn more about Data Analytics & BI" [ref=e311] [cursor=pointer]:
+              - /url: /services/data-analytics
+              - generic [ref=e315]:
+                - heading "Data Analytics & BI" [level=3] [ref=e316]
+                - paragraph [ref=e317]: Turn scattered data into clear decisions.
+              - paragraph [ref=e318]: We bring scattered business data into dashboards, reports, and decision views your team can trust without digging through disconnected spreadsheets and tools.
+              - generic [ref=e319]:
+                - generic "Python" [ref=e320]:
+                  - img [ref=e321]
+                - generic "Spark" [ref=e323]:
+                  - img [ref=e324]
+                - generic "Tableau" [ref=e326]:
+                  - img [ref=e327]
+              - generic [ref=e329]:
+                - text: Build My Dashboard
+                - img [ref=e330]
+          - listitem [ref=e332]:
+            - link "Learn more about Technical Consulting" [ref=e333] [cursor=pointer]:
+              - /url: /services/technical-consulting
+              - generic [ref=e337]:
+                - heading "Technical Consulting" [level=3] [ref=e338]
+                - paragraph [ref=e339]: Get the right roadmap before you build.
+              - generic [ref=e340]:
+                - generic "Git" [ref=e341]:
+                  - img [ref=e342]
+                - generic "GitHub" [ref=e344]:
+                  - img [ref=e345]
+                - generic "Terraform" [ref=e347]:
+                  - img [ref=e348]
+              - generic [ref=e350]:
+                - generic [ref=e351]: Get Roadmap
+                - img [ref=e352]
+        - link "View all services" [ref=e355] [cursor=pointer]:
+          - /url: /services
+          - text: View all services
+          - img [ref=e356]
+    - region "Proof that Megicode can build systems people actually use." [ref=e358]:
+      - generic [ref=e359]:
+        - generic [ref=e360]:
+          - generic [ref=e361]:
+            - img [ref=e362]
+            - text: Real platforms shipped
+          - heading "Proof that Megicode can build systems people actually use." [level=2] [ref=e364]
+          - paragraph [ref=e365]: "These are the kinds of outcomes buyers need to see before trusting a software partner: operational change, active usage, and a clear path to booked leads."
+        - generic [ref=e366]:
+          - article [ref=e367]:
+            - generic [ref=e369]:
+              - generic [ref=e370]:
+                - img [ref=e371]
+                - text: Clinic platform
+              - generic [ref=e373]: "01"
+            - heading "Website + WhatsApp booking + patient records + billing portal." [level=3] [ref=e374]
+            - paragraph [ref=e375]: Offline clinic operations became a searchable, bookable, managed digital system.
+            - generic [ref=e376]:
+              - generic [ref=e377]: 7+ services showcased
+              - generic [ref=e378]: Booking flow
+              - generic [ref=e379]: Internal portal
+            - link "View case study" [ref=e380] [cursor=pointer]:
+              - /url: /projects/aesthetics-clinic-platform
+              - text: View case study
+              - img [ref=e381]
+          - article [ref=e383]:
+            - generic [ref=e385]:
+              - generic [ref=e386]:
+                - img [ref=e387]
+                - text: Student platform
+              - generic [ref=e389]: "02"
+            - heading "CampusAxis usage proof from Google Analytics, not a portfolio-only claim." [level=3] [ref=e390]
+            - paragraph [ref=e391]: A student platform with real tracked usage across resources, calculators, reviews, and community workflows.
+            - button "Open CampusAxis Google Analytics proof screenshot" [ref=e392]:
+              - img "Google Analytics dashboard for CampusAxis showing 13K users, 24K views, 13K active users, and 72K events." [ref=e393]
+              - generic:
+                - img
+                - text: View proof
+            - generic [ref=e394]:
+              - generic [ref=e395]: 13K users
+              - generic [ref=e396]: 24K views
+              - generic [ref=e397]: 72K events
+            - link "View case study" [ref=e398] [cursor=pointer]:
+              - /url: /projects/campusaxis-university-portal
+              - text: View case study
+              - img [ref=e399]
+          - article [ref=e401]:
+            - generic [ref=e403]:
+              - generic [ref=e404]:
+                - img [ref=e405]
+                - text: Growth agency website
+              - generic [ref=e407]: "03"
+            - heading "Conversion-focused website with funnel narrative, proof, pricing, and booking flow." [level=3] [ref=e408]
+            - paragraph [ref=e409]: A premium website that explains the offer and pushes qualified visitors to book.
+            - generic [ref=e410]:
+              - generic [ref=e411]: Funnel narrative
+              - generic [ref=e412]: Proof blocks
+              - generic [ref=e413]: Audit CTA
+            - link "View case study" [ref=e414] [cursor=pointer]:
+              - /url: /projects/wajdan-growth-system-website
+              - text: View case study
+              - img [ref=e415]
+    - region "Clear ways to start without guessing the budget" [ref=e421]:
+      - generic [ref=e422]:
+        - generic [ref=e423]:
+          - generic [ref=e424]: Clear starting points
+          - heading "Clear ways to start without guessing the budget" [level=2] [ref=e425]
+          - paragraph [ref=e426]: "Choose the first package that matches your scope: roadmap, automation, clinic setup, AI MVP, or custom platform."
+        - generic [ref=e427]:
+          - article [ref=e428]:
+            - generic [ref=e429]:
+              - heading "MVP Roadmap" [level=3] [ref=e430]
+              - strong [ref=e431]: From $400
+              - paragraph [ref=e432]: Clarify scope before you build.
+            - 'link "View Roadmap: MVP Roadmap" [ref=e433] [cursor=pointer]':
+              - /url: /contact?service=mvp-roadmap
+              - generic [ref=e434]: View Roadmap
+              - generic [ref=e435]: →
+          - article [ref=e436]:
+            - generic [ref=e437]: Most booked
+            - generic [ref=e438]:
+              - heading "AI Automation" [level=3] [ref=e439]
+              - strong [ref=e440]: From $900
+              - paragraph [ref=e441]: Automate leads, replies, bookings, or reports.
+            - 'link "Automate Workflow: AI Automation" [ref=e442] [cursor=pointer]':
+              - /url: /services/ai-automation-agents
+              - generic [ref=e443]: Automate Workflow
+              - generic [ref=e444]: →
+          - article [ref=e445]:
+            - generic [ref=e446]:
+              - heading "Clinic AI Receptionist" [level=3] [ref=e447]
+              - strong [ref=e448]: From $1,250 setup
+              - generic [ref=e449]: Support from $150/mo
+              - paragraph [ref=e450]: Capture inquiries, bookings, reminders, and staff handoff.
+            - 'link "Automate Clinic Bookings: Clinic AI Receptionist" [ref=e451] [cursor=pointer]':
+              - /url: /contact?service=clinic-ai-receptionist
+              - generic [ref=e452]: Automate Clinic Bookings
+              - generic [ref=e453]: →
+          - article [ref=e454]:
+            - generic [ref=e455]:
+              - heading "AI SaaS MVP" [level=3] [ref=e456]
+              - strong [ref=e457]: From $4,500
+              - paragraph [ref=e458]: Build a focused AI product with launch setup.
+            - 'link "Plan My MVP: AI SaaS MVP" [ref=e459] [cursor=pointer]':
+              - /url: /services/ai-saas-mvp-development
+              - generic [ref=e460]: Plan My MVP
+              - generic [ref=e461]: →
+          - article [ref=e462]:
+            - generic [ref=e463]:
+              - heading "Custom Platform" [level=3] [ref=e464]
+              - strong [ref=e465]: From $3,500
+              - paragraph [ref=e466]: Replace spreadsheets and disconnected tools.
+            - 'link "Build My Platform: Custom Platform" [ref=e467] [cursor=pointer]':
+              - /url: /services/custom-web-development
+              - generic [ref=e468]: Build My Platform
+              - generic [ref=e469]: →
+        - generic "How Megicode pricing works" [ref=e470]:
+          - generic [ref=e471]: Start small when scope is unclear
+          - generic [ref=e472]: Fixed-scope entry packages
+          - generic [ref=e473]: Milestone-based larger builds
+          - generic [ref=e474]: Third-party tools billed separately
+        - generic [ref=e475]:
+          - link "Compare Packages" [ref=e476] [cursor=pointer]:
+            - /url: /pricing
+            - generic [ref=e477]: Compare Packages
+            - generic [ref=e478]: →
+          - link "Book a Fit Call" [ref=e479] [cursor=pointer]:
+            - /url: /contact?source=home-pricing
+            - generic [ref=e480]: Book a Fit Call
+            - generic [ref=e481]: →
+    - region "Proof from products, platforms, and business systems we have shipped." [ref=e482]:
+      - generic [ref=e483]:
+        - generic [ref=e484]:
+          - generic [ref=e485]:
+            - img [ref=e486]
+            - text: Reviews & outcomes
+          - heading "Proof from products, platforms, and business systems we have shipped." [level=2] [ref=e488]
+          - paragraph [ref=e489]: Megicode is built for founders and teams who need real software outcomes, not vague technical promises.
+        - list [ref=e490]:
+          - listitem [ref=e491]:
+            - generic [ref=e492]:
+              - link "Booking automation" [ref=e493] [cursor=pointer]:
+                - /url: /services/ai-automation-agents
+              - img "Rated 5 out of 5" [ref=e494]:
+                - img [ref=e495]
+                - img [ref=e497]
+                - img [ref=e499]
+                - img [ref=e501]
+                - img [ref=e503]
+            - blockquote [ref=e505]:
+              - paragraph [ref=e506]: Megicode helped us move from scattered offline operations to a proper digital clinic experience — a professional website, consultation booking, WhatsApp flow, patient records, billing, and staff roles in one system.
+            - generic [ref=e508]:
+              - generic [ref=e509]: Dr. Qandeel Sardar
+              - generic [ref=e510]: Clinic founder — Aesthetics Place
+          - listitem [ref=e511]:
+            - generic [ref=e512]:
+              - link "SaaS platform" [ref=e513] [cursor=pointer]:
+                - /url: /services/ai-saas-mvp-development
+              - img "Rated 5 out of 5" [ref=e514]:
+                - img [ref=e515]
+                - img [ref=e517]
+                - img [ref=e519]
+                - img [ref=e521]
+                - img [ref=e523]
+            - blockquote [ref=e525]:
+              - paragraph [ref=e526]: CampusAxis changed my university experience. Past papers, GPA calculator, faculty reviews, timetable, everything I need is in one place and it takes seconds to find.
+            - generic [ref=e527]:
+              - generic [ref=e528]: SU
+              - generic [ref=e529]:
+                - generic [ref=e530]: Student user
+                - generic [ref=e531]: CampusAxis — university platform
+          - listitem [ref=e532]:
+            - generic [ref=e533]:
+              - link "Conversion website" [ref=e534] [cursor=pointer]:
+                - /url: /services/custom-web-development
+              - img "Rated 5 out of 5" [ref=e535]:
+                - img [ref=e536]
+                - img [ref=e538]
+                - img [ref=e540]
+                - img [ref=e542]
+                - img [ref=e544]
+            - blockquote [ref=e546]:
+              - paragraph [ref=e547]: Megicode turned our growth system into a conversion-focused website. The site now explains our offer, funnel, automation, proof, pricing, and booking flow in a way cold visitors can understand and act on.
+            - generic [ref=e549]:
+              - generic [ref=e550]: M. Wajahat Ali
+              - generic [ref=e551]: Agency co-founder — Wajdan Digital Alchemy
+        - link "Read more reviews" [ref=e553] [cursor=pointer]:
+          - /url: /reviews
+          - text: Read more reviews
+          - img [ref=e554]
+    - region [ref=e560]:
+      - region "ABOUT US" [ref=e561]:
+        - generic [ref=e562]:
+          - heading "ABOUT US" [level=2] [ref=e564]
+          - paragraph [ref=e565]: Your AI Tech Partner — From Idea to Scale
+          - generic [ref=e566]:
+            - paragraph [ref=e567]: Megicode is a software company that partners with startups, non-technical founders, and growing businesses to build AI products, websites, and business platforms. We handle the tech — roadmap, design, build, launch, and support — so you can focus on customers.
+            - paragraph [ref=e568]: "We work like a technical co-founder: clear scope before code, honest trade-off advice, working software shipped in weeks, and a team that stays accountable after launch."
+          - paragraph [ref=e569]: One team that takes your product from idea to launch — and stays after it ships.
+          - link "Learn more about Megicode" [ref=e570] [cursor=pointer]:
+            - /url: /about
+            - text: Learn more about us
+            - img [ref=e571]
+    - region [ref=e573]:
+      - generic [ref=e575]:
+        - generic [ref=e576]:
+          - generic [ref=e577]:
+            - img [ref=e578]
+            - text: Get In Touch
+          - heading "Have a project in mind?" [level=2] [ref=e581]
+          - paragraph [ref=e582]: Send us a quick message and we'll reply within one business day. Need to share budget, timeline, or full requirements? Use our detailed project brief instead.
+          - generic "Working with Megicode" [ref=e583]:
+            - generic [ref=e584]: 24h response
+            - generic [ref=e585]: Free intro call
+            - generic [ref=e586]: NDA available
+            - generic [ref=e587]: Remote-first
+            - generic [ref=e588]: Lahore-based, global clients
+        - generic [ref=e589]:
+          - form "Quick contact form" [ref=e590]:
+            - generic [ref=e592]:
+              - generic [ref=e593]: Name
+              - textbox "Name" [ref=e594]:
+                - /placeholder: Your name
+            - generic [ref=e595]:
+              - generic [ref=e596]: Email
+              - textbox "Email" [ref=e597]:
+                - /placeholder: you@company.com
+            - generic [ref=e598]:
+              - generic [ref=e599]: Message
+              - textbox "Message" [ref=e600]:
+                - /placeholder: Tell us what you're building...
+            - button "Send message" [ref=e601] [cursor=pointer]:
+              - text: Send Message
+              - img [ref=e602]
+          - generic [ref=e604]:
+            - heading "Contact Information" [level=3] [ref=e605]
+            - paragraph [ref=e606]: Let's start a conversation
+            - list [ref=e607]:
+              - listitem [ref=e608]:
+                - img [ref=e610]
+                - link "contact@megicode.com" [ref=e613] [cursor=pointer]:
+                  - /url: mailto:contact@megicode.com
+              - listitem [ref=e614]:
+                - img [ref=e616]
+                - generic [ref=e618]: Remote · Global — serving clients worldwide
+              - listitem [ref=e619]:
+                - img [ref=e621]
+                - generic [ref=e623]: Mon – Fri, 9 AM – 6 PM PKT
+            - link "Need a full project brief?" [ref=e624] [cursor=pointer]:
+              - /url: /contact
+              - text: Need a full project brief?
+              - img [ref=e625]
+    - generic [ref=e628]:
+      - generic [ref=e630]:
+        - generic [ref=e631]:
+          - link "Megicode home" [ref=e632] [cursor=pointer]:
+            - /url: /
+            - img "Megicode" [ref=e633]
+          - paragraph [ref=e634]: AI software, automation, SaaS MVPs, and custom business platforms.
+        - navigation "Footer services" [ref=e635]:
+          - strong [ref=e636]: Services
+          - link "Pricing" [ref=e637] [cursor=pointer]:
+            - /url: /pricing
+          - link "AI Automation" [ref=e638] [cursor=pointer]:
+            - /url: /services/ai-automation-agents
+          - link "AI SaaS MVP" [ref=e639] [cursor=pointer]:
+            - /url: /services/ai-saas-mvp-development
+          - link "Custom Platforms" [ref=e640] [cursor=pointer]:
+            - /url: /services/custom-web-development
+        - navigation "Footer company links" [ref=e641]:
+          - strong [ref=e642]: Company
+          - link "About" [ref=e643] [cursor=pointer]:
+            - /url: /about
+          - link "Our Work" [ref=e644] [cursor=pointer]:
+            - /url: /projects
+          - link "Reviews" [ref=e645] [cursor=pointer]:
+            - /url: /reviews
+          - link "Insights" [ref=e646] [cursor=pointer]:
+            - /url: /insights
+          - link "Contact" [ref=e647] [cursor=pointer]:
+            - /url: /contact?source=footer
+          - link "Careers" [ref=e648] [cursor=pointer]:
+            - /url: /careers
+          - link "Privacy" [ref=e649] [cursor=pointer]:
+            - /url: /privacy-policy
+        - generic [ref=e650]:
+          - strong [ref=e651]: Start here
+          - link "Start Your Project →" [ref=e652] [cursor=pointer]:
+            - /url: /contact?source=footer
+          - link "contact@megicode.com" [ref=e653] [cursor=pointer]:
+            - /url: mailto:contact@megicode.com
+          - generic "Megicode social links" [ref=e654]:
+            - link "LinkedIn" [ref=e655] [cursor=pointer]:
+              - /url: https://www.linkedin.com/company/megicode
+              - img "LinkedIn" [ref=e656]
+            - link "Instagram" [ref=e657] [cursor=pointer]:
+              - /url: https://www.instagram.com/megicode/
+              - img "Instagram" [ref=e658]
+            - link "GitHub" [ref=e659] [cursor=pointer]:
+              - /url: https://github.com/megicodes
+              - img "GitHub" [ref=e660]
+      - generic [ref=e661]:
+        - paragraph [ref=e662]: Copyright 2026 Megicode. All Rights Reserved.
+        - link "Access Internal Portal" [ref=e663] [cursor=pointer]:
+          - /url: /internal/login
+          - img [ref=e664]
+          - text: Portal
+  - button "Open Next.js Dev Tools" [ref=e672] [cursor=pointer]:
+    - img [ref=e673]
