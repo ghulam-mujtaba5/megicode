@@ -116,7 +116,7 @@ const Footer = ({
                 whileTap={{ scale: 0.95 }}
               >
                 <Image
-                  alt=""
+                  alt="LinkedIn"
                   src={theme === 'dark' ? '/LinkedinDark.svg' : '/linkedin-icon.svg'}
                   width={22}
                   height={22}
@@ -133,7 +133,7 @@ const Footer = ({
                 whileTap={{ scale: 0.95 }}
               >
                 <Image
-                  alt=""
+                  alt="Instagram"
                   src={theme === 'dark' ? '/InstagramDark.svg' : '/Instagram-icon.svg'}
                   width={22}
                   height={22}
@@ -150,7 +150,7 @@ const Footer = ({
                 whileTap={{ scale: 0.95 }}
               >
                 <Image
-                  alt=""
+                  alt="GitHub"
                   src={theme === 'dark' ? '/GithubDark.svg' : '/github_icon.svg'}
                   width={22}
                   height={22}
