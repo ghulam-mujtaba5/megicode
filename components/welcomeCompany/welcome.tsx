@@ -30,16 +30,6 @@ const Frame = () => {
         transition={{ duration: 0.35 }}
       >
         <h1 className={commonStyles.heroHeading}>
-          {/* Eyebrow — who we are, where we work */}
-          <motion.span
-            className={`${commonStyles.welcomeEyebrow} ${themeStyles.welcomeEyebrow}`}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, delay: 0.05, ease: EASE }}
-          >
-            AI Product Studio — Lahore, serving global clients
-          </motion.span>
-
           {/* Outcome-first headline — the conversion h1 */}
           <motion.span
             className={`${commonStyles.heroTitle} ${themeStyles.heroHeadline}`}

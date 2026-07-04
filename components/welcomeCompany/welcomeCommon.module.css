@@ -28,16 +28,6 @@
   gap: 2px;
 }
 
-/* "Welcome to" — small eyebrow above the brand name */
-.welcomeEyebrow {
-  font-family: var(--font-body), sans-serif;
-  font-size: clamp(0.875rem, 1.4vw, 1.125rem);
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  line-height: 1.4;
-}
-
 /* Brand name container — overflow:hidden clips the shimmer sweep without touching letter descenders */
 .brandLine {
   display: block;
