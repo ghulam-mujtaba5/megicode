@@ -15,6 +15,15 @@
   z-index: 1;
   overflow: visible;
   user-select: none;
+  /* decorative diagram — never intercept clicks meant for the hero copy/CTAs */
+  pointer-events: none;
+}
+
+/* Parallax depth layers — same size as the canvas so the % positioning
+   of cards and wires inside them is unchanged */
+.layer {
+  position: absolute;
+  inset: 0;
 }
 
 .wires {
@@ -34,6 +43,15 @@
 
 .pulseDot {
   fill: var(--brand-blue, #4573df);
+}
+
+.pulseHalo {
+  fill: var(--brand-blue, #4573df);
+}
+
+[data-theme='dark'] .pulseDot,
+[data-theme='dark'] .pulseHalo {
+  fill: #86a8f8;
 }
 
 /* ── Cards ── */
@@ -78,6 +96,47 @@
   color: var(--ink-soft, #526070);
 }
 
+/* The brief types itself out over the first stretch of the pulse cycle,
+   holds, then clears just before the next cycle begins. 34ch = text length. */
+.typedLine {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  vertical-align: bottom;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.64rem;
+  color: var(--ink-soft, #526070);
+  border-right: 1.5px solid var(--brand-blue, #4573df);
+  animation:
+    typeBrief 5.6s steps(34, end) infinite,
+    caretBlink 0.8s step-end infinite;
+}
+
+@keyframes typeBrief {
+  0% {
+    width: 0ch;
+  }
+  36%,
+  88% {
+    width: 34ch;
+  }
+  94%,
+  100% {
+    width: 0ch;
+  }
+}
+
+@keyframes caretBlink {
+  0%,
+  100% {
+    border-right-color: var(--brand-blue, #4573df);
+  }
+  50% {
+    border-right-color: transparent;
+  }
+}
+
 .monoLine {
   font-family: var(--font-mono), monospace;
   font-size: 0.68rem;
@@ -118,6 +177,24 @@
   background: var(--brand-blue, #4573df);
   color: #fff;
   flex-shrink: 0;
+  /* swells right as the output pulse docks at the card (end of the cycle) */
+  animation: arriveSwell 5.6s ease-in-out infinite;
+}
+
+@keyframes arriveSwell {
+  0%,
+  92% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(69, 115, 223, 0.35);
+  }
+  97% {
+    transform: scale(1.14);
+    box-shadow: 0 0 0 6px rgba(69, 115, 223, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(69, 115, 223, 0);
+  }
 }
 
 /* ── The magic box — Megicode core ── */
@@ -231,18 +308,49 @@
 }
 
 .agentChip {
+  --chip-bg: rgba(69, 115, 223, 0.09);
+  --chip-ink: var(--brand-blue, #4573df);
   border-radius: 999px;
   padding: 2px 7px;
-  background: rgba(69, 115, 223, 0.09);
-  color: var(--brand-blue, #4573df);
+  background: var(--chip-bg);
+  color: var(--chip-ink);
   font-family: var(--font-mono), monospace;
   font-size: 0.58rem;
   font-weight: 500;
+  /* design → build → automate light up in sequence while the core "works"
+     (just after the brief arrives at the cycle midpoint) */
+  animation: chipWork 5.6s ease-in-out infinite;
+}
+
+.agentChip:nth-child(2) {
+  animation-delay: 0.22s;
+}
+
+.agentChip:nth-child(3) {
+  animation-delay: 0.44s;
+}
+
+@keyframes chipWork {
+  0%,
+  50% {
+    background: var(--chip-bg);
+    color: var(--chip-ink);
+  }
+  55%,
+  60% {
+    background: var(--brand-blue, #4573df);
+    color: #fff;
+  }
+  68%,
+  100% {
+    background: var(--chip-bg);
+    color: var(--chip-ink);
+  }
 }
 
 [data-theme='dark'] .agentChip {
-  background: rgba(69, 115, 223, 0.2);
-  color: #c0d4ff;
+  --chip-bg: rgba(69, 115, 223, 0.2);
+  --chip-ink: #c0d4ff;
 }
 
 /* ── Analytics mini chart ── */
@@ -263,6 +371,22 @@
 
 .barHot {
   background: var(--brand-blue, #4573df);
+  /* ticks up when the analytics pulse docks; delayed so the framer
+     entrance (scaleY 0 → 1) finishes before the loop takes over */
+  animation: barTick 5.6s ease-in-out 2.4s infinite;
+}
+
+@keyframes barTick {
+  0%,
+  92% {
+    transform: scaleY(1);
+  }
+  97% {
+    transform: scaleY(1.14);
+  }
+  100% {
+    transform: scaleY(1);
+  }
 }
 
 .chartCaption {
@@ -301,14 +425,21 @@
   .canvas {
     max-width: 400px;
     margin: 8px auto 14px;
+    /* taller canvas spreads the % card positions so they don't overlap */
+    aspect-ratio: 1.25 / 1;
   }
 
   .card {
     padding: 10px 11px;
   }
 
-  .cardBody {
+  .cardBody,
+  .monoLine {
     display: none;
+  }
+
+  .chart {
+    height: 32px;
   }
 }
 
@@ -317,11 +448,21 @@
   .dotLive,
   .coreRing,
   .coreGlow,
-  .coreBox {
+  .coreBox,
+  .checkDot,
+  .agentChip,
+  .barHot {
     animation: none;
   }
 
-  .pulseDot {
+  .pulseDot,
+  .pulseHalo {
     display: none;
+  }
+
+  .typedLine {
+    animation: none;
+    width: auto;
+    border-right: none;
   }
 }

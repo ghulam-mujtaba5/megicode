@@ -5,18 +5,11 @@ import Link from 'next/link';
 
 import { LOGO_ICON } from '@/lib/logo';
 
-import { useTheme } from '../../../context/ThemeContext';
-
-export default function ArticleError() {
-  const { theme } = useTheme();
-
+export default function ArticleError({ reset }: { reset: () => void }) {
   return (
     <div
       style={{
-        background:
-          theme === 'dark'
-            ? 'linear-gradient(135deg, #181c22 0%, #232946 100%)'
-            : 'linear-gradient(135deg, #f8fafc 0%, #e8eaf6 100%)',
+        background: 'var(--surface-page)',
         minHeight: '100vh',
         overflowX: 'hidden',
         display: 'flex',
@@ -38,39 +31,52 @@ export default function ArticleError() {
           fontSize: '2rem',
           fontWeight: 700,
           marginBottom: '1rem',
-          color: theme === 'dark' ? '#e3e8ee' : '#1d2127',
+          color: 'var(--ink)',
         }}
       >
-        Oops! Something went wrong
+        We couldn&rsquo;t load this article
       </h1>
       <p
         style={{
           fontSize: '1.1rem',
           marginBottom: '2rem',
-          color: theme === 'dark' ? '#b0b8c1' : '#5a6270',
+          color: 'var(--ink-soft)',
           textAlign: 'center',
         }}
       >
-        We encountered an error while loading the article.
-        <br />
-        Please try again later.
+        Something went wrong on our side. Try again, or head back to Insights.
       </p>
-      <Link
-        href="/insights"
-        style={{
-          background: theme === 'dark' ? '#4573df' : '#4573df',
-          color: '#ffffff',
-          padding: '0.75rem 1.5rem',
-          borderRadius: '0.5rem',
-          textDecoration: 'none',
-          fontWeight: 600,
-          transition: 'background 0.2s',
-          border: 'none',
-          cursor: 'pointer',
-        }}
-      >
-        Back to Insights
-      </Link>
+      <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+        <button
+          onClick={reset}
+          style={{
+            background: 'var(--brand-blue, #4573df)',
+            color: '#ffffff',
+            padding: '0.75rem 1.5rem',
+            borderRadius: '0.5rem',
+            fontWeight: 600,
+            fontSize: '1rem',
+            border: 'none',
+            cursor: 'pointer',
+          }}
+        >
+          Try again
+        </button>
+        <Link
+          href="/insights"
+          style={{
+            background: 'transparent',
+            color: 'var(--brand-blue, #4573df)',
+            padding: '0.75rem 1.5rem',
+            borderRadius: '0.5rem',
+            textDecoration: 'none',
+            fontWeight: 600,
+            border: '1px solid var(--line-blueprint-strong, #b8c9ee)',
+          }}
+        >
+          Back to Insights
+        </Link>
+      </div>
     </div>
   );
 }

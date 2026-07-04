@@ -1,7 +1,5 @@
 'use client';
 
-import { useRef, useState } from 'react';
-
 import Image from 'next/image';
 
 import { useTheme } from '@/context/ThemeContext';
@@ -17,23 +15,20 @@ interface LoadingAnimationProps {
   message?: string;
 }
 
-interface AnimationParticle {
-  id: number;
-  style: {
-    top: string;
-    left: string;
-    animationDelay: string;
-    scale: number;
-    opacity: number;
-    size: string;
-    blur: string;
-    color: string;
-    transform: string;
-    zIndex: number;
-  };
-  type: 'particle';
-}
+/* Ring geometry — viewBox 64×64, r 28 */
+const RADIUS = 28;
+const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
 
+const LOGO_PX = { small: 16, medium: 36, large: 52 } as const;
+
+/* What the "core" is doing while the page loads — same story the hero tells */
+const STATUS_WORDS = ['designing', 'building', 'automating', 'shipping'];
+
+/**
+ * Pipeline-core loader: the Megicode core box (same motif as the hero
+ * diagram) with a blueprint track ring and a brand-blue arc travelling
+ * around it. Determinate when `progress` is given, indeterminate otherwise.
+ */
 export const LoadingAnimation = ({
   size = 'medium',
   fullscreen = false,
@@ -43,113 +38,80 @@ export const LoadingAnimation = ({
   message,
 }: LoadingAnimationProps) => {
   const { theme } = useTheme();
-  const animationRef = useRef<HTMLDivElement>(null);
 
-  const progressDisplay = typeof progress === 'number' ? Math.min(100, Math.max(0, progress)) : 0;
-
-  const progressStyle = {
-    '--progress': `${progressDisplay}%`,
-  } as React.CSSProperties;
-
-  const [particles] = useState<AnimationParticle[]>(() => {
-    const particleCount = 20;
-
-    return Array.from({ length: particleCount }, (_, index) => {
-      const primaryColor = 'var(--md-primary)';
-      const secondaryColor = 'var(--md-secondary)';
-
-      const phi = Math.acos(-1 + (2 * index) / particleCount);
-      const theta = Math.sqrt(particleCount * Math.PI) * phi;
-
-      const radius = 25 + Math.random() * 15;
-
-      const x = 50 + radius * Math.cos(theta) * Math.sin(phi);
-      const y = 50 + radius * Math.sin(theta) * Math.sin(phi);
-      const z = radius * Math.cos(phi);
-
-      return {
-        id: index,
-        type: 'particle',
-        style: {
-          top: `${y}%`,
-          left: `${x}%`,
-          animationDelay: `${index * 0.2}s`,
-          scale: 0.6 + Math.random() * 0.4,
-          opacity: 0.7 + Math.random() * 0.3,
-          size: `${3 + Math.random() * 2}px`,
-          blur: `${0.5}px`,
-          color: index % 3 === 0 ? primaryColor : secondaryColor,
-          transform: `translateZ(${z}px) rotateX(${Math.random() * 360}deg) rotateY(${Math.random() * 360}deg)`,
-          zIndex: Math.floor(z),
-        },
-      };
-    });
-  });
+  const determinate = typeof progress === 'number';
+  const clamped = determinate ? Math.min(100, Math.max(0, progress)) : 0;
+  const dashOffset = determinate ? CIRCUMFERENCE * (1 - clamped / 100) : undefined;
 
   return (
     <div
-      className={`${styles.loadingContainer} ${styles[size]} ${fullscreen ? styles.fullscreen : ''} ${inline ? styles.inline : ''}`}
-      ref={animationRef}
+      className={[
+        styles.loadingContainer,
+        styles[size],
+        fullscreen ? styles.fullscreen : '',
+        inline ? styles.inline : '',
+      ]
+        .filter(Boolean)
+        .join(' ')}
+      role="status"
+      aria-live="polite"
+      aria-label={message ?? 'Loading'}
     >
-      {!inline && (
-        <div className={styles.particles}>
-          {particles.map((particle) => {
-            if (particle.type === 'particle') {
-              return (
-                <div
-                  key={particle.id}
-                  className={styles.particle}
-                  style={{
-                    ...particle.style,
-                    transform: `${particle.style.transform} scale(${particle.style.scale})`,
-                    width: particle.style.size,
-                    height: particle.style.size,
-                    filter: `blur(${particle.style.blur})`,
-                    background: particle.style.color,
-                    zIndex: particle.style.zIndex,
-                  }}
-                />
-              );
-            }
-            return null;
-          })}
-        </div>
-      )}
-      <div className={styles.loadingWrapper}>
-        <div className={styles.progressRing} style={progressStyle}>
-          <div className={`${styles.circle} ${styles.circle1}`}>
-            <div className={styles.circleContent} />
-          </div>
-          <div className={`${styles.circle} ${styles.circle2}`}>
-            <div className={styles.circleContent} />
-          </div>
-          <div className={`${styles.circle} ${styles.circle3}`}>
-            <div className={styles.circleContent} />
-          </div>
-        </div>
+      <div className={styles.ringWrap}>
+        <svg
+          className={`${styles.ring} ${determinate ? styles.ringDeterminate : ''}`}
+          viewBox="0 0 64 64"
+          aria-hidden="true"
+        >
+          <circle className={styles.track} cx="32" cy="32" r={RADIUS} />
+          {determinate ? (
+            <circle
+              className={`${styles.arc} ${styles.arcDeterminate}`}
+              cx="32"
+              cy="32"
+              r={RADIUS}
+              style={{ strokeDasharray: CIRCUMFERENCE, strokeDashoffset: dashOffset }}
+            />
+          ) : (
+            /* comet orbit: a bright pulse with a fading two-step tail,
+               circling the blueprint track — the hero's traveling pulse,
+               orbiting while the page gets built */
+            <g className={styles.orbit}>
+              <circle className={styles.tailFar} cx="32" cy="32" r={RADIUS} />
+              <circle className={styles.tailNear} cx="32" cy="32" r={RADIUS} />
+              <circle className={styles.orbitDot} cx="60" cy="32" r="3" />
+            </g>
+          )}
+        </svg>
         {showLogo && (
-          <div className={styles.logo}>
-            <div className={styles.logoGlow} />
+          <div className={styles.core}>
+            <span className={styles.coreGlow} aria-hidden="true" />
             <Image
               src={theme === 'dark' ? '/logo-navbar-dark.png' : '/logo-navbar-light.png'}
-              alt="Megicode Logo"
-              width={size === 'small' ? 20 : size === 'large' ? 60 : 40}
-              height={size === 'small' ? 20 : size === 'large' ? 60 : 40}
+              alt=""
+              width={LOGO_PX[size]}
+              height={LOGO_PX[size]}
               priority
               className={styles.logoImage}
             />
           </div>
         )}
-        {message && (
-          <div className={styles.messageWrapper}>
-            <span className={styles.message}>{message}</span>
-            {progress !== undefined && (
-              <span className={styles.progressText}>{Math.round(progressDisplay)}%</span>
-            )}
-          </div>
-        )}
       </div>
-      <div className={styles.gridOverlay} />
+      {(message || determinate) && (
+        <div className={styles.messageWrapper}>
+          {message && <span className={styles.message}>{message}</span>}
+          {determinate && <span className={styles.progressText}>{Math.round(clamped)}%</span>}
+        </div>
+      )}
+      {fullscreen && !message && !determinate && (
+        <div className={styles.statusCycle} aria-hidden="true">
+          {STATUS_WORDS.map((word, i) => (
+            <span key={word} className={styles.statusWord} style={{ animationDelay: `${i * 2}s` }}>
+              {word}
+            </span>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

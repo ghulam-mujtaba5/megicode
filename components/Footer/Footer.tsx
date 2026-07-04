@@ -1,16 +1,39 @@
 'use client';
-import React, { useMemo, useRef } from 'react';
+import React, { useRef } from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
 
 import { useTheme } from '../../context/ThemeContext';
-import commonStyles from './FooterCommon.module.css';
-import darkStyles from './FooterDark.module.css';
-import lightStyles from './FooterLight.module.css';
+import styles from './FooterCommon.module.css';
 
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+const SERVICE_LINKS = [
+  { href: '/services/ai-automation-agents', label: 'AI Automation & Agents' },
+  { href: '/services/ai-saas-mvp-development', label: 'AI SaaS MVPs' },
+  { href: '/services/custom-web-development', label: 'Custom Platforms' },
+  { href: '/services/mobile-app-development', label: 'Mobile Apps' },
+  { href: '/services/data-analytics', label: 'Data & Analytics' },
+  { href: '/services/ui-ux-design', label: 'UI/UX Design' },
+];
+
+const COMPANY_LINKS = [
+  { href: '/about', label: 'About' },
+  { href: '/projects', label: 'Our Work' },
+  { href: '/pricing', label: 'Pricing' },
+  { href: '/reviews', label: 'Reviews' },
+  { href: '/insights', label: 'Insights' },
+  { href: '/careers', label: 'Careers' },
+];
+
+/**
+ * Site footer — where the pipeline motif terminates: a blueprint wire runs
+ * across the top and its pulse docks at the "start your project" panel.
+ * Fully token-based ([data-theme]); orange appears only on the single CTA.
+ */
 const Footer = ({
   copyrightText = `Copyright ${new Date().getFullYear()} Megicode. All Rights Reserved.`,
   linkedinUrl = 'https://www.linkedin.com/company/megicode',
@@ -19,176 +42,143 @@ const Footer = ({
 }) => {
   const { theme } = useTheme();
   const footerRef = useRef<HTMLElement>(null);
-  const isInView = useInView(footerRef, { once: true, amount: 0.3 });
+  const isInView = useInView(footerRef, { once: true, amount: 0.15 });
+  const reduceMotion = useReducedMotion();
 
-  const themeStyles = useMemo(() => (theme === 'dark' ? darkStyles : lightStyles), [theme]);
-
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number],
-        staggerChildren: 0.1,
-      },
+  const socials = [
+    {
+      href: linkedinUrl,
+      label: 'LinkedIn',
+      src: theme === 'dark' ? '/LinkedinDark.svg' : '/linkedin-icon.svg',
     },
-  };
-
-  const iconVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] },
+    {
+      href: instagramUrl,
+      label: 'Instagram',
+      src: theme === 'dark' ? '/InstagramDark.svg' : '/Instagram-icon.svg',
     },
+    {
+      href: githubUrl,
+      label: 'GitHub',
+      src: theme === 'dark' ? '/GithubDark.svg' : '/github_icon.svg',
+    },
+  ];
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
   };
 
   return (
-    <motion.footer
-      ref={footerRef}
-      className={`${commonStyles.footer} ${themeStyles.footer}`}
-      initial="hidden"
-      animate={isInView ? 'visible' : 'hidden'}
-      variants={containerVariants}
-    >
-      <div className={commonStyles.footerFrame}>
-        <div className={`${commonStyles.footerBackground} ${themeStyles.footerBackground}`} />
-        <motion.div className={commonStyles.footerContent} variants={containerVariants}>
-          <motion.div className={commonStyles.footerBrand} variants={iconVariants}>
-            <Link href="/" className={commonStyles.footerLogoLink} aria-label="Megicode home">
+    <footer ref={footerRef} className={styles.footer}>
+      {/* The site-wide pipeline wire ends here */}
+      <div className={styles.wire} aria-hidden="true">
+        <span className={styles.wirePulse} />
+        <span className={styles.wireNode} />
+      </div>
+
+      <motion.div
+        className={styles.frame}
+        initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+        animate={isInView ? { opacity: 1, y: 0 } : undefined}
+        transition={{ duration: 0.6, ease: EASE }}
+      >
+        <div className={styles.content}>
+          {/* Brand */}
+          <div className={styles.brand}>
+            <Link href="/" className={styles.logoLink} aria-label="Megicode home">
               <Image
                 src={theme === 'dark' ? '/logo-navbar-dark.png' : '/logo-navbar-light.png'}
                 alt="Megicode"
-                width={56}
-                height={56}
-                className={commonStyles.footerLogo}
-                priority={false}
+                width={48}
+                height={48}
+                className={styles.logo}
               />
             </Link>
-            <p>AI software, automation, SaaS MVPs, and custom business platforms.</p>
-          </motion.div>
+            <p className={styles.tagline}>
+              AI software, automation, SaaS MVPs, and custom business platforms — designed, built,
+              and shipped by one accountable team.
+            </p>
+            <p className={styles.statusChip}>
+              <span className={styles.statusDot} />
+              Available for new projects · 24h replies
+            </p>
+            <p className={styles.locationLine}>Lahore, Pakistan — serving clients worldwide</p>
+          </div>
 
-          <motion.nav
-            className={commonStyles.footerNav}
-            aria-label="Footer services"
-            variants={iconVariants}
-          >
-            <strong>Services</strong>
-            <Link href="/pricing">Pricing</Link>
-            <Link href="/services/ai-automation-agents">AI Automation</Link>
-            <Link href="/services/ai-saas-mvp-development">AI SaaS MVP</Link>
-            <Link href="/services/custom-web-development">Custom Platforms</Link>
-          </motion.nav>
+          {/* Services */}
+          <nav className={styles.navCol} aria-label="Footer services">
+            <strong className={styles.colTitle}>Services</strong>
+            {SERVICE_LINKS.map(({ href, label }) => (
+              <Link key={href} href={href} className={styles.navLink}>
+                {label}
+              </Link>
+            ))}
+          </nav>
 
-          <motion.nav
-            className={commonStyles.footerNav}
-            aria-label="Footer company links"
-            variants={iconVariants}
-          >
-            <strong>Company</strong>
-            <Link href="/about">About</Link>
-            <Link href="/projects">Our Work</Link>
-            <Link href="/reviews">Reviews</Link>
-            <Link href="/insights">Insights</Link>
-            <Link href="/contact?source=footer">Contact</Link>
-            <Link href="/careers">Careers</Link>
-            <Link href="/privacy-policy">Privacy</Link>
-          </motion.nav>
+          {/* Company */}
+          <nav className={styles.navCol} aria-label="Footer company links">
+            <strong className={styles.colTitle}>Company</strong>
+            {COMPANY_LINKS.map(({ href, label }) => (
+              <Link key={href} href={href} className={styles.navLink}>
+                {label}
+              </Link>
+            ))}
+          </nav>
 
-          <motion.div className={commonStyles.footerContact} variants={iconVariants}>
-            <strong>Start here</strong>
-            <Link className={commonStyles.footerCta} href="/contact?source=footer">
+          {/* Start panel — where the wire's pulse docks */}
+          <div className={styles.startPanel}>
+            <strong className={styles.colTitle}>Have an idea?</strong>
+            <p className={styles.startCopy}>
+              Tell us the goal — we&rsquo;ll reply with the best next step, free.
+            </p>
+            <Link href="/contact?source=footer" className={styles.cta}>
               Start Your Project →
             </Link>
-            <a href="mailto:contact@megicode.com">contact@megicode.com</a>
-            <div className={commonStyles.footerSocial} aria-label="Megicode social links">
-              <motion.a
-                href={linkedinUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={commonStyles.linkedinIcon}
-                aria-label="LinkedIn"
-                variants={iconVariants}
-                whileHover={{ scale: 1.08, transition: { duration: 0.2 } }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Image
-                  alt="LinkedIn"
-                  src={theme === 'dark' ? '/LinkedinDark.svg' : '/linkedin-icon.svg'}
-                  width={22}
-                  height={22}
-                />
-              </motion.a>
-              <motion.a
-                href={instagramUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={commonStyles.instagramIcon}
-                aria-label="Instagram"
-                variants={iconVariants}
-                whileHover={{ scale: 1.08, transition: { duration: 0.2 } }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Image
-                  alt="Instagram"
-                  src={theme === 'dark' ? '/InstagramDark.svg' : '/Instagram-icon.svg'}
-                  width={22}
-                  height={22}
-                />
-              </motion.a>
-              <motion.a
-                href={githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={commonStyles.githubIcon}
-                aria-label="GitHub"
-                variants={iconVariants}
-                whileHover={{ scale: 1.08, transition: { duration: 0.2 } }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Image
-                  alt="GitHub"
-                  src={theme === 'dark' ? '/GithubDark.svg' : '/github_icon.svg'}
-                  width={22}
-                  height={22}
-                />
-              </motion.a>
+            <a href="mailto:contact@megicode.com" className={styles.emailLink}>
+              contact@megicode.com
+            </a>
+            <div className={styles.social} aria-label="Megicode social links">
+              {socials.map(({ href, label, src }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.socialIcon}
+                  aria-label={label}
+                >
+                  <Image alt="" src={src} width={20} height={20} />
+                </a>
+              ))}
             </div>
-          </motion.div>
-        </motion.div>
-
-        <div className={commonStyles.footerBottom}>
-          <motion.p className={commonStyles.copyrightLabel} variants={iconVariants}>
-            {copyrightText}
-          </motion.p>
-          <motion.a
-            href="/internal/login"
-            className={`${commonStyles.internalPortalLink} ${themeStyles.internalPortalLink}`}
-            variants={iconVariants}
-            whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
-            title="Team Portal Access"
-            aria-label="Access Internal Portal"
-          >
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              style={{ marginRight: '4px', verticalAlign: 'middle' }}
-            >
-              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-            </svg>
-            Portal
-          </motion.a>
+          </div>
         </div>
+
+        <div className={styles.bottom}>
+          <p className={styles.copyright}>{copyrightText}</p>
+          <div className={styles.bottomLinks}>
+            <Link href="/privacy-policy" className={styles.bottomLink}>
+              Privacy
+            </Link>
+            <a href="/internal/login" className={styles.bottomLink} title="Team portal access">
+              Portal
+            </a>
+            <button
+              type="button"
+              className={styles.toTop}
+              onClick={scrollToTop}
+              aria-label="Back to top"
+            >
+              ↑
+            </button>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Oversized watermark — quiet, cropped, unmistakably ours */}
+      <div className={styles.watermark} aria-hidden="true">
+        megicode
       </div>
-    </motion.footer>
+    </footer>
   );
 };
 

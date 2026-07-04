@@ -1,17 +1,19 @@
 'use client';
 import React from 'react';
-import commonStyles from './AboutHeroCommon.module.css';
-import lightStyles from './AboutHeroLight.module.css';
-import darkStyles from './AboutHeroDark.module.css';
-import { useTheme } from '../../context/ThemeContext';
+
+import Link from 'next/link';
+
 import { motion } from 'framer-motion';
+
+import { useTheme } from '../../context/ThemeContext';
 import { fadeInUp, staggerContainer } from '../../utils/animations';
+import commonStyles from './AboutHeroCommon.module.css';
+import darkStyles from './AboutHeroDark.module.css';
+import lightStyles from './AboutHeroLight.module.css';
 
 const AboutHero = () => {
   const { theme } = useTheme();
   const themeStyles = theme === 'dark' ? darkStyles : lightStyles;
-
-
 
   return (
     <section className={`${commonStyles.heroContainer} ${themeStyles.heroContainer}`}>
@@ -20,41 +22,58 @@ const AboutHero = () => {
         <div className={commonStyles.gradientOrb2} />
       </div>
 
-      <motion.div 
+      <motion.div
         className={commonStyles.contentWrapper}
         initial="hidden"
         animate="visible"
         variants={staggerContainer}
       >
-        <motion.h1 
-          className={`${commonStyles.heading} ${themeStyles.heading}`}
-          variants={fadeInUp}
-        >
+        <motion.h1 className={`${commonStyles.heading} ${themeStyles.heading}`} variants={fadeInUp}>
           Your <span className={commonStyles.gradientText}>AI-Powered</span> Technical{' '}
           <span className={commonStyles.gradientText}>Partner</span>
         </motion.h1>
 
-        <motion.p 
+        <motion.p
           className={`${commonStyles.subheading} ${themeStyles.subheading}`}
           variants={fadeInUp}
         >
-          We build intelligent software for startups, founders, and growing businesses
-          — from first MVP to production-ready AI products.
+          We build intelligent software for startups, founders, and growing businesses — from first
+          MVP to production-ready AI products.
+        </motion.p>
+
+        <motion.div className={commonStyles.ctaRow} variants={fadeInUp}>
+          <Link href="/contact" className={commonStyles.ctaPrimary}>
+            Start your project →
+          </Link>
+          <Link href="/projects" className={commonStyles.ctaSecondary}>
+            See our work
+          </Link>
+        </motion.div>
+
+        <motion.p className={commonStyles.microProof} variants={fadeInUp}>
+          15+ products shipped · 5+ countries · replies within 24h
         </motion.p>
       </motion.div>
 
-      <motion.div 
+      <motion.div
         className={commonStyles.scrollIndicator}
-        animate={{ 
+        animate={{
           y: [0, 5, 0],
-          opacity: [0.6, 1, 0.6]
+          opacity: [0.6, 1, 0.6],
         }}
-        transition={{ 
+        transition={{
           y: { duration: 1.5, repeat: Infinity },
-          opacity: { duration: 1.5, repeat: Infinity }
+          opacity: { duration: 1.5, repeat: Infinity },
         }}
       >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+        >
           <path d="M12 5v14M19 12l-7 7-7-7" />
         </svg>
       </motion.div>
