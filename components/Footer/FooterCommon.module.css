@@ -128,6 +128,8 @@
   line-height: 1.45;
   text-decoration: none;
   width: fit-content;
+  padding: 4px 0;
+  margin: -4px 0;
   transition:
     color 0.2s ease,
     transform 0.2s ease;
@@ -202,8 +204,8 @@
 }
 
 .socialIcon {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 999px;
   border: 1px solid var(--line-blueprint, #dce5f6);
   background: var(--surface-raised, #fbfcfe);
@@ -262,6 +264,7 @@
 .toTop {
   width: 36px;
   height: 36px;
+  min-width: 36px;
   border-radius: 999px;
   border: 1px solid var(--line-blueprint-strong, #b8c9ee);
   background: var(--surface-raised, #fbfcfe);
@@ -312,12 +315,12 @@
 
 @media (max-width: 576px) {
   .frame {
-    padding: 36px 20px 20px;
+    padding: 28px 20px 16px;
   }
 
   .content {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 28px 18px;
+    gap: 20px 18px;
   }
 
   .brand,
@@ -325,14 +328,42 @@
     grid-column: 1 / -1;
   }
 
+  .brand {
+    gap: 8px;
+  }
+
+  .tagline {
+    max-width: none;
+  }
+
+  .navCol {
+    gap: 6px;
+  }
+
+  .colTitle {
+    margin-bottom: 2px;
+  }
+
+  .startPanel {
+    gap: 8px;
+  }
+
   .bottom {
-    flex-wrap: wrap;
-    gap: 10px 16px;
-    margin-top: 32px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+    margin-top: 20px;
+    padding-top: 16px;
+  }
+
+  .bottomLinks {
+    margin-left: 0;
   }
 
   .watermark {
-    font-size: clamp(3rem, 18vw, 5rem);
+    margin: 0 0 -0.34em;
+    font-size: clamp(2.25rem, 14vw, 3.5rem);
   }
 }
 
