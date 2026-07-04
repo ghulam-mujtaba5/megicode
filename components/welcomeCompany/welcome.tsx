@@ -84,15 +84,6 @@ const Frame = () => {
           </Link>
         </motion.div>
 
-        {/* Micro-proof line — measured, not marketed */}
-        <motion.p
-          className={commonStyles.microProof}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.6, ease: EASE }}
-        >
-          15+ products shipped · 5+ countries · replies within 24h
-        </motion.p>
         {calendlyModal}
       </motion.div>
     </section>

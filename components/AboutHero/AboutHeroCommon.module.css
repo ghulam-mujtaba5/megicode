@@ -142,13 +142,6 @@
   transform: translateY(-1px);
 }
 
-.microProof {
-  font-family: var(--font-mono), monospace;
-  font-size: 0.82rem;
-  color: var(--ink-soft, #526070);
-  margin: 0.4rem 0 0;
-}
-
 /* Tablet */
 @media (max-width: 1024px) {
   .heroContainer {

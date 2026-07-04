@@ -108,49 +108,6 @@
   color: var(--ink-soft, #526070);
 }
 
-.statusChip {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  width: fit-content;
-  margin: 0;
-  padding: 6px 12px;
-  border-radius: 999px;
-  border: 1px solid var(--line-blueprint, #dce5f6);
-  background: var(--surface-raised, #fbfcfe);
-  font-family: var(--font-mono), monospace;
-  font-size: 0.72rem;
-  color: var(--ink-soft, #526070);
-}
-
-.statusDot {
-  width: 7px;
-  height: 7px;
-  border-radius: 999px;
-  background: #22a06b;
-  flex-shrink: 0;
-  animation: statusPing 2.4s ease-out infinite;
-}
-
-@keyframes statusPing {
-  0% {
-    box-shadow: 0 0 0 0 rgba(34, 160, 107, 0.35);
-  }
-  70% {
-    box-shadow: 0 0 0 6px rgba(34, 160, 107, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(34, 160, 107, 0);
-  }
-}
-
-.locationLine {
-  margin: 0;
-  font-size: 0.82rem;
-  color: var(--ink-soft, #526070);
-  opacity: 0.85;
-}
-
 /* ── Nav columns ── */
 .navCol {
   display: grid;
@@ -379,13 +336,8 @@
   }
 }
 
-/* Reduced motion: static wire, no pings */
+/* Reduced motion: static wire */
 @media (prefers-reduced-motion: reduce) {
-  .wirePulse,
-  .statusDot {
-    animation: none;
-  }
-
   .wirePulse {
     display: none;
   }

@@ -49,10 +49,6 @@ const AboutHero = () => {
             See our work
           </Link>
         </motion.div>
-
-        <motion.p className={commonStyles.microProof} variants={fadeInUp}>
-          15+ products shipped · 5+ countries · replies within 24h
-        </motion.p>
       </motion.div>
 
       <motion.div

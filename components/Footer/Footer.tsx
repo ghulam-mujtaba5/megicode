@@ -97,11 +97,6 @@ const Footer = ({
               AI software, automation, SaaS MVPs, and custom business platforms — designed, built,
               and shipped by one accountable team.
             </p>
-            <p className={styles.statusChip}>
-              <span className={styles.statusDot} />
-              Available for new projects · 24h replies
-            </p>
-            <p className={styles.locationLine}>Lahore, Pakistan — serving clients worldwide</p>
           </div>
 
           {/* Services */}
