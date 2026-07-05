@@ -68,6 +68,35 @@
   gap: 7px;
 }
 
+.coreWrapPosition {
+  left: 39%;
+  top: 33%;
+}
+
+.cardIdea {
+  left: 1%;
+  top: 33%;
+  width: min(182px, 27%);
+}
+
+.cardMvp {
+  left: 70%;
+  top: 5%;
+  width: min(186px, 28%);
+}
+
+.cardAutomation {
+  left: 71%;
+  top: 37%;
+  width: min(182px, 27%);
+}
+
+.cardScale {
+  left: 64%;
+  top: 62%;
+  width: min(176px, 27%);
+}
+
 .cardHeader {
   display: flex;
   align-items: center;
@@ -425,12 +454,94 @@
   .canvas {
     max-width: 400px;
     margin: 8px auto 14px;
-    /* taller canvas spreads the % card positions so they don't overlap */
-    aspect-ratio: 1.25 / 1;
+    /* taller canvas (lower aspect ratio) spreads the % card positions so they don't overlap */
+    aspect-ratio: 1.08 / 1;
+    min-height: 330px;
   }
 
   .card {
-    padding: 10px 11px;
+    padding: 7px 9px;
+    gap: 4px;
+  }
+
+  .cardHeader {
+    gap: 4px;
+  }
+
+  .cardTitle {
+    font-size: 0.68rem;
+  }
+
+  .cardMeta {
+    font-size: 0.54rem;
+  }
+
+  .checkDot {
+    width: 13px;
+    height: 13px;
+  }
+
+  .checkDot svg {
+    width: 7px;
+    height: 7px;
+  }
+
+  .coreWrapPosition {
+    left: 33%;
+    top: 31%;
+  }
+
+  .cardIdea {
+    left: 0%;
+    top: 32%;
+    width: 29%;
+  }
+
+  .cardMvp {
+    left: 68%;
+    top: 1%;
+    width: 31%;
+  }
+
+  .cardAutomation {
+    left: 69%;
+    top: 35%;
+    width: 31%;
+  }
+
+  .cardScale {
+    left: 62%;
+    top: 67%;
+    width: 34%;
+  }
+
+  .coreBox {
+    width: 58px;
+    height: 58px;
+    border-radius: 16px;
+  }
+
+  .coreRing {
+    inset: -6px;
+    border-radius: 22px;
+  }
+
+  .coreLogo {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .agentLabel {
+    font-size: 0.7rem;
+  }
+
+  .agentChips {
+    gap: 2px;
+  }
+
+  .agentChip {
+    padding: 1px 4px;
+    font-size: 0.52rem;
   }
 
   .cardBody,
@@ -439,7 +550,35 @@
   }
 
   .chart {
-    height: 32px;
+    height: 24px;
+    gap: 3px;
+  }
+
+  .bar {
+    width: 8px;
+  }
+
+  .chartCaption {
+    font-size: 0.58rem;
+  }
+}
+
+/* Scaling adjustments for very small viewports to prevent wrapping / collision */
+@media (max-width: 380px) {
+  .canvas {
+    transform: scale(0.85);
+    transform-origin: center top;
+    margin-top: 2px;
+    margin-bottom: -45px;
+  }
+}
+
+@media (max-width: 325px) {
+  .canvas {
+    transform: scale(0.72);
+    transform-origin: center top;
+    margin-top: -5px;
+    margin-bottom: -80px;
   }
 }
 

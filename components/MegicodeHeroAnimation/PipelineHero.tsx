@@ -68,17 +68,18 @@ const MOTION_KEYTIMES = '0;0.5;1';
 type FloatCardProps = {
   delay: number;
   floatDuration: number;
-  style: React.CSSProperties;
+  style?: React.CSSProperties;
+  className?: string;
   children: React.ReactNode;
 };
 
 /** Card that staggers in, then floats ±4px unless reduced motion is set. */
-function FloatCard({ delay, floatDuration, style, children }: FloatCardProps) {
+function FloatCard({ delay, floatDuration, style, className, children }: FloatCardProps) {
   const reduceMotion = useReducedMotion();
 
   return (
     <motion.div
-      className={styles.card}
+      className={`${styles.card} ${className || ''}`}
       style={style}
       initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 16, scale: 0.97 }}
       animate={reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
@@ -218,8 +219,7 @@ export default function PipelineHero() {
       {/* 1 · The magic box — Megicode designs, builds, automates */}
       <motion.div className={styles.layer} style={{ x: coreX, y: coreY }}>
         <motion.div
-          className={styles.coreWrap}
-          style={{ left: '39%', top: '33%' }}
+          className={`${styles.coreWrap} ${styles.coreWrapPosition}`}
           initial={{ opacity: 0, scale: 0.88 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.6, ease: EASE }}
@@ -248,11 +248,7 @@ export default function PipelineHero() {
       <motion.div className={styles.layer} style={{ x: cardsX, y: cardsY }}>
         {/* 0 · The idea comes in — the brief types itself out as the pulse
           carries it toward the core */}
-        <FloatCard
-          delay={0.5}
-          floatDuration={6.5}
-          style={{ left: '1%', top: '33%', width: 'min(182px, 27%)' }}
-        >
+        <FloatCard delay={0.5} floatDuration={6.5} className={styles.cardIdea}>
           <div className={styles.cardHeader}>
             <span className={styles.dotLive} />
             <span className={styles.cardTitle}>Your idea</span>
@@ -264,11 +260,7 @@ export default function PipelineHero() {
         </FloatCard>
 
         {/* 2 · SaaS MVP ships */}
-        <FloatCard
-          delay={0.85}
-          floatDuration={7.5}
-          style={{ left: '70%', top: '5%', width: 'min(186px, 28%)' }}
-        >
+        <FloatCard delay={0.85} floatDuration={7.5} className={styles.cardMvp}>
           <div className={styles.cardHeader}>
             <CheckDot />
             <span className={styles.cardTitle}>SaaS MVP launched</span>
@@ -277,11 +269,7 @@ export default function PipelineHero() {
         </FloatCard>
 
         {/* 3 · Workflow runs itself */}
-        <FloatCard
-          delay={0.95}
-          floatDuration={8}
-          style={{ left: '71%', top: '37%', width: 'min(182px, 27%)' }}
-        >
+        <FloatCard delay={0.95} floatDuration={8} className={styles.cardAutomation}>
           <div className={styles.cardHeader}>
             <CheckDot />
             <span className={styles.cardTitle}>Booking automated</span>
@@ -290,11 +278,7 @@ export default function PipelineHero() {
         </FloatCard>
 
         {/* 4 · Growth you can measure */}
-        <FloatCard
-          delay={1.05}
-          floatDuration={8.5}
-          style={{ left: '64%', top: '62%', width: 'min(176px, 27%)' }}
-        >
+        <FloatCard delay={1.05} floatDuration={8.5} className={styles.cardScale}>
           <div className={styles.cardHeader}>
             <span className={styles.cardTitle}>Scale</span>
             <span className={styles.cardMeta}>live</span>
