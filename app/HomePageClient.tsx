@@ -8,6 +8,7 @@ import { CONTACT_EMAIL, SITE_SOCIAL, getCopyrightText } from '@/lib/constants';
 import LoadingAnimation from '@/components/LoadingAnimation/LoadingAnimation';
 
 import Footer from '../components/Footer/Footer';
+import ThemeToggleIcon from '../components/Icon/sbicon';
 import NewNavBar from '../components/NavBar_Desktop_Company/NewNavBar';
 import NavBarMobile from '../components/NavBar_Mobile/NavBar-mobile';
 import PipelineDivider from '../components/Pipeline/PipelineDivider';
@@ -51,6 +52,9 @@ export default function HomePageClient() {
     <>
       <div className={`page-container ${theme}`}>
         <main id="main-content" className="main-content">
+          <div id="theme-toggle" role="button" tabIndex={0}>
+            <ThemeToggleIcon />
+          </div>
           <NewNavBar />
           <NavBarMobile />
           {/* Welcome Frame + Advanced Hero Animation */}

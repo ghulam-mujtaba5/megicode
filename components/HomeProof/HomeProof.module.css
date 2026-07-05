@@ -4,18 +4,21 @@
   width: 100%;
   padding: 0 1.25rem;
   margin-top: -0.5rem;
+  box-sizing: border-box;
 }
 
 .rail {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  width: min(1080px, 100%);
+  width: 100%;
+  max-width: 1080px;
   margin: 0 auto;
   border: 1px solid var(--line-blueprint, #dce5f6);
   border-radius: 20px;
   background: var(--surface-card, #fff);
   box-shadow: var(--shadow-card);
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 .item {
@@ -23,6 +26,7 @@
   flex-direction: column;
   gap: 4px;
   padding: 26px 28px;
+  box-sizing: border-box;
 }
 
 .item + .item {
