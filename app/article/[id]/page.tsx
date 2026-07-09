@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import { getBlogPost, getRelatedPosts } from '@/lib/blog/posts';
 import { SITE_SOCIAL, getCopyrightText } from '@/lib/constants';
 
+import AuthorCard from '@/components/Article/AuthorCard';
 import FaqAccordion from '@/components/Article/FaqAccordion';
 import ReadingProgress from '@/components/Article/ReadingProgress';
 import ShareButtons from '@/components/Article/ShareButtons';
@@ -65,6 +66,17 @@ function extractHeadings(html: string): TocItem[] {
     });
   }
   return items;
+}
+
+function extractExecutiveTakeaway(html: string): { takeaway: string | null; cleanHtml: string } {
+  if (!html) return { takeaway: null, cleanHtml: '' };
+  const match = html.match(/<blockquote>([\s\S]*?)<\/blockquote>/i);
+  if (match) {
+    const takeaway = match[1];
+    const cleanHtml = html.replace(match[0], '');
+    return { takeaway, cleanHtml };
+  }
+  return { takeaway: null, cleanHtml: html };
 }
 
 export async function generateMetadata({
@@ -130,6 +142,7 @@ const ArticleDetailPage = async ({ params }: { params: Promise<{ id: string }> }
   const publishedDate = formatDate(article.publishedAt || article.createdAt);
   const updatedDate = formatDate(article.updatedAt);
   const headings = extractHeadings(article.contentHtml || '');
+  const { takeaway, cleanHtml } = extractExecutiveTakeaway(article.contentHtml || '');
   const related = await getRelatedPosts(article.slug || id, category, 3).catch(() => []);
   const pageUrl = `${SITE}/insights/${article.slug || id}`;
 
@@ -214,16 +227,55 @@ const ArticleDetailPage = async ({ params }: { params: Promise<{ id: string }> }
 
           <div className={styles.layout}>
             <aside className={styles.sidebar}>
-              <TableOfContents items={headings} />
+              <div className={styles.stickySidebarContent}>
+                <TableOfContents items={headings} />
+                <div className={styles.sidebarCtaCard}>
+                  <span className={styles.sidebarCtaEyebrow}>Start Your Project</span>
+                  <h3 className={styles.sidebarCtaTitle}>Ready to build?</h3>
+                  <p className={styles.sidebarCtaText}>
+                    Get a free strategy call with our expert team.
+                  </p>
+                  <Link href="/contact" className={styles.sidebarCtaButton}>
+                    Book a Call
+                  </Link>
+                </div>
+              </div>
             </aside>
 
             <article className={styles.contentCard}>
+              {takeaway && (
+                <div className={styles.aiSummaryContainer}>
+                  <div className={styles.aiSummaryHeader}>
+                    <svg
+                      className={styles.aiSummaryIcon}
+                      viewBox="0 0 24 24"
+                      width="18"
+                      height="18"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                    <span>Key Takeaways / AI Summary</span>
+                  </div>
+                  <div
+                    className={styles.aiSummaryContent}
+                    dangerouslySetInnerHTML={{ __html: takeaway }}
+                  />
+                </div>
+              )}
+
               <div
                 className={styles.articleContent}
                 dangerouslySetInnerHTML={{
-                  __html: article.contentHtml || '<p>No content available.</p>',
+                  __html: cleanHtml || '<p>No content available.</p>',
                 }}
               />
+
+              <AuthorCard authorName={article.authorName} />
 
               {(article.ctaLabel || article.ctaText) && (
                 <aside className={styles.ctaBox}>

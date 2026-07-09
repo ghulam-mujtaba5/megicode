@@ -64,11 +64,33 @@ const ArticleSchema: React.FC<ArticleSchemaProps> = ({ article }) => {
     image: [imageUrl],
     datePublished: article.publishedAt || article.createdAt,
     dateModified: article.updatedAt || article.createdAt,
-    author: {
-      '@type': 'Organization',
-      name: 'Megicode',
-      url: 'https://www.megicode.com',
-    },
+    author:
+      article.authorName && article.authorName !== 'Megicode Team'
+        ? {
+            '@type': 'Person',
+            name: article.authorName,
+            jobTitle:
+              article.authorName === 'Ghulam Mujtaba'
+                ? 'Founder & Principal Architect'
+                : 'Co-Founder & Systems Engineer',
+            worksFor: {
+              '@type': 'Organization',
+              name: 'Megicode',
+              url: 'https://www.megicode.com',
+            },
+            sameAs:
+              article.authorName === 'Ghulam Mujtaba'
+                ? [
+                    'https://www.linkedin.com/in/ghulam-mujtaba5/',
+                    'https://github.com/ghulam-mujtaba5',
+                  ]
+                : [],
+          }
+        : {
+            '@type': 'Organization',
+            name: 'Megicode',
+            url: 'https://www.megicode.com',
+          },
     publisher: {
       '@type': 'Organization',
       name: 'Megicode',
