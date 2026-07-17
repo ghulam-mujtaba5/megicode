@@ -3,7 +3,8 @@ import type { Metadata } from 'next';
 import { breadcrumbJsonLd, serviceJsonLd } from '@/lib/metadata';
 
 export const metadata: Metadata = {
-  title: 'AI-Powered Product Development | Build AI SaaS & Intelligent Products | Megicode',
+  title:
+    'Artificial Intelligence Development Company | Build AI SaaS & Intelligent Products | Megicode',
   description:
     'Build AI-first products that solve real problems. Megicode delivers custom AI/ML development, GPT & LLM integration, RAG systems, AI agents, and intelligent SaaS MVPs using OpenAI, LangChain, Python & TensorFlow.',
   keywords: [
@@ -17,9 +18,11 @@ export const metadata: Metadata = {
     'AI SaaS development',
     'OpenAI development',
     'LangChain development',
+    'artificial intelligence development company',
+    'custom software design for startups',
   ],
   openGraph: {
-    title: 'AI-Powered Product Development | Build Intelligent SaaS | Megicode',
+    title: 'Artificial Intelligence Development Company | Build Intelligent SaaS | Megicode',
     description:
       'Build AI-first products with custom ML models, GPT/LLM integration, RAG systems, and AI agents.',
     url: 'https://www.megicode.com/services/ai-saas-mvp-development',

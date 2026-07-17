@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { breadcrumbJsonLd, serviceJsonLd } from '@/lib/metadata';
 
 export const metadata: Metadata = {
-  title: 'Growth Marketing & SEO for Startups | Data-Driven Growth | Megicode',
+  title: 'Marketing Company for Startups | Growth Marketing & SEO | Megicode',
   description:
     'Data-driven growth marketing for AI-powered products and SaaS startups. Technical SEO, content marketing, performance ads, conversion optimization, and analytics — we turn traffic into paying users.',
   keywords: [
@@ -15,9 +15,12 @@ export const metadata: Metadata = {
     'conversion rate optimization',
     'technical SEO agency',
     'growth hacking for startups',
+    'marketing companies for startups',
+    'marketing agency lead generation',
+    'digital growth strategy',
   ],
   openGraph: {
-    title: 'Growth Marketing & SEO for Startups | Data-Driven Growth | Megicode',
+    title: 'Marketing Company for Startups | Growth Marketing & SEO | Megicode',
     description:
       'Data-driven growth marketing for SaaS and AI startups — SEO, content, paid ads & conversion optimization.',
     url: 'https://www.megicode.com/services/growth-marketing-seo',

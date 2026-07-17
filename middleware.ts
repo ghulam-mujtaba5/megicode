@@ -4,7 +4,7 @@ import type { NextRequest } from 'next/server';
 const CANONICAL_HOST = 'www.megicode.com';
 const CANONICAL_ORIGIN = 'https://www.megicode.com';
 
-export function proxy(request: NextRequest) {
+export function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
   const host = request.headers.get('host') || '';
 

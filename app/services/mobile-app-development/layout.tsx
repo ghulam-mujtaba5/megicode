@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { breadcrumbJsonLd, serviceJsonLd } from '@/lib/metadata';
 
 export const metadata: Metadata = {
-  title: 'Mobile App Development | Cross-Platform iOS & Android with AI Features | Megicode',
+  title: 'Cross Platform Mobile Application Development Company | iOS & Android | Megicode',
   description:
     'Build mobile apps that stand out with AI features. Megicode develops cross-platform iOS & Android apps using React Native and Flutter — with AI-powered features, real-time sync, and startup-ready architecture.',
   keywords: [
@@ -15,9 +15,10 @@ export const metadata: Metadata = {
     'cross-platform mobile apps',
     'iOS Android development',
     'mobile MVP development',
+    'cross platform mobile application development company',
   ],
   openGraph: {
-    title: 'Mobile App Development | iOS & Android with AI Features | Megicode',
+    title: 'Cross Platform Mobile Application Development Company | iOS & Android | Megicode',
     description:
       'Cross-platform mobile apps with AI features, real-time sync, and startup-ready architecture.',
     url: 'https://www.megicode.com/services/mobile-app-development',

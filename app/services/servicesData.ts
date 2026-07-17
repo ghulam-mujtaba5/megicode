@@ -22,6 +22,8 @@ const servicesData = [
       'custom AI software company',
       'AI startup technical partner',
       'RAG system development',
+      'artificial intelligence development company',
+      'custom software design for startups',
     ],
     openGraph: {
       title: 'AI-Powered Product Development for Startups | Megicode',
@@ -219,6 +221,7 @@ const servicesData = [
       'AI mobile app development',
       'cross-platform mobile app company',
       'startup mobile app builder',
+      'cross platform mobile application development company',
     ],
     openGraph: {
       title: 'Mobile App Development for Startups | Megicode',
@@ -448,6 +451,9 @@ const servicesData = [
       'conversion rate optimization for startups',
       'technical SEO agency',
       'growth hacking for startups',
+      'marketing companies for startups',
+      'marketing agency lead generation',
+      'digital growth strategy',
     ],
     openGraph: {
       title: 'Growth Marketing & SEO for Startups | Megicode',
