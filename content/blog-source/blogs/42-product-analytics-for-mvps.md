@@ -1,7 +1,7 @@
 ---
 title: 'Product Analytics for MVPs: What to Track From Day One'
 slug: 'product-analytics-for-mvps'
-recommended_url_path: '/article/product-analytics-for-mvps'
+recommended_url_path: '/insights/product-analytics-for-mvps'
 seo_title: 'Product Analytics for MVPs: What to Track From Day One'
 meta_description: 'Product Analytics for MVPs: What to Track From Day One: practical framework for founders who want to learn from users after launch. Learn scope, risks,…'
 primary_keyword: 'product analytics for MVP'
@@ -226,7 +226,7 @@ If you are planning **product analytics for MVP**, do not start with the biggest
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/product-analytics-for-mvps"
+    "@id": "https://www.megicode.com/insights/product-analytics-for-mvps"
   },
   "image": "https://www.megicode.com/images/blog/product-analytics-for-mvps.png"
 }

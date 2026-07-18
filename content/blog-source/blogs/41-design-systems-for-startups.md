@@ -1,7 +1,7 @@
 ---
 title: 'Design Systems for Startups'
 slug: 'design-systems-for-startups'
-recommended_url_path: '/article/design-systems-for-startups'
+recommended_url_path: '/insights/design-systems-for-startups'
 seo_title: 'Design Systems for Startups'
 meta_description: 'Design Systems for Startups: practical framework for startups building web and mobile products. Learn scope, risks, features, ROI, and how MegiCode can…'
 primary_keyword: 'design systems for startups'
@@ -237,7 +237,7 @@ If you are planning **design systems for startups**, do not start with the bigge
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/design-systems-for-startups"
+    "@id": "https://www.megicode.com/insights/design-systems-for-startups"
   },
   "image": "https://www.megicode.com/images/blog/design-systems-for-startups.png"
 }

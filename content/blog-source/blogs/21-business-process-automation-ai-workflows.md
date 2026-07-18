@@ -1,7 +1,7 @@
 ---
 title: 'Business Process Automation: 15 Workflows AI Can Improve'
 slug: 'business-process-automation-ai-workflows'
-recommended_url_path: '/article/business-process-automation-ai-workflows'
+recommended_url_path: '/insights/business-process-automation-ai-workflows'
 seo_title: 'Business Process Automation: 15 Workflows AI Can Improve'
 meta_description: 'Business Process Automation: 15 Workflows AI Can Improve: practical framework for business owners, managers, and operations teams. Learn scope, risks,…'
 primary_keyword: 'business process automation'
@@ -236,7 +236,7 @@ If you are planning **business process automation**, do not start with the bigge
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/business-process-automation-ai-workflows"
+    "@id": "https://www.megicode.com/insights/business-process-automation-ai-workflows"
   },
   "image": "https://www.megicode.com/images/blog/business-process-automation-ai-workflows.png"
 }

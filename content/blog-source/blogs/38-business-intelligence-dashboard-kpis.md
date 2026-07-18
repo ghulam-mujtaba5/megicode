@@ -1,7 +1,7 @@
 ---
 title: 'Business Intelligence Dashboard: Design KPIs That Matter'
 slug: 'business-intelligence-dashboard-kpis'
-recommended_url_path: '/article/business-intelligence-dashboard-kpis'
+recommended_url_path: '/insights/business-intelligence-dashboard-kpis'
 seo_title: 'Business Intelligence Dashboard: Design KPIs That Matter'
 meta_description: 'Business Intelligence Dashboard: Design KPIs That Matter: practical framework for business owners and managers building analytics dashboards. Learn…'
 primary_keyword: 'business intelligence dashboard'
@@ -236,7 +236,7 @@ If you are planning **business intelligence dashboard**, do not start with the b
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/business-intelligence-dashboard-kpis"
+    "@id": "https://www.megicode.com/insights/business-intelligence-dashboard-kpis"
   },
   "image": "https://www.megicode.com/images/blog/business-intelligence-dashboard-kpis.png"
 }

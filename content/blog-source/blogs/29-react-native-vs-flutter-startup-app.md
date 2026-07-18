@@ -1,7 +1,7 @@
 ---
 title: 'React Native vs Flutter: Which Is Better for Your Startup App?'
 slug: 'react-native-vs-flutter-startup-app'
-recommended_url_path: '/article/react-native-vs-flutter-startup-app'
+recommended_url_path: '/insights/react-native-vs-flutter-startup-app'
 seo_title: 'React Native vs Flutter: Which Is Better for Your Startup App?'
 meta_description: 'React Native vs Flutter: Which Is Better for Your Startup App?: practical framework for founders planning iOS and Android apps. Learn scope, risks,…'
 primary_keyword: 'React Native vs Flutter'
@@ -231,7 +231,7 @@ If you are planning **React Native vs Flutter**, do not start with the biggest p
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/react-native-vs-flutter-startup-app"
+    "@id": "https://www.megicode.com/insights/react-native-vs-flutter-startup-app"
   },
   "image": "https://www.megicode.com/images/blog/react-native-vs-flutter-startup-app.png"
 }

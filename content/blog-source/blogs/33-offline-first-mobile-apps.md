@@ -1,7 +1,7 @@
 ---
 title: 'Offline-First Mobile Apps'
 slug: 'offline-first-mobile-apps'
-recommended_url_path: '/article/offline-first-mobile-apps'
+recommended_url_path: '/insights/offline-first-mobile-apps'
 seo_title: 'Offline-First Mobile Apps'
 meta_description: 'Offline-First Mobile Apps: practical framework for teams building apps for field work, education, healthcare, or unreliable connectivity. Learn scope,…'
 primary_keyword: 'offline-first mobile app'
@@ -226,7 +226,7 @@ If you are planning **offline-first mobile app**, do not start with the biggest 
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/offline-first-mobile-apps"
+    "@id": "https://www.megicode.com/insights/offline-first-mobile-apps"
   },
   "image": "https://www.megicode.com/images/blog/offline-first-mobile-apps.png"
 }

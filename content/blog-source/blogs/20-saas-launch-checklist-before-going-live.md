@@ -1,7 +1,7 @@
 ---
 title: 'SaaS Launch Checklist: What to Test Before Going Live'
 slug: 'saas-launch-checklist-before-going-live'
-recommended_url_path: '/article/saas-launch-checklist-before-going-live'
+recommended_url_path: '/insights/saas-launch-checklist-before-going-live'
 seo_title: 'SaaS Launch Checklist: What to Test Before Going Live'
 meta_description: 'SaaS Launch Checklist: What to Test Before Going Live: practical framework for founders preparing to launch a web app or SaaS product. Learn scope,…'
 primary_keyword: 'SaaS launch checklist'
@@ -226,7 +226,7 @@ If you are planning **SaaS launch checklist**, do not start with the biggest pos
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/saas-launch-checklist-before-going-live"
+    "@id": "https://www.megicode.com/insights/saas-launch-checklist-before-going-live"
   },
   "image": "https://www.megicode.com/images/blog/saas-launch-checklist-before-going-live.png"
 }

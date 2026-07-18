@@ -1,7 +1,7 @@
 ---
 title: 'AI SaaS Security Checklist for Founders and Product Teams'
 slug: 'ai-saas-security-checklist-founders'
-recommended_url_path: '/article/ai-saas-security-checklist-founders'
+recommended_url_path: '/insights/ai-saas-security-checklist-founders'
 seo_title: 'AI SaaS Security Checklist for Founders and Product Teams'
 meta_description: 'AI SaaS Security Checklist for Founders and Product Teams: practical framework for founders building AI-enabled SaaS products. Learn scope, risks,…'
 primary_keyword: 'AI SaaS security checklist'
@@ -226,7 +226,7 @@ If you are planning **AI SaaS security checklist**, do not start with the bigges
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/ai-saas-security-checklist-founders"
+    "@id": "https://www.megicode.com/insights/ai-saas-security-checklist-founders"
   },
   "image": "https://www.megicode.com/images/blog/ai-saas-security-checklist-founders.png"
 }

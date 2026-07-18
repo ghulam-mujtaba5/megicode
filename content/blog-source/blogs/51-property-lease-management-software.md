@@ -1,7 +1,7 @@
 ---
 title: 'Property Lease Management Software'
 slug: 'property-lease-management-software'
-recommended_url_path: '/article/property-lease-management-software'
+recommended_url_path: '/insights/property-lease-management-software'
 seo_title: 'Property Lease Management Software | Custom PropTech Solutions'
 meta_description: 'Property Lease Management Software: A guide for property managers, landlords, and PropTech founders. Learn features, scope, and how to build custom software.'
 primary_keyword: 'property lease management software'
@@ -183,7 +183,7 @@ Off-the-shelf property tools often charge expensive per-unit fees and lack flexi
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/property-lease-management-software"
+    "@id": "https://www.megicode.com/insights/property-lease-management-software"
   },
   "image": "https://www.megicode.com/images/blog/property-lease-management-software.png"
 }

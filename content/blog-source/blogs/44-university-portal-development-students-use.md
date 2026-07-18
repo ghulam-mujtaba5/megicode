@@ -1,7 +1,7 @@
 ---
 title: 'University Portal Development'
 slug: 'university-portal-development-students-use'
-recommended_url_path: '/article/university-portal-development-students-use'
+recommended_url_path: '/insights/university-portal-development-students-use'
 seo_title: 'University Portal Development'
 meta_description: 'University Portal Development: practical framework for education startups, universities, and student communities. Learn scope, risks, features, ROI, and…'
 primary_keyword: 'university portal development'
@@ -224,7 +224,7 @@ If you are planning **university portal development**, do not start with the big
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/university-portal-development-students-use"
+    "@id": "https://www.megicode.com/insights/university-portal-development-students-use"
   },
   "image": "https://www.megicode.com/images/blog/university-portal-development-students-use.png"
 }

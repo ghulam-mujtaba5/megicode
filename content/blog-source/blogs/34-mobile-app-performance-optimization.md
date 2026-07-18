@@ -1,7 +1,7 @@
 ---
 title: 'Mobile App Performance Optimization: What Users Notice First'
 slug: 'mobile-app-performance-optimization'
-recommended_url_path: '/article/mobile-app-performance-optimization'
+recommended_url_path: '/insights/mobile-app-performance-optimization'
 seo_title: 'Mobile App Performance Optimization: What Users Notice First'
 meta_description: 'Mobile App Performance Optimization: What Users Notice First: practical framework for businesses with slow or underperforming mobile apps. Learn scope,…'
 primary_keyword: 'mobile app performance optimization'
@@ -226,7 +226,7 @@ If you are planning **mobile app performance optimization**, do not start with t
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/mobile-app-performance-optimization"
+    "@id": "https://www.megicode.com/insights/mobile-app-performance-optimization"
   },
   "image": "https://www.megicode.com/images/blog/mobile-app-performance-optimization.png"
 }

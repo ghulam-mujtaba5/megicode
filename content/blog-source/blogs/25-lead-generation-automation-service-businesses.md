@@ -1,7 +1,7 @@
 ---
 title: 'Lead Generation Automation for Service Businesses'
 slug: 'lead-generation-automation-service-businesses'
-recommended_url_path: '/article/lead-generation-automation-service-businesses'
+recommended_url_path: '/insights/lead-generation-automation-service-businesses'
 seo_title: 'Lead Generation Automation for Service Businesses'
 meta_description: 'Lead Generation Automation for Service Businesses: practical framework for agencies, clinics, consultants, and software companies. Learn scope, risks,…'
 primary_keyword: 'lead generation automation'
@@ -237,7 +237,7 @@ If you are planning **lead generation automation**, do not start with the bigges
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/lead-generation-automation-service-businesses"
+    "@id": "https://www.megicode.com/insights/lead-generation-automation-service-businesses"
   },
   "image": "https://www.megicode.com/images/blog/lead-generation-automation-service-businesses.png"
 }

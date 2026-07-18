@@ -25,11 +25,6 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(url, 301);
   }
 
-  if (url.pathname === '/article' || url.pathname.startsWith('/article/')) {
-    url.pathname = url.pathname.replace(/^\/article/, '/insights');
-    return NextResponse.redirect(url, 301);
-  }
-
   const response = NextResponse.next();
 
   if (url.pathname.startsWith('/internal') || url.pathname.startsWith('/megicode')) {

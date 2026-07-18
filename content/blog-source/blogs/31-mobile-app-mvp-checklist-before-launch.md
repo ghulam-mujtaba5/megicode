@@ -1,7 +1,7 @@
 ---
 title: 'Mobile App MVP Checklist: What to Build Before Launch'
 slug: 'mobile-app-mvp-checklist-before-launch'
-recommended_url_path: '/article/mobile-app-mvp-checklist-before-launch'
+recommended_url_path: '/insights/mobile-app-mvp-checklist-before-launch'
 seo_title: 'Mobile App MVP Checklist: What to Build Before Launch'
 meta_description: 'Mobile App MVP Checklist: What to Build Before Launch: practical framework for startup founders preparing to build a mobile app. Learn scope, risks,…'
 primary_keyword: 'mobile app MVP checklist'
@@ -227,7 +227,7 @@ If you are planning **mobile app MVP checklist**, do not start with the biggest 
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/mobile-app-mvp-checklist-before-launch"
+    "@id": "https://www.megicode.com/insights/mobile-app-mvp-checklist-before-launch"
   },
   "image": "https://www.megicode.com/images/blog/mobile-app-mvp-checklist-before-launch.png"
 }

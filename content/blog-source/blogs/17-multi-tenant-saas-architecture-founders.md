@@ -1,7 +1,7 @@
 ---
 title: 'Multi-Tenant SaaS Architecture Explained for Founders'
 slug: 'multi-tenant-saas-architecture-founders'
-recommended_url_path: '/article/multi-tenant-saas-architecture-founders'
+recommended_url_path: '/insights/multi-tenant-saas-architecture-founders'
 seo_title: 'Multi-Tenant SaaS Architecture Explained for Founders'
 meta_description: 'Multi-Tenant SaaS Architecture Explained for Founders: practical framework for B2B SaaS founders and product teams. Learn scope, risks, features, ROI,…'
 primary_keyword: 'multi-tenant SaaS architecture'
@@ -227,7 +227,7 @@ If you are planning **multi-tenant SaaS architecture**, do not start with the bi
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/multi-tenant-saas-architecture-founders"
+    "@id": "https://www.megicode.com/insights/multi-tenant-saas-architecture-founders"
   },
   "image": "https://www.megicode.com/images/blog/multi-tenant-saas-architecture-founders.png"
 }

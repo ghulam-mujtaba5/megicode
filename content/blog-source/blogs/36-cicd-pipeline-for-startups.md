@@ -1,7 +1,7 @@
 ---
 title: 'CI/CD Pipeline for Startups: Ship Faster With Less Risk'
 slug: 'cicd-pipeline-for-startups'
-recommended_url_path: '/article/cicd-pipeline-for-startups'
+recommended_url_path: '/insights/cicd-pipeline-for-startups'
 seo_title: 'CI/CD Pipeline for Startups: Ship Faster With Less Risk'
 meta_description: 'CI/CD Pipeline for Startups: Ship Faster With Less Risk: practical framework for software teams that want safer and faster releases. Learn scope, risks,…'
 primary_keyword: 'CI/CD pipeline for startups'
@@ -226,7 +226,7 @@ If you are planning **CI/CD pipeline for startups**, do not start with the bigge
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/cicd-pipeline-for-startups"
+    "@id": "https://www.megicode.com/insights/cicd-pipeline-for-startups"
   },
   "image": "https://www.megicode.com/images/blog/cicd-pipeline-for-startups.png"
 }

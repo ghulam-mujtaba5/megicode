@@ -1,7 +1,7 @@
 ---
 title: 'Education SaaS Development'
 slug: 'education-saas-development-learning-platforms'
-recommended_url_path: '/article/education-saas-development-learning-platforms'
+recommended_url_path: '/insights/education-saas-development-learning-platforms'
 seo_title: 'Education SaaS Development'
 meta_description: 'Education SaaS Development: practical framework for edtech founders and educational organizations. Learn scope, risks, features, ROI, and how MegiCode…'
 primary_keyword: 'education SaaS development'
@@ -224,7 +224,7 @@ If you are planning **education SaaS development**, do not start with the bigges
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/education-saas-development-learning-platforms"
+    "@id": "https://www.megicode.com/insights/education-saas-development-learning-platforms"
   },
   "image": "https://www.megicode.com/images/blog/education-saas-development-learning-platforms.png"
 }

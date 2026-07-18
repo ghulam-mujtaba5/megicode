@@ -1,7 +1,7 @@
 ---
 title: 'WhatsApp Automation for Businesses: Use Cases and Safe Setup'
 slug: 'whatsapp-automation-for-businesses-use-cases'
-recommended_url_path: '/article/whatsapp-automation-for-businesses-use-cases'
+recommended_url_path: '/insights/whatsapp-automation-for-businesses-use-cases'
 seo_title: 'WhatsApp Automation for Businesses: Use Cases and Safe Setup'
 meta_description: 'WhatsApp Automation for Businesses: Use Cases and Safe Setup: practical framework for businesses that communicate with customers through WhatsApp. Learn…'
 primary_keyword: 'WhatsApp automation for business'
@@ -237,7 +237,7 @@ If you are planning **WhatsApp automation for business**, do not start with the 
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/whatsapp-automation-for-businesses-use-cases"
+    "@id": "https://www.megicode.com/insights/whatsapp-automation-for-businesses-use-cases"
   },
   "image": "https://www.megicode.com/images/blog/whatsapp-automation-for-businesses-use-cases.png"
 }

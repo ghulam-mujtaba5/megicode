@@ -1,7 +1,7 @@
 ---
 title: 'LLM Integration Guide for Startups'
 slug: 'llm-integration-guide-for-startups'
-recommended_url_path: '/article/llm-integration-guide-for-startups'
+recommended_url_path: '/insights/llm-integration-guide-for-startups'
 seo_title: 'LLM Integration Guide for Startups'
 meta_description: 'LLM Integration Guide for Startups: practical framework for startup founders, product managers, and SaaS teams. Learn scope, risks, features, ROI, and…'
 primary_keyword: 'LLM integration for startups'
@@ -226,7 +226,7 @@ If you are planning **LLM integration for startups**, do not start with the bigg
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/llm-integration-guide-for-startups"
+    "@id": "https://www.megicode.com/insights/llm-integration-guide-for-startups"
   },
   "image": "https://www.megicode.com/images/blog/llm-integration-guide-for-startups.png"
 }

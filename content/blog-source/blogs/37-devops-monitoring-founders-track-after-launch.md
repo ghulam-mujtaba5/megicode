@@ -1,7 +1,7 @@
 ---
 title: 'DevOps Monitoring: What Founders Should Track After Launch'
 slug: 'devops-monitoring-founders-track-after-launch'
-recommended_url_path: '/article/devops-monitoring-founders-track-after-launch'
+recommended_url_path: '/insights/devops-monitoring-founders-track-after-launch'
 seo_title: 'DevOps Monitoring: What Founders Should Track After Launch'
 meta_description: 'DevOps Monitoring: What Founders Should Track After Launch: practical framework for founders and teams after product launch. Learn scope, risks,…'
 primary_keyword: 'DevOps monitoring'
@@ -226,7 +226,7 @@ If you are planning **DevOps monitoring**, do not start with the biggest possibl
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/devops-monitoring-founders-track-after-launch"
+    "@id": "https://www.megicode.com/insights/devops-monitoring-founders-track-after-launch"
   },
   "image": "https://www.megicode.com/images/blog/devops-monitoring-founders-track-after-launch.png"
 }

@@ -1,7 +1,7 @@
 ---
 title: 'Marketplace Platform Development'
 slug: 'marketplace-platform-development-trust-based-platform'
-recommended_url_path: '/article/marketplace-platform-development-trust-based-platform'
+recommended_url_path: '/insights/marketplace-platform-development-trust-based-platform'
 seo_title: 'Marketplace Platform Development'
 meta_description: 'Marketplace Platform Development: practical framework for founders building marketplaces for services, clinics, education, or local businesses. Learn…'
 primary_keyword: 'marketplace platform development'
@@ -236,7 +236,7 @@ If you are planning **marketplace platform development**, do not start with the 
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/marketplace-platform-development-trust-based-platform"
+    "@id": "https://www.megicode.com/insights/marketplace-platform-development-trust-based-platform"
   },
   "image": "https://www.megicode.com/images/blog/marketplace-platform-development-trust-based-platform.png"
 }

@@ -1,7 +1,7 @@
 ---
 title: 'Add Ai Features To Existing App Guide'
 slug: 'add-ai-features-to-existing-app'
-recommended_url_path: '/article/add-ai-features-to-existing-app'
+recommended_url_path: '/insights/add-ai-features-to-existing-app'
 seo_title: 'Add Ai Features To Existing App Guide'
 meta_description: 'Add Ai Features To Existing App Guide: practical framework for SaaS owners and businesses with existing software. Learn scope, risks, features, ROI, and…'
 primary_keyword: 'add AI features to existing app'
@@ -226,7 +226,7 @@ If you are planning **add AI features to existing app**, do not start with the b
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/add-ai-features-to-existing-app"
+    "@id": "https://www.megicode.com/insights/add-ai-features-to-existing-app"
   },
   "image": "https://www.megicode.com/images/blog/add-ai-features-to-existing-app.png"
 }

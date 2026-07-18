@@ -1,7 +1,7 @@
 ---
 title: 'Cloud Architecture for Startups'
 slug: 'cloud-architecture-for-startups'
-recommended_url_path: '/article/cloud-architecture-for-startups'
+recommended_url_path: '/insights/cloud-architecture-for-startups'
 seo_title: 'Cloud Architecture for Startups'
 meta_description: 'Cloud Architecture for Startups: practical framework for startups preparing to launch or scale software products. Learn scope, risks, features, ROI, and…'
 primary_keyword: 'cloud architecture for startups'
@@ -226,7 +226,7 @@ If you are planning **cloud architecture for startups**, do not start with the b
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/cloud-architecture-for-startups"
+    "@id": "https://www.megicode.com/insights/cloud-architecture-for-startups"
   },
   "image": "https://www.megicode.com/images/blog/cloud-architecture-for-startups.png"
 }

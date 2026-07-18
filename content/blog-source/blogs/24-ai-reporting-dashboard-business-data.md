@@ -1,7 +1,7 @@
 ---
 title: 'AI Reporting Dashboards: Turn Raw Business Data Into Decisions'
 slug: 'ai-reporting-dashboard-business-data'
-recommended_url_path: '/article/ai-reporting-dashboard-business-data'
+recommended_url_path: '/insights/ai-reporting-dashboard-business-data'
 seo_title: 'AI Reporting Dashboards: Turn Raw Business Data Into Decisions'
 meta_description: 'AI Reporting Dashboards: Turn Raw Business Data Into Decisions: practical framework for founders and managers who need clearer business visibility. Learn…'
 primary_keyword: 'AI reporting dashboard'
@@ -236,7 +236,7 @@ If you are planning **AI reporting dashboard**, do not start with the biggest po
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/ai-reporting-dashboard-business-data"
+    "@id": "https://www.megicode.com/insights/ai-reporting-dashboard-business-data"
   },
   "image": "https://www.megicode.com/images/blog/ai-reporting-dashboard-business-data.png"
 }

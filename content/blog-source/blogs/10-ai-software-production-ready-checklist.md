@@ -1,7 +1,7 @@
 ---
 title: 'What Makes AI Software Production-Ready? A Practical Checklist'
 slug: 'ai-software-production-ready-checklist'
-recommended_url_path: '/article/ai-software-production-ready-checklist'
+recommended_url_path: '/insights/ai-software-production-ready-checklist'
 seo_title: 'What Makes AI Software Production-Ready? A Practical Checklist'
 meta_description: 'What Makes AI Software Production-Ready? A Practical Checklist: practical framework for founders and teams preparing to launch AI products. Learn scope,…'
 primary_keyword: 'production ready AI software'
@@ -236,7 +236,7 @@ If you are planning **production ready AI software**, do not start with the bigg
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/ai-software-production-ready-checklist"
+    "@id": "https://www.megicode.com/insights/ai-software-production-ready-checklist"
   },
   "image": "https://www.megicode.com/images/blog/ai-software-production-ready-checklist.png"
 }

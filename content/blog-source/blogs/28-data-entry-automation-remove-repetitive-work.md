@@ -1,7 +1,7 @@
 ---
 title: 'Data Entry Automation: Remove Repetitive Work From Your Team'
 slug: 'data-entry-automation-remove-repetitive-work'
-recommended_url_path: '/article/data-entry-automation-remove-repetitive-work'
+recommended_url_path: '/insights/data-entry-automation-remove-repetitive-work'
 seo_title: 'Data Entry Automation: Remove Repetitive Work From Your Team'
 meta_description: 'Data Entry Automation: Remove Repetitive Work From Your Team: practical framework for operations teams, clinics, agencies, and SMEs. Learn scope, risks,…'
 primary_keyword: 'data entry automation'
@@ -227,7 +227,7 @@ If you are planning **data entry automation**, do not start with the biggest pos
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/data-entry-automation-remove-repetitive-work"
+    "@id": "https://www.megicode.com/insights/data-entry-automation-remove-repetitive-work"
   },
   "image": "https://www.megicode.com/images/blog/data-entry-automation-remove-repetitive-work.png"
 }

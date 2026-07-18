@@ -1,7 +1,7 @@
 ---
 title: 'AI Chatbot for Customer Support'
 slug: 'ai-chatbot-customer-support-features-use-cases-build-plan'
-recommended_url_path: '/article/ai-chatbot-customer-support-features-use-cases-build-plan'
+recommended_url_path: '/insights/ai-chatbot-customer-support-features-use-cases-build-plan'
 seo_title: 'AI Chatbot for Customer Support'
 meta_description: 'AI Chatbot for Customer Support: practical framework for clinics, agencies, service businesses, and growing startups. Learn scope, risks, features, ROI,…'
 primary_keyword: 'AI chatbot for customer support'
@@ -240,7 +240,7 @@ If you are planning **AI chatbot for customer support**, do not start with the b
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/ai-chatbot-customer-support-features-use-cases-build-plan"
+    "@id": "https://www.megicode.com/insights/ai-chatbot-customer-support-features-use-cases-build-plan"
   },
   "image": "https://www.megicode.com/images/blog/ai-chatbot-customer-support-features-use-cases-build-plan.png"
 }

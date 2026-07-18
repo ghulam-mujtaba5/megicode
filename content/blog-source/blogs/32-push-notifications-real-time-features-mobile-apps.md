@@ -1,7 +1,7 @@
 ---
 title: 'Push Notifications and Real-Time Features'
 slug: 'push-notifications-real-time-features-mobile-apps'
-recommended_url_path: '/article/push-notifications-real-time-features-mobile-apps'
+recommended_url_path: '/insights/push-notifications-real-time-features-mobile-apps'
 seo_title: 'Push Notifications and Real-Time Features'
 meta_description: 'Push Notifications and Real-Time Features: practical framework for product teams building mobile engagement features. Learn scope, risks, features, ROI,…'
 primary_keyword: 'push notifications app development'
@@ -227,7 +227,7 @@ If you are planning **push notifications app development**, do not start with th
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/push-notifications-real-time-features-mobile-apps"
+    "@id": "https://www.megicode.com/insights/push-notifications-real-time-features-mobile-apps"
   },
   "image": "https://www.megicode.com/images/blog/push-notifications-real-time-features-mobile-apps.png"
 }

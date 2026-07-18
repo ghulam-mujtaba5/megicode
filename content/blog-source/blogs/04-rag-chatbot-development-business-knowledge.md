@@ -1,7 +1,7 @@
 ---
 title: 'RAG Chatbot Development'
 slug: 'rag-chatbot-development-business-knowledge'
-recommended_url_path: '/article/rag-chatbot-development-business-knowledge'
+recommended_url_path: '/insights/rag-chatbot-development-business-knowledge'
 seo_title: 'RAG Chatbot Development'
 meta_description: 'RAG Chatbot Development: practical framework for business owners, SaaS teams, support teams, and founders. Learn scope, risks, features, ROI, and how…'
 primary_keyword: 'RAG chatbot development'
@@ -268,7 +268,7 @@ If you are planning **RAG chatbot development**, do not start with the biggest p
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/rag-chatbot-development-business-knowledge"
+    "@id": "https://www.megicode.com/insights/rag-chatbot-development-business-knowledge"
   },
   "image": "https://www.megicode.com/images/blog/rag-chatbot-development-business-knowledge.png"
 }

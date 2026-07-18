@@ -1,7 +1,7 @@
 ---
 title: 'AI Product Roadmap'
 slug: 'ai-product-roadmap-for-founders'
-recommended_url_path: '/article/ai-product-roadmap-for-founders'
+recommended_url_path: '/insights/ai-product-roadmap-for-founders'
 seo_title: 'AI Product Roadmap'
 meta_description: 'AI Product Roadmap: practical framework for non-technical founders and early-stage startup teams. Learn scope, risks, features, ROI, and how MegiCode can…'
 primary_keyword: 'AI product roadmap'
@@ -236,7 +236,7 @@ If you are planning **AI product roadmap**, do not start with the biggest possib
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/ai-product-roadmap-for-founders"
+    "@id": "https://www.megicode.com/insights/ai-product-roadmap-for-founders"
   },
   "image": "https://www.megicode.com/images/blog/ai-product-roadmap-for-founders.png"
 }

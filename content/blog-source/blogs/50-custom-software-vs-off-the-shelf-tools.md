@@ -1,7 +1,7 @@
 ---
 title: 'Custom Software vs Off-the-Shelf Tools: Decide'
 slug: 'custom-software-vs-off-the-shelf-tools'
-recommended_url_path: '/article/custom-software-vs-off-the-shelf-tools'
+recommended_url_path: '/insights/custom-software-vs-off-the-shelf-tools'
 seo_title: 'Custom Software vs Off-the-Shelf Tools: Decide'
 meta_description: 'Custom Software vs Off-the-Shelf Tools: Decide: practical framework for business owners deciding whether to buy software or build custom tools. Learn…'
 primary_keyword: 'custom software vs off-the-shelf'
@@ -225,7 +225,7 @@ If you are planning **custom software vs off-the-shelf**, do not start with the 
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/custom-software-vs-off-the-shelf-tools"
+    "@id": "https://www.megicode.com/insights/custom-software-vs-off-the-shelf-tools"
   },
   "image": "https://www.megicode.com/images/blog/custom-software-vs-off-the-shelf-tools.png"
 }

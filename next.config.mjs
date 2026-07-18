@@ -113,7 +113,8 @@ const nextConfig = {
   async redirects() {
     return [
       // Articles aliases → canonical /insights (301 SEO equity pass-through)
-      // Note: /article itself is redirected to /insights by middleware.ts
+      { source: '/article', destination: '/insights', permanent: true },
+      { source: '/article/:path*', destination: '/insights/:path*', permanent: true },
       { source: '/articles', destination: '/insights', permanent: true },
       { source: '/articles/:path*', destination: '/insights/:path*', permanent: true },
       // Common www subdomain mistypes & old URL patterns

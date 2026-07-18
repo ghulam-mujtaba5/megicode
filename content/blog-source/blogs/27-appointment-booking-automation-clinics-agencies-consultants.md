@@ -1,7 +1,7 @@
 ---
 title: 'Appointment Booking Automation Guide'
 slug: 'appointment-booking-automation-clinics-agencies-consultants'
-recommended_url_path: '/article/appointment-booking-automation-clinics-agencies-consultants'
+recommended_url_path: '/insights/appointment-booking-automation-clinics-agencies-consultants'
 seo_title: 'Appointment Booking Automation Guide'
 meta_description: 'Appointment Booking Automation Guide: practical framework for service businesses that schedule calls, consultations, or appointments. Learn scope, risks,…'
 primary_keyword: 'appointment booking automation'
@@ -237,7 +237,7 @@ If you are planning **appointment booking automation**, do not start with the bi
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/appointment-booking-automation-clinics-agencies-consultants"
+    "@id": "https://www.megicode.com/insights/appointment-booking-automation-clinics-agencies-consultants"
   },
   "image": "https://www.megicode.com/images/blog/appointment-booking-automation-clinics-agencies-consultants.png"
 }

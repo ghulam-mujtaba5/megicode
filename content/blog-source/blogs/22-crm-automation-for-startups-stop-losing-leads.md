@@ -1,7 +1,7 @@
 ---
 title: 'CRM Automation for Startups: Stop Losing Leads'
 slug: 'crm-automation-for-startups-stop-losing-leads'
-recommended_url_path: '/article/crm-automation-for-startups-stop-losing-leads'
+recommended_url_path: '/insights/crm-automation-for-startups-stop-losing-leads'
 seo_title: 'CRM Automation for Startups: Stop Losing Leads'
 meta_description: 'CRM Automation for Startups: Stop Losing Leads: practical framework for startups, agencies, clinics, and service companies. Learn scope, risks, features,…'
 primary_keyword: 'CRM automation for startups'
@@ -231,7 +231,7 @@ If you are planning **CRM automation for startups**, do not start with the bigge
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/crm-automation-for-startups-stop-losing-leads"
+    "@id": "https://www.megicode.com/insights/crm-automation-for-startups-stop-losing-leads"
   },
   "image": "https://www.megicode.com/images/blog/crm-automation-for-startups-stop-losing-leads.png"
 }

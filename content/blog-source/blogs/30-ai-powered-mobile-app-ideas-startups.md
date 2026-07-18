@@ -1,7 +1,7 @@
 ---
 title: 'AI-Powered Mobile App Ideas for Startups and Small Businesses'
 slug: 'ai-powered-mobile-app-ideas-startups'
-recommended_url_path: '/article/ai-powered-mobile-app-ideas-startups'
+recommended_url_path: '/insights/ai-powered-mobile-app-ideas-startups'
 seo_title: 'AI-Powered Mobile App Ideas for Startups and Small Businesses'
 meta_description: 'AI-Powered Mobile App Ideas for Startups and Small Businesses: practical framework for founders looking for practical mobile product opportunities. Learn…'
 primary_keyword: 'AI-powered mobile app ideas'
@@ -226,7 +226,7 @@ If you are planning **AI-powered mobile app ideas**, do not start with the bigge
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/ai-powered-mobile-app-ideas-startups"
+    "@id": "https://www.megicode.com/insights/ai-powered-mobile-app-ideas-startups"
   },
   "image": "https://www.megicode.com/images/blog/ai-powered-mobile-app-ideas-startups.png"
 }

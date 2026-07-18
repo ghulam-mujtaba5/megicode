@@ -1,7 +1,7 @@
 ---
 title: 'Digital Transformation Roadmap for Growing Businesses'
 slug: 'digital-transformation-roadmap-growing-businesses'
-recommended_url_path: '/article/digital-transformation-roadmap-growing-businesses'
+recommended_url_path: '/insights/digital-transformation-roadmap-growing-businesses'
 seo_title: 'Digital Transformation Roadmap for Growing Businesses'
 meta_description: 'Digital Transformation Roadmap for Growing Businesses: practical framework for SMEs and growing businesses moving from manual work to software systems.…'
 primary_keyword: 'digital transformation roadmap'
@@ -235,7 +235,7 @@ If you are planning **digital transformation roadmap**, do not start with the bi
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/digital-transformation-roadmap-growing-businesses"
+    "@id": "https://www.megicode.com/insights/digital-transformation-roadmap-growing-businesses"
   },
   "image": "https://www.megicode.com/images/blog/digital-transformation-roadmap-growing-businesses.png"
 }

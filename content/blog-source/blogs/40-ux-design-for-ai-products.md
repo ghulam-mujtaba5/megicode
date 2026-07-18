@@ -1,7 +1,7 @@
 ---
 title: 'UX Design for AI Products: Make AI Feel Useful, Not Confusing'
 slug: 'ux-design-for-ai-products'
-recommended_url_path: '/article/ux-design-for-ai-products'
+recommended_url_path: '/insights/ux-design-for-ai-products'
 seo_title: 'UX Design for AI Products: Make AI Feel Useful, Not Confusing'
 meta_description: 'UX Design for AI Products: Make AI Feel Useful, Not Confusing: practical framework for teams building AI-powered products. Learn scope, risks, features,…'
 primary_keyword: 'UX design for AI products'
@@ -231,7 +231,7 @@ If you are planning **UX design for AI products**, do not start with the biggest
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/ux-design-for-ai-products"
+    "@id": "https://www.megicode.com/insights/ux-design-for-ai-products"
   },
   "image": "https://www.megicode.com/images/blog/ux-design-for-ai-products.png"
 }

@@ -1,7 +1,7 @@
 ---
 title: 'n8n, Zapier, or Custom Automation'
 slug: 'n8n-zapier-custom-automation'
-recommended_url_path: '/article/n8n-zapier-custom-automation'
+recommended_url_path: '/insights/n8n-zapier-custom-automation'
 seo_title: 'n8n, Zapier, or Custom Automation'
 meta_description: 'n8n, Zapier, or Custom Automation: practical framework for businesses deciding between no-code and custom automation. Learn scope, risks, features, ROI,…'
 primary_keyword: 'n8n vs Zapier vs custom automation'
@@ -227,7 +227,7 @@ If you are planning **n8n vs Zapier vs custom automation**, do not start with th
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/n8n-zapier-custom-automation"
+    "@id": "https://www.megicode.com/insights/n8n-zapier-custom-automation"
   },
   "image": "https://www.megicode.com/images/blog/n8n-zapier-custom-automation.png"
 }

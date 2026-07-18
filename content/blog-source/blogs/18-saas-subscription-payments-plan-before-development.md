@@ -1,7 +1,7 @@
 ---
 title: 'SaaS Subscription Payments: What to Plan Before Development'
 slug: 'saas-subscription-payments-plan-before-development'
-recommended_url_path: '/article/saas-subscription-payments-plan-before-development'
+recommended_url_path: '/insights/saas-subscription-payments-plan-before-development'
 seo_title: 'SaaS Subscription Payments: What to Plan Before Development'
 meta_description: 'SaaS Subscription Payments: What to Plan Before Development: practical framework for founders adding subscriptions to a SaaS product. Learn scope, risks,…'
 primary_keyword: 'SaaS subscription payments'
@@ -227,7 +227,7 @@ If you are planning **SaaS subscription payments**, do not start with the bigges
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/saas-subscription-payments-plan-before-development"
+    "@id": "https://www.megicode.com/insights/saas-subscription-payments-plan-before-development"
   },
   "image": "https://www.megicode.com/images/blog/saas-subscription-payments-plan-before-development.png"
 }

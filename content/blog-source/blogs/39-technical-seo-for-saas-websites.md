@@ -1,7 +1,7 @@
 ---
 title: 'Technical SEO for SaaS Websites: A Founder-Friendly Checklist'
 slug: 'technical-seo-for-saas-websites'
-recommended_url_path: '/article/technical-seo-for-saas-websites'
+recommended_url_path: '/insights/technical-seo-for-saas-websites'
 seo_title: 'Technical SEO for SaaS Websites: A Founder-Friendly Checklist'
 meta_description: 'Technical SEO for SaaS Websites: A Founder-Friendly Checklist: practical framework for SaaS founders and software companies building organic traffic.…'
 primary_keyword: 'technical SEO for SaaS'
@@ -236,7 +236,7 @@ If you are planning **technical SEO for SaaS**, do not start with the biggest po
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/technical-seo-for-saas-websites"
+    "@id": "https://www.megicode.com/insights/technical-seo-for-saas-websites"
   },
   "image": "https://www.megicode.com/images/blog/technical-seo-for-saas-websites.png"
 }

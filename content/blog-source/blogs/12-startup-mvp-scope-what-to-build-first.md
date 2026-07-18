@@ -1,7 +1,7 @@
 ---
 title: 'Startup MVP Scope: Decide What to Build First'
 slug: 'startup-mvp-scope-what-to-build-first'
-recommended_url_path: '/article/startup-mvp-scope-what-to-build-first'
+recommended_url_path: '/insights/startup-mvp-scope-what-to-build-first'
 seo_title: 'Startup MVP Scope: Decide What to Build First'
 meta_description: 'Startup MVP Scope: Decide What to Build First: practical framework for founders who want to launch quickly without building the wrong product. Learn…'
 primary_keyword: 'startup MVP scope'
@@ -236,7 +236,7 @@ If you are planning **startup MVP scope**, do not start with the biggest possibl
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/startup-mvp-scope-what-to-build-first"
+    "@id": "https://www.megicode.com/insights/startup-mvp-scope-what-to-build-first"
   },
   "image": "https://www.megicode.com/images/blog/startup-mvp-scope-what-to-build-first.png"
 }

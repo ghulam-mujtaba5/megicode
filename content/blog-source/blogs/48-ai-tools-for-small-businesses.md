@@ -1,7 +1,7 @@
 ---
 title: 'AI Tools for Small Businesses'
 slug: 'ai-tools-for-small-businesses'
-recommended_url_path: '/article/ai-tools-for-small-businesses'
+recommended_url_path: '/insights/ai-tools-for-small-businesses'
 seo_title: 'AI Tools for Small Businesses'
 meta_description: 'AI Tools for Small Businesses: practical framework for small business owners and service teams. Learn scope, risks, features, ROI, and how MegiCode can…'
 primary_keyword: 'AI tools for small businesses'
@@ -235,7 +235,7 @@ If you are planning **AI tools for small businesses**, do not start with the big
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/ai-tools-for-small-businesses"
+    "@id": "https://www.megicode.com/insights/ai-tools-for-small-businesses"
   },
   "image": "https://www.megicode.com/images/blog/ai-tools-for-small-businesses.png"
 }

@@ -1,7 +1,7 @@
 ---
 title: 'Next.js SaaS Development: Why It Works for Modern Web Apps'
 slug: 'nextjs-saas-development-modern-web-apps'
-recommended_url_path: '/article/nextjs-saas-development-modern-web-apps'
+recommended_url_path: '/insights/nextjs-saas-development-modern-web-apps'
 seo_title: 'Next.js SaaS Development: Why It Works for Modern Web Apps'
 meta_description: 'Next.js SaaS Development: Why It Works for Modern Web Apps: practical framework for startups and businesses considering a modern web application. Learn…'
 primary_keyword: 'Next.js SaaS development'
@@ -227,7 +227,7 @@ If you are planning **Next.js SaaS development**, do not start with the biggest 
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/nextjs-saas-development-modern-web-apps"
+    "@id": "https://www.megicode.com/insights/nextjs-saas-development-modern-web-apps"
   },
   "image": "https://www.megicode.com/images/blog/nextjs-saas-development-modern-web-apps.png"
 }

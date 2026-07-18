@@ -1,7 +1,7 @@
 ---
 title: 'Custom AI Model vs AI API: What Should Your Startup Choose?'
 slug: 'custom-ai-model-vs-ai-api-startup-guide'
-recommended_url_path: '/article/custom-ai-model-vs-ai-api-startup-guide'
+recommended_url_path: '/insights/custom-ai-model-vs-ai-api-startup-guide'
 seo_title: 'Custom AI Model vs AI API: What Should Your Startup Choose?'
 meta_description: 'Custom AI Model vs AI API: What Should Your Startup Choose?: practical framework for founders deciding how to implement AI features. Learn scope, risks,…'
 primary_keyword: 'custom AI model vs API'
@@ -227,7 +227,7 @@ If you are planning **custom AI model vs API**, do not start with the biggest po
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/custom-ai-model-vs-ai-api-startup-guide"
+    "@id": "https://www.megicode.com/insights/custom-ai-model-vs-ai-api-startup-guide"
   },
   "image": "https://www.megicode.com/images/blog/custom-ai-model-vs-ai-api-startup-guide.png"
 }

@@ -1,7 +1,7 @@
 ---
 title: 'Admin Dashboard Development: Features Every SaaS Needs'
 slug: 'admin-dashboard-development-features-saas'
-recommended_url_path: '/article/admin-dashboard-development-features-saas'
+recommended_url_path: '/insights/admin-dashboard-development-features-saas'
 seo_title: 'Admin Dashboard Development: Features Every SaaS Needs'
 meta_description: 'Admin Dashboard Development: Features Every SaaS Needs: practical framework for SaaS founders and businesses building internal tools. Learn scope, risks,…'
 primary_keyword: 'admin dashboard development'
@@ -226,7 +226,7 @@ If you are planning **admin dashboard development**, do not start with the bigge
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/admin-dashboard-development-features-saas"
+    "@id": "https://www.megicode.com/insights/admin-dashboard-development-features-saas"
   },
   "image": "https://www.megicode.com/images/blog/admin-dashboard-development-features-saas.png"
 }

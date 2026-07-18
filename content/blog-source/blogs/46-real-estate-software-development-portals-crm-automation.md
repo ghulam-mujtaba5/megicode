@@ -1,7 +1,7 @@
 ---
 title: 'Real Estate Software Development'
 slug: 'real-estate-software-development-portals-crm-automation'
-recommended_url_path: '/article/real-estate-software-development-portals-crm-automation'
+recommended_url_path: '/insights/real-estate-software-development-portals-crm-automation'
 seo_title: 'Real Estate Software Development'
 meta_description: 'Real Estate Software Development: practical framework for real estate agencies, property startups, and brokers. Learn scope, risks, features, ROI, and…'
 primary_keyword: 'real estate software development'
@@ -235,7 +235,7 @@ If you are planning **real estate software development**, do not start with the 
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/real-estate-software-development-portals-crm-automation"
+    "@id": "https://www.megicode.com/insights/real-estate-software-development-portals-crm-automation"
   },
   "image": "https://www.megicode.com/images/blog/real-estate-software-development-portals-crm-automation.png"
 }

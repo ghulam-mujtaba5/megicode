@@ -1,7 +1,7 @@
 ---
 title: 'Build an AI-Powered SaaS MVP Without Wasting Budget'
 slug: 'build-ai-saas-mvp-without-wasting-budget'
-recommended_url_path: '/article/build-ai-saas-mvp-without-wasting-budget'
+recommended_url_path: '/insights/build-ai-saas-mvp-without-wasting-budget'
 seo_title: 'Build an AI-Powered SaaS MVP Without Wasting Budget'
 meta_description: 'Build an AI-Powered SaaS MVP Without Wasting Budget: practical framework for startup founders and non-technical founders. Learn scope, risks, features,…'
 primary_keyword: 'AI SaaS MVP development'
@@ -226,7 +226,7 @@ If you are planning **AI SaaS MVP development**, do not start with the biggest p
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/build-ai-saas-mvp-without-wasting-budget"
+    "@id": "https://www.megicode.com/insights/build-ai-saas-mvp-without-wasting-budget"
   },
   "image": "https://www.megicode.com/images/blog/build-ai-saas-mvp-without-wasting-budget.png"
 }

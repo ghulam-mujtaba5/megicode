@@ -1,7 +1,7 @@
 ---
 title: 'E-Commerce Automation'
 slug: 'ecommerce-automation-workflows'
-recommended_url_path: '/article/ecommerce-automation-workflows'
+recommended_url_path: '/insights/ecommerce-automation-workflows'
 seo_title: 'E-Commerce Automation'
 meta_description: 'E-Commerce Automation: practical framework for online stores and businesses selling products or services online. Learn scope, risks, features, ROI, and…'
 primary_keyword: 'e-commerce automation'
@@ -235,7 +235,7 @@ If you are planning **e-commerce automation**, do not start with the biggest pos
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.megicode.com/article/ecommerce-automation-workflows"
+    "@id": "https://www.megicode.com/insights/ecommerce-automation-workflows"
   },
   "image": "https://www.megicode.com/images/blog/ecommerce-automation-workflows.png"
 }
