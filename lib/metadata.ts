@@ -212,10 +212,15 @@ export function caseStudyJsonLd(opts: {
     name: opts.title,
     description: opts.description,
     url: canonicalUrl(opts.path),
-    creator: {
+    publisher: {
       '@type': 'Organization',
+      '@id': `${SITE_URL}#organization`,
       name: SITE_NAME,
       url: SITE_URL,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${SITE_URL}/meta/android-chrome-512x512.png`,
+      },
     },
     ...(opts.image && { image: opts.image }),
     ...(opts.techStack && {

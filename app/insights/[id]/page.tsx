@@ -100,15 +100,21 @@ export async function generateMetadata({
   const description =
     article.seoDescription || article.excerpt || article.title || 'Read this article on Megicode.';
 
+  const baseTitle = (article.seoTitle || article.title || 'Article').trim();
+  const title =
+    baseTitle.length > 55
+      ? `${baseTitle.slice(0, 55).trim()}... | Megicode`
+      : `${baseTitle} | Megicode`;
+
   return {
-    title: article.seoTitle || article.title || 'Article | Megicode',
+    title,
     description,
     keywords: [article.primaryKeyword, ...(article.keywords || []), ...(article.tags || [])].filter(
       Boolean
     ) as string[],
     authors: [{ name: article.authorName || 'Megicode Team' }],
     openGraph: {
-      title: article.title,
+      title,
       description,
       url: pageUrl,
       type: 'article',

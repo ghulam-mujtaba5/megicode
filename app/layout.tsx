@@ -209,16 +209,50 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   const navJsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'SiteNavigationElement',
-    name: ['About', 'Services', 'Pricing', 'Case Studies', 'Insights', 'Contact', 'Privacy Policy'],
-    url: [
-      'https://www.megicode.com/about',
-      'https://www.megicode.com/services',
-      canonicalUrl('/pricing'),
-      canonicalUrl('/projects'),
-      canonicalUrl('/insights'),
-      'https://www.megicode.com/contact',
-      'https://www.megicode.com/privacy-policy',
+    '@type': 'ItemList',
+    itemListElement: [
+      {
+        '@type': 'SiteNavigationElement',
+        position: 1,
+        name: 'About',
+        url: 'https://www.megicode.com/about',
+      },
+      {
+        '@type': 'SiteNavigationElement',
+        position: 2,
+        name: 'Services',
+        url: 'https://www.megicode.com/services',
+      },
+      {
+        '@type': 'SiteNavigationElement',
+        position: 3,
+        name: 'Pricing',
+        url: canonicalUrl('/pricing'),
+      },
+      {
+        '@type': 'SiteNavigationElement',
+        position: 4,
+        name: 'Case Studies',
+        url: canonicalUrl('/projects'),
+      },
+      {
+        '@type': 'SiteNavigationElement',
+        position: 5,
+        name: 'Insights',
+        url: canonicalUrl('/insights'),
+      },
+      {
+        '@type': 'SiteNavigationElement',
+        position: 6,
+        name: 'Contact',
+        url: 'https://www.megicode.com/contact',
+      },
+      {
+        '@type': 'SiteNavigationElement',
+        position: 7,
+        name: 'Privacy Policy',
+        url: 'https://www.megicode.com/privacy-policy',
+      },
     ],
   };
 

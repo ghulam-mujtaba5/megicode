@@ -305,7 +305,7 @@ export default function UIUXProductDesignDetailPage() {
           <div className={commonStyles.overviewImageBlock}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/icons/icon-wireframe-ui.png"
+              src="/Ui&Ux-icon.svg"
               alt="UI/UX wireframe design"
               className={`${commonStyles.overviewImage} ${themeStyles.overviewImage}`}
               data-animate="fade-in"
@@ -427,7 +427,7 @@ export default function UIUXProductDesignDetailPage() {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/icons/icon-analytics-dashboard.png"
+              src="/icons/icon-growth-chart.png"
               alt="Analytics dashboard illustration"
               width={240}
               height={240}
