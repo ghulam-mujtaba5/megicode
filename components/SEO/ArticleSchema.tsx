@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { PWA_ICON } from '@/lib/logo';
-
 // Define a more specific type for the article data
 interface Article {
   id: string;
@@ -30,19 +28,21 @@ interface ArticleSchemaProps {
   article: Article;
 }
 
+const BASE_URL = 'https://www.megicode.com';
+
 function absoluteUrl(pathOrUrl?: string) {
-  if (!pathOrUrl) return 'https://www.megicode.com/meta/default-og.jpg';
+  if (!pathOrUrl) return `${BASE_URL}/meta/og-image.png`;
   if (/^https?:\/\//i.test(pathOrUrl)) return pathOrUrl;
-  return `https://www.megicode.com${pathOrUrl.startsWith('/') ? pathOrUrl : `/${pathOrUrl}`}`;
+  return `${BASE_URL}${pathOrUrl.startsWith('/') ? pathOrUrl : `/${pathOrUrl}`}`;
 }
 
 const ArticleSchema: React.FC<ArticleSchemaProps> = ({ article }) => {
-  const pageUrl = `https://www.megicode.com/insights/${article.slug || article.id}`;
+  const pageUrl = `${BASE_URL}/insights/${article.slug || article.id}`;
   const imageUrl = absoluteUrl(
     article.heroImage?.sizes?.medium?.url ||
       article.heroImage?.url ||
       article.coverImage ||
-      '/meta/default-og.jpg'
+      '/meta/og-image.png'
   );
   const description = article.seoDescription || article.summary || article.excerpt || article.title;
 
@@ -52,9 +52,46 @@ const ArticleSchema: React.FC<ArticleSchemaProps> = ({ article }) => {
     ...(article.tags || []),
   ].filter(Boolean);
 
+  const authorName = (
+    article.authorName ||
+    article.populatedAuthors?.[0]?.name ||
+    'Megicode Team'
+  ).trim();
+
+  const isPerson = authorName && authorName !== 'Megicode Team';
+
+  const authorObject = isPerson
+    ? {
+        '@type': 'Person',
+        name: authorName,
+        url:
+          authorName === 'Ghulam Mujtaba'
+            ? 'https://www.linkedin.com/in/ghulam-mujtaba5/'
+            : `${BASE_URL}/about`,
+        jobTitle:
+          authorName === 'Ghulam Mujtaba'
+            ? 'Founder & Principal Architect'
+            : 'Co-Founder & Systems Engineer',
+        worksFor: {
+          '@type': 'Organization',
+          name: 'Megicode',
+          url: BASE_URL,
+        },
+        sameAs:
+          authorName === 'Ghulam Mujtaba'
+            ? ['https://www.linkedin.com/in/ghulam-mujtaba5/', 'https://github.com/ghulam-mujtaba5']
+            : [],
+      }
+    : {
+        '@type': 'Organization',
+        name: 'Megicode',
+        url: BASE_URL,
+        logo: `${BASE_URL}/meta/android-chrome-512x512.png`,
+      };
+
   const jsonLd: Record<string, unknown> = {
     '@context': 'https://schema.org',
-    '@type': 'Article',
+    '@type': 'BlogPosting',
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': pageUrl,
@@ -63,40 +100,17 @@ const ArticleSchema: React.FC<ArticleSchemaProps> = ({ article }) => {
     description,
     image: [imageUrl],
     datePublished: article.publishedAt || article.createdAt,
-    dateModified: article.updatedAt || article.createdAt,
-    author:
-      article.authorName && article.authorName !== 'Megicode Team'
-        ? {
-            '@type': 'Person',
-            name: article.authorName,
-            jobTitle:
-              article.authorName === 'Ghulam Mujtaba'
-                ? 'Founder & Principal Architect'
-                : 'Co-Founder & Systems Engineer',
-            worksFor: {
-              '@type': 'Organization',
-              name: 'Megicode',
-              url: 'https://www.megicode.com',
-            },
-            sameAs:
-              article.authorName === 'Ghulam Mujtaba'
-                ? [
-                    'https://www.linkedin.com/in/ghulam-mujtaba5/',
-                    'https://github.com/ghulam-mujtaba5',
-                  ]
-                : [],
-          }
-        : {
-            '@type': 'Organization',
-            name: 'Megicode',
-            url: 'https://www.megicode.com',
-          },
+    dateModified: article.updatedAt || article.publishedAt || article.createdAt,
+    author: [authorObject],
     publisher: {
       '@type': 'Organization',
       name: 'Megicode',
+      url: BASE_URL,
       logo: {
         '@type': 'ImageObject',
-        url: `https://www.megicode.com${PWA_ICON}`,
+        url: `${BASE_URL}/meta/android-chrome-512x512.png`,
+        width: 512,
+        height: 512,
       },
     },
   };

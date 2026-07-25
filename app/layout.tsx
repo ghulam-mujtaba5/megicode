@@ -2,7 +2,6 @@ import React from 'react';
 
 import { Inter, JetBrains_Mono, Manrope } from 'next/font/google';
 
-import { LOGO_MAIN_DARK, LOGO_MAIN_LIGHT, PWA_ICON } from '@/lib/logo';
 import { SOCIAL_PROFILES, canonicalUrl, professionalServiceJsonLd } from '@/lib/metadata';
 
 import GoogleAnalytics from '@/components/GoogleAnalytics/GoogleAnalytics';
@@ -141,7 +140,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     '@id': 'https://www.megicode.com#organization',
     name: 'Megicode',
     url: 'https://www.megicode.com',
-    logo: `https://www.megicode.com${PWA_ICON}`,
+    logo: 'https://www.megicode.com/meta/android-chrome-512x512.png',
     email: 'contact@megicode.com',
     foundingDate: '2025-07',
     numberOfEmployees: {
