@@ -4,11 +4,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 5%;
+  padding: clamp(90px, 12vh, 130px) 5% clamp(40px, 6vh, 80px);
   height: auto;
   position: relative;
   min-height: 100vh;
   min-height: 100svh;
+  box-sizing: border-box;
 }
 
 .textContainer {
@@ -26,6 +27,8 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 2px;
+  overflow: visible;
+  padding-top: 4px;
 }
 
 /* Brand name container — overflow:hidden clips the shimmer sweep without touching letter descenders */
@@ -62,9 +65,11 @@
   font-size: clamp(2.2rem, 4.4vw, 3.4rem);
   font-weight: 800;
   letter-spacing: -0.02em;
-  line-height: 1.12;
-  margin-top: 12px;
+  line-height: 1.2;
+  margin-top: 0;
+  padding-top: 4px;
   max-width: 640px;
+  overflow: visible;
 }
 
 .heroTitleAccent {
@@ -191,7 +196,7 @@
 /* Media query for tablets */
 @media (max-width: 1024px) {
   .container {
-    padding-left: 6%;
+    padding: clamp(84px, 10vh, 110px) 6% 3rem;
     min-height: 0;
   }
   .decoBlobWrap {
