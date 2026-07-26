@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Inter, JetBrains_Mono, Manrope } from 'next/font/google';
 
+import { LOGO_MAIN_DARK, LOGO_MAIN_LIGHT } from '@/lib/logo';
 import { SOCIAL_PROFILES, canonicalUrl, professionalServiceJsonLd } from '@/lib/metadata';
 
 import GoogleAnalytics from '@/components/GoogleAnalytics/GoogleAnalytics';
