@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { breadcrumbJsonLd, serviceJsonLd } from '@/lib/metadata';
+import { breadcrumbJsonLd, faqJsonLd, serviceJsonLd } from '@/lib/metadata';
 
 export const metadata: Metadata = {
   title: 'Cloud Infrastructure & DevOps | Startup-Ready Cloud Architecture | Megicode',
@@ -56,7 +56,52 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       'Startup-ready cloud architecture, CI/CD pipelines, auto-scaling, and infrastructure cost optimization.',
     path: '/services/cloud-devops',
     category: 'Cloud & DevOps',
+    offers: [
+      {
+        name: 'Cloud Architecture & Setup',
+        description:
+          'AWS/Vercel architecture setup, containerization with Docker, and environment configuration.',
+        price: '1500',
+        priceCurrency: 'USD',
+        deliveryTime: '1-3 weeks',
+      },
+      {
+        name: 'CI/CD & Automation Pipeline',
+        description:
+          'Automated GitHub Actions deployment pipelines, testing automation, and zero-downtime releases.',
+        price: '2500',
+        priceCurrency: 'USD',
+        deliveryTime: '2-4 weeks',
+      },
+      {
+        name: 'Cloud Infrastructure & Security Retainer',
+        description:
+          'Ongoing 24/7 monitoring, auto-scaling, backup management, cost optimization, and security audits.',
+        price: '1000',
+        priceCurrency: 'USD',
+        deliveryTime: 'Monthly',
+      },
+    ],
   });
+  const faqs = faqJsonLd([
+    {
+      q: 'Can you migrate from on-prem to cloud?',
+      a: 'Yes, we specialize in seamless migration from on-premises to cloud infrastructure with minimal disruption.',
+    },
+    {
+      q: 'What DevOps tools do you use?',
+      a: 'We use industry-leading tools including AWS, Azure, Docker, Kubernetes, Terraform, GitHub Actions, and Jenkins.',
+    },
+    {
+      q: 'How do you ensure uptime and security?',
+      a: 'We implement robust monitoring, automated failover, and industry best practices for security and compliance.',
+    },
+    {
+      q: 'Do you offer managed services?',
+      a: 'Yes, we provide ongoing management and optimization.',
+    },
+  ]);
+
   return (
     <>
       <script
@@ -66,6 +111,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(service) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqs) }}
       />
       {children}
     </>

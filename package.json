@@ -23,6 +23,11 @@
     "test:e2e:ui": "npx playwright test --ui",
     "test:e2e:debug": "npx playwright test --debug",
     "test:trace": "ts-node scripts/capture-devtools-trace.ts",
+    "seo:audit": "ts-node --project scripts/tsconfig.json scripts/seo-engine/audit-crawler.ts",
+    "seo:ingest": "ts-node --project scripts/tsconfig.json scripts/seo-engine/gsc-ingest.ts",
+    "seo:sprint": "ts-node --project scripts/tsconfig.json scripts/seo-engine/task-generator.ts",
+    "seo:looker": "ts-node --project scripts/tsconfig.json scripts/seo-engine/export-looker.ts",
+    "seo:all": "npm run seo:ingest && npm run seo:audit && npm run seo:sprint && npm run seo:looker",
     "prepare": "husky"
   },
   "dependencies": {

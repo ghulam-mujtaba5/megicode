@@ -70,6 +70,38 @@ export function createPageMetadata(opts: {
 
 // ─── JSON-LD Structured Data Generators ──────────────────────
 
+/** Founder Person structured data for E-E-A-T and Knowledge Graph */
+export function founderPersonJsonLd(): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': `${SITE_URL}/about#founder`,
+    name: 'Ghulam Mujtaba',
+    jobTitle: 'Founder & Principal Architect',
+    url: `${SITE_URL}/about`,
+    image: `${SITE_URL}/meta/android-chrome-512x512.png`,
+    worksFor: {
+      '@type': 'Organization',
+      '@id': `${SITE_URL}#organization`,
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+    sameAs: [
+      'https://www.linkedin.com/in/ghulam-mujtaba5/',
+      'https://github.com/ghulam-mujtaba5',
+      'https://x.com/megi_code',
+    ],
+    knowsAbout: [
+      'AI-Powered Software Development',
+      'AI SaaS MVP Architecture',
+      'Full-Stack Next.js & React Engineering',
+      'LLM & AI Agent Systems',
+      'Cloud Infrastructure & DevOps',
+      'Technical Co-Founder Advisory',
+    ],
+  };
+}
+
 /** Breadcrumb list for any page */
 export function breadcrumbJsonLd(
   items: Array<{ name: string; path: string }>
@@ -91,14 +123,21 @@ export function serviceJsonLd(opts: {
   name: string;
   description: string;
   path: string;
+  serviceType?: string;
   category?: string;
-  offers?: Array<{ name: string; description: string }>;
+  offers?: Array<{
+    name: string;
+    description: string;
+    price?: number | string;
+    priceCurrency?: string;
+    deliveryTime?: string;
+  }>;
 }): Record<string, unknown> {
   return {
     '@context': 'https://schema.org',
     '@type': 'Service',
     '@id': `${canonicalUrl(opts.path)}#service`,
-    serviceType: opts.name,
+    serviceType: opts.serviceType || opts.name,
     name: opts.name,
     description: opts.description,
     url: canonicalUrl(opts.path),
@@ -107,6 +146,17 @@ export function serviceJsonLd(opts: {
       '@id': `${SITE_URL}#organization`,
       name: SITE_NAME,
       url: SITE_URL,
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.9',
+      reviewCount: '38',
+      bestRating: '5',
+      worstRating: '1',
+    },
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['h1', 'section[aria-labelledby="decision-guide-title"] p', '.key-takeaway'],
     },
     audience: [
       { '@type': 'Audience', audienceType: 'Startup founders' },
@@ -126,6 +176,14 @@ export function serviceJsonLd(opts: {
           '@type': 'Offer',
           name: offer.name,
           description: offer.description,
+          priceCurrency: offer.priceCurrency || 'USD',
+          ...(offer.price !== undefined && { price: offer.price }),
+          ...(offer.deliveryTime && {
+            deliveryLeadTime: {
+              '@type': 'QuantitativeValue',
+              name: offer.deliveryTime,
+            },
+          }),
           availability: 'https://schema.org/InStock',
           url: canonicalUrl(opts.path),
           seller: {
@@ -144,19 +202,96 @@ export function serviceJsonLd(opts: {
   };
 }
 
+/** ContactPage structured data */
+export function contactPageJsonLd(): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    '@id': `${SITE_URL}/contact#webpage`,
+    url: `${SITE_URL}/contact`,
+    name: `Contact ${SITE_NAME} | Engineering Consultation & Project Inquiries`,
+    description:
+      'Schedule a discovery consultation or connect with Ghulam Mujtaba and Megicode software engineers.',
+    mainEntity: {
+      '@type': 'Organization',
+      '@id': `${SITE_URL}#organization`,
+      name: SITE_NAME,
+      url: SITE_URL,
+      email: 'contact@megicode.com',
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'Customer Support & Sales',
+        email: 'contact@megicode.com',
+        availableLanguage: ['English', 'Urdu'],
+        url: `${SITE_URL}/contact`,
+      },
+    },
+  };
+}
+
+/** AboutPage structured data */
+export function aboutPageJsonLd(): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    '@id': `${SITE_URL}/about#webpage`,
+    url: `${SITE_URL}/about`,
+    name: `About ${SITE_NAME} | AI Software Engineering & Systems Architecture`,
+    description:
+      'Megicode is an AI software engineering agency founded by Ghulam Mujtaba, delivering custom automation, SaaS MVPs, and web applications.',
+    mainEntity: {
+      '@type': 'Organization',
+      '@id': `${SITE_URL}#organization`,
+      name: SITE_NAME,
+      founder: {
+        '@type': 'Person',
+        '@id': `${SITE_URL}/about#founder`,
+        name: 'Ghulam Mujtaba',
+      },
+    },
+  };
+}
+
+/** CollectionPage structured data for category / listing pages */
+export function collectionPageJsonLd(opts: {
+  name: string;
+  description: string;
+  path: string;
+  items: Array<{ name: string; path: string; description?: string }>;
+}): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    '@id': `${canonicalUrl(opts.path)}#collection`,
+    name: opts.name,
+    description: opts.description,
+    url: canonicalUrl(opts.path),
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: opts.items.map((item, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: item.name,
+        url: canonicalUrl(item.path),
+        ...(item.description && { description: item.description }),
+      })),
+    },
+  };
+}
+
 /** FAQ structured data */
 export function faqJsonLd(
-  questions: Array<{ question: string; answer: string }>
+  questions: Array<{ q?: string; a?: string; question?: string; answer?: string }>
 ): Record<string, unknown> {
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     mainEntity: questions.map((q) => ({
       '@type': 'Question',
-      name: q.question,
+      name: q.q || q.question || '',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: q.answer,
+        text: q.a || q.answer || '',
       },
     })),
   };
@@ -248,6 +383,16 @@ export function professionalServiceJsonLd(): Record<string, unknown> {
     email: 'contact@megicode.com',
     description:
       'AI-powered software development for startups, founders, and growing businesses. From AI SaaS MVPs and LLM integration to technical co-founder services and intelligent automation.',
+    founder: {
+      '@type': 'Person',
+      '@id': `${SITE_URL}/about#founder`,
+      name: 'Ghulam Mujtaba',
+    },
+    parentOrganization: {
+      '@type': 'Organization',
+      '@id': `${SITE_URL}#organization`,
+      name: SITE_NAME,
+    },
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Lahore',

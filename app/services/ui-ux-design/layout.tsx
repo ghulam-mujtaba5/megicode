@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { breadcrumbJsonLd, serviceJsonLd } from '@/lib/metadata';
+import { breadcrumbJsonLd, faqJsonLd, serviceJsonLd } from '@/lib/metadata';
 
 export const metadata: Metadata = {
   title: 'Product Design & UX Strategy | Conversion-Focused Design for SaaS & AI | Megicode',
@@ -54,7 +54,52 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       'Conversion-focused product design, UX research, and design systems for SaaS and AI-powered products.',
     path: '/services/ui-ux-design',
     category: 'Product Design',
+    offers: [
+      {
+        name: 'UX Discovery & Wireframing Sprint',
+        description:
+          'User flow mapping, information architecture, low-fidelity wireframes, and conversion path design.',
+        price: '950',
+        priceCurrency: 'USD',
+        deliveryTime: '1-2 weeks',
+      },
+      {
+        name: 'Full Product UI/UX & Design System',
+        description:
+          'High-fidelity Figma mockups, responsive design, interactive prototype, and scalable design system.',
+        price: '2800',
+        priceCurrency: 'USD',
+        deliveryTime: '3-6 weeks',
+      },
+      {
+        name: 'Conversion Rate & UX Redesign',
+        description:
+          'UX audit of existing product, friction elimination, micro-interactions, and conversion-optimized screen overhaul.',
+        price: '1600',
+        priceCurrency: 'USD',
+        deliveryTime: '2-4 weeks',
+      },
+    ],
   });
+  const faqs = faqJsonLd([
+    {
+      q: 'Do you provide design systems?',
+      a: 'Yes, we create scalable design systems for consistency and efficiency.',
+    },
+    {
+      q: 'Can you work with our branding?',
+      a: 'Absolutely. We align all designs with your brand guidelines.',
+    },
+    {
+      q: 'What tools do you use?',
+      a: 'Figma, Adobe XD, Sketch, InVision, and other modern design tools.',
+    },
+    {
+      q: 'Do you test with real users?',
+      a: 'Yes, usability testing is a core part of our process.',
+    },
+  ]);
+
   return (
     <>
       <script
@@ -64,6 +109,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(service) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqs) }}
       />
       {children}
     </>

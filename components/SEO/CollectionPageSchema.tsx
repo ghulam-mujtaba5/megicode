@@ -36,13 +36,13 @@ const CollectionPageSchema: React.FC<CollectionPageSchemaProps> = ({ articles })
     inLanguage: 'en-US',
     isPartOf: {
       '@type': 'WebSite',
-      '@id': 'https://www.megicode.com/#website',
+      '@id': 'https://www.megicode.com#website',
       name: 'Megicode',
       url: 'https://www.megicode.com',
     },
     publisher: {
       '@type': 'Organization',
-      '@id': 'https://www.megicode.com/#organization',
+      '@id': 'https://www.megicode.com#organization',
       name: 'Megicode',
       url: 'https://www.megicode.com',
       logo: {
@@ -65,11 +65,13 @@ const CollectionPageSchema: React.FC<CollectionPageSchemaProps> = ({ articles })
         image: absoluteImageUrl(article.coverImage),
         author: {
           '@type': 'Organization',
+          '@id': 'https://www.megicode.com#organization',
           name: 'Megicode',
           url: 'https://www.megicode.com',
         },
         publisher: {
           '@type': 'Organization',
+          '@id': 'https://www.megicode.com#organization',
           name: 'Megicode',
           url: 'https://www.megicode.com',
         },

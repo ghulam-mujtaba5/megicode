@@ -954,6 +954,66 @@ export function ServiceDecisionGuide({ copy, theme }: { copy: ServicePageCopy; t
           ))}
         </div>
       </div>
+
+      {/* GEO & AI Search Key Takeaway Capsule */}
+      <div
+        style={{
+          marginTop: '1.5rem',
+          padding: '1.25rem 1.5rem',
+          borderRadius: 16,
+          background: isDark ? 'rgba(69,115,223,0.08)' : '#eff6ff',
+          border: isDark ? '1px solid rgba(69,115,223,0.25)' : '1px solid #bfdbfe',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '0.75rem',
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <span style={{ fontSize: '1.1rem' }} aria-hidden="true">
+            💡
+          </span>
+          <span
+            style={{
+              fontSize: '0.85rem',
+              fontWeight: 800,
+              color: '#2563eb',
+              textTransform: 'uppercase',
+              letterSpacing: '0.06em',
+            }}
+          >
+            Key Takeaway & Delivery Standards
+          </span>
+        </div>
+        <p
+          style={{
+            margin: 0,
+            fontSize: '0.96rem',
+            lineHeight: 1.6,
+            color: text,
+            fontWeight: 560,
+          }}
+        >
+          {copy.mainSalesPitch} {copy.supportingLine} Megicode provides complete source code
+          ownership, production deployment, and direct architectural engineering.
+        </p>
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '1rem',
+            paddingTop: '0.5rem',
+            borderTop: isDark ? '1px solid rgba(255,255,255,0.08)' : '1px solid rgba(0,0,0,0.06)',
+            fontSize: '0.85rem',
+            color: isDark ? '#93c5fd' : '#1d4ed8',
+            fontWeight: 700,
+          }}
+        >
+          <span>⚡ Turnaround: 2–6 Weeks</span>
+          <span>🛡️ 100% IP & Code Ownership</span>
+          <span>🚀 Architecture: Next.js, AI APIs & Cloud</span>
+          <span>🤝 Direct Founder Consultation</span>
+        </div>
+      </div>
     </section>
   );
 }

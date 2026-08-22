@@ -32,7 +32,6 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
 import Breadcrumbs from '@/components/SEO/Breadcrumbs';
-import ServiceSchema from '@/components/SEO/ServiceSchema';
 
 import { useCalendlyModal } from '../../../components/CalendlyModal';
 import Footer from '../../../components/Footer/Footer';
@@ -629,14 +628,6 @@ export default function MobileAppSolutionsPage() {
         </section>
       </main>
       {calendlyModalElement}
-      <ServiceSchema
-        service={{
-          title: service!.title,
-          description: service!.description,
-          slug: 'mobile-app-development',
-          features: service!.features,
-        }}
-      />
       <Footer />
     </div>
   );

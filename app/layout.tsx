@@ -188,20 +188,35 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       'DevOps & CI/CD',
       'Startup Software Solutions',
     ],
+    founder: {
+      '@type': 'Person',
+      '@id': 'https://www.megicode.com/about#founder',
+      name: 'Ghulam Mujtaba',
+    },
     sameAs: [...SOCIAL_PROFILES],
   };
 
   const websiteJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
+    '@id': 'https://www.megicode.com#website',
     name: 'Megicode',
     url: 'https://www.megicode.com',
+    inLanguage: 'en-US',
     description:
       'AI-powered software development for startups, founders, and growing businesses. From AI SaaS MVPs and LLM integration to technical co-founder services — your tech partner from idea to scale.',
     publisher: {
       '@type': 'Organization',
       '@id': 'https://www.megicode.com#organization',
       name: 'Megicode',
+    },
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: 'https://www.megicode.com/insights?q={search_term_string}',
+      },
+      'query-input': 'required name=search_term_string',
     },
   };
 

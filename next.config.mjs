@@ -132,16 +132,35 @@ const nextConfig = {
       // Obsolete crawler-spotted slugs yielding 404s
       { source: '/services/saas-web-platform-development', destination: '/services/custom-web-development', permanent: true },
       { source: '/services/seo-growth-marketing', destination: '/services/growth-marketing-seo', permanent: true },
-      // High-intent service URL aliases (SEO & CRO)
+      // High-intent top-level & service URL aliases (SEO & CRO)
+      { source: '/ai-automation-services', destination: '/services/ai-automation-agents', permanent: true },
+      { source: '/ai-automation', destination: '/services/ai-automation-agents', permanent: true },
+      { source: '/saas-mvp-development', destination: '/services/ai-saas-mvp-development', permanent: true },
+      { source: '/saas-development', destination: '/services/ai-saas-mvp-development', permanent: true },
+      { source: '/custom-software-development', destination: '/services/custom-web-development', permanent: true },
       { source: '/services/ai-automation', destination: '/services/ai-automation-agents', permanent: true },
       { source: '/services/ai-agents', destination: '/services/ai-automation-agents', permanent: true },
       { source: '/services/ai-chatbots', destination: '/services/ai-automation-agents', permanent: true },
       { source: '/services/custom-web-app-development', destination: '/services/custom-web-development', permanent: true },
       { source: '/services/business-automation', destination: '/services/ai-automation-agents', permanent: true },
-      { source: '/services/clinic-management-software', destination: '/services/custom-web-development', permanent: true },
+      { source: '/services/clinic-management-software', destination: '/services/ai-automation-agents', permanent: true },
       { source: '/services/dashboard-development', destination: '/services/data-analytics', permanent: true },
       { source: '/services/api-integrations', destination: '/services/ai-automation-agents', permanent: true },
       { source: '/services/seo-ready-websites', destination: '/services/growth-marketing-seo', permanent: true },
+      // Industry shortcuts mapped to existing core service pages
+      { source: '/healthcare-software-development', destination: '/services/ai-automation-agents', permanent: true },
+      { source: '/real-estate-software-development', destination: '/services/custom-web-development', permanent: true },
+      { source: '/education-software-development', destination: '/services/custom-web-development', permanent: true },
+      { source: '/software-for-marketing-agencies', destination: '/services/ai-automation-agents', permanent: true },
+      // Tool shortcuts mapped to relevant service offerings
+      { source: '/calculator', destination: '/services/ai-automation-agents', permanent: true },
+      { source: '/roi-calculator', destination: '/services/ai-automation-agents', permanent: true },
+      { source: '/saas-calculator', destination: '/services/ai-saas-mvp-development', permanent: true },
+      { source: '/mvp-calculator', destination: '/services/ai-saas-mvp-development', permanent: true },
+      // Case study & results aliases
+      { source: '/case-studies', destination: '/projects', permanent: true },
+      { source: '/case-studies/:path*', destination: '/projects/:path*', permanent: true },
+      { source: '/results', destination: '/projects', permanent: true },
     ];
   },
 };

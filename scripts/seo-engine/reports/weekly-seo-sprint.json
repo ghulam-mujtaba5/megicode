@@ -1,0 +1,78 @@
+[
+  {
+    "id": "TASK-SEO-001",
+    "category": "Content & Keywords",
+    "title": "Optimize Service Landing Page for Top Money Keyword \"voiseed product reporting dashboards\"",
+    "priority": "P0 - Immediate",
+    "targetUrl": "/services/data-analytics",
+    "impactScore": 95,
+    "reason": "Search query \"voiseed product reporting dashboards\" has 788 impressions with 0 clicks at position #4.8.",
+    "instructions": [
+      "Review H2 and subheadings on /services/data-analytics.",
+      "Add a dedicated section explaining reporting dashboards and BI architectures.",
+      "Embed comparison table and FAQ answering \"voiseed product reporting dashboards\".",
+      "Verify page canonical tag and OpenGraph preview."
+    ],
+    "status": "Done"
+  },
+  {
+    "id": "TASK-SEO-002",
+    "category": "Content & Keywords",
+    "title": "Push Quick-Win Keyword \"voiseed product reporting dashboards\" into Top 3 SERP",
+    "priority": "P0 - Immediate",
+    "targetUrl": "/services/ai-automation-agents",
+    "impactScore": 92,
+    "reason": "Currently ranking at position #4.8 with 788 impressions.",
+    "instructions": [
+      "Add 3 contextual internal links pointing to /services/ai-automation-agents from relevant blog posts.",
+      "Add structured FAQ schema addressing common buyer questions.",
+      "Embed Aesthetics Clinic booking case study snippet for verified social proof."
+    ],
+    "status": "Done"
+  },
+  {
+    "id": "TASK-SEO-003",
+    "category": "Technical",
+    "title": "Verify 100% 301 Redirect Equity and Canonical URL Standardization",
+    "priority": "P0 - Immediate",
+    "targetUrl": "https://www.megicode.com",
+    "impactScore": 98,
+    "reason": "GSC reported 25 redirected pages and 11 canonical mismatches in historical data.",
+    "instructions": [
+      "Confirm all alias routes (/article/*, /ai-automation-services, /saas-mvp-development) 301-redirect cleanly.",
+      "Ensure sitemap.xml strictly contains canonical URLs and excludes internal/redirect routes.",
+      "Verify all layout files output self-referencing canonicals with https://www.megicode.com domain."
+    ],
+    "status": "Done"
+  },
+  {
+    "id": "TASK-SEO-004",
+    "category": "Content & Keywords",
+    "title": "Publish & Cross-Link High-Intent AI Automation Articles",
+    "priority": "P1 - High",
+    "targetUrl": "/insights",
+    "impactScore": 88,
+    "reason": "Google requires topical depth in AI automation and SaaS MVP engineering to establish entity authority.",
+    "instructions": [
+      "Publish 2 technical articles per week covering AI Agents, n8n workflows, and SaaS MVP costing.",
+      "Ensure every published article contains 3 contextual links to relevant money service pages.",
+      "Validate AuthorCard Person schema and publisher Organization markup on all blog posts."
+    ],
+    "status": "In Progress"
+  },
+  {
+    "id": "TASK-SEO-005",
+    "category": "CRO & Conversions",
+    "title": "Enhance Service Page Conversion Triggers & GA4 Event Tracking",
+    "priority": "P1 - High",
+    "targetUrl": "/services",
+    "impactScore": 90,
+    "reason": "Organic traffic must convert into qualified discovery calls and inbound project requests.",
+    "instructions": [
+      "Ensure Calendly modal popup is prominent on all service hero banners.",
+      "Verify GA4 events for consultation booking, contact form submission, and WhatsApp clicks.",
+      "Monitor Microsoft Clarity session recordings for user friction points and drop-offs."
+    ],
+    "status": "Done"
+  }
+]

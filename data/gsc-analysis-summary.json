@@ -1,0 +1,146 @@
+{
+  "analyzedAt": "2026-08-22T18:46:26.815Z",
+  "totalQueries": 292,
+  "totalPages": 110,
+  "canonicalSplit": {
+    "wwwCount": 101,
+    "nonWwwCount": 9
+  },
+  "quickWins": [
+    {
+      "query": "voiseed product reporting dashboards",
+      "clicks": 0,
+      "impressions": 788,
+      "ctr": 0,
+      "position": 4.84
+    },
+    {
+      "query": "meegoshcode.com founded",
+      "clicks": 0,
+      "impressions": 169,
+      "ctr": 0,
+      "position": 6.39
+    },
+    {
+      "query": "gigged.ai product features reporting dashboards analytics",
+      "clicks": 0,
+      "impressions": 114,
+      "ctr": 0,
+      "position": 7.82
+    },
+    {
+      "query": "\"campusaxis\"",
+      "clicks": 0,
+      "impressions": 108,
+      "ctr": 0,
+      "position": 5.23
+    },
+    {
+      "query": "campusaxis",
+      "clicks": 2,
+      "impressions": 91,
+      "ctr": 2.2,
+      "position": 5.65
+    },
+    {
+      "query": "magicode company",
+      "clicks": 0,
+      "impressions": 52,
+      "ctr": 0,
+      "position": 6.71
+    },
+    {
+      "query": "ai app development ideas for small businesses",
+      "clicks": 0,
+      "impressions": 35,
+      "ctr": 0,
+      "position": 7.46
+    },
+    {
+      "query": "\"campusaxis\" software",
+      "clicks": 0,
+      "impressions": 16,
+      "ctr": 0,
+      "position": 9.62
+    },
+    {
+      "query": "real estate brokerage software development",
+      "clicks": 0,
+      "impressions": 16,
+      "ctr": 0,
+      "position": 16.38
+    }
+  ],
+  "moneyKeywords": [
+    {
+      "query": "voiseed product reporting dashboards",
+      "clicks": 0,
+      "impressions": 788,
+      "ctr": 0,
+      "position": 4.84
+    },
+    {
+      "query": "custom machine learning development services",
+      "clicks": 0,
+      "impressions": 437,
+      "ctr": 0,
+      "position": 67.58
+    },
+    {
+      "query": "ml-powered solutions development",
+      "clicks": 0,
+      "impressions": 410,
+      "ctr": 0,
+      "position": 67.35
+    },
+    {
+      "query": "custom machine learning solutions",
+      "clicks": 0,
+      "impressions": 370,
+      "ctr": 0,
+      "position": 48.15
+    },
+    {
+      "query": "meegoshcode.com founded",
+      "clicks": 0,
+      "impressions": 169,
+      "ctr": 0,
+      "position": 6.39
+    },
+    {
+      "query": "gigged.ai product features reporting dashboards analytics",
+      "clicks": 0,
+      "impressions": 114,
+      "ctr": 0,
+      "position": 7.82
+    },
+    {
+      "query": "\"campusaxis\"",
+      "clicks": 0,
+      "impressions": 108,
+      "ctr": 0,
+      "position": 5.23
+    },
+    {
+      "query": "reducing and automating data entry",
+      "clicks": 0,
+      "impressions": 61,
+      "ctr": 0,
+      "position": 79.98
+    },
+    {
+      "query": "magicode company",
+      "clicks": 0,
+      "impressions": 52,
+      "ctr": 0,
+      "position": 6.71
+    },
+    {
+      "query": "ai business process automation",
+      "clicks": 0,
+      "impressions": 50,
+      "ctr": 0,
+      "position": 75.6
+    }
+  ]
+}

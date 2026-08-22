@@ -1,0 +1,45 @@
+{
+  "auditedAt": "2026-08-22T18:46:30.843Z",
+  "targets": [
+    {
+      "route": "/",
+      "pageName": "Homepage",
+      "fileVerified": true,
+      "h1RenderPatternVerified": true,
+      "schemaConfigured": true,
+      "status": "VERIFIED_OK"
+    },
+    {
+      "route": "/services/ai-automation-agents",
+      "pageName": "AI Automation Services",
+      "fileVerified": true,
+      "h1RenderPatternVerified": true,
+      "schemaConfigured": true,
+      "status": "VERIFIED_OK"
+    },
+    {
+      "route": "/industries/healthcare-software-development",
+      "pageName": "Healthcare Industry Solution",
+      "fileVerified": true,
+      "h1RenderPatternVerified": true,
+      "schemaConfigured": true,
+      "status": "VERIFIED_OK"
+    },
+    {
+      "route": "/case-studies",
+      "pageName": "Case Studies Showcase",
+      "fileVerified": true,
+      "h1RenderPatternVerified": true,
+      "schemaConfigured": true,
+      "status": "VERIFIED_OK"
+    },
+    {
+      "route": "/tools/saas-cost-calculator",
+      "pageName": "SaaS Cost Calculator Tool",
+      "fileVerified": true,
+      "h1RenderPatternVerified": true,
+      "schemaConfigured": true,
+      "status": "VERIFIED_OK"
+    }
+  ]
+}

@@ -63,10 +63,13 @@ const ArticleSchema: React.FC<ArticleSchemaProps> = ({ article }) => {
   const authorObject = isPerson
     ? {
         '@type': 'Person',
+        ...(authorName === 'Ghulam Mujtaba' && {
+          '@id': `${BASE_URL}/about#founder`,
+        }),
         name: authorName,
         url:
           authorName === 'Ghulam Mujtaba'
-            ? 'https://www.linkedin.com/in/ghulam-mujtaba5/'
+            ? `${BASE_URL}/about`
             : `${BASE_URL}/about`,
         jobTitle:
           authorName === 'Ghulam Mujtaba'
@@ -74,16 +77,22 @@ const ArticleSchema: React.FC<ArticleSchemaProps> = ({ article }) => {
             : 'Co-Founder & Systems Engineer',
         worksFor: {
           '@type': 'Organization',
+          '@id': `${BASE_URL}#organization`,
           name: 'Megicode',
           url: BASE_URL,
         },
         sameAs:
           authorName === 'Ghulam Mujtaba'
-            ? ['https://www.linkedin.com/in/ghulam-mujtaba5/', 'https://github.com/ghulam-mujtaba5']
+            ? [
+                'https://www.linkedin.com/in/ghulam-mujtaba5/',
+                'https://github.com/ghulam-mujtaba5',
+                'https://x.com/megi_code',
+              ]
             : [],
       }
     : {
         '@type': 'Organization',
+        '@id': `${BASE_URL}#organization`,
         name: 'Megicode',
         url: BASE_URL,
         logo: `${BASE_URL}/meta/android-chrome-512x512.png`,
@@ -104,6 +113,7 @@ const ArticleSchema: React.FC<ArticleSchemaProps> = ({ article }) => {
     author: [authorObject],
     publisher: {
       '@type': 'Organization',
+      '@id': `${BASE_URL}#organization`,
       name: 'Megicode',
       url: BASE_URL,
       logo: {
@@ -112,6 +122,12 @@ const ArticleSchema: React.FC<ArticleSchemaProps> = ({ article }) => {
         width: 512,
         height: 512,
       },
+    },
+    inLanguage: 'en-US',
+    isAccessibleForFree: true,
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['h1', 'article p:first-of-type', '.article-summary'],
     },
   };
 

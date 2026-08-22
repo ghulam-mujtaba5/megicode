@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { breadcrumbJsonLd, serviceJsonLd } from '@/lib/metadata';
+import { breadcrumbJsonLd, faqJsonLd, serviceJsonLd } from '@/lib/metadata';
 
 export const metadata: Metadata = {
   title: 'Technical Co-Founder as a Service | CTO-Level Guidance for Startups | Megicode',
@@ -56,12 +56,50 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     category: 'Technical Advisory',
     offers: [
       {
-        name: 'Technical Consulting / Roadmap',
+        name: 'Technical Discovery & MVP Roadmap',
         description:
-          'MVP scope, architecture options, risk review, stack decision, budget logic, and practical build sequence before development.',
+          'MVP scope definition, architecture options, tech stack selection, risk analysis, and budget plan.',
+        price: '400',
+        priceCurrency: 'USD',
+        deliveryTime: '1-2 weeks',
+      },
+      {
+        name: 'Fractional CTO & Architecture Advisory',
+        description:
+          'CTO-level advisory, engineering team mentoring, technical due diligence for investors, and code audits.',
+        price: '2500',
+        priceCurrency: 'USD',
+        deliveryTime: 'Monthly',
+      },
+      {
+        name: 'Architecture & Security Audit',
+        description:
+          'Deep architecture evaluation, security vulnerability scanning, performance bottleneck identification, and remediation plan.',
+        price: '1200',
+        priceCurrency: 'USD',
+        deliveryTime: '1-2 weeks',
       },
     ],
   });
+  const faqs = faqJsonLd([
+    {
+      q: 'Do you provide 24/7 support?',
+      a: 'Yes, we offer various support packages including 24/7 coverage with different SLA levels to match your business needs.',
+    },
+    {
+      q: 'Can you help with compliance?',
+      a: 'Absolutely! We help organizations achieve and maintain compliance with GDPR, ISO 27001, HIPAA, and other standards.',
+    },
+    {
+      q: 'What platforms do you support?',
+      a: 'We support all major platforms including Windows, Linux, macOS, cloud services (AWS, Azure, GCP), and enterprise applications.',
+    },
+    {
+      q: 'How do you ensure security?',
+      a: 'We implement industry best practices, conduct regular security audits, and follow strict protocols for data protection and access control.',
+    },
+  ]);
+
   return (
     <>
       <script
@@ -71,6 +109,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(service) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqs) }}
       />
       {children}
     </>

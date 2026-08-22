@@ -5,6 +5,7 @@ import React, { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 
 import { SITE_SOCIAL, getCopyrightText } from '@/lib/constants';
+import { breadcrumbJsonLd, serviceJsonLd } from '@/lib/metadata';
 
 import LoadingAnimation from '@/components/LoadingAnimation/LoadingAnimation';
 import Breadcrumbs from '@/components/SEO/Breadcrumbs';
@@ -21,6 +22,35 @@ const ServicesHero = dynamic(() => import('../../components/Services/Hero/Servic
 const ServiceCard = dynamic(() => import('../../components/Services/Card/ServiceCard'), {
   loading: () => <LoadingAnimation size="medium" />,
 });
+
+const breadcrumb = breadcrumbJsonLd([
+  { name: 'Home', path: '/' },
+  { name: 'Services', path: '/services' },
+]);
+
+const services = [
+  serviceJsonLd({
+    name: 'AI Automation & Agents',
+    description:
+      'AI chatbots, WhatsApp flows, CRM and booking automation, workflow agents, and lead capture systems for growing businesses.',
+    path: '/services/ai-automation-agents',
+    category: 'AI Automation',
+  }),
+  serviceJsonLd({
+    name: 'AI SaaS & MVP Development',
+    description:
+      'Launch-ready AI SaaS MVP development with auth, dashboards, databases, payments, AI features, admin panels, and deployment.',
+    path: '/services/ai-saas-mvp-development',
+    category: 'AI Product Development',
+  }),
+  serviceJsonLd({
+    name: 'Custom Web Apps & Business Platforms',
+    description:
+      'Custom portals, dashboards, booking systems, CRMs, management platforms, and business software tailored to daily operations.',
+    path: '/services/custom-web-development',
+    category: 'Custom Software Development',
+  }),
+];
 
 const coreServices = [
   {
@@ -131,6 +161,17 @@ export default function ServicesPage() {
         overflowX: 'hidden',
       }}
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+      />
+      {services.map((service) => (
+        <script
+          key={String(service['@id'])}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(service) }}
+        />
+      ))}
       <div
         id="theme-toggle"
         role="button"

@@ -1,0 +1,638 @@
+{
+  "timestamp": "2026-08-22T19:45:52.535Z",
+  "summary": {
+    "totalQueries": 312,
+    "totalTrackedPages": 110,
+    "totalClicks": null,
+    "totalImpressions": 4501,
+    "overallCtr": "NaN%",
+    "avgPosition": 57.43
+  },
+  "quickWins": [
+    {
+      "query": "voiseed product reporting dashboards",
+      "clicks": 0,
+      "impressions": 788,
+      "ctr": "0%",
+      "position": 4.84,
+      "action": "Boost content depth, add FAQ schema & internal links to push from #4.8 into Top 3"
+    },
+    {
+      "query": "meegoshcode.com founded",
+      "clicks": 0,
+      "impressions": 169,
+      "ctr": "0%",
+      "position": 6.39,
+      "action": "Boost content depth, add FAQ schema & internal links to push from #6.4 into Top 3"
+    },
+    {
+      "query": "gigged.ai product features reporting dashboards analytics",
+      "clicks": 0,
+      "impressions": 114,
+      "ctr": "0%",
+      "position": 7.82,
+      "action": "Boost content depth, add FAQ schema & internal links to push from #7.8 into Top 3"
+    },
+    {
+      "query": "\"\"campusaxis\"\"",
+      "clicks": 0,
+      "impressions": 108,
+      "ctr": "0%",
+      "position": 5.23,
+      "action": "Boost content depth, add FAQ schema & internal links to push from #5.2 into Top 3"
+    },
+    {
+      "query": "campusaxis",
+      "clicks": 2,
+      "impressions": 91,
+      "ctr": "2.2%",
+      "position": 5.65,
+      "action": "Boost content depth, add FAQ schema & internal links to push from #5.7 into Top 3"
+    },
+    {
+      "query": "magicode company",
+      "clicks": 0,
+      "impressions": 52,
+      "ctr": "0%",
+      "position": 6.71,
+      "action": "Boost content depth, add FAQ schema & internal links to push from #6.7 into Top 3"
+    },
+    {
+      "query": "ai app development ideas for small businesses",
+      "clicks": 0,
+      "impressions": 35,
+      "ctr": "0%",
+      "position": 7.46,
+      "action": "Boost content depth, add FAQ schema & internal links to push from #7.5 into Top 3"
+    },
+    {
+      "query": "\"\"campusaxis\"\" software",
+      "clicks": 0,
+      "impressions": 16,
+      "ctr": "0%",
+      "position": 9.62,
+      "action": "Boost content depth, add FAQ schema & internal links to push from #9.6 into Top 3"
+    },
+    {
+      "query": "real estate brokerage software development",
+      "clicks": 0,
+      "impressions": 16,
+      "ctr": "0%",
+      "position": 16.38,
+      "action": "Boost content depth, add FAQ schema & internal links to push from #16.4 into Top 3"
+    },
+    {
+      "query": "quality to support growing teams",
+      "clicks": 0,
+      "impressions": 12,
+      "ctr": "0%",
+      "position": 6.42,
+      "action": "Boost content depth, add FAQ schema & internal links to push from #6.4 into Top 3"
+    },
+    {
+      "query": "scratch",
+      "clicks": 0,
+      "impressions": 11,
+      "ctr": "0%",
+      "position": 6.45,
+      "action": "Boost content depth, add FAQ schema & internal links to push from #6.5 into Top 3"
+    },
+    {
+      "query": "what is the industry of meegoshcode.com",
+      "clicks": 0,
+      "impressions": 10,
+      "ctr": "0%",
+      "position": 7.3,
+      "action": "Boost content depth, add FAQ schema & internal links to push from #7.3 into Top 3"
+    },
+    {
+      "query": "wajdan",
+      "clicks": 0,
+      "impressions": 9,
+      "ctr": "0%",
+      "position": 8,
+      "action": "Boost content depth, add FAQ schema & internal links to push from #8.0 into Top 3"
+    },
+    {
+      "query": "מגיקוד",
+      "clicks": 0,
+      "impressions": 9,
+      "ctr": "0%",
+      "position": 17.89,
+      "action": "Boost content depth, add FAQ schema & internal links to push from #17.9 into Top 3"
+    },
+    {
+      "query": "saas founder security",
+      "clicks": 0,
+      "impressions": 8,
+      "ctr": "0%",
+      "position": 13.5,
+      "action": "Boost content depth, add FAQ schema & internal links to push from #13.5 into Top 3"
+    },
+    {
+      "query": "saas team building internal mobile growth dashboard",
+      "clicks": 0,
+      "impressions": 8,
+      "ctr": "0%",
+      "position": 18,
+      "action": "Boost content depth, add FAQ schema & internal links to push from #18.0 into Top 3"
+    },
+    {
+      "query": "what is the company name for meegoshcode.com",
+      "clicks": 0,
+      "impressions": 7,
+      "ctr": "0%",
+      "position": 9.86,
+      "action": "Boost content depth, add FAQ schema & internal links to push from #9.9 into Top 3"
+    },
+    {
+      "query": "top llm integration tools for startups",
+      "clicks": 0,
+      "impressions": 5,
+      "ctr": "0%",
+      "position": 10.8,
+      "action": "Boost content depth, add FAQ schema & internal links to push from #10.8 into Top 3"
+    },
+    {
+      "query": "which developers build performance-optimized mobile apps with ux focus?",
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": "0%",
+      "position": 7.33,
+      "action": "Boost content depth, add FAQ schema & internal links to push from #7.3 into Top 3"
+    },
+    {
+      "query": "\"\"ifjcode24 je mezikódem\"\"",
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": "0%",
+      "position": 5.5,
+      "action": "Boost content depth, add FAQ schema & internal links to push from #5.5 into Top 3"
+    }
+  ],
+  "moneyKeywords": [
+    {
+      "query": "voiseed product reporting dashboards",
+      "clicks": 0,
+      "impressions": 788,
+      "ctr": "0%",
+      "position": 4.84,
+      "priority": "P0 CRITICAL",
+      "action": "Align H1/H2 headings, enhance commercial CTA & build supporting contextual links for \"voiseed product reporting dashboards\""
+    },
+    {
+      "query": "custom machine learning development services",
+      "clicks": 0,
+      "impressions": 437,
+      "ctr": "0%",
+      "position": 67.58,
+      "priority": "P0 CRITICAL",
+      "action": "Align H1/H2 headings, enhance commercial CTA & build supporting contextual links for \"custom machine learning development services\""
+    },
+    {
+      "query": "ml-powered solutions development",
+      "clicks": 0,
+      "impressions": 410,
+      "ctr": "0%",
+      "position": 67.35,
+      "priority": "P0 CRITICAL",
+      "action": "Align H1/H2 headings, enhance commercial CTA & build supporting contextual links for \"ml-powered solutions development\""
+    },
+    {
+      "query": "custom machine learning solutions",
+      "clicks": 0,
+      "impressions": 370,
+      "ctr": "0%",
+      "position": 48.15,
+      "priority": "P0 CRITICAL",
+      "action": "Align H1/H2 headings, enhance commercial CTA & build supporting contextual links for \"custom machine learning solutions\""
+    },
+    {
+      "query": "meegoshcode.com founded",
+      "clicks": 0,
+      "impressions": 169,
+      "ctr": "0%",
+      "position": 6.39,
+      "priority": "P0 CRITICAL",
+      "action": "Align H1/H2 headings, enhance commercial CTA & build supporting contextual links for \"meegoshcode.com founded\""
+    },
+    {
+      "query": "gigged.ai product features reporting dashboards analytics",
+      "clicks": 0,
+      "impressions": 114,
+      "ctr": "0%",
+      "position": 7.82,
+      "priority": "P0 CRITICAL",
+      "action": "Align H1/H2 headings, enhance commercial CTA & build supporting contextual links for \"gigged.ai product features reporting dashboards analytics\""
+    },
+    {
+      "query": "\"\"campusaxis\"\"",
+      "clicks": 0,
+      "impressions": 108,
+      "ctr": "0%",
+      "position": 5.23,
+      "priority": "P0 CRITICAL",
+      "action": "Align H1/H2 headings, enhance commercial CTA & build supporting contextual links for \"\"\"campusaxis\"\"\""
+    },
+    {
+      "query": "reducing and automating data entry",
+      "clicks": 0,
+      "impressions": 61,
+      "ctr": "0%",
+      "position": 79.98,
+      "priority": "P0 CRITICAL",
+      "action": "Align H1/H2 headings, enhance commercial CTA & build supporting contextual links for \"reducing and automating data entry\""
+    },
+    {
+      "query": "magicode company",
+      "clicks": 0,
+      "impressions": 52,
+      "ctr": "0%",
+      "position": 6.71,
+      "priority": "P0 CRITICAL",
+      "action": "Align H1/H2 headings, enhance commercial CTA & build supporting contextual links for \"magicode company\""
+    },
+    {
+      "query": "ai business process automation",
+      "clicks": 0,
+      "impressions": 50,
+      "ctr": "0%",
+      "position": 75.6,
+      "priority": "P1 HIGH",
+      "action": "Align H1/H2 headings, enhance commercial CTA & build supporting contextual links for \"ai business process automation\""
+    },
+    {
+      "query": "saas payments",
+      "clicks": 0,
+      "impressions": 47,
+      "ctr": "0%",
+      "position": 51.32,
+      "priority": "P1 HIGH",
+      "action": "Align H1/H2 headings, enhance commercial CTA & build supporting contextual links for \"saas payments\""
+    },
+    {
+      "query": "custom machine learning development",
+      "clicks": 0,
+      "impressions": 37,
+      "ctr": "0%",
+      "position": 70.62,
+      "priority": "P1 HIGH",
+      "action": "Align H1/H2 headings, enhance commercial CTA & build supporting contextual links for \"custom machine learning development\""
+    },
+    {
+      "query": "ai app development ideas for small businesses",
+      "clicks": 0,
+      "impressions": 35,
+      "ctr": "0%",
+      "position": 7.46,
+      "priority": "P1 HIGH",
+      "action": "Align H1/H2 headings, enhance commercial CTA & build supporting contextual links for \"ai app development ideas for small businesses\""
+    },
+    {
+      "query": "admin dashboard development",
+      "clicks": 0,
+      "impressions": 35,
+      "ctr": "0%",
+      "position": 21.89,
+      "priority": "P1 HIGH",
+      "action": "Align H1/H2 headings, enhance commercial CTA & build supporting contextual links for \"admin dashboard development\""
+    },
+    {
+      "query": "ai mobile app ideas",
+      "clicks": 0,
+      "impressions": 35,
+      "ctr": "0%",
+      "position": 22,
+      "priority": "P1 HIGH",
+      "action": "Align H1/H2 headings, enhance commercial CTA & build supporting contextual links for \"ai mobile app ideas\""
+    },
+    {
+      "query": "cicd for startups",
+      "clicks": 0,
+      "impressions": 35,
+      "ctr": "0%",
+      "position": 37.29,
+      "priority": "P1 HIGH",
+      "action": "Align H1/H2 headings, enhance commercial CTA & build supporting contextual links for \"cicd for startups\""
+    },
+    {
+      "query": "saas technology stack",
+      "clicks": 0,
+      "impressions": 34,
+      "ctr": "0%",
+      "position": 65.47,
+      "priority": "P1 HIGH",
+      "action": "Align H1/H2 headings, enhance commercial CTA & build supporting contextual links for \"saas technology stack\""
+    },
+    {
+      "query": "best tech stack for saas",
+      "clicks": 0,
+      "impressions": 34,
+      "ctr": "0%",
+      "position": 74.68,
+      "priority": "P1 HIGH",
+      "action": "Align H1/H2 headings, enhance commercial CTA & build supporting contextual links for \"best tech stack for saas\""
+    },
+    {
+      "query": "ai tools for small businesses",
+      "clicks": 0,
+      "impressions": 30,
+      "ctr": "0%",
+      "position": 85.03,
+      "priority": "P1 HIGH",
+      "action": "Align H1/H2 headings, enhance commercial CTA & build supporting contextual links for \"ai tools for small businesses\""
+    },
+    {
+      "query": "ai software for small business",
+      "clicks": 0,
+      "impressions": 28,
+      "ctr": "0%",
+      "position": 82.82,
+      "priority": "P1 HIGH",
+      "action": "Align H1/H2 headings, enhance commercial CTA & build supporting contextual links for \"ai software for small business\""
+    },
+    {
+      "query": "customer support ai chatbot development service for ecommerce",
+      "clicks": 0,
+      "impressions": 26,
+      "ctr": "0%",
+      "position": 82.58,
+      "priority": "P1 HIGH",
+      "action": "Align H1/H2 headings, enhance commercial CTA & build supporting contextual links for \"customer support ai chatbot development service for ecommerce\""
+    },
+    {
+      "query": "custom machine learning development company",
+      "clicks": 0,
+      "impressions": 25,
+      "ctr": "0%",
+      "position": 73.04,
+      "priority": "P1 HIGH",
+      "action": "Align H1/H2 headings, enhance commercial CTA & build supporting contextual links for \"custom machine learning development company\""
+    },
+    {
+      "query": "ai agents for business development",
+      "clicks": 0,
+      "impressions": 24,
+      "ctr": "0%",
+      "position": 52.17,
+      "priority": "P1 HIGH",
+      "action": "Align H1/H2 headings, enhance commercial CTA & build supporting contextual links for \"ai agents for business development\""
+    },
+    {
+      "query": "workflow automation agency reading",
+      "clicks": 0,
+      "impressions": 24,
+      "ctr": "0%",
+      "position": 61.67,
+      "priority": "P1 HIGH",
+      "action": "Align H1/H2 headings, enhance commercial CTA & build supporting contextual links for \"workflow automation agency reading\""
+    },
+    {
+      "query": "ai app ideas",
+      "clicks": 0,
+      "impressions": 22,
+      "ctr": "0%",
+      "position": 49.45,
+      "priority": "P1 HIGH",
+      "action": "Align H1/H2 headings, enhance commercial CTA & build supporting contextual links for \"ai app ideas\""
+    }
+  ],
+  "coverageIssues": [
+    {
+      "reason": "Page with redirect",
+      "pages": 25,
+      "source": "Website",
+      "status": "Not Started"
+    },
+    {
+      "reason": "Crawled - currently not indexed",
+      "pages": 12,
+      "source": "Google systems",
+      "status": "Not Started"
+    },
+    {
+      "reason": "Duplicate",
+      "pages": null,
+      "source": "Google chose different canonical than user",
+      "status": "Google systems"
+    },
+    {
+      "reason": "Discovered - currently not indexed",
+      "pages": 6,
+      "source": "Google systems",
+      "status": "Passed"
+    }
+  ],
+  "pagePerformance": [
+    {
+      "url": "https://www.megicode.com/insights/ai-reporting-dashboard-business-data",
+      "clicks": 0,
+      "impressions": 972,
+      "ctr": "0%",
+      "position": 8.27
+    },
+    {
+      "url": "https://megicode.com/services/ai-machine-learning",
+      "clicks": 0,
+      "impressions": 808,
+      "ctr": "0%",
+      "position": 55.27
+    },
+    {
+      "url": "https://www.megicode.com/",
+      "clicks": 89,
+      "impressions": 756,
+      "ctr": "11.77%",
+      "position": 4.48
+    },
+    {
+      "url": "https://www.megicode.com/services/ai-machine-learning",
+      "clicks": 0,
+      "impressions": 754,
+      "ctr": "0%",
+      "position": 54.14
+    },
+    {
+      "url": "https://www.megicode.com/about",
+      "clicks": 0,
+      "impressions": 457,
+      "ctr": "0%",
+      "position": 5.85
+    },
+    {
+      "url": "https://www.megicode.com/services",
+      "clicks": 1,
+      "impressions": 372,
+      "ctr": "0.27%",
+      "position": 4.55
+    },
+    {
+      "url": "https://www.megicode.com/projects/campusaxis-university-portal",
+      "clicks": 4,
+      "impressions": 290,
+      "ctr": "1.38%",
+      "position": 5.9
+    },
+    {
+      "url": "https://www.megicode.com/projects",
+      "clicks": 0,
+      "impressions": 281,
+      "ctr": "0%",
+      "position": 8.08
+    },
+    {
+      "url": "https://www.megicode.com/careers",
+      "clicks": 1,
+      "impressions": 264,
+      "ctr": "0.38%",
+      "position": 5.19
+    },
+    {
+      "url": "https://www.megicode.com/article/best-tech-stack-for-saas-startups-2026",
+      "clicks": 0,
+      "impressions": 239,
+      "ctr": "0%",
+      "position": 63.86
+    },
+    {
+      "url": "https://www.megicode.com/article/ai-powered-mobile-app-ideas-startups",
+      "clicks": 1,
+      "impressions": 226,
+      "ctr": "0.44%",
+      "position": 25.88
+    },
+    {
+      "url": "https://www.megicode.com/insights/saas-subscription-payments-plan-before-development",
+      "clicks": 0,
+      "impressions": 162,
+      "ctr": "0%",
+      "position": 55.33
+    },
+    {
+      "url": "https://www.megicode.com/article/business-process-automation-ai-workflows",
+      "clicks": 0,
+      "impressions": 145,
+      "ctr": "0%",
+      "position": 81.43
+    },
+    {
+      "url": "https://www.megicode.com/insights/admin-dashboard-development-features-saas",
+      "clicks": 1,
+      "impressions": 136,
+      "ctr": "0.74%",
+      "position": 15.63
+    },
+    {
+      "url": "https://www.megicode.com/services/custom-web-development",
+      "clicks": 0,
+      "impressions": 127,
+      "ctr": "0%",
+      "position": 9.03
+    },
+    {
+      "url": "https://www.megicode.com/services/mobile-app-solutions",
+      "clicks": 0,
+      "impressions": 110,
+      "ctr": "0%",
+      "position": 7.82
+    },
+    {
+      "url": "https://www.megicode.com/article/business-intelligence-dashboard-kpis",
+      "clicks": 0,
+      "impressions": 109,
+      "ctr": "0%",
+      "position": 60.72
+    },
+    {
+      "url": "https://megicode.com/",
+      "clicks": 28,
+      "impressions": 103,
+      "ctr": "27.18%",
+      "position": 1.84
+    },
+    {
+      "url": "https://www.megicode.com/article/data-entry-automation-remove-repetitive-work",
+      "clicks": 0,
+      "impressions": 102,
+      "ctr": "0%",
+      "position": 70.49
+    },
+    {
+      "url": "https://www.megicode.com/reviews",
+      "clicks": 0,
+      "impressions": 96,
+      "ctr": "0%",
+      "position": 17.33
+    },
+    {
+      "url": "https://www.megicode.com/privacy-policy",
+      "clicks": 0,
+      "impressions": 95,
+      "ctr": "0%",
+      "position": 6.71
+    },
+    {
+      "url": "https://www.megicode.com/insights/ai-chatbot-customer-support-features-use-cases-build-plan",
+      "clicks": 0,
+      "impressions": 89,
+      "ctr": "0%",
+      "position": 49.34
+    },
+    {
+      "url": "https://www.megicode.com/insights/university-portal-development-students-use",
+      "clicks": 0,
+      "impressions": 84,
+      "ctr": "0%",
+      "position": 19.62
+    },
+    {
+      "url": "https://www.megicode.com/article/ai-tools-for-small-businesses",
+      "clicks": 0,
+      "impressions": 81,
+      "ctr": "0%",
+      "position": 76.63
+    },
+    {
+      "url": "https://www.megicode.com/insights/build-ai-saas-mvp-without-wasting-budget",
+      "clicks": 0,
+      "impressions": 79,
+      "ctr": "0%",
+      "position": 19.87
+    },
+    {
+      "url": "https://megicode.com/services",
+      "clicks": 0,
+      "impressions": 78,
+      "ctr": "0%",
+      "position": 2.62
+    },
+    {
+      "url": "https://www.megicode.com/article/admin-dashboard-development-features-saas",
+      "clicks": 0,
+      "impressions": 78,
+      "ctr": "0%",
+      "position": 19.83
+    },
+    {
+      "url": "https://megicode.com/projects",
+      "clicks": 1,
+      "impressions": 76,
+      "ctr": "1.32%",
+      "position": 2.84
+    },
+    {
+      "url": "https://www.megicode.com/services/ai-automation-agents",
+      "clicks": 1,
+      "impressions": 76,
+      "ctr": "1.32%",
+      "position": 33.05
+    },
+    {
+      "url": "https://www.megicode.com/article/saas-launch-checklist-before-going-live",
+      "clicks": 2,
+      "impressions": 70,
+      "ctr": "2.86%",
+      "position": 41.6
+    }
+  ]
+}

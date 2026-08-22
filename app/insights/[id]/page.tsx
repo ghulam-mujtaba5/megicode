@@ -8,6 +8,7 @@ import { SITE_SOCIAL, getCopyrightText } from '@/lib/constants';
 import AuthorCard from '@/components/Article/AuthorCard';
 import FaqAccordion from '@/components/Article/FaqAccordion';
 import ReadingProgress from '@/components/Article/ReadingProgress';
+import { ServiceLinkFunnel } from '@/components/Article/ServiceLinkFunnel';
 import ShareButtons from '@/components/Article/ShareButtons';
 import TableOfContents, { type TocItem } from '@/components/Article/TableOfContents';
 import Footer from '@/components/Footer/Footer';
@@ -279,6 +280,12 @@ const ArticleDetailPage = async ({ params }: { params: Promise<{ id: string }> }
                 dangerouslySetInnerHTML={{
                   __html: cleanHtml || '<p>No content available.</p>',
                 }}
+              />
+
+              <ServiceLinkFunnel
+                title={article.title}
+                category={article.categories?.[0]}
+                tags={article.tags}
               />
 
               <AuthorCard authorName={article.authorName} />

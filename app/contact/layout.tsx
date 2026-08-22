@@ -1,8 +1,9 @@
-import { breadcrumbJsonLd, faqJsonLd } from '@/lib/metadata';
+import { breadcrumbJsonLd, contactPageJsonLd, faqJsonLd } from '@/lib/metadata';
 
 export { metadata } from './metadata';
 
 export default function ContactLayout({ children }: { children: React.ReactNode }) {
+  const contactPage = contactPageJsonLd();
   const breadcrumb = breadcrumbJsonLd([
     { name: 'Home', path: '/' },
     { name: 'Contact', path: '/contact' },
@@ -38,6 +39,10 @@ export default function ContactLayout({ children }: { children: React.ReactNode 
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactPage) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
