@@ -96,7 +96,6 @@ export default function PricingPageClient() {
 
         <section className="pricing-hero" aria-labelledby="pricing-heading">
           <div className="hero-copy">
-            <span className="eyebrow">USD pricing</span>
             <h1 id="pricing-heading">
               Clear pricing for AI automation, MVPs, and business platforms
             </h1>
@@ -118,10 +117,6 @@ export default function PricingPageClient() {
                 </span>
               </a>
             </div>
-            <p className="tool-note">
-              Third-party tools, hosting, WhatsApp, telephony, and AI API usage are billed
-              separately.
-            </p>
           </div>
 
           <div className="pricing-stack" aria-label="Pricing starting points">
@@ -136,7 +131,6 @@ export default function PricingPageClient() {
 
         <section id="packages" className="packages-section" aria-labelledby="packages-heading">
           <div className="section-head">
-            <span className="eyebrow">Packages</span>
             <h2 id="packages-heading">Compare fixed-scope packages by service type.</h2>
             <p>
               Growth packages are highlighted where they are the safest default for most buyers.
@@ -159,10 +153,6 @@ export default function PricingPageClient() {
           </div>
 
           <p className="category-summary">{activeCategory.summary}</p>
-          <div className="start-guidance">
-            <strong>Not sure where to start?</strong>
-            <span>Choose MVP Roadmap if the scope is unclear.</span>
-          </div>
 
           <div className="package-grid">
             {activeCategory.packages.map((item) => (
@@ -209,7 +199,6 @@ export default function PricingPageClient() {
 
         <section className="comparison-section" aria-labelledby="comparison-heading">
           <div className="section-head">
-            <span className="eyebrow">Comparison</span>
             <h2 id="comparison-heading">Choose the safest buying path.</h2>
             <p>
               Start with the smallest useful commitment when scope is unclear. Move into Growth or
@@ -254,7 +243,6 @@ export default function PricingPageClient() {
 
         <section className="fit-section" aria-labelledby="fit-heading">
           <div className="section-head">
-            <span className="eyebrow">Fit check</span>
             <h2 id="fit-heading">A better fit for serious builds.</h2>
             <p>
               These guidelines keep the first call focused and help both sides avoid mismatched
@@ -283,7 +271,6 @@ export default function PricingPageClient() {
 
         <section className="payment-section" aria-labelledby="payment-heading">
           <div className="payment-copy">
-            <span className="eyebrow">Payment clarity</span>
             <h2 id="payment-heading">Simple terms before a proposal.</h2>
             <p>Final payment structure is confirmed in the proposal before work starts.</p>
           </div>
@@ -300,7 +287,6 @@ export default function PricingPageClient() {
 
         <section className="faq-section" aria-labelledby="faq-heading">
           <div className="section-head">
-            <span className="eyebrow">FAQ</span>
             <h2 id="faq-heading">Straight answers before the call.</h2>
           </div>
           <div className="faq-grid">

@@ -99,10 +99,6 @@ export default function HomeTestimonials() {
           <h2 id="home-testimonials-heading" className={styles.title}>
             Proof from products, platforms, and business systems we have shipped.
           </h2>
-          <p className={styles.subtitle}>
-            Megicode is built for founders and teams who need real software outcomes, not vague
-            technical promises.
-          </p>
         </motion.header>
 
         <motion.ul

@@ -3,6 +3,7 @@ import React from 'react';
 
 import Link from 'next/link';
 
+import servicePageCopy, { defaultComparisonMetrics } from './servicePageCopy';
 import type { ServicePageCopy } from './servicePageCopy';
 
 const serviceCatalog = [
@@ -1285,3 +1286,745 @@ export function ServiceFAQs({ faqs, theme }: { faqs: { q: string; a: string }[];
     </section>
   );
 }
+
+export function ServiceAnswerCapsule({
+  slug,
+  copy,
+  theme,
+}: {
+  slug?: string;
+  copy?: any;
+  theme?: string;
+}) {
+  const isDark = theme === 'dark';
+  const resolvedCopy = copy || (slug ? (servicePageCopy as any)[slug] : null);
+  if (!resolvedCopy) return null;
+
+  const definition =
+    resolvedCopy.answerCapsule?.definition ||
+    resolvedCopy.definitionBlock ||
+    `${resolvedCopy.mainSalesPitch} ${resolvedCopy.supportingLine}`;
+
+  const targetAudience =
+    resolvedCopy.answerCapsule?.targetAudience ||
+    'Growing businesses, SaaS founders, and operational leaders.';
+
+  const deliveryScope =
+    resolvedCopy.answerCapsule?.deliveryScope ||
+    (resolvedCopy.useCases ? resolvedCopy.useCases.join(', ') : 'Production architecture, custom engineering, automated testing, and deployment.');
+
+  const roiBenchmark =
+    resolvedCopy.answerCapsule?.roiBenchmark ||
+    '3x to 5x workflow acceleration with measurable operational time savings.';
+
+  const turnaround = resolvedCopy.answerCapsule?.turnaround || '2–6 Weeks';
+  const ownership =
+    resolvedCopy.answerCapsule?.ownership || '100% Full IP & Source Code Ownership';
+
+  const cardBg = isDark
+    ? 'linear-gradient(135deg, rgba(20, 26, 38, 0.95), rgba(30, 41, 59, 0.92))'
+    : 'linear-gradient(135deg, #ffffff, #f0f7ff)';
+  const border = isDark ? '1px solid rgba(69, 115, 223, 0.35)' : '1px solid rgba(69, 115, 223, 0.25)';
+  const textColor = isDark ? '#e2e8f0' : '#1e293b';
+  const headingColor = isDark ? '#f8fafc' : '#0f172a';
+
+  return (
+    <section
+      aria-label="Direct Answer Capsule and Service Definition"
+      itemScope
+      itemType="https://schema.org/Service"
+      style={{
+        width: 'min(1120px, calc(100% - 32px))',
+        margin: '2rem auto 2.5rem',
+        borderRadius: 24,
+        padding: '1.75rem 2rem',
+        background: cardBg,
+        border,
+        boxShadow: isDark
+          ? '0 20px 50px rgba(0, 0, 0, 0.35), 0 0 30px rgba(69, 115, 223, 0.15)'
+          : '0 20px 50px rgba(69, 115, 223, 0.12), 0 4px 12px rgba(69, 115, 223, 0.05)',
+        position: 'relative',
+        overflow: 'hidden',
+      }}
+    >
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          top: 0,
+          right: 0,
+          width: 320,
+          height: 320,
+          background: 'radial-gradient(circle at top right, rgba(69, 115, 223, 0.18), transparent 70%)',
+          pointerEvents: 'none',
+        }}
+      />
+
+      <div style={{ position: 'relative', zIndex: 1 }}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.65rem',
+            flexWrap: 'wrap',
+            marginBottom: '1rem',
+          }}
+        >
+          <span
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.45rem',
+              padding: '0.4rem 0.85rem',
+              borderRadius: 999,
+              background: isDark
+                ? 'linear-gradient(135deg, rgba(69, 115, 223, 0.25), rgba(45, 79, 162, 0.35))'
+                : 'linear-gradient(135deg, #dbeafe, #eff6ff)',
+              border: isDark ? '1px solid rgba(123, 160, 255, 0.4)' : '1px solid #93c5fd',
+              color: isDark ? '#93c5fd' : '#1d4ed8',
+              fontSize: '0.78rem',
+              fontWeight: 800,
+              textTransform: 'uppercase',
+              letterSpacing: '0.07em',
+            }}
+          >
+            <span
+              aria-hidden="true"
+              style={{
+                width: 8,
+                height: 8,
+                borderRadius: '50%',
+                background: '#3b82f6',
+                boxShadow: '0 0 10px #3b82f6',
+              }}
+            />
+            Direct Answer Capsule / AI Overview Definition
+          </span>
+          <span
+            style={{
+              fontSize: '0.8rem',
+              fontWeight: 700,
+              color: isDark ? '#38bdf8' : '#0284c7',
+            }}
+          >
+            ⚡ Verified Service Authority
+          </span>
+        </div>
+
+        <p
+          itemProp="description"
+          style={{
+            margin: '0 0 1.5rem',
+            fontSize: 'clamp(1.05rem, 1.35vw, 1.22rem)',
+            lineHeight: 1.68,
+            color: headingColor,
+            fontWeight: 650,
+            letterSpacing: '-0.01em',
+          }}
+        >
+          {definition}
+        </p>
+
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 230px), 1fr))',
+            gap: '1rem',
+            paddingTop: '1.25rem',
+            borderTop: isDark ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(69, 115, 223, 0.15)',
+          }}
+        >
+          <div
+            style={{
+              padding: '0.85rem 1rem',
+              borderRadius: 14,
+              background: isDark ? 'rgba(30, 41, 59, 0.7)' : 'rgba(255, 255, 255, 0.85)',
+              border: isDark ? '1px solid rgba(255, 255, 255, 0.06)' : '1px solid rgba(69, 115, 223, 0.1)',
+            }}
+          >
+            <div style={{ fontSize: '0.74rem', fontWeight: 800, textTransform: 'uppercase', color: '#4573df', letterSpacing: '0.05em', marginBottom: 4 }}>
+              Target Audience
+            </div>
+            <div style={{ fontSize: '0.88rem', color: textColor, fontWeight: 600, lineHeight: 1.45 }}>
+              {targetAudience}
+            </div>
+          </div>
+
+          <div
+            style={{
+              padding: '0.85rem 1rem',
+              borderRadius: 14,
+              background: isDark ? 'rgba(30, 41, 59, 0.7)' : 'rgba(255, 255, 255, 0.85)',
+              border: isDark ? '1px solid rgba(255, 255, 255, 0.06)' : '1px solid rgba(69, 115, 223, 0.1)',
+            }}
+          >
+            <div style={{ fontSize: '0.74rem', fontWeight: 800, textTransform: 'uppercase', color: '#4573df', letterSpacing: '0.05em', marginBottom: 4 }}>
+              Delivery Scope & Turnaround
+            </div>
+            <div style={{ fontSize: '0.88rem', color: textColor, fontWeight: 600, lineHeight: 1.45 }}>
+              {deliveryScope} · <strong style={{ color: isDark ? '#38bdf8' : '#0369a1' }}>{turnaround}</strong>
+            </div>
+          </div>
+
+          <div
+            style={{
+              padding: '0.85rem 1rem',
+              borderRadius: 14,
+              background: isDark ? 'rgba(30, 41, 59, 0.7)' : 'rgba(255, 255, 255, 0.85)',
+              border: isDark ? '1px solid rgba(255, 255, 255, 0.06)' : '1px solid rgba(69, 115, 223, 0.1)',
+            }}
+          >
+            <div style={{ fontSize: '0.74rem', fontWeight: 800, textTransform: 'uppercase', color: '#4573df', letterSpacing: '0.05em', marginBottom: 4 }}>
+              ROI Benchmark & IP Guarantee
+            </div>
+            <div style={{ fontSize: '0.88rem', color: textColor, fontWeight: 600, lineHeight: 1.45 }}>
+              {roiBenchmark} · <strong style={{ color: isDark ? '#4ade80' : '#16a34a' }}>{ownership}</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function ServicePricingBenchmarks({
+  slug,
+  theme,
+  onConsultationClick,
+}: {
+  slug?: string;
+  theme?: string;
+  onConsultationClick?: () => void;
+}) {
+  const isDark = theme === 'dark';
+  const resolvedSlug = slug || 'custom-web-development';
+  const resolvedCopy = (servicePageCopy as any)[resolvedSlug];
+  const tiers = resolvedCopy?.pricingTiers || (servicePageCopy as any)['custom-web-development'].pricingTiers;
+
+  const [selectedTierIndex, setSelectedTierIndex] = React.useState<number>(1);
+
+  const containerBg = isDark
+    ? 'linear-gradient(145deg, rgba(23, 28, 40, 0.96), rgba(30, 41, 59, 0.94))'
+    : 'linear-gradient(145deg, #ffffff, #f8fafc)';
+  const border = isDark ? '1px solid rgba(123, 160, 255, 0.22)' : '1px solid rgba(69, 115, 223, 0.18)';
+  const headingColor = isDark ? '#f8fafc' : '#0f172a';
+  const textColor = isDark ? '#cbd5e1' : '#334155';
+
+  return (
+    <section
+      aria-labelledby="pricing-benchmarks-heading"
+      style={{
+        width: 'min(1120px, calc(100% - 32px))',
+        margin: '3.5rem auto',
+        padding: '2.25rem 1.75rem',
+        borderRadius: 24,
+        background: containerBg,
+        border,
+        boxShadow: isDark
+          ? '0 24px 60px rgba(0, 0, 0, 0.3)'
+          : '0 20px 50px rgba(69, 115, 223, 0.1)',
+      }}
+    >
+      <div style={{ textAlign: 'center', maxWidth: 760, margin: '0 auto 2.5rem' }}>
+        <p
+          style={{
+            margin: '0 0 0.5rem',
+            color: '#4573df',
+            fontWeight: 800,
+            fontSize: '0.82rem',
+            textTransform: 'uppercase',
+            letterSpacing: '0.08em',
+          }}
+        >
+          Transparent Investment & Timelines
+        </p>
+        <h2
+          id="pricing-benchmarks-heading"
+          style={{
+            margin: '0 0 0.85rem',
+            color: headingColor,
+            fontSize: 'clamp(1.6rem, 2.5vw, 2.3rem)',
+            lineHeight: 1.2,
+            letterSpacing: '-0.02em',
+          }}
+        >
+          Fixed-Price Pricing & Turnaround Benchmarks
+        </h2>
+        <p
+          style={{
+            margin: 0,
+            color: textColor,
+            fontSize: '1rem',
+            lineHeight: 1.6,
+            fontWeight: 550,
+          }}
+        >
+          Every package includes 100% source code ownership, direct principal engineering, and
+          milestone-based payments with zero hidden agency markups.
+        </p>
+      </div>
+
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
+          gap: '1.5rem',
+          alignItems: 'stretch',
+        }}
+      >
+        {tiers.map((tier: any, index: number) => {
+          const isPopular = tier.isPopular;
+          const cardBg = isDark
+            ? isPopular
+              ? 'linear-gradient(145deg, rgba(37, 50, 78, 0.95), rgba(24, 32, 50, 0.95))'
+              : 'rgba(28, 35, 49, 0.85)'
+            : isPopular
+            ? 'linear-gradient(145deg, #f0f7ff, #ffffff)'
+            : '#ffffff';
+
+          const cardBorder = isPopular
+            ? isDark
+              ? '2px solid #4573df'
+              : '2px solid #2563eb'
+            : isDark
+            ? '1px solid rgba(255, 255, 255, 0.1)'
+            : '1px solid rgba(69, 115, 223, 0.18)';
+
+          return (
+            <article
+              key={tier.name}
+              onClick={() => setSelectedTierIndex(index)}
+              style={{
+                borderRadius: 20,
+                padding: '1.85rem 1.6rem',
+                background: cardBg,
+                border: cardBorder,
+                boxShadow: isPopular
+                  ? isDark
+                    ? '0 16px 40px rgba(69, 115, 223, 0.25)'
+                    : '0 16px 40px rgba(37, 99, 235, 0.15)'
+                  : isDark
+                  ? '0 8px 24px rgba(0, 0, 0, 0.2)'
+                  : '0 8px 24px rgba(0, 0, 0, 0.05)',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                position: 'relative',
+                transform: isPopular ? 'scale(1.02)' : 'none',
+                transition: 'all 0.2s ease-in-out',
+                cursor: 'pointer',
+              }}
+            >
+              {isPopular && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: -13,
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    background: 'linear-gradient(135deg, #2563eb, #1d4ed8)',
+                    color: '#ffffff',
+                    padding: '0.28rem 0.95rem',
+                    borderRadius: 999,
+                    fontSize: '0.72rem',
+                    fontWeight: 800,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.08em',
+                    boxShadow: '0 4px 12px rgba(37, 99, 235, 0.35)',
+                  }}
+                >
+                  Most Popular Scope
+                </div>
+              )}
+
+              <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '0.75rem' }}>
+                  <h3
+                    style={{
+                      margin: 0,
+                      color: headingColor,
+                      fontSize: '1.25rem',
+                      fontWeight: 750,
+                    }}
+                  >
+                    {tier.name}
+                  </h3>
+                  <span
+                    style={{
+                      fontSize: '0.76rem',
+                      fontWeight: 750,
+                      color: '#4573df',
+                      background: isDark ? 'rgba(69, 115, 223, 0.15)' : 'rgba(69, 115, 223, 0.1)',
+                      padding: '0.25rem 0.6rem',
+                      borderRadius: 8,
+                    }}
+                  >
+                    ⏱️ {tier.timeline}
+                  </span>
+                </div>
+
+                <div style={{ marginBottom: '1.1rem' }}>
+                  <span
+                    style={{
+                      fontSize: '2.2rem',
+                      fontWeight: 850,
+                      color: headingColor,
+                      letterSpacing: '-0.03em',
+                    }}
+                  >
+                    {tier.price}
+                  </span>
+                </div>
+
+                <p
+                  style={{
+                    margin: '0 0 1.35rem',
+                    fontSize: '0.92rem',
+                    lineHeight: 1.55,
+                    color: textColor,
+                  }}
+                >
+                  {tier.description}
+                </p>
+
+                <div
+                  style={{
+                    borderTop: isDark ? '1px solid rgba(255, 255, 255, 0.08)' : '1px solid rgba(0, 0, 0, 0.06)',
+                    paddingTop: '1.1rem',
+                    marginBottom: '1.5rem',
+                  }}
+                >
+                  <div style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', color: '#4573df', letterSpacing: '0.06em', marginBottom: '0.75rem' }}>
+                    Package Deliverables
+                  </div>
+                  <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: '0.65rem' }}>
+                    {tier.deliverables.map((item: string) => (
+                      <li
+                        key={item}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'flex-start',
+                          gap: '0.6rem',
+                          fontSize: '0.88rem',
+                          color: isDark ? '#e2e8f0' : '#334155',
+                          fontWeight: 550,
+                          lineHeight: 1.45,
+                        }}
+                      >
+                        <span style={{ color: '#22c55e', fontSize: '0.95rem', flexShrink: 0, marginTop: 1 }}>
+                          ✓
+                        </span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              <div>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (onConsultationClick) {
+                      onConsultationClick();
+                    } else {
+                      window.location.href = `/contact?service=${resolvedSlug}`;
+                    }
+                  }}
+                  style={{
+                    width: '100%',
+                    padding: '0.85rem 1.25rem',
+                    borderRadius: 999,
+                    border: isPopular
+                      ? 'none'
+                      : isDark
+                      ? '1px solid rgba(69, 115, 223, 0.4)'
+                      : '1px solid rgba(69, 115, 223, 0.3)',
+                    background: isPopular
+                      ? 'linear-gradient(135deg, #2563eb, #1d4ed8)'
+                      : isDark
+                      ? 'rgba(69, 115, 223, 0.12)'
+                      : '#f1f5f9',
+                    color: isPopular ? '#ffffff' : isDark ? '#93c5fd' : '#1e40af',
+                    fontWeight: 800,
+                    fontSize: '0.92rem',
+                    cursor: 'pointer',
+                    boxShadow: isPopular ? '0 8px 20px rgba(37, 99, 235, 0.3)' : 'none',
+                    transition: 'all 0.15s ease',
+                  }}
+                >
+                  {tier.ctaText || 'Book Consultation'} →
+                </button>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+
+      <div
+        style={{
+          marginTop: '2rem',
+          padding: '1rem 1.25rem',
+          borderRadius: 16,
+          background: isDark ? 'rgba(69, 115, 223, 0.08)' : '#eff6ff',
+          border: isDark ? '1px solid rgba(69, 115, 223, 0.2)' : '1px solid #bfdbfe',
+          display: 'flex',
+          justifyContent: 'space-around',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: '1rem',
+          fontSize: '0.85rem',
+          fontWeight: 700,
+          color: isDark ? '#93c5fd' : '#1e40af',
+        }}
+      >
+        <span>🛡️ 100% Fixed-Price Scope Guarantee</span>
+        <span>⚡ 1–8 Week Sprint Turnaround</span>
+        <span>🔑 100% Source Code & IP Ownership</span>
+        <span>🤝 Direct Principal Engineer on Every Build</span>
+      </div>
+    </section>
+  );
+}
+
+export function ServiceComparisonMatrix({
+  slug,
+  theme,
+}: {
+  slug?: string;
+  theme?: string;
+}) {
+  const isDark = theme === 'dark';
+  const resolvedSlug = slug || 'custom-web-development';
+  const resolvedCopy = (servicePageCopy as any)[resolvedSlug];
+  const metrics =
+    resolvedCopy?.comparisonMetrics ||
+    defaultComparisonMetrics;
+
+  const containerBg = isDark
+    ? 'linear-gradient(145deg, rgba(23, 28, 40, 0.96), rgba(30, 41, 59, 0.94))'
+    : 'linear-gradient(145deg, #ffffff, #f8fafc)';
+  const border = isDark ? '1px solid rgba(123, 160, 255, 0.22)' : '1px solid rgba(69, 115, 223, 0.18)';
+  const headingColor = isDark ? '#f8fafc' : '#0f172a';
+  const textColor = isDark ? '#cbd5e1' : '#334155';
+
+  return (
+    <section
+      aria-labelledby="comparison-matrix-heading"
+      style={{
+        width: 'min(1120px, calc(100% - 32px))',
+        margin: '3.5rem auto',
+        padding: '2.25rem 1.75rem',
+        borderRadius: 24,
+        background: containerBg,
+        border,
+        boxShadow: isDark
+          ? '0 24px 60px rgba(0, 0, 0, 0.3)'
+          : '0 20px 50px rgba(69, 115, 223, 0.1)',
+      }}
+    >
+      <div style={{ textAlign: 'center', maxWidth: 780, margin: '0 auto 2.25rem' }}>
+        <p
+          style={{
+            margin: '0 0 0.5rem',
+            color: '#4573df',
+            fontWeight: 800,
+            fontSize: '0.82rem',
+            textTransform: 'uppercase',
+            letterSpacing: '0.08em',
+          }}
+        >
+          Delivery Model Evaluation
+        </p>
+        <h2
+          id="comparison-matrix-heading"
+          style={{
+            margin: '0 0 0.85rem',
+            color: headingColor,
+            fontSize: 'clamp(1.6rem, 2.5vw, 2.3rem)',
+            lineHeight: 1.2,
+            letterSpacing: '-0.02em',
+          }}
+        >
+          Megicode vs. Agencies vs. Freelancers vs. In-House
+        </h2>
+        <p
+          style={{
+            margin: 0,
+            color: textColor,
+            fontSize: '1rem',
+            lineHeight: 1.6,
+            fontWeight: 550,
+          }}
+        >
+          Compare engineering speed, architecture quality, cost predictability, and IP ownership
+          across development models.
+        </p>
+      </div>
+
+      <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+        <table
+          style={{
+            width: '100%',
+            minWidth: 700,
+            borderCollapse: 'separate',
+            borderSpacing: 0,
+            borderRadius: 18,
+            overflow: 'hidden',
+            border: isDark ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(69, 115, 223, 0.18)',
+          }}
+        >
+          <thead>
+            <tr
+              style={{
+                background: isDark ? 'rgba(30, 41, 59, 0.9)' : '#eff6ff',
+                textAlign: 'left',
+              }}
+            >
+              <th
+                style={{
+                  padding: '1.1rem 1.2rem',
+                  fontSize: '0.88rem',
+                  fontWeight: 800,
+                  color: isDark ? '#94a3b8' : '#475569',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.05em',
+                  width: '24%',
+                  borderBottom: isDark ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid #bfdbfe',
+                }}
+              >
+                Dimension
+              </th>
+              <th
+                style={{
+                  padding: '1.1rem 1.2rem',
+                  fontSize: '0.94rem',
+                  fontWeight: 850,
+                  color: '#ffffff',
+                  background: 'linear-gradient(135deg, #2563eb, #1d4ed8)',
+                  width: '28%',
+                  borderBottom: '1px solid #1e40af',
+                }}
+              >
+                🚀 Megicode
+                <span
+                  style={{
+                    display: 'block',
+                    fontSize: '0.72rem',
+                    fontWeight: 600,
+                    opacity: 0.9,
+                    marginTop: 2,
+                  }}
+                >
+                  Principal-Led Sprint
+                </span>
+              </th>
+              <th
+                style={{
+                  padding: '1.1rem 1.2rem',
+                  fontSize: '0.88rem',
+                  fontWeight: 750,
+                  color: isDark ? '#cbd5e1' : '#334155',
+                  width: '24%',
+                  borderBottom: isDark ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid #bfdbfe',
+                }}
+              >
+                Traditional Agency
+              </th>
+              <th
+                style={{
+                  padding: '1.1rem 1.2rem',
+                  fontSize: '0.88rem',
+                  fontWeight: 750,
+                  color: isDark ? '#cbd5e1' : '#334155',
+                  width: '24%',
+                  borderBottom: isDark ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid #bfdbfe',
+                }}
+              >
+                Freelancers / In-House
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {metrics.map((row: any, idx: number) => {
+              const isEven = idx % 2 === 0;
+              const rowBg = isEven
+                ? isDark
+                  ? 'rgba(30, 41, 59, 0.4)'
+                  : 'rgba(248, 250, 252, 0.8)'
+                : isDark
+                ? 'rgba(23, 28, 40, 0.4)'
+                : '#ffffff';
+
+              return (
+                <tr
+                  key={row.dimension}
+                  style={{
+                    background: rowBg,
+                    borderBottom: isDark ? '1px solid rgba(255, 255, 255, 0.06)' : '1px solid rgba(0, 0, 0, 0.05)',
+                  }}
+                >
+                  <td
+                    style={{
+                      padding: '1.1rem 1.2rem',
+                      fontWeight: 750,
+                      color: headingColor,
+                      fontSize: '0.92rem',
+                      borderBottom: isDark ? '1px solid rgba(255, 255, 255, 0.06)' : '1px solid rgba(0, 0, 0, 0.05)',
+                    }}
+                  >
+                    {row.dimension}
+                  </td>
+                  <td
+                    style={{
+                      padding: '1.1rem 1.2rem',
+                      fontWeight: 650,
+                      color: isDark ? '#93c5fd' : '#1e40af',
+                      fontSize: '0.9rem',
+                      lineHeight: 1.45,
+                      background: isDark ? 'rgba(37, 99, 235, 0.12)' : 'rgba(219, 234, 254, 0.45)',
+                      borderLeft: '2px solid #3b82f6',
+                      borderRight: '1px solid rgba(59, 130, 246, 0.2)',
+                      borderBottom: isDark ? '1px solid rgba(255, 255, 255, 0.06)' : '1px solid rgba(0, 0, 0, 0.05)',
+                    }}
+                  >
+                    <span style={{ display: 'inline-block', marginRight: 6, color: '#22c55e' }}>✓</span>
+                    {row.megicode}
+                  </td>
+                  <td
+                    style={{
+                      padding: '1.1rem 1.2rem',
+                      fontWeight: 550,
+                      color: isDark ? '#94a3b8' : '#64748b',
+                      fontSize: '0.88rem',
+                      lineHeight: 1.45,
+                      borderBottom: isDark ? '1px solid rgba(255, 255, 255, 0.06)' : '1px solid rgba(0, 0, 0, 0.05)',
+                    }}
+                  >
+                    <span style={{ display: 'inline-block', marginRight: 6, color: '#ef4444' }}>✕</span>
+                    {row.agency}
+                  </td>
+                  <td
+                    style={{
+                      padding: '1.1rem 1.2rem',
+                      fontWeight: 550,
+                      color: isDark ? '#94a3b8' : '#64748b',
+                      fontSize: '0.88rem',
+                      lineHeight: 1.45,
+                      borderBottom: isDark ? '1px solid rgba(255, 255, 255, 0.06)' : '1px solid rgba(0, 0, 0, 0.05)',
+                    }}
+                  >
+                    <span style={{ display: 'inline-block', marginRight: 6, color: '#f59e0b' }}>⚠️</span>
+                    {row.freelancer || row.inHouse}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  );
+}
+

@@ -1,3 +1,30 @@
+export type PricingTier = {
+  name: string;
+  price: string;
+  timeline: string;
+  description: string;
+  deliverables: string[];
+  isPopular?: boolean;
+  ctaText?: string;
+};
+
+export type ComparisonDimension = {
+  dimension: string;
+  megicode: string;
+  agency: string;
+  freelancer: string;
+  inHouse: string;
+};
+
+export type AnswerCapsuleData = {
+  definition: string;
+  targetAudience: string;
+  deliveryScope: string;
+  roiBenchmark: string;
+  turnaround: string;
+  ownership: string;
+};
+
 export type ServicePageCopy = {
   mainSalesPitch: string;
   supportingLine: string;
@@ -11,9 +38,58 @@ export type ServicePageCopy = {
     goodFit: string[];
     notFor: string[];
   };
+  definitionBlock: string;
+  answerCapsule: AnswerCapsuleData;
+  pricingTiers: PricingTier[];
+  comparisonMetrics: ComparisonDimension[];
 };
 
-const servicePageCopy = {
+export const defaultComparisonMetrics: ComparisonDimension[] = [
+  {
+    dimension: 'Time to Market',
+    megicode: '1–8 Weeks sprint delivery with weekly working builds',
+    agency: '3–9 Months with prolonged scoping and meetings',
+    freelancer: 'Unpredictable timelines & high project abandonment risk',
+    inHouse: '3–6 Months to recruit, hire, and onboard engineers',
+  },
+  {
+    dimension: 'Architecture & Code Quality',
+    megicode: 'Production Next.js, TypeScript & clean scalable patterns',
+    agency: 'Junior-assembled templates with heavy technical debt',
+    freelancer: 'Inconsistent patterns, limited testing & poor documentation',
+    inHouse: 'High quality, but significant initial ramp-up delay',
+  },
+  {
+    dimension: 'Dedicated Principal Engineer',
+    megicode: 'Direct founder & lead architect involvement on every build',
+    agency: 'Junior developers managed by non-technical account reps',
+    freelancer: 'Solo developer lacking cross-domain architecture breadth',
+    inHouse: 'Requires $180k+/yr salary plus equity and benefits',
+  },
+  {
+    dimension: 'Cost Predictability',
+    megicode: '100% Fixed-price milestones with 0 hidden change fees',
+    agency: 'Hourly creep and expensive billable change orders',
+    freelancer: 'Scope ambiguity leading to sudden rate renegotiations',
+    inHouse: 'High fixed burn ($15k–$25k/month ongoing payroll)',
+  },
+  {
+    dimension: 'IP Ownership & Security',
+    megicode: '100% Full source code, IP, and repository ownership',
+    agency: 'Proprietary lock-in or restrictive agency licensing clauses',
+    freelancer: 'Legal ambiguity and risk of unvetted code reuse',
+    inHouse: '100% company-owned IP after legal employment contracts',
+  },
+  {
+    dimension: 'Post-Launch Support & SLA',
+    megicode: 'Direct engineering warranty, documentation & support SLA',
+    agency: 'Expensive monthly retainers ($3k–$10k/mo required)',
+    freelancer: 'High ghosting risk after final milestone payment',
+    inHouse: 'Continuous internal support, dependent on team retention',
+  },
+];
+
+const servicePageCopy: Record<string, ServicePageCopy> = {
   'ui-ux-design': {
     mainSalesPitch:
       'Good design makes users trust faster, understand faster, and take action faster.',
@@ -57,6 +133,64 @@ const servicePageCopy = {
         'Design changes without access to the real user journey.',
       ],
     },
+    definitionBlock:
+      'Megicode crafts conversion-focused UI/UX product designs and scalable design systems for SaaS startups and digital platforms. We deliver high-fidelity Figma prototypes, interactive user journey maps, design tokens, and developer-ready design specifications in 2 to 4 weeks, increasing user onboarding completion by 35% and cutting development rework in half.',
+    answerCapsule: {
+      definition:
+        'Megicode crafts conversion-focused UI/UX product designs and scalable design systems for SaaS startups and digital platforms. We deliver high-fidelity Figma prototypes, interactive user journey maps, design tokens, and developer-ready design specifications in 2 to 4 weeks, increasing user onboarding completion by 35% and cutting development rework in half.',
+      targetAudience: 'SaaS founders, product teams, and scaling B2B platforms needing conversion-driven interfaces.',
+      deliveryScope: 'User research, wireframing, high-fidelity Figma design systems, interactive prototypes, and dev handoff.',
+      roiBenchmark: '+35% onboarding completion, -50% frontend engineering rework, 2-4 week delivery.',
+      turnaround: '2–4 Weeks',
+      ownership: '100% Figma Source Files & Component Token Ownership',
+    },
+    pricingTiers: [
+      {
+        name: 'UX Audit & Sprint',
+        price: '$800',
+        timeline: '1–2 Weeks',
+        description: 'Rapid UX heuristic audit, friction identification, and wireframe redesign of 3 core conversion flows.',
+        deliverables: [
+          'Comprehensive heuristic UX evaluation',
+          '3 core user flow redesigns in Figma',
+          'Conversion bottleneck analysis report',
+          'Developer handoff notes & annotations',
+        ],
+        isPopular: false,
+        ctaText: 'Book UX Audit',
+      },
+      {
+        name: 'Full Product UI/UX',
+        price: '$2,400',
+        timeline: '2–4 Weeks',
+        description: 'Complete end-to-end product UI/UX design, design system tokens, and 15+ high-fidelity interactive screens.',
+        deliverables: [
+          'Complete Figma design system & tokens',
+          '15+ responsive screens (Desktop & Mobile)',
+          'Interactive prototype for user testing',
+          'Component states & edge-case library',
+          'Developer handoff call & documentation',
+        ],
+        isPopular: true,
+        ctaText: 'Start Product Design',
+      },
+      {
+        name: 'Enterprise Design System',
+        price: '$5,000+',
+        timeline: '4–6 Weeks',
+        description: 'Multi-platform design system architecture, 40+ screens, dark/light theme tokens, and micro-interactions.',
+        deliverables: [
+          'Multi-brand scalable design token architecture',
+          '40+ high-fidelity responsive screens',
+          'Micro-interactions & animation specs',
+          'Accessibility (WCAG AA) compliance verification',
+          'Ongoing design-dev collaboration sprint',
+        ],
+        isPopular: false,
+        ctaText: 'Request Custom Scope',
+      },
+    ],
+    comparisonMetrics: defaultComparisonMetrics,
   },
   'custom-web-development': {
     mainSalesPitch:
@@ -103,6 +237,67 @@ const servicePageCopy = {
         'A build where maintainability is not important.',
       ],
     },
+    definitionBlock:
+      'Megicode develops enterprise-grade custom web applications, internal operational portals, and customer-facing platforms for scaling companies. We deliver high-performance Next.js architectures, complex database schemas, role-based access controls, and third-party API integrations in 4 to 10 weeks, delivering 3x faster workflows, 99.9% uptime, and complete source code ownership.',
+    answerCapsule: {
+      definition:
+        'Megicode develops enterprise-grade custom web applications, internal operational portals, and customer-facing platforms for scaling companies. We deliver high-performance Next.js architectures, complex database schemas, role-based access controls, and third-party API integrations in 4 to 10 weeks, delivering 3x faster workflows, 99.9% uptime, and complete source code ownership.',
+      targetAudience: 'Growing enterprises, B2B companies, and operators needing bespoke portals and business web applications.',
+      deliveryScope: 'Full-stack Next.js/TypeScript architecture, PostgreSQL/database schema, RBAC, API integrations, and cloud deployment.',
+      roiBenchmark: '3x operational workflow velocity, 99.9% uptime SLA, $0 ongoing vendor platform fees.',
+      turnaround: '4–10 Weeks',
+      ownership: '100% Full Source Code & Repository Transfer',
+    },
+    pricingTiers: [
+      {
+        name: 'Essential Portal',
+        price: '$1,800',
+        timeline: '2–3 Weeks',
+        description: 'Custom database dashboard, client portal, or internal workflow app with secure authentication and CRUD flows.',
+        deliverables: [
+          'Full-stack Next.js web application',
+          'User authentication & role permissions',
+          'Database setup (PostgreSQL / Supabase)',
+          'Responsive UI with dark/light mode',
+          'Production Vercel / Cloud deployment',
+        ],
+        isPopular: false,
+        ctaText: 'Build Essential Portal',
+      },
+      {
+        name: 'Full Business Platform',
+        price: '$4,500',
+        timeline: '4–8 Weeks',
+        description: 'End-to-end custom operational platform with multi-tier permissions, payment integration, external API sync, and reporting.',
+        deliverables: [
+          'Complex multi-role permissions & access control',
+          'Payment & billing integration (Stripe / PayPal)',
+          'Third-party API & webhook automation',
+          'Custom analytics & exportable reports',
+          'Automated database backups & security audit',
+          '30-day post-launch engineering warranty',
+        ],
+        isPopular: true,
+        ctaText: 'Build Full Platform',
+      },
+      {
+        name: 'Enterprise System',
+        price: '$9,500+',
+        timeline: '6–10 Weeks',
+        description: 'High-concurrency enterprise web platform with microservice architecture, custom ERP/CRM sync, and compliance telemetry.',
+        deliverables: [
+          'Enterprise multi-tenant microservices architecture',
+          'Custom ERP/CRM integrations & legacy sync',
+          'High-throughput caching & database optimization',
+          'Automated CI/CD deployment pipeline',
+          'Full security hardening & SOC2 compliance prep',
+          '60-day SLA warranty & team onboarding',
+        ],
+        isPopular: false,
+        ctaText: 'Consult Enterprise Architect',
+      },
+    ],
+    comparisonMetrics: defaultComparisonMetrics,
   },
   'ai-saas-mvp-development': {
     mainSalesPitch:
@@ -147,6 +342,67 @@ const servicePageCopy = {
         'A pilot with no success metric or owner.',
       ],
     },
+    definitionBlock:
+      'Megicode designs and builds launch-ready AI SaaS MVPs for startup founders and enterprise innovators. We deliver complete Next.js web applications featuring LLM integrations, multi-tenant authentication, Stripe billing, and vector database architectures within 4 to 8 weeks, slashing time-to-market by 60% with production-grade engineering and zero technical debt.',
+    answerCapsule: {
+      definition:
+        'Megicode designs and builds launch-ready AI SaaS MVPs for startup founders and enterprise innovators. We deliver complete Next.js web applications featuring LLM integrations, multi-tenant authentication, Stripe billing, and vector database architectures within 4 to 8 weeks, slashing time-to-market by 60% with production-grade engineering and zero technical debt.',
+      targetAudience: 'Startup founders, non-technical entrepreneurs, and product leaders launching proprietary AI SaaS products.',
+      deliveryScope: 'Full-stack Next.js app, OpenAI/Anthropic model integration, RAG vector embeddings, Stripe billing, and admin dashboard.',
+      roiBenchmark: '60% faster launch speed, validated revenue readiness in 4-8 weeks, 100% intellectual property ownership.',
+      turnaround: '4–8 Weeks',
+      ownership: '100% Full IP, Codebase, and AI Prompt Pipeline Ownership',
+    },
+    pricingTiers: [
+      {
+        name: 'Lean AI MVP Sprint',
+        price: '$2,800',
+        timeline: '2–4 Weeks',
+        description: 'Rapid proof-of-concept AI web app with single core LLM workflow, user auth, database, and polished UI.',
+        deliverables: [
+          'Next.js & Tailwind application skeleton',
+          'OpenAI / Anthropic API integration with streaming',
+          'User authentication & session management',
+          'Database setup with Supabase / PostgreSQL',
+          'Production cloud deployment & testing',
+        ],
+        isPopular: false,
+        ctaText: 'Launch Lean AI MVP',
+      },
+      {
+        name: 'Full AI SaaS Launch',
+        price: '$5,500',
+        timeline: '4–8 Weeks',
+        description: 'Complete commercial SaaS MVP with RAG vector search, multi-tiered Stripe billing, admin portal, and usage limits.',
+        deliverables: [
+          'Full-featured AI SaaS web application',
+          'RAG vector database search (Pinecone / pgvector)',
+          'Stripe subscription checkout & customer portal',
+          'Token usage rate-limiting & cost controls',
+          'Admin analytics & user management dashboard',
+          '30-day post-launch warranty & maintenance',
+        ],
+        isPopular: true,
+        ctaText: 'Build Full AI SaaS',
+      },
+      {
+        name: 'Enterprise Scale AI SaaS',
+        price: '$11,000+',
+        timeline: '6–10 Weeks',
+        description: 'Multi-tenant enterprise AI platform with custom model fine-tuning, SOC2 security controls, and high-concurrency architecture.',
+        deliverables: [
+          'Multi-tenant enterprise architecture & team workspaces',
+          'Custom model fine-tuning & prompt evaluation pipeline',
+          'Role-based permissions & audit logging',
+          'Enterprise telemetry, Datadog & error monitoring',
+          'Full automated testing suite (E2E & integration)',
+          '60-day engineering SLA warranty',
+        ],
+        isPopular: false,
+        ctaText: 'Talk to Lead AI Engineer',
+      },
+    ],
+    comparisonMetrics: defaultComparisonMetrics,
   },
   'data-analytics': {
     mainSalesPitch: 'Better data turns guessing into confident decisions.',
@@ -189,6 +445,65 @@ const servicePageCopy = {
         'Analytics without a clear business question.',
       ],
     },
+    definitionBlock:
+      'Megicode builds custom business intelligence platforms, real-time analytics dashboards, and automated data pipelines for data-driven companies. We deliver unified data warehouse connections, interactive executive reporting interfaces, predictive modeling, and automated KPI tracking in 2 to 6 weeks, cutting manual reporting labor by 80% and delivering instant executive decision clarity.',
+    answerCapsule: {
+      definition:
+        'Megicode builds custom business intelligence platforms, real-time analytics dashboards, and automated data pipelines for data-driven companies. We deliver unified data warehouse connections, interactive executive reporting interfaces, predictive modeling, and automated KPI tracking in 2 to 6 weeks, cutting manual reporting labor by 80% and delivering instant executive decision clarity.',
+      targetAudience: 'Executives, finance leaders, and operational managers wanting automated KPI tracking and unified dashboards.',
+      deliveryScope: 'Data warehouse modeling (PostgreSQL/BigQuery/Snowflake), ETL pipeline integration, interactive dashboards, and automated email alerts.',
+      roiBenchmark: '80% reduction in manual report preparation hours, real-time decision visibility across 100% of core business metrics.',
+      turnaround: '2–6 Weeks',
+      ownership: '100% Source Code & Data Warehouse Schema Ownership',
+    },
+    pricingTiers: [
+      {
+        name: 'BI Dashboard Sprint',
+        price: '$900',
+        timeline: '1–2 Weeks',
+        description: 'Single-source interactive executive dashboard connecting your database, Stripe, or CRM with 5 core KPI visual widgets.',
+        deliverables: [
+          'Single-source database / API connector',
+          'Interactive dashboard with date & category filters',
+          '5 core business KPI visual metric cards',
+          'Automated daily / weekly email digest summary',
+          'Production hosting & access control',
+        ],
+        isPopular: false,
+        ctaText: 'Build BI Dashboard',
+      },
+      {
+        name: 'Full Data Pipeline & BI',
+        price: '$2,500',
+        timeline: '2–4 Weeks',
+        description: 'Multi-source ETL data pipeline aggregating CRM, ads, payments, and product usage into a unified executive BI portal.',
+        deliverables: [
+          'Multi-source data aggregation (Postgres, Stripe, Ads, CRM)',
+          'Automated ETL data ingestion pipeline',
+          'Multi-view executive and operational dashboards',
+          'Export to PDF / CSV & scheduled Slack alerts',
+          'Role-based permissions & viewer access',
+        ],
+        isPopular: true,
+        ctaText: 'Build Full BI Pipeline',
+      },
+      {
+        name: 'Enterprise Data Intelligence',
+        price: '$6,500+',
+        timeline: '4–8 Weeks',
+        description: 'Warehouse-scale analytics platform with Snowflake/BigQuery, predictive analytics, automated anomaly detection, and custom dashboards.',
+        deliverables: [
+          'Enterprise data warehouse modeling & schema design',
+          'Real-time streaming ingestion & event processing',
+          'Predictive modeling & churn/revenue forecasting',
+          'Automated anomaly detection alerts',
+          'Comprehensive SLA & ongoing pipeline monitoring',
+        ],
+        isPopular: false,
+        ctaText: 'Consult Data Architect',
+      },
+    ],
+    comparisonMetrics: defaultComparisonMetrics,
   },
   'mobile-app-development': {
     mainSalesPitch: 'A mobile app keeps your business closer to customers every day.',
@@ -231,6 +546,67 @@ const servicePageCopy = {
         'A build with no plan for updates after launch.',
       ],
     },
+    definitionBlock:
+      'Megicode builds cross-platform iOS and Android mobile applications for consumer brands and B2B platforms using React Native and Flutter. We deliver native device integrations, offline data synchronization, push notifications, and App Store submission readiness in 4 to 8 weeks, achieving sub-2-second startup speeds and 99.8% crash-free user sessions.',
+    answerCapsule: {
+      definition:
+        'Megicode builds cross-platform iOS and Android mobile applications for consumer brands and B2B platforms using React Native and Flutter. We deliver native device integrations, offline data synchronization, push notifications, and App Store submission readiness in 4 to 8 weeks, achieving sub-2-second startup speeds and 99.8% crash-free user sessions.',
+      targetAudience: 'Consumer brands, B2B services, and startups seeking high-performance iOS and Android mobile applications.',
+      deliveryScope: 'Cross-platform mobile codebase (React Native / Flutter), REST API sync, biometric auth, push notifications, and App Store/Play Store deployment.',
+      roiBenchmark: '<2s launch speed, 99.8% crash-free sessions, 50% cost savings with unified single codebase.',
+      turnaround: '4–8 Weeks',
+      ownership: '100% Mobile Codebase & App Store Developer Account Ownership',
+    },
+    pricingTiers: [
+      {
+        name: 'MVP Mobile App',
+        price: '$2,500',
+        timeline: '3–5 Weeks',
+        description: 'Essential cross-platform iOS and Android MVP app with user auth, REST backend sync, push notifications, and clean UI.',
+        deliverables: [
+          'React Native / Flutter cross-platform codebase',
+          'User login, signup & profile management',
+          'REST API integration & cloud data sync',
+          'Push notification infrastructure',
+          'TestFlight & Google Play Internal testing build',
+        ],
+        isPopular: false,
+        ctaText: 'Build Mobile MVP',
+      },
+      {
+        name: 'Production Mobile Platform',
+        price: '$5,800',
+        timeline: '5–8 Weeks',
+        description: 'Complete commercial mobile application with in-app purchases, offline caching, biometric security, and store release.',
+        deliverables: [
+          'Full iOS & Android native app build',
+          'In-app subscriptions & purchases (RevenueCat / Stripe)',
+          'Offline data caching & optimistic sync',
+          'Biometric authentication (FaceID / TouchID)',
+          'Full Apple App Store & Google Play Store submission',
+          '30-day post-launch warranty & bug-fix support',
+        ],
+        isPopular: true,
+        ctaText: 'Launch Mobile App',
+      },
+      {
+        name: 'Custom Enterprise Mobile',
+        price: '$11,500+',
+        timeline: '8–12 Weeks',
+        description: 'High-security enterprise mobile platform with Bluetooth/IoT hardware integration, real-time websockets, and MDM compliance.',
+        deliverables: [
+          'Enterprise hardware / Bluetooth / IoT integrations',
+          'Real-time WebSocket geolocation & chat engine',
+          'Enterprise MDM & SSO authentication',
+          'Full automated mobile UI test suites',
+          'Dedicated CI/CD mobile build pipeline (Fastlane)',
+          '60-day engineering SLA warranty',
+        ],
+        isPopular: false,
+        ctaText: 'Consult Mobile Lead',
+      },
+    ],
+    comparisonMetrics: defaultComparisonMetrics,
   },
   'cloud-devops': {
     mainSalesPitch:
@@ -275,6 +651,65 @@ const servicePageCopy = {
         'Scaling work before product basics are stable.',
       ],
     },
+    definitionBlock:
+      'Megicode engineers resilient cloud infrastructure, automated CI/CD deployment pipelines, and Kubernetes container architectures for modern SaaS and enterprise applications. We deliver secure AWS/GCP cloud environments, automated zero-downtime releases, infrastructure-as-code, and 24/7 telemetry monitoring in 2 to 4 weeks, reducing cloud hosting overhead by 30% and eliminating release outages.',
+    answerCapsule: {
+      definition:
+        'Megicode engineers resilient cloud infrastructure, automated CI/CD deployment pipelines, and Kubernetes container architectures for modern SaaS and enterprise applications. We deliver secure AWS/GCP cloud environments, automated zero-downtime releases, infrastructure-as-code, and 24/7 telemetry monitoring in 2 to 4 weeks, reducing cloud hosting overhead by 30% and eliminating release outages.',
+      targetAudience: 'SaaS companies, engineering teams, and CTOs needing automated CI/CD, cloud migration, and 99.99% uptime.',
+      deliveryScope: 'AWS/GCP/Vercel cloud setup, Terraform IaC, GitHub Actions CI/CD, Docker/Kubernetes containerization, and monitoring.',
+      roiBenchmark: '30% reduction in cloud monthly spend, 0 release downtime, sub-10-minute automated deployments.',
+      turnaround: '2–4 Weeks',
+      ownership: '100% Terraform Scripts, CI/CD Pipeline & Cloud Account Ownership',
+    },
+    pricingTiers: [
+      {
+        name: 'CI/CD & Cloud Setup',
+        price: '$950',
+        timeline: '1–2 Weeks',
+        description: 'Dockerization, GitHub Actions CI/CD automation, environment variables management, and zero-downtime deployment to AWS/Vercel.',
+        deliverables: [
+          'Docker containerization of services',
+          'Automated GitHub Actions CI/CD pipeline',
+          'Staging & production environment separation',
+          'SSL, custom domain & CDN configuration',
+          'Deployment runbook & documentation',
+        ],
+        isPopular: false,
+        ctaText: 'Automate CI/CD',
+      },
+      {
+        name: 'Infrastructure Hardening',
+        price: '$2,600',
+        timeline: '2–4 Weeks',
+        description: 'Terraform Infrastructure-as-Code, auto-scaling ECS/Kubernetes cluster, secret management, and Datadog monitoring.',
+        deliverables: [
+          'Terraform Infrastructure-as-Code codebase',
+          'Auto-scaling container cluster (AWS ECS / EKS)',
+          'Automated database backups & disaster recovery',
+          'Telemetry, log aggregation & Prometheus/Datadog alerts',
+          'Security vulnerability scan & IAM hardening',
+        ],
+        isPopular: true,
+        ctaText: 'Harden Infrastructure',
+      },
+      {
+        name: 'Enterprise Cloud Migration',
+        price: '$6,000+',
+        timeline: '4–8 Weeks',
+        description: 'Full legacy server-to-cloud migration, multi-region high availability, SOC2 compliance security posture, and cloud cost audit.',
+        deliverables: [
+          'Zero-downtime database & asset migration plan',
+          'Multi-region high availability & failover',
+          'SOC2 / ISO 27001 cloud security hardening',
+          'Comprehensive cloud cost optimization (-30% guarantee)',
+          'Dedicated DevOps on-call support for migration window',
+        ],
+        isPopular: false,
+        ctaText: 'Plan Cloud Migration',
+      },
+    ],
+    comparisonMetrics: defaultComparisonMetrics,
   },
   'ai-automation-agents': {
     mainSalesPitch: 'Repetitive work is not a growth strategy.',
@@ -319,6 +754,66 @@ const servicePageCopy = {
         'Tasks that require human judgment at every step.',
       ],
     },
+    definitionBlock:
+      'Megicode engineers custom AI agents, automated workflow pipelines, and intelligent API integrations for growing businesses and medical clinics. We deliver end-to-end multi-step task execution, CRM synchronization, and autonomous customer communication in 1 to 4 weeks, reducing operational labor costs by 40% to 70% with guaranteed 100% IP ownership.',
+    answerCapsule: {
+      definition:
+        'Megicode engineers custom AI agents, automated workflow pipelines, and intelligent API integrations for growing businesses and medical clinics. We deliver end-to-end multi-step task execution, CRM synchronization, and autonomous customer communication in 1 to 4 weeks, reducing operational labor costs by 40% to 70% with guaranteed 100% IP ownership.',
+      targetAudience: 'SMEs, medical clinics, service businesses, and sales teams drowning in repetitive manual operational tasks.',
+      deliveryScope: 'Custom Python/Node.js automation agents, Make/Zapier pipelines, CRM sync, WhatsApp/Email booking agents, and error alerts.',
+      roiBenchmark: '40% to 70% operational time saved, instant lead response under 60 seconds, 0 missed follow-ups.',
+      turnaround: '1–4 Weeks',
+      ownership: '100% Custom Script & Workflow Account Transfer',
+    },
+    pricingTiers: [
+      {
+        name: 'AI Automation Starter',
+        price: '$900',
+        timeline: '1–2 Weeks',
+        description: 'Single high-impact workflow automation connecting your CRM, email, forms, or calendars with error logging and alerts.',
+        deliverables: [
+          '1 multi-step automated operational workflow',
+          'CRM, form, or booking calendar integration',
+          'Webhook triggers & data mapping logic',
+          'Automated error fallback notifications (Slack/Email)',
+          'Team onboarding walkthrough video',
+        ],
+        isPopular: false,
+        ctaText: 'Build Starter Automation',
+      },
+      {
+        name: 'AI Business Growth',
+        price: '$2,200',
+        timeline: '2–4 Weeks',
+        description: '3–4 integrated autonomous AI agent workflows with LLM document parsing, WhatsApp/Email lead routing, and bi-directional CRM sync.',
+        deliverables: [
+          '3–4 advanced autonomous business workflows',
+          'AI document & lead data extraction/enrichment',
+          'WhatsApp / Email / SMS automated conversation flows',
+          'Bi-directional sync between CRM, ERP, and databases',
+          'Custom webhook middleware & reliability monitoring',
+          '30-day maintenance & optimization support',
+        ],
+        isPopular: true,
+        ctaText: 'Automate Business Workflows',
+      },
+      {
+        name: 'Enterprise Automation Suite',
+        price: '$4,800+',
+        timeline: '4–8 Weeks',
+        description: 'Enterprise-grade autonomous agent swarm, custom Python microservices, human-in-the-loop review portals, and high-volume processing.',
+        deliverables: [
+          'Autonomous multi-agent task execution system',
+          'Custom Python/Node.js microservices & RPA connectors',
+          'Human-in-the-loop approval & override interface',
+          'Enterprise security, encryption & audit trails',
+          'Dedicated SLA support & continuous pipeline tuning',
+        ],
+        isPopular: false,
+        ctaText: 'Consult Automation Lead',
+      },
+    ],
+    comparisonMetrics: defaultComparisonMetrics,
   },
   'technical-consulting': {
     mainSalesPitch:
@@ -365,6 +860,65 @@ const servicePageCopy = {
         'Skipping validation and jumping straight into a large build.',
       ],
     },
+    definitionBlock:
+      'Megicode provides fractional CTO leadership, technical architecture audits, and MVP roadmap advisory for startup founders and non-technical executives. We deliver actionable software scoping documents, technology stack evaluations, vendor code quality audits, and cost optimization plans in 1 to 3 weeks, preventing six-figure development mistakes and accelerating investor readiness.',
+    answerCapsule: {
+      definition:
+        'Megicode provides fractional CTO leadership, technical architecture audits, and MVP roadmap advisory for startup founders and non-technical executives. We deliver actionable software scoping documents, technology stack evaluations, vendor code quality audits, and cost optimization plans in 1 to 3 weeks, preventing six-figure development mistakes and accelerating investor readiness.',
+      targetAudience: 'Non-technical founders, executive teams, and investors evaluating technical scope, feasibility, or vendor quality.',
+      deliveryScope: 'Technical architecture blueprints, MVP scope definition, tech stack selection, vendor code audits, and fractional CTO advisory.',
+      roiBenchmark: 'Prevent $50k+ in vendor rework and bad stack choices; accelerate investor pitch technical readiness.',
+      turnaround: '1–3 Weeks',
+      ownership: '100% Written Architecture Blueprints & Scoping Deliverables',
+    },
+    pricingTiers: [
+      {
+        name: 'Architecture & MVP Blueprint',
+        price: '$400',
+        timeline: '1 Week',
+        description: 'Comprehensive 1-on-1 advisory session resulting in a complete technical specification blueprint, stack recommendation, and budget plan.',
+        deliverables: [
+          'Detailed product architecture & data model blueprint',
+          'Recommended technology stack & vendor evaluations',
+          'MVP milestone scope breakdown with cost estimates',
+          'Technical risk assessment & mitigation matrix',
+          '60-minute interactive executive strategy session',
+        ],
+        isPopular: false,
+        ctaText: 'Get MVP Blueprint',
+      },
+      {
+        name: 'Fractional CTO Sprint',
+        price: '$1,800',
+        timeline: '2–4 Weeks',
+        description: '4-week hands-on fractional CTO engagement guiding developer hiring, conducting code reviews, and leading architectural decisions.',
+        deliverables: [
+          'Weekly technical sprint planning & lead architecture',
+          'Code quality, security & repository reviews',
+          'Vendor candidate technical screening & vetting',
+          'Cloud infrastructure & API cost optimization',
+          'Direct Slack / async CTO access for founders',
+        ],
+        isPopular: true,
+        ctaText: 'Retain Fractional CTO',
+      },
+      {
+        name: 'Technical Due Diligence',
+        price: '$4,200+',
+        timeline: '3–6 Weeks',
+        description: 'Comprehensive technical audit for investors, M&A, or high-stakes scaling initiatives evaluating codebase health and security.',
+        deliverables: [
+          'Full repository architecture & codebase audit',
+          'Security vulnerability & compliance assessment',
+          'Scalability bottleneck & load tolerance testing',
+          'IP ownership & dependency license verification',
+          'Executive investor-ready due diligence report',
+        ],
+        isPopular: false,
+        ctaText: 'Request Due Diligence',
+      },
+    ],
+    comparisonMetrics: defaultComparisonMetrics,
   },
   'growth-marketing-seo': {
     mainSalesPitch: 'A great product is not enough if the right customers never find it.',
@@ -407,6 +961,65 @@ const servicePageCopy = {
         'Paid ads before the page can convert.',
       ],
     },
+    definitionBlock:
+      'Megicode engineers programmatic SEO engines, conversion rate optimization architectures, and B2B growth funnels for scaling software and service companies. We deliver technical site audits, automated landing page generation, semantic JSON-LD graphs, and analytics tracking in 2 to 6 weeks, driving 2x to 5x organic qualified pipeline growth and sustainable search authority.',
+    answerCapsule: {
+      definition:
+        'Megicode engineers programmatic SEO engines, conversion rate optimization architectures, and B2B growth funnels for scaling software and service companies. We deliver technical site audits, automated landing page generation, semantic JSON-LD graphs, and analytics tracking in 2 to 6 weeks, driving 2x to 5x organic qualified pipeline growth and sustainable search authority.',
+      targetAudience: 'B2B SaaS companies, professional agencies, and eCommerce platforms looking to dominate organic search and AI citations.',
+      deliveryScope: 'Technical SEO audits, semantic JSON-LD graphs, programmatic landing page generation, GEO optimization, and conversion tracking.',
+      roiBenchmark: '2x to 5x increase in organic qualified leads, 100% technical audit health score, AI engine citations.',
+      turnaround: '2–6 Weeks',
+      ownership: '100% Full Content, Code & Analytics Property Transfer',
+    },
+    pricingTiers: [
+      {
+        name: 'Technical SEO & GEO Sprint',
+        price: '$650',
+        timeline: '1–2 Weeks',
+        description: 'Deep technical audit, JSON-LD schema implementation, canonical URL normalization, and Core Web Vitals speed optimization.',
+        deliverables: [
+          'Complete technical crawler & indexability audit',
+          'JSON-LD schema graph implementation (Organization, Service, FAQ)',
+          'Canonicalization & redirect chain resolution (100% health)',
+          'Core Web Vitals & page speed performance tuneup',
+          'GEO keyword positioning report for AI Overviews',
+        ],
+        isPopular: false,
+        ctaText: 'Fix Technical SEO',
+      },
+      {
+        name: 'Programmatic Growth Engine',
+        price: '$2,200',
+        timeline: '2–5 Weeks',
+        description: 'Scalable programmatic SEO architecture generating 50+ high-ranking landing pages, internal reverse-silo links, and CRO triggers.',
+        deliverables: [
+          'Programmatic Next.js page generation system',
+          'Structured database-driven keyword page templates',
+          'Deterministic reverse-silo internal linking engine',
+          'Conversion rate optimized on-page strategy bars & CTAs',
+          'Google Search Console & analytics tracking setup',
+        ],
+        isPopular: true,
+        ctaText: 'Build Growth Engine',
+      },
+      {
+        name: 'Full Organic CRO Acceleration',
+        price: '$4,800+',
+        timeline: '4–8 Weeks',
+        description: 'End-to-end GEO & SEO search domination, conversion rate optimization, automated lead enrichment, and Looker Studio dashboards.',
+        deliverables: [
+          'Comprehensive programmatic SEO & GEO AI answer strategy',
+          'A/B testing CRO framework with lead capture forms',
+          'Automated Looker Studio executive reporting dashboard',
+          'Competitor keyword conquesting & backlink funnel',
+          '90-day ongoing technical rank tracking & optimization',
+        ],
+        isPopular: false,
+        ctaText: 'Accelerate Growth',
+      },
+    ],
+    comparisonMetrics: defaultComparisonMetrics,
   },
 } satisfies Record<string, ServicePageCopy>;
 

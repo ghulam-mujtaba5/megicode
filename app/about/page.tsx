@@ -11,6 +11,7 @@ import NewNavBar from "../../components/NavBar_Desktop_Company/NewNavBar";
 import NavBarMobile from "../../components/NavBar_Mobile/NavBar-mobile";
 import ThemeToggleIcon from "../../components/Icon/sbicon";
 import AboutHero from "../../components/AboutHero/AboutHero";
+import Breadcrumbs from "@/components/SEO/Breadcrumbs";
 import { SITE_SOCIAL, getCopyrightText } from '@/lib/constants';
 
 // Component interfaces
@@ -96,6 +97,10 @@ export default function AboutPage() {
           color: "var(--color-text)" 
         }}
       >
+        <div style={{ maxWidth: '1320px', margin: '20px auto 0', padding: '0 2rem' }}>
+          <Breadcrumbs theme={theme as 'light' | 'dark'} />
+        </div>
+
         {/* Critical Path - Load Immediately */}
         <AboutHero />
 

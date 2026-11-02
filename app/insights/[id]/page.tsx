@@ -8,7 +8,11 @@ import { SITE_SOCIAL, getCopyrightText } from '@/lib/constants';
 import AuthorCard from '@/components/Article/AuthorCard';
 import FaqAccordion from '@/components/Article/FaqAccordion';
 import ReadingProgress from '@/components/Article/ReadingProgress';
-import { ServiceLinkFunnel } from '@/components/Article/ServiceLinkFunnel';
+import {
+  ServiceLinkFunnel,
+  getServiceForArticle,
+  type ServiceFunnelTarget,
+} from '@/components/Article/ServiceLinkFunnel';
 import ShareButtons from '@/components/Article/ShareButtons';
 import TableOfContents, { type TocItem } from '@/components/Article/TableOfContents';
 import Footer from '@/components/Footer/Footer';
@@ -78,6 +82,75 @@ function extractExecutiveTakeaway(html: string): { takeaway: string | null; clea
     return { takeaway, cleanHtml };
   }
   return { takeaway: null, cleanHtml: html };
+}
+
+/**
+ * Injects a contextual reverse-silo callout banner after the 2nd <h2>
+ * channeling PageRank link equity directly into the target money page.
+ */
+function injectMidArticleCallout(html: string, target: ServiceFunnelTarget): string {
+  if (!html) return html;
+
+  const calloutHtml = `
+<aside class="mid-article-funnel-banner" style="margin: 2.25rem 0; padding: 1.5rem; border-radius: 12px; background: rgba(37, 99, 235, 0.06); border-left: 4px solid #2563eb; border-top: 1px solid rgba(37, 99, 235, 0.15); border-right: 1px solid rgba(37, 99, 235, 0.15); border-bottom: 1px solid rgba(37, 99, 235, 0.15);">
+  <div style="font-size: 0.75rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #2563eb; margin-bottom: 0.35rem;">
+    Enterprise Execution &amp; Consulting
+  </div>
+  <p style="margin: 0 0 0.75rem 0; font-size: 0.98rem; line-height: 1.55; color: inherit; font-weight: 500;">
+    Looking to execute this in production? Explore Megicode's verified architecture in <strong><a href="${target.href}" style="color: #2563eb; text-decoration: underline; font-weight: 700;">${target.title}</a></strong>.
+  </p>
+  <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
+    <a href="${target.href}" style="display: inline-flex; align-items: center; font-size: 0.85rem; font-weight: 700; color: #ffffff; background-color: #2563eb; padding: 6px 14px; border-radius: 6px; text-decoration: none;">
+      ${target.cta}
+    </a>
+    <a href="/contact?service=${target.contactServiceParam}" style="display: inline-flex; align-items: center; font-size: 0.85rem; font-weight: 600; color: #2563eb; text-decoration: none;">
+      Book Technical Strategy Call &rarr;
+    </a>
+  </div>
+</aside>
+`.trim();
+
+  // Find closing tag of 2nd <h2>
+  let count = 0;
+  const regex = /<\/h2>/gi;
+  let match: RegExpExecArray | null;
+  let insertIndex = -1;
+
+  while ((match = regex.exec(html)) !== null) {
+    count++;
+    if (count === 2) {
+      insertIndex = match.index + match[0].length;
+      break;
+    }
+  }
+
+  // Fallback if only 1 <h2>
+  if (insertIndex === -1 && count === 1) {
+    const firstMatch = /<\/h2>/i.exec(html);
+    if (firstMatch) {
+      insertIndex = firstMatch.index + firstMatch[0].length;
+    }
+  }
+
+  // Fallback if no <h2> found: insert after 2nd </p>
+  if (insertIndex === -1) {
+    let pCount = 0;
+    const pRegex = /<\/p>/gi;
+    let pMatch: RegExpExecArray | null;
+    while ((pMatch = pRegex.exec(html)) !== null) {
+      pCount++;
+      if (pCount === 2) {
+        insertIndex = pMatch.index + pMatch[0].length;
+        break;
+      }
+    }
+  }
+
+  if (insertIndex !== -1) {
+    return html.slice(0, insertIndex) + '\n\n' + calloutHtml + '\n\n' + html.slice(insertIndex);
+  }
+
+  return html + '\n\n' + calloutHtml;
 }
 
 export async function generateMetadata({
@@ -152,6 +225,12 @@ const ArticleDetailPage = async ({ params }: { params: Promise<{ id: string }> }
   const { takeaway, cleanHtml } = extractExecutiveTakeaway(article.contentHtml || '');
   const related = await getRelatedPosts(article.slug || id, category, 3).catch(() => []);
   const pageUrl = `${SITE}/insights/${article.slug || id}`;
+
+  const serviceTarget = getServiceForArticle(article.slug || id, category, article.tags);
+  const contentWithMidCallout = injectMidArticleCallout(
+    cleanHtml || '<p>No content available.</p>',
+    serviceTarget
+  );
 
   const { linkedinUrl, instagramUrl, githubUrl } = SITE_SOCIAL;
   const copyrightText = getCopyrightText();
@@ -237,13 +316,25 @@ const ArticleDetailPage = async ({ params }: { params: Promise<{ id: string }> }
               <div className={styles.stickySidebarContent}>
                 <TableOfContents items={headings} />
                 <div className={styles.sidebarCtaCard}>
-                  <span className={styles.sidebarCtaEyebrow}>Start Your Project</span>
-                  <h3 className={styles.sidebarCtaTitle}>Ready to build?</h3>
-                  <p className={styles.sidebarCtaText}>
-                    Get a free strategy call with our expert team.
-                  </p>
-                  <Link href="/contact" className={styles.sidebarCtaButton}>
-                    Book a Call
+                  <span className={styles.sidebarCtaEyebrow}>{serviceTarget.badge}</span>
+                  <h3 className={styles.sidebarCtaTitle}>{serviceTarget.title}</h3>
+                  <p className={styles.sidebarCtaText}>{serviceTarget.tagline}</p>
+                  <Link href={serviceTarget.href} className={styles.sidebarCtaButton}>
+                    {serviceTarget.cta}
+                  </Link>
+                  <Link
+                    href={`/contact?service=${serviceTarget.contactServiceParam}`}
+                    style={{
+                      display: 'block',
+                      marginTop: '0.75rem',
+                      fontSize: '0.82rem',
+                      textAlign: 'center',
+                      color: '#64708a',
+                      textDecoration: 'none',
+                      fontWeight: 600,
+                    }}
+                  >
+                    Schedule Consultation &rarr;
                   </Link>
                 </div>
               </div>
@@ -278,11 +369,12 @@ const ArticleDetailPage = async ({ params }: { params: Promise<{ id: string }> }
               <div
                 className={styles.articleContent}
                 dangerouslySetInnerHTML={{
-                  __html: cleanHtml || '<p>No content available.</p>',
+                  __html: contentWithMidCallout,
                 }}
               />
 
               <ServiceLinkFunnel
+                slug={article.slug || id}
                 title={article.title}
                 category={article.categories?.[0]}
                 tags={article.tags}

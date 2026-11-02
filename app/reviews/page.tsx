@@ -11,6 +11,7 @@ import NewNavBar from '../../components/NavBar_Desktop_Company/NewNavBar';
 import NavBarMobile from '../../components/NavBar_Mobile/NavBar-mobile';
 import ReviewsGrid from '../../components/Reviews/ReviewsGrid/ReviewsGrid';
 import ReviewsHero from '../../components/Reviews/ReviewsHero/ReviewsHero';
+import Breadcrumbs from '@/components/SEO/Breadcrumbs';
 import { useTheme } from '../../context/ThemeContext';
 
 export default function ReviewsPage() {
@@ -43,6 +44,9 @@ export default function ReviewsPage() {
       </nav>
 
       <main id="main-content" className="relative" aria-label="Reviews Main Content">
+        <div style={{ maxWidth: '1320px', margin: '20px auto 0', padding: '0 2rem' }}>
+          <Breadcrumbs theme={theme as 'light' | 'dark'} />
+        </div>
         <Suspense fallback={<LoadingAnimation size="medium" />}>
           <ReviewsHero />
           <ReviewsGrid />

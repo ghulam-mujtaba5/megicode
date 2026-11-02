@@ -8,7 +8,6 @@ import {
   HiCurrencyDollar,
   HiEnvelope,
   HiExclamationCircle,
-  HiGlobeAlt,
   HiMapPin,
   HiPaperAirplane,
   HiRocketLaunch,
@@ -24,6 +23,7 @@ import LoadingAnimation from '@/components/LoadingAnimation/LoadingAnimation';
 import ThemeToggleIcon from '../../components/Icon/sbicon';
 import NewNavBar from '../../components/NavBar_Desktop_Company/NewNavBar';
 import NavBarMobile from '../../components/NavBar_Mobile/NavBar-mobile';
+import Breadcrumbs from '../../components/SEO/Breadcrumbs';
 import { useTheme } from '../../context/ThemeContext';
 import styles from './contact.module.css';
 
@@ -82,7 +82,7 @@ function FAQAccordion() {
     {
       question: 'What are your pricing models?',
       answer:
-        'We publish USD starting prices for roadmap, automation, clinic AI receptionist, SaaS MVP, platform, and support packages. Fixed-scope packages are quoted clearly, while larger builds use milestone pricing after scope is confirmed.',
+        'We publish clear starting prices for roadmap, automation, clinic AI receptionist, SaaS MVP, platform, and support packages. Fixed-scope packages are quoted clearly, while larger builds use milestone pricing after scope is confirmed.',
       icon: <HiCurrencyDollar size={18} />,
     },
   ];
@@ -353,6 +353,9 @@ export default function ContactPage() {
       </header>
 
       <main id="main-content" className={styles.container} data-theme={theme}>
+        <div style={{ maxWidth: '1320px', margin: '10px auto 0', padding: '0 1.5rem', position: 'relative', zIndex: 10 }}>
+          <Breadcrumbs theme={theme as 'light' | 'dark'} />
+        </div>
         <div className={styles.backgroundGradient} />
         <Suspense fallback={<LoadingAnimation size="medium" />}>
           <ParticleBackground />
@@ -368,22 +371,6 @@ export default function ContactPage() {
             Share your goal, current problem, and timeline. We&apos;ll reply within one business day
             with the best next step.
           </p>
-          <div className={styles.trustBar}>
-            <div className={styles.trustItem}>
-              <HiClock size={15} aria-hidden="true" />
-              <span>24h Response</span>
-            </div>
-            <div className={styles.trustDot} aria-hidden="true" />
-            <div className={styles.trustItem}>
-              <HiGlobeAlt size={15} aria-hidden="true" />
-              <span>Remote-First</span>
-            </div>
-            <div className={styles.trustDot} aria-hidden="true" />
-            <div className={styles.trustItem}>
-              <HiChatBubbleLeftRight size={15} aria-hidden="true" />
-              <span>Free Intro Call</span>
-            </div>
-          </div>
           <div ref={accentRef} className={styles.heroAccent} />
         </section>
 

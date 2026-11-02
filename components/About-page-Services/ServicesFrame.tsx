@@ -361,10 +361,6 @@ const ServicesFrame = () => {
             Choose by business outcome.
           </span>
         </h2>
-        <p className={`${commonStyles.sectionSub} ${t.sectionSub}`}>
-          Start from the problem your buyer, team, or founder is feeling today, then move into the
-          right Megicode service path.
-        </p>
       </motion.header>
 
       <motion.div

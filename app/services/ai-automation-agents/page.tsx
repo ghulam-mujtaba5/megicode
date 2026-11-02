@@ -32,10 +32,13 @@ import NavBarMobile from '../../../components/NavBar_Mobile/NavBar-mobile';
 import { useTheme } from '../../../context/ThemeContext';
 import { useInViewAnimation } from '../../../hooks/useInViewAnimation';
 import {
+  ServiceAnswerCapsule,
+  ServiceComparisonMatrix,
   ServiceConversionPanel,
   ServiceDecisionGuide,
   ServiceFAQs,
   ServicePersonalizationPanel,
+  ServicePricingBenchmarks,
   ServiceProofStrip,
   ServiceUsabilityBlocks,
 } from '../ServiceDetailSections';
@@ -263,6 +266,7 @@ export default function AutomationIntegrationPage() {
           onConsultationClick={openCalendly}
           theme={theme}
         />
+        <ServiceAnswerCapsule copy={serviceCopy} slug="ai-automation-agents" theme={theme} />
 
         {/* Service Overview - Side-by-side layout */}
         {/* Section divider */}
@@ -434,6 +438,12 @@ export default function AutomationIntegrationPage() {
             })}
           </div>
         </section>
+        <ServicePricingBenchmarks
+          slug="ai-automation-agents"
+          theme={theme}
+          onConsultationClick={openCalendly}
+        />
+        <ServiceComparisonMatrix slug="ai-automation-agents" theme={theme} />
         <ServiceConversionPanel
           copy={serviceCopy}
           primaryCta={serviceCopy.primaryCta}

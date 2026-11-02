@@ -30,10 +30,13 @@ import NavBarMobile from '../../../components/NavBar_Mobile/NavBar-mobile';
 import { useTheme } from '../../../context/ThemeContext';
 import { useInViewAnimation } from '../../../hooks/useInViewAnimation';
 import {
+  ServiceAnswerCapsule,
+  ServiceComparisonMatrix,
   ServiceConversionPanel,
   ServiceDecisionGuide,
   ServiceFAQs,
   ServicePersonalizationPanel,
+  ServicePricingBenchmarks,
   ServiceProofStrip,
   ServiceUsabilityBlocks,
 } from '../ServiceDetailSections';
@@ -262,6 +265,7 @@ export default function ITConsultingSupportPage() {
           onConsultationClick={openCalendly}
           theme={theme}
         />
+        <ServiceAnswerCapsule copy={serviceCopy} slug="technical-consulting" theme={theme} />
 
         {/* Service Overview - Side-by-side layout */}
         {/* Section divider */}
@@ -465,6 +469,12 @@ export default function ITConsultingSupportPage() {
             })}
           </div>
         </section>
+        <ServicePricingBenchmarks
+          slug="technical-consulting"
+          theme={theme}
+          onConsultationClick={openCalendly}
+        />
+        <ServiceComparisonMatrix slug="technical-consulting" theme={theme} />
         <ServiceConversionPanel
           copy={serviceCopy}
           primaryCta={serviceCopy.primaryCta}

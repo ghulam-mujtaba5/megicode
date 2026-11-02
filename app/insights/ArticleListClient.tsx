@@ -11,6 +11,7 @@ import Footer from '../../components/Footer/Footer';
 import ThemeToggleIcon from '../../components/Icon/sbicon';
 import NewNavBar from '../../components/NavBar_Desktop_Company/NewNavBar';
 import NavBarMobile from '../../components/NavBar_Mobile/NavBar-mobile';
+import Breadcrumbs from '../../components/SEO/Breadcrumbs';
 import { useTheme } from '../../context/ThemeContext';
 import styles from './ArticleList.module.css';
 
@@ -36,6 +37,18 @@ export interface Article {
 interface ArticleListClientProps {
   initialArticles: Article[];
 }
+
+const CORE_TOPIC_HUBS = [
+  { label: 'AI SaaS & MVP', href: '/services/ai-saas-mvp-development' },
+  { label: 'AI Automation & Agents', href: '/services/ai-automation-agents' },
+  { label: 'Custom Web Platforms', href: '/services/custom-web-development' },
+  { label: 'Mobile Apps', href: '/services/mobile-app-development' },
+  { label: 'Cloud & DevOps', href: '/services/cloud-devops' },
+  { label: 'UI/UX Design', href: '/services/ui-ux-design' },
+  { label: 'Data Analytics', href: '/services/data-analytics' },
+  { label: 'Growth & Technical SEO', href: '/services/growth-marketing-seo' },
+  { label: 'Technical Consulting', href: '/services/technical-consulting' },
+] as const;
 
 const ALL = 'All';
 
@@ -125,6 +138,10 @@ const ArticleListClient = ({ initialArticles }: ArticleListClientProps) => {
       </nav>
 
       <main id="main-content" className={styles.mainContent}>
+        <div className={styles.breadcrumbsWrapper}>
+          <Breadcrumbs theme={theme as 'light' | 'dark'} />
+        </div>
+
         <section className={styles.hero}>
           <div className={styles.heroSplit}>
             <div className={styles.heroText}>
@@ -194,6 +211,17 @@ const ArticleListClient = ({ initialArticles }: ArticleListClientProps) => {
               ))}
             </div>
           )}
+
+          <div className={styles.topicHubsSection} aria-label="Explore Core Capabilities">
+            <span className={styles.topicHubsLabel}>Explore Solutions:</span>
+            <div className={styles.topicHubsList}>
+              {CORE_TOPIC_HUBS.map((hub) => (
+                <Link key={hub.href} href={hub.href} className={styles.topicHubLink}>
+                  {hub.label}
+                </Link>
+              ))}
+            </div>
+          </div>
         </section>
 
         {filtered.length === 0 ? (

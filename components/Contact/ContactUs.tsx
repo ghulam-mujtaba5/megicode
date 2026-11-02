@@ -159,19 +159,6 @@ const ContactSection = ({ email = CONTACT_EMAIL }) => {
               Send us a quick message and we&apos;ll reply within one business day. Need to share
               budget, timeline, or full requirements? Use our detailed project brief instead.
             </p>
-            <div className={commonStyles.trustChips} aria-label="Working with Megicode">
-              {[
-                '24h response',
-                'Free intro call',
-                'NDA available',
-                'Remote-first',
-                'Lahore-based, global clients',
-              ].map((chip) => (
-                <span key={chip} className={commonStyles.trustChip}>
-                  {chip}
-                </span>
-              ))}
-            </div>
           </div>
 
           <div className={commonStyles.grid}>

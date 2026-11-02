@@ -40,37 +40,31 @@ import light from './TechStackLight.module.css';
 const techCategories = {
   'AI & Machine Learning': {
     outcome: 'Agents, LLM features, classification, automation, and decision systems.',
-    proof: 'Used for intelligent workflows',
     Icon: HiCpuChip,
     techs: ['TensorFlow', 'PyTorch', 'OpenAI', 'Scikit-learn'],
   },
   'Data & Analytics': {
     outcome: 'Dashboards, reporting layers, data pipelines, and business intelligence.',
-    proof: 'Turns scattered data into clarity',
     Icon: HiArrowTrendingUp,
     techs: ['Python', 'Tableau', 'SQL', 'Spark'],
   },
   'Web Development': {
     outcome: 'Fast marketing sites, SaaS platforms, portals, CRMs, and internal tools.',
-    proof: 'Core stack for production apps',
     Icon: HiBolt,
     techs: ['React', 'Next.js', 'Node.js', 'Spring Boot', 'Express.js'],
   },
   'Mobile Development': {
     outcome: 'Mobile apps, companion products, and cross-platform customer experiences.',
-    proof: 'For iOS, Android, and Firebase-backed apps',
     Icon: HiCpuChip,
     techs: ['React Native', 'Flutter', 'Swift', 'Kotlin', 'Firebase'],
   },
   'Cloud & DevOps': {
     outcome: 'Reliable deployments, containers, automation, monitoring, and launch readiness.',
-    proof: 'Keeps products stable after launch',
     Icon: HiShieldCheck,
     techs: ['Amazon Web Services', 'Docker', 'Kubernetes', 'Terraform', 'Jenkins'],
   },
   Design: {
     outcome: 'Product UX, interface systems, prototypes, and conversion-focused visuals.',
-    proof: 'Makes products easier to trust',
     Icon: HiSparkleProxy,
     techs: ['Figma', 'Adobe XD', 'Sketch', 'InVision', 'Adobe Creative'],
   },
@@ -192,9 +186,6 @@ const TechStack: React.FC = () => {
                 <p className={cx(common.categoryOutcome, themed.categoryOutcome)}>
                   {config.outcome}
                 </p>
-                <span className={cx(common.categoryProof, themed.categoryProof)}>
-                  {config.proof}
-                </span>
                 <div className={common.techGrid}>
                   {config.techs.map((tech) => {
                     const Icon = iconMap[tech];

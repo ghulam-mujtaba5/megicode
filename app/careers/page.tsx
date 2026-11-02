@@ -14,6 +14,7 @@ import ThemeToggleIcon from '../../components/Icon/sbicon';
 // Static imports for critical components
 import NewNavBar from '../../components/NavBar_Desktop_Company/NewNavBar';
 import NavBarMobile from '../../components/NavBar_Mobile/NavBar-mobile';
+import Breadcrumbs from '@/components/SEO/Breadcrumbs';
 import { useTheme } from '../../context/ThemeContext';
 
 // Component interfaces
@@ -59,6 +60,10 @@ export default function CareersPage() {
           {/* Navigation */}
           <NewNavBar />
           <NavBarMobile />
+
+          <div style={{ maxWidth: 920, margin: '20px auto 0', padding: '0 24px' }}>
+            <Breadcrumbs theme={theme as 'light' | 'dark'} />
+          </div>
 
           <section
             style={{

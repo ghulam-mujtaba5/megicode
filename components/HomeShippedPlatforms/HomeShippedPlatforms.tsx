@@ -5,7 +5,6 @@ import {
   HiArrowRight,
   HiCheckBadge,
   HiMagnifyingGlassPlus,
-  HiSparkles,
   HiXMark,
 } from 'react-icons/hi2';
 
@@ -84,20 +83,12 @@ export default function HomeShippedPlatforms() {
     >
       <div className={commonStyles.inner}>
         <header className={commonStyles.header}>
-          <span className={`${commonStyles.eyebrow} ${themeStyles.eyebrow}`}>
-            <HiSparkles size={14} aria-hidden="true" />
-            Real platforms shipped
-          </span>
           <h2
             id="home-platform-proof-heading"
             className={`${commonStyles.title} ${themeStyles.title}`}
           >
             Proof that Megicode can build systems people actually use.
           </h2>
-          <p className={`${commonStyles.subtitle} ${themeStyles.subtitle}`}>
-            These are the kinds of outcomes buyers need to see before trusting a software partner:
-            operational change, active usage, and a clear path to booked leads.
-          </p>
         </header>
 
         <div className={commonStyles.grid}>

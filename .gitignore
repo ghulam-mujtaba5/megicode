@@ -96,6 +96,8 @@ ts-baseline.log
 
 # Local build/debug artifacts
 build-*.txt
+build_*.txt
+.agents/
 deploy-log.txt
 ts-check*.txt
 ts-errors.log

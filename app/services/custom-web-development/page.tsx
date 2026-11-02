@@ -38,10 +38,13 @@ import NavBarMobile from '../../../components/NavBar_Mobile/NavBar-mobile';
 import { useTheme } from '../../../context/ThemeContext';
 import { useInViewAnimation } from '../../../hooks/useInViewAnimation';
 import {
+  ServiceAnswerCapsule,
+  ServiceComparisonMatrix,
   ServiceConversionPanel,
   ServiceDecisionGuide,
   ServiceFAQs,
   ServicePersonalizationPanel,
+  ServicePricingBenchmarks,
   ServiceProofStrip,
   ServiceUsabilityBlocks,
 } from '../ServiceDetailSections';
@@ -266,6 +269,7 @@ export default function WebDevelopmentDetailPage() {
           onConsultationClick={openCalendly}
           theme={theme}
         />
+        <ServiceAnswerCapsule copy={serviceCopy} slug="custom-web-development" theme={theme} />
 
         {/* Service Overview - Side-by-side layout */}
         {/* Section divider */}
@@ -485,6 +489,12 @@ export default function WebDevelopmentDetailPage() {
             })}
           </div>
         </section>
+        <ServicePricingBenchmarks
+          slug="custom-web-development"
+          theme={theme}
+          onConsultationClick={openCalendly}
+        />
+        <ServiceComparisonMatrix slug="custom-web-development" theme={theme} />
         <ServiceConversionPanel
           copy={serviceCopy}
           primaryCta={serviceCopy.primaryCta}

@@ -28,10 +28,13 @@ import NavBarMobile from '../../../components/NavBar_Mobile/NavBar-mobile';
 import { useTheme } from '../../../context/ThemeContext';
 import { useInViewAnimation } from '../../../hooks/useInViewAnimation';
 import {
+  ServiceAnswerCapsule,
+  ServiceComparisonMatrix,
   ServiceConversionPanel,
   ServiceDecisionGuide,
   ServiceFAQs,
   ServicePersonalizationPanel,
+  ServicePricingBenchmarks,
   ServiceProofStrip,
   ServiceUsabilityBlocks,
 } from '../ServiceDetailSections';
@@ -262,6 +265,7 @@ export default function GrowthMarketingSeoPage() {
           onConsultationClick={openCalendly}
           theme={theme}
         />
+        <ServiceAnswerCapsule copy={serviceCopy} slug="growth-marketing-seo" theme={theme} />
 
         {/* Overview */}
         <div className={`${commonStyles.sectionDivider} ${themeStyles.sectionDivider}`} />
@@ -429,6 +433,12 @@ export default function GrowthMarketingSeoPage() {
             })}
           </div>
         </section>
+        <ServicePricingBenchmarks
+          slug="growth-marketing-seo"
+          theme={theme}
+          onConsultationClick={openCalendly}
+        />
+        <ServiceComparisonMatrix slug="growth-marketing-seo" theme={theme} />
         <ServiceConversionPanel
           copy={serviceCopy}
           primaryCta={serviceCopy.primaryCta}

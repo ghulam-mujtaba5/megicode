@@ -10,6 +10,7 @@ import NewNavBar from '../../components/NavBar_Desktop_Company/NewNavBar';
 import NavBarMobile from '../../components/NavBar_Mobile/NavBar-mobile';
 import ProjectHero from '../../components/Projects/ProjectHero';
 import ProjectsShowcase from '../../components/Projects/ProjectsShowcase';
+import Breadcrumbs from '../../components/SEO/Breadcrumbs';
 import { useTheme } from '../../context/ThemeContext';
 
 export default function ProjectsPage() {
@@ -65,6 +66,9 @@ export default function ProjectsPage() {
 
         <NewNavBar />
         <NavBarMobile />
+        <div style={{ maxWidth: '1320px', margin: '20px auto 0', padding: '0 2rem' }}>
+          <Breadcrumbs theme={theme as 'light' | 'dark'} />
+        </div>
         <ProjectHero />
         <ProjectsShowcase />
         <Footer

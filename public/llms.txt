@@ -8,7 +8,7 @@ Megicode builds AI automation, AI SaaS MVPs, custom web apps, booking systems, d
 - Services: https://www.megicode.com/services
 - Case studies: https://www.megicode.com/projects
 - Results and reviews: https://www.megicode.com/reviews
-- Insights: https://www.megicode.com/article
+- Insights: https://www.megicode.com/insights
 - Contact: https://www.megicode.com/contact
 
 ## Primary Services

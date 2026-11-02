@@ -20,6 +20,23 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(`${CANONICAL_ORIGIN}${url.pathname}${url.search}`, 301);
   }
 
+  // Enforce permanent 301 redirects from legacy /article and /articles paths to canonical /insights
+  if (url.pathname === '/article' || url.pathname.startsWith('/article/')) {
+    const targetPath = url.pathname.replace(/^\/article/, '/insights');
+    const redirectUrl = isLocalHost
+      ? `${url.origin}${targetPath}${url.search}`
+      : `${CANONICAL_ORIGIN}${targetPath}${url.search}`;
+    return NextResponse.redirect(redirectUrl, 301);
+  }
+
+  if (url.pathname === '/articles' || url.pathname.startsWith('/articles/')) {
+    const targetPath = url.pathname.replace(/^\/articles/, '/insights');
+    const redirectUrl = isLocalHost
+      ? `${url.origin}${targetPath}${url.search}`
+      : `${CANONICAL_ORIGIN}${targetPath}${url.search}`;
+    return NextResponse.redirect(redirectUrl, 301);
+  }
+
   if (url.pathname !== '/' && url.pathname.endsWith('/')) {
     url.pathname = url.pathname.replace(/\/+$/, '');
     return NextResponse.redirect(url, 301);

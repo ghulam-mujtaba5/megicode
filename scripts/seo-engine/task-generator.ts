@@ -88,7 +88,7 @@ export function generateWeeklyTasks(): SeoTaskItem[] {
     priority: 'P0 - Immediate',
     targetUrl: 'https://www.megicode.com',
     impactScore: 98,
-    reason: `GSC reported 25 redirected pages and 11 canonical mismatches. Audit verified ${auditData.summary.routesAudited} routes with ${auditData.summary.healthScore}% health score.`,
+    reason: `GSC reported 25 redirected pages and 11 canonical mismatches. Audit verified ${auditData.totalPagesAudited} routes with ${auditData.overallHealthScore}% health score.`,
     instructions: [
       `Confirm all alias routes (/article/*, /ai-automation-services, /saas-mvp-development) 301-redirect cleanly.`,
       `Ensure sitemap.xml strictly contains canonical URLs and excludes internal/redirect routes.`,

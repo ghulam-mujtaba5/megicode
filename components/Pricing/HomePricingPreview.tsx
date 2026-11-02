@@ -4,13 +4,6 @@ import { pricingEntrypoints } from '@/data/pricing';
 
 import styles from './HomePricingPreview.module.css';
 
-const REASSURANCE_CHIPS = [
-  'Start small when scope is unclear',
-  'Fixed-scope entry packages',
-  'Milestone-based larger builds',
-  'Third-party tools billed separately',
-];
-
 export default function HomePricingPreview() {
   return (
     <section className={styles.section} aria-labelledby="home-pricing-heading">
@@ -51,14 +44,6 @@ export default function HomePricingPreview() {
                 </span>
               </Link>
             </article>
-          ))}
-        </div>
-
-        <div className={styles.chips} aria-label="How Megicode pricing works">
-          {REASSURANCE_CHIPS.map((chip) => (
-            <span key={chip} className={styles.chip}>
-              {chip}
-            </span>
           ))}
         </div>
 

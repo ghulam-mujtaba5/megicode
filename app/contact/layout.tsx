@@ -33,7 +33,7 @@ export default function ContactLayout({ children }: { children: React.ReactNode 
     {
       question: 'What are your pricing models?',
       answer:
-        'Megicode publishes USD starting prices for MVP Roadmaps, AI Automation, Clinic AI Receptionist setup, AI SaaS MVP builds, custom platforms, and monthly support. Roadmaps are paid upfront, automation and clinic setups usually start with 60% upfront, and larger builds use milestone-based pricing after scope approval.',
+        'Megicode publishes clear starting prices for MVP Roadmaps, AI Automation, Clinic AI Receptionist setup, AI SaaS MVP builds, custom platforms, and monthly support. Roadmaps are paid upfront, automation and clinic setups usually start with 60% upfront, and larger builds use milestone-based pricing after scope approval.',
     },
   ]);
 

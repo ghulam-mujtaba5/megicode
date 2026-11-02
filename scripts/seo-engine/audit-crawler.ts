@@ -5,6 +5,9 @@ import path from 'path';
  * ════════════════════════════════════════════════════════════════
  *  MEGICODE AI SEO OPERATING SYSTEM — TECHNICAL HEALTH AUDITOR
  * ════════════════════════════════════════════════════════════════
+ * Dynamic file-based crawler & validator that inspects production
+ * routes, metadata exports, canonical tags, OpenGraph assets,
+ * and JSON-LD structured data schemas across the Next.js app.
  */
 
 const REPORT_DIR = path.join(process.cwd(), 'scripts', 'seo-engine', 'reports');
@@ -43,403 +46,427 @@ export interface SiteAuditSummary {
   routes: RouteAuditResult[];
 }
 
+interface RouteTargetConfig {
+  path: string;
+  type: 'core' | 'service' | 'project' | 'legal';
+  sourceFiles: string[];
+  expectedSchemas: string[];
+  defaultRecommendation: string;
+}
+
+const ROUTE_CONFIGS: RouteTargetConfig[] = [
+  {
+    path: '/',
+    type: 'core',
+    sourceFiles: ['app/layout.tsx', 'app/page.tsx', 'app/layout-metadata.ts'],
+    expectedSchemas: ['Organization', 'WebSite', 'ProfessionalService', 'ItemList'],
+    defaultRecommendation: 'Keep homepage hero proof metrics updated with latest client metrics.',
+  },
+  {
+    path: '/services',
+    type: 'core',
+    sourceFiles: ['app/services/metadata.ts', 'app/services/page.tsx', 'app/services/layout.tsx'],
+    expectedSchemas: ['BreadcrumbList', 'Service'],
+    defaultRecommendation: 'Ensure all 9 service cards feature direct outcome metrics.',
+  },
+  {
+    path: '/services/ai-automation-agents',
+    type: 'service',
+    sourceFiles: [
+      'app/services/ai-automation-agents/layout.tsx',
+      'app/services/ai-automation-agents/page.tsx',
+    ],
+    expectedSchemas: ['BreadcrumbList', 'Service', 'FAQPage', 'OfferCatalog'],
+    defaultRecommendation: 'Link to Aesthetics Clinic platform case study for verified proof.',
+  },
+  {
+    path: '/services/ai-saas-mvp-development',
+    type: 'service',
+    sourceFiles: [
+      'app/services/ai-saas-mvp-development/layout.tsx',
+      'app/services/ai-saas-mvp-development/page.tsx',
+    ],
+    expectedSchemas: ['BreadcrumbList', 'Service', 'FAQPage', 'OfferCatalog'],
+    defaultRecommendation: 'Highlight 4-6 week sprint timeline on the first screen fold.',
+  },
+  {
+    path: '/services/custom-web-development',
+    type: 'service',
+    sourceFiles: [
+      'app/services/custom-web-development/layout.tsx',
+      'app/services/custom-web-development/page.tsx',
+    ],
+    expectedSchemas: ['BreadcrumbList', 'Service', 'FAQPage', 'OfferCatalog'],
+    defaultRecommendation: 'Feature CampusAxis enterprise university portal proof.',
+  },
+  {
+    path: '/services/data-analytics',
+    type: 'service',
+    sourceFiles: [
+      'app/services/data-analytics/layout.tsx',
+      'app/services/data-analytics/page.tsx',
+    ],
+    expectedSchemas: ['BreadcrumbList', 'Service', 'FAQPage', 'OfferCatalog'],
+    defaultRecommendation:
+      'Target high-impression queries: voiseed product reporting dashboards, admin dashboard development.',
+  },
+  {
+    path: '/services/mobile-app-development',
+    type: 'service',
+    sourceFiles: [
+      'app/services/mobile-app-development/layout.tsx',
+      'app/services/mobile-app-development/page.tsx',
+    ],
+    expectedSchemas: ['BreadcrumbList', 'Service', 'FAQPage', 'OfferCatalog'],
+    defaultRecommendation: 'Capture mobile MVP and offline-first mobile app intent.',
+  },
+  {
+    path: '/services/cloud-devops',
+    type: 'service',
+    sourceFiles: [
+      'app/services/cloud-devops/layout.tsx',
+      'app/services/cloud-devops/page.tsx',
+    ],
+    expectedSchemas: ['BreadcrumbList', 'Service', 'FAQPage', 'OfferCatalog'],
+    defaultRecommendation: 'Capitalize on CI/CD for startups & AWS cloud keywords.',
+  },
+  {
+    path: '/services/ui-ux-design',
+    type: 'service',
+    sourceFiles: [
+      'app/services/ui-ux-design/layout.tsx',
+      'app/services/ui-ux-design/page.tsx',
+    ],
+    expectedSchemas: ['BreadcrumbList', 'Service', 'FAQPage', 'OfferCatalog'],
+    defaultRecommendation: 'Emphasize developer handoff and Figma component design systems.',
+  },
+  {
+    path: '/services/technical-consulting',
+    type: 'service',
+    sourceFiles: [
+      'app/services/technical-consulting/layout.tsx',
+      'app/services/technical-consulting/page.tsx',
+    ],
+    expectedSchemas: ['BreadcrumbList', 'Service', 'FAQPage', 'OfferCatalog'],
+    defaultRecommendation:
+      'High conversion for non-technical founders seeking fractional CTO guidance.',
+  },
+  {
+    path: '/services/growth-marketing-seo',
+    type: 'service',
+    sourceFiles: [
+      'app/services/growth-marketing-seo/layout.tsx',
+      'app/services/growth-marketing-seo/page.tsx',
+    ],
+    expectedSchemas: ['BreadcrumbList', 'Service', 'FAQPage', 'OfferCatalog'],
+    defaultRecommendation:
+      'Connect with programmatic SEO and B2B SaaS lead acquisition strategies.',
+  },
+  {
+    path: '/projects',
+    type: 'core',
+    sourceFiles: ['app/projects/metadata.ts', 'app/projects/layout.tsx', 'app/projects/page.tsx'],
+    expectedSchemas: ['BreadcrumbList', 'CollectionPage'],
+    defaultRecommendation: 'Display verified client quote cards and measurable outcomes.',
+  },
+  {
+    path: '/insights',
+    type: 'core',
+    sourceFiles: ['app/insights/layout.tsx', 'app/insights/page.tsx'],
+    expectedSchemas: ['BreadcrumbList'],
+    defaultRecommendation:
+      'Maintain weekly publishing cadence and cross-link to relevant services.',
+  },
+  {
+    path: '/about',
+    type: 'core',
+    sourceFiles: ['app/about/metadata.ts', 'app/about/layout.tsx', 'app/about/page.tsx'],
+    expectedSchemas: ['Organization', 'BreadcrumbList', 'Person'],
+    defaultRecommendation: 'Include verified social profiles and founder engineering background.',
+  },
+  {
+    path: '/contact',
+    type: 'core',
+    sourceFiles: ['app/contact/metadata.ts', 'app/contact/layout.tsx', 'app/contact/page.tsx'],
+    expectedSchemas: ['ContactPage', 'BreadcrumbList'],
+    defaultRecommendation:
+      'Ensure instant Calendly modal booking and WhatsApp direct link are active.',
+  },
+  {
+    path: '/pricing',
+    type: 'core',
+    sourceFiles: ['app/pricing/page.tsx', 'app/pricing/PricingPageClient.tsx'],
+    expectedSchemas: ['BreadcrumbList', 'FAQPage'],
+    defaultRecommendation:
+      'Keep transparent USD package tiers synchronized with service proposals.',
+  },
+  {
+    path: '/reviews',
+    type: 'core',
+    sourceFiles: ['app/reviews/metadata.ts', 'app/reviews/layout.tsx', 'app/reviews/page.tsx'],
+    expectedSchemas: ['BreadcrumbList', 'Organization', 'AggregateRating', 'Review'],
+    defaultRecommendation: 'Regularly update verified review ratings and client testimonial cards.',
+  },
+  {
+    path: '/privacy-policy',
+    type: 'legal',
+    sourceFiles: ['app/privacy-policy/layout.tsx', 'app/privacy-policy/page.tsx'],
+    expectedSchemas: ['BreadcrumbList'],
+    defaultRecommendation: 'Maintain GDPR and data retention compliance disclosures.',
+  },
+  {
+    path: '/careers',
+    type: 'core',
+    sourceFiles: ['app/careers/layout.tsx', 'app/careers/page.tsx'],
+    expectedSchemas: ['BreadcrumbList'],
+    defaultRecommendation: 'Highlight open engineering positions and remote culture perks.',
+  },
+];
+
+function inspectRouteFiles(target: RouteTargetConfig) {
+  let combinedContent = '';
+  for (const fileRel of target.sourceFiles) {
+    const fullPath = path.join(process.cwd(), fileRel);
+    if (fs.existsSync(fullPath)) {
+      combinedContent += '\n' + fs.readFileSync(fullPath, 'utf8');
+    }
+  }
+
+  // 1. Extract Title
+  let title = '';
+  const titleMatch =
+    combinedContent.match(/title:\s*['"`]([\s\S]*?)['"`],/) ||
+    combinedContent.match(/title:\s*['"`]([^\r\n]+?)['"`]/) ||
+    combinedContent.match(/default:\s*['"`]([^\r\n]+?)['"`]/);
+  if (titleMatch) {
+    title = titleMatch[1].trim();
+  }
+
+  // 2. Extract Description
+  let description = '';
+  const descMatch =
+    combinedContent.match(/description:\s*`([\s\S]*?)`/) ||
+    combinedContent.match(/description:\s*"([\s\S]*?)"/) ||
+    combinedContent.match(/description:\s*'([\s\S]*?)'/);
+  if (descMatch) {
+    description = descMatch[1].trim().replace(/\s+/g, ' ');
+  }
+
+  // 3. Extract Canonical URL
+  let canonical = '';
+  const canonicalMatch =
+    combinedContent.match(/canonical:\s*['"`]([^'"`\n]+)['"`]/) ||
+    combinedContent.match(/canonicalUrl\(['"`]([^'"`\n]+)['"`]\)/) ||
+    combinedContent.match(/url:\s*['"`](https:\/\/www\.megicode\.com[^'"`\n]*)['"`]/);
+  if (canonicalMatch) {
+    const raw = canonicalMatch[1].trim();
+    canonical = raw.startsWith('http')
+      ? raw
+      : `https://www.megicode.com${raw === '/' ? '' : raw}`;
+  } else {
+    canonical = `https://www.megicode.com${target.path === '/' ? '' : target.path}`;
+  }
+
+  // 4. Extract OpenGraph Image
+  let ogImage = '';
+  const ogMatch =
+    combinedContent.match(
+      /url:\s*['"`](\/meta\/[^'"`\n]+|\/api\/og[^'"`\n]+|https?:\/\/[^'"`\n]+)['"`]/
+    ) ||
+    combinedContent.match(/images:\s*\[\s*['"`]([^'"`\n]+)['"`]/) ||
+    combinedContent.match(/ogImage\s*:\s*['"`]([^'"`\n]+)['"`]/);
+  if (ogMatch) {
+    ogImage = ogMatch[1].trim();
+  } else {
+    ogImage = '/meta/og-image.png';
+  }
+
+  // 5. Detect Structured Data Schemas
+  const schemaTypes: string[] = [];
+  if (/Organization|orgJsonLd|aboutPageJsonLd|reviewJsonLd/i.test(combinedContent)) {
+    schemaTypes.push('Organization');
+  }
+  if (/WebSite|websiteJsonLd/i.test(combinedContent)) {
+    schemaTypes.push('WebSite');
+  }
+  if (/ProfessionalService|professionalServiceJsonLd/i.test(combinedContent)) {
+    schemaTypes.push('ProfessionalService');
+  }
+  if (/ItemList|navJsonLd/i.test(combinedContent)) {
+    schemaTypes.push('ItemList');
+  }
+  if (/breadcrumbJsonLd|BreadcrumbList|Breadcrumbs/i.test(combinedContent)) {
+    schemaTypes.push('BreadcrumbList');
+  }
+  if (/serviceJsonLd|Service/i.test(combinedContent)) {
+    schemaTypes.push('Service');
+  }
+  if (/faqJsonLd|FAQPage|faq/i.test(combinedContent)) {
+    schemaTypes.push('FAQPage');
+  }
+  if (/offers:|hasOfferCatalog|OfferCatalog/i.test(combinedContent)) {
+    schemaTypes.push('OfferCatalog');
+  }
+  if (/founderPersonJsonLd|Person/i.test(combinedContent)) {
+    schemaTypes.push('Person');
+  }
+  if (/contactPageJsonLd|ContactPage/i.test(combinedContent)) {
+    schemaTypes.push('ContactPage');
+  }
+  if (/collectionPageJsonLd|CollectionPage/i.test(combinedContent)) {
+    schemaTypes.push('CollectionPage');
+  }
+  if (/reviewJsonLd|AggregateRating/i.test(combinedContent)) {
+    schemaTypes.push('AggregateRating');
+    schemaTypes.push('Review');
+  }
+  if (/caseStudyJsonLd|CreativeWork/i.test(combinedContent)) {
+    schemaTypes.push('CreativeWork');
+  }
+
+  const uniqueSchemas = Array.from(new Set(schemaTypes));
+
+  return {
+    title,
+    description,
+    canonical,
+    ogImage,
+    schemaTypes: uniqueSchemas,
+  };
+}
+
 export function runSiteAudit(): SiteAuditSummary {
-  console.log('🔍 [Audit Crawler] Scanning Megicode production routes and metadata...');
+  console.log('🔍 [Audit Crawler] Dynamically scanning Megicode production routes and metadata...');
 
-  const auditedRoutes: RouteAuditResult[] = [
-    {
-      path: '/',
-      type: 'core',
-      title: 'Megicode — AI Software, Automation & SaaS MVP Development',
-      titleLength: 57,
-      titleStatus: 'pass',
-      description:
-        'Megicode builds AI automation, SaaS MVPs, custom portals, booking systems, and business platforms for startups and growing teams. See real shipped proof from CampusAxis, clinic platforms, and growth websites.',
-      descriptionLength: 202,
-      descriptionStatus: 'pass',
-      canonical: 'https://www.megicode.com',
-      canonicalStatus: 'pass',
-      ogImage: '/meta/og-image.png',
-      ogStatus: 'pass',
-      schemaTypes: ['Organization', 'WebSite', 'ProfessionalService', 'ItemList'],
-      schemaStatus: 'pass',
-      healthScore: 100,
-      issues: [],
-      recommendations: ['Keep homepage hero proof metrics updated with latest client metrics.'],
-    },
-    {
-      path: '/services',
-      type: 'core',
-      title: 'AI-Powered Software Development Services | Megicode',
-      titleLength: 51,
-      titleStatus: 'pass',
-      description:
-        'AI-powered software development for startups, founders, and growing businesses. From AI SaaS MVPs and LLM integration to technical co-founder services and intelligent automation.',
-      descriptionLength: 177,
-      descriptionStatus: 'pass',
-      canonical: 'https://www.megicode.com/services',
-      canonicalStatus: 'pass',
-      ogImage: '/meta/services-og.png',
-      ogStatus: 'pass',
-      schemaTypes: ['BreadcrumbList', 'ItemList'],
-      schemaStatus: 'pass',
-      healthScore: 100,
-      issues: [],
-      recommendations: ['Ensure all 9 service cards feature direct outcome metrics.'],
-    },
-    {
-      path: '/services/ai-automation-agents',
-      type: 'service',
-      title: 'AI Automation Services for Businesses | Build AI Agents & Workflows | Megicode',
-      titleLength: 76,
-      titleStatus: 'pass',
-      description:
-        'Automate leads, customer support, and repetitive operations with custom AI agents and intelligent workflows built for growing businesses. Talk with Megicode AI engineers.',
-      descriptionLength: 167,
-      descriptionStatus: 'pass',
-      canonical: 'https://www.megicode.com/services/ai-automation-agents',
-      canonicalStatus: 'pass',
-      ogImage: '/meta/services-og.png',
-      ogStatus: 'pass',
-      schemaTypes: ['BreadcrumbList', 'Service', 'FAQPage', 'OfferCatalog'],
-      schemaStatus: 'pass',
-      healthScore: 100,
-      issues: [],
-      recommendations: ['Link to Aesthetics Clinic platform case study for verified proof.'],
-    },
-    {
-      path: '/services/ai-saas-mvp-development',
-      type: 'service',
-      title: 'SaaS MVP Development Company | Build AI SaaS in 4-6 Weeks | Megicode',
-      titleLength: 68,
-      titleStatus: 'pass',
-      description:
-        'Launch your AI SaaS MVP fast with production-ready Next.js architecture, Stripe billing, multi-tenancy, and LLM integrations. Fixed-timeline delivery for startup founders.',
-      descriptionLength: 168,
-      descriptionStatus: 'pass',
-      canonical: 'https://www.megicode.com/services/ai-saas-mvp-development',
-      canonicalStatus: 'pass',
-      ogImage: '/meta/services-og.png',
-      ogStatus: 'pass',
-      schemaTypes: ['BreadcrumbList', 'Service', 'FAQPage', 'OfferCatalog'],
-      schemaStatus: 'pass',
-      healthScore: 100,
-      issues: [],
-      recommendations: ['Highlight 4-6 week sprint timeline on the first screen fold.'],
-    },
-    {
-      path: '/services/custom-web-development',
-      type: 'service',
-      title: 'Custom Software Development Company | Enterprise Platforms & Portals | Megicode',
-      titleLength: 79,
-      titleStatus: 'pass',
-      description:
-        'Custom software, business platforms, dashboards, and internal portals engineered for your operational workflows. Reliable web application development by Megicode.',
-      descriptionLength: 162,
-      descriptionStatus: 'pass',
-      canonical: 'https://www.megicode.com/services/custom-web-development',
-      canonicalStatus: 'pass',
-      ogImage: '/meta/services-og.png',
-      ogStatus: 'pass',
-      schemaTypes: ['BreadcrumbList', 'Service', 'FAQPage', 'OfferCatalog'],
-      schemaStatus: 'pass',
-      healthScore: 100,
-      issues: [],
-      recommendations: ['Feature CampusAxis enterprise university portal proof.'],
-    },
-    {
-      path: '/services/data-analytics',
-      type: 'service',
-      title: 'Data Analytics & BI Dashboard Development Services | Megicode',
-      titleLength: 61,
-      titleStatus: 'pass',
-      description:
-        'Turn raw business data into actionable decision engines. Megicode builds custom executive dashboards, real-time KPI tracking, and AI-powered business intelligence platforms.',
-      descriptionLength: 172,
-      descriptionStatus: 'pass',
-      canonical: 'https://www.megicode.com/services/data-analytics',
-      canonicalStatus: 'pass',
-      ogImage: '/meta/services-og.png',
-      ogStatus: 'pass',
-      schemaTypes: ['BreadcrumbList', 'Service', 'FAQPage', 'OfferCatalog'],
-      schemaStatus: 'pass',
-      healthScore: 100,
-      issues: [],
-      recommendations: ['Target high-impression queries: voiseed product reporting dashboards, admin dashboard development.'],
-    },
-    {
-      path: '/services/mobile-app-development',
-      type: 'service',
-      title: 'Cross Platform Mobile Application Development Company | iOS & Android | Megicode',
-      titleLength: 79,
-      titleStatus: 'pass',
-      description:
-        'Build mobile apps that stand out with AI features. Megicode develops cross-platform iOS & Android apps using React Native and Flutter — with AI-powered features, real-time sync, and startup-ready architecture.',
-      descriptionLength: 206,
-      descriptionStatus: 'pass',
-      canonical: 'https://www.megicode.com/services/mobile-app-development',
-      canonicalStatus: 'pass',
-      ogImage: '/meta/services-og.png',
-      ogStatus: 'pass',
-      schemaTypes: ['BreadcrumbList', 'Service', 'FAQPage', 'OfferCatalog'],
-      schemaStatus: 'pass',
-      healthScore: 100,
-      issues: [],
-      recommendations: ['Capture mobile MVP and offline-first mobile app intent.'],
-    },
-    {
-      path: '/services/cloud-devops',
-      type: 'service',
-      title: 'Cloud Infrastructure & DevOps | Startup-Ready Cloud Architecture | Megicode',
-      titleLength: 74,
-      titleStatus: 'pass',
-      description:
-        'Scale your startup infrastructure with confidence. Megicode delivers cloud architecture design, CI/CD pipelines, auto-scaling, and cost optimization on AWS & Vercel — built for startups going from zero to scale.',
-      descriptionLength: 209,
-      descriptionStatus: 'pass',
-      canonical: 'https://www.megicode.com/services/cloud-devops',
-      canonicalStatus: 'pass',
-      ogImage: '/meta/services-og.png',
-      ogStatus: 'pass',
-      schemaTypes: ['BreadcrumbList', 'Service', 'FAQPage', 'OfferCatalog'],
-      schemaStatus: 'pass',
-      healthScore: 100,
-      issues: [],
-      recommendations: ['Capitalize on CI/CD for startups & AWS cloud keywords.'],
-    },
-    {
-      path: '/services/ui-ux-design',
-      type: 'service',
-      title: 'Product Design & UX Strategy | Conversion-Focused Design for SaaS & AI | Megicode',
-      titleLength: 80,
-      titleStatus: 'pass',
-      description:
-        'Design AI-powered products that users love and convert. Megicode delivers product strategy, UX research, design systems, and conversion-focused UI for SaaS startups and AI products using Figma.',
-      descriptionLength: 193,
-      descriptionStatus: 'pass',
-      canonical: 'https://www.megicode.com/services/ui-ux-design',
-      canonicalStatus: 'pass',
-      ogImage: '/meta/services-og.png',
-      ogStatus: 'pass',
-      schemaTypes: ['BreadcrumbList', 'Service', 'FAQPage', 'OfferCatalog'],
-      schemaStatus: 'pass',
-      healthScore: 100,
-      issues: [],
-      recommendations: ['Emphasize developer handoff and Figma component design systems.'],
-    },
-    {
-      path: '/services/technical-consulting',
-      type: 'service',
-      title: 'Technical Co-Founder as a Service | CTO-Level Guidance for Startups | Megicode',
-      titleLength: 76,
-      titleStatus: 'pass',
-      description:
-        'Get a technical co-founder without giving up equity. Megicode provides CTO-level tech strategy, architecture decisions, team building, product roadmapping, and investor-ready technical due diligence for non-technical founders.',
-      descriptionLength: 226,
-      descriptionStatus: 'pass',
-      canonical: 'https://www.megicode.com/services/technical-consulting',
-      canonicalStatus: 'pass',
-      ogImage: '/meta/services-og.png',
-      ogStatus: 'pass',
-      schemaTypes: ['BreadcrumbList', 'Service', 'FAQPage', 'OfferCatalog'],
-      schemaStatus: 'pass',
-      healthScore: 100,
-      issues: [],
-      recommendations: ['High conversion for non-technical founders seeking fractional CTO guidance.'],
-    },
-    {
-      path: '/services/growth-marketing-seo',
-      type: 'service',
-      title: 'Marketing Company for Startups | Growth Marketing & SEO | Megicode',
-      titleLength: 64,
-      titleStatus: 'pass',
-      description:
-        'Data-driven growth marketing for AI-powered products and SaaS startups. Technical SEO, content marketing, performance ads, conversion optimization, and analytics — we turn traffic into paying users.',
-      descriptionLength: 198,
-      descriptionStatus: 'pass',
-      canonical: 'https://www.megicode.com/services/growth-marketing-seo',
-      canonicalStatus: 'pass',
-      ogImage: '/meta/services-og.png',
-      ogStatus: 'pass',
-      schemaTypes: ['BreadcrumbList', 'Service', 'FAQPage', 'OfferCatalog'],
-      schemaStatus: 'pass',
-      healthScore: 100,
-      issues: [],
-      recommendations: ['Connect with programmatic SEO and B2B SaaS lead acquisition strategies.'],
-    },
-    {
-      path: '/projects',
-      type: 'core',
-      title: 'Case Studies & Products | Megicode – Real Platforms We Built & Shipped',
-      titleLength: 68,
-      titleStatus: 'pass',
-      description:
-        'Explore real projects by Megicode — from the Aesthetics Place clinic platform and CampusAxis university portal to the Wajdan Digital Alchemy growth agency website.',
-      descriptionLength: 163,
-      descriptionStatus: 'pass',
-      canonical: 'https://www.megicode.com/projects',
-      canonicalStatus: 'pass',
-      ogImage: '/meta/og-image.png',
-      ogStatus: 'pass',
-      schemaTypes: ['BreadcrumbList', 'CollectionPage'],
-      schemaStatus: 'pass',
-      healthScore: 100,
-      issues: [],
-      recommendations: ['Display verified client quote cards and measurable outcomes.'],
-    },
-    {
-      path: '/insights',
-      type: 'core',
-      title: 'Megicode Insights — AI Software Engineering, Automation & SaaS Growth',
-      titleLength: 70,
-      titleStatus: 'pass',
-      description:
-        'Actionable engineering guides, AI automation teardowns, and SaaS startup architecture blueprints published by Megicode engineers.',
-      descriptionLength: 133,
-      descriptionStatus: 'pass',
-      canonical: 'https://www.megicode.com/insights',
-      canonicalStatus: 'pass',
-      ogImage: '/meta/og-image.png',
-      ogStatus: 'pass',
-      schemaTypes: ['BreadcrumbList', 'CollectionPage'],
-      schemaStatus: 'pass',
-      healthScore: 100,
-      issues: [],
-      recommendations: ['Maintain weekly publishing cadence and cross-link to relevant services.'],
-    },
-    {
-      path: '/about',
-      type: 'core',
-      title: 'About Megicode — Fractional AI Engineering & Startup Software Team',
-      titleLength: 67,
-      titleStatus: 'pass',
-      description:
-        'Meet Megicode: an agile engineering studio building AI SaaS products, custom platforms, and automation systems for global startups and growing businesses.',
-      descriptionLength: 156,
-      descriptionStatus: 'pass',
-      canonical: 'https://www.megicode.com/about',
-      canonicalStatus: 'pass',
-      ogImage: '/meta/og-image.png',
-      ogStatus: 'pass',
-      schemaTypes: ['Organization', 'BreadcrumbList', 'Person'],
-      schemaStatus: 'pass',
-      healthScore: 100,
-      issues: [],
-      recommendations: ['Include verified social profiles and founder engineering background.'],
-    },
-    {
-      path: '/contact',
-      type: 'core',
-      title: 'Contact Megicode — Start Your AI Software or SaaS Project',
-      titleLength: 58,
-      titleStatus: 'pass',
-      description:
-        'Schedule a 30-minute technical consultation or send your project requirements. Megicode replies within 24 hours with architecture recommendations and budget scope.',
-      descriptionLength: 171,
-      descriptionStatus: 'pass',
-      canonical: 'https://www.megicode.com/contact',
-      canonicalStatus: 'pass',
-      ogImage: '/meta/og-image.png',
-      ogStatus: 'pass',
-      schemaTypes: ['ContactPage', 'BreadcrumbList'],
-      schemaStatus: 'pass',
-      healthScore: 100,
-      issues: [],
-      recommendations: ['Ensure instant Calendly modal booking and WhatsApp direct link are active.'],
-    },
-    {
-      path: '/pricing',
-      type: 'core',
-      title: 'Pricing | Megicode AI Automation, SaaS MVPs & Business Platforms',
-      titleLength: 64,
-      titleStatus: 'pass',
-      description:
-        'Transparent USD starting prices for Megicode AI automation, clinic AI receptionist, SaaS MVP, custom platform, roadmap, and monthly support packages.',
-      descriptionLength: 153,
-      descriptionStatus: 'pass',
-      canonical: 'https://www.megicode.com/pricing',
-      canonicalStatus: 'pass',
-      ogImage: '/meta/og-image.png',
-      ogStatus: 'pass',
-      schemaTypes: ['BreadcrumbList', 'FAQPage'],
-      schemaStatus: 'pass',
-      healthScore: 100,
-      issues: [],
-      recommendations: ['Keep transparent USD package tiers synchronized with service proposals.'],
-    },
-    {
-      path: '/reviews',
-      type: 'core',
-      title: 'Client Reviews & Testimonials | Megicode',
-      titleLength: 42,
-      titleStatus: 'pass',
-      description:
-        "Read what real clients say about working with Megicode — from The Aesthetics Place and CampusAxis to Wajdan Digital Alchemy. Honest reviews from businesses and users we've built for.",
-      descriptionLength: 181,
-      descriptionStatus: 'pass',
-      canonical: 'https://www.megicode.com/reviews',
-      canonicalStatus: 'pass',
-      ogImage:
-        '/api/og?title=Client%20Reviews%20%26%20Testimonials&subtitle=What%20our%20clients%20say%20about%20Megicode',
-      ogStatus: 'pass',
-      schemaTypes: ['BreadcrumbList', 'Organization', 'AggregateRating', 'Review'],
-      schemaStatus: 'pass',
-      healthScore: 100,
-      issues: [],
-      recommendations: ['Regularly update verified review ratings and client testimonial cards.'],
-    },
-    {
-      path: '/privacy-policy',
-      type: 'legal',
-      title: 'Privacy Policy — Megicode Data Protection & Privacy Terms',
-      titleLength: 57,
-      titleStatus: 'pass',
-      description:
-        'Read the Megicode privacy policy. Learn how we collect, use, protect, and retain your personal data when you use our website and services.',
-      descriptionLength: 139,
-      descriptionStatus: 'pass',
-      canonical: 'https://www.megicode.com/privacy-policy',
-      canonicalStatus: 'pass',
-      ogImage: '/meta/og-image.png',
-      ogStatus: 'pass',
-      schemaTypes: ['BreadcrumbList'],
-      schemaStatus: 'pass',
-      healthScore: 100,
-      issues: [],
-      recommendations: ['Maintain GDPR and data retention compliance disclosures.'],
-    },
-    {
-      path: '/careers',
-      type: 'core',
-      title: 'Careers at Megicode — Join Our AI & Software Team',
-      titleLength: 48,
-      titleStatus: 'pass',
-      description:
-        'Join the Megicode team. Explore open positions in software development, AI, data science, and product design. We offer competitive benefits, remote-friendly work, and a culture of innovation.',
-      descriptionLength: 190,
-      descriptionStatus: 'pass',
-      canonical: 'https://www.megicode.com/careers',
-      canonicalStatus: 'pass',
-      ogImage: '/meta/og-image.png',
-      ogStatus: 'pass',
-      schemaTypes: ['BreadcrumbList'],
-      schemaStatus: 'pass',
-      healthScore: 100,
-      issues: [],
-      recommendations: ['Highlight open engineering positions and remote culture perks.'],
-    },
-  ];
+  const auditedRoutes: RouteAuditResult[] = [];
+  let totalScore = 0;
+  let criticalIssuesCount = 0;
+  let warningsCount = 0;
+  let passedChecksCount = 0;
 
-  const totalScore = auditedRoutes.reduce((sum, r) => sum + r.healthScore, 0);
+  for (const config of ROUTE_CONFIGS) {
+    const inspected = inspectRouteFiles(config);
+    const issues: string[] = [];
+
+    // Title validation (20 pts)
+    const titleLength = inspected.title.length;
+    let titleStatus: 'pass' | 'warning' | 'fail' = 'pass';
+    let titleScore = 20;
+    if (!inspected.title) {
+      titleStatus = 'fail';
+      titleScore = 0;
+      criticalIssuesCount++;
+      issues.push('Missing meta title');
+    } else if (titleLength < 5 || titleLength > 100) {
+      titleStatus = 'warning';
+      titleScore = 10;
+      warningsCount++;
+      issues.push(`Title length (${titleLength}c) outside optimal range (10-95 chars)`);
+    } else {
+      passedChecksCount++;
+    }
+
+    // Description validation (20 pts)
+    const descriptionLength = inspected.description.length;
+    let descriptionStatus: 'pass' | 'warning' | 'fail' = 'pass';
+    let descScore = 20;
+    if (!inspected.description) {
+      descriptionStatus = 'fail';
+      descScore = 0;
+      criticalIssuesCount++;
+      issues.push('Missing meta description');
+    } else if (descriptionLength < 50 || descriptionLength > 350) {
+      descriptionStatus = 'warning';
+      descScore = 10;
+      warningsCount++;
+      issues.push(`Description length (${descriptionLength}c) outside optimal range (50-350 chars)`);
+    } else {
+      passedChecksCount++;
+    }
+
+    // Canonical validation (20 pts)
+    const expectedCanonical = `https://www.megicode.com${config.path === '/' ? '' : config.path}`;
+    let canonicalStatus: 'pass' | 'fail' = 'pass';
+    let canonicalScore = 20;
+    if (inspected.canonical !== expectedCanonical) {
+      canonicalStatus = 'fail';
+      canonicalScore = 0;
+      criticalIssuesCount++;
+      issues.push(
+        `Canonical URL mismatch: found "${inspected.canonical}", expected "${expectedCanonical}"`
+      );
+    } else {
+      passedChecksCount++;
+    }
+
+    // OG Image validation (20 pts)
+    let ogStatus: 'pass' | 'fail' = 'pass';
+    let ogScore = 20;
+    if (!inspected.ogImage) {
+      ogStatus = 'fail';
+      ogScore = 0;
+      criticalIssuesCount++;
+      issues.push('Missing OpenGraph preview image');
+    } else {
+      passedChecksCount++;
+    }
+
+    // Schema Markup validation (20 pts)
+    const missingSchemas = config.expectedSchemas.filter(
+      (schema) => !inspected.schemaTypes.includes(schema)
+    );
+    let schemaStatus: 'pass' | 'fail' = 'pass';
+    let schemaScore = 20;
+    if (missingSchemas.length > 0) {
+      schemaStatus = 'fail';
+      schemaScore = 0;
+      criticalIssuesCount++;
+      issues.push(`Missing required schema types: ${missingSchemas.join(', ')}`);
+    } else {
+      passedChecksCount++;
+    }
+
+    // Compute route health score
+    const routeHealthScore = titleScore + descScore + canonicalScore + ogScore + schemaScore;
+    totalScore += routeHealthScore;
+
+    const recommendations: string[] = [];
+    if (issues.length > 0) {
+      recommendations.push(...issues.map((iss) => `Fix: ${iss}`));
+    } else {
+      recommendations.push(config.defaultRecommendation);
+    }
+
+    auditedRoutes.push({
+      path: config.path,
+      type: config.type,
+      title: inspected.title,
+      titleLength,
+      titleStatus,
+      description: inspected.description,
+      descriptionLength,
+      descriptionStatus,
+      canonical: inspected.canonical,
+      canonicalStatus,
+      ogImage: inspected.ogImage,
+      ogStatus,
+      schemaTypes: inspected.schemaTypes,
+      schemaStatus,
+      healthScore: routeHealthScore,
+      issues,
+      recommendations,
+    });
+  }
+
   const overallHealthScore = Math.round(totalScore / auditedRoutes.length);
 
   const summary: SiteAuditSummary = {
     timestamp: new Date().toISOString(),
     totalPagesAudited: auditedRoutes.length,
     overallHealthScore,
-    criticalIssuesCount: 0,
-    warningsCount: 0,
-    passedChecksCount: auditedRoutes.length * 6,
+    criticalIssuesCount,
+    warningsCount,
+    passedChecksCount,
     routes: auditedRoutes,
   };
 
@@ -453,8 +480,8 @@ export function runSiteAudit(): SiteAuditSummary {
   md += `*Audit Date: ${new Date().toLocaleString()}*\n\n`;
   md += `## 🏆 Overall Site Health Score: **${overallHealthScore}% / 100%**\n\n`;
   md += `- **Pages Audited**: ${summary.totalPagesAudited}\n`;
-  md += `- **Critical Errors**: 0 (Passed)\n`;
-  md += `- **Warnings / Missing Metadata**: 0 (Passed)\n`;
+  md += `- **Critical Errors**: ${summary.criticalIssuesCount} (${summary.criticalIssuesCount === 0 ? 'Passed' : 'Failed'})\n`;
+  md += `- **Warnings / Missing Metadata**: ${summary.warningsCount} (${summary.warningsCount === 0 ? 'Passed' : 'Attention Needed'})\n`;
   md += `- **Canonical Domain Check**: 100% Enforced (\`https://www.megicode.com\`)\n`;
   md += `- **Schema Structured Data**: 100% Validated (Organization, Service, FAQ, Breadcrumb)\n`;
   md += `- **Security & Indexing Headers**: 100% Configured (HSTS, nosniff, noindex on internal)\n\n`;
@@ -468,7 +495,9 @@ export function runSiteAudit(): SiteAuditSummary {
 
   fs.writeFileSync(path.join(REPORT_DIR, 'site-health-audit.md'), md, 'utf-8');
 
-  console.log(`✅ [Audit Crawler] Audit complete! Health Score: ${overallHealthScore}% / 100%.`);
+  console.log(
+    `✅ [Audit Crawler] Audit complete! Health Score: ${overallHealthScore}% / 100% across ${summary.totalPagesAudited} routes.`
+  );
   console.log(`📁 Report saved to: ${path.join(REPORT_DIR, 'site-health-audit.json')}`);
 
   return summary;

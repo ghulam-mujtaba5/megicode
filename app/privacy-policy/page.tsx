@@ -6,6 +6,7 @@ import darkStyles from "./PrivacyPolicyDark.module.css";
 import NewNavBar from "../../components/NavBar_Desktop_Company/NewNavBar";
 import NavBarMobile from "../../components/NavBar_Mobile/NavBar-mobile";
 import Footer from "../../components/Footer/Footer";
+import Breadcrumbs from "@/components/SEO/Breadcrumbs";
 import Link from "next/link";
 import { useTheme } from "../../context/ThemeContext";
 import { motion } from "framer-motion";
@@ -34,6 +35,9 @@ export default function PrivacyPolicyPage() {
         id="main-content"
         className={`${commonStyles.privacyMain} ${themeStyles.privacyMain}`}
       >
+        <div style={{ maxWidth: '1200px', margin: '20px auto 0', padding: '0 1rem' }}>
+          <Breadcrumbs theme={theme as 'light' | 'dark'} />
+        </div>
         <motion.div
           className={commonStyles.heroSection}
           initial="hidden"
